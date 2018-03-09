@@ -1,0 +1,108 @@
+.anypoint-form-layout-vertical .align-vertical{
+	margin-bottom:0px;
+}
+
+/* OVERFLOW FOR SELECT COMPONENT */
+.select-dropdown-component .select-input.single-select .tag{
+	width: 100%;	
+}
+
+.form-input-block{
+	margin-bottom: 5px;
+	margin-left:10px;
+	width:100%;
+}
+.form-checkbox-block{	
+	margin-left:10px;
+	margin-bottom:10px;
+	display: flex;
+}
+.input-message{
+	height:15px;	
+	font-size:11px;
+	line-height: 15px;
+	color:#999;
+	span{ 
+		display:block;
+		animation: fadeInInputMessage 0.3s ease-out;
+	}
+}
+
+
+.form-input-block,
+.form-checkbox-block{	
+	label{
+		-webkit-font-smoothing: antialiased;
+	}
+	.input-base{
+		display: block
+	}
+	
+	&.picker {
+		input{
+			cursor:pointer;
+		}
+	}
+
+	&.required{
+		.input-base input, .select-input{
+			border-color:#cc3 !important;
+			background:#ffc  !important;
+		}
+	}
+
+	&.error{
+		.input-base input, .select-input{
+			border-color:#c33 !important;
+			background:#fdd  !important;
+		}
+	}
+
+	&.pending{
+		.input-base input, .select-input{
+			background:#def  !important;
+			border-color:#069 !important;		
+		}
+	}
+}
+
+.anypoint-field-group.align-vertical{
+	.pending{
+			background:#def  !important;
+		.input-wrapper{
+			border-color:#069 !important;		
+		}
+	}
+}
+
+/* MODAL CSS MODIFIERS */
+.wizard-modal-body{
+	/* tweak how the select componets renders */
+	.select-dropdown-component.single-select > div{
+		position: absolute !important;
+		top:45px !important;
+	}
+	.select-dropdown-component.single-select > div > div{
+		position: absolute;
+		width: 100%;
+	}
+	.select-dropdown-component.single-select > div > div > div{
+		position: relative;
+		top:0px !important;
+	}
+	
+	/* No margin for inputs */
+	.form-input-block{
+		margin-left:0;
+	}
+}
+.custom-modal-body{
+	.form-input-block{
+		margin-left:0;
+	}
+}
+
+@keyframes fadeInInputMessage{
+	0%{ opacity: 0; }
+	100%{ opacity: 1; }
+}

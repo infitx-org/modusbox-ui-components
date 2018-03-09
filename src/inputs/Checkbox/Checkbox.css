@@ -1,0 +1,137 @@
+/* MULTI SELECTION */
+.input-checkbox-wrapper{
+	padding: 3px;
+	display: flex;
+}
+.input-checkbox{
+	appearance: none;
+	display: none;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);		
+	position: relative;
+
+	&input[type='checkbox']{
+		margin:0px;
+		padding:0px;
+	}
+	
+	+ label{
+
+		max-width: 100%;
+		display: flex;
+		position: relative;		
+		cursor: pointer;
+
+		&:hover{
+			&:before{
+				box-shadow:0px 0px 0px 3px rgba(0,0,0,0.13);
+			}
+		}		
+
+		&.round{			
+			&:before{
+				border-radius: 11px;
+			}
+		}
+		&:before{
+			box-sizing: initial;
+			flex: 0 0 20px;
+			display: inline-block;    
+			margin-right: 5px;
+				background: linear-gradient(#fafafa,#f4f4f4);
+
+			border: 1px solid #CACBCC;
+			content: '';
+			width: 20px;
+			height: 20px;					
+			box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.13);
+			transition: all .2s ease-out;
+		}		
+	}
+
+	&:disabled{
+		+ label{ 
+			color: #999;
+			&:before{
+				background: #eee;
+				box-shadow: none;
+			}
+		}
+	}
+	
+	&:disabled&:checked{
+		+ label{
+			&:before{
+				border-color: #60d2fd;
+				background: #60d2fd;
+			}
+		}
+	}
+
+	&:checked {		
+		+ label{
+
+			&:before{
+				border-color: #00a2df;
+				background: linear-gradient(#20c2ff,#00a2df);
+			};
+			&:after{				
+				content: '';
+				box-sizing: content-box;
+				box-sizing: initial;
+				position: absolute;
+				left: 6px;
+				top: 10px;
+				background: #fff;
+				width: 2px;
+				height: 2px;
+				box-shadow: 2px 0 0 #fff, 4px 0 0 #fff, 4px -2px 0 #fff, 4px -4px 0 #fff, 4px -8px 0 #fff, 4px -6px 0 #fff;
+				transform: rotate(45deg);
+				animation: animateCheckboxContent 0.2s ease-out 1;
+			}
+		}
+	}
+	&.semi-checked {		
+		+ label{
+			&:before{
+				border-color: #ddd;
+				background: #ddd;
+			}
+
+			&:after{				
+				content: "";
+				box-sizing: content-box;
+				box-sizing: initial;
+				position: absolute;
+				left: 6px;
+				top: 10px;
+				background: #999;
+				width: 10px;
+				height: 2px;								
+			}
+		}
+	}
+}
+.input-checkbox-label{
+	margin-left: 4px;
+	color: #333;
+	cursor: pointer;
+	&:hover{
+		color:#666
+	};
+	
+	&.disabled{
+		color: #999;
+	}	
+}
+
+@keyframes animateCheckboxContent{ 
+	0%{ 
+		margin-top:2px;
+		opacity:0;
+	}
+	100%{
+		margin-top:0px;
+		opacity:1;
+	}
+}
+

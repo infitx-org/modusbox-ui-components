@@ -1,0 +1,41 @@
+.options-position{
+	position: relative;
+}
+.options-wrapper{
+	position: absolute;
+	width: 100%;
+	max-height: 240px;
+	z-index: 1000;	
+}
+.option-item{
+	height: 40px;
+	color:#555;
+	padding-left:10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 40px;
+	font-size:13px;
+	background: #fff;
+
+	border-left:2px solid #ccc;
+	border-right:2px solid #ccc;
+	cursor: pointer;
+
+	&:hover{
+		background:#f8f8f8;
+		border-color:#00A3E0;
+		color:#00A3E0;
+	};
+
+	&.selected{ 
+		background: #E8E9EA;
+		border-color: #58595A;
+		color: #516873;
+	}
+
+	&.disabled{
+		color:#999;
+		cursor: auto;
+	}
+}
