@@ -48,7 +48,11 @@ class ScrollBar extends React.Component {
 	render(){
 		const { showTrack } = this.props
 		const { showScrollbar, barHeight, translate, isMoving, height } = this.state
-		const style = {
+		const trackerStyle = {
+			height,
+			...this.props.style
+		}
+		const handleStyle = {
 			height: `${barHeight}%`,
 			transform: `translate3d(0,${translate}px,0)`,			
 		}
@@ -58,17 +62,19 @@ class ScrollBar extends React.Component {
 		}
 
 		return (
-			<div className={`datalist-scrollbar ${showTrack ? 'track-visible' : ''}`} style={{ height }}>
-				 <div className={`${isMoving ? 'moving' : ''} datalist-scrollbar-handle`} style={ style }/>
+			<div className={`scrollbar ${showTrack ? 'track-visible' : ''}`} style={ trackerStyle }>
+				 <div className={`${isMoving ? 'moving' : ''} scrollbar-handle`} style={ handleStyle }/>
 			</div>
 		)
 	}
 }
 ScrollBar.propTypes = {
-	showTrack: React.PropTypes.bool
+	showTrack: React.PropTypes.bool,
+	style: React.PropTypes.object
 }
 ScrollBar.defaultProps = {
-	showTrack: false
+	showTrack: true,
+	style: {}
 }
 
 export default ScrollBar

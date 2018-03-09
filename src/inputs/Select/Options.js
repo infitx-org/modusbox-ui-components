@@ -52,7 +52,7 @@ class Options extends Component {
 		const filteredOptions = this.filterOptions()
 		return (
 			<div className='options-wrapper'>				
-				<ScrollBox style={{height:'200px'}}>
+				<ScrollBox style={{height:'200px'}} trackerStyle={{marginRight: '2px'}} showTrack={false}>
 					{ filteredOptions.map( (item, index) => {
 						const isSelected = selected === item.value					
 						return (

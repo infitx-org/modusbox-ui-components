@@ -5,6 +5,7 @@
 	position: absolute;
 	width: 100%;
 	max-height: 240px;
+	border-bottom: 2px solid #ccc;
 	z-index: 1000;	
 }
 .option-item{

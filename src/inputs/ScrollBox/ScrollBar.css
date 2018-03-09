@@ -1,5 +1,5 @@
 /* SCROLLBAR RULES */
-.datalist-scrollbar{
+.scrollbar{
 	height: 100%;
     width: 6px;
     position: absolute;
@@ -11,7 +11,7 @@
         background: rgba(0,0,0,0.1)
     }
 
-    .datalist-scrollbar-handle{
+    .scrollbar-handle{
     	background:rgba(0,0,0,0.5);
     	opacity: 0.7;
     	width:100%;
