@@ -3,7 +3,7 @@ import ScrollBox from '../inputs/ScrollBox'
 
 
 const Content = ({ color }) => ( 
-	<div style={{background:'#f93', height: '300px', color }} >
+	<div style={{background:'#fc9', height: '300px', color }} >
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sollicitudin lacus. Maecenas a sem libero. Curabitur ullamcorper, ex et tincidunt hendrerit, metus enim faucibus purus, sed euismod urna augue nec diam. Nullam tempor diam purus, id viverra nisi finibus id. Donec faucibus egestas odio, eu semper velit ornare finibus. Suspendisse pharetra, est efficitur condimentum ultricies, risus libero ullamcorper neque, et fermentum sem neque tristique tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam lacinia ante vel enim suscipit luctus. Quisque erat tellus, ullamcorper non fringilla vel, sodales ac ipsum. Aliquam erat volutpat.
 		Mauris interdum massa vel ultrices laoreet. Mauris nec risus vitae magna efficitur sollicitudin sit amet eget enim. Pellentesque eu cursus erat. Vestibulum ut erat vel ipsum blandit ultrices nec ac leo. Ut quis euismod arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam iaculis arcu tortor, eget fermentum eros viverra non. Sed non gravida sapien. Vivamus sit amet libero in quam aliquam pellentesque. Quisque ultrices consequat dignissim. Aenean condimentum arcu a neque suscipit euismod. Duis malesuada convallis augue id maximus. In imperdiet odio quis nibh dapibus, quis dapibus diam venenatis. Sed sem risus, imperdiet eu dolor vel, malesuada auctor diam.
 		Pellentesque consectetur vestibulum dui facilisis rutrum. Fusce vel mi et purus varius mattis. Pellentesque cursus felis convallis, cursus orci in, venenatis justo. Donec mollis commodo tellus at viverra. Vivamus molestie lectus vitae fermentum imperdiet. Duis condimentum tincidunt massa. Aliquam scelerisque leo sit amet hendrerit rutrum. Pellentesque libero orci, ullamcorper a tincidunt vel, lobortis a enim. Phasellus faucibus congue augue quis pellentesque. Aenean feugiat lacus quis nisl vehicula, vitae interdum urna tempus. Aliquam erat volutpat. Aliquam cursus congue ante, sit amet euismod metus imperdiet ac. Suspendisse in risus magna.
@@ -24,6 +24,12 @@ const TestScrollBox = () => (
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>			
 			<ScrollBox style={{height:'200px'}}>
 				<Content color='red' />
+			</ScrollBox>
+		</div>
+
+		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc' }}>			
+			<ScrollBox style={{maxHeight:'100px'}}>
+				<Content color='white' />
 			</ScrollBox>
 		</div>	
 	</div>

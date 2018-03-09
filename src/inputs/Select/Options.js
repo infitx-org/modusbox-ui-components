@@ -52,20 +52,22 @@ class Options extends Component {
 		const filteredOptions = this.filterOptions()
 		return (
 			<div className='options-wrapper'>				
-				<ScrollBox style={{height:'200px'}} trackerStyle={{marginRight: '2px'}} showTrack={false}>
-					{ filteredOptions.map( (item, index) => {
-						const isSelected = selected === item.value					
-						return (
-							<Option
-								label={ item.label }
-								value={ item.value }
-								disabled={ item.disabled === true }
-								key={ index }
-								selected={ isSelected }
-								onClick={ () => this.onClickOption( item ) }
-							/>
-						)
-					})}
+				<ScrollBox style={{maxHeight:'240px'}} trackerStyle={{marginRight: '2px'}} showTrack={false}>
+					<div>
+						{ filteredOptions.map( (item, index) => {
+							const isSelected = selected === item.value					
+							return (
+								<Option
+									label={ item.label }
+									value={ item.value }
+									disabled={ item.disabled === true }
+									key={ index }
+									selected={ isSelected }
+									onClick={ () => this.onClickOption( item ) }
+								/>
+							)
+						})}
+					</div>
 				</ScrollBox>
 				
 

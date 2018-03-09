@@ -28,9 +28,9 @@ class ScrollBox extends React.Component {
 	updateScrollbar(){
 		const { scrollTop } = this.refs.contentBox
 		const { height } = this.refs.contentBox.getBoundingClientRect()
-		const contentHeight = this.refs.contentBox.childNodes[0].getBoundingClientRect().height		
+		const contentHeight = this.refs.content.childNodes[0].getBoundingClientRect().height		
 		const offset = 0
-		
+		console.log( contentHeight )
 		if( this.refs.scrollbar ){
 			this.refs.scrollbar.setPosition({ scrollTop, offset, contentHeight, height })
 		}
