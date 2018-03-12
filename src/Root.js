@@ -8,6 +8,7 @@ import '../assets/custom.css'
 
 import configureStore from './redux/configureStore'
 import Views from './views'
+import './icons'
 
 var store = configureStore();
 

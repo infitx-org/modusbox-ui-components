@@ -1,4 +1,5 @@
 .input-textfield-wrapper{
+	width: 100%;
 	height: 45px;	
 	display: inline-flex;
 	box-sizing: border-box;
@@ -29,11 +30,14 @@
 		cursor: auto;
 	}
 }
-.input-textfield-box{
+.input-textfield-content-box{
 	display: flex;
 	position: relative;
 	height: 100%;
 	width: 100%;
+	align-items: center;	
+	padding-left: 16px;
+	padding-right: 12px;
 }
 
 .input-textfield-placeholder{
@@ -52,32 +56,14 @@
 	}
 }
 
-.input-textfield-value{
-	color:#333;
-	margin-left:10px;
-	justify-content:center;
-	align-items:center;
-}
 
 .input-textfield-input-content-box{
 	width:100%;
 	display: flex;
-	margin-top: 14px;
-	padding-left: 16px;
-	padding-right: 12px;
+	align-items: center;
 }
 
 .input-textfield-input-value{
-	flex:2 1 auto;
-	vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;
-    height:20px;
-
-}
-.input-textfield-input-filter{
 	-webkit-box-flex: 2;
     -ms-flex: 2 1 auto;
     flex: 2 1 auto;
@@ -92,10 +78,14 @@
 	border: none;
 	outline: none;
 	padding: 0px;
+	padding-top:1px;
 	pointer-events: none;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color:#333;	
+	justify-content:center;
+	align-items:center;
 
     &.has-filter{
     	color:#06c;

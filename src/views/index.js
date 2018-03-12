@@ -7,6 +7,8 @@ import TestRadio from './TestRadio'
 import TestDataList from './TestDataList'
 import TestScrollBox from './TestScrollBox'
 import TestFileUploader from './TestFileUploader'
+import TestDatePicker from './TestDatePicker'
+import TestIcon from './TestIcon'
 
 
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../inputs/Tabs'
@@ -19,7 +21,9 @@ const Items = {
 	Tabs: TestTabs,
 	DataList: TestDataList,
 	ScrollBox: TestScrollBox,
-	FileUploader: TestFileUploader
+	FileUploader: TestFileUploader,
+	DatePicker: TestDatePicker,
+	Icon: TestIcon
 }
 
 const Views = () => {

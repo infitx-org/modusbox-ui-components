@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
-import { default as Icon } from '@mulesoft/anypoint-components/Icon'
+//import { default as Icon } from '@mulesoft/anypoint-components/Icon'
+import Icon from '../Icon'
 
 import './TextField.css'
 
@@ -61,7 +62,7 @@ class TextField extends Component {
 	}
 
 	setValue( value ){
-		this.refs.filter.value = value
+		this.refs.input.value = value
 	} 
 	closeTextField(){
 		this.has_focus = false
@@ -70,12 +71,12 @@ class TextField extends Component {
 	leaveTextField( goNext = true ){		
 		
 		this.closeTextField()
-		this.refs.filter.blur();		
+		this.refs.input.blur();		
 
 		if( document.activeElement == document.body ){
 			const inputs = document.querySelectorAll('input:not([disabled])')			
 			const inputList = Array.prototype.slice.call( inputs )			
-			const nextIndex = inputList.indexOf( this.refs.filter ) + ( goNext ? 1 : -1 )						
+			const nextIndex = inputList.indexOf( this.refs.input ) + ( goNext ? 1 : -1 )						
 			if( nextIndex < 0 ){
 				inputList[ inputList.length + nextIndex ].focus()
 			}
@@ -111,7 +112,7 @@ class TextField extends Component {
 			return 
 		}
 		this.setState({
-			value: this.refs.filter.value
+			value: this.refs.input.value
 		})
 	}
 
@@ -125,7 +126,7 @@ class TextField extends Component {
 		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(this.refs.area).contains(evt.target)		
 	    if ( ! isClickWithinTextFieldBox ){
 	    	this.closeTextField()	    	
-			this.refs.filter.blur();		
+			this.refs.input.blur();		
 	   }
 	}
 
@@ -139,7 +140,7 @@ class TextField extends Component {
 	}
 
 	onTextFieldFilter(){		
-		this.refs.filter.focus();
+		this.refs.input.focus();
 	}
 
 	render(){
@@ -151,7 +152,7 @@ class TextField extends Component {
 		return (
 			<div className='input-textfield-wrapper'>
 				<div id={id} className={`input-textfield-component ${isOpen ? 'open' : '' } ${disabled ? 'disabled' : '' } `} onClick={ this.onClickTextField } ref='area'>
-					<div className='input-textfield-box'>
+					<div className='input-textfield-content-box'>
 						
 						{ typeof placeholder === 'string' && 
 							<label className={`input-textfield-placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
@@ -159,9 +160,9 @@ class TextField extends Component {
 						
 						<div className='input-textfield-input-content-box'>						
 							<input 
-								className='input-textfield-input-filter'
+								className='input-textfield-input-value'
 								type='text'
-								ref='filter'
+								ref='input'
 								onKeyDown={ this.testTabKey }
 								onChange={ this.applyFilter }
 								onFocus={ this.enterTextField }
