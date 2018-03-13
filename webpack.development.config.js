@@ -6,7 +6,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var aliases = {
 	'@mulesoft/anypoint-components': 'node_modules/@mulesoft/anypoint-components/lib',
 	'@mulesoft/anypoint-styles': 'node_modules/@mulesoft/anypoint-styles/lib',
-	/*'@mulesoft/anypoint-navbar': 'node_modules/@mulesoft/anypoint-navbar',*/
 	'domains': 'src/domains',
 	'views': 'src/views',
 	'style': 'src/style',  

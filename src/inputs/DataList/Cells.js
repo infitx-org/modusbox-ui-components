@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import ReactDOM from 'react-dom'
 import { isEqual } from 'lodash'
-import { Icon } from '@mulesoft/anypoint-components/Icon'
+import Icon from '../Icon'
 import Checkbox from './Checkbox'
 
 // the icon is throwing an error, but the code and the functionality isn't broken

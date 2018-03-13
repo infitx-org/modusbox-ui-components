@@ -1,10 +1,17 @@
 import React from 'react'
+import './Icon.css'
 
 class Icon extends React.Component {
 	constructor(props){
 		super(props)
+		this.onClick = this.onClick.bind(this)
 	}
 
+	onClick(e){
+		if( typeof this.props.onClick === 'function' ){
+			this.props.onClick(e)
+		}
+	}
 	render(){
 		const { style, size, name, fill, stroke, spin } = this.props
 		const svgStyle = { 
@@ -14,7 +21,7 @@ class Icon extends React.Component {
 			stroke					
 		}
 		return (
-			<svg style={ svgStyle }>
+			<svg style={ svgStyle } onClick={ this.onClick } className={ `icon ${spin ? 'spin' : ''}`}>
 				<use xlinkHref={`#${name}`} />
 			</svg>
 		)

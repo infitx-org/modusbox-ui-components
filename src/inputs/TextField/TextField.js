@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
-//import { default as Icon } from '@mulesoft/anypoint-components/Icon'
 import Icon from '../Icon'
 
 import './TextField.css'
@@ -11,23 +10,22 @@ class TextField extends Component {
 		super( props )
 
 		this.onClickTextField = this.onClickTextField.bind(this)		
-		this.onPageClick = this.onPageClick.bind(this)
-		this.onTextFieldFilter = this.onTextFieldFilter.bind(this)
+		this.onPageClick = this.onPageClick.bind(this)	
 
 		this.setValue = this.setValue.bind(this)
 		this.closeTextField = this.closeTextField.bind(this)
 		this.leaveTextField = this.leaveTextField.bind(this)
 		this.enterTextField = this.enterTextField.bind(this)
-		this.testTabKey = this.testTabKey.bind(this)
-		this.applyFilter = this.applyFilter.bind(this)
+		this.testTabKey = this.testTabKey.bind(this)		
+		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
 
 		const { value, pending, disabled } = this.props
 		this.state = {
 			isOpen: false,
+			isPasswordVisible: false,
 			value,
 			pending,
-			disabled,
-			filter: undefined
+			disabled
 		}
 		this.has_focus = false
 	}
@@ -61,9 +59,6 @@ class TextField extends Component {
 		window.removeEventListener( 'mouseup', this.onPageClick, false );
 	}
 
-	setValue( value ){
-		this.refs.input.value = value
-	} 
 	closeTextField(){
 		this.has_focus = false
 		this.setState({ isOpen: false })
@@ -92,7 +87,6 @@ class TextField extends Component {
 	}
 	enterTextField(){		
 		
-		console.log('s')
 		if( this.state.disabled ){
 			this.leaveTextField()
 			return
@@ -107,15 +101,18 @@ class TextField extends Component {
 			return
 		}
 	}
-	applyFilter(e){
-		if( ! this.has_focus ){
-			return 
+	setValue( value ){
+		this.refs.input.value = value
+		if( this.state.value != value ){
+			this.setState({ value })
+			this.props.onChange( value )
 		}
-		this.setState({
-			value: this.refs.input.value
-		})
 	}
 
+	onShowPasswordClick(e){
+		e.stopPropagation()
+		this.setState({ isPasswordVisible: ! this.state.isPasswordVisible })
+	}
 
 	// when clicking on the page 
 	onPageClick(evt) {		
@@ -135,12 +132,8 @@ class TextField extends Component {
 		const isOpen = ! this.state.isOpen
 		this.setState({ isOpen })
 		if( isOpen === true ){
-			this.onTextFieldFilter()
+			this.refs.input.focus();			
 		}
-	}
-
-	onTextFieldFilter(){		
-		this.refs.input.focus();
 	}
 
 	render(){
@@ -164,16 +157,16 @@ class TextField extends Component {
 								type='text'
 								ref='input'
 								onKeyDown={ this.testTabKey }
-								onChange={ this.applyFilter }
+								onChange={ this.setValue }
 								onFocus={ this.enterTextField }
 								onClick={ this.enterTextField }
 								value={ inputValue }
 								disabled={ disabled }
-								type={ type }								
+								type={ type === 'password' ? this.state.isPasswordVisible ? 'text' : 'password' : type }
 							/>
 							
 							<div className='input-textfield-input-icon'>
-								{ type == 'password' ? <EyeIcon /> : null }
+								{ type == 'password' ? <EyeIcon onClick={ this.onShowPasswordClick } /> : null }
 								{ pending ? <PendingIcon /> : null }
 							
 						 	</div>
@@ -187,9 +180,10 @@ class TextField extends Component {
 	}
 }
 
-const EyeIcon = () => (
+const EyeIcon = ({ onClick }) => (
 	<Icon 
-		name='settings-small'
+		onClick={ onClick }
+		name='toggle-visible'
 		size={16}
 		fill='#39f'		
 	/>

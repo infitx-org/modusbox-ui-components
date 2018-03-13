@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { isEqual } from 'lodash'
 import { NotifyResize } from 'react-notify-resize'
-import { default as Icon } from '@mulesoft/anypoint-components/Icon'
+import Icon from '../Icon'
 import { default as Row } from '@mulesoft/anypoint-components/Row'
 
 

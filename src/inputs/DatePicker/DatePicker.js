@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import moment from 'moment'
 
 import { default as Row } from '@mulesoft/anypoint-components/Row'
-import { default as Icon } from '@mulesoft/anypoint-components/Icon'
+import Icon from '../Icon'
 
 import DayPicker, { DateUtils } from 'react-day-picker'
 import './DatePicker.css'

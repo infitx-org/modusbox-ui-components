@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { default as Icon } from '@mulesoft/anypoint-components/Icon'
+import Icon from '../Icon'
 import './Link.css'
 
 class Link extends Component {

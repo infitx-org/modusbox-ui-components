@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
-import { default as Icon } from '@mulesoft/anypoint-components/Icon'
+import Icon from '../Icon'
 
 import './Select.css'
 

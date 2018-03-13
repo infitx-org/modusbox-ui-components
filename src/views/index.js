@@ -30,10 +30,10 @@ const Views = () => {
 
 	const AllItemTabs = Object.keys( Items ).map( (item, i) => <Tab key={ i }> { item } </Tab> )
 	const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }><div > { Items[ item ]() } </div> </TabPanel> )
-	
+	const selected = Object.keys( Items ).length - 1
 	return (
 		<div style={{padding:10}}>
-			<Tabs selected={ 7 }>
+			<Tabs selected={ selected }>
 				<TabList style={{width:'500px'}}>{ AllItemTabs }</TabList>
 				<TabPanels>{ AllItemPanels }</TabPanels>
 			</Tabs>
