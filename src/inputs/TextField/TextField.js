@@ -122,7 +122,7 @@ class TextField extends Component {
 
 	render(){
 		const { id, type, placeholder } = this.props 
-		const { isOpen, value, pending, disabled } = this.state
+		const { isOpen, value, pending, disabled, isPasswordVisible } = this.state
 		const inputValue = value || ''
 		const isPlaceholderTop = isOpen || value 
 		
@@ -137,20 +137,19 @@ class TextField extends Component {
 						
 						<div className='input-textfield-input-content-box'>						
 							<input 
-								className='input-textfield-input-value'
-								type='text'
 								ref='input'
+								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }
 								onKeyDown={ this.testTabKey }
 								onChange={ this.setValue }
 								onFocus={ this.enterTextField }
 								onClick={ this.enterTextField }
 								value={ inputValue }
 								disabled={ disabled }
-								type={ type === 'password' ? this.state.isPasswordVisible ? 'text' : 'password' : type }
+								className='input-textfield-input-value'
 							/>
 							
 							<div className='input-textfield-input-icon'>
-								{ type == 'password' ? <EyeIcon onClick={ this.onShowPasswordClick } /> : null }
+								{ type == 'password' ? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> : null }
 								{ pending ? <PendingIcon /> : null }
 							
 						 	</div>
@@ -164,10 +163,10 @@ class TextField extends Component {
 	}
 }
 
-const EyeIcon = ({ onClick }) => (
+const EyeIcon = ({ open, onClick }) => (
 	<Icon 
 		onClick={ onClick }
-		name='toggle-visible'
+		name={ open ? 'toggle-invisible' : 'toggle-visible' }
 		size={16}
 		fill='#333'		
 	/>
