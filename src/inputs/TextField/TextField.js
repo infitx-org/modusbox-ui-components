@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
+import { focusNextFocusableElement } from '../../utils/common'
 import Icon from '../Icon'
 
 import './TextField.css'
@@ -63,27 +64,10 @@ class TextField extends Component {
 		this.has_focus = false
 		this.setState({ isOpen: false })
 	}
-	leaveTextField( goNext = true ){		
+	leaveTextField( next ){		
 		
-		this.closeTextField()
-		this.refs.input.blur();		
-
-		if( document.activeElement == document.body ){
-			const inputs = document.querySelectorAll('input:not([disabled])')			
-			const inputList = Array.prototype.slice.call( inputs )			
-			const nextIndex = inputList.indexOf( this.refs.input ) + ( goNext ? 1 : -1 )						
-			if( nextIndex < 0 ){
-				inputList[ inputList.length + nextIndex ].focus()
-			}
-			else if( nextIndex >= inputList.length ){					
-				inputList[ nextIndex % inputList.length ].focus()
-			}
-			else{
-				inputList[ nextIndex ].focus()
-			}
-		}
-		
-
+		this.closeTextField()		
+		focusNextFocusableElement( this.refs.input, next );
 	}
 	enterTextField(){		
 		
@@ -185,7 +169,7 @@ const EyeIcon = ({ onClick }) => (
 		onClick={ onClick }
 		name='toggle-visible'
 		size={16}
-		fill='#39f'		
+		fill='#333'		
 	/>
 )
 const PendingIcon = () => (

@@ -15,8 +15,8 @@ class Icon extends React.Component {
 	render(){
 		const { style, size, name, fill, stroke, spin } = this.props
 		const svgStyle = { 
-			height: size,
-			width: size,
+			height: `${size}px`,
+			width: `${size}px`,
 			fill,
 			stroke					
 		}
@@ -31,7 +31,7 @@ class Icon extends React.Component {
 Icon.defaultProps = {
 	size: 20,
 	name: undefined,
-	fill: '#000',
+	fill: '#999',
 	stroke: undefined,
 	spin: false
 }

@@ -24,11 +24,25 @@ const icons = [
 	'editing',
 	'magic-wand',
 	'settings',
+
+	// mulesoft 
+	'access-manager-color',
+	'undo',
+	'unlock-small',
+	'upload-small',
+	'upload',
+	'user-small',
+	'user',
+	'walkthrough-small',
+	'warning-small',
+	'warning',
+	'xchange-color',
+	'xchange-greyscale'
 ]
 
 
 const Block = ({ icon }) => (
-	<div style={{ height: '140px', width: '140px', border: '1px solid #eee', 'justify-content':'center', display:'flex', 'flex-direction':'column'}}>
+	<div style={{ height: '140px', width: '140px', border: '1px solid #eee', justifyContent:'center', display:'flex', flexDirection:'column'}}>
 		<div style={{flex:'0 0 auto','justify-content':'center', display:'flex'}}>
 			<Icon 
 				size='40'
