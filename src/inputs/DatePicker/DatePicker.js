@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
+import DayPicker, { DateUtils } from 'react-day-picker'
+import * as utils from '../../utils/common'
 
 import { default as Row } from '@mulesoft/anypoint-components/Row'
 import Icon from '../Icon'
 
-import DayPicker, { DateUtils } from 'react-day-picker'
 import './DatePicker.css'
 
 export default class DatePicker extends React.Component {
@@ -36,12 +37,13 @@ export default class DatePicker extends React.Component {
 		const { hour, minute, second } = this.getTime( this.props.value )
 		
 		this.state = {
+			disabled: this.props.disabled,
 			selectedDay,
 			dateString,
 			hour,
 			minute,
 			second,
-			showPicker: false,		
+			isOpen: false,		
 		};		
 	}
 	
@@ -53,7 +55,7 @@ export default class DatePicker extends React.Component {
 	}
 	componentWillReceiveProps(props) {
 
-		const { value, defaultHour, defaultMinute, defaultSecond } = props
+		const { value, defaultHour, defaultMinute, defaultSecond, disabled } = props
 		let timeValue = value
 		const defaultTime = {
 			hour: defaultHour || 0 ,
@@ -68,6 +70,7 @@ export default class DatePicker extends React.Component {
 		const { hour, minute, second } = value ? this.getTime( timeValue ) : defaultTime
 
 		this.setState({ 
+			disabled,
 			selectedDay,
 			dateString,
 			hour,
@@ -114,13 +117,13 @@ export default class DatePicker extends React.Component {
 	}
 
 	handleOpenClick(){
-		this.setState({ showPicker : ! this.state.showPicker })
+		this.setState({ isOpen: ! this.state.isOpen })
 	}
 	// detect if the used clicks outside the datepicker box
 	handlePageClick(evt) {		
 		const area = ReactDOM.findDOMNode(this.refs.area)	    
 		if (!area.contains(evt.target)) {
-			this.setState({ showPicker:false })
+			this.setState({ isOpen: false })
 	   }
 	}
 
@@ -179,24 +182,32 @@ export default class DatePicker extends React.Component {
 
 	render() {		
 		const { placeholder, id } = this.props
-		const { dateString, selectedDay } = this.state
+		const { isOpen, disabled, dateString, selectedDay } = this.state
 		const initialMonth = selectedDay == undefined ? this.getDate( this.props.initialMonth ) : selectedDay
 		const hasDate = dateString != 0 && dateString != undefined		
 		const isPlaceholderTop = hasDate
 		
+		const componentClassName = utils.composeClassNames([
+			'input-datepicker__component',
+			'component',
+			'component__borders',
+			'component__background',
+			isOpen && 'input-datepicker__component--open component__borders--open component__background--open',
+			disabled && 'input-datepicker--disabled component--disabled'
+		])
 		return (
-			<div className='input-datepicker-wrapper'>
-				<div className='input-datepicker-component'>
+			<div className='input-datepicker'>
+				<div className={ componentClassName }>
 					<div 
 						id={ id }
-						className='input-datepicker-content-box'
+						className='input-datepicker__content'
 						onClick={ this.handleOpenClick }							
 					>
 						{ typeof placeholder === 'string' && 
-							<label className={`input-datepicker-placeholder ${hasDate ? 'top' :''}`}> { placeholder } </label> 
+							<label className={`input-datepicker__placeholder ${isOpen || hasDate ? 'top' :''}`}> { placeholder } </label> 
 						}
 						
-						<div className='input-datepicker-value'> 
+						<div className='input-datepicker__value'> 
 							{ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 						</div>
 						
@@ -208,7 +219,7 @@ export default class DatePicker extends React.Component {
 				</div>
 				
 				<div ref='area'>
-					{ this.state.showPicker &&
+					{ this.state.isOpen &&
 						<div className='daypicker-position'>
 							<DayPicker		
 								initialMonth={ initialMonth }				

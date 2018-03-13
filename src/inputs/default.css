@@ -9,6 +9,7 @@ $background--open: #f9fafb;
 
 /******************* COMPONENT ******************/
 .component{	
+	transition: all 0.2s ease-out;
 }
 
 .component--disabled{

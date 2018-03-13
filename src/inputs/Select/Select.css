@@ -11,13 +11,11 @@
 	background:#eee;
 	height: 100%;
 	width: 100%;	
-	cursor: pointer;
-
-	transition: all 0.2s ease-out;
+	cursor: pointer;	
 	
 	&.input-select__component--open {
 		width:calc(100% + 4px);
-		padding:0px 2px;	
+		padding:0px 2px;
 	}	
 	
 	&.input-select__component--disabled{		

@@ -52,12 +52,12 @@ class Checkbox extends React.Component {
 	 	const { semi, id, label, disabled, round } = this.props
 
 		return (
-			<div className={`input-checkbox-wrapper`}>
+			<div className={`input-checkbox`}>
 				<input
 					ref='input'
 					type='checkbox'
 					id={id}
-					className={`input-checkbox ${ semi ? 'semi-checked' : ''}`}
+					className={`input-checkbox__input ${ semi ? 'semi-checked' : ''}`}
 					onKeyDown={ this.testTabKey }
 					checked={ checked && semi != true }	
 					onChange={ this.preventDefault }

@@ -35,25 +35,31 @@
   } 
 }
 
-
-
-
-.input-datepicker-wrapper{
+.input-datepicker{
   position:relative;
   width: 100%;
-  height: 45px;
-  padding-left:5px;
-  padding-right:5px;
+  height: 45px;  
   vertical-align: middle;
-  background: #F4F5F6;
-  border-left: 2px solid #CACBCC;
-  border-right: 2px solid #CACBCC;
-  color: #989a9b;
-  font-size:11px;
   cursor: pointer;  
 }
 
-.input-datepicker-content-box{
+.input-datepicker__component{
+  display: flex;
+  position: relative; 
+  height: 100%;
+  width: 100%;  
+  cursor: pointer;
+
+  &.input-datepicker__component--open{
+    width:calc(100% + 4px);
+    padding:0px 2px;    
+  } 
+  
+  &.input-datepicker__component--disabled{   
+  }
+}
+
+.input-datepicker__content{
   display: flex;
   position: relative;
   height: 100%;
@@ -63,7 +69,9 @@
   padding-right: 12px;
 }
 
-.input-datepicker-placeholder{
+
+
+.input-datepicker__placeholder{
   font-size: 14px;
   transition: all 0.2s ease-out;
   position: absolute;
@@ -79,7 +87,7 @@
   }
 }
 
-.input-datepicker-value{
+.input-datepicker__value{
   flex: 2 1 auto;
   vertical-align: middle;
   overflow: hidden;
