@@ -1,20 +1,42 @@
+$component-opacity--disabled: 0.5;
+
+$border-color--default: #CACBCC;
+$border-color--open: #58595A;
+
+$background--default: #eee;
+$background--open: #f9fafb;
+
+
+/******************* COMPONENT ******************/
+.component{	
+}
+
+.component--disabled{
+	opacity: $component-opacity--disabled;
+	pointer-events: none;
+	cursor: auto;
+}
+
+/******************* BACKGROUND ******************/
 
 .component__background{
-	background:#eee;
+	background: $background--default;
 }
 
 .component__background--open{
-	background:#f9fafb;
+	background: $background--open;
 }
+
+
+/******************** BORDERS ********************/
 
 .component__borders{
-	border-left: 2px solid #CACBCC;
-	border-right: 2px solid #CACBCC;
+	border-left: 2px solid $border-color--default;
+	border-right: 2px solid $border-color--default;
 }
 
-
 .component__borders--open{
-	margin-left:-2px;
-	margin-right:-2px;	
-	border-color: #58595A;
+	margin-left: -2px;
+	margin-right: -2px;	
+	border-color: $border-color--open;
 }	

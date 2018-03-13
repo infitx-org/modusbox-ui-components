@@ -1,13 +1,13 @@
-.options-position{
+.input-select__options{
 	position: relative;
 }
-.options-wrapper{
+.input-select__options-wrapper{
 	position: absolute;
 	width: 100%;
 	border-bottom: 2px solid #ccc;
 	z-index: 1000;	
 }
-.option-item{
+.input-select__options-item{
 	flex: 0 0 40px;	
 	color:#555;
 	padding-left:10px;

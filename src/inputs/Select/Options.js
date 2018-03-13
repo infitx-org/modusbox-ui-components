@@ -1,6 +1,7 @@
 import React, { PureComponent, Component, PropTypes } from 'react'
-import ScrollBox from '../ScrollBox'
 import { find } from 'lodash'
+import * as utils from '../../utils/common'
+import ScrollBox from '../ScrollBox'
 
 import './Options.css'
 
@@ -51,7 +52,7 @@ class Options extends Component {
 		const { options, selected } = this.state
 		const filteredOptions = this.filterOptions()
 		return (
-			<div className='options-wrapper'>				
+			<div className='input-select__options-wrapper'>				
 				<ScrollBox style={{maxHeight:'240px'}} trackerStyle={{marginLeft: '-4px', width:'5px', borderRadius:'3px'}} showTrack={false}>
 					<div>
 						{ filteredOptions.map( (item, index) => {
@@ -98,9 +99,16 @@ class Option extends PureComponent {
 		this.props.onClick()
 	}
 	render(){
-		 return (
+		const { selected, disabled } = this.props
+		const optionsClassNames = utils.composeClassNames([
+			'input-select__options-item',
+			selected && 'selected',
+			disabled && 'disabled',
+		])
+		
+		return (
 		 	<div 
-		 		className={`option-item ${this.props.selected ? 'selected' :''} ${this.props.disabled ? 'disabled' :''}`}
+		 		className={ optionsClassNames }
 		 		onClick={ this.onClick }		 		
 		 	>
 		 		{ this.props.label }

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
-import { focusNextFocusableElement } from '../../utils/common'
+import * as utils from '../../utils/common'
 import Icon from '../Icon'
 
 import './Select.css'
@@ -156,23 +156,35 @@ class Select extends Component {
 	}
 
 	render(){
+		
 		const { id, placeholder } = this.props 
 		const { isOpen, options, selectedLabel, selectedValue, pending, disabled, filter } = this.state
+		
 		const inputValue = filter || selectedLabel || ''
 		const isPlaceholderTop = isOpen || selectedLabel 
+
+
+		const componentClassName = utils.composeClassNames([
+			'input-select__component',
+			'component',
+			'component__borders',
+			'component__background',
+			isOpen && 'input-select__component--open component__borders--open component__background--open',
+			disabled && 'input-select--disabled component--disabled'
+		])
 		
 		return (
-			<div className='select-wrapper'>
-				<div id={id} className={`select-component ${isOpen ? 'open' : '' } ${disabled ? 'disabled' : '' } `} onClick={ this.onClickSelect } ref='area'>
-					<div className='select-box'>
+			<div className='input-select'>
+				<div id={id} className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
+					<div className='input-select__content'>
 						
 						{ typeof placeholder === 'string' && 
-							<label className={`select-placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
+							<label className={`input-select__placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
 						}
 						
-						<div className='select-input-content-box'>						
+						<div className='input-select__input-content'>						
 							<input 
-								className={`select-input-filter ${filter ? 'has-filter' : ''}`}
+								className={`input-select__filter ${filter ? 'has-filter' : ''}`}
 								type='text'
 								ref='filter'
 								onKeyDown={ this.testTabKey }
@@ -184,14 +196,14 @@ class Select extends Component {
 							/>
 							
 							<div className='select-input-icon'>
-								{ pending ? <PendingIcon /> : <ArrowIcon isOpen={isOpen} /> }
+								{ pending ? <PendingIcon /> : <ArrowIcon isOpen={ isOpen } /> }
 						 	</div>
 						</div>						
 						
 					</div>
 				</div>
 				
-				<div className='options-position'>
+				<div className='input-select__options'>
 					{ isOpen && 
 						<Options
 							ref='options' 

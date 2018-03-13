@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
-import { composeClassNames, focusNextFocusableElement } from '../../utils/common'
+import * as utils from '../../utils/common'
 import Icon from '../Icon'
 import '../default.css'
 import './TextField.css'
@@ -64,10 +64,9 @@ class TextField extends Component {
 		this.has_focus = false
 		this.setState({ isOpen: false })
 	}
-	leaveTextField( next ){		
-		
+	leaveTextField( next ){				
 		this.closeTextField()		
-		focusNextFocusableElement( this.refs.input, next );
+		utils.focusNextFocusableElement( this.refs.input, next );
 	}
 	enterTextField(){		
 		
@@ -127,13 +126,13 @@ class TextField extends Component {
 		const inputValue = value || ''
 		const isPlaceholderTop = isOpen || value 
 		
-		const componentClassName = composeClassNames([
+		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
 			'component',
 			'component__borders',
 			'component__background',
 			isOpen && 'input-textfield__component--open component__borders--open component__background--open',
-			disabled && 'input-textfield__component--disabled'
+			disabled && 'input-textfield__component--disabled component--disabled'
 		])
 		return (
 			<div className='input-textfield'>
@@ -142,8 +141,7 @@ class TextField extends Component {
 						
 						{ typeof placeholder === 'string' && 
 							<label className={`input-textfield__placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
-						}
-						
+						}						
 						<div className='input-textfield__input-content'>						
 							<input 
 								ref='input'
@@ -155,8 +153,7 @@ class TextField extends Component {
 								value={ inputValue }
 								disabled={ disabled }
 								className='input-textfield__input'
-							/>
-							
+							/>							
 							<div className='input-textfield__icon'>
 								{ type == 'password' ? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> : null }
 								{ pending ? <PendingIcon /> : null }
