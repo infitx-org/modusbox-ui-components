@@ -49,12 +49,12 @@ class ScrollBar extends React.Component {
 		const { showTrack } = this.props
 		const { showScrollbar, barHeight, translate, isMoving, height } = this.state
 		const trackerStyle = {
-			height,
-			...this.props.style
+			height
 		}
 		const handleStyle = {
 			height: `${barHeight}%`,
-			transform: `translate3d(0,${translate}px,0)`,			
+			transform: `translate3d(0,${translate}px,0)`,
+			...this.props.style
 		}
 
 		if( ! showScrollbar ){			
