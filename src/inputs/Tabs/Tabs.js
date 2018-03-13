@@ -37,11 +37,12 @@ class Tabs extends React.Component {
 		
 	}
 	onSelect( evt, index ){
+		this.setState({ selected: index })
+		
 		if( typeof this.props.onSelect === 'function' ){
 			this.props.onSelect( evt, index )
 		}
 		
-		this.setState({ selected: index })
 		
 	}
 	render(){
