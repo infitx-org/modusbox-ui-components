@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
+import { focusNextFocusableElement } from '../../utils/common'
 import Icon from '../Icon'
 
 import './Select.css'
@@ -81,27 +82,11 @@ class Select extends Component {
 		this.has_focus = false
 		this.setState({ isOpen: false, filter: undefined })
 	}
-	leaveSelect( goNext = true ){		
+	leaveSelect( next){		
 		
 		this.closeSelect()
-		this.refs.filter.blur();		
-
-		if( document.activeElement == document.body ){
-			const inputs = document.querySelectorAll('input:not([disabled])')			
-			const inputList = Array.prototype.slice.call( inputs )
-			const nextIndex = inputList.indexOf( this.refs.filter ) + ( goNext ? 1 : -1 )						
-			if( nextIndex < 0 ){
-				inputList[ inputList.length + nextIndex ].focus()
-			}
-			else if( nextIndex >= inputList.length ){					
-				inputList[ nextIndex % inputList.length ].focus()
-			}
-			else{
-				inputList[ nextIndex ].focus()
-			}
-		}
+		focusNextFocusableElement( this.refs.filter, next )
 		
-
 	}
 	enterSelect(){		
 		this.has_focus = true
