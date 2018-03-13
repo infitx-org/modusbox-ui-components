@@ -1,0 +1,20 @@
+
+.component__background{
+	background:#eee;
+}
+
+.component__background--open{
+	background:#f9fafb;
+}
+
+.component__borders{
+	border-left: 2px solid #CACBCC;
+	border-right: 2px solid #CACBCC;
+}
+
+
+.component__borders--open{
+	margin-left:-2px;
+	margin-right:-2px;	
+	border-color: #58595A;
+}	

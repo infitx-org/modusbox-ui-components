@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { find } from 'lodash'
-import { focusNextFocusableElement } from '../../utils/common'
+import { composeClassNames, focusNextFocusableElement } from '../../utils/common'
 import Icon from '../Icon'
-
+import '../default.css'
 import './TextField.css'
 
 class TextField extends Component { 
@@ -121,21 +121,30 @@ class TextField extends Component {
 	}
 
 	render(){
+		
 		const { id, type, placeholder } = this.props 
 		const { isOpen, value, pending, disabled, isPasswordVisible } = this.state
 		const inputValue = value || ''
 		const isPlaceholderTop = isOpen || value 
 		
+		const componentClassName = composeClassNames([
+			'input-textfield__component',
+			'component',
+			'component__borders',
+			'component__background',
+			isOpen && 'input-textfield__component--open component__borders--open component__background--open',
+			disabled && 'input-textfield__component--disabled'
+		])
 		return (
-			<div className='input-textfield-wrapper'>
-				<div id={id} className={`input-textfield-component ${isOpen ? 'open' : '' } ${disabled ? 'disabled' : '' } `} onClick={ this.onClickTextField } ref='area'>
-					<div className='input-textfield-content-box'>
+			<div className='input-textfield'>
+				<div id={id} className={ componentClassName } onClick={ this.onClickTextField } ref='area'>
+					<div className='input-textfield__content'>
 						
 						{ typeof placeholder === 'string' && 
-							<label className={`input-textfield-placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
+							<label className={`input-textfield__placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
 						}
 						
-						<div className='input-textfield-input-content-box'>						
+						<div className='input-textfield__input-content'>						
 							<input 
 								ref='input'
 								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }
@@ -145,19 +154,17 @@ class TextField extends Component {
 								onClick={ this.enterTextField }
 								value={ inputValue }
 								disabled={ disabled }
-								className='input-textfield-input-value'
+								className='input-textfield__input'
 							/>
 							
-							<div className='input-textfield-input-icon'>
+							<div className='input-textfield__icon'>
 								{ type == 'password' ? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> : null }
 								{ pending ? <PendingIcon /> : null }
 							
 						 	</div>
-						</div>						
-						
+						</div>												
 					</div>
 				</div>				
-
 			</div>
 		)
 	}
