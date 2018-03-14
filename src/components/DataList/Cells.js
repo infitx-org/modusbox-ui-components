@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import ReactDOM from 'react-dom'
-import { isEqual } from 'lodash'
+import isEqual from 'lodash/isEqual'
 import Icon from '../Icon'
 import Checkbox from './Checkbox'
 

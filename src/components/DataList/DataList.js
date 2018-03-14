@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { isEqual, orderBy, find, findIndex } from 'lodash'
+import isEqual from 'lodash/isEqual'
+import orderBy from 'lodash/orderBy'
+import find from 'lodash/find'
+import findIndex from 'lodash/findIndex'
 
 /*import { default as Spinner } from '@mulesoft/anypoint-components/Spinner'*/
 import Column from '../Column'

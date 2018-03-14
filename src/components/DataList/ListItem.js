@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
-import { isEqual } from 'lodash'
+import isEqual from 'lodash/isEqual'
+
 import { NotifyResize } from 'react-notify-resize'
 import Icon from '../Icon'
-import { default as Row } from '@mulesoft/anypoint-components/Row'
+import Row from '../Row'
 
 
 import Link from './Link'

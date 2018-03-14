@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import { find } from 'lodash'
+import find from 'lodash/find'
+
 import { Row } from '@mulesoft/anypoint-components/Row'
 
 import { HeaderCell, ScrollBarHeaderCell } from './Cells'

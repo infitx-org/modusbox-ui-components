@@ -176,7 +176,9 @@ export default class DatePicker extends React.Component {
 		}
 
 		// call the external function
-		this.props.onSelect( exportDay )
+		if( typeof this.props.onSelect === 'function' ){
+			this.props.onSelect( exportDay )
+		}
 	}
 
 

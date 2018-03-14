@@ -26,6 +26,8 @@ var config = {
 	},
 	devtool: 'source-map',
 	plugins: [
+		// Ignore all locale files of moment.js
+    	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 	],
 
 	resolve: {		

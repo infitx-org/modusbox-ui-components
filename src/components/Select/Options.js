@@ -1,5 +1,6 @@
 import React, { PureComponent, Component, PropTypes } from 'react'
-import { find } from 'lodash'
+import find from 'lodash/find'
+
 import * as utils from '../../utils/common'
 import ScrollBox from '../ScrollBox'
 

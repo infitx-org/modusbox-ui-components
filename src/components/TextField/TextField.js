@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { find } from 'lodash'
+import find from 'lodash/find'
+
 import * as utils from '../../utils/common'
 import Icon from '../Icon'
 import '../default.css'
