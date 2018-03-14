@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import DatePicker from '../inputs/DatePicker'
+import DatePicker from '../components/DatePicker'
 
 const TestDatePicker = () => (
 	<div>

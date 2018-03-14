@@ -2,11 +2,10 @@ import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { isEqual, orderBy, find, findIndex } from 'lodash'
 
-import { default as Row } from '@mulesoft/anypoint-components/Row'
-import { default as Column } from '@mulesoft/anypoint-components/Column'
-import { default as Heading } from '@mulesoft/anypoint-components/Heading'
-import { default as Spinner } from '@mulesoft/anypoint-components/Spinner'
-import { default as TextField } from '@mulesoft/anypoint-components/TextField'
+/*import { default as Spinner } from '@mulesoft/anypoint-components/Spinner'*/
+import Column from '../Column'
+import Row from '../Row'
+import TextField from '../TextField'
 import Icon from '../Icon'
 
 import { NotifyResize } from 'react-notify-resize'
@@ -21,7 +20,8 @@ import ListItem from './ListItem'
 const SpinnerBox = ({ id = 'datalist-pending-box' }) => (
 	<div id={`${id}`} style={{width:'100%'}}>
 		<Row align='center center' className='loading-box'> 
-			<Spinner size='s' className='loading-spinner'/>
+			<Icon size={ 16 } className='loading-spinner' name='warning-sign'/>
+			{/*<Spinner size='s' className='loading-spinner'/>*/}
 		</Row>
 	</div>
 )

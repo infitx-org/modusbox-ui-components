@@ -1,4 +1,6 @@
 import React from 'react'
+import * as utils from '../../utils/common'
+
 import './Icon.css'
 
 class Icon extends React.Component {
@@ -13,13 +15,18 @@ class Icon extends React.Component {
 		}
 	}
 	render(){
-		const { style, size, name, fill, stroke, spin } = this.props
+		const { className, style, size, name, fill, stroke, spin } = this.props
 		const svgStyle = { 
 			height: `${size}px`,
 			width: `${size}px`,
 			fill,
 			stroke					
 		}
+		const componentClassName = utils.composeClassNames([
+			'icon',
+			spin && 'spin',
+			className
+		])
 		return (
 			<svg style={ svgStyle } onClick={ this.onClick } className={ `icon ${spin ? 'spin' : ''}`}>
 				<use xlinkHref={`#${name}`} />
@@ -29,6 +36,7 @@ class Icon extends React.Component {
 }
 
 Icon.defaultProps = {
+	className: undefined,
 	size: 20,
 	name: undefined,
 	fill: '#999',
@@ -37,6 +45,7 @@ Icon.defaultProps = {
 }
 
 Icon.propTypes = {
+	className: React.PropTypes.string,
 	size: React.PropTypes.number,
 	name: React.PropTypes.string,
 	fill: React.PropTypes.string,

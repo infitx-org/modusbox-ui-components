@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import DataList from '../inputs/DataList'
+import DataList from '../components/DataList'
 
 const columns = ['a','b','c','d','e']
 const list1 = new Array(100).fill(0).map( (row, rowi) => columns.reduce( (p,c,i) => ({ ...p, [`${c}`]: `${i + rowi *  columns.length }` }), {}) )

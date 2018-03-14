@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Select from '../inputs/Select'
+import Select from '../components/Select'
 
 const options = [
 	{

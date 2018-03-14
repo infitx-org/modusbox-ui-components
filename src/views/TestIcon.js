@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Icon from '../inputs/Icon'
+import Icon from '../components/Icon'
 
 import '../icons/index.js'
 

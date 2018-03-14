@@ -11,7 +11,7 @@ import TestDatePicker from './TestDatePicker'
 import TestIcon from './TestIcon'
 
 
-import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../inputs/Tabs'
+import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
 
 const Items = {
 	Checkbox: TestCheckbox,
