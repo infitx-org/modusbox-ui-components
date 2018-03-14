@@ -10,12 +10,16 @@ class Tabs extends React.Component {
 	constructor(props){
 		super(props)
 
-		const { selected } = this.props
+		const { selected, children } = this.props
+		const items = this.getTabs( children )		
 		this.state = {
 			selected: Math.max( 0, typeof selected === 'string' ? items.indexOf( selected ) : selected != undefined ? selected : 0 )
 		}	
 		this.onSelect = this.onSelect.bind(this)	
-	} 
+		this.getTabListAndTabPanels = this.getTabListAndTabPanels.bind(this)
+		this.getTabs = this.getTabs.bind(this)
+		this.getPanels = this.getPanels.bind(this)
+	} 	
 	componentWillReceiveProps(nextProps){
 		
 		const { children } = nextProps
@@ -36,29 +40,40 @@ class Tabs extends React.Component {
 		this.setState({ selected })
 		
 	}
+
+
+	getTabListAndTabPanels(){
+		const items = this.props.children
+		const subElements = Array.isArray( items ) ? items : [ items ]				
+		const [ tabList, tabPanels ] = subElements
+		return [ tabList, tabPanels ]
+	}
+	getTabs(){		
+		const [ tabList ] = this.getTabListAndTabPanels()
+		return tabList.props.children.filter( child => child.type === Tab )
+	}
+	getPanels(){
+		const [ tabList, tabPanels ] = this.getTabListAndTabPanels()
+		const panels = tabPanels ? tabPanels.props.children : []
+		return panels.filter( child => child.type === TabPanel )
+	}
 	onSelect( evt, index ){
 		this.setState({ selected: index })
 		
 		if( typeof this.props.onSelect === 'function' ){
-			this.props.onSelect( evt, index )
-		}
-		
-		
+			this.props.onSelect( index )
+		}		
 	}
 	render(){
 		const { selected } = this.state
 		const { children } = this.props		
-		const subElements = Array.isArray( children ) ? children : [ children ]		
+		const [ tabList ] = this.getTabListAndTabPanels()
 		
-		const [ tabList, tabPanels ] = subElements
-		const tabs = tabList.props.children
-		.filter( child => child.type === Tab )
+		const tabs = this.getTabs( children )
 		.map( (child,index) => React.cloneElement( child, {...child.props, onSelect: this.onSelect } ) )
-		
-		const panels = tabPanels ? tabPanels.props.children : []
 
-		const Panels = panels.filter( child => child.type === TabPanel )
-		const SelectedPanel = (panels.length >= selected + 1) ? Panels[ selected ] : null
+		const panels = this.getPanels( children )		
+		const SelectedPanel = (panels.length >= selected + 1) ? panels[ selected ] : null
 
 		const { width } = tabList.props.style || {}
 		const growTab = width != undefined

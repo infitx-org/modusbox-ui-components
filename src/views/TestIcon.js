@@ -43,21 +43,21 @@ const icons = [
 
 const Block = ({ icon }) => (
 	<div style={{ height: '140px', width: '140px', border: '1px solid #eee', justifyContent:'center', display:'flex', flexDirection:'column'}}>
-		<div style={{flex:'0 0 auto','justify-content':'center', display:'flex'}}>
+		<div style={{flex:'0 0 auto', justifyContent:'center', display:'flex'}}>
 			<Icon 
-				size='40'
+				size={40}
 				fill='#999'
 				name={ icon }
 				style={{display:'flex'}}
 			/>
 		</div>
-		<div style={{flex:'0 0 auto','justify-content':'center', display:'flex', 'font-size':'13'}}> { icon } </div>
+		<div style={{flex:'0 0 auto', justifyContent:'center', display:'flex', fontSize:'13px'}}> { icon } </div>
 	</div>
 )
 
 const TestIcon = () => (	
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc', display:'flex', 'flex-wrap':'wrap'}}>
-			{ icons.map( icon => <Block icon={ icon }/>	) }
+		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc', display:'flex', flexWrap:'wrap'}}>
+			{ icons.map( (icon,i) => <Block key={i} icon={ icon }/>	) }
 		</div>
 )
 

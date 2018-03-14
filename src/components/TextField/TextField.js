@@ -78,18 +78,20 @@ class TextField extends Component {
 		this.has_focus = true
 		this.setState({ isOpen: true })
 	}
-	testTabKey(e){
+	testTabKey(e){		
 		if( e.nativeEvent.keyCode === 9 || e.nativeEvent.keyCode === 13 ){
 			e.preventDefault()
 			this.leaveTextField( ! e.nativeEvent.shiftKey )
 			return
 		}
 	}
-	setValue( value ){
-		this.refs.input.value = value
+	setValue( evt ){		
+		const value = evt.target.value
 		if( this.state.value != value ){
 			this.setState({ value })
-			this.props.onChange( value )
+			if( typeof this.props.onChange === 'function'){
+				this.props.onChange( value )
+			}
 		}
 	}
 

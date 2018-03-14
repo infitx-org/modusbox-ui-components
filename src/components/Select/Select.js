@@ -86,7 +86,7 @@ class Select extends Component {
 	leaveSelect( next){		
 		
 		this.closeSelect()
-		focusNextFocusableElement( this.refs.filter, next )
+		utils.focusNextFocusableElement( this.refs.filter, next )
 		
 	}
 	enterSelect(){		

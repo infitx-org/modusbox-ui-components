@@ -1,15 +1,15 @@
 .icon{
 	flex: 0 0 auto;
 	&.spin{
-		animation: spin 1s linear infinite;
+		animation: spinIcon 1s linear infinite;
 	}
 }
 
-@keyframes spin{
+@keyframes spinIcon{
 	0%{
-		transform: rotate3d(0deg);
+		transform: rotate(0deg);
 	}
 	100%{
-		transform: rotate3d(360deg);
+		transform: rotate(360deg);
 	}
 }
