@@ -1,10 +1,10 @@
-const focusNextFocusableElement = ( current, next = true ) => {
-	current.blur();		
+const focusNextFocusableElement = ( currentElement, next = true ) => {
+	currentElement.blur();		
 	const selector = 'input:not([disabled])'
 	if( document.activeElement == document.body ){
 		const inputs = document.querySelectorAll( selector )			
 		const inputList = Array.prototype.slice.call( inputs )			
-		const nextIndex = inputList.indexOf( current ) + ( next ? 1 : -1 )						
+		const nextIndex = inputList.indexOf( currentElement ) + ( next ? 1 : -1 )						
 		if( nextIndex < 0 ){
 			inputList[ inputList.length + nextIndex ].focus()
 		}
@@ -18,7 +18,9 @@ const focusNextFocusableElement = ( current, next = true ) => {
 	return 
 }
 
-
-
 const composeClassNames = ( items ) => items.filter( item => item !== true && item !== false && item !== undefined ).join(' ')
-export { focusNextFocusableElement, composeClassNames }
+
+export {
+	focusNextFocusableElement,
+	composeClassNames
+}

@@ -10,7 +10,6 @@ module.exports = {
 			'element-class',
 			'fixed-data-table',
 			'lodash',
-			/*'marked',*/
 			'normalizr',
 			'perfect-scrollbar',
 			'rc-notification',
@@ -20,10 +19,8 @@ module.exports = {
 			'react-contenteditable',
 			'react-dom',
 			'react-flexbox',
-			'react-router',
 			'react-virtualized',
 			'react-zeroclipboard',
-			/*'smallxhr'*/
 		]
 	},
 
