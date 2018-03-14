@@ -7,7 +7,6 @@ import Icon from '../Icon'
 
 import './Select.css'
 
-
 import Options from './Options'
 class Select extends Component { 
 	constructor( props ){
