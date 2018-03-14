@@ -1,0 +1,27 @@
+.modus-spinner {
+	display: inline-flex;
+	animation: rotator 3s linear infinite;
+
+	&.center{ 
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+}
+.modus-spinner__component {
+  animation: rotator 1.2s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  stroke: #00a2df;
+}
+
