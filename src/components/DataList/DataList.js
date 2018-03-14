@@ -5,7 +5,6 @@ import orderBy from 'lodash/orderBy'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 
-/*import { default as Spinner } from '@mulesoft/anypoint-components/Spinner'*/
 import Column from '../Column'
 import Row from '../Row'
 import TextField from '../TextField'

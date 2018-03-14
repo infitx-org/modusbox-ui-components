@@ -4,7 +4,7 @@ import moment from 'moment'
 import DayPicker, { DateUtils } from 'react-day-picker'
 import * as utils from '../../utils/common'
 
-import { default as Row } from '@mulesoft/anypoint-components/Row'
+import Row from '../Row'
 import Icon from '../Icon'
 
 import './DatePicker.css'

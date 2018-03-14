@@ -4,23 +4,10 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 //var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 var aliases = {
-	'@mulesoft/anypoint-components': 'node_modules/@mulesoft/anypoint-components/lib',
-	'@mulesoft/anypoint-styles': 'node_modules/@mulesoft/anypoint-styles/lib',
-	'domains': 'src/domains',
 	'views': 'src/views',
-	'style': 'src/style',  
 	'icons': 'src/icons',
-	'components': 'src/components',
-	'actions': 'src/actions',
-	'constants': 'src/utils/constants',
-	'models': 'src/models',
-	'statics': 'src/statics',
-	'validators': 'src/validators',
 	'reducers': 'src/reducers',
-	'providers': 'src/providers',
 	'store': 'src/store',
-	'styles': '@mulesoft/anypoint-styles',
-	'util': '@mulesoft/anypoint-utils',
 	'utils': 'src/utils',
 	'HOCs': 'src/HOCs',
 	react: path.resolve('./node_modules/react')	
@@ -107,11 +94,7 @@ var config = {
 		/* autoprefix for different browser vendors */
 		require('autoprefixer'),
 		/* require global variables */
-		require('postcss-simple-vars')({
-			variables: function () {
-				return require('@mulesoft/anypoint-styles/lib/variables')
-			}
-		})
+		require('postcss-simple-vars')
 	]
 }
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import find from 'lodash/find'
 
-import { Row } from '@mulesoft/anypoint-components/Row'
+import Row from '../Row'
 
 import { HeaderCell, ScrollBarHeaderCell } from './Cells'
 import Checkbox from './Checkbox'

@@ -39,7 +39,7 @@ Icon.defaultProps = {
 	className: undefined,
 	size: 20,
 	name: undefined,
-	fill: '#999',
+	fill: '#999',	
 	stroke: undefined,
 	spin: false
 }
