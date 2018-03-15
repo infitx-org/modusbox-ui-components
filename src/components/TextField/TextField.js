@@ -73,7 +73,7 @@ class TextField extends PureComponent {
 		this.has_focus = true
 		this.setState({ isOpen: true })
 	}
-	testKey(e){		
+	testKey( e ){		
 		const { keyCode, shiftKey } = e.nativeEvent
 		if( keyCode === keyCodes.KEY_TAB || keyCode === keyCodes.KEY_RETURN ){
 			e.preventDefault()
@@ -81,8 +81,8 @@ class TextField extends PureComponent {
 			return
 		}
 	}
-	setValue( evt ){		
-		const value = evt.target.value
+	setValue( e ){		
+		const value = e.target.value
 		if( this.state.value != value ){
 			this.setState({ value })
 			if( typeof this.props.onChange === 'function'){
@@ -91,7 +91,7 @@ class TextField extends PureComponent {
 		}
 	}
 
-	onShowPasswordClick(e){
+	onShowPasswordClick( e ){
 		e.stopPropagation()
 		this.setState({ isPasswordVisible: ! this.state.isPasswordVisible })
 	}

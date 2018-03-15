@@ -1,7 +1,12 @@
 const focusNextFocusableElement = ( currentElement, next = true ) => {
-	currentElement.blur();		
-	const selector = 'input:not([disabled])'
-	if( document.activeElement == document.body ){
+	
+	currentElement.blur();
+
+	const { body, activeElement } = document
+	const forceFocusNextElement = activeElement === currentElement || activeElement === body
+		
+	if( forceFocusNextElement ){
+		const selector = 'input:not([disabled])'
 		const inputs = document.querySelectorAll( selector )			
 		const inputList = Array.prototype.slice.call( inputs )			
 		const nextIndex = inputList.indexOf( currentElement ) + ( next ? 1 : -1 )						

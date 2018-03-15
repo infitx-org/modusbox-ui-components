@@ -120,9 +120,9 @@ class DatePicker extends React.Component {
 		this.setState({ isOpen: ! this.state.isOpen })
 	}
 	// detect if the used clicks outside the datepicker box
-	handlePageClick(evt) {		
+	handlePageClick( e ) {		
 		const area = ReactDOM.findDOMNode(this.refs.area)	    
-		if (!area.contains(evt.target)) {
+		if (!area.contains(e.target)) {
 			this.setState({ isOpen: false })
 	   }
 	}
@@ -330,7 +330,7 @@ class TimeInput extends React.Component{
 		return value < 10 ? `0${value}` : value
 	}
 
-	onChangeValue(e){
+	onChangeValue( e ){
 		const value = parseInt( e.target.value )
 		this.props.onChange(value)
 	}
@@ -344,7 +344,7 @@ class TimeInput extends React.Component{
 					disabled = { disabled }
 					type='number'
 					className='timepicker-select'
-					onFocus={ (e) => e.target.select() }				
+					onFocus={ ( e ) => e.target.select() }				
 					onChange={ this.onChangeValue }				
 					value={ this.state.shown }
 					min={ 0 }

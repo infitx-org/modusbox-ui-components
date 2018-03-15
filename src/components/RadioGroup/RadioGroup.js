@@ -42,10 +42,11 @@ class RadioGroup extends React.Component {
 		return (
 			<div className={`input-radio-wrapper`}>
 				{ label && <span>{ label }</span> }
-				{ options.map( ( option, i ) => (
-					<Radio 				
-						id={ `${id}-${i}` }
-						name={`${name}-${i}` }
+				{ options.map( ( option, idx ) => (
+					<Radio
+						key={ idx } 				
+						id={ `${id}-${idx}` }
+						name={`${name}-${idx}` }
 						onClick={ this.onChange }
 						onChange={ this.preventDefault }
 						checked={ value === option.value }

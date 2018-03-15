@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
 import * as utils from '../../utils/common'
+import keyCodes from '../../utils/keyCodes'
 
 import Spinner from '../Spinner'
 
@@ -89,34 +90,35 @@ class FileUploader extends Component {
 		}
 	}
 
-	onKeyDown(evt){	
+	onKeyDown( e ){	
 		if( ! this.state.isOpen ){
 			return 
 		}		
-		if( evt.nativeEvent.keyCode === 9 ){
-			evt.preventDefault()			
-			evt.stopPropagation()			
-			this.leaveFileUploader( ! evt.nativeEvent.shiftKey )			
+		const { keyCode, shiftKey } = e.nativeEvent
+		if( e.nativeEvent.keyCode === keyCodes.KEY_TAB ){
+			e.preventDefault()			
+			e.stopPropagation()			
+			this.leaveFileUploader( ! e.nativeEvent.shiftKey )			
 			return
 		}
 
-		if( evt.nativeEvent.keyCode === 13 ){			
-			evt.preventDefault()
+		if( e.nativeEvent.keyCode === keyCodes.KEY_RETURN ){			
+			e.preventDefault()
 			this.onButtonClick()			
 		}
 		
 	}
-	onPageClick(evt) {		
+	onPageClick( e ) {		
 	
 		if( ! this.state.isOpen ){
 			return 
 		}
-		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(this.refs.area).contains(evt.target)		
+		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(this.refs.area).contains(e.target)		
 	    if ( ! isClickWithinTextFieldBox ){
 	    	this.onCloseFileUploader()	    		
 	   }
 	}
-	async onChangeFile(evt){
+	async onChangeFile( e ){
 		const readAsText = ( file ) => {
 			const reader = new FileReader()
 			return new Promise((resolve, reject) => {
@@ -126,7 +128,7 @@ class FileUploader extends Component {
 			})
 		}
 
-		const [ file ] = evt.target.files		
+		const [ file ] = e.target.files		
 		if( file == undefined ){
 			return
 		}
@@ -182,10 +184,10 @@ class FileUploader extends Component {
 								accept={ fileType }
 								onFocus={ this.onEnterFileUploader }
 								onChange={ this.onChangeFile }								
-								disabled={ disabled }							
+								disabled={ disabled }										
 								ref='fileuploader'								
 								onKeyDown={ this.onKeyDown }
-								id={ `${id}-file` }
+								id={ id }
 							/>
 							{ fileName 
 								? <div className='input-fileuploader__filename'> { fileName } </div>

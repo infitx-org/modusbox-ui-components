@@ -92,7 +92,7 @@ class Select extends PureComponent {
 		this.has_focus = true
 		this.setState({ isOpen: true })
 	}
-	testKey(e){
+	testKey( e ){
 		
 		const { keyCode, shiftKey } = e.nativeEvent
 
@@ -116,7 +116,7 @@ class Select extends PureComponent {
 			}
 		}
 	}
-	applyFilter(e){
+	applyFilter( e ){
 		if( ! this.has_focus ){
 			return 
 		}
@@ -138,13 +138,13 @@ class Select extends PureComponent {
 	}
 
 	// when clicking on the page 
-	onPageClick(evt) {		
+	onPageClick( e ) {		
 	
 		if( ! this.state.isOpen ){
 			return 
 		}
-		const isClickWithinSelectBox = ReactDOM.findDOMNode(this.refs.area).contains(evt.target)
-		const isClickWithinOptionsBox = this.refs.options ? ReactDOM.findDOMNode(this.refs.options).contains(evt.target) : false
+		const isClickWithinSelectBox = ReactDOM.findDOMNode(this.refs.area).contains(e.target)
+		const isClickWithinOptionsBox = this.refs.options ? ReactDOM.findDOMNode(this.refs.options).contains(e.target) : false
 	    if ( ! isClickWithinSelectBox && ! isClickWithinOptionsBox ){
 	    	this.closeSelect()	    	
 			this.refs.filter.blur();
