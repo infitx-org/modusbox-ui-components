@@ -9,7 +9,8 @@ import '../assets/custom.css'
 import configureStore from './redux/configureStore'
 import Views from './views'
 
-var store = configureStore();
+var store = configureStore()
+//console.clear()
 
 class Root extends React.Component{	
 	render(){

@@ -1,32 +1,18 @@
-.input-fileuploader-wrapper{
+.input-fileuploader{
 	height: 45px;
 	display: block;
 	box-sizing: border-box;
 	position: relative;
 }
-.input-fileuploader-component{
+.input-fileuploader__component{
 	display: flex;
-	position: relative;
-	background:#eee;
-	height: 100%;
-	width: 100%;	
-	border-left: 2px solid #CACBCC;
-	border-right: 2px solid #CACBCC;
+	position: relative;	
 	cursor: pointer;
-
-	transition: all 0.2s ease-out;
-	&.open {
-		width:calc(100% + 4px);
-		margin-left:-2px;
-		margin-right:-2px;
-		padding:0px 2px;
-		border-color: #58595A;
+	
+	&.input-fileuploader__component--open {
 	}	
 	
-	&.disabled{
-		opacity: .5;
-		pointer-events: none;
-		cursor: auto;
+	&.input-fileuploader__component--disabled{
 	}
 }
 .input-fileuploader-box{
@@ -36,58 +22,29 @@
 	width: 100%;
 }
 
-.input-fileuploader-placeholder{
-	font-size: 14px;
-	transition: all 0.2s ease-out;
-	position: absolute;
-	top: 50%;
-	left: 16px;	
-	color: #999;
-	transform: translateY(-50%);
-
-	&.top{
-		top: 12px;				
-		font-size: 11px;
-		
-	}
+.input-fileuploader__placeholder{	
 }
 
-.input-fileuploader-value{
-	color:#333;
-	margin-left:10px;
-	justify-content:center;
-	align-items:center;
-}
 
-.input-fileuploader-input-content-box{
+.input-fileuploader__content{
 	position: absolute;
 	height: 100%;
 	width:100%;
 	display: flex;	
 	padding-left: 16px;
-	padding-right: 5px;
+	padding-right: 12px;
 	align-items: center;
 }
 
-.input-fileuploader-input-value{
-	flex:2 1 auto;
-	vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;
-    height:20px;
-
-}
-.input-fileuploader-input-file{	
+.input-fileuploader__input{	
     flex: 0 0 0;    
     position: relative;
-    height:20px;
+    height: 20px;
     opacity: 0;
     width: 0;
 }
 
-.input-fileuploader-input-filename{
+.input-fileuploader__filename{
 	flex:2 1 auto;
 	vertical-align: middle;
     overflow: hidden;
@@ -95,19 +52,13 @@
     white-space: nowrap;
     position: relative;
     height:20px;
-}
-.input-fileuploader-input-noFile{
-	color:#999;	
-	flex:2 1 auto;
-	vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;
-    height:20px;	
+
+    &.missing {
+		color:#999;
+	}
 }
 
-.input-fileuploader-button{
+.input-fileuploader__button{
 	outline: none;
 	flex: 0 0 auto;
 	border-radius:3px;
@@ -123,7 +74,7 @@
 	};
 }
 
-.input-fileuploader-remove-button{
+.input-fileuploader__button-remove{
 	outline: none;
 	flex: 0 0 auto;
 	border-radius:3px;
@@ -138,6 +89,6 @@
 		color: #fff;
 	}
 }
-.input-fileuploader-input-icon{
+.input-fileuploader__icon{
 	flex: 0 0 auto;
 }

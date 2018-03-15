@@ -1,297 +1,281 @@
-.timepicker-position{
-  position: relative;
-  display: flex;
-  
-  .timepicker-item-box{
-    width:50%;
-    flex: 1 1 auto;
-    text-align: left;
-    margin:2px;
-    .placeholder{
-      color:#666;
-      font-size:13px;
-      text-align: center;
-    }
-
-    .timepicker-select{
-      outline:none;
-      flex: 2 2 auto;
-      appearance:none;    
-      border-radius: 0px;
-      height:30px;
-      width:100%;  
-      padding-left:10;
-      border:none;  
-      border-bottom: 1px solid #eee;
-      background:#fff;
-      cursor:pointer;
-      text-align: center;
-      &:disabled{
-        background:#eee;
-        color:#999;
-        cursor: default;
-      };
-    }
-  } 
-}
 
 .input-datepicker{
-  position:relative;
-  width: 100%;
-  height: 45px;  
-  vertical-align: middle;
-  cursor: pointer;  
+	position:relative;
+	width: 100%;
+	height: 45px;  
+	vertical-align: middle;
+	cursor: pointer;  
 }
 
 .input-datepicker__component{
-  display: flex;
-  position: relative; 
-  height: 100%;
-  width: 100%;  
-  cursor: pointer;
+	display: flex;
+	position: relative; 
+	cursor: pointer;
 
-  &.input-datepicker__component--open{
-    width:calc(100% + 4px);
-    padding:0px 2px;    
-  } 
-  
-  &.input-datepicker__component--disabled{   
-  }
+	&.input-datepicker__component--open{    
+	} 
+	
+	&.input-datepicker__component--disabled{   
+	}
 }
 
 .input-datepicker__content{
-  display: flex;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  padding-left: 16px;
-  padding-right: 12px;
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	padding-left: 16px;
+	padding-right: 12px;
 }
 
 
 
-.input-datepicker__placeholder{
-  font-size: 14px;
-  transition: all 0.2s ease-out;
-  position: absolute;
-  top: 50%;
-  left: 16px; 
-  color: #999;
-  transform: translateY(-50%);
-
-  &.top{
-    top: 13px;        
-    font-size: 11px;
-    
-  }
+.input-datepicker__placeholder{	
 }
 
 .input-datepicker__value{
-  flex: 2 1 auto;
-  vertical-align: middle;
-  overflow: hidden;
-  text-overflow: clip;
-  white-space: nowrap;
-  position: relative;
-  height:20px;
+	flex: 2 1 auto;
+	vertical-align: middle;
+	overflow: hidden;
+	text-overflow: clip;
+	white-space: nowrap;
+	position: relative;
+	height:20px;
 
-  background: transparent;
-  border: none;
-  outline: none;
-  padding: 0px;
-  padding-top:1px;
-  pointer-events: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color:#333;
-  font-size:14px;
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: 0px;
+	padding-top:1px;
+	pointer-events: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color:#333;
+	font-size:14px;
 }
 .input-datepicker-icon{
-  flex: 0 0 auto;
+	flex: 0 0 auto;
 }
+
+.timepicker-position{
+	position: relative;
+	display: flex;
+	
+	.timepicker-item-box{
+	width:50%;
+	flex: 1 1 auto;
+	text-align: left;
+	margin:2px;
+	
+	.placeholder{
+		color:#666;
+		font-size:13px;
+		text-align: center;
+	}
+
+	.timepicker-select{
+		outline:none;
+		flex: 2 2 auto;
+		appearance:none;    
+		border-radius: 0px;
+		height:30px;
+		width:100%;  
+		padding-left:10;
+		border:none;  
+		border-bottom: 1px solid #eee;
+		background:#fff;
+		cursor:pointer;
+		text-align: center;
+		&:disabled{
+		background:#eee;
+		color:#999;
+		cursor: default;
+		};
+	}
+	} 
+}
+
 
 
 /* DayPicker styles */
-
 .DayPicker {
+	display: flex;
+	flex-wrap: wrap;
 
-  display: flex;
-  flex-wrap: wrap;
-
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: relative !important;
-  padding: 1rem 0;
-  user-select: none;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	position: relative !important;
+	padding: 1rem 0;
+	user-select: none;
 }
 
 .DayPicker-Month {
-  display: table;
-  border-collapse: collapse;
-  border-spacing: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  margin: 0 1rem;
+	display: table;
+	border-collapse: collapse;
+	border-spacing: 0;
+	-webkit-user-select: none;
+	 -moz-user-select: none;
+		-ms-user-select: none;
+			user-select: none;
+	margin: 0 1rem;
 }
 
-  .DayPicker-NavBar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    padding: 0 .5rem;
-  }
+	.DayPicker-NavBar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: 0 .5rem;
+	}
 
-  .DayPicker-NavButton {
-    position: absolute;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    cursor: pointer;
-  }
+	.DayPicker-NavButton {
+	position: absolute;
+	width: 1.5rem;
+	height: 1.5rem;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	cursor: pointer;
+	}
 
-    .DayPicker-NavButton--prev {
-      left: 1rem;
-      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI2cHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDI2IDUwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMy4zLjIgKDEyMDQzKSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5wcmV2PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+CiAgICAgICAgPGcgaWQ9InByZXYiIHNrZXRjaDp0eXBlPSJNU0xheWVyR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEzLjM5MzE5MywgMjUuMDAwMDAwKSBzY2FsZSgtMSwgMSkgdHJhbnNsYXRlKC0xMy4zOTMxOTMsIC0yNS4wMDAwMDApIHRyYW5zbGF0ZSgwLjg5MzE5MywgMC4wMDAwMDApIiBmaWxsPSIjNTY1QTVDIj4KICAgICAgICAgICAgPHBhdGggZD0iTTAsNDkuMTIzNzMzMSBMMCw0NS4zNjc0MzQ1IEwyMC4xMzE4NDU5LDI0LjcyMzA2MTIgTDAsNC4yMzEzODMxNCBMMCwwLjQ3NTA4NDQ1OSBMMjUsMjQuNzIzMDYxMiBMMCw0OS4xMjM3MzMxIEwwLDQ5LjEyMzczMzEgWiIgaWQ9InJpZ2h0IiBza2V0Y2g6dHlwZT0iTVNTaGFwZUdyb3VwIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K");
-    }
+	.DayPicker-NavButton--prev {
+		left: 1rem;
+		background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI2cHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDI2IDUwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMy4zLjIgKDEyMDQzKSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5wcmV2PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+CiAgICAgICAgPGcgaWQ9InByZXYiIHNrZXRjaDp0eXBlPSJNU0xheWVyR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEzLjM5MzE5MywgMjUuMDAwMDAwKSBzY2FsZSgtMSwgMSkgdHJhbnNsYXRlKC0xMy4zOTMxOTMsIC0yNS4wMDAwMDApIHRyYW5zbGF0ZSgwLjg5MzE5MywgMC4wMDAwMDApIiBmaWxsPSIjNTY1QTVDIj4KICAgICAgICAgICAgPHBhdGggZD0iTTAsNDkuMTIzNzMzMSBMMCw0NS4zNjc0MzQ1IEwyMC4xMzE4NDU5LDI0LjcyMzA2MTIgTDAsNC4yMzEzODMxNCBMMCwwLjQ3NTA4NDQ1OSBMMjUsMjQuNzIzMDYxMiBMMCw0OS4xMjM3MzMxIEwwLDQ5LjEyMzczMzEgWiIgaWQ9InJpZ2h0IiBza2V0Y2g6dHlwZT0iTVNTaGFwZUdyb3VwIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K");
+	}
 
-    .DayPicker-NavButton--next {
-      right: 1rem;
-      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI2cHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDI2IDUwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMy4zLjIgKDEyMDQzKSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5uZXh0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+CiAgICAgICAgPGcgaWQ9Im5leHQiIHNrZXRjaDp0eXBlPSJNU0xheWVyR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuOTUxNDUxLCAwLjAwMDAwMCkiIGZpbGw9IiM1NjVBNUMiPgogICAgICAgICAgICA8cGF0aCBkPSJNMCw0OS4xMjM3MzMxIEwwLDQ1LjM2NzQzNDUgTDIwLjEzMTg0NTksMjQuNzIzMDYxMiBMMCw0LjIzMTM4MzE0IEwwLDAuNDc1MDg0NDU5IEwyNSwyNC43MjMwNjEyIEwwLDQ5LjEyMzczMzEgTDAsNDkuMTIzNzMzMSBaIiBpZD0icmlnaHQiIHNrZXRjaDp0eXBlPSJNU1NoYXBlR3JvdXAiPjwvcGF0aD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=");
-    }
+	.DayPicker-NavButton--next {
+		right: 1rem;
+		background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI2cHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDI2IDUwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMy4zLjIgKDEyMDQzKSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5uZXh0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+CiAgICAgICAgPGcgaWQ9Im5leHQiIHNrZXRjaDp0eXBlPSJNU0xheWVyR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuOTUxNDUxLCAwLjAwMDAwMCkiIGZpbGw9IiM1NjVBNUMiPgogICAgICAgICAgICA8cGF0aCBkPSJNMCw0OS4xMjM3MzMxIEwwLDQ1LjM2NzQzNDUgTDIwLjEzMTg0NTksMjQuNzIzMDYxMiBMMCw0LjIzMTM4MzE0IEwwLDAuNDc1MDg0NDU5IEwyNSwyNC43MjMwNjEyIEwwLDQ5LjEyMzczMzEgTDAsNDkuMTIzNzMzMSBaIiBpZD0icmlnaHQiIHNrZXRjaDp0eXBlPSJNU1NoYXBlR3JvdXAiPjwvcGF0aD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=");
+	}
 
 
-  .DayPicker-Caption {
-    display: table-caption;
-    height: 1.5rem;
-    text-align: center;
-  }
+	.DayPicker-Caption {
+	display: table-caption;
+	height: 1.5rem;
+	text-align: center;
+	}
 
-  .DayPicker-Weekdays {
-    display: table-header-group;
-  }
+	.DayPicker-Weekdays {
+	display: table-header-group;
+	}
 
-    .DayPicker-WeekdaysRow {
-      display: table-row;
-    }
+	.DayPicker-WeekdaysRow {
+		display: table-row;
+	}
 
-      .DayPicker-Weekday {
-        display: table-cell;
-        padding: .5rem;
-        font-size: .875em;
-        text-align: center;
-        color: #8b9898;
-      }
+		.DayPicker-Weekday {
+		display: table-cell;
+		padding: .5rem;
+		font-size: .875em;
+		text-align: center;
+		color: #8b9898;
+		}
 
-  .DayPicker-Body {
-    display: table-row-group;
-  }
+	.DayPicker-Body {
+	display: table-row-group;
+	}
 
-    .DayPicker-Week {
-      display: table-row;
-    }
+	.DayPicker-Week {
+		display: table-row;
+	}
 
-      .DayPicker-Day {
-        display: table-cell;
-        padding: .5rem;
-        border: 1px solid #eaecec;
-        text-align: center;
-        cursor: pointer;
-        vertical-align: middle;
-        
-      }
+		.DayPicker-Day {
+		display: table-cell;
+		padding: .5rem;
+		border: 1px solid #eaecec;
+		text-align: center;
+		cursor: pointer;
+		vertical-align: middle;
+		
+		}
 
-  .DayPicker--interactionDisabled .DayPicker-Day {
-    cursor: default;
-  }
+	.DayPicker--interactionDisabled .DayPicker-Day {
+	cursor: default;
+	}
 
 /* Default modifiers */
 .DayPicker{
-  border:1px solid #eee;
-  position:absolute;
-  z-index:100000;
-  background:#fff;  
-  outline:none;
+	border:1px solid #eee;
+	position:absolute;
+	z-index:100000;
+	background:#fff;  
+	outline:none;
 }
 
 .DayPicker-Day{
-  height:30px;
-  width:30px;
-  font-size:11px;
-  border:none;
-  outline:none;
+	height:30px;
+	width:30px;
+	font-size:11px;
+	border:none;
+	outline:none;
 }
 .DayPicker-Day--today { 
-  color:#00a2df;  
-  font-weight: bold;
+	color:#00a2df;  
+	font-weight: bold;
 }
 
 .DayPicker-Day--disabled {
-  color: #dce0e0;
-  cursor: default;
-  /*background-color: #eff1f1;*/
+	color: #dce0e0;
+	cursor: default;
+	/*background-color: #eff1f1;*/
 }
 
 .DayPicker-Day--outside {
-  cursor: default;
-  color: #dce0e0;
+	cursor: default;
+	color: #dce0e0;
 }
 
 /* Example modifiers */
 .DayPicker-Day--sunday {
-  background-color: #f7f8f8;
+	background-color: #f7f8f8;
 }
 
 .DayPicker-Day--sunday:not(.DayPicker-Day--today) {
-  color: #dce0e0;
+	color: #dce0e0;
 }
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
-  color: #FFF;  
-  background-color: #00a2df;
+	color: #FFF;  
+	background-color: #00a2df;
 }
 
 
 .DayPicker-Day:hover:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected) {
-  background:#eee;
+	background:#eee;
 }
 
 .daypicker-position{
-  position:absolute;
-  z-index: 100000;
-  top:100%;
-  left:0;
-  width:250px;
-  padding: 5px;
-  background: #f8f8f8;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+	position:absolute;
+	z-index: 100000;
+	top:100%;
+	left:0;
+	width:250px;
+	padding: 5px;
+	background: #f8f8f8;
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
 
 
 }
 
 .value-row{
-  position: relative;
-  display: flex;
-  align-items: center;  
-  height: 28px;
+	position: relative;
+	display: flex;
+	align-items: center;  
+	height: 28px;
 }
 
 .value-box{
-  padding: 2px 2px 2px 10px;
-  font-size: 14px;
-  margin-left: 0px;
-  margin-bottom: 0px;
-  padding-top: 7px;
-  margin-right: 5px;
-  vertical-align: top;
+	padding: 2px 2px 2px 10px;
+	font-size: 14px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	padding-top: 7px;
+	margin-right: 5px;
+	vertical-align: top;
 }
 .value-icon{
-  position: absolute;
-  right: 0;
+	position: absolute;
+	right: 0;
 }

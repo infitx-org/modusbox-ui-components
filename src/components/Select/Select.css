@@ -8,14 +8,9 @@
 .input-select__component{
 	display: flex;
 	position: relative;
-	background:#eee;
-	height: 100%;
-	width: 100%;	
 	cursor: pointer;	
 	
-	&.input-select__component--open {
-		width:calc(100% + 4px);
-		padding:0px 2px;
+	&.input-select__component--open {		
 	}	
 	
 	&.input-select__component--disabled{		
@@ -28,20 +23,7 @@
 	width: 100%;
 }
 
-.input-select__placeholder{
-	font-size: 14px;
-	transition: all 0.2s ease-out;
-	position: absolute;
-	top: 50%;
-	left: 16px;	
-	color: #999;
-	transform: translateY(-50%);
-
-	&.top{
-		top: 11px;				
-		font-size: 11px;
-		
-	}
+.input-select__placeholder{	
 }
 
 .select-value{

@@ -5,22 +5,36 @@ const TestDatePicker = () => (
 	<div>
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<DatePicker
-				id='filter_date_from'
+				placeholder='Default'
 				exportFormat = 'x'
-				onSelect={ console.log }
-				value={ undefined }
-				placeholder='Date Time'
+				onSelect={ console.log }	
+			/>
+			<DatePicker
+				placeholder='Default with time'
+				exportFormat = 'x'
+				onSelect={ console.log }				
 				defaultHour={ 0 }
 				defaultMinute={ 0 }
 				defaultSecond={ 0 }
-				hasTime
+				withTime
 			/>
 			<DatePicker
-				id='filter_date_from'
+				placeholder='Pending'
+				exportFormat = 'x'
+				onSelect={ console.log }				
+				pending
+			/>
+			<DatePicker
+				placeholder='Invalid'
 				exportFormat = 'x'
 				onSelect={ console.log }
-				value={ undefined }
-				placeholder='Date only'				
+				invalid
+			/>
+			<DatePicker
+				placeholder='Required'
+				exportFormat = 'x'
+				onSelect={ console.log }
+				required
 			/>
 		</div>
 	</div>

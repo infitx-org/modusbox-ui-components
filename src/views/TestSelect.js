@@ -44,29 +44,28 @@ const TestSelect = () => (
 	<div>		
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<Select
-				id='x'
-				placeholder='MySelect'
-				options={ options }
-				pending
+				placeholder='Default'
+				options={ options }				
 			/>
 			<Select
-				id='x'
-				placeholder='placeholder'
+				placeholder='Pending'
+				options={ options }		
+				pending		
+			/>
+			<Select
+				placeholder='Invalid'
+				options={ options }
+				invalid
+			/>
+			<Select
+				placeholder='Required'
+				options={ options }
+				required
+			/>
+			<Select
+				placeholder='Disabled'
 				options={ options }
 				disabled
-				style={{ width: '200px' }}
-			/>
-			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
-				pending
-				disabled
-			/>
-			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
 			/>
 		</div>
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>

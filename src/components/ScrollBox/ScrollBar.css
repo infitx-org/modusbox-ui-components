@@ -1,10 +1,10 @@
 /* SCROLLBAR RULES */
-.scrollbar{
-	height: 100%;
+.scrollbar{	
     width: 6px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
     background: transparent;
 
     &.show-track{
@@ -12,7 +12,7 @@
     }
 
     .scrollbar-handle{
-    	background:rgba(0,0,0,0.5);
+    	background:rgba(0,0,0,0.3);
     	opacity: 0.7;
     	width:100%;
     	transition: opacity 0.2s linear;

@@ -4,6 +4,8 @@ import find from 'lodash/find'
 
 import * as utils from '../../utils/common'
 import Icon from '../Icon'
+import Spinner from '../Spinner'
+
 import '../default.css'
 import './TextField.css'
 
@@ -21,30 +23,23 @@ class TextField extends Component {
 		this.testTabKey = this.testTabKey.bind(this)		
 		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
 
-		const { value, pending, disabled } = this.props
+		const { value } = this.props
 		this.state = {
 			isOpen: false,
 			isPasswordVisible: false,
 			value,
-			pending,
-			disabled
 		}
 		this.has_focus = false
 	}
 
 	componentWillReceiveProps(nextProps, nextState){
 		const changes = {}
-		const { value, pending, disabled } = nextProps
+		const { value, disabled } = nextProps
 		
 		if( value !== this.props.value ){						
 			changes.value = value			
 		}
-
-		if( pending !== this.props.pending ){
-			changes.pending = pending
-		}
-		if( disabled !== this.props.disabled ){
-			changes.disabled = disabled
+		if( disabled !== this.props.disabled ){			
 			changes.isOpen = false
 		}
 		
@@ -71,7 +66,7 @@ class TextField extends Component {
 	}
 	enterTextField(){		
 		
-		if( this.state.disabled ){
+		if( this.props.disabled ){
 			this.leaveTextField()
 			return
 		}
@@ -124,8 +119,8 @@ class TextField extends Component {
 
 	render(){
 		
-		const { id, type, placeholder } = this.props 
-		const { isOpen, value, pending, disabled, isPasswordVisible } = this.state
+		const { id, type, placeholder, disabled, pending, required, invalid } = this.props 
+		const { isOpen, value, isPasswordVisible } = this.state
 		const inputValue = value || ''
 		const isPlaceholderTop = isOpen || value 
 		
@@ -134,17 +129,26 @@ class TextField extends Component {
 			'component',
 			'component__borders',
 			'component__background',
-			isOpen && 'input-textfield__component--open component__borders--open component__background--open',
-			disabled && 'input-textfield__component--disabled component--disabled'
+			isOpen && 'component--open component__borders--open component__background--open',
+			disabled && 'component--disabled component__borders--disabled component__background--disabled',
+			pending && 'component--pending component__borders--pending component__background--pending',
+			invalid && 'component--invalid component__borders--invalid component__background--invalid',
+			required && 'component--required component__borders--required component__background--required',
 		])
+
+		const placeholderClassName = utils.composeClassNames([
+			'component__placeholder',
+			isPlaceholderTop && 'component__placeholder--active'
+		])
+		
 		return (
 			<div className='input-textfield'>
 				<div id={id} className={ componentClassName } onClick={ this.onClickTextField } ref='area'>
 					<div className='input-textfield__content'>
 						
 						{ typeof placeholder === 'string' && 
-							<label className={`input-textfield__placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
-						}						
+							<label className={ placeholderClassName }> { placeholder } </label> 
+						}
 						<div className='input-textfield__input-content'>						
 							<input 
 								ref='input'
@@ -158,8 +162,12 @@ class TextField extends Component {
 								className='input-textfield__input'
 							/>							
 							<div className='input-textfield__icon'>
-								{ type == 'password' ? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> : null }
-								{ pending ? <PendingIcon /> : null }
+								{ pending 
+									? <Spinner size={16} /> 
+									: type == 'password' 
+									? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> 
+									: null
+								}
 							
 						 	</div>
 						</div>												
@@ -202,7 +210,9 @@ TextField.propTypes = {
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
 	pending: PropTypes.bool,
-	disabled: PropTypes.bool,
+	required: PropTypes.bool,
+	invalid: PropTypes.bool,
+	disabled: PropTypes.bool
 }
 
 TextField.defaultProps = {
@@ -212,6 +222,8 @@ TextField.defaultProps = {
 	placeholder: undefined,	
 	value: undefined,
 	pending: false,
+	required: false,
+	invalid: false, 
 	disabled: false
 }
 

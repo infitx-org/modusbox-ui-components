@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-
+import ReactDOM from 'react-dom'
 import './ScrollBar.css'
 
 class ScrollBar extends React.Component {
@@ -34,11 +34,15 @@ class ScrollBar extends React.Component {
 		}, 500)
 	}
 	setPosition(positions){		
-		const { height, contentHeight, scrollTop, offset } = positions
-		const barHeight = ( height ) / ( offset + contentHeight ) * 100 
+		let height = positions.height
+		if( this.refs.tracker ){			
+			height = ReactDOM.findDOMNode( this.refs.tracker ).getBoundingClientRect().height
+		}
+		const {contentHeight, scrollTop, offset } = positions
+		const barHeight = ( positions.height ) / ( offset + contentHeight ) * 100 
 		const showScrollbar = ( barHeight < 100 )		
 		const translate = ( scrollTop / ( offset + contentHeight ) ) * height
-		const isMoving = true		
+		const isMoving = true				
 
 		this.setState({ showScrollbar, barHeight, translate, isMoving, height })
 		
@@ -46,15 +50,15 @@ class ScrollBar extends React.Component {
 	}
 
 	render(){
-		const { showTrack } = this.props
+		const { showTrack, trackStyle, handleStyle } = this.props
 		const { showScrollbar, barHeight, translate, isMoving, height } = this.state
-		const trackerStyle = {
-			height
+		const trackStyles = {
+			...trackStyle
 		}
-		const handleStyle = {
+		const handleStyles = {
 			height: `${barHeight}%`,
 			transform: `translate3d(0,${translate}px,0)`,
-			...this.props.style
+			...handleStyle
 		}
 
 		if( ! showScrollbar ){			
@@ -62,12 +66,13 @@ class ScrollBar extends React.Component {
 		}
 
 		return (
-			<div className={`scrollbar ${showTrack ? 'track-visible' : ''}`} style={ trackerStyle }>
-				 <div className={`${isMoving ? 'moving' : ''} scrollbar-handle`} style={ handleStyle }/>
-			</div>
+			<Tracker ref='tracker'  style={ trackStyles }>
+				 <div className={`${isMoving ? 'moving' : ''} scrollbar-handle`} style={ handleStyles }/>
+			</Tracker>
 		)
 	}
 }
+
 ScrollBar.propTypes = {
 	showTrack: React.PropTypes.bool,
 	style: React.PropTypes.object
@@ -75,6 +80,19 @@ ScrollBar.propTypes = {
 ScrollBar.defaultProps = {
 	showTrack: true,
 	style: {}
+}
+
+
+
+class Tracker extends React.Component {
+	constructor(props){
+		super(props)			
+	}
+	render(){
+		return <div className={`scrollbar ${this.props.showTrack ? 'track-visible' : ''}`} style={ this.props.style }>
+		 	{this.props.children}
+		 </div>
+	}
 }
 
 export default ScrollBar

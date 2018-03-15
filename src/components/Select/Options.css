@@ -1,11 +1,14 @@
 .input-select__options{
-	position: relative;
+	position: relative;	
 }
 .input-select__options-wrapper{
 	position: absolute;
-	width: 100%;
+	width: calc( 100% + 4px );
+	margin:0px -2px;
 	border-bottom: 2px solid #ccc;
-	z-index: 1000;	
+	z-index: 1000;
+	animation: fadeIn 0.15s ease-in-out;
+
 }
 .input-select__options-item{
 	flex: 0 0 40px;	
@@ -38,4 +41,9 @@
 		color:#999;
 		cursor: auto;
 	}
+}
+
+@keyframes fadeIn{
+	0%{ opacity: 0; }
+	100%{ opacity: 1; }
 }

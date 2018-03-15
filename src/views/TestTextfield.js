@@ -6,21 +6,27 @@ const TestTextField = () => (
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<TextField
 				type='text'
-				id='x'
-				placeholder='1'
-				pending
+				placeholder='Default'
 			/>
 			<TextField
 				type='password'
-				id='x'
-				placeholder='2'
-				disabled
+				placeholder='Password'				
 			/>
 			<TextField
-				id='x'
-				placeholder='3'
+				placeholder='Pending'
 				pending
-				disabled
+			/>
+			<TextField		
+				placeholder='Invalid'				
+				invalid
+			/>
+			<TextField		
+				placeholder='Required'
+				required				
+			/>
+			<TextField		
+				placeholder='Disabled'
+				disabled				
 			/>
 			<TextField
 				type='password'
@@ -31,8 +37,8 @@ const TestTextField = () => (
 		</div>
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<TextField
-				id='x'
-				placeholder='5'				
+				type='password'
+				placeholder='Password pending'				
 				pending
 			/>
 			<TextField

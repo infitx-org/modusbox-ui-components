@@ -5,21 +5,29 @@ const TestFileUploader = () => (
 	<div>		
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<FileUploader				
-				id='x'
-				placeholder='1'			
-				style={{width:'200px'}}
+				placeholder='Default'
 			/>
 			<FileUploader				
-				id='x1'
-				placeholder='text'
+				placeholder='Only .txt file type'
 				parseFileAsText
 				fileType='.txt'
 				onChange={console.log}
 			/>
 			<FileUploader
-				id='x2'
-				placeholder='2'
+				placeholder='Pending'
+				pending
+			/>
+			<FileUploader
+				placeholder='Disabled'
 				disabled
+			/>
+			<FileUploader
+				placeholder='Invalid'
+				invalid
+			/>
+			<FileUploader
+				placeholder='Required'
+				required
 			/>
 			
 		</div>		

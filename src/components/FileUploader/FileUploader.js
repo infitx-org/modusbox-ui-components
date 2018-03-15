@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import find from 'lodash/find'
 
-import Icon from '../Icon'
+import * as utils from '../../utils/common'
+
+import Spinner from '../Spinner'
 
 import './FileUploader.css'
 
@@ -20,29 +21,23 @@ class FileUploader extends Component {
 		this.onChangeFile = this.onChangeFile.bind(this)
 		this.onKeyDown = this.onKeyDown.bind(this)		
 
-		const { fileName, pending, disabled } = this.props
+		const { fileName } = this.props
 		this.state = {
 			isOpen: false,
 			fileContent: undefined,
 			fileName,
-			pending,
-			disabled,
 			filter: undefined
 		}		
 	}
 
 	componentWillReceiveProps(nextProps, nextState){
 		const changes = {}
-		const { fileName, pending, disabled } = nextProps
+		const { fileName } = nextProps
 		
 		if( fileName !== this.props.fileName ){						
 			changes.fileName = fileName
 		}
-		if( pending !== this.props.pending ){
-			changes.pending = pending
-		}
 		if( disabled !== this.props.disabled ){
-			changes.disabled = disabled
 			changes.isOpen = false
 		}
 		
@@ -166,23 +161,40 @@ class FileUploader extends Component {
 	
 
 	render(){
-		const { id, placeholder, fileType, style, required } = this.props 
-		const { isOpen, fileName, pending, disabled } = this.state
+		const { id, placeholder, fileType, style, required, invalid, pending, disabled } = this.props 
+		const { isOpen, fileName } = this.state
 		const inputValue = fileName || ''
 		const isPlaceholderTop = isOpen || fileName || placeholder
+
+		const componentClassName = utils.composeClassNames([
+			'input-fileuploader__component',
+			'component',
+			'component__borders',
+			'component__background',
+			isOpen && 'component--open component__borders--open component__background--open',
+			disabled && 'component--disabled component__borders--disabled component__background--disabled',
+			pending && 'component--pending component__borders--pending component__background--pending',
+			invalid && 'component--invalid component__borders--invalid component__background--invalid',
+			required && fileName == undefined && 'component--required component__borders--required component__background--required',
+		])
+
+		const placeholderClassName = utils.composeClassNames([
+			'component__placeholder',
+			isPlaceholderTop && 'component__placeholder--active'
+		])
 		
 		return (
-			<div className='input-fileuploader-wrapper' style={ style }>
-				<div id={id} className={`input-fileuploader-component ${isOpen ? 'open' : '' } ${disabled ? 'disabled' : '' } ${required && fileName == undefined ? 'required' : '' }`} onClick={ this.onClickFileUploader} ref='area'>
+			<div className='input-fileuploader' style={ style }>
+				<div id={id} className={ componentClassName } onClick={ this.onClickFileUploader} ref='area'>
 					<div className='input-fileuploader-box'>
 						
 						{ typeof placeholder === 'string' && 
-							<label className={`input-fileuploader-placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
+							<label className={ placeholderClassName }> { placeholder } </label> 
 						}
 						
-						<div className='input-fileuploader-input-content-box'>												
+						<div className='input-fileuploader__content'>												
 							<input 
-								className='input-fileuploader-input-file'
+								className='input-fileuploader__input'
 								type='file'
 								accept={ fileType }
 								onFocus={ this.onEnterFileUploader }
@@ -193,20 +205,16 @@ class FileUploader extends Component {
 								id={ `${id}-file` }
 							/>
 							{ fileName 
-								? 
-								<div className='input-fileuploader-input-fileName'> { fileName } </div>
-								:
-								<div className='input-fileuploader-input-noFile'> No File Choosen </div>
+								? <div className='input-fileuploader__filename'> { fileName } </div>
+								: <div className='input-fileuploader__filename missing'> No File Choosen </div>
 							}
 
-							<div className='input-fileuploader-input-icon'>								
-								{ pending ? <PendingIcon /> : null }
-						 	</div>
-						 	{ fileName 
-
+							{ pending 
+								? <div className='input-fileuploader__icon'> <Spinner size={16}/> </div>
+								: fileName 
 						 		?
 						 		<button
-									className={`input-fileuploader-remove-button ${isOpen ? 'has-focus' : ''}`}
+									className={`input-fileuploader__button-remove ${isOpen ? 'has-focus' : ''}`}
 									onClick={ this.onRemoveButtonClick }								
 									tabIndex='-1'
 								>
@@ -214,7 +222,7 @@ class FileUploader extends Component {
 								</button> 
 						 		:
 								<button
-									className={`input-fileuploader-button ${isOpen ? 'has-focus' : ''}`}
+									className={`input-fileuploader__button ${isOpen ? 'has-focus' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 								>
@@ -231,30 +239,6 @@ class FileUploader extends Component {
 	}
 }
 
-const EyeIcon = () => (
-	<Icon 
-		name='settings-small'
-		size={16}
-		fill='#39f'		
-	/>
-)
-const PendingIcon = () => (
-	<Icon 
-		name='spinner'		
-		size={16}
-		fill='#39f'
-		spin
-	/>
-)
-const ArrowIcon = ({ isOpen }) => (
-	<Icon 
-		name='arrow-down-small'
-		style={{transform: `rotateZ(${ isOpen ? '180' : '0'}deg)` }}
-		size={20}
-		fill='#666'
-	/>
-)
-
 FileUploader.propTypes = {
 	style: PropTypes.object,
 	id: PropTypes.string,
@@ -264,6 +248,8 @@ FileUploader.propTypes = {
 	placeholder: PropTypes.string,
 	pending: PropTypes.bool,
 	disabled: PropTypes.bool,
+	invalid: PropTypes.bool,
+	required: PropTypes.bool
 }
 
 FileUploader.defaultProps = {
@@ -274,7 +260,9 @@ FileUploader.defaultProps = {
 	onChange: undefined,
 	placeholder: undefined,	
 	pending: false,
-	disabled: false
+	disabled: false,
+	invalid: false,
+	required: false
 }
 
 

@@ -54,7 +54,7 @@ class Options extends Component {
 		const filteredOptions = this.filterOptions()
 		return (
 			<div className='input-select__options-wrapper'>				
-				<ScrollBox style={{maxHeight:'240px'}} trackerStyle={{marginLeft: '-4px', width:'5px', borderRadius:'3px'}} showTrack={false}>
+				<ScrollBox style={{maxHeight:'240px'}} handleStyle={{borderRadius:'3px'}} trackStyle={{top:'2px', bottom:'2px', right:'4px', width:'5px'}} showTrack={false}>
 					<div>
 						{ filteredOptions.map( (item, index) => {
 							const isSelected = selected === item.value					

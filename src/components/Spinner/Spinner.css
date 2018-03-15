@@ -1,6 +1,6 @@
 .modus-spinner {
 	display: inline-flex;
-	animation: rotator 3s linear infinite;
+	animation: rotator 4s linear infinite;
 
 	&.center{ 
 		width: 100%;
@@ -10,7 +10,7 @@
 	}
 }
 .modus-spinner__component {
-  animation: rotator 1.2s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;
+  animation: rotator 0.8s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;
 }
 
 @keyframes rotator {

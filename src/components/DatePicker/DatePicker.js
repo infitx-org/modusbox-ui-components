@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
 import DayPicker, { DateUtils } from 'react-day-picker'
@@ -6,10 +6,11 @@ import * as utils from '../../utils/common'
 
 import Row from '../Row'
 import Icon from '../Icon'
+import Spinner from '../Spinner'
 
 import './DatePicker.css'
 
-export default class DatePicker extends React.Component {
+class DatePicker extends React.Component {
 	constructor(props) {
 		super(props)
 		
@@ -55,14 +56,14 @@ export default class DatePicker extends React.Component {
 	}
 	componentWillReceiveProps(props) {
 
-		const { value, defaultHour, defaultMinute, defaultSecond, disabled } = props
-		let timeValue = value
+		const { value, defaultHour, defaultMinute, defaultSecond } = props
 		const defaultTime = {
-			hour: defaultHour || 0 ,
-			minute: defaultMinute || 0,
-			second: defaultSecond || 0
+			hour: defaultHour,
+			minute: defaultMinute,
+			second: defaultSecond
 		}
 		
+		let timeValue = value
 		if( typeof value === 'string' ){
 			timeValue = parseInt(value)
 		}
@@ -70,7 +71,6 @@ export default class DatePicker extends React.Component {
 		const { hour, minute, second } = value ? this.getTime( timeValue ) : defaultTime
 
 		this.setState({ 
-			disabled,
 			selectedDay,
 			dateString,
 			hour,
@@ -183,20 +183,31 @@ export default class DatePicker extends React.Component {
 
 
 	render() {		
-		const { placeholder, id } = this.props
-		const { isOpen, disabled, dateString, selectedDay } = this.state
+		
+		const { placeholder, id, disabled, pending, invalid, required } = this.props
+		const { isOpen, dateString, selectedDay } = this.state
 		const initialMonth = selectedDay == undefined ? this.getDate( this.props.initialMonth ) : selectedDay
 		const hasDate = dateString != 0 && dateString != undefined		
-		const isPlaceholderTop = hasDate
+		const isPlaceholderTop = isOpen || hasDate		
 		
 		const componentClassName = utils.composeClassNames([
 			'input-datepicker__component',
 			'component',
 			'component__borders',
 			'component__background',
-			isOpen && 'input-datepicker__component--open component__borders--open component__background--open',
-			disabled && 'input-datepicker--disabled component--disabled'
+			isOpen && 'component--open component__borders--open component__background--open',
+			disabled && 'component--disabled component__borders--disabled component__background--disabled',
+			pending && 'component--pending component__borders--pending component__background--pending',
+			invalid && 'component--invalid component__borders--invalid component__background--invalid',
+			required && 'component--required component__borders--required component__background--required',
 		])
+
+		const placeholderClassName = utils.composeClassNames([
+			'component__placeholder',
+			isPlaceholderTop && 'component__placeholder--active'
+		])
+
+
 		return (
 			<div className='input-datepicker'>
 				<div className={ componentClassName }>
@@ -206,15 +217,17 @@ export default class DatePicker extends React.Component {
 						onClick={ this.handleOpenClick }							
 					>
 						{ typeof placeholder === 'string' && 
-							<label className={`input-datepicker__placeholder ${isOpen || hasDate ? 'top' :''}`}> { placeholder } </label> 
+							<label className={ placeholderClassName }> { placeholder } </label> 
 						}
-						
 						<div className='input-datepicker__value'> 
 							{ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 						</div>
 						
+						<div className='select-input-icon'>
+							{ pending ? <Spinner size={16} /> : <Icon size={16} name='calendar-small' /> }
+					 	</div>
 						<div className='input-datepicker-icon'> 
-							<Icon size={16} name='calendar-small' />
+							
 						</div>
 
 					</div>
@@ -229,7 +242,7 @@ export default class DatePicker extends React.Component {
 								onDayClick={ this.handleDayClick }
 								disabledDays={ this.props.disabledDays }
 							/>
-							{ this.props.hasTime &&
+							{ this.props.withTime &&
 								<TimePicker 
 									hour={ this.state.hour }
 									minute={ this.state.minute }
@@ -247,6 +260,40 @@ export default class DatePicker extends React.Component {
 		);
 	}
 }
+
+DatePicker.propTypes = {
+	id: PropTypes.string,
+	style: PropTypes.object,
+	value: PropTypes.string,
+	placeholder: PropTypes.string,
+	onSelect: PropTypes.func,
+	exportFormat: PropTypes.string,
+	withTime: PropTypes.bool,
+	defaultHour: PropTypes.number,
+	defaultMinute: PropTypes.number,
+	defaultSecond: PropTypes.number,
+	disabled: PropTypes.bool,
+	pending: PropTypes.bool,
+	required: PropTypes.bool,
+	invalid: PropTypes.bool,
+}
+DatePicker.defaultProps = {
+	id: undefined,
+	style: undefined,
+	value: undefined,
+	placeholder: undefined,
+	onSelect: undefined,
+	exportFormat: undefined,
+	withTime: false,
+	defaultHour: 0,
+	defaultMinute: 0,
+	defaultSecond: 0,
+	disabled: false,
+	pending: false,
+	required: false,
+	invalid: false
+}
+
 
 const TimePicker = ({ hour, minute, second, onHourChange, onMinuteChange, onSecondChange, disabled }) => (
 	<div className='timepicker-position'>		
@@ -307,3 +354,6 @@ class TimeInput extends React.Component{
 		)
 	}
 }
+
+
+export default DatePicker

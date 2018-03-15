@@ -6,13 +6,13 @@ class Column extends React.Component {
 		const [ alignItems, justifyContent ] = align.split(' ')
 		const styles = {
 			'display': 'flex',
-    		'flex-flow': 'column nowrap',
-			'flex-direction': 'row',
-			'flex-grow': grow,
-			'flex-shrink': shrink,
-			'flex-basis': basis,
-			'align-items': alignItems,
-			'justify-content': justifyContent,
+    		'flexFlow': 'column nowrap',
+			'flexDirection': 'row',
+			'flexGrow': grow,
+			'flexShrink': shrink,
+			'flexBasis': basis,
+			'alignItems': alignItems,
+			'justifyContent': justifyContent,
 			...style
 		}
 		return (

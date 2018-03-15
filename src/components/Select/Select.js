@@ -4,10 +4,12 @@ import find from 'lodash/find'
 
 import * as utils from '../../utils/common'
 import Icon from '../Icon'
+import Spinner from '../Spinner'
+
+import Options from './Options'
 
 import './Select.css'
 
-import Options from './Options'
 class Select extends Component { 
 	constructor( props ){
 		super( props )
@@ -24,7 +26,7 @@ class Select extends Component {
 		this.testTabKey = this.testTabKey.bind(this)
 		this.applyFilter = this.applyFilter.bind(this)
 
-		const { options, selected, pending, disabled } = this.props
+		const { options, selected } = this.props
 		const selectedItem = find( options, { value: selected })
 		const selectedLabel = selectedItem ? selectedItem.label : undefined
 		this.state = {
@@ -32,8 +34,6 @@ class Select extends Component {
 			options,
 			selectedLabel,
 			selectedValue: selected,
-			pending,
-			disabled,
 			filter: undefined
 		}
 		this.has_focus = false
@@ -54,11 +54,7 @@ class Select extends Component {
 		if( options !== this.props.options ){
 			changes.options = options
 		}
-		if( pending !== this.props.pending ){
-			changes.pending = pending
-		}
-		if( disabled !== this.props.disabled ){
-			changes.disabled = disabled
+		if( disabled !== this.props.disabled ){			
 			changes.isOpen = false
 		}
 		
@@ -157,8 +153,8 @@ class Select extends Component {
 
 	render(){
 		
-		const { id, placeholder } = this.props 
-		const { isOpen, options, selectedLabel, selectedValue, pending, disabled, filter } = this.state
+		const { id, placeholder, pending, disabled, invalid, required } = this.props 
+		const { isOpen, options, selectedLabel, selectedValue, filter } = this.state
 		
 		const inputValue = filter || selectedLabel || ''
 		const isPlaceholderTop = isOpen || selectedLabel 
@@ -169,8 +165,16 @@ class Select extends Component {
 			'component',
 			'component__borders',
 			'component__background',
-			isOpen && 'input-select__component--open component__borders--open component__background--open',
-			disabled && 'input-select--disabled component--disabled'
+			isOpen && 'component--open component__borders--open component__background--open',
+			disabled && 'component--disabled component__borders--disabled component__background--disabled',
+			pending && 'component--pending component__borders--pending component__background--pending',
+			invalid && 'component--invalid component__borders--invalid component__background--invalid',
+			required && 'component--required component__borders--required component__background--required',
+		])
+
+		const placeholderClassName = utils.composeClassNames([
+			'component__placeholder',
+			isPlaceholderTop && 'component__placeholder--active'
 		])
 		
 		return (
@@ -179,7 +183,7 @@ class Select extends Component {
 					<div className='input-select__content'>
 						
 						{ typeof placeholder === 'string' && 
-							<label className={`input-select__placeholder ${isPlaceholderTop ? 'top' :''}`}> { placeholder } </label> 
+							<label className={ placeholderClassName }> { placeholder } </label> 
 						}
 						
 						<div className='input-select__input-content'>						
@@ -196,7 +200,7 @@ class Select extends Component {
 							/>
 							
 							<div className='select-input-icon'>
-								{ pending ? <PendingIcon /> : <ArrowIcon isOpen={ isOpen } /> }
+								{ pending ? <Spinner size={16} /> : <ArrowIcon isOpen={ isOpen } /> }
 						 	</div>
 						</div>						
 						
@@ -220,15 +224,6 @@ class Select extends Component {
 	}
 }
 
-const PendingIcon = () => (
-	<Icon 
-		name='spinner'
-		style={{marginTop: '-2px'}}
-		size={16}
-		fill='#39f'
-		spin
-	/>
-)
 const ArrowIcon = ({ isOpen }) => (
 	<Icon 
 		name='arrow-down-small'
@@ -249,7 +244,9 @@ Select.propTypes = {
 		})
 	),
 	pending: PropTypes.bool,
-	disabled: PropTypes.bool,
+	required: PropTypes.bool,
+	invalid: PropTypes.bool,
+	disabled: PropTypes.bool
 }
 
 Select.defaultProps = {
@@ -259,6 +256,8 @@ Select.defaultProps = {
 	options: [],
 	selected: undefined,
 	pending: false,
+	required: false,
+	invalid: false, 
 	disabled: false
 }
 
