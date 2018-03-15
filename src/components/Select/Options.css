@@ -31,6 +31,12 @@
 		color:#00A3E0;
 	};
 
+	&.highlighted{
+		background:#f8f8f8;
+		border-color:#00A3E0;
+		color:#00A3E0;	
+	}
+
 	&.selected{ 
 		background: #E8E9EA;
 		border-color: #58595A;

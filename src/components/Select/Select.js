@@ -1,8 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import find from 'lodash/find'
 
 import * as utils from '../../utils/common'
+import keyCodes from '../../utils/keyCodes'
+
 import Icon from '../Icon'
 import Spinner from '../Spinner'
 
@@ -10,7 +12,7 @@ import Options from './Options'
 
 import './Select.css'
 
-class Select extends Component { 
+class Select extends PureComponent { 
 	constructor( props ){
 		super( props )
 
@@ -23,14 +25,17 @@ class Select extends Component {
 		this.closeSelect = this.closeSelect.bind(this)
 		this.leaveSelect = this.leaveSelect.bind(this)
 		this.enterSelect = this.enterSelect.bind(this)
-		this.testTabKey = this.testTabKey.bind(this)
+		this.testKey = this.testKey.bind(this)
 		this.applyFilter = this.applyFilter.bind(this)
+		this.filterOptions = this.filterOptions.bind(this)
+		this.highlightNextOption = this.highlightNextOption.bind(this)
 
 		const { options, selected } = this.props
 		const selectedItem = find( options, { value: selected })
 		const selectedLabel = selectedItem ? selectedItem.label : undefined
 		this.state = {
 			isOpen: false,
+			highlightedOption: 0,
 			options,
 			selectedLabel,
 			selectedValue: selected,
@@ -38,7 +43,6 @@ class Select extends Component {
 		}
 		this.has_focus = false
 	}
-
 	componentWillReceiveProps(nextProps, nextState){
 		const changes = {}
 		const { options, selected, pending, disabled } = nextProps
@@ -50,18 +54,18 @@ class Select extends Component {
 			changes.selectedLabel = selectedLabel
 			this.setValue( selectedLabel )
 		}
-
 		if( options !== this.props.options ){
 			changes.options = options
 		}
 		if( disabled !== this.props.disabled ){			
 			changes.isOpen = false
+			changes.highlightedOption = 0
+			changes.filter = undefined
 		}
 		
 		if( Object.keys(changes).length > 0 ){
 			this.setState( changes )
 		}
-
 	}
 
 	componentDidMount() {
@@ -76,7 +80,7 @@ class Select extends Component {
 	} 
 	closeSelect(){
 		this.has_focus = false
-		this.setState({ isOpen: false, filter: undefined })
+		this.setState({ isOpen: false, filter: undefined, highlightedOption: 0 })
 	}
 	leaveSelect( next){		
 		
@@ -88,11 +92,28 @@ class Select extends Component {
 		this.has_focus = true
 		this.setState({ isOpen: true })
 	}
-	testTabKey(e){
-		if( e.nativeEvent.keyCode === 9 ){
+	testKey(e){
+		
+		const { keyCode, shiftKey } = e.nativeEvent
+
+		if( keyCode === keyCodes.KEY_TAB ){
 			e.preventDefault()
-			this.leaveSelect( ! e.nativeEvent.shiftKey )
+			this.leaveSelect( ! shiftKey )
 			return
+		}		
+		if( keyCode === keyCodes.KEY_UP || keyCode === keyCodes.KEY_DOWN ){
+			e.preventDefault()
+			this.highlightNextOption( keyCode === keyCodes.KEY_DOWN )
+		}
+		if( keyCode === keyCodes.KEY_RETURN ){
+			e.preventDefault()
+			if( this.state.isOpen ){
+				const options = this.filterOptions()			
+				this.onSelectOption( options[ this.state.highlightedOption ] )
+			}
+			else{
+				this.setState({ isOpen: true })
+			}
 		}
 	}
 	applyFilter(e){
@@ -108,7 +129,13 @@ class Select extends Component {
 			})
 		}
 	}
-
+	highlightNextOption( next = true ){		
+		let nextHighlightedOption = ( this.state.highlightedOption + ( next ? 1 : - 1 ) ) % this.state.options.length
+		if( nextHighlightedOption < 0 ){
+			nextHighlightedOption = this.state.options.length - 1
+		}	
+		this.setState({ highlightedOption: nextHighlightedOption })
+	}
 
 	// when clicking on the page 
 	onPageClick(evt) {		
@@ -120,7 +147,7 @@ class Select extends Component {
 		const isClickWithinOptionsBox = this.refs.options ? ReactDOM.findDOMNode(this.refs.options).contains(evt.target) : false
 	    if ( ! isClickWithinSelectBox && ! isClickWithinOptionsBox ){
 	    	this.closeSelect()	    	
-			this.refs.filter.blur();		
+			this.refs.filter.blur();
 	   }
 	}
 
@@ -138,23 +165,27 @@ class Select extends Component {
 	}
 
 	// when selecting the options item itself
-	onSelectOption( item ){
-		
+	onSelectOption( item ){		
 		const selectedItem = find( this.state.options, { value: item.value })
 		const selectedLabel = selectedItem ? selectedItem.label : undefined
-		//this.setValue( selectedLabel )
 		this.setState({
 			selectedValue: item.value,
 			selectedLabel,			
 		})
-		this.closeSelect()
-		
+		this.setState({ isOpen: false })
+	}
+	filterOptions(){
+		const { options, filter } = this.state		
+		if( filter == undefined || filter == '' ){ 
+			return options
+		}
+		return options.filter( item => item.label.includes( filter ) )
 	}
 
 	render(){
 		
 		const { id, placeholder, pending, disabled, invalid, required } = this.props 
-		const { isOpen, options, selectedLabel, selectedValue, filter } = this.state
+		const { isOpen, selectedLabel, selectedValue, filter, highlightedOption } = this.state
 		
 		const inputValue = filter || selectedLabel || ''
 		const isPlaceholderTop = isOpen || selectedLabel 
@@ -191,7 +222,7 @@ class Select extends Component {
 								className={`input-select__filter ${filter ? 'has-filter' : ''}`}
 								type='text'
 								ref='filter'
-								onKeyDown={ this.testTabKey }
+								onKeyDown={ this.testKey }
 								onChange={ this.applyFilter }
 								onFocus={ this.enterSelect }
 								onClick={ this.enterSelect }
@@ -211,10 +242,10 @@ class Select extends Component {
 					{ isOpen && 
 						<Options
 							ref='options' 
-							options={ options }
+							options={ this.filterOptions() }							
 							selected={ selectedValue }
-							onSelect={ this.onSelectOption }
-							filter={ filter }
+							highlighted={ highlightedOption }
+							onSelect={ this.onSelectOption }							
 						/>
 					}
 				</div>
