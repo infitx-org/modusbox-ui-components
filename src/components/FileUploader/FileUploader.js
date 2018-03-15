@@ -32,7 +32,7 @@ class FileUploader extends Component {
 
 	componentWillReceiveProps(nextProps, nextState){
 		const changes = {}
-		const { fileName } = nextProps
+		const { fileName, disabled } = nextProps
 		
 		if( fileName !== this.props.fileName ){						
 			changes.fileName = fileName
@@ -57,28 +57,11 @@ class FileUploader extends Component {
 	onCloseFileUploader(){		
 		this.setState({ isOpen: false })
 	}
-	leaveFileUploader( goNext = true ){			
-		this.refs.fileuploader.blur();		
-
-		if( document.activeElement == document.body ){
-			const inputs = document.querySelectorAll('input:not([disabled])')			
-			const inputList = Array.prototype.slice.call( inputs )			
-			const nextIndex = inputList.indexOf( this.refs.fileuploader ) + ( goNext ? 1 : -1 )						
-			if( nextIndex < 0 ){
-				inputList[ inputList.length + nextIndex ].focus()
-			}
-			else if( nextIndex >= inputList.length ){					
-				inputList[ nextIndex % inputList.length ].focus()
-			}
-			else{
-				inputList[ nextIndex ].focus()
-			}
-		}		
+	leaveFileUploader( next = true ){		
+		utils.focusNextFocusableElement( this.refs.fileuploader, next );			
 		this.onCloseFileUploader()
-		
-
 	}
-	onEnterFileUploader(){				
+	onEnterFileUploader(){	
 		this.setState({ isOpen: true })				
 		if( this.state.disabled ){
 			this.leaveFileUploader()
@@ -106,7 +89,7 @@ class FileUploader extends Component {
 		}
 	}
 
-	onKeyDown(evt){		
+	onKeyDown(evt){	
 		if( ! this.state.isOpen ){
 			return 
 		}		
@@ -117,8 +100,9 @@ class FileUploader extends Component {
 			return
 		}
 
-		if( evt.nativeEvent.keyCode === 13 ){
-			this.onButtonClick()
+		if( evt.nativeEvent.keyCode === 13 ){			
+			evt.preventDefault()
+			this.onButtonClick()			
 		}
 		
 	}
@@ -133,7 +117,6 @@ class FileUploader extends Component {
 	   }
 	}
 	async onChangeFile(evt){
-		
 		const readAsText = ( file ) => {
 			const reader = new FileReader()
 			return new Promise((resolve, reject) => {
