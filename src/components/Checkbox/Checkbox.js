@@ -11,7 +11,7 @@ class Checkbox extends React.Component {
 		}
 		this.onChange = this.onChange.bind(this)
 		this.preventDefault = this.preventDefault.bind(this)
-		this.testTabKey = this.testTabKey.bind(this)		
+		this.testKey = this.testKey.bind(this)		
 	}
 
 	componentWillReceiveProps( nextProps ){
@@ -39,7 +39,7 @@ class Checkbox extends React.Component {
 			this.props.onChange( checked )
 		}
 	}
-	testTabKey(e){
+	testKey(e){
 		if( e.nativeEvent.keyCode === 9 || e.nativeEvent.keyCode === 13 ){
 			e.preventDefault()			
 			focusNextFocusableElement( this.refs.input, ! e.nativeEvent.shiftKey );			
@@ -58,7 +58,7 @@ class Checkbox extends React.Component {
 					type='checkbox'
 					id={id}
 					className={`input-checkbox__input ${ semi ? 'semi-checked' : ''}`}
-					onKeyDown={ this.testTabKey }
+					onKeyDown={ this.testKey }
 					checked={ checked && semi != true }	
 					onChange={ this.preventDefault }
 					disabled={ disabled }					

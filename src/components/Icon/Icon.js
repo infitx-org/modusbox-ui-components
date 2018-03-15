@@ -3,7 +3,7 @@ import * as utils from '../../utils/common'
 
 import './Icon.css'
 
-class Icon extends React.Component {
+class Icon extends React.PureComponent {
 	constructor(props){
 		super(props)
 		this.onClick = this.onClick.bind(this)

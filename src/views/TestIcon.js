@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Icon from '../components/Icon'
+import ScrollBox from '../components/ScrollBox'
 
 import '../icons/index.js'
 
@@ -248,12 +249,14 @@ const IconBox = ({ icons }) => (
 )
 
 const TestIcon = () => (
-	<div>
-		<h3> Modusbox </h3>
-		<IconBox icons={ modusboxIcons }/>
+	<ScrollBox style={{height:'100%'}}>
+		<div>
+			<h3> Modusbox </h3>
+			<IconBox icons={ modusboxIcons }/>
 
-		<h3> Mulesoft </h3>
-		<IconBox icons={ mulesoftIcons }/>
-	</div>
+			<h3> Mulesoft </h3>
+			<IconBox icons={ mulesoftIcons }/>
+		</div>
+	</ScrollBox>
 ) 
 export default TestIcon

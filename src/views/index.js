@@ -39,9 +39,9 @@ const Views = () => {
 	
 	
 	return (
-		<div style={{padding:10}}>
+		<div style={{width:'100%', height:'100%', overflow:'hidden'}}>
 			<Tabs selected={ selected } onSelect={ onSelectTab }>
-				<TabList style={{width:'500px'}}>{ AllItemTabs }</TabList>
+				<TabList>{ AllItemTabs }</TabList>
 				<TabPanels>{ AllItemPanels }</TabPanels>
 			</Tabs>
 		</div>

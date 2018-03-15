@@ -1,15 +1,17 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import find from 'lodash/find'
 
 import * as utils from '../../utils/common'
+import keyCodes from '../../utils/keyCodes'
+
 import Icon from '../Icon'
 import Spinner from '../Spinner'
 
 import '../default.css'
 import './TextField.css'
 
-class TextField extends Component { 
+class TextField extends PureComponent { 
 	constructor( props ){
 		super( props )
 
@@ -20,7 +22,7 @@ class TextField extends Component {
 		this.closeTextField = this.closeTextField.bind(this)
 		this.leaveTextField = this.leaveTextField.bind(this)
 		this.enterTextField = this.enterTextField.bind(this)
-		this.testTabKey = this.testTabKey.bind(this)		
+		this.testKey = this.testKey.bind(this)		
 		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
 
 		const { value } = this.props
@@ -46,9 +48,7 @@ class TextField extends Component {
 		if( Object.keys(changes).length > 0 ){
 			this.setState( changes )
 		}
-
 	}
-
 	componentDidMount() {
 		window.addEventListener( 'mouseup', this.onPageClick, false );
 	}
@@ -73,10 +73,11 @@ class TextField extends Component {
 		this.has_focus = true
 		this.setState({ isOpen: true })
 	}
-	testTabKey(e){		
-		if( e.nativeEvent.keyCode === 9 || e.nativeEvent.keyCode === 13 ){
+	testKey(e){		
+		const { keyCode, shiftKey } = e.nativeEvent
+		if( keyCode === keyCodes.KEY_TAB || keyCode === keyCodes.KEY_RETURN ){
 			e.preventDefault()
-			this.leaveTextField( ! e.nativeEvent.shiftKey )
+			this.leaveTextField( ! shiftKey )
 			return
 		}
 	}
@@ -95,7 +96,6 @@ class TextField extends Component {
 		this.setState({ isPasswordVisible: ! this.state.isPasswordVisible })
 	}
 
-	// when clicking on the page 
 	onPageClick(evt) {		
 	
 		if( ! this.state.isOpen ){
@@ -108,7 +108,6 @@ class TextField extends Component {
 	   }
 	}
 
-	// when opening the list of options...
 	onClickTextField(){
 		const isOpen = ! this.state.isOpen
 		this.setState({ isOpen })
@@ -153,7 +152,7 @@ class TextField extends Component {
 							<input 
 								ref='input'
 								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }
-								onKeyDown={ this.testTabKey }
+								onKeyDown={ this.testKey }
 								onChange={ this.setValue }
 								onFocus={ this.enterTextField }
 								onClick={ this.enterTextField }
@@ -184,22 +183,6 @@ const EyeIcon = ({ open, onClick }) => (
 		name={ open ? 'toggle-invisible' : 'toggle-visible' }
 		size={16}
 		fill='#333'		
-	/>
-)
-const PendingIcon = () => (
-	<Icon 
-		name='spinner'		
-		size={16}
-		fill='#39f'
-		spin
-	/>
-)
-const ArrowIcon = ({ isOpen }) => (
-	<Icon 
-		name='arrow-down-small'
-		style={{transform: `rotateZ(${ isOpen ? '180' : '0'}deg)` }}
-		size={20}
-		fill='#666'
 	/>
 )
 
