@@ -15,23 +15,32 @@ class TextField extends PureComponent {
 	constructor( props ){
 		super( props )
 
-		this.onClickTextField = this.onClickTextField.bind(this)		
+		// Events 
+		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
 		this.onPageClick = this.onPageClick.bind(this)	
+		this.onTextFieldClick = this.onTextFieldClick.bind(this)
 
+		// Wrapper events
+		this.onClick = this.onClick.bind(this)
+		this.onChange = this.onChange.bind(this)
+		this.onKeyPress = this.onKeyPress.bind(this)
+		this.onEnter = this.onEnter.bind(this)
+		this.onBlur = this.onBlur.bind(this)
+		this.onFocus = this.onFocus.bind(this)
+
+		// Internal lifecycle methods
 		this.setValue = this.setValue.bind(this)
 		this.closeTextField = this.closeTextField.bind(this)
 		this.leaveTextField = this.leaveTextField.bind(this)
 		this.enterTextField = this.enterTextField.bind(this)
 		this.testKey = this.testKey.bind(this)		
-		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
 
 		const { value } = this.props
 		this.state = {
 			isOpen: false,
 			isPasswordVisible: false,
 			value,
-		}
-		this.has_focus = false
+		}		
 	}
 
 	componentWillReceiveProps(nextProps, nextState){
@@ -56,8 +65,7 @@ class TextField extends PureComponent {
 		window.removeEventListener( 'mouseup', this.onPageClick, false );
 	}
 
-	closeTextField(){
-		this.has_focus = false
+	closeTextField(){		
 		this.setState({ isOpen: false })
 	}
 	leaveTextField( next ){				
@@ -69,8 +77,7 @@ class TextField extends PureComponent {
 		if( this.props.disabled ){
 			this.leaveTextField()
 			return
-		}
-		this.has_focus = true
+		}		
 		this.setState({ isOpen: true })
 	}
 	testKey( e ){		
@@ -84,16 +91,49 @@ class TextField extends PureComponent {
 	setValue( e ){		
 		const value = e.target.value
 		if( this.state.value != value ){
-			this.setState({ value })
-			if( typeof this.props.onChange === 'function'){
-				this.props.onChange( value )
-			}
+			this.setState({ value })			
+		}
+	}	
+	onTextFieldClick(e){		
+		this.refs.input.click()		
+	}
+	onClick( e ){
+		if( typeof this.props.onClick === 'function'){
+			this.props.onClick( e )
+		}		
+		if( this.state.isOpen === true ){
+			return
+		}
+		this.refs.input.focus()
+		this.setState({ isOpen: true })		
+	}
+	onChange( e ){
+		if( typeof this.props.onChange === 'function'){
+			this.props.onChange( e )
+		}
+		this.setValue( e )
+	}
+	onKeyPress( e ){
+		if( typeof this.props.onKeyPress === 'function'){
+			this.props.onKeyPress( e )
 		}
 	}
-
-	onShowPasswordClick( e ){
-		e.stopPropagation()
-		this.setState({ isPasswordVisible: ! this.state.isPasswordVisible })
+	onEnter( e ){
+		if( typeof this.props.onEnter === 'function'){
+			this.props.onEnter( e )
+		}
+	}
+	onBlur( e ){		
+		if( typeof this.props.onBlur === 'function'){
+			this.props.onBlur( e )
+		}		
+		this.closeTextField()
+	}
+	onFocus( e ){
+		if( typeof this.props.onFocus === 'function'){
+			this.props.onFocus( e )
+		}
+		this.enterTextField( e )
 	}
 
 	onPageClick(evt) {		
@@ -107,18 +147,14 @@ class TextField extends PureComponent {
 			this.refs.input.blur();		
 	   }
 	}
-
-	onClickTextField(){
-		const isOpen = ! this.state.isOpen
-		this.setState({ isOpen })
-		if( isOpen === true ){
-			this.refs.input.focus();			
-		}
+	onShowPasswordClick( e ){
+		e.stopPropagation()
+		this.setState({ isPasswordVisible: ! this.state.isPasswordVisible })
 	}
 
 	render(){
 		
-		const { id, type, placeholder, disabled, pending, required, invalid } = this.props 
+		const { id, type, placeholder, icon, disabled, pending, required, invalid } = this.props 
 		const { isOpen, value, isPasswordVisible } = this.state
 		const inputValue = value || ''
 		const isPlaceholderTop = isOpen || value 
@@ -142,7 +178,7 @@ class TextField extends PureComponent {
 		
 		return (
 			<div className='input-textfield'>
-				<div id={id} className={ componentClassName } onClick={ this.onClickTextField } ref='area'>
+				<div id={id} className={ componentClassName } onClick={ this.onTextFieldClick } ref='area'>
 					<div className='input-textfield__content'>
 						
 						{ typeof placeholder === 'string' && 
@@ -151,11 +187,14 @@ class TextField extends PureComponent {
 						<div className='input-textfield__input-content'>						
 							<input 
 								ref='input'
-								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }
-								onKeyDown={ this.testKey }
-								onChange={ this.setValue }
-								onFocus={ this.enterTextField }
-								onClick={ this.enterTextField }
+								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }								
+								onClick={ this.onClick }
+								onChange={ this.onChange }
+								onKeyDown={ this.testKey }																								
+								onKeyPress={ this.onKeyPress }
+								onEnter={ this.onEnter }
+								onBlur={ this.onBlur }
+								onFocus={ this.onFocus }
 								value={ inputValue }
 								disabled={ disabled }
 								className='input-textfield__input'
@@ -166,9 +205,13 @@ class TextField extends PureComponent {
 									: type == 'password' 
 									? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> 
 									: null
-								}
-							
+								}							
 						 	</div>
+						 	{ icon && 
+						 		<div className='input-textfield__icon'>
+									<Icon size={16} name={ icon } /> 
+								</div>
+							}													 	
 						</div>												
 					</div>
 				</div>				
@@ -187,11 +230,17 @@ const EyeIcon = ({ open, onClick }) => (
 )
 
 TextField.propTypes = {
+	style: PropTypes.object,
 	type: PropTypes.oneOf(['text','password']),
 	id: PropTypes.string,
-	style: PropTypes.object,
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
+	onChange: PropTypes.func,
+	onKeyPress: PropTypes.func,
+    onEnter: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
+	icon: PropTypes.string,
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
@@ -204,6 +253,12 @@ TextField.defaultProps = {
 	style: {},	
 	placeholder: undefined,	
 	value: undefined,
+	onChange: undefined,
+	onKeyPress: undefined,
+	onEnter: undefined,
+	onBlur: undefined,
+	onFocus: undefined,
+	icon: undefined,
 	pending: false,
 	required: false,
 	invalid: false, 

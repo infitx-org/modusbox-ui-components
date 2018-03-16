@@ -30,9 +30,21 @@ const TestTextField = () => (
 			/>
 			<TextField
 				type='password'
-				id='x'
 				placeholder='4'
 				value='text'
+			/>
+			<TextField
+				placeholder='Icon'
+				icon='close-small'			
+			/>
+			<TextField
+				placeholder='Events'				
+				onChange={ () => console.log('onChange') }
+				onClick={ () => console.log('onClick') }
+				onKeyPress={ () => console.log('onKeyPress') }
+				onEnter={ () => console.log('onEnter') }
+				onBlur={ () => console.log('onBlur') }
+				onFocus={ () => console.log('onFocus') }
 			/>
 		</div>
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
