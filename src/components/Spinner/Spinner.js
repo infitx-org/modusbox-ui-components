@@ -25,7 +25,7 @@ const Spinner = ({ size, center }) => {
   
   const strokeWidth = size / 10
   const width = `${size}px`, height = `${size}px`
-  const position = size/2
+  const position = size / 2
   const radius = position - strokeWidth
 
   return(
