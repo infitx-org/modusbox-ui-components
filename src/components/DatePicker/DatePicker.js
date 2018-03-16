@@ -87,11 +87,8 @@ class DatePicker extends React.Component {
 		return undefined
 	}
 	getTime( value ){
-		let intValue = 0
-		if( typeof value === 'string' ){
-			intValue = parseInt( value )
-		}
-					
+		const intValue = typeof value === 'undefined' ? 0 : typeof value === 'string' ? parseInt( value ) : value
+
 		const hour = value ? moment(intValue).get('hour') : 0
 		const minute = value ? moment(intValue).get('minute') : 0
 		const second = value ? moment(intValue).get('second') : 0
