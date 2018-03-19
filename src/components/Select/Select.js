@@ -239,11 +239,11 @@ class Select extends PureComponent {
 							/>
 							
 							{ filter && 
-								<div className='select-input-icon'>
+								<div className='component__inner-icon select-input__icon'>
 									<Icon name='search-small' size={16} />
 								</div>
 							}
-							<div className='select-input-icon'>
+							<div className='component__inner-icon select-input__icon'>
 								{ pending ? <Spinner size={16} /> : <ArrowIcon isOpen={ isOpen } /> }
 						 	</div>
 						</div>						

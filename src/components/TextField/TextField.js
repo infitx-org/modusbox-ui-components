@@ -198,7 +198,7 @@ class TextField extends PureComponent {
 								disabled={ disabled }
 								className='input-textfield__input'
 							/>							
-							<div className='input-textfield__icon'>
+							<div className='component__inner-icon input-textfield__icon'>
 								{ pending 
 									? <Spinner size={16} /> 
 									: type == 'password' 
@@ -207,7 +207,7 @@ class TextField extends PureComponent {
 								}							
 						 	</div>
 						 	{ icon && 
-						 		<div className='input-textfield__icon'>
+						 		<div className='component__inner-icon input-textfield__icon'>
 									<Icon size={16} name={ icon } /> 
 								</div>
 							}													 	

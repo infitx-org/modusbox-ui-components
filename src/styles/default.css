@@ -30,23 +30,8 @@ $background--required: #ffc;
 	cursor: auto;
 }
 
-/** COMPONENT PLACEHOLDER **/
 
-.component__placeholder{
-	font-size: 14px;
-	transition: all 0.2s ease-out;
-	position: absolute;
-	top: 50%;
-	left: 16px;	
-	color: #999;
-	transform: translateY(-50%);
-}
-.component__placeholder--active{
-	top: 11px;
-	font-size: 11px;
-}
-
-/** BACKGROUND **/
+/** COMPONENT BACKGROUND **/
 
 .component__background{
 	background: $background--default;
@@ -64,13 +49,13 @@ $background--required: #ffc;
 	background: $background--required;	
 }
 
-/** BORDERS **/
+
+/** COMPONENT BORDERS **/
 
 .component__borders{
 	border-left: 2px solid $border-color--default;
 	border-right: 2px solid $border-color--default;
 }
-
 .component__borders--open{
 	margin-left: -2px;
 	margin-right: -2px;	
@@ -85,3 +70,47 @@ $background--required: #ffc;
 .component__borders--required{
 	border-color: $border-color--required;
 }	
+
+
+/** COMPONENT PLACEHOLDER **/
+
+.component__placeholder{
+	font-size: 14px;
+	transition: all 0.2s ease-out;
+	position: absolute;
+	top: 50%;
+	left: 16px;	
+	color: #999;
+	transform: translateY(-50%);
+}
+.component__placeholder--active{
+	top: 11px;
+	font-size: 11px;
+}
+
+
+/** COMPONENT INNER BUTTON **/
+
+.component__inner-button{
+	outline: none;
+	flex: 0 0 auto;
+	border-radius:3px;
+	height: 24px;
+	margin: 5px;
+	background: rgba(0,0,0,0.1);
+	border: none;
+	font-size:12px;
+
+	&:hover, &.active{
+		background: rgba(0,162,233,0.8);
+		color: #fff;
+	}
+}
+
+
+/** COMPONENT INNER ICON **/
+
+.component__inner-icon{
+	flex: 0 0 auto;
+	fill: #999;
+}

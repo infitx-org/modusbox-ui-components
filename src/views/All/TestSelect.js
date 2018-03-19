@@ -8,7 +8,8 @@ const options = [
 	},
 	{
 		label: 'test11231231312313123',
-		value:'z1'
+		value:'z1',
+		icon: 'close-small'
 	},
 	{
 		label: 'test2',
