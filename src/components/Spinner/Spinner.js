@@ -38,9 +38,7 @@ const Spinner = ({ size, center }) => {
         xmlns='http://www.w3.org/2000/svg'
       >
         <path 
-          id='p1'
-          className='path'
-          fill='none'
+          className='modus-spinner__svg-path'
           strokeWidth={ strokeWidth }
           d={ describeArc( position, position, radius, 90, 200 )}
         />

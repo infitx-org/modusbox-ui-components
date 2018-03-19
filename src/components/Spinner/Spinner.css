@@ -1,6 +1,6 @@
 .modus-spinner {
 	display: inline-flex;
-	animation: rotator 4s linear infinite;
+	animation: rotateSpinner 4s linear infinite;
 
 	&.center{ 
 		width: 100%;
@@ -10,18 +10,19 @@
 	}
 }
 .modus-spinner__component {
-  animation: rotator 0.8s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;
+	animation: rotateSpinner 0.8s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;			   
 }
 
-@keyframes rotator {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.modus-spinner__svg-path {
+	fill: none;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 0;
+	transform-origin: center;	
+	stroke-linecap: round;
+	stroke: #00a2df;
 }
 
-.path {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 0;
-  transform-origin: center;
-  stroke: #00a2df;
+@keyframes rotateSpinner {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }
-
