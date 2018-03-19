@@ -23,12 +23,12 @@ class Icon extends React.PureComponent {
 			stroke					
 		}
 		const componentClassName = utils.composeClassNames([
-			'icon',
+			'element-icon',
 			spin && 'spin',
 			className
 		])
 		return (
-			<svg style={ svgStyle } onClick={ this.onClick } className={ `icon ${spin ? 'spin' : ''}`}>
+			<svg style={ svgStyle } onClick={ this.onClick } className={ componentClassName }>
 				<use xlinkHref={`#${name}`} />
 			</svg>
 		)
