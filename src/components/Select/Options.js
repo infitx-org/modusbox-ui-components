@@ -1,8 +1,9 @@
 import React, { PureComponent, Component, PropTypes } from 'react'
 
-
 import * as utils from '../../utils/common'
+
 import ScrollBox from '../ScrollBox'
+import Icon from '../Icon'
 
 import './Options.css'
 
@@ -40,6 +41,7 @@ class Options extends PureComponent {
 									highlighted={ highlighted === index }
 									label={ item.label }
 									value={ item.value }
+									icon={ item.icon }
 									disabled={ item.disabled === true }
 									key={ index }
 									selected={ isSelected }
@@ -78,7 +80,7 @@ class Option extends PureComponent {
 		this.props.onClick()
 	}
 	render(){
-		const { selected, disabled, highlighted } = this.props
+		const { label, icon, selected, disabled, highlighted } = this.props
 		const optionsClassNames = utils.composeClassNames([
 			'input-select__options-item',
 			selected && 'selected',
@@ -91,7 +93,8 @@ class Option extends PureComponent {
 		 		className={ optionsClassNames }
 		 		onClick={ this.onClick }		 		
 		 	>
-		 		{ this.props.label }
+		 		{ icon && <Icon className='input-select__options-item__icon' name={icon} size={16} fill='#666' /> }
+		 		{ label }
 		 	</div>
 		 )
 	}

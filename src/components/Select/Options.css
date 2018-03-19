@@ -11,6 +11,8 @@
 
 }
 .input-select__options-item{
+	display: flex;
+	align-items: center;
 	flex: 0 0 40px;	
 	color:#555;
 	padding-left:10px;
@@ -47,6 +49,10 @@
 		color:#999;
 		cursor: auto;
 	}
+}
+
+.input-select__options-item__icon{
+	margin-right: 2px;
 }
 
 @keyframes fadeIn{
