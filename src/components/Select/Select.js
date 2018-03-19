@@ -131,10 +131,26 @@ class Select extends PureComponent {
 	}
 	highlightNextOption( next = true ){		
 		const { highlightedOption, options } = this.state
-		let nextHighlightedOption = ( highlightedOption + ( next ? 1 : - 1 ) ) % options.length
-		if( nextHighlightedOption < 0 ){
-			nextHighlightedOption = options.length - 1
-		}	
+		let currentHightlightedOption = highlightedOption
+		let nextHighlightedOption = -1
+
+		const getNextEnabledOption = () => {
+			let option = ( currentHightlightedOption + ( next ? 1 : - 1 ) ) % options.length
+			if( option < 0 ){
+				option = options.length - 1
+			}
+			currentHightlightedOption = option
+			if( this.state.options[ option ].disabled ){
+				return -1
+			}
+			return option
+		}
+		
+		while( nextHighlightedOption === -1 ){
+			nextHighlightedOption = getNextEnabledOption()
+			console.log( nextHighlightedOption )
+		}
+
 		this.setState({ highlightedOption: nextHighlightedOption })
 	}
 
@@ -217,9 +233,9 @@ class Select extends PureComponent {
 		])
 		
 		return (
-			<div className='input-select' style={ style }>
+			<div className='input-select component__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
-					<div className='input-select__content'>
+					<div className='component__content input-select__content'>
 						
 						{ typeof placeholder === 'string' && 
 							<label className={ placeholderClassName }> { placeholder } </label> 
