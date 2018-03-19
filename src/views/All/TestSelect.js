@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Select from '../components/Select'
+import Select from '../../components/Select'
 
 const options = [
 	{
@@ -66,6 +66,11 @@ const TestSelect = () => (
 				placeholder='Disabled'
 				options={ options }
 				disabled
+			/>
+			<Select
+				placeholder='OnChange'
+				options={ options }
+				onChange={ console.log }
 			/>
 		</div>
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>

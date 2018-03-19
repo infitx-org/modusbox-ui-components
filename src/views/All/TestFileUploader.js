@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import FileUploader from '../components/FileUploader'
+import FileUploader from '../../components/FileUploader'
 
 const TestFileUploader = () => (
 	<div>		

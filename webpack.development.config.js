@@ -9,7 +9,6 @@ var aliases = {
 	'reducers': 'src/reducers',
 	'store': 'src/store',
 	'utils': 'src/utils',
-	'HOCs': 'src/HOCs',
 	react: path.resolve('./node_modules/react')	
 }
 

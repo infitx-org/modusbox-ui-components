@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../components/Tabs'
+import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs'
 
 const TestTabs = () => (
 	<div>

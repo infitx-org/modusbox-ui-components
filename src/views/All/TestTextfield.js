@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import TextField from '../components/TextField'
+import TextField from '../../components/TextField'
 
 const TestTextField = () => (
 	<div>		

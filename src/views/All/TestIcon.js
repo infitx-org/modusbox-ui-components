@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
-import Icon from '../components/Icon'
-import ScrollBox from '../components/ScrollBox'
+import Icon from '../../components/Icon'
+import ScrollBox from '../../components/ScrollBox'
 
-import '../icons/index.js'
+import '../../icons/index.js'
 
 const modusboxIcons = [
 	'business-processes',

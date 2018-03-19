@@ -1,15 +1,17 @@
 import React from 'react'
-import TestCheckbox from './TestCheckbox'
-import TestSelect from './TestSelect'
-import TestTextField from './TestTextField'
-import TestTabs from './TestTabs'
-import TestRadio from './TestRadio'
-import TestDataList from './TestDataList'
-import TestScrollBox from './TestScrollBox'
-import TestFileUploader from './TestFileUploader'
-import TestDatePicker from './TestDatePicker'
-import TestIcon from './TestIcon'
-import TestSpinner from './TestSpinner'
+
+import Select from '../components/Select'
+import TestCheckbox from './All/TestCheckbox'
+import TestSelect from './All/TestSelect'
+import TestTextField from './All/TestTextField'
+import TestTabs from './All/TestTabs'
+import TestRadio from './All/TestRadio'
+import TestDataList from './All/TestDataList'
+import TestScrollBox from './All/TestScrollBox'
+import TestFileUploader from './All/TestFileUploader'
+import TestDatePicker from './All/TestDatePicker'
+import TestIcon from './All/TestIcon'
+import TestSpinner from './All/TestSpinner'
 
 
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
@@ -28,26 +30,49 @@ const Items = {
 	Spinner: TestSpinner
 }
 
-const Views = () => {
+const ItemKeys = Object.keys( Items )
+const AllItemTabs = ItemKeys.map( (item, i) => <Tab key={ i }> { item } </Tab> )
+const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }>{ Items[ item ]() } </TabPanel> )
+const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
+const selected = selectedTab || Object.keys( Items ).length - 1
+const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
 
-	const AllItemTabs = Object.keys( Items ).map( (item, i) => <Tab key={ i }> { item } </Tab> )
-	const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }><div > { Items[ item ]() } </div> </TabPanel> )
-	
+class Views extends React.Component {
 
-	const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
-	const selected = selectedTab || Object.keys( Items ).length - 1
-	
-	
-	return (
-		<div style={{width:'100%', height:'100%', overflow:'hidden'}}>
-			<Tabs selected={ selected } onSelect={ onSelectTab }>
-				<TabList>{ AllItemTabs }</TabList>
-				<TabPanels>{ AllItemPanels }</TabPanels>
-			</Tabs>
-		</div>
-	)
+	constructor(props){
+		super(props)		
+		this.onChange = this.onChange.bind(this)
+		this.state = { selected: 'default' }
+	}	
 
+	onChange(value){
+		this.setState({ selected: value })
+	}
+	
+	render(){
+		const options = [
+			{ label:'default', value:'default'},
+			{ label:'custom', value:'custom'},
+		]
+		require('../styles/' + this.state.selected + '.css')
+		return (
+			<div style={{width:'100%', height:'100%', overflow:'hidden', flexDirection: 'column', display:'flex'}}>
+				<div style={{margin: '10px'}}>
+					<Select
+						 value={ this.state.selected }
+						 onChange={this.onChange }
+						 options={ options }
+					/>
+				</div>
+				<Tabs selected={ selected } onSelect={ onSelectTab }>
+					<TabList>{ AllItemTabs }</TabList>
+					<TabPanels>{ AllItemPanels }</TabPanels>
+				</Tabs>
+			</div>
+		)
+	}
 }
 
-const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
+
+
 export default Views

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Checkbox from '../components/Checkbox'
+import Checkbox from '../../components/Checkbox'
 
 const TestCheckbox = () => (
 	<div>

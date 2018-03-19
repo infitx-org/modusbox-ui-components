@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import ScrollBox from '../components/ScrollBox'
+import ScrollBox from '../../components/ScrollBox'
 
 
 const Content = ({ color }) => ( 
