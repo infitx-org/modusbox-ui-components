@@ -8,7 +8,6 @@ import keyCodes from '../../utils/keyCodes'
 import Icon from '../Icon'
 import Spinner from '../Spinner'
 
-import '../default.css'
 import './TextField.css'
 
 class TextField extends PureComponent { 
@@ -225,7 +224,7 @@ const EyeIcon = ({ open, onClick }) => (
 		onClick={ onClick }
 		name={ open ? 'toggle-invisible' : 'toggle-visible' }
 		size={16}
-		fill='#333'		
+		fill={ open ? '#999' : '#39f' }		
 	/>
 )
 
