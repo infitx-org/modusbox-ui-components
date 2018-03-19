@@ -2,7 +2,6 @@
 	position: relative;
 	overflow-x: hidden; 
 	display: flex;
-	flex: 1 0 auto;
 	
 }
 .scrollbox-content-box{

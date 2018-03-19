@@ -39,11 +39,12 @@ class ScrollBar extends React.Component {
 			height = ReactDOM.findDOMNode( this.refs.tracker ).getBoundingClientRect().height
 		}
 		const {contentHeight, scrollTop, offset } = positions
-		const barHeight = ( positions.height ) / ( offset + contentHeight ) * 100 
-		const showScrollbar = ( barHeight < 100 )		
-		const translate = ( scrollTop / ( offset + contentHeight ) ) * height
-		const isMoving = true				
-
+		const viewToContentRatio = ( ( positions.height ) / ( offset + contentHeight ) )
+		const barHeight =  viewToContentRatio * height
+		const showScrollbar = viewToContentRatio < 1 
+		const translate = showScrollbar ? ((scrollTop) / ( offset + contentHeight - height) ) * (positions.height - barHeight) : 0
+		
+		const isMoving = true		
 		this.setState({ showScrollbar, barHeight, translate, isMoving, height })
 		
 		this.fadeMovingHandle()
@@ -56,13 +57,13 @@ class ScrollBar extends React.Component {
 			...trackStyle
 		}
 		const handleStyles = {
-			height: `${barHeight}%`,
+			height: `${barHeight}px`,
 			transform: `translate3d(0,${translate}px,0)`,
 			...handleStyle
 		}
 
 		if( ! showScrollbar ){			
-			return <div />
+			return null
 		}
 
 		return (
