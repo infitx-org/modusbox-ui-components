@@ -18,12 +18,12 @@ class TextField extends PureComponent {
 		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
 		this.onPageClick = this.onPageClick.bind(this)	
 		this.onTextFieldClick = this.onTextFieldClick.bind(this)
+		this.onButtonClick = this.onButtonClick.bind(this)
 
 		// Wrapper events
 		this.onClick = this.onClick.bind(this)
 		this.onChange = this.onChange.bind(this)
-		this.onKeyPress = this.onKeyPress.bind(this)
-		this.onEnter = this.onEnter.bind(this)
+		this.onKeyPress = this.onKeyPress.bind(this)		
 		this.onBlur = this.onBlur.bind(this)
 		this.onFocus = this.onFocus.bind(this)
 
@@ -93,8 +93,14 @@ class TextField extends PureComponent {
 			this.setState({ value })			
 		}
 	}	
-	onTextFieldClick(e){		
+	onTextFieldClick( e ){		
 		this.refs.input.click()		
+	}
+	onButtonClick( e ){
+		e.stopPropagation()
+		if( typeof this.props.onButtonClick === 'function'){
+			this.props.onButtonClick( e )
+		}
 	}
 	onClick( e ){
 		if( typeof this.props.onClick === 'function'){
@@ -115,11 +121,6 @@ class TextField extends PureComponent {
 	onKeyPress( e ){
 		if( typeof this.props.onKeyPress === 'function'){
 			this.props.onKeyPress( e )
-		}
-	}
-	onEnter( e ){
-		if( typeof this.props.onEnter === 'function'){
-			this.props.onEnter( e )
 		}
 	}
 	onBlur( e ){		
@@ -153,7 +154,7 @@ class TextField extends PureComponent {
 
 	render(){
 		
-		const { id, type, placeholder, icon, disabled, pending, required, invalid } = this.props 
+		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props 
 		const { isOpen, value, isPasswordVisible } = this.state
 		const inputValue = value || ''
 		const isPlaceholderTop = isOpen || value 
@@ -176,9 +177,9 @@ class TextField extends PureComponent {
 		])
 		
 		return (
-			<div className='input-textfield'>
+			<div className='input-textfield component__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onTextFieldClick } ref='area'>
-					<div className='input-textfield__content'>
+					<div className='component__content input-textfield__content'>
 						
 						{ typeof placeholder === 'string' && 
 							<label className={ placeholderClassName }> { placeholder } </label> 
@@ -191,13 +192,21 @@ class TextField extends PureComponent {
 								onChange={ this.onChange }
 								onKeyDown={ this.testKey }																								
 								onKeyPress={ this.onKeyPress }
-								onEnter={ this.onEnter }
 								onBlur={ this.onBlur }
 								onFocus={ this.onFocus }
 								value={ inputValue }
 								disabled={ disabled }
 								className='input-textfield__input'
-							/>							
+							/>
+							{ buttonText &&
+								<button
+									className={`component__inner-button input-textfield__button`}
+									onClick={ this.onButtonClick }								
+									tabIndex='-1'
+								>
+									{ buttonText }
+								</button> 						
+							}
 							<div className='component__inner-icon input-textfield__icon'>
 								{ pending 
 									? <Spinner size={16} /> 
@@ -234,9 +243,10 @@ TextField.propTypes = {
 	id: PropTypes.string,
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
+	buttonText: PropTypes.string,
+	onButtonClick: PropTypes.func,
 	onChange: PropTypes.func,
 	onKeyPress: PropTypes.func,
-    onEnter: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
 	icon: PropTypes.string,
@@ -252,9 +262,10 @@ TextField.defaultProps = {
 	style: {},	
 	placeholder: undefined,	
 	value: undefined,
+	buttonText: undefined,
+	onButtonClick: undefined,
 	onChange: undefined,
 	onKeyPress: undefined,
-	onEnter: undefined,
 	onBlur: undefined,
 	onFocus: undefined,
 	icon: undefined,
