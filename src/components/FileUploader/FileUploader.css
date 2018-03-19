@@ -68,25 +68,17 @@
 	border: none;
 	font-size:12px;
 
-	&:hover, &.has-focus{
-		background: #00A2DF;
-		color: #fff;
-	};
 }
 
-.input-fileuploader__button-remove{
-	outline: none;
-	flex: 0 0 auto;
-	border-radius:3px;
-	height: 24px;
-	margin: 5px;
-	background: rgba(0,0,0,0.1);
-	border: none;
-	font-size:12px;
+.input-fileuploader__button-add{
+	&:hover, &.active{
+		background: rgba(0,162,233,0.8);
+	};
 
-	&:hover, &.has-focus{
-		background: rgba(255,50,50,0.8);
-		color: #fff;
+}
+.input-fileuploader__button-remove{
+	&:hover, &.active{	
+		background: rgba(255,50,50,0.8);		
 	}
 }
 .input-fileuploader__icon{
