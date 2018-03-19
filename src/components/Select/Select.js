@@ -147,8 +147,7 @@ class Select extends PureComponent {
 		}
 		
 		while( nextHighlightedOption === -1 ){
-			nextHighlightedOption = getNextEnabledOption()
-			console.log( nextHighlightedOption )
+			nextHighlightedOption = getNextEnabledOption()			
 		}
 
 		this.setState({ highlightedOption: nextHighlightedOption })

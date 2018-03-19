@@ -1,6 +1,8 @@
 import React from 'react'
 
 import Select from '../components/Select'
+import ScrollBox from '../components/ScrollBox'
+
 import TestCheckbox from './All/TestCheckbox'
 import TestSelect from './All/TestSelect'
 import TestTextField from './All/TestTextField'
@@ -32,7 +34,7 @@ const Items = {
 
 const ItemKeys = Object.keys( Items )
 const AllItemTabs = ItemKeys.map( (item, i) => <Tab key={ i }> { item } </Tab> )
-const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }>{ Items[ item ]() } </TabPanel> )
+const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }><ScrollBox>{ Items[ item ]() }</ScrollBox></TabPanel> )
 const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
 const selected = selectedTab || Object.keys( Items ).length - 1
 const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
@@ -55,6 +57,7 @@ class Views extends React.Component {
 			{ label:'custom', value:'custom'},
 		]
 		require('../styles/' + this.state.selected + '.css')
+
 		return (
 			<div style={{width:'100%', height:'100%', overflow:'hidden', flexDirection: 'column', display:'flex'}}>
 				<div style={{margin: '10px'}}>
