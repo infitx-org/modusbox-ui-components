@@ -130,9 +130,10 @@ class Select extends PureComponent {
 		}
 	}
 	highlightNextOption( next = true ){		
-		let nextHighlightedOption = ( this.state.highlightedOption + ( next ? 1 : - 1 ) ) % this.state.options.length
+		const { highlightedOption, options } = this.state
+		let nextHighlightedOption = ( highlightedOption + ( next ? 1 : - 1 ) ) % options.length
 		if( nextHighlightedOption < 0 ){
-			nextHighlightedOption = this.state.options.length - 1
+			nextHighlightedOption = options.length - 1
 		}	
 		this.setState({ highlightedOption: nextHighlightedOption })
 	}
@@ -165,18 +166,21 @@ class Select extends PureComponent {
 	}
 
 	// when selecting the options item itself
-	onSelectOption( item ){		
-		if( item == undefined ){
+	onSelectOption({ value } = {}){		
+		if( value == undefined ){
 			return
 		}
-		const selectedItem = find( this.state.options, { value: item.value })
+		const selectedItem = find( this.state.options, { value })
 		const selectedLabel = selectedItem ? selectedItem.label : undefined
 		this.setState({
 			filter: undefined,
-			selectedValue: item.value,
+			selectedValue: value,
 			selectedLabel,			
 		})
 		this.setState({ isOpen: false })
+		if( typeof this.props.onChange === 'function' ){
+			this.props.onChange( value )
+		}
 	}
 	filterOptions(){
 		const { options, filter } = this.state		
@@ -188,7 +192,7 @@ class Select extends PureComponent {
 
 	render(){
 		
-		const { id, placeholder, pending, disabled, invalid, required } = this.props 
+		const { id, style, placeholder, pending, disabled, invalid, required } = this.props 
 		const { isOpen, selectedLabel, selectedValue, filter, highlightedOption } = this.state
 		
 		const inputValue = filter || selectedLabel || ''
@@ -213,7 +217,7 @@ class Select extends PureComponent {
 		])
 		
 		return (
-			<div className='input-select'>
+			<div className='input-select' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
 					<div className='input-select__content'>
 						
@@ -234,6 +238,11 @@ class Select extends PureComponent {
 								disabled={ disabled }
 							/>
 							
+							{ filter && 
+								<div className='select-input-icon'>
+									<Icon name='search-small' size={16} />
+								</div>
+							}
 							<div className='select-input-icon'>
 								{ pending ? <Spinner size={16} /> : <ArrowIcon isOpen={ isOpen } /> }
 						 	</div>
@@ -278,6 +287,7 @@ Select.propTypes = {
 			value: PropTypes.string,
 		})
 	),
+	selected: PropTypes.oneOf([ PropTypes.string, PropTypes.number, PropTypes.bool ]),
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
