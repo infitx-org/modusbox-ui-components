@@ -1,5 +1,7 @@
+$component-margin: 2px;
 $component-opacity--disabled: 0.5;
 
+$border-radius: 0px;
 $border-color--default: #CACBCC;
 $border-color--open: #58595A;
 $border-color--pending: #069;
@@ -12,6 +14,20 @@ $background--pending: #def;
 $background--invalid: #fdd;
 $background--required: #ffc;
 
+$placeholder-color: #999;
+
+
+/** BOX */
+
+.component__box{
+	width: 100%;
+	height: 45px;	
+	display: block;
+	box-sizing: border-box;
+	position: relative;
+	margin: $component-margin;
+}
+
 
 /** COMPONENT **/
 
@@ -19,6 +35,7 @@ $background--required: #ffc;
 	transition: all 0.2s ease-out;
 	width: 100%;
 	height: 100%;
+	border-radius: $border-radius;
 }
 .component--open{
 	width: calc(100% + 4px);
@@ -71,6 +88,18 @@ $background--required: #ffc;
 	border-color: $border-color--required;
 }	
 
+/** COMPONENT CONTENT */
+
+.component__content{
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	align-items: center;	
+	padding-left: 16px;
+	padding-right: 10px;
+}
+
 
 /** COMPONENT PLACEHOLDER **/
 
@@ -80,7 +109,7 @@ $background--required: #ffc;
 	position: absolute;
 	top: 50%;
 	left: 16px;	
-	color: #999;
+	color: $placeholder-color;
 	transform: translateY(-50%);
 }
 .component__placeholder--active{
@@ -96,7 +125,7 @@ $background--required: #ffc;
 	flex: 0 0 auto;
 	border-radius:3px;
 	height: 24px;
-	margin: 5px;
+	margin-left: 5px;
 	background: rgba(0,0,0,0.1);
 	border: none;
 	font-size:12px;

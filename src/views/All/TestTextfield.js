@@ -46,6 +46,11 @@ const TestTextField = () => (
 				onBlur={ () => console.log('onBlur') }
 				onFocus={ () => console.log('onFocus') }
 			/>
+			<TextField
+				placeholder='Button'
+				onButtonClick={ () => console.log('Clicked!') }
+				buttonText='Press Me'		
+			/>
 		</div>
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<TextField

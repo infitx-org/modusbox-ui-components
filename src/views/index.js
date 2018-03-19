@@ -59,9 +59,10 @@ class Views extends React.Component {
 			<div style={{width:'100%', height:'100%', overflow:'hidden', flexDirection: 'column', display:'flex'}}>
 				<div style={{margin: '10px'}}>
 					<Select
-						 value={ this.state.selected }
-						 onChange={this.onChange }
-						 options={ options }
+						placeholder='Select StyleSheet'
+						value={ this.state.selected }
+						onChange={this.onChange }
+						options={ options }
 					/>
 				</div>
 				<Tabs selected={ selected } onSelect={ onSelectTab }>

@@ -169,7 +169,7 @@ class FileUploader extends Component {
 		])
 		
 		return (
-			<div className='input-fileuploader' style={ style }>
+			<div className='input-fileuploader component__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onClickFileUploader} ref='area'>
 					<div className='input-fileuploader-box'>
 						
@@ -177,7 +177,7 @@ class FileUploader extends Component {
 							<label className={ placeholderClassName }> { placeholder } </label> 
 						}
 						
-						<div className='input-fileuploader__content'>												
+						<div className='component__content input-fileuploader__content'>												
 							<input 
 								className='input-fileuploader__input'
 								type='file'

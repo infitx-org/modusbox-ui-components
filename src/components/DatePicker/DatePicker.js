@@ -181,7 +181,7 @@ class DatePicker extends React.Component {
 
 	render() {		
 		
-		const { placeholder, id, disabled, pending, invalid, required } = this.props
+		const { placeholder, id, style, disabled, pending, invalid, required } = this.props
 		const { isOpen, dateString, selectedDay } = this.state
 		const initialMonth = selectedDay == undefined ? this.getDate( this.props.initialMonth ) : selectedDay
 		const hasDate = dateString != 0 && dateString != undefined		
@@ -206,7 +206,7 @@ class DatePicker extends React.Component {
 
 
 		return (
-			<div className='input-datepicker'>
+			<div className='input-datepicker component__box' style={ style }>
 				<div className={ componentClassName }>
 					<div 
 						id={ id }
