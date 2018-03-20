@@ -15,18 +15,15 @@ const columns1 = [
 
 
 
-const TestDataList = () => (
-	<div>
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
-			<DataList
-				id='1'
-				columns={ columns1 }
-				list={ list1 }
-				selected={ 'a' }
-				height='400'	
-				paging			
-			/>
-		</div>
+const TestDataList = () => (	
+	<div style={{ padding:'10px', margin:'5px 0px', border: '1px solid #ccc', flex: '2 1 auto', display: 'flex'}}>
+		<DataList
+			id='1'
+			columns={ columns1 }
+			list={ list1 }
+			selected={ 'a' }				
+			paging			
+		/>
 	</div>
 )
 

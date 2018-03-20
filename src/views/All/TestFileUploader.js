@@ -6,6 +6,8 @@ const TestFileUploader = () => (
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<FileUploader				
 				placeholder='Default'
+				parseFileAsText
+				onChange={console.log}
 			/>
 			<FileUploader				
 				placeholder='Only .txt file type'

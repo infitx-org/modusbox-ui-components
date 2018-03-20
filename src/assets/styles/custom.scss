@@ -1,20 +1,20 @@
 $component-margin: 2px;
 $component-opacity--disabled: 0.5;
 
-$border-radius: 5px;
-$border-color--default: #aca;
-$border-color--open: #9c9;
+$border-radius: 0px;
+$border-color--default: #CACBCC;
+$border-color--open: #58595A;
 $border-color--pending: #069;
 $border-color--invalid: #c33;
 $border-color--required: #cc3;
 
-$background--default: #ded;
-$background--open: #efe;
-$background--pending: #def;
-$background--invalid: #fdd;
-$background--required: #ffc;
+$background--default: transparent;
+$background--open: transparent;
+$background--pending: transparent;
+$background--invalid: transparent;
+$background--required: transparent;
 
-$placeholder-color: #696;
+$placeholder-color: #999;
 
 
 /** BOX */
@@ -25,7 +25,7 @@ $placeholder-color: #696;
 	display: block;
 	box-sizing: border-box;
 	position: relative;
-	margin: $component-margin;
+	margin: $component-margin 0px;
 }
 
 
@@ -33,12 +33,10 @@ $placeholder-color: #696;
 
 .component{	
 	transition: all 0.2s ease-out;
-	width: 100%;
 	height: 100%;
 	border-radius: $border-radius;
 }
 .component--open{
-	width: calc(100% + 4px);
 	padding: 0px 2px;		
 }
 .component--disabled{
@@ -69,9 +67,8 @@ $placeholder-color: #696;
 
 /** COMPONENT BORDERS **/
 
-.component__borders{
-	border-left: 2px solid $border-color--default;
-	border-right: 2px solid $border-color--default;
+.component__borders{	
+	border-bottom: 2px solid $border-color--default;
 }
 .component__borders--open{
 	margin-left: -2px;
@@ -127,6 +124,7 @@ $placeholder-color: #696;
 	height: 24px;
 	margin-left: 5px;
 	background: rgba(0,0,0,0.1);
+	color: #999;
 	border: none;
 	font-size:12px;
 

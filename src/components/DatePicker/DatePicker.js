@@ -220,11 +220,14 @@ class DatePicker extends React.Component {
 							{ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 						</div>
 						
-						<div className='select-input-icon'>
-							{ pending ? <Spinner size={16} /> : <Icon size={16} name='calendar-small' /> }
-					 	</div>
-						<div className='input-datepicker-icon'> 
-							
+						{ pending && 
+							<div className='component__inner-icon input-datepicker__icon'>
+								<Spinner size={16} />
+						 	</div>
+						 }
+
+						<div className='component__inner-icon input-datepicker__icon'> 
+							<Icon size={16} name='calendar-small' fill='#999'/>	
 						</div>
 
 					</div>

@@ -36,7 +36,7 @@ const Items = {
 
 const ItemKeys = Object.keys( Items )
 const AllItemTabs = ItemKeys.map( (item, i) => <Tab key={ i }> { item } </Tab> )
-const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }><ScrollBox>{ Items[ item ]() }</ScrollBox></TabPanel> )
+const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }><ScrollBox flex>{ Items[ item ]() }</ScrollBox></TabPanel> )
 const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
 const selected = selectedTab || Object.keys( Items ).length - 1
 const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
@@ -46,7 +46,7 @@ class Views extends React.Component {
 	constructor(props){
 		super(props)		
 		this.onChange = this.onChange.bind(this)
-		this.state = { selected: 'default' }
+		this.state = { selected: 'custom' }
 	}	
 
 	onChange(value){
