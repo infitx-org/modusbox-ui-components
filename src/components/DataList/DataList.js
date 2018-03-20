@@ -13,7 +13,7 @@ import Icon from '../Icon'
 import { NotifyResize } from 'react-notify-resize'
 import './DataList.scss'
 
-import ScrollBar from './ScrollBar'
+import { ScrollBar } from '../ScrollBox'
 import Link from './Link'
 import Header from './Header'
 import ListItem from './ListItem'
@@ -1031,7 +1031,7 @@ class ListItems extends React.Component {
 				{ /* API ERROR */ }
 				{ apiError && <ErrorBox message={apiError} /> }
 
-				<div className='data-list' id={ this.props.id } style={{ display: hideList ? 'none' : 'block' }} >
+				<div className='data-list' id={ this.props.id } style={ hideList ? { display: 'none' } : undefined }>
 					{ this.state.isOverlayColumnVisible && 
 						<OverlayColumnResizer 
 							start={this.state.cellLeftPosition}
@@ -1126,17 +1126,13 @@ class ListItems extends React.Component {
 
 							{ this.state.isUpdating && <SpinnerBox id={`${this.props.id}-updating-box`} /> }
 							{ isNoDataInfiniteFiltered && <NoDataBox message={ `${this.props.noData} with these filters` } /> }
+							
+							
 						</div>
-						
-						{/* this.props.showScrollbar &&  */}
 						<ScrollBar ref='scrollbar' onInit={this.updateScrollbar}/>
 
-						{ this.state.hasPages && <Paging 
-							qty={ this.state.pageQty }
-							selected={ this.state.page }
-							onSelect={ this.pageClick }
-						/> }
-						
+						{/* this.props.showScrollbar &&  */}
+
 						<Paginator 			
 							show={ this.hasUpdatedPreviousItems }
 							hide={ this.hasUpdatedNewItems }
@@ -1145,7 +1141,13 @@ class ListItems extends React.Component {
 							position={-35}
 							direction='up'
 						/>
+						
 					</div>
+					{ this.state.hasPages && <Paging 
+						qty={ this.state.pageQty }
+						selected={ this.state.page }
+						onSelect={ this.pageClick }
+					/> }
 				</div>
 			</div>
 		)
