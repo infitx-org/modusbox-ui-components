@@ -30,9 +30,10 @@ class Options extends PureComponent {
 	}
 	render(){
 		const { options, selected, highlighted } = this.state		
+		const { maxHeight } = this.props
 		return (
 			<div className='input-select__options-wrapper'>				
-				<ScrollBox style={{maxHeight:'240px'}} handleStyle={{borderRadius:'3px'}} trackStyle={{top:'2px', bottom:'2px', right:'4px', width:'5px'}} showTrack={false}>
+				<ScrollBox style={{ maxHeight: maxHeight }} handleStyle={{borderRadius:'3px'}} trackStyle={{top:'2px', bottom:'2px', right:'4px', width:'5px'}} showTrack={false}>
 					<div>
 						{ options.map( (item, index) => {
 							const isSelected = selected === item.value					
@@ -93,7 +94,14 @@ class Option extends PureComponent {
 		 		className={ optionsClassNames }
 		 		onClick={ this.onClick }		 		
 		 	>
-		 		{ icon && <Icon className='input-select__options-item__icon' name={icon} size={16} fill='#666' /> }
+		 		{ icon && 
+		 			<Icon 
+			 			className='input-select__options-item__icon'
+			 			name={icon}
+			 			size={16}
+			 			fill='#666'
+			 		/>
+			 	}
 		 		{ label }
 		 	</div>
 		 )
