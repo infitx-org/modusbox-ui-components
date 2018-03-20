@@ -3,6 +3,7 @@ import React from 'react'
 import Select from '../components/Select'
 import ScrollBox from '../components/ScrollBox'
 
+import TestButton from './All/TestButton'
 import TestCheckbox from './All/TestCheckbox'
 import TestSelect from './All/TestSelect'
 import TestTextField from './All/TestTextField'
@@ -19,6 +20,7 @@ import TestSpinner from './All/TestSpinner'
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
 
 const Items = {
+	Button: TestButton,
 	Checkbox: TestCheckbox,
 	Radio: TestRadio,
 	Select: TestSelect,
@@ -56,7 +58,7 @@ class Views extends React.Component {
 			{ label:'default', value:'default'},
 			{ label:'custom', value:'custom'},
 		]
-		require('../styles/' + this.state.selected + '.css')
+		require('../assets/styles/' + this.state.selected + '.scss')
 
 		return (
 			<div style={{width:'100%', height:'100%', overflow:'hidden', flexDirection: 'column', display:'flex'}}>

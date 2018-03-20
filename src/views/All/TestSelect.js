@@ -43,7 +43,7 @@ const options = [
 
 const TestSelect = () => (
 	<div>		
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<div style={{padding:10, border: '1px solid #ccc'}}>
 			<Select
 				placeholder='Default'
 				options={ options }				
@@ -74,7 +74,7 @@ const TestSelect = () => (
 				onChange={ console.log }
 			/>
 		</div>
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<div style={{padding:10, border: '1px solid #ccc'}}>
 			<Select
 				id='x'
 				placeholder='placeholder'

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import './ScrollBar.css'
+import './ScrollBar.scss'
 
 class ScrollBar extends React.Component {
 	constructor(){

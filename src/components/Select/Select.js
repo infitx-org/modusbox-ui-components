@@ -10,7 +10,7 @@ import Spinner from '../Spinner'
 
 import Options from './Options'
 
-import './Select.css'
+import './Select.scss'
 
 class Select extends PureComponent { 
 	constructor( props ){
@@ -40,8 +40,7 @@ class Select extends PureComponent {
 			selectedLabel,
 			selectedValue: selected,
 			filter: undefined
-		}
-		this.has_focus = false
+		}		
 	}
 	componentWillReceiveProps(nextProps, nextState){
 		const changes = {}
@@ -78,8 +77,7 @@ class Select extends PureComponent {
 	setValue( value ){
 		this.refs.filter.value = value
 	} 
-	closeSelect(){
-		this.has_focus = false
+	closeSelect(){		
 		this.setState({ isOpen: false, filter: undefined, highlightedOption: 0 })
 	}
 	leaveSelect( next){		
@@ -89,7 +87,6 @@ class Select extends PureComponent {
 		
 	}
 	enterSelect(){		
-		this.has_focus = true
 		this.setState({ isOpen: true })
 	}
 	testKey( e ){
@@ -117,13 +114,14 @@ class Select extends PureComponent {
 		}
 	}
 	applyFilter( e ){
-		if( ! this.has_focus ){
+		/*if( ! this.state.isOpen ){
 			return 
-		}
+		}*/
 		const { value } = this.refs.filter
 		this.setState({ filter: value })
 		if( value === '' ){
 			this.setState({
+				isOpen: true,
 				selectedLabel: undefined,
 				selectedValue: undefined
 			})
@@ -223,7 +221,7 @@ class Select extends PureComponent {
 			disabled && 'component--disabled component__borders--disabled component__background--disabled',
 			pending && 'component--pending component__borders--pending component__background--pending',
 			invalid && 'component--invalid component__borders--invalid component__background--invalid',
-			required && 'component--required component__borders--required component__background--required',
+			required && ( selectedLabel === undefined ) && 'component--required component__borders--required component__background--required',
 		])
 
 		const placeholderClassName = utils.composeClassNames([

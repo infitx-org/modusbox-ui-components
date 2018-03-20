@@ -8,7 +8,7 @@ import Row from '../Row'
 import Icon from '../Icon'
 import Spinner from '../Spinner'
 
-import './DatePicker.css'
+import './DatePicker.scss'
 
 class DatePicker extends React.Component {
 	constructor(props) {

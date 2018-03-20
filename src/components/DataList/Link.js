@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Icon from '../Icon'
-import './Link.css'
+import './Link.scss'
 
 class Link extends Component {
 	constructor(props){

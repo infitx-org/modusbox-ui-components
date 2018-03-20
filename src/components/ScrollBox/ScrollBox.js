@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import './ScrollBox.css'
+import './ScrollBox.scss'
 
 import ScrollBar from './ScrollBar'
 

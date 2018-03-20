@@ -8,7 +8,7 @@ import keyCodes from '../../utils/keyCodes'
 import Icon from '../Icon'
 import Spinner from '../Spinner'
 
-import './TextField.css'
+import './TextField.scss'
 
 class TextField extends PureComponent { 
 	constructor( props ){
@@ -155,8 +155,7 @@ class TextField extends PureComponent {
 	render(){
 		
 		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props 
-		const { isOpen, value, isPasswordVisible } = this.state
-		const inputValue = value || ''
+		const { isOpen, value, isPasswordVisible } = this.state		
 		const isPlaceholderTop = isOpen || value 
 		
 		const componentClassName = utils.composeClassNames([
@@ -168,7 +167,7 @@ class TextField extends PureComponent {
 			disabled && 'component--disabled component__borders--disabled component__background--disabled',
 			pending && 'component--pending component__borders--pending component__background--pending',
 			invalid && 'component--invalid component__borders--invalid component__background--invalid',
-			required && 'component--required component__borders--required component__background--required',
+			required && ( value === undefined || value === '' ) && 'component--required component__borders--required component__background--required',
 		])
 
 		const placeholderClassName = utils.composeClassNames([
@@ -194,7 +193,7 @@ class TextField extends PureComponent {
 								onKeyPress={ this.onKeyPress }
 								onBlur={ this.onBlur }
 								onFocus={ this.onFocus }
-								value={ inputValue }
+								value={ value || '' }
 								disabled={ disabled }
 								className='input-textfield__input'
 							/>

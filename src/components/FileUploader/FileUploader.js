@@ -6,7 +6,7 @@ import keyCodes from '../../utils/keyCodes'
 
 import Spinner from '../Spinner'
 
-import './FileUploader.css'
+import './FileUploader.scss'
 
 class FileUploader extends Component { 
 	constructor( props ){

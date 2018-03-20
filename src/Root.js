@@ -3,15 +3,12 @@ import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import '../assets/main.css'
-import '../assets/custom.css'
-
 import configureStore from './redux/configureStore'
 import Views from './views'
 
 var store = configureStore()
 //console.clear()
-
+import './assets/main.css'
 class Root extends React.Component{	
 	render(){
 

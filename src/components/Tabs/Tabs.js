@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import './Tabs.css' 
+import './Tabs.scss' 
 
 class TabList extends React.Component {
 	render(){

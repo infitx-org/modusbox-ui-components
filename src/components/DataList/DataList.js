@@ -11,7 +11,7 @@ import TextField from '../TextField'
 import Icon from '../Icon'
 
 import { NotifyResize } from 'react-notify-resize'
-import './DataList.css'
+import './DataList.scss'
 
 import ScrollBar from './ScrollBar'
 import Link from './Link'

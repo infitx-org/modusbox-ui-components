@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import './RadioGroup.css'
+import './RadioGroup.scss'
 
 class RadioGroup extends React.Component {
 

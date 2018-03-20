@@ -1,7 +1,7 @@
 import React from 'react'
 import * as utils from '../../utils/common'
 
-import './Icon.css'
+import './Icon.scss'
 
 class Icon extends React.PureComponent {
 	constructor(props){
@@ -20,7 +20,8 @@ class Icon extends React.PureComponent {
 			height: `${size}px`,
 			width: `${size}px`,
 			fill,
-			stroke					
+			stroke,
+			...style			
 		}
 		const componentClassName = utils.composeClassNames([
 			'element-icon',
@@ -36,15 +37,19 @@ class Icon extends React.PureComponent {
 }
 
 Icon.defaultProps = {
+	id: undefined,
+	style: undefined,
 	className: undefined,
 	size: 20,
 	name: undefined,
-	fill: '#999',	
+	fill: undefined,
 	stroke: undefined,
 	spin: false
 }
 
 Icon.propTypes = {
+	idName: React.PropTypes.string,
+	style: React.PropTypes.object,
 	className: React.PropTypes.string,
 	size: React.PropTypes.number,
 	name: React.PropTypes.string,

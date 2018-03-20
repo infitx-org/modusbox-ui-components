@@ -5,7 +5,7 @@ import * as utils from '../../utils/common'
 import ScrollBox from '../ScrollBox'
 import Icon from '../Icon'
 
-import './Options.css'
+import './Options.scss'
 
 class Options extends PureComponent { 
 	constructor( props ){

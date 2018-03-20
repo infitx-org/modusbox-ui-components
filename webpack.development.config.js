@@ -47,7 +47,7 @@ var config = {
 	resolve: {
 		root: path.resolve(__dirname),
 		alias: aliases,
-		extensions: ['', '.js','.css']
+		extensions: ['', '.js','.css','.scss']
 	},
 
 	module: {
@@ -58,7 +58,7 @@ var config = {
 				include: [path.join(__dirname, 'src')]
 			},
 			{
-				test: /\.css?$/,
+				test: /\.(css|scss)?$/,
 				loaders: ['style-loader', 'css-loader', 'postcss-loader']
 			},
 			{
