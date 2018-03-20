@@ -45,10 +45,11 @@ class ScrollBar extends React.Component {
 		const barHeight =  viewToContentRatio * height
 		const realBaHeight = ( height / totalContentHeight ) * height
 		const showScrollbar = viewToContentRatio < 1 
-		const translate = showScrollbar ? ( scrollTop / ( offset + contentHeight - height) ) * (height - realBaHeight) : 0
+		const translate = showScrollbar ? ( scrollTop / ( totalContentHeight - height) ) * (height - realBaHeight) : 0
 		const isMoving = true		
-		this.setState({ showScrollbar, barHeight, translate, isMoving, height })
 		
+		console.log({ scrollTop, ph: positions.height, totalContentHeight, height, realBaHeight})
+		this.setState({ showScrollbar, barHeight, translate, isMoving, height })		
 		this.fadeMovingHandle()
 	}
 

@@ -6,7 +6,7 @@ const focusNextFocusableElement = ( currentElement, next = true ) => {
 	const forceFocusNextElement = activeElement === currentElement || activeElement === body
 		
 	if( forceFocusNextElement ){
-		const selector = 'input:not([disabled]),button'
+		const selector = 'input:not([disabled]),[aria-component="button"]:not([disabled])'
 		const inputs = document.querySelectorAll( selector )					
 		const inputList = Array.prototype.slice.call( inputs )			
 		const nextIndex = inputList.indexOf( currentElement ) + ( next ? 1 : -1 )						

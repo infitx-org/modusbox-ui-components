@@ -55,6 +55,7 @@ class Button extends React.PureComponent {
 				onKeyDown={ this.testKey }					
 				onClick={ this.onClick }
 				disabled={ disabled }					
+				aria-component='button'
 			>	
 				<div className='input-button__content'>
 					{ icon && <Icon name={ icon } size={15} style={{marginRight:'5px'}}/> }
