@@ -21,7 +21,10 @@ class Select extends PureComponent {
 		this.onPageClick = this.onPageClick.bind(this)
 		this.onSelectFilter = this.onSelectFilter.bind(this)
 
+		// Internal lifecycle methods
 		this.setValue = this.setValue.bind(this)
+		this.getMaxHeight = this.getMaxHeight.bind(this)
+		
 		this.closeSelect = this.closeSelect.bind(this)
 		this.leaveSelect = this.leaveSelect.bind(this)
 		this.enterSelect = this.enterSelect.bind(this)
@@ -30,26 +33,26 @@ class Select extends PureComponent {
 		this.filterOptions = this.filterOptions.bind(this)
 		this.highlightNextOption = this.highlightNextOption.bind(this)
 
-		const { options, selected } = this.props
-		const selectedItem = find( options, { value: selected })
+		const { options, value } = this.props		
+		const selectedItem = find( options, { value })
 		const selectedLabel = selectedItem ? selectedItem.label : undefined
 		this.state = {
 			isOpen: false,
 			highlightedOption: 0,
 			options,
 			selectedLabel,
-			selectedValue: selected,
+			value,
 			filter: undefined
 		}		
 	}
 	componentWillReceiveProps(nextProps, nextState){
 		const changes = {}
-		const { options, selected, pending, disabled } = nextProps
+		const { options, value, pending, disabled } = nextProps
 		
-		if( selected !== this.props.selected ){
-			const selectedItem = find( options, { value: selected })
+		if( value !== this.props.value ){
+			const selectedItem = find( options, { value })
 			const selectedLabel = selectedItem ? selectedItem.label : undefined
-			changes.selectedValue = selected
+			changes.value = value
 			changes.selectedLabel = selectedLabel
 			this.setValue( selectedLabel )
 		}
@@ -123,7 +126,7 @@ class Select extends PureComponent {
 			this.setState({
 				isOpen: true,
 				selectedLabel: undefined,
-				selectedValue: undefined
+				value: undefined
 			})
 		}
 	}
@@ -187,7 +190,7 @@ class Select extends PureComponent {
 		const selectedLabel = selectedItem ? selectedItem.label : undefined
 		this.setState({
 			filter: undefined,
-			selectedValue: value,
+			value: value,
 			selectedLabel,			
 		})
 		this.setState({ isOpen: false })
@@ -203,10 +206,16 @@ class Select extends PureComponent {
 		return options.filter( item => item.label.includes( filter ) )
 	}
 
+	getMaxHeight(){		
+		const dims = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
+		console.log( dims )
+		return 260
+	}
+
 	render(){
 		
 		const { id, style, placeholder, pending, disabled, invalid, required } = this.props 
-		const { isOpen, selectedLabel, selectedValue, filter, highlightedOption } = this.state
+		const { isOpen, selectedLabel, value, filter, highlightedOption } = this.state
 		
 		const inputValue = filter || selectedLabel || ''
 		const isPlaceholderTop = isOpen || selectedLabel 
@@ -264,12 +273,13 @@ class Select extends PureComponent {
 					</div>
 				</div>
 				
-				<div className='input-select__options'>
+				<div className='input-select__options' ref='options-position'>
 					{ isOpen && 
 						<Options
 							ref='options' 
 							options={ this.filterOptions() }							
-							selected={ selectedValue }
+							maxHeight={ this.getMaxHeight() }
+							selected={ value }
 							highlighted={ highlightedOption }
 							onSelect={ this.onSelectOption }							
 						/>
