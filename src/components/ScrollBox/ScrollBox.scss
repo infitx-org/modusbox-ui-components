@@ -2,6 +2,7 @@
 	position: relative;
 	overflow-x: hidden; 
 	display: flex;
+	flex: 1 1 auto;
 	
 }
 .scrollbox-content-box{
@@ -17,7 +18,11 @@
 }
 .scrollbox-content{
 	width: calc( 100% + 20px );
-	flex: 1 0 auto;
     max-height: 100%;
     flex-direction: column;
+	flex: 2 0 auto;
+
+	&.flexible{
+		display: flex;
+	}
 }

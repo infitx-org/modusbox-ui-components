@@ -39,12 +39,12 @@ class ScrollBox extends React.Component {
 		this.refs.content.style.width = width - 20
 	}
 	render(){
-		const { showTrack, handleStyle, trackStyle, style, children } = this.props
+		const { showTrack, handleStyle, trackStyle, style, children, flex } = this.props
 		return (
 			<div className='scrollbox-wrapper' style={ style } > 
 				
 				<div ref='contentBox' className='scrollbox-content-box'>
-					<div ref='content' className='scrollbox-content'>{ children }</div>
+					<div ref='content' className={`scrollbox-content ${flex ? 'flexible' :''}`}>{ children }</div>
 				</div>
 
 				<ScrollBar 
@@ -58,15 +58,17 @@ class ScrollBox extends React.Component {
 	}
 }
 ScrollBox.propTypes = {
+	flex: React.PropTypes.bool,
 	style: React.PropTypes.object,
 	trackerStyle: React.PropTypes.object,
 	handleStyle: React.PropTypes.object,
 	showTrack: React.PropTypes.bool
 }
 ScrollBox.defaultProps = {	
+	flex: false,
 	style: {},
 	trackerStyle: {},
 	handleStyle: {},
-	showTrack: false
+	showTrack: false	
 }
 export default ScrollBox
