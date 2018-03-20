@@ -59,8 +59,8 @@ class ScrollBar extends React.Component {
 			...trackStyle
 		}
 		const handleStyles = {
-			height: `${barHeight}px`,
-			transform: `translate3d(0,${translate}px,0)`,
+			height: `${Math.round(barHeight)}px`,
+			transform: `translate3d(0,${Math.round(translate)}px,0)`,
 			...handleStyle
 		}
 
