@@ -37,14 +37,16 @@ class Button extends React.PureComponent {
 	}
 	render(){	 	
 	 	
-	 	const { id, style, kind, label, icon, disabled, pending } = this.props	 	
+	 	const { id, style, kind, label, icon, noFill, disabled, pending } = this.props	 	
 	 	const classNames = utils.composeClassNames([
 			'input-button__input',			
 			kind === 'primary' && 'input-button__input--primary',
 			kind === 'secondary' && 'input-button__input--secondary',
-			kind === 'tertiary' && 'input-button__input--tertiary',			
+			kind === 'tertiary' && 'input-button__input--tertiary',
+			kind === 'danger' && 'input-button__input--danger',
 			disabled && 'component--disabled input-button__input--disabled',
-			pending && 'component--pending input-button__input--pending'			
+			pending && 'component--pending input-button__input--pending',
+			noFill && 'noFill'
 		])
 
 		return (			
@@ -71,6 +73,7 @@ Button.propTypes = {
 	kind: PropTypes.string,
 	label: PropTypes.string,
 	icon: PropTypes.string,
+	noFill: PropTypes.bool,
 	disabled: PropTypes.bool,
 	pending: PropTypes.bool,
 	onClick: PropTypes.func
@@ -81,6 +84,7 @@ Button.defaultProps = {
 	kind: 'primary',
 	label: undefined,
 	icon: undefined,
+	noFill: false,
 	disabled: false,
 	pending: false,
 	onClick: undefined

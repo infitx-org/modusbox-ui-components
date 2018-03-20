@@ -19,6 +19,10 @@ const TestButton = () => (
 				kind='tertiary'				
 			/>
 			<Button
+				label='Danger'
+				kind='danger'				
+			/>
+			<Button
 				label='Disabled'
 				disabled
 			/>
@@ -33,7 +37,25 @@ const TestButton = () => (
 			<Button
 				label='Icon'
 				icon='deploy-small'
+			/>
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
 			/>		
+			<Button
+				label='No Fill'				
+				icon='deploy-small'
+				noFill
+				kind='secondary'				
+			/>		
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				kind='tertiary'				
+			/>		
+
 		</div>
 	</div>
 )

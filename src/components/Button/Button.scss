@@ -20,35 +20,57 @@
     -webkit-font-smoothing: antialiased;
     border: 1px solid;
     align-items: center;
+
 }
 
 .input-button__content{
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .input-button__input--primary{
-	background-color: #00a2df;
+    background-color: #00a2df;
     border-color: #00a2df;
+    &.noFill{
+        background-color: transparent;
+        color: #00a2df;
+        fill: #00a2df;
+    }
 
     &:hover, &:focus{
-    	background-color: #04b3f5;
-    	border-color: #04b3f5;
+        background-color: #04b3f5;
+        border-color: #04b3f5;
+        &.noFill{
+            fill: #fff;
+            color: #fff;
+        }
     };
 
     &:active{
-		color: #087299;
-		fill: #087299;
+        color: #087299;
+        fill: #087299;
+
 	}
 }
 .input-button__input--secondary{
 	background-color: #6b8a99;
     border-color: #6b8a99;
+    &.noFill{
+        background: transparent;
+        color: #6b8a99;
+        fill: #6b8a99;
+    }
+
     &:hover, &:focus{
 		background-color: #a1b1b8;
 		border-color: #a1b1b8;
-    };
+        &.noFill{
+            fill: #fff;
+            color: #fff;
+        }
+    }
+
     &:active{
 		color: #506773;
 		fill: #506773;
@@ -59,6 +81,10 @@
     background-color: #cacbcc;
     border-color: #cacbcc;
     color: #58595a;
+
+    &.noFill{
+        background: transparent;
+    }
     &:hover, &:focus{
 		background-color: #e8e9ea;
 		border-color: #e8e9ea;
@@ -68,4 +94,27 @@
 		fill: #989a9b;
 	}
 	
+}
+.input-button__input--danger{
+    background-color: #d1344e;
+    border-color: #d1344e;
+    &.noFill{
+        background: transparent;
+        color: #6b8a99;
+        fill: #6b8a99;
+    }
+
+    &:hover, &:focus{
+        background-color: #e23955;
+        border-color: #e23955;
+        &.noFill{
+            fill: #fff;
+            color: #fff;
+        }
+    }
+
+    &:active{
+        color: #6a0213;
+        fill: #6a0213;
+    }
 }
