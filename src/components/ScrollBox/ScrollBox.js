@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react'
 
-import './ScrollBox.scss'
+import * as utils from '../../utils/common'
 
 import ScrollBar from './ScrollBar'
+
+import './ScrollBox.scss'
 
 class ScrollBox extends React.Component {
 	constructor( props ){
@@ -40,11 +42,16 @@ class ScrollBox extends React.Component {
 	}
 	render(){
 		const { showTrack, handleStyle, trackStyle, style, children, flex } = this.props
+		
+		const wrapperClassName = utils.composeClassNames([ 'element-scrollbox__wrapper', flex && 'flexible' ])
+		const contentBoxClassName = utils.composeClassNames([ 'element-scrollbox__content-box', flex && 'flexible' ])
+		const contentClassName = utils.composeClassNames([ 'element-scrollbox__content', flex && 'flexible' ])
+
 		return (
-			<div className='scrollbox-wrapper' style={ style } > 
+			<div className={ wrapperClassName } style={ style } > 
 				
-				<div ref='contentBox' className='scrollbox-content-box'>
-					<div ref='content' className={`scrollbox-content ${flex ? 'flexible' :''}`}>{ children }</div>
+				<div ref='contentBox' className={ contentBoxClassName }>
+					<div ref='content' className={ contentClassName }>{ children }</div>
 				</div>
 
 				<ScrollBar 

@@ -34,18 +34,15 @@ class ScrollBar extends React.Component {
 		}, 500)
 	}
 	setPosition(positions){		
-		let height = positions.height
-		if( this.refs.tracker ){			
-			height = ReactDOM.findDOMNode( this.refs.tracker ).getBoundingClientRect().height
-		}
+		const { tracker } = this.refs 
+		const { height } = tracker ? ReactDOM.findDOMNode( tracker ).getBoundingClientRect() : positions		
 		const { contentHeight, scrollTop, offset } = positions
 		const totalContentHeight = offset + contentHeight
-
 		const viewToContentRatio = ( positions.height / totalContentHeight )
 		const barHeight =  viewToContentRatio * height
 		const realBaHeight = ( height / totalContentHeight ) * height
 		const showScrollbar = viewToContentRatio < 1 
-		const translate = showScrollbar ? ( scrollTop / ( totalContentHeight - height) ) * (height - realBaHeight) : 0
+		const translate = showScrollbar ? ( scrollTop / ( totalContentHeight - height ) ) * ( height - realBaHeight ) : 0
 		const isMoving = true		
 				
 		this.setState({ showScrollbar, barHeight, translate, isMoving, height })		
