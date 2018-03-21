@@ -90,12 +90,15 @@ class Select extends PureComponent {
 	}
 	openSelect(){		
 		this.setState({ isOpen: true })
+
 		const { top } = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
 		const { height } = document.body.getBoundingClientRect()		
 		const maxLowerHeight = height - top - 10
 		const maxUpperHeight = top - 10
-		this.reverse = maxLowerHeight < maxUpperHeight
-		this.maxHeight = Math.min(240, Math.max( maxLowerHeight, maxUpperHeight ) )		
+		const optionsHeight = Math.min( 240, this.state.options.length * 30 )
+
+		this.reverse = maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight
+		this.maxHeight = Math.min( 240, Math.max( maxLowerHeight, maxUpperHeight ) )		
 
 	}
 	testKey( e ){
@@ -218,10 +221,6 @@ class Select extends PureComponent {
 		return options.filter( item => item.label.includes( filter ) )
 	}
 
-	setMaxOptionsHeight(){		
-		
-	}
-
 	render(){
 		
 		const { id, style, placeholder, pending, disabled, invalid, required } = this.props 
@@ -229,7 +228,6 @@ class Select extends PureComponent {
 		
 		const inputValue = filter || selectedLabel || ''
 		const isPlaceholderActive = isOpen || selectedLabel 
-
 
 		const componentClassName = utils.composeClassNames([
 			'input-select__component',
