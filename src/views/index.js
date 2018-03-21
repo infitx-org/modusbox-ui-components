@@ -38,9 +38,12 @@ const Items = {
 
 const ItemKeys = Object.keys( Items )
 const AllItemTabs = ItemKeys.map( (item, i) => <Tab key={ i }> { item } </Tab> )
-const AllItemPanels = Object.keys( Items ).map( (item, i) => {
+const AllItemPanels = ItemKeys.map( (item, i) => {
 	const Content = Items[ item ]
-	return <TabPanel key={ i }><ScrollBox flex><Content /></ScrollBox></TabPanel>
+	if( item === 'DataList' ){
+		return <TabPanel key={ i }><Content /></TabPanel>
+	}
+	return <TabPanel key={ i }><ScrollBox><Content /></ScrollBox></TabPanel>
 })
 const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
 const selected = selectedTab || Object.keys( Items ).length - 1
