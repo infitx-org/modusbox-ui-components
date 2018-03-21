@@ -2,12 +2,14 @@ import React, { PropTypes } from 'react'
 
 class Row extends React.Component {
 	render(){
-		const { align, grow, shrink, basis, className, style, children } = this.props		
+		const { placeContent, align, grow, shrink, basis, className, style, children } = this.props		
 		const [ alignItems, justifyContent ] = align.split(' ')
 		const styles = {
 			'display': 'flex',
     		'flexFlow': 'row nowrap',
 			'flexDirection': 'row',
+			'placeContent': placeContent,
+    		'alignItems': 'center',
 			'flexGrow': grow,
 			'flexShrink': shrink,
 			'flexBasis': basis,
@@ -24,6 +26,7 @@ class Row extends React.Component {
 	
 
 Row.propTypes = {
+	placeContent: PropTypes.string,
 	align: PropTypes.string,
 	grow: PropTypes.string,
 	shrink: PropTypes.string,
@@ -32,7 +35,8 @@ Row.propTypes = {
 	style: PropTypes.object
 }
 Row.defaultProps = {
-	align: '',
+	placeContent: 'flex-start',
+	align: 'center',
 	grow: undefined,
 	shrink: undefined,
 	basis: 'auto',

@@ -21,12 +21,14 @@ const describeArc = ( x, y, radius, startAngle, endAngle ) => {
     ].join(' ');    
 }
 
-const Spinner = ({ size, center }) => {
+const Spinner = ({ size, center, color }) => {
   
-  const strokeWidth = size / 10
-  const width = `${size}px`, height = `${size}px`
-  const position = size / 2
+  const realSize = ( typeof size === 'string' ) ? { s: 16, m: 30, l: 50 }[ size ] : size
+  const strokeWidth = realSize / 10
+  const width = `${realSize}px`, height = `${realSize}px`
+  const position = realSize / 2
   const radius = position - strokeWidth
+  const style = { stroke: color }
 
   return(
     <div className={`modus-spinner ${center ? 'center' : '' }`}>
@@ -34,19 +36,30 @@ const Spinner = ({ size, center }) => {
         className='modus-spinner__component'
         width={ width }
         height={ height }
-        viewBox={`0 0 ${size} ${size}`}
-        xmlns='http://www.w3.org/2000/svg'
+        viewBox={`0 0 ${realSize} ${realSize}`}        
       >
         <path 
           className='modus-spinner__svg-path'
           strokeWidth={ strokeWidth }
           d={ describeArc( position, position, radius, 90, 200 )}
+          style={ style }
         />
       </svg>
     </div>
   )
 }
 
+Spinner.defaultProps = {
+  size: 20,
+  center: false,
+  color: undefined
+}
+
+Spinner.PropTypes = {
+  size: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.number ]),
+  center: React.PropTypes.bool,
+  color: React.PropTypes.string
+}
 export default Spinner
 
 

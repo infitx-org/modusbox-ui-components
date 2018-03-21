@@ -55,6 +55,12 @@ const TestButton = () => (
 				noFill
 				kind='tertiary'				
 			/>		
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				kind='danger'				
+			/>		
 
 		</div>
 	</div>

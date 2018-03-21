@@ -77,10 +77,10 @@
 	}
 }
 .input-button__input--tertiary{
-	fill: #58595a;
     background-color: #cacbcc;
     border-color: #cacbcc;
     color: #58595a;
+	fill: #58595a;
 
     &.noFill{
         background: transparent;
@@ -98,11 +98,12 @@
 .input-button__input--danger{
     background-color: #d1344e;
     border-color: #d1344e;
+    color: #d1344e;
+    fill: #d1344e;
+    
     &.noFill{
         background: transparent;
-        color: #6b8a99;
-        fill: #6b8a99;
-    }
+     }
 
     &:hover, &:focus{
         background-color: #e23955;
