@@ -15,6 +15,7 @@ import TestFileUploader from './All/TestFileUploader'
 import TestDatePicker from './All/TestDatePicker'
 import TestIcon from './All/TestIcon'
 import TestSpinner from './All/TestSpinner'
+import TestModal from './All/TestModal'
 
 
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
@@ -31,12 +32,16 @@ const Items = {
 	FileUploader: TestFileUploader,
 	DatePicker: TestDatePicker,
 	Icon: TestIcon,
-	Spinner: TestSpinner
+	Spinner: TestSpinner,
+	Modal: TestModal,
 }
 
 const ItemKeys = Object.keys( Items )
 const AllItemTabs = ItemKeys.map( (item, i) => <Tab key={ i }> { item } </Tab> )
-const AllItemPanels = Object.keys( Items ).map( (item, i) => <TabPanel key={ i }><ScrollBox flex>{ Items[ item ]() }</ScrollBox></TabPanel> )
+const AllItemPanels = Object.keys( Items ).map( (item, i) => {
+	const Content = Items[ item ]
+	return <TabPanel key={ i }><ScrollBox flex><Content /></ScrollBox></TabPanel>
+})
 const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
 const selected = selectedTab || Object.keys( Items ).length - 1
 const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
@@ -45,10 +50,11 @@ class Views extends React.Component {
 
 	constructor(props){
 		super(props)				
+		this.onChange = this.onChange.bind(this)
 		this.state = { selected: 'default' }
 	}	
 
-	static onChange(value){
+	onChange(value){
 		this.setState({ selected: value })
 	}
 	

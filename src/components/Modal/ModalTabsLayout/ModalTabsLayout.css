@@ -1,0 +1,55 @@
+.modal-tab-layout{
+ 	display: flex;
+ 	flex-direction: row;
+ 	flex-grow: 1;
+}
+.modal-tab-content-wrapper{	
+	position: relative;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;		
+}
+.modal-tab-content{	
+	flex: 1;
+	padding: 10px;
+	padding-right: 30px;
+	margin-right: -30px;
+	overflow-y: scroll;
+
+	&.flexible{
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding: 10px;
+		margin: 0px;
+	}
+}
+.modal-tab-items{
+	display: flex;
+	flex: 0 0 160px;
+	flex-direction: column;	
+	border-right: 1px solid #eee;
+}
+.modal-tab-item{
+	height: 45px;
+	width: 100%;
+	font-size: 14px;
+	line-height: 45px;
+	padding-left: 10px;
+	cursor: pointer;
+
+	justify-content: flex-start;
+	align-items: center;	
+	border-left: 5px solid transparent;
+	&.selected{
+		border-left-color:#00A2DF;
+		background: #EEEEEF;
+		color:#00A2DF;
+		font-weight: bold;
+	}
+	&.disabled{			
+		color: #999;
+	}
+
+
+}
