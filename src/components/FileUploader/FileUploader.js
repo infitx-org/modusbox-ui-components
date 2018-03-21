@@ -192,7 +192,7 @@ class FileUploader extends Component {
 								: fileName 
 						 		?
 						 		<button
-									className={`component__inner-button input-fileuploader__button-remove ${isOpen ? 'active' : ''}`}
+									className={`component__inner-button input-fileuploader__button-remove ${isOpen ? 'component__inner-button--active' : ''}`}
 									onClick={ this.onRemoveButtonClick }								
 									tabIndex='-1'
 								>
@@ -200,7 +200,7 @@ class FileUploader extends Component {
 								</button> 
 						 		:
 								<button
-									className={`component__inner-button input-fileuploader__button-add ${isOpen ? 'active' : ''}`}
+									className={`component__inner-button input-fileuploader__button-add ${isOpen ? 'component__inner-button--active' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 								>

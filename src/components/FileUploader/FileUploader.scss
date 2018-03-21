@@ -59,12 +59,12 @@
 }
 
 .input-fileuploader__button-add{
-	&:hover, &.active{
+	&:hover, &.component__inner-button--active{
 		background: rgba(0,162,233,0.8);
 	}
 }
 .input-fileuploader .input-fileuploader__button-remove{
-	&:hover, &.active{	
+	&:hover, &.component__inner-button--active{	
 		background: rgba(255,50,50,0.8);		
 	}
 }

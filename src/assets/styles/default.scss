@@ -130,7 +130,7 @@ $placeholder-color: #999;
 	border: none;
 	font-size:12px;
 
-	&:hover, &.active{
+	&:hover, &.component__inner-button--active{
 		background: rgba(0,162,233,0.8);
 		color: #fff;
 	}
