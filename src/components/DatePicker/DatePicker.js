@@ -207,10 +207,9 @@ class DatePicker extends React.Component {
 						className='input-datepicker__content'
 						onClick={ this.handleOpenClick }							
 					>
-						{ typeof placeholder === 'string' && 
-							<label className={ placeholderClassName }> { placeholder } </label> 
-						}
-						<div className='input-datepicker__value'> 
+						<Placeholder label={ placeholder } active={ isPlaceholderActive } />
+						
+						<div className='input-datepicker__value'>
 							{ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 						</div>
 						

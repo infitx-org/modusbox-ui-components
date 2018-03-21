@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Modal from '../../components/Modal'
+import Select from '../../components/Select'
 
 class TestModal extends React.Component{
 	
@@ -56,7 +57,11 @@ class TestModal extends React.Component{
 							primaryAction='Hey'
 							onClose={ () => this.onClose( 2 ) }
 						>
-							<div style={{ height:'1000px' }}> <span> Hello! modal 2 </span> </div>
+							<div style={{ height:'1000px' }}>
+								<span> Hello! modal 2 </span>
+								<Select options={ new Array(100).fill({ label:'1', value:'2' }) } />
+							</div>
+
 
 						</Modal>
 					}

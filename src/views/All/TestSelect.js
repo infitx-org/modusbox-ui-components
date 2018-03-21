@@ -82,6 +82,11 @@ const TestSelect = () => (
 				pending
 			/>
 			<Select
+				placeholder='Position 2 options'
+				options={ [ options[0], options[1] ] }				
+			/>
+			{/*<select> { options.map( i => <option value={i.label}>{i.label}</option> ) } </select>*/}
+			<Select
 				id='x'
 				placeholder='placeholder'
 				options={ options }
