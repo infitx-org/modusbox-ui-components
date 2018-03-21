@@ -32,6 +32,8 @@ class Options extends PureComponent {
 		const { options, selected, highlighted } = this.state		
 		const { maxHeight, reverse } = this.props
 		const marginTop = reverse ? ( - maxHeight - 45 ) : 0		
+		const top = reverse ? undefined : 0
+		const bottom = reverse ? 45 : undefined
 		//const items = reverse ? [...options].reverse() : options
 
 		const className = utils.composeClassNames([
@@ -39,7 +41,7 @@ class Options extends PureComponent {
 			reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular'
 		])
 		return (
-			<div className={ className } style={{ marginTop }}>
+			<div className={ className } style={{ position:'absolute', top, bottom }}>
 				<ScrollBox 
 					style={{ maxHeight: maxHeight }}
 					handleStyle={{ borderRadius:'3px' }}
