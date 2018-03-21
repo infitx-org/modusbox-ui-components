@@ -30,11 +30,23 @@ class Options extends PureComponent {
 	}
 	render(){
 		const { options, selected, highlighted } = this.state		
-		const { maxHeight } = this.props
+		const { maxHeight, reverse } = this.props
+		const marginTop = reverse ? ( - maxHeight - 45 ) : 0		
+		//const items = reverse ? [...options].reverse() : options
+
+		const className = utils.composeClassNames([
+			'input-select__options-wrapper',
+			reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular'
+		])
 		return (
-			<div className='input-select__options-wrapper'>				
-				<ScrollBox style={{ maxHeight: maxHeight }} handleStyle={{borderRadius:'3px'}} trackStyle={{top:'2px', bottom:'2px', right:'4px', width:'5px'}} showTrack={false}>
-					<div>
+			<div className={ className } style={{ marginTop }}>
+				<ScrollBox 
+					style={{ maxHeight: maxHeight }}
+					handleStyle={{ borderRadius:'3px' }}
+					trackStyle={{ top:'2px', bottom:'2px', right:'4px', width:'5px' }}
+					showTrack={ false }
+				>
+					<div ref='items'>
 						{ options.map( (item, index) => {
 							const isSelected = selected === item.value					
 							return (
@@ -87,12 +99,12 @@ class Option extends PureComponent {
 			selected && 'selected',
 			disabled && 'disabled',
 			highlighted && 'highlighted'
-		])
-		
+		])		
 		return (
 		 	<div 
 		 		className={ optionsClassNames }
 		 		onClick={ this.onClick }		 		
+		 		tabIndex='1'
 		 	>
 		 		{ icon && 
 		 			<Icon 

@@ -60,6 +60,9 @@
     	color:#06c;
     }
 }
-.select-input__icon{
+.input-select-input__icon{
 	flex: 0 0 auto;
+}
+.input-select__indicator{
+	transition: all 0.2s linear;
 }

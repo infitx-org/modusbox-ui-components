@@ -91,7 +91,7 @@ const TestSelect = () => (
 				id='x'
 				placeholder='placeholder'
 				options={ options }
-			/>
+			/>			
 		</div>
 		
 	</div>

@@ -5,10 +5,14 @@
 	position: absolute;
 	width: calc( 100% + 4px );
 	margin:0px -2px;
-	border-bottom: 2px solid #ccc;
 	z-index: 1000;
 	animation: fadeIn 0.15s ease-in-out;
-
+}
+.input-select__options-wrapper--regular{	
+	border-bottom: 2px solid #ccc;
+}
+.input-select__options-wrapper--reverse{
+	border-top: 2px solid #ccc;
 }
 .input-select__options-item{
 	display: flex;

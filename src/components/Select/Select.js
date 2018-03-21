@@ -23,11 +23,10 @@ class Select extends PureComponent {
 
 		// Internal lifecycle methods
 		this.setValue = this.setValue.bind(this)
-		this.getMaxHeight = this.getMaxHeight.bind(this)
 		
 		this.closeSelect = this.closeSelect.bind(this)
 		this.leaveSelect = this.leaveSelect.bind(this)
-		this.enterSelect = this.enterSelect.bind(this)
+		this.openSelect = this.openSelect.bind(this)
 		this.testKey = this.testKey.bind(this)
 		this.applyFilter = this.applyFilter.bind(this)
 		this.filterOptions = this.filterOptions.bind(this)
@@ -89,8 +88,15 @@ class Select extends PureComponent {
 		utils.focusNextFocusableElement( this.refs.filter, next )
 		
 	}
-	enterSelect(){		
+	openSelect(){		
 		this.setState({ isOpen: true })
+		const { top } = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
+		const { height } = document.body.getBoundingClientRect()		
+		const maxLowerHeight = height - top - 10
+		const maxUpperHeight = top - 10
+		this.reverse = maxLowerHeight < maxUpperHeight
+		this.maxHeight = Math.min(240, Math.max( maxLowerHeight, maxUpperHeight ) )		
+
 	}
 	testKey( e ){
 		
@@ -112,7 +118,7 @@ class Select extends PureComponent {
 				this.onSelectOption( options[ this.state.highlightedOption ] )
 			}
 			else{
-				this.setState({ isOpen: true })
+				this.openSelect()
 			}
 		}
 	}
@@ -123,25 +129,27 @@ class Select extends PureComponent {
 		const { value } = this.refs.filter
 		this.setState({ filter: value })
 		if( value === '' ){
-			this.setState({
-				isOpen: true,
+			this.setState({				
 				selectedLabel: undefined,
 				value: undefined
-			})
+			})			
+			this.openSelect()
 		}
 	}
 	highlightNextOption( next = true ){		
 		const { highlightedOption, options } = this.state
+		// const items = this.reverse ? [...options].reverse() : options
+		const items = options
 		let currentHightlightedOption = highlightedOption
 		let nextHighlightedOption = -1
 
 		const getNextEnabledOption = () => {
-			let option = ( currentHightlightedOption + ( next ? 1 : - 1 ) ) % options.length
+			let option = ( currentHightlightedOption + ( next ? 1 : - 1 ) ) % items.length
 			if( option < 0 ){
-				option = options.length - 1
+				option = items.length - 1
 			}
 			currentHightlightedOption = option
-			if( this.state.options[ option ].disabled ){
+			if( items[ option ].disabled ){
 				return -1
 			}
 			return option
@@ -150,7 +158,8 @@ class Select extends PureComponent {
 		while( nextHighlightedOption === -1 ){
 			nextHighlightedOption = getNextEnabledOption()			
 		}
-
+		ReactDOM.findDOMNode(this.refs.options.refs.items).childNodes[nextHighlightedOption].focus()
+		this.refs.filter.focus();		
 		this.setState({ highlightedOption: nextHighlightedOption })
 	}
 
@@ -171,9 +180,12 @@ class Select extends PureComponent {
 	// when opening the list of options...
 	onClickSelect(){
 		const isOpen = ! this.state.isOpen
-		this.setState({ isOpen })
 		if( isOpen === true ){
 			this.onSelectFilter()
+			this.setState({ isOpen })
+		}
+		else{
+			this.closeSelect()
 		}
 	}
 
@@ -206,10 +218,8 @@ class Select extends PureComponent {
 		return options.filter( item => item.label.includes( filter ) )
 	}
 
-	getMaxHeight(){		
-		const dims = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
-		console.log( dims )
-		return 260
+	setMaxOptionsHeight(){		
+		
 	}
 
 	render(){
@@ -247,22 +257,22 @@ class Select extends PureComponent {
 								ref='filter'
 								onKeyDown={ this.testKey }
 								onChange={ this.applyFilter }
-								onFocus={ this.enterSelect }
-								onClick={ this.enterSelect }
+								onFocus={ this.openSelect }
+								onClick={ this.openSelect }
 								value={ inputValue }
 								disabled={ disabled }
 							/>
 							
 							{ filter && 
-								<div className='component__inner-icon select-input__icon'>
+								<div className='component__inner-icon input-select-input__icon'>
 									<Icon name='search-small' size={16} />
 								</div>
 							}
 
 							<Loader visible={ pending } />
 
-							<div className='component__inner-icon select-input__icon'>
-								<ArrowIcon isOpen={ isOpen } />
+							<div className='component__inner-icon input-select-input__icon'>
+								<Indicator isOpen={ isOpen } />
 						 	</div>
 						</div>						
 						
@@ -274,7 +284,8 @@ class Select extends PureComponent {
 						<Options
 							ref='options' 
 							options={ this.filterOptions() }							
-							maxHeight={ this.getMaxHeight() }
+							maxHeight={ this.maxHeight || 0 }
+							reverse={ this.reverse }
 							selected={ value }
 							highlighted={ highlightedOption }
 							onSelect={ this.onSelectOption }							
@@ -287,8 +298,9 @@ class Select extends PureComponent {
 	}
 }
 
-const ArrowIcon = ({ isOpen }) => (
+const Indicator = ({ isOpen }) => (
 	<Icon 
+		className='input-select__indicator'
 		name='arrow'
 		style={{marginTop:'2px', transform: `rotateZ(${ isOpen ? '270' : '90'}deg)` }}
 		size={10}
