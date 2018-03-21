@@ -14,18 +14,20 @@
 	display: flex;
 	align-items: center;
 	flex: 0 0 40px;	
-	color:#555;
-	padding-left:10px;
+	color: #555;
+	padding-left: 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	line-height: 40px;
-	font-size:13px;
+	font-size: 13px;
 	background: #fff;
 
-	border-left:2px solid #ccc;
-	border-right:2px solid #ccc;
+	border-left: 2px solid #ccc;
+	border-right: 2px solid #ccc;
 	cursor: pointer;
+	color: #666;
+	fill: #666;
 
 	&:hover{
 		background:#f8f8f8;
@@ -34,9 +36,10 @@
 	};
 
 	&.highlighted{
-		background:#f8f8f8;
-		border-color:#00A3E0;
-		color:#00A3E0;	
+		background: #f8f8f8;
+		border-color: #00A3E0;
+		color: #00A3E0;	
+		fill: #00A3E0;
 	}
 
 	&.selected{ 

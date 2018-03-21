@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import * as utils from '../../utils/common'
 import keyCodes from '../../utils/keyCodes'
 
-import Spinner from '../Spinner'
+import { Loader, Placeholder } from '../Common'
 
 import './FileUploader.scss'
 
@@ -149,7 +149,7 @@ class FileUploader extends Component {
 		const { id, placeholder, fileType, style, required, invalid, pending, disabled } = this.props 
 		const { isOpen, fileName } = this.state
 		const inputValue = fileName || ''
-		const isPlaceholderTop = isOpen || fileName || placeholder
+		const isPlaceholderActive = isOpen || fileName || placeholder
 
 		const componentClassName = utils.composeClassNames([
 			'input-fileuploader__component',
@@ -163,11 +163,6 @@ class FileUploader extends Component {
 			required && fileName == undefined && 'component--required component__borders--required component__background--required',
 		])
 
-		const placeholderClassName = utils.composeClassNames([
-			'component__placeholder',
-			isPlaceholderTop && 'component__placeholder--active'
-		])
-		
 		return (
 			<div className='input-fileuploader component__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onClickFileUploader} ref='area'>
@@ -195,7 +190,7 @@ class FileUploader extends Component {
 							}
 
 							{ pending 
-								? <div className='input-fileuploader__icon'> <Spinner size={16}/> </div>
+								? <Loader visible />
 								: fileName 
 						 		?
 						 		<button

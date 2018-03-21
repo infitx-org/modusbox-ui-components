@@ -1,3 +1,4 @@
+$component-open-size: 2px;
 $component-margin: 2px;
 $component-opacity--disabled: 0.5;
 
@@ -37,7 +38,7 @@ $placeholder-color: #999;
 	border-radius: $border-radius;
 }
 .component--open{
-	padding: 0px 2px;		
+	padding: 0px $component-open-size;		
 }
 .component--disabled{
 	opacity: $component-opacity--disabled;
@@ -72,8 +73,8 @@ $placeholder-color: #999;
 	border-right: 2px solid $border-color--default;
 }
 .component__borders--open{
-	margin-left: -2px;
-	margin-right: -2px;	
+	margin-left: -$component-open-size;
+	margin-right: -$component-open-size;	
 	border-color: $border-color--open;
 }	
 .component__borders--pending{

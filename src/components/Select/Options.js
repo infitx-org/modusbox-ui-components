@@ -98,8 +98,7 @@ class Option extends PureComponent {
 		 			<Icon 
 			 			className='input-select__options-item__icon'
 			 			name={icon}
-			 			size={16}
-			 			fill='#666'
+			 			size={16}			 		
 			 		/>
 			 	}
 		 		{ label }

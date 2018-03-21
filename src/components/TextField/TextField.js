@@ -6,7 +6,7 @@ import * as utils from '../../utils/common'
 import keyCodes from '../../utils/keyCodes'
 
 import Icon from '../Icon'
-import Spinner from '../Spinner'
+import { Loader, Placeholder } from '../Common'
 
 import './TextField.scss'
 
@@ -156,7 +156,7 @@ class TextField extends PureComponent {
 		
 		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props 
 		const { isOpen, value, isPasswordVisible } = this.state		
-		const isPlaceholderTop = isOpen || value 
+		const isPlaceholderActive = isOpen || value 
 		
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
@@ -172,7 +172,7 @@ class TextField extends PureComponent {
 
 		const placeholderClassName = utils.composeClassNames([
 			'component__placeholder',
-			isPlaceholderTop && 'component__placeholder--active'
+			isPlaceholderActive && 'component__placeholder--active'
 		])
 		
 		return (
@@ -180,9 +180,7 @@ class TextField extends PureComponent {
 				<div id={id} className={ componentClassName } onClick={ this.onTextFieldClick } ref='area'>
 					<div className='component__content input-textfield__content'>
 						
-						{ typeof placeholder === 'string' && 
-							<label className={ placeholderClassName }> { placeholder } </label> 
-						}
+						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
 						<div className='input-textfield__input-content'>						
 							<input 
 								ref='input'
@@ -206,14 +204,13 @@ class TextField extends PureComponent {
 									{ buttonText }
 								</button> 						
 							}
-							<div className='component__inner-icon input-textfield__icon'>
-								{ pending 
-									? <Spinner size={16} /> 
-									: type == 'password' 
-									? <EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> 
-									: null
-								}							
-						 	</div>
+							<Loader visible={ pending } />
+							
+							{ type == 'password' &&
+								<div className='component__inner-icon input-textfield__icon'>
+									<EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> 
+								</div>
+							}	
 						 	{ icon && 
 						 		<div className='component__inner-icon input-textfield__icon'>
 									<Icon size={16} name={ icon } /> 

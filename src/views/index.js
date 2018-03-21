@@ -44,12 +44,11 @@ const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);
 class Views extends React.Component {
 
 	constructor(props){
-		super(props)		
-		this.onChange = this.onChange.bind(this)
-		this.state = { selected: 'custom' }
+		super(props)				
+		this.state = { selected: 'default' }
 	}	
 
-	onChange(value){
+	static onChange(value){
 		this.setState({ selected: value })
 	}
 	

@@ -6,7 +6,7 @@ import * as utils from '../../utils/common'
 
 import Row from '../Row'
 import Icon from '../Icon'
-import Spinner from '../Spinner'
+import { Loader, Placeholder } from '../Common'
 
 import './DatePicker.scss'
 
@@ -185,7 +185,7 @@ class DatePicker extends React.Component {
 		const { isOpen, dateString, selectedDay } = this.state
 		const initialMonth = selectedDay == undefined ? this.getDate( this.props.initialMonth ) : selectedDay
 		const hasDate = dateString != 0 && dateString != undefined		
-		const isPlaceholderTop = isOpen || hasDate		
+		const isPlaceholderActive = isOpen || hasDate		
 		
 		const componentClassName = utils.composeClassNames([
 			'input-datepicker__component',
@@ -198,12 +198,6 @@ class DatePicker extends React.Component {
 			invalid && 'component--invalid component__borders--invalid component__background--invalid',
 			required && 'component--required component__borders--required component__background--required',
 		])
-
-		const placeholderClassName = utils.composeClassNames([
-			'component__placeholder',
-			isPlaceholderTop && 'component__placeholder--active'
-		])
-
 
 		return (
 			<div className='input-datepicker component__box' style={ style }>
@@ -220,11 +214,7 @@ class DatePicker extends React.Component {
 							{ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 						</div>
 						
-						{ pending && 
-							<div className='component__inner-icon input-datepicker__icon'>
-								<Spinner size={16} />
-						 	</div>
-						 }
+						<Loader visible={ pending } />
 
 						<div className='component__inner-icon input-datepicker__icon'> 
 							<Icon size={16} name='calendar-small' fill='#999'/>	

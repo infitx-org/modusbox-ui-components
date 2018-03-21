@@ -6,7 +6,7 @@ import * as utils from '../../utils/common'
 import keyCodes from '../../utils/keyCodes'
 
 import Icon from '../Icon'
-import Spinner from '../Spinner'
+import { Loader, Placeholder } from '../Common'
 
 import Options from './Options'
 
@@ -218,7 +218,7 @@ class Select extends PureComponent {
 		const { isOpen, selectedLabel, value, filter, highlightedOption } = this.state
 		
 		const inputValue = filter || selectedLabel || ''
-		const isPlaceholderTop = isOpen || selectedLabel 
+		const isPlaceholderActive = isOpen || selectedLabel 
 
 
 		const componentClassName = utils.composeClassNames([
@@ -233,19 +233,12 @@ class Select extends PureComponent {
 			required && ( selectedLabel === undefined ) && 'component--required component__borders--required component__background--required',
 		])
 
-		const placeholderClassName = utils.composeClassNames([
-			'component__placeholder',
-			isPlaceholderTop && 'component__placeholder--active'
-		])
-		
 		return (
 			<div className='input-select component__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
 					<div className='component__content input-select__content'>
 						
-						{ typeof placeholder === 'string' && 
-							<label className={ placeholderClassName }> { placeholder } </label> 
-						}
+						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
 						
 						<div className='input-select__input-content'>						
 							<input 
@@ -265,8 +258,11 @@ class Select extends PureComponent {
 									<Icon name='search-small' size={16} />
 								</div>
 							}
+
+							<Loader visible={ pending } />
+
 							<div className='component__inner-icon select-input__icon'>
-								{ pending ? <Spinner size={16} /> : <ArrowIcon isOpen={ isOpen } /> }
+								<ArrowIcon isOpen={ isOpen } />
 						 	</div>
 						</div>						
 						
@@ -293,10 +289,10 @@ class Select extends PureComponent {
 
 const ArrowIcon = ({ isOpen }) => (
 	<Icon 
-		name='arrow-down-small'
-		style={{transform: `rotateZ(${ isOpen ? '180' : '0'}deg)` }}
-		size={20}
-		fill='#666'
+		name='arrow'
+		style={{marginTop:'2px', transform: `rotateZ(${ isOpen ? '270' : '90'}deg)` }}
+		size={10}
+		fill='rgba(0,0,0,0.5)'
 	/>
 )
 
