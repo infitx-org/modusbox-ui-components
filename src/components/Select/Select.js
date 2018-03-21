@@ -92,7 +92,7 @@ class Select extends PureComponent {
 		this.setState({ isOpen: true })
 
 		const getParentOverflow = ( elem ) => {
-			const { overflowY } = window.getComputedStyle( elem.parentNode )
+			const { overflowY } = window.getComputedStyle( elem.parentNode )			
 			if( overflowY === "hidden" ){				
 				return elem.parentNode
 			}
