@@ -244,8 +244,8 @@ class Select extends PureComponent {
 		])
 
 		return (
-			<div className='input-select component__box' style={ style }>
-				<div id={id} className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
+			<div id={id} className='input-select component__box' style={ style }>
+				<div className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
 					<div className='component__content input-select__content'>
 						
 						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
@@ -302,7 +302,7 @@ const Indicator = ({ isOpen }) => (
 	<Icon 
 		className='input-select__indicator'
 		name='arrow'
-		style={{marginTop:'2px', transform: `rotateZ(${ isOpen ? '270' : '90'}deg)` }}
+		style={{ marginTop:'2px', transform: `rotateZ(${ isOpen ? '270' : '90'}deg)` }}
 		size={10}
 		fill='rgba(0,0,0,0.5)'
 	/>
