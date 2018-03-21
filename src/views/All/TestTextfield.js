@@ -3,7 +3,7 @@ import TextField from '../../components/TextField'
 
 const TestTextField = () => (
 	<div>		
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<div style={{padding:'10px', border: '1px solid #ccc'}}>
 			<TextField
 				type='text'
 				placeholder='Default'
@@ -52,7 +52,7 @@ const TestTextField = () => (
 				buttonText='Press Me'		
 			/>
 		</div>
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<div style={{padding:'10px', border: '1px solid #ccc'}}>
 			<TextField
 				type='password'
 				placeholder='Password pending'				

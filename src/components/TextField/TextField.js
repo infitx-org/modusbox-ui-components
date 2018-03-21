@@ -81,10 +81,20 @@ class TextField extends PureComponent {
 	}
 	testKey( e ){		
 		const { keyCode, shiftKey } = e.nativeEvent
-		if( keyCode === keyCodes.KEY_TAB || keyCode === keyCodes.KEY_RETURN ){
+		if( keyCode === keyCodes.KEY_TAB ){
 			e.preventDefault()
 			this.leaveTextField( ! shiftKey )
 			return
+		}
+		if( keyCode === keyCodes.KEY_RETURN ){
+			if( this.props.buttonText ){
+				this.onButtonClick( e )
+			}
+			else{
+				e.preventDefault()
+				this.leaveTextField( ! shiftKey )
+				return
+			}
 		}
 	}
 	setValue( e ){		
@@ -197,7 +207,7 @@ class TextField extends PureComponent {
 							/>
 							{ buttonText &&
 								<button
-									className={`component__inner-button input-textfield__button`}
+									className={`component__inner-button input-textfield__button ${isOpen ? 'component__inner-button--active' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 								>
