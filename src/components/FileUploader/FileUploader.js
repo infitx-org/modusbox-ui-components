@@ -5,6 +5,7 @@ import * as utils from '../../utils/common'
 import keyCodes from '../../utils/keyCodes'
 
 import { Loader, Placeholder } from '../Common'
+import Button from '../Button'
 
 import './FileUploader.scss'
 
@@ -127,13 +128,26 @@ class FileUploader extends Component {
 				reader.readAsText(file)
 			})
 		}
+		const readAsBase64 = ( file ) => {
+			const reader = new FileReader()
+			return new Promise((resolve, reject) => {
+				reader.readAsDataURL(file);
+				reader.onload = event => resolve(event.target.result)
+				reader.onerror = error => reject(error)
+			})
+		}
 
 		const [ file ] = e.target.files		
 		if( file == undefined ){
 			return
 		}
 
-		const fileContent = this.props.parseFileAsText ? await readAsText( file ) : file		
+		const { parseFileAs } = this.props
+		const fileContent = parseFileAs === 'text'
+		? await readAsText( file ) 
+		: parseFileAs === 'base64'
+		? await readAsBase64( file )
+		: file
 		this.setState({
 			fileContent,
 			fileName: file.name
@@ -191,21 +205,21 @@ class FileUploader extends Component {
 								? <Loader visible />
 								: fileName 
 						 		?
-						 		<button
+						 		<Button									
 									className={`component__inner-button input-fileuploader__button-remove ${isOpen ? 'component__inner-button--active' : ''}`}
 									onClick={ this.onRemoveButtonClick }								
 									tabIndex='-1'
-								>
-									Remove
-								</button> 
+									icon='close-small'
+									label='Remove'
+								/>
 						 		:
-								<button
+								<Button
 									className={`component__inner-button input-fileuploader__button-add ${isOpen ? 'component__inner-button--active' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
-								>
-									Choose File 
-								</button>
+									icon='upload-small'
+									label='Choose File'								
+								/>
 							} 
 						</div>												
 					</div>
@@ -220,7 +234,7 @@ FileUploader.propTypes = {
 	style: PropTypes.object,
 	id: PropTypes.string,
 	fileType: PropTypes.string,
-	parseFileAsText: PropTypes.bool,
+	parseFileAs: PropTypes.oneOf(['text','base64']),	
 	onChange: PropTypes.func,
 	placeholder: PropTypes.string,
 	pending: PropTypes.bool,
@@ -233,7 +247,7 @@ FileUploader.defaultProps = {
 	style: {},	
 	id: undefined,
 	fileType: undefined,
-	parseFileAsText: false,
+	parseFileAs: undefined,
 	onChange: undefined,
 	placeholder: undefined,	
 	pending: false,
