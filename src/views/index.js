@@ -1,52 +1,24 @@
 import React from 'react'
 
+import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
 import Select from '../components/Select'
 import ScrollBox from '../components/ScrollBox'
 
-import TestButton from './All/TestButton'
-import TestCheckbox from './All/TestCheckbox'
-import TestSelect from './All/TestSelect'
-import TestTextField from './All/TestTextField'
-import TestTabs from './All/TestTabs'
-import TestRadio from './All/TestRadio'
-import TestDataList from './All/TestDataList'
-import TestScrollBox from './All/TestScrollBox'
-import TestFileUploader from './All/TestFileUploader'
-import TestDatePicker from './All/TestDatePicker'
-import TestIcon from './All/TestIcon'
-import TestSpinner from './All/TestSpinner'
-import TestModal from './All/TestModal'
+const TestViews = require('./All')
+const ComponentMappings = Object.keys( TestViews ).map( view => ({ name: view.substring(4), view }) )
 
 
-import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
-
-const Items = {
-	Button: TestButton,
-	Checkbox: TestCheckbox,
-	Radio: TestRadio,
-	Select: TestSelect,
-	TextField: TestTextField,
-	Tabs: TestTabs,
-	DataList: TestDataList,
-	ScrollBox: TestScrollBox,
-	FileUploader: TestFileUploader,
-	DatePicker: TestDatePicker,
-	Icon: TestIcon,
-	Spinner: TestSpinner,
-	Modal: TestModal,
-}
-
-const ItemKeys = Object.keys( Items )
-const AllItemTabs = ItemKeys.map( (item, i) => <Tab key={ i }> { item } </Tab> )
-const AllItemPanels = ItemKeys.map( (item, i) => {
-	const Content = Items[ item ]
-	if( item === 'DataList' ){
-		return <TabPanel key={ i }><Content /></TabPanel>
+console.log( TestViews )
+const AllItemTabs = ComponentMappings.map( ({name}, i) => <Tab key={ i }> { name } </Tab> )
+const AllItemPanels = ComponentMappings.map( ({ view, name }, i) => {
+	const View = TestViews[ view ]	
+	if( name === 'DataList' ){
+		return <TabPanel key={ i }><View /></TabPanel>
 	}
-	return <TabPanel key={ i }><ScrollBox><Content /></ScrollBox></TabPanel>
+	return <TabPanel key={ i }><ScrollBox><View /></ScrollBox></TabPanel>
 })
 const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
-const selected = selectedTab || Object.keys( Items ).length - 1
+const selected = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1
 const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
 
 class Views extends React.Component {
