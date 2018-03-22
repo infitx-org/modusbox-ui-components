@@ -98,7 +98,7 @@ class FileUploader extends Component {
 		const { keyCode, shiftKey } = e.nativeEvent
 		if( e.nativeEvent.keyCode === keyCodes.KEY_TAB ){
 			e.preventDefault()			
-			e.stopPropagation()			
+			e.stopPropagation()						
 			this.leaveFileUploader( ! e.nativeEvent.shiftKey )			
 			return
 		}
@@ -211,6 +211,7 @@ class FileUploader extends Component {
 									tabIndex='-1'
 									icon='close-small'
 									label='Remove'
+									disabled={ disabled }
 								/>
 						 		:
 								<Button
@@ -218,7 +219,8 @@ class FileUploader extends Component {
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 									icon='upload-small'
-									label='Choose File'								
+									label='Choose File'
+									disabled={ disabled }						
 								/>
 							} 
 						</div>												
