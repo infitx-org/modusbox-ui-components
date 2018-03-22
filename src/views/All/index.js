@@ -12,6 +12,7 @@ import TestIcon from './TestIcon'
 import TestSpinner from './TestSpinner'
 import TestModal from './TestModal'
 import TestRow from './TestRow'
+import TestColumn from './TestColumn'
 
 export { 
 	TestButton,
@@ -27,5 +28,6 @@ export {
 	TestIcon,
 	TestSpinner,
 	TestModal,
-	TestRow
+	TestRow,
+	TestColumn
 }

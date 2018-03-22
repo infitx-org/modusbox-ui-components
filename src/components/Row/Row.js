@@ -5,11 +5,10 @@ const mapFlexToProperty = ( property ) => {
 	const flexMappers = {
 		top: 'flex-start',
 		bottom: 'flex-end',
-		center: 'center',
 		left: 'flex-start',
 		right: 'flex-end'
 	}
-	return property ? flexMappers[ property ] : undefined
+	return property ? ( flexMappers[ property ] || property ) : undefined
 }
 class Row extends React.Component {
 	render(){

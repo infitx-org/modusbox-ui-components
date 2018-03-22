@@ -8,7 +8,6 @@ const TestViews = require('./All')
 const ComponentMappings = Object.keys( TestViews ).map( view => ({ name: view.substring(4), view }) )
 
 
-console.log( TestViews )
 const AllItemTabs = ComponentMappings.map( ({name}, i) => <Tab key={ i }> { name } </Tab> )
 const AllItemPanels = ComponentMappings.map( ({ view, name }, i) => {
 	const View = TestViews[ view ]	
@@ -44,10 +43,10 @@ class Views extends React.Component {
 			<div style={{width:'100%', height:'100%', overflow:'hidden', flexDirection: 'column', display:'flex'}}>
 				<div style={{margin: '10px'}}>
 					<Select
-						placeholder='Select StyleSheet'
 						value={ this.state.selected }
-						onChange={this.onChange }
-						options={ options }
+						placeholder='Select StyleSheet'						
+						onChange={ this.onChange }
+						options={ options }						
 					/>
 				</div>
 				<Tabs selected={ selected } onSelect={ onSelectTab }>
