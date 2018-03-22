@@ -37,8 +37,9 @@ class Button extends React.PureComponent {
 	}
 	render(){	 	
 	 	
-	 	const { id, style, kind, label, icon, noFill, disabled, pending } = this.props	 	
+	 	const { id, className, style, kind, label, icon, noFill, disabled, pending } = this.props	 	
 	 	const classNames = utils.composeClassNames([
+	 		className,
 			'input-button__input',			
 			kind === 'primary' && 'input-button__input--primary',
 			kind === 'secondary' && 'input-button__input--secondary',
@@ -56,9 +57,8 @@ class Button extends React.PureComponent {
 				className={ classNames }
 				onKeyDown={ this.testKey }					
 				onClick={ this.onClick }
-				disabled={ disabled }					
-				aria-component='button'
-			>	
+				disabled={ disabled }				
+			>
 				<div className='input-button__content'>
 					{ icon && <Icon name={ icon } size={15} style={{marginRight:'5px'}}/> }
 					{ label && <span>{ label }</span> }
@@ -68,6 +68,7 @@ class Button extends React.PureComponent {
 	}
 }
 Button.propTypes = {
+	className: PropTypes.string,
 	id: PropTypes.string,
 	style: PropTypes.string,
 	kind: PropTypes.string,
@@ -79,6 +80,7 @@ Button.propTypes = {
 	onClick: PropTypes.func
 }
 Button.defaultProps = {
+	className: undefined,
 	id: undefined,
 	style: undefined,
 	kind: 'primary',

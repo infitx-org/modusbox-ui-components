@@ -98,11 +98,13 @@
 .input-button__input--danger{
     background-color: #d1344e;
     border-color: #d1344e;
-    color: #d1344e;
-    fill: #d1344e;
+    color: #fff;
+    fill: #fff;
     
     &.noFill{
         background: transparent;
+        color: #d1344e;
+        fill: #d1344e;
      }
 
     &:hover, &:focus{
