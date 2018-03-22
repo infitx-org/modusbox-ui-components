@@ -92,11 +92,22 @@ const TestSelect = () => (
 				options={ options }
 				disabled
 			/>
+			
 			<Select
 				id='x'
 				placeholder='placeholder'
 				options={ options }
 			/>			
+			<Select
+				id='x'
+				placeholder='placeholder'
+				options={ options }
+			/>	
+			<Select
+				id='x'
+				placeholder='placeholder'
+				options={ options }
+			/>	
 		</div>
 		
 	</div>

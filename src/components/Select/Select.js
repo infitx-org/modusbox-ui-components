@@ -108,16 +108,13 @@ class Select extends PureComponent {
 		
 		const wrapper = getParentOverflow( ReactDOM.findDOMNode( this.refs['options-position'] ) )
 		const wrapperRect = wrapper.getBoundingClientRect()		
-		const { top } = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()		
-		const realTop = top - wrapperRect.top
-		const realHeight = wrapperRect.height		
-		const maxLowerHeight = realHeight - realTop - 10
-		const maxUpperHeight = realTop - 10
-		const optionsHeight = Math.min( 240, this.state.options.length * 30 )
-
+		const { top, bottom } = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
+		const maxLowerHeight = Math.min( wrapperRect.height, window.innerHeight - bottom )- 10
+		const maxUpperHeight = Math.min( top, top - wrapperRect.top - wrapper.parentNode.scrollTop ) - 10
+		const optionsHeight = Math.min( 240, this.state.options.length * 30 )		
 		this.reverse = maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight
 		this.maxHeight = Math.min( 240, Math.max( maxLowerHeight, maxUpperHeight ) )				
-
+		
 	}
 	testKey( e ){
 		
