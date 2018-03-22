@@ -331,7 +331,7 @@ Select.propTypes = {
 			value: PropTypes.string,
 		})
 	),
-	selected: PropTypes.oneOf([ PropTypes.string, PropTypes.number, PropTypes.bool ]),
+	selected: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.bool ]),
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
