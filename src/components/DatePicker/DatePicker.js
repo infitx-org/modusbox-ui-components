@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
 import DayPicker, { DateUtils } from 'react-day-picker'
+
 import * as utils from '../../utils/common'
+import keyCodes from '../../utils/keyCodes'
 
 import Row from '../Row'
 import Icon from '../Icon'
@@ -16,7 +18,7 @@ class DatePicker extends React.Component {
 		
 		// interaction methods 
 		this.handlePageClick = this.handlePageClick.bind(this)
-		this.handleOpenClick = this.handleOpenClick.bind(this)		
+		this.onFocus = this.onFocus.bind(this)		
 		
 		// time methods 
 		this.handleDayClick = this.handleDayClick.bind(this)
@@ -30,6 +32,8 @@ class DatePicker extends React.Component {
 		this.getDayAndString = this.getDayAndString.bind(this)
 		this.getTime = this.getTime.bind(this)
 		this.getDate = this.getDate.bind(this)
+		this.leaveDatePicker = this.leaveDatePicker.bind(this)
+		this.testKey = this.testKey.bind(this)
 
 		// internal timeout 
 		this.deferredTimeChangeTimeout = undefined
@@ -79,7 +83,18 @@ class DatePicker extends React.Component {
 		});
 
 	}
-
+	leaveDatePicker( next ){				
+		this.setState({ isOpen: false })
+		utils.focusNextFocusableElement( this.refs.input, next );
+	}
+	testKey( e ){		
+		const { keyCode, shiftKey } = e.nativeEvent		
+		if( keyCode === keyCodes.KEY_TAB ){
+			e.preventDefault()
+			this.leaveDatePicker( ! shiftKey )
+			return
+		}		
+	}
 	getDate( value ){
 		if( typeof value === 'string' || typeof value === 'number' ){
 			return new Date( parseInt(value) )
@@ -113,8 +128,11 @@ class DatePicker extends React.Component {
 		return dateTime 
 	}
 
-	handleOpenClick(){
-		this.setState({ isOpen: ! this.state.isOpen })
+	onFocus(){
+		if( this.state.isOpen === false ){
+			this.refs.input.focus()
+			this.setState({ isOpen: true })
+		}
 	}
 	// detect if the used clicks outside the datepicker box
 	handlePageClick( e ) {		
@@ -205,13 +223,19 @@ class DatePicker extends React.Component {
 					<div 
 						id={ id }
 						className='input-datepicker__content'
-						onClick={ this.handleOpenClick }							
+						onClick={ this.onFocus }							
 					>
 						<Placeholder label={ placeholder } active={ isPlaceholderActive } />
 						
-						<div className='input-datepicker__value'>
-							{ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
-						</div>
+						<input
+							onFocus={ this.onFocus }
+							ref='input'
+							className='input-datepicker__value'
+							value={ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
+							onKeyDown={ this.testKey }
+							disabled={ disabled }
+						/>
+						
 						
 						<Loader visible={ pending } />
 
