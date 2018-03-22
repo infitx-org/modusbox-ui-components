@@ -198,7 +198,7 @@ class TextField extends PureComponent {
 								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }								
 								onClick={ this.onClick }
 								onChange={ this.onChange }
-								onKeyDown={ this.testKey }																								
+								onKeyDown={ this.testKey }
 								onKeyPress={ this.onKeyPress }
 								onBlur={ this.onBlur }
 								onFocus={ this.onFocus }
@@ -212,6 +212,7 @@ class TextField extends PureComponent {
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 									label={ buttonText }
+									disabled={ disabled }
 								/>
 							}
 							<Loader visible={ pending } />
