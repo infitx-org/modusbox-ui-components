@@ -6,7 +6,7 @@ const TestDatePicker = () => (
 		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<DatePicker
 				placeholder='Default'
-				exportFormat = 'x'
+				exportFormat='x'
 				onSelect={ console.log }	
 			/>
 			<DatePicker
@@ -20,21 +20,27 @@ const TestDatePicker = () => (
 			/>
 			<DatePicker
 				placeholder='Pending'
-				exportFormat = 'x'
+				exportFormat='x'
 				onSelect={ console.log }				
 				pending
 			/>
 			<DatePicker
 				placeholder='Invalid'
-				exportFormat = 'x'
+				exportFormat='x'
 				onSelect={ console.log }
 				invalid
 			/>
 			<DatePicker
 				placeholder='Required'
-				exportFormat = 'x'
+				exportFormat='x'
 				onSelect={ console.log }
 				required
+			/>
+			<DatePicker
+				placeholder='Required'
+				exportFormat='x'
+				onSelect={ console.log }
+				disabled
 			/>
 		</div>
 	</div>

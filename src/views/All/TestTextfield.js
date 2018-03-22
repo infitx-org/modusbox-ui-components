@@ -51,6 +51,12 @@ const TestTextField = () => (
 				onButtonClick={ () => console.log('Clicked!') }
 				buttonText='Press Me'		
 			/>
+			<TextField		
+				placeholder='Disabled'
+				onButtonClick={ () => console.log('Clicked!') }
+				buttonText='Press Me'
+				disabled				
+			/>
 		</div>
 		<div style={{padding:'10px', border: '1px solid #ccc'}}>
 			<TextField
