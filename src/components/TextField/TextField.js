@@ -5,6 +5,7 @@ import find from 'lodash/find'
 import * as utils from '../../utils/common'
 import keyCodes from '../../utils/keyCodes'
 
+import Button from '../Button'
 import Icon from '../Icon'
 import { Loader, Placeholder } from '../Common'
 
@@ -206,13 +207,12 @@ class TextField extends PureComponent {
 								className='input-textfield__input'
 							/>
 							{ buttonText &&
-								<button
+								<Button									
 									className={`component__inner-button input-textfield__button ${isOpen ? 'component__inner-button--active' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
-								>
-									{ buttonText }
-								</button> 						
+									label={ buttonText }
+								/>
 							}
 							<Loader visible={ pending } />
 							
