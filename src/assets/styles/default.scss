@@ -125,14 +125,23 @@ $placeholder-color: #999;
 	border-radius:3px;
 	height: 24px;
 	margin-left: 5px;
-	background: rgba(0,0,0,0.1);
-	color: #999;
-	border: none;
+	border: 1px solid rgba(0,0,0,0.3);
+	background: transparent;
+	color: rgba(0,0,0,0.5);
+	fill: rgba(0,0,0,0.5);
+	/*border: none;*/
 	font-size:12px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	padding: 0px 5px;
+	font-size: 11px;
 
 	&:hover, &.component__inner-button--active{
 		background: rgba(0,162,233,0.8);
+		border-color: transparent;
 		color: #fff;
+		fill: #fff;
 	}
 }
 
