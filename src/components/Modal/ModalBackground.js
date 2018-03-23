@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Row from '../Row'
 import Button from '../Button'
+import ScrollBox from '../ScrollBox'
 import './Modal.css'
 
 export default class ModalBackground extends React.PureComponent {
@@ -70,17 +71,6 @@ export default class ModalBackground extends React.PureComponent {
 	}
 	render(){
 
-		const style = {
-			position: 'fixed',
-			top: 0,
-			left: 0,
-			bottom: 0,
-			right: 0,
-			zIndex: 1040,	
-		    display: 'flex',		    
-		    alignItems: 'center',
-		    justifyContent: 'center'
-		}
 		const width = `${this.props.width || '800px'}`
 		const maxHeight = this.props.maximise ? 'auto' : `calc(100% - ${60 * this.props.modalIndex + 70 }px)`
 		const bottom =  this.props.maximise ? '20px' : undefined 
@@ -99,7 +89,7 @@ export default class ModalBackground extends React.PureComponent {
 		const isSubmitDisabled = ! this.props.isSubmitEnabled || this.state.isSubmitPending
 		const isCloseDisabled = ! this.props.isCloseEnabled || this.state.isSubmitPending
 		return (
-			<div className='element-modal' style={ style }>
+			<div className='element-modal'>
 				<div className='element-modal__overlay' style={ customStyle } onClick={ this.onClickOverlay } />
 				<div className={`element-modal__container ${this.props.type}`} style={ modalStyle }>
 					
@@ -107,8 +97,12 @@ export default class ModalBackground extends React.PureComponent {
 						<div className='element-modal__header-title'>{ this.props.title }</div>
 					</div>
 					
-					<div className={`element-modal__body ${this.props.tabbed ? 'has-tabs' : ''} ${this.props.alignItems ? 'align-items' : ''}`} > 
-						{ this.getChild() } 
+					<div className={`element-modal__body ${this.props.tabbed ? 'has-tabs' : ''} ${this.props.alignItems ? 'align-items' : ''}`} >
+						<ScrollBox>
+							<div style={{padding:'20px'}}>
+								{ this.getChild() } 
+							</div>
+						</ScrollBox>
 					</div>
 										
 					<div className='element-modal__footer'>

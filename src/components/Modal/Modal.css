@@ -7,7 +7,7 @@
 	z-index: 1040;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: center;	
 }
 .element-modal__overlay{
 	/*animation: fadeInModalOverlay 0.2s cubic-bezier(0, 0, 0.03, 0.99);*/
@@ -102,11 +102,9 @@
 }
 .element-modal__body{
 	width:100%;
-	padding:20px 20px;
 	border-bottom: 1px solid #ccc;			
     flex: 1;
     min-height: 0;
-    overflow-y: scroll;
     position: relative;
     display: flex;
 
