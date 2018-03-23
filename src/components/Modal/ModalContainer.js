@@ -9,7 +9,7 @@ import ModalBackground from './ModalBackground';
  * the source code so that one can build other combinations of Background and
  * Portal.
  */
-export default class ModalContainer extends React.Component {
+export default class ModalContainer extends React.PureComponent {
 	
 	render(){
 		const {

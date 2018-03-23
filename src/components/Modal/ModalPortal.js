@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 // For example, for react-router
 const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer
 
-export default class ModalPortal extends React.Component {
+export default class ModalPortal extends React.PureComponent {
 	componentDidMount(){		
 		// Create a div and append it to the body
 		// Mount a component on that div			

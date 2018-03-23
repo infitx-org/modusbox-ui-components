@@ -10,7 +10,7 @@ const mapFlexToProperty = ( property ) => {
 	}
 	return property ? ( flexMappers[ property ] || property ) : undefined
 }
-class Row extends React.Component {
+class Row extends React.PureComponent {
 	render(){
 		const { align, wrap, grow, shrink, basis, className, style, children } = this.props		
 		const [ alignItems, justifyContent ] = align.split(' ')

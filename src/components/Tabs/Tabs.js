@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
 import './Tabs.scss' 
 
-class TabList extends React.Component {
+class TabList extends React.PureComponent {
 	render(){
 		return children
 	}
 }
-class Tabs extends React.Component {	
+class Tabs extends React.PureComponent {	
 	constructor(props){
 		super(props)
 

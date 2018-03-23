@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import './RadioGroup.scss'
 
-class RadioGroup extends React.Component {
+class RadioGroup extends React.PureComponent {
 
 	constructor(props){
 		super(props)

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import './ScrollBar.scss'
 
-class ScrollBar extends React.Component {
+class ScrollBar extends React.PureComponent {
 	constructor( props ){
 		super( props )
 		this.setPosition = this.setPosition.bind(this)
@@ -115,7 +115,7 @@ ScrollBar.defaultProps = {
 
 
 
-class Tracker extends React.Component {
+class Tracker extends React.PureComponent {
 	constructor(props){
 		super(props)			
 	}

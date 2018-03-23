@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { focusNextFocusableElement } from '../../utils/common'
 import './Checkbox.scss'
 
-class Checkbox extends React.Component {
+class Checkbox extends React.PureComponent {
 
 	constructor(props){
 		super(props)

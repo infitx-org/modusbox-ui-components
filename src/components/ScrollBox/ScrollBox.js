@@ -6,7 +6,7 @@ import ScrollBar from './ScrollBar'
 
 import './ScrollBox.scss'
 
-class ScrollBox extends React.Component {
+class ScrollBox extends React.PureComponent {
 	constructor( props ){
 		super( props )
 		this.handleResize = this.handleResize.bind(this)

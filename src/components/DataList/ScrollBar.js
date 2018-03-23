@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import './ScrollBar.scss'
 
-class ScrollBar extends React.Component {
+class ScrollBar extends React.PureComponent {
 	constructor(){
 		super()
 		this.setPosition = this.setPosition.bind(this)

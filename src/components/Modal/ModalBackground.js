@@ -3,7 +3,7 @@ import Row from '../Row'
 import Button from '../Button'
 import './Modal.css'
 
-export default class ModalBackground extends React.Component {
+export default class ModalBackground extends React.PureComponent {
 	
 	constructor(props){
 		super(props)

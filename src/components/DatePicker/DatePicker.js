@@ -12,7 +12,7 @@ import { Loader, Placeholder } from '../Common'
 
 import './DatePicker.scss'
 
-class DatePicker extends React.Component {
+class DatePicker extends React.PureComponent {
 	constructor(props) {
 		super(props)
 		
@@ -319,7 +319,7 @@ const TimePicker = ({ hour, minute, second, onHourChange, onMinuteChange, onSeco
 ////////////////////////////////////////////////
 
 
-class TimeInput extends React.Component{
+class TimeInput extends React.PureComponent{
 	constructor(props){
 		super(props)
 		this.getDoubleDigitTime = this.getDoubleDigitTime.bind(this)

@@ -10,7 +10,7 @@ const mapFlexToProperty = ( property ) => {
 	}
 	return property ? ( flexMappers[ property ] || property ) : undefined
 }
-class Column extends React.Component {
+class Column extends React.PureComponent {
 	render(){
 		const { align, wrap, grow, shrink, basis, className, style, children } = this.props		
 		const [ justifyContent, alignItems ] = align.split(' ')

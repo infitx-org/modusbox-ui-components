@@ -3,7 +3,7 @@ import { isEqual } from 'lodash'
 import { ScrollBar } from '../../ScrollBox'
 import './ModalTabsLayout.css' 
 
-class ModalTabsLayout extends React.Component {
+class ModalTabsLayout extends React.PureComponent {
 	constructor(props){
 		super(props)
 
