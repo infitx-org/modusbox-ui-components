@@ -20,23 +20,7 @@
 }
 
 
-.input-select__input-content{
-	display: flex;
-	width:100%;	
-	align-items: center;
-}
-
-.select-input-value{
-	flex:2 1 auto;
-	vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;
-    height:20px;
-
-}
-.input-select__filter{
+.input-select__value{
 	-webkit-box-flex: 2;
     -ms-flex: 2 1 auto;
     flex: 2 1 auto;

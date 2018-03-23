@@ -96,8 +96,11 @@ class Select extends PureComponent {
 			if( overflowY === "hidden" ){				
 				return elem.parentNode
 			}
-			if( overflowY === "scroll" ){				
-				return elem
+			if( overflowY === "scroll" ){												
+				if( elem.getBoundingClientRect().height > elem.parentNode.offsetHeight )
+					return elem.parentNode
+				else
+					return elem
 			}
 			if( elem.parentNode === document.body ){
 				return document.body
@@ -106,14 +109,15 @@ class Select extends PureComponent {
 		}
 
 		
-		const wrapper = getParentOverflow( ReactDOM.findDOMNode( this.refs['options-position'] ) )
+		const wrapper = getParentOverflow( ReactDOM.findDOMNode( this.refs['options-position'] ) )		
 		const wrapperRect = wrapper.getBoundingClientRect()		
 		const { top, bottom } = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
-		const maxLowerHeight = Math.min( wrapperRect.height, window.innerHeight - bottom )- 10
+		const maxLowerHeight = Math.min( wrapperRect.height + wrapperRect.top - top , window.innerHeight - bottom ) - 10
 		const maxUpperHeight = Math.min( top, top - wrapperRect.top - wrapper.parentNode.scrollTop ) - 10
 		const optionsHeight = Math.min( 240, this.state.options.length * 30 )		
 		this.reverse = maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight
 		this.maxHeight = Math.min( 240, Math.max( maxLowerHeight, maxUpperHeight ) )				
+		
 		
 	}
 	testKey( e ){
@@ -263,9 +267,9 @@ class Select extends PureComponent {
 						
 						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
 						
-						<div className='input-select__input-content'>						
+						
 							<input 
-								className={`input-select__filter ${filter ? 'has-filter' : ''}`}
+								className={`component__input input-select__value ${filter ? 'has-filter' : ''}`}
 								type='text'
 								ref='filter'
 								onKeyDown={ this.testKey }
@@ -287,7 +291,7 @@ class Select extends PureComponent {
 							<div className='component__inner-icon input-select-input__icon'>
 								<Indicator isOpen={ isOpen } />
 						 	</div>
-						</div>						
+											
 						
 					</div>
 				</div>
