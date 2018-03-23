@@ -12,6 +12,7 @@ class ScrollBox extends React.Component {
 		this.handleResize = this.handleResize.bind(this)
 		this.updateScrollbar = this.updateScrollbar.bind(this)
 		this.updateContentSize = this.updateContentSize.bind(this)
+		this.onDrag = this.onDrag.bind(this)
 	}
 	componentDidMount(){
 		this.updateScrollbar()
@@ -46,6 +47,13 @@ class ScrollBox extends React.Component {
 		const { width } = this.refs.contentBox.getBoundingClientRect()
 		this.refs.content.style.width = width - 20
 	}
+	onDrag( ratio ){
+		const { height } = this.refs.content.getBoundingClientRect()
+		const boxHeight = this.refs.contentBox.getBoundingClientRect().height
+		
+		const scrollTop = ratio * ( height - boxHeight )		
+		this.refs.contentBox.scrollTop = scrollTop		
+	}
 	render(){
 		const { showTrack, handleStyle, trackStyle, style, children, flex } = this.props
 		
@@ -65,6 +73,7 @@ class ScrollBox extends React.Component {
 					trackStyle={ trackStyle }
 					handleStyle={ handleStyle }
 					showTrack={ showTrack }
+					onDrag={ this.onDrag }
 				/>
 			</div>
 		)
