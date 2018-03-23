@@ -1,4 +1,4 @@
-.tabs{
+.element-tabs{
 	flex: 2 1 0%;
     display: flex;
     flex-direction: column;
@@ -7,14 +7,14 @@
 
 	}
 }
-.tab-items{
+.element-tabs__tab-items{
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;		
 	padding-bottom:4px;
 	flex: 0 0 auto;
 }
-.tab-item{
+.element-tabs__tab-item{
 	flex-grow: 0;
 	flex-shrink: 1;
 	flex-basis: auto;
@@ -33,26 +33,39 @@
 		flex-grow: 1;		
 	}
 
-	&:hover:not(.disabled):not(.selected){
+	&:hover:not(.element-tabs__tab-item--disabled):not(.element-tabs__tab-item--selected){
 		border-bottom-color:#ddd;
 		cursor: pointer;
 	}
-	&.selected{
-		border-bottom-color:#00A2DF;
-		cursor: pointer;
+	&.element-tabs__tab-item--selected{
+		border-bottom-color: #00A2DF;
 		color:#0082bF;
+		cursor: pointer;
 	}
-	&.disabled{
+	&.element-tabs__tab-item--focused{
+		border-bottom-color: #20c2fF;
+		color:#20c2fF;
+	}
+	&.element-tabs__tab-item--disabled{
 		color:#ccc;
 		cursor: default;
 	}
 }
-.tab-content{
+
+.element-tabs__tab-item-input{
+	width: 0px;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+	flex: 0 1 0px;
+	border: none;
+}
+.element-tabs__tab__content{
 	display: flex;
 	flex-grow: 1;
 	flex-direction: column;		
 }
-.tab-panel{
+.element-tabs__tab__panel{
 	display: flex;
 	flex-grow: 1;
 	flex-direction: column;	
