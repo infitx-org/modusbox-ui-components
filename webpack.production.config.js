@@ -44,7 +44,7 @@ var config = {
 				include: [path.join(__dirname, 'src')]
 			},
 			{
-				test: /\.css?$/,
+				test: /\.(css|scss)?$/,
 				loaders: ['style-loader', 'css-loader', 'postcss-loader']
 			},
 			{
