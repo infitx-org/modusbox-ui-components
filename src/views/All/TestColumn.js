@@ -23,9 +23,9 @@ const wrapStyle = { border: '1px solid #ccc', height: '100px' }
 const jcs = ['top', 'center', 'bottom']
 const ais = ['left', 'center', 'right']
 
-const Items = jcs.reduce( ( p, jc ) => ([ ...p, ...ais.map( ai => (
+const Items = jcs.reduce( ( p, jc, i ) => ([ ...p, ...ais.map( ( ai, j ) => (
 	
-		<Column>
+		<Column key={ i * ais.length + j }>
 			<span> { jc } { ai } </span>
 			<Column style={ columnStyle } align={`${jc} ${ai}`} grow='1'>
 				<Block/>

@@ -156,7 +156,7 @@ class Select extends PureComponent {
 			return 
 		}*/
 		const { value } = this.refs.filter
-		this.setState({ filter: value })
+		this.setState({ filter: value, isOpen: true })
 		if( value === '' ){
 			this.setState({				
 				selectedLabel: undefined,

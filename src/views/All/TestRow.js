@@ -21,8 +21,8 @@ const rowStyle = {border: '1px solid #ccc'}
 const jcs = ['top', 'center', 'bottom']
 const ais = ['left', 'center', 'right']
 
-const Items = jcs.reduce( ( p, jc ) => ([ ...p, ...ais.map( ai => (
-	<div>
+const Items = jcs.reduce( ( p, jc, i ) => ([ ...p, ...ais.map( ( ai, j ) => (
+	<div key={ i * ais.length + j } >
 		<span> { jc } { ai } </span>
 		<Row style={ rowStyle } align={`${jc} ${ai}`}>
 			<Block/>

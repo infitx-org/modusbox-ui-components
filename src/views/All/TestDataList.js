@@ -2,15 +2,15 @@ import React, { PropTypes } from 'react'
 import DataList from '../../components/DataList'
 
 const columns = ['a','b','c','d','e']
-const list1 = new Array(100).fill(0).map( (row, rowi) => columns.reduce( (p,c,i) => ({ ...p, [`${c}`]: `${i + rowi *  columns.length }` }), {}) )
+const list1 = new Array(5).fill(0).map( (row, rowi) => columns.reduce( (p,c,i) => ({ ...p, [`${c}`]: `${i + rowi *  columns.length }` }), {}) )
 
-const icon = () => () => ({name:'close-small', color: '#39c', size: parseInt( Math.random() * 16 + 4 ) })
+const icon =  () => ({ name:'close-small', color: '#39c', size: 16  })
 const columns1 = [
-	{ label: 'a', key: 'a',  icon: icon() },
-	{ label: 'b', key: 'b',  icon: icon() },
-	{ label: 'c', key: 'c',  icon: icon() },
-	{ label: 'd', key: 'd',  icon: icon() },
-	{ label: 'e', key: 'e',  icon: icon() }
+	{ label: 'a', key: 'a',  icon },
+	{ label: 'b', key: 'b',  icon },
+	{ label: 'c', key: 'c',  icon },
+	{ label: 'd', key: 'd',  icon },
+	{ label: 'e', key: 'e',  icon }
 ]
 
 
