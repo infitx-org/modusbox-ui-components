@@ -31,6 +31,7 @@ class Select extends PureComponent {
 		this.applyFilter = this.applyFilter.bind(this)
 		this.filterOptions = this.filterOptions.bind(this)
 		this.highlightNextOption = this.highlightNextOption.bind(this)
+		this.handleResize = this.handleResize.bind(this)
 
 		const { options, value } = this.props		
 		const selectedItem = find( options, { value })
@@ -70,9 +71,11 @@ class Select extends PureComponent {
 	}
 
 	componentDidMount() {
+		window.addEventListener( 'resize', this.handleResize )
 		window.addEventListener( 'mouseup', this.onPageClick, false );
 	}
 	componentWillUnmount() {
+		window.removeEventListener( 'resize', this.handleResize )
 		window.removeEventListener( 'mouseup', this.onPageClick, false );
 	}
 
@@ -90,7 +93,9 @@ class Select extends PureComponent {
 	}
 	openSelect(){		
 		this.setState({ isOpen: true })
-
+		this.handleResize()		
+	}
+	handleResize(){
 		const getParentOverflow = ( elem ) => {
 			const { overflowY } = window.getComputedStyle( elem.parentNode )			
 			if( overflowY === "hidden" ){				
@@ -113,12 +118,14 @@ class Select extends PureComponent {
 		const wrapperRect = wrapper.getBoundingClientRect()		
 		const { top, bottom } = ReactDOM.findDOMNode( this.refs['options-position'] ).getBoundingClientRect()
 		const maxLowerHeight = Math.min( wrapperRect.height + wrapperRect.top - top , window.innerHeight - bottom ) - 10
-		const maxUpperHeight = Math.min( top, top - wrapperRect.top - wrapper.parentNode.scrollTop ) - 10
+		const maxUpperHeight = Math.min( top, top - wrapperRect.top - wrapper.parentNode.scrollTop - 45 ) - 10
 		const optionsHeight = Math.min( 240, this.state.options.length * 30 )		
 		this.reverse = maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight
-		this.maxHeight = Math.min( 240, Math.max( maxLowerHeight, maxUpperHeight ) )				
+		this.maxHeight = Math.min( 240, Math.max( maxLowerHeight, maxUpperHeight ) )
 		
-		
+		clearTimeout( this._forceUpdateTimeout )
+		this._forceUpdateTimeout = setTimeout( () => this.forceUpdate() , 50)
+
 	}
 	testKey( e ){
 		
