@@ -9,6 +9,7 @@ import './ScrollBox.scss'
 class ScrollBox extends React.Component {
 	constructor( props ){
 		super( props )
+		this.handleResize = this.handleResize.bind(this)
 		this.updateScrollbar = this.updateScrollbar.bind(this)
 		this.updateContentSize = this.updateContentSize.bind(this)
 	}
@@ -16,16 +17,21 @@ class ScrollBox extends React.Component {
 		this.updateScrollbar()
 		this.updateContentSize()
 		
-		window.addEventListener( 'resize', this.updateScrollbar )
+		window.addEventListener( 'resize', this.handleResize )
 		this.refs.contentBox.addEventListener('scroll', this.updateScrollbar )
 	}
 	componentWillUnmount(){
-		window.removeEventListener( 'resize', this.updateScrollbar )
+		window.removeEventListener( 'resize', this.handleResize )
 		this.refs.contentBox.removeEventListener('scroll', this.updateScrollbar )
 	}
+
 	componentDidUpdate(){
 		this.updateScrollbar()
 		this.updateContentSize()
+	}
+	handleResize(){
+		this.updateScrollbar()
+		this.updateContentSize()	
 	}
 	updateScrollbar(){
 		const { scrollTop } = this.refs.contentBox

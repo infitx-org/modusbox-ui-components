@@ -196,11 +196,9 @@ class FileUploader extends Component {
 								onKeyDown={ this.onKeyDown }
 								id={ id }
 							/>
-							{ fileName 
-								? <div className='input-fileuploader__filename'> { fileName } </div>
-								: <div className='input-fileuploader__filename missing'> No File Choosen </div>
-							}
-
+							<div className={`input-fileuploader__value ${ fileName ? '' : 'missing'}`}>
+								{ fileName || 'No File Choosen' }
+							</div>
 							{ pending 
 								? <Loader visible />
 								: fileName 

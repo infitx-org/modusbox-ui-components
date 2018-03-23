@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import Modal from '../../components/Modal'
 import Select from '../../components/Select'
+import Button from '../../components/Button'
 
 class TestModal extends React.Component{
 	
@@ -31,9 +32,9 @@ class TestModal extends React.Component{
 		const [ first, second, third ] = modals
 		return (
 			<div>		
-				<span onClick={ () => this.onOpen(0) }> 1 </span>
-				<span onClick={ () => this.onOpen(1) }> 2 </span>
-				<span onClick={ () => this.onOpen(2) }> 3 </span>
+				<Button onClick={ () => this.onOpen(0) } label='1'/>
+				<Button onClick={ () => this.onOpen(1) } label='2'/>
+				<Button onClick={ () => this.onOpen(2) } label='3'/>
 
 				<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 					{ first &&

@@ -24,13 +24,7 @@
 .input-textfield__placeholder{	
 }
 
-.input-textfield__input-content{
-	width:100%;
-	display: flex;
-	align-items: center;
-}
-
-.input-textfield__input{
+.input-textfield__value{
 	-webkit-box-flex: 2;
     -ms-flex: 2 1 auto;
     flex: 2 1 auto;

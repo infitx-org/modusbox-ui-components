@@ -13,40 +13,39 @@ import Row from '../../components/Row'
 // className: undefined,
 // style: undefined
 
-const Block = () => <div style={{ background:'#ddd', margin:'5px', height:'50px', width: '50px'}} />
-const BlockBig = () => <div style={{ background:'#eee', margin:'5px', height:'100px', width: '100px'}} />
+const Block = () => <div style={{ background:'#ddd', margin:'5px', height:'20px', width: '20px'}} />
+const BlockBig = () => <div style={{ background:'#eee', margin:'5px', height:'40px', width: '40px'}} />
 
-const columnStyle = {border: '1px solid #ccc', height:'100%'}
+const columnStyle = { border: '1px solid #ccc', height:'200px', width: '80px'}
+const wrapStyle = { border: '1px solid #ccc', height: '100px' }
 
 
 const jcs = ['top', 'center', 'bottom']
 const ais = ['left', 'center', 'right']
 
 const Items = jcs.reduce( ( p, jc ) => ([ ...p, ...ais.map( ai => (
-	<Row>
-		<div>
+	
+		<Column>
 			<span> { jc } { ai } </span>
-			<Column style={ columnStyle } align={`${jc} ${ai}`}>
+			<Column style={ columnStyle } align={`${jc} ${ai}`} grow='1'>
 				<Block/>
 				<BlockBig/>
 				<Block/>
 				<BlockBig/>
 			</Column>
-		</div>
-	</Row>
+		</Column>
+	
 )) ]), [] )
 
-console.log(Items)
+
 const TestColumn = () => (
 	<div>		
-		<div style={{padding:10, border: '1px solid #ccc'}}>
-		
-
+		<div style={{padding:10, border: '1px solid #ccc'}}>		
 			<Row align='center space-between'>
 				{ Items }				
 			</Row>
-			
-			{/*<Column style={ columnStyle } wrap>
+		
+			<Column style={ wrapStyle } wrap>
 				<Block/>
 				<BlockBig/>
 				<Block/>
@@ -66,7 +65,7 @@ const TestColumn = () => (
 				<Block/>
 				<BlockBig/>
 		
-			</Column>*/}
+			</Column>
 
 		</div>		
 	</div>

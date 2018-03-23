@@ -27,7 +27,7 @@ const TestTextField = () => (
 			<TextField		
 				placeholder='Disabled'
 				disabled				
-			/>
+			/>			
 			<TextField
 				type='password'
 				placeholder='4'
@@ -64,14 +64,16 @@ const TestTextField = () => (
 				placeholder='Password pending'				
 				pending
 			/>
-			<TextField
-				id='x'
-				placeholder='6'				
-				disabled
+			<TextField		
+				placeholder='Required Disabled'
+				required				
+				disabled				
 			/>
-			<TextField
-				id='x'
-				placeholder='7'				
+			<TextField		
+				placeholder='Required Disabled Invalid'
+				required				
+				disabled				
+				invalid
 			/>
 		</div>
 		

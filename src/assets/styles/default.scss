@@ -58,13 +58,14 @@ $placeholder-color: #999;
 .component__background--pending{
 	background: $background--pending;	
 }
-.component__background--invalid{
+.component__background--invalid,
+.component__background--required.component__background--invalid{
 	background: $background--invalid;	
 }
 .component__background--required{
 	background: $background--required;	
 }
-
+	
 
 /** COMPONENT BORDERS **/
 
@@ -80,7 +81,8 @@ $placeholder-color: #999;
 .component__borders--pending{
 	border-color: $border-color--pending;
 }	
-.component__borders--invalid{
+.component__borders--invalid,
+.component__borders--required.component__borders--invalid{
 	border-color: $border-color--invalid;
 }	
 .component__borders--required{
@@ -99,7 +101,22 @@ $placeholder-color: #999;
 	padding-right: 10px;
 }
 
+.component__input{
+	flex: 2 1 auto;	
+	overflow: hidden;
+	height:20px;
 
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: 0px;
+	padding-top:1px;	
+	
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size:14px;	
+
+}
 /** COMPONENT PLACEHOLDER **/
 
 .component__placeholder{

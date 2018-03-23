@@ -192,7 +192,7 @@ class TextField extends PureComponent {
 					<div className='component__content input-textfield__content'>
 						
 						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
-						<div className='input-textfield__input-content'>						
+						
 							<input 
 								ref='input'
 								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }								
@@ -204,7 +204,7 @@ class TextField extends PureComponent {
 								onFocus={ this.onFocus }
 								value={ value || '' }
 								disabled={ disabled }
-								className='input-textfield__input'
+								className='component__input input-textfield__value'
 							/>
 							{ buttonText &&
 								<Button									
@@ -227,7 +227,7 @@ class TextField extends PureComponent {
 									<Icon size={16} name={ icon } /> 
 								</div>
 							}													 	
-						</div>												
+															
 					</div>
 				</div>				
 			</div>

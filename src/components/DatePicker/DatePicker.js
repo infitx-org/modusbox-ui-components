@@ -222,7 +222,7 @@ class DatePicker extends React.Component {
 				<div className={ componentClassName }>
 					<div 
 						id={ id }
-						className='input-datepicker__content'
+						className='component__content input-datepicker__content'						
 						onClick={ this.onFocus }							
 					>
 						<Placeholder label={ placeholder } active={ isPlaceholderActive } />
@@ -230,7 +230,7 @@ class DatePicker extends React.Component {
 						<input
 							onFocus={ this.onFocus }
 							ref='input'
-							className='input-datepicker__value'
+							className='component__input input-datepicker__value'
 							value={ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 							onKeyDown={ this.testKey }
 							disabled={ disabled }
