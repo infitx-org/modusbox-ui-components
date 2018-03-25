@@ -354,7 +354,7 @@ class TimeInput extends React.PureComponent{
 			<div className='timepicker-item-box'>
 				<div className='placeholder'> { name } </div>
 				<input 
-					disabled = { disabled }
+					disabled={ disabled }
 					type='number'
 					className='timepicker-select'
 					onFocus={ ( e ) => e.target.select() }				

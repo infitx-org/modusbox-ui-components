@@ -56,7 +56,7 @@ class Checkbox extends React.PureComponent {
 				<input
 					ref='input'
 					type='checkbox'
-					id={id}
+					id={ id }
 					className={`input-checkbox__input ${ semi ? 'semi-checked' : ''}`}
 					onKeyDown={ this.testKey }
 					checked={ checked && semi != true }	

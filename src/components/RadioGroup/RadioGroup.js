@@ -1,4 +1,8 @@
 import React, { PropTypes } from 'react'
+
+import * as utils from '../../utils/common'
+import keyCodes from '../../utils/keyCodes'
+
 import './RadioGroup.scss'
 
 class RadioGroup extends React.PureComponent {
@@ -8,7 +12,12 @@ class RadioGroup extends React.PureComponent {
 		this.state = {
 			value: this.props.value
 		}
+		this.onFocus = this.onFocus.bind(this)
+		this.onBlur = this.onBlur.bind(this)
 		this.onChange = this.onChange.bind(this)
+		this.testKey = this.testKey.bind(this)
+
+		this.selectSiblingRadio = this.selectSiblingRadio.bind(this)
 		this.preventDefault = this.preventDefault.bind(this)
 	}
 
@@ -27,20 +36,79 @@ class RadioGroup extends React.PureComponent {
 	onChange(e, value, disabled){		
 		if( this.props.disabled || disabled ) return 
 		
-		this.preventDefault(e)		
-		this.setState({ value })
+		//this.preventDefault(e)		
+		this.setState({ value, focused: value })
+		this.refs.btn.focus()
 		
 		if( typeof this.props.onChange === 'function' ){
 			this.props.onChange( value )
 		}
 	}
+	onFocus( e ){
+		e.preventDefault()
+		e.stopPropagation()
+		if( this.state.focused === undefined ){
+			this.setState( state => ({ focused: state.value }) )
+		}
+		return 
+	}
+	onBlur( e ){
+		this.setState({ focused: undefined })
+	}
+	testKey( e ){		
+		const { keyCode, shiftKey } = e.nativeEvent
+		if( keyCode === keyCodes.KEY_TAB ){
+			e.preventDefault()
+			this.setState({ focused: undefined })						
+			utils.focusNextFocusableElement( this.refs.btn, ! shiftKey );
+			return
+		}
+		if( keyCode === keyCodes.KEY_LEFT ){
+			e.preventDefault()
+			this.selectSiblingRadio( false )
+			return
+		}
+		if( keyCode === keyCodes.KEY_RIGHT ){
+			e.preventDefault()
+			this.selectSiblingRadio( true )
+			return
+		}
+	}
+	selectSiblingRadio( next ){
+		const { value } = this.state		
+		const { options } = this.props
+		let nextIndex = options.map( o => o.value ).indexOf( value ) || 0	
+		
+		while( true ){
+			nextIndex += next ? 1 : -1
+			if( nextIndex == options.length || nextIndex < 0 ){
+				break
+			}			
+			if( ! options[ nextIndex ].disabled ){
+				console.log( options[ nextIndex ] )
+				const { value } = options[ nextIndex ]
+				this.setState({ value, focused: value })
+				break
+			}
+		}
+
+	}
 	render(){	 	
-	 	const { value } = this.state
+	 	const { value, focused } = this.state
 	 	const { id, label, disabled, round, options } = this.props
 	 	const name = this.props.name || 'defaul-radio-name'
 
 		return (
 			<div className={`input-radio-wrapper`}>
+				<input 
+					ref='btn'
+					type='button'
+					className='input-radio-input'
+					onFocus={ this.onFocus }
+					onBlur={ this.onBlur }
+					onKeyDown={ this.testKey }
+					disabled={ disabled }
+				/>
 				{ label && <span>{ label }</span> }
 				{ options.map( ( option, idx ) => (
 					<Radio
@@ -50,9 +118,10 @@ class RadioGroup extends React.PureComponent {
 						onClick={ this.onChange }
 						onChange={ this.preventDefault }
 						checked={ value === option.value }
+						focused={ focused === option.value }
 						label={ option.label }
 						value={ option.value }
-						disabled={ option.disabled || disabled }
+						disabled={ option.disabled || disabled }						
 					/>
 				))}				
 			</div>
@@ -60,18 +129,16 @@ class RadioGroup extends React.PureComponent {
 	}
 }
 
-const Radio = ({ id, onClick, onChange, checked, label, value, disabled }) => {
+const Radio = ({ id, onClick, onChange, checked, label, focused, value, disabled }) => {
 	return (
 		<div className='input-radio-option'>
-			<input				
-				type='radio'
+			<div								
 				name={ name }
 				id={id}
-				className={`input-radio`}
+				className={`input-radio ${checked ? 'checked' : ''} ${disabled ? 'disabled' :''} ${focused ? 'focused' : '' }`}
 				value={ value }
-				checked={ checked }	
 				onChange={ onChange }
-				disabled={ disabled }												
+				onClick={ (e) => onClick(e, value, disabled) }				
 			/>			
 			<label htmlFor={ id } onClick={ (e) => onClick(e, value, disabled) }> <span>{ label }</span></label>
 		</div>

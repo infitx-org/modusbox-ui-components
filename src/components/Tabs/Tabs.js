@@ -138,7 +138,14 @@ class Tabs extends React.PureComponent {
 		
 		return (
 			<div className='element-tabs'>
-				<input ref='btn' type='button' className='element-tabs__tab-item-input' onFocus={ this.onFocus } onBlur={ this.onBlur }  onKeyDown={ this.testKey }/>
+				<input 
+					ref='btn'
+					type='button'
+					className='element-tabs__tab-item-input'
+					onFocus={ this.onFocus }
+					onBlur={ this.onBlur }
+					onKeyDown={ this.testKey }
+				/>
 				<div className='element-tabs__tab-items' style={ tabList.props.style }> 
 					{ tabs.map( (item, index) => (
 						<Tab 
