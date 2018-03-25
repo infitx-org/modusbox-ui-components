@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import * as utils from '../../utils/common'
 
 import Icon from '../Icon'
-
+import Spinner from '../Spinner'
 import './Button.scss'
 
 class Button extends React.PureComponent {
@@ -53,14 +53,22 @@ class Button extends React.PureComponent {
 		return (			
 			<button
 				ref='input'
-				id={id}
+				id={ id }
+				style={ style }
 				className={ classNames }
 				onKeyDown={ this.testKey }					
 				onClick={ this.onClick }
 				disabled={ disabled }				
 			>
 				<div className='input-button__content'>
-					{ icon && <Icon name={ icon } size={15} style={{marginRight:'5px'}}/> }
+					{ (pending || icon) && 
+						<div className='input-button__icon'>
+							{ pending 
+								? <Spinner color='inherit' size={16}/>
+								: <Icon name={ icon } stroke='none' spin={ pending } size={16} />
+							}
+						</div>
+					}
 					{ label && <span>{ label }</span> }
 				</div>
 			</button>							

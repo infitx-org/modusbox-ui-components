@@ -5,6 +5,7 @@
     border: 0;
     color: #fff;
     fill: #fff;
+    stroke: #fff;
     display: inline-block;
     flex: 0 0 auto;
     font-size: 14px;
@@ -28,6 +29,12 @@
     align-items: center;
     justify-content: center;
 }
+.input-button__icon{
+    margin-right: 5px;
+    margin-left: 0px;
+    fill: inherit;
+    stroke: inherit;
+}
 
 .input-button__input--primary{
     background-color: #00a2df;
@@ -36,6 +43,7 @@
         background-color: transparent;
         color: #00a2df;
         fill: #00a2df;
+        stroke: #00a2df;
     }
 
     &:hover, &:focus{
@@ -44,12 +52,14 @@
         &.noFill{
             fill: #fff;
             color: #fff;
+            stroke: #fff;
         }
     };
 
     &:active{
         color: #087299;
         fill: #087299;
+        stroke: #087299;
 
 	}
 }
@@ -60,30 +70,68 @@
         background: transparent;
         color: #6b8a99;
         fill: #6b8a99;
+        stroke: #6b8a99;
     }
 
     &:hover, &:focus{
 		background-color: #a1b1b8;
 		border-color: #a1b1b8;
         &.noFill{
-            fill: #fff;
             color: #fff;
+            fill: #fff;
+            stroke: #fff;
         }
     }
 
     &:active{
 		color: #506773;
 		fill: #506773;
+        stroke: #506773;
 	}
 }
+.input-button__input--danger{
+    background-color: #d1344e;
+    border-color: #d1344e;
+    color: #fff;
+    fill: #fff;
+    stroke: #fff;
+    
+    &.noFill{
+        background: transparent;
+        color: #d1344e;
+        fill: #d1344e;
+        stroke: #d1344e;
+     }
+
+    &:hover, &:focus{
+        background-color: #e23955;
+        border-color: #e23955;
+        &.noFill{
+            color: #fff;
+            fill: #fff;
+            stroke: #fff;
+        }
+    }
+
+    &:active{
+        color: #6a0213;
+        fill: #6a0213;
+        stroke: #6a0213;
+    }
+}
+.input-button__input--disabled,
 .input-button__input--tertiary{
     background-color: #cacbcc;
     border-color: #cacbcc;
     color: #58595a;
 	fill: #58595a;
+    stroke: #58595a;
 
     &.noFill{
         background: transparent;
+        color: #999;
+        fill: #999;
+        stroke: #999;
     }
     &:hover, &:focus{
 		background-color: #e8e9ea;
@@ -92,32 +140,7 @@
     &:active{
 		color: #989a9b;
 		fill: #989a9b;
+        stroke: #989a9b;
 	}
 	
-}
-.input-button__input--danger{
-    background-color: #d1344e;
-    border-color: #d1344e;
-    color: #fff;
-    fill: #fff;
-    
-    &.noFill{
-        background: transparent;
-        color: #d1344e;
-        fill: #d1344e;
-     }
-
-    &:hover, &:focus{
-        background-color: #e23955;
-        border-color: #e23955;
-        &.noFill{
-            fill: #fff;
-            color: #fff;
-        }
-    }
-
-    &:active{
-        color: #6a0213;
-        fill: #6a0213;
-    }
 }

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import * as utils from '../../utils/common'
 import Spinner from '../Spinner'
 
-const Loader = ({ visible }) => {
+const Loader = ({ visible = true }) => {
 	if( ! visible ){
 		return null
 	}

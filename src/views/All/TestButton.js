@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react'
+
+import Row from '../../components/Row'
+import Column from '../../components/Column'
 import Button from '../../components/Button'
 
-
-
 const TestButton = () => (
-	<div>		
-		<div style={{padding:10, border: '1px solid #ccc', alignItems:'center', display: 'flex'}}>
+	<Column style={{padding:'10px'}}>
+		All kinds
+		<Row style={{padding:'10px', border: '1px solid #ccc'}} align='center space-between'>
 			<Button
 				label='Primary'
-				kind='primary'				
+				kind='primary'
 			/>
 			<Button
 				label='Secondary'
@@ -16,11 +18,11 @@ const TestButton = () => (
 			/>
 			<Button
 				label='Tertiary'
-				kind='tertiary'				
+				kind='tertiary'		
 			/>
 			<Button
 				label='Danger'
-				kind='danger'				
+				kind='danger'
 			/>
 			<Button
 				label='Disabled'
@@ -28,7 +30,7 @@ const TestButton = () => (
 			/>
 			<Button
 				label='Pending'
-				pending		
+				pending
 			/>
 			<Button
 				label='Events'
@@ -61,9 +63,130 @@ const TestButton = () => (
 				noFill
 				kind='danger'				
 			/>		
+		</Row>
+		Pending
+		<Row style={{padding:'10px', border: '1px solid #ccc'}} align='center space-between'>
+			<Button
+				label='Primary'
+				kind='primary'
+				pending
+			/>
+			<Button
+				label='Secondary'
+				kind='secondary'
+				pending
 
-		</div>
-	</div>
+			/>
+			<Button
+				label='Tertiary'
+				kind='tertiary'
+				pending
+			/>
+			<Button
+				label='Danger'
+				kind='danger'
+				pending
+			/>
+			<Button
+				label='Disabled'
+				disabled
+				pending
+			/>
+			<Button
+				label='Icon'
+				icon='deploy-small'
+				pending
+			/>
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				pending
+			/>		
+			<Button
+				label='No Fill'				
+				icon='deploy-small'
+				noFill
+				kind='secondary'
+				pending
+			/>		
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				kind='tertiary'
+				pending
+			/>		
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				kind='danger'
+				pending			
+			/>		
+		</Row>
+		Disabled
+		<Row style={{padding:'10px', border: '1px solid #ccc'}} align='center space-between'>
+			<Button
+				label='Primary'
+				kind='primary'
+				disabled
+			/>
+			<Button
+				label='Secondary'
+				kind='secondary'
+				disabled
+
+			/>
+			<Button
+				label='Tertiary'
+				kind='tertiary'
+				disabled
+			/>
+			<Button
+				label='Danger'
+				kind='danger'
+				disabled
+			/>
+			<Button
+				label='Pending'
+				pending
+				disabled
+			/>
+			<Button
+				label='Icon'
+				icon='deploy-small'
+				disabled
+			/>
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				disabled
+			/>		
+			<Button
+				label='No Fill'				
+				icon='deploy-small'
+				noFill
+				kind='secondary'
+				disabled
+			/>		
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				kind='tertiary'
+				disabled
+			/>		
+			<Button
+				label='No Fill'
+				icon='deploy-small'
+				noFill
+				kind='danger'
+				disabled			
+			/>		
+		</Row>
+	</Column>
 )
 
 export default TestButton
