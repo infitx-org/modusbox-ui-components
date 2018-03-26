@@ -21,7 +21,7 @@ class Column extends React.PureComponent {
     		'flexGrow': grow,
 			'flexShrink': shrink,
 			'flexBasis': basis,
-			'alignItems': mapFlexToProperty( alignItems ),
+			'alignItems': mapFlexToProperty( alignItems ) || 'top',
 			'justifyContent': mapFlexToProperty( justifyContent ),
 			...style
 		}
@@ -43,7 +43,7 @@ Column.propTypes = {
 	style: PropTypes.object
 }
 Column.defaultProps = {
-	align: 'center',
+	align: 'top',
 	wrap: false,
 	grow: undefined,
 	shrink: undefined,
