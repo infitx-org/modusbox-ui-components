@@ -31,6 +31,8 @@
     "react-notify-resize": "^2.0.2",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
+    "redux-actions": "^2.3.0",
+    "redux-thunk": "^2.2.0",
     "svg-inline-loader": "^0.4.1",
     "svg-sprite-loader": "0.0.19",
     "yargs": "^4.2.0"
