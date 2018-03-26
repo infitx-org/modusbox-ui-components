@@ -3,7 +3,10 @@ import React from 'react'
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs'
 import Select from '../components/Select'
 import ScrollBox from '../components/ScrollBox'
+import Row from '../components/Row'
+import Column from '../components/Column'
 
+import Source from './Source'
 const TestViews = require('./All')
 const ComponentMappings = Object.keys( TestViews ).map( view => ({ name: view.substring(4), view }) )
 
@@ -11,10 +14,20 @@ const ComponentMappings = Object.keys( TestViews ).map( view => ({ name: view.su
 const AllItemTabs = ComponentMappings.map( ({name}, i) => <Tab key={ i }> { name } </Tab> )
 const AllItemPanels = ComponentMappings.map( ({ view, name }, i) => {
 	const View = TestViews[ view ]	
+	const Content = () => (
+		<Row align='top'>
+			<Column style={{width:'70%'}}>
+				<View />
+			</Column>
+			<Column style={{width:'30%'}}>
+				<Source name={ view }/>
+			</Column>
+		</Row>
+	)
 	if( name === 'DataList' ){
-		return <TabPanel key={ i }><View /></TabPanel>
+		return <TabPanel key={ i }><Content /></TabPanel>
 	}
-	return <TabPanel key={ i }><ScrollBox><View /></ScrollBox></TabPanel>
+	return <TabPanel key={ i }><ScrollBox><Content /></ScrollBox></TabPanel>
 })
 const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
 const selected = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1

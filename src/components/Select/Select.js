@@ -326,7 +326,7 @@ const Indicator = ({ isOpen }) => (
 	<Icon 
 		className='input-select__indicator'
 		name='arrow'
-		style={{ marginTop:'2px', transform: `rotateZ(${ isOpen ? '270' : '90'}deg)` }}
+		style={{ marginTop:'2px', transform: `rotateZ(90deg) rotateY(${isOpen ? '180' : 0}deg)` }}
 		size={10}
 		fill='rgba(0,0,0,0.5)'
 	/>

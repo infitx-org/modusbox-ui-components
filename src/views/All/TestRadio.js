@@ -26,7 +26,7 @@ const options = [
 ]
 const TestRadioGroup = () => (
 	<div>
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<div style={{padding: '10px', border: '1px solid #ccc'}}>
 			<RadioGroup
 				id='x'
 				label='my RadioGroup'
@@ -41,14 +41,14 @@ const TestRadioGroup = () => (
 			/>
 			<RadioGroup
 				id='x4'
-				label='onChange event'
+				label='Events (console)'
 				onChange={ () => alert() }
 				options={ options }
 				value='value5'
 			/>
 			<RadioGroup
 				id='x5'
-				label='I am disabled'			
+				label='Disabled'			
 				disabled
 				value='value1'
 				options={ options }

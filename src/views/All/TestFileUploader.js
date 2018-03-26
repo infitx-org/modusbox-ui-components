@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react'
 import FileUploader from '../../components/FileUploader'
 
 const TestFileUploader = () => (
-	<div>		
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<div style={{padding:'10px', border: '1px solid #ccc'}}>
 			<FileUploader				
 				placeholder='Default'
 				parseFileAs='text'
@@ -34,7 +33,6 @@ const TestFileUploader = () => (
 			/>
 			
 		</div>		
-	</div>
 )
 
 export default TestFileUploader

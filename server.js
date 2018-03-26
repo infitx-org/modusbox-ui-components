@@ -40,12 +40,26 @@ if( isDevelopment ){
 	app.get('/dist/vendorPackages.dll.js', function (req, res, next) {				
 		res.sendFile(path.join(__dirname, '/dist/vendorPackages.dll.js'))
 	})
+
+	app.get( appBaseName + '/cmp/:cmp', function (req, res, next) {		
+		var file = path.join(__dirname, '/src/views/All/' + req.params.cmp + '.js')
+		var content, err
+		
+		try{ 
+			content = fs.readFileSync( file, 'utf8' )
+			res.send( content )
+		}
+		catch(e){
+			res.status(500);
+			res.send( e )
+		}		
+	});
+
 	// Handle routing on UI with React Router
 	// this is the path serving the files
 	app.get( appBaseName + '/*', function (req, res, next) {				
 		res.sendFile(path.join(__dirname, '/index.html'))
 	})
-
 }
 else{	
 	app.get('*.js', function (req, res, next) {

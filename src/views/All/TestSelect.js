@@ -69,7 +69,7 @@ const TestSelect = () => (
 				disabled
 			/>
 			<Select
-				placeholder='OnChange'
+				placeholder='Events (console)'
 				options={ options }
 				onChange={ console.log }
 			/>

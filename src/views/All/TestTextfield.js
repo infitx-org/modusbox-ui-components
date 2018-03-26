@@ -38,7 +38,7 @@ const TestTextField = () => (
 				icon='close-small'			
 			/>
 			<TextField
-				placeholder='Events'				
+				placeholder='Events (console)'				
 				onChange={ () => console.log('onChange') }
 				onClick={ () => console.log('onClick') }
 				onKeyPress={ () => console.log('onKeyPress') }

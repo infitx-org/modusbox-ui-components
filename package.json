@@ -16,6 +16,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "better-npm-run": "0.0.8",
+    "codemirror": "^5.36.0",
+    "codemirror-highlight": "^1.1.1",
     "json-loader": "^0.5.4",
     "moment": ">= 2.6.0",
     "moment-timezone": "0.5.4",
