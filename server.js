@@ -4,7 +4,6 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var path = require('path');
 var fs = require('fs');
 var Express = require('express');
-var request = require('request');
 var http = require('http');
 var app = new Express();
 var port = undefined;
