@@ -1,7 +1,7 @@
 /* MULTI SELECTION */
 .input-checkbox{
-	padding: 3px;
-	display: flex;
+	padding: 3px 10px;
+	display: inline-flex;
 }
 .input-checkbox__input{
 	appearance: none;
@@ -27,6 +27,7 @@
 		position: relative;		
 		cursor: pointer;
 		align-items: center;
+		font-size: 14px;
 
 		&:hover{
 			&:before{

@@ -52,7 +52,7 @@ class Checkbox extends React.PureComponent {
 	 	const { semi, id, label, disabled, round } = this.props
 
 		return (
-			<div className={`input-checkbox`}>
+			<div className='input input-checkbox'>
 				<input
 					ref='input'
 					type='checkbox'

@@ -137,11 +137,11 @@ class Tabs extends React.PureComponent {
 		const growTab = width != undefined
 		
 		return (
-			<div className='element-tabs'>
+			<div className='element element-tabs'>
 				<input 
 					ref='btn'
 					type='button'
-					className='element-tabs__tab-item-input'
+					className='element__holder'
 					onFocus={ this.onFocus }
 					onBlur={ this.onBlur }
 					onKeyDown={ this.testKey }

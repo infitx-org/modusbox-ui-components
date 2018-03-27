@@ -59,7 +59,7 @@ var config = {
 			},
 			{
 				test: /\.(css|scss)?$/,
-				loaders: ['style-loader', 'css-loader', 'postcss-loader']
+				loaders: ['style-loader', 'css-loader', 'sass-loader','postcss-loader']
 			},
 			{
 				include: /\.json$/,
@@ -93,7 +93,7 @@ var config = {
 		/* autoprefix for different browser vendors */
 		require('autoprefixer'),
 		/* require global variables */
-		require('postcss-simple-vars')
+		//require('postcss-simple-vars')
 	]
 }
 

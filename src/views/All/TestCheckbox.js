@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
+import Column from '../../components/Column'
 import Checkbox from '../../components/Checkbox'
 
 const TestCheckbox = () => (
 	<div>
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		<Column style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<Checkbox
 				id='x'
 				label='my Checkbox'
@@ -21,8 +22,8 @@ const TestCheckbox = () => (
 				checked={ false }
 				semi={ true }			
 			/>
-		</div>
-		<div style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
+		</Column>
+		<Column style={{padding:10, margin:'5px 0px', border: '1px solid #ccc'}}>
 			<Checkbox
 				id='x3'
 				label='Click me'
@@ -50,7 +51,7 @@ const TestCheckbox = () => (
 				label='Round Corners'
 				round
 			/>
-		</div>
+		</Column>
 	</div>
 )
 

@@ -5,6 +5,7 @@ import Select from '../components/Select'
 import ScrollBox from '../components/ScrollBox'
 import Row from '../components/Row'
 import Column from '../components/Column'
+import Checkbox from '../components/Checkbox'
 
 import Source from './Source'
 const TestViews = require('./All')
@@ -23,7 +24,7 @@ const AllItemPanels = ComponentMappings.map( ({ view, name }, i) => {
 				<Source name={ view }/>
 			</Column>
 		</Row>
-	)
+	)	
 	if( name === 'DataList' ){
 		return <TabPanel key={ i }><Content /></TabPanel>
 	}
@@ -38,9 +39,15 @@ class Views extends React.Component {
 	constructor(props){
 		super(props)				
 		this.onChange = this.onChange.bind(this)
-		this.state = { selected: 'default' }
+		this.onCodeToggle = this.onCodeToggle.bind(this)
+		this.state = { 
+			selected: 'default',
+			code: false
+		}
 	}	
-
+	onCodeToggle(value){
+		this.setState({ code: value })
+	}
 	onChange(value){
 		this.setState({ selected: value })
 	}
@@ -53,20 +60,33 @@ class Views extends React.Component {
 		require('../assets/styles/' + this.state.selected + '.scss')
 
 		return (
-			<div style={{width:'100%', height:'100%', overflow:'hidden', flexDirection: 'column', display:'flex'}}>
+			<Column style={{width:'100%', height:'100%', overflow:'hidden'}}>
 				<div style={{margin: '10px'}}>
-					<Select
-						value={ this.state.selected }
-						placeholder='Select StyleSheet'						
-						onChange={ this.onChange }
-						options={ options }						
-					/>
+					<Row>
+						<Select
+							value={ this.state.selected }
+							placeholder='Select StyleSheet'						
+							onChange={ this.onChange }
+							options={ options }						
+						/>
+					
+						<Checkbox 
+							label='Code'
+							checked={ this.state.code }
+							onChange={ this.onCodeToggle }
+						/>
+					</Row>
 				</div>
-				<Tabs selected={ selected } onSelect={ onSelectTab }>
-					<TabList>{ AllItemTabs }</TabList>
-					<TabPanels>{ AllItemPanels }</TabPanels>
-				</Tabs>
-			</div>
+				<div grow='1' align='top'>	 								
+					<Tabs selected={ selected } onSelect={ onSelectTab }>
+						<TabList>{ AllItemTabs }</TabList>
+						<TabPanels>{ AllItemPanels }</TabPanels>
+					</Tabs>
+					
+				</div>
+
+
+			</Column>
 		)
 	}
 }

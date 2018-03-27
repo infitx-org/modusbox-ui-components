@@ -20,6 +20,12 @@
     -webkit-font-smoothing: antialiased;
     border: 1px solid;
     align-items: center;
+
+    &:active{        
+        color: rgba(0,0,0,0.3);
+        fill: rgba(0,0,0,0.3);
+        stroke: rgba(0,0,0,0.3);
+    }
 }
 
 .input-button__content{
@@ -52,14 +58,7 @@
             color: #fff;
             stroke: #fff;
         }
-    };
-
-    &:active{
-        color: #087299;
-        fill: #087299;
-        stroke: #087299;
-
-	}
+    };    
 }
 .input-button__input--secondary{
 	background-color: #6b8a99;
@@ -79,13 +78,7 @@
             fill: #fff;
             stroke: #fff;
         }
-    }
-
-    &:active{
-		color: #506773;
-		fill: #506773;
-        stroke: #506773;
-	}
+    }    
 }
 .input-button__input--danger{
     background-color: #d1344e;
@@ -110,12 +103,6 @@
             stroke: #fff;
         }
     }
-
-    &:active{
-        color: #6a0213;
-        fill: #6a0213;
-        stroke: #6a0213;
-    }
 }
 .input-button__input--disabled,
 .input-button__input--tertiary{
@@ -135,10 +122,24 @@
 		background-color: #e8e9ea;
 		border-color: #e8e9ea;
     };
-    &:active{
-		color: #989a9b;
-		fill: #989a9b;
-        stroke: #989a9b;
-	}
-	
+}
+
+.input-button__input--primary,
+.input-button__input--secondary,
+.input-button__input--tertiary,
+.input-button__input--danger{
+    &:hover{
+        &.noFill{ 
+            &:active{ 
+                color: rgba(0,0,0,0.3);
+                fill: rgba(0,0,0,0.3);
+                stroke: rgba(0,0,0,0.3);
+            }
+        }
+    } 
+    &:active{        
+        color: rgba(0,0,0,0.3);
+        fill: rgba(0,0,0,0.3);
+        stroke: rgba(0,0,0,0.3);
+    }
 }

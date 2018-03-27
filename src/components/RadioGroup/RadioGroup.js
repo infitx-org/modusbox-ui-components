@@ -96,14 +96,14 @@ class RadioGroup extends React.PureComponent {
 	render(){	 	
 	 	const { value, focused } = this.state
 	 	const { id, label, disabled, round, options } = this.props
-	 	const name = this.props.name || 'defaul-radio-name'
+	 	const name = this.props.name || 'default-radio-name'
 
 		return (
-			<div className={`input-radio-wrapper`}>
+			<div className='input input-radio'>
 				<input 
 					ref='btn'
 					type='button'
-					className='input-radio-input'
+					className='input__holder'
 					onFocus={ this.onFocus }
 					onBlur={ this.onBlur }
 					onKeyDown={ this.testKey }
@@ -131,16 +131,16 @@ class RadioGroup extends React.PureComponent {
 
 const Radio = ({ id, onClick, onChange, checked, label, focused, value, disabled }) => {
 	return (
-		<div className='input-radio-option'>
+		<div className='input-radio__option'>
 			<div								
 				name={ name }
 				id={id}
-				className={`input-radio ${checked ? 'checked' : ''} ${disabled ? 'disabled' :''} ${focused ? 'focused' : '' }`}
+				className={`input-radio__input ${checked ? 'checked' : ''} ${disabled ? 'disabled' :''} ${focused ? 'focused' : '' }`}
 				value={ value }
 				onChange={ onChange }
 				onClick={ (e) => onClick(e, value, disabled) }				
 			/>			
-			<label htmlFor={ id } onClick={ (e) => onClick(e, value, disabled) }> <span>{ label }</span></label>
+			<label htmlFor={ id } onClick={ (e) => onClick(e, value, disabled) }><span>{ label }</span></label>
 		</div>
 	)
 }

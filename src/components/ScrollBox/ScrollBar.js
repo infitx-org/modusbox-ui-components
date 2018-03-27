@@ -53,7 +53,6 @@ class ScrollBar extends React.PureComponent {
 		const translate = showScrollbar ? ( scrollTop / ( totalContentHeight - height ) ) * ( height - realBaHeight ) : 0
 		const isMoving = true		
 				
-		console.log({ barHeight, translate, height })
 		this.setState({ showScrollbar, barHeight, translate, isMoving, height })		
 		this.fadeMovingHandle()
 	}

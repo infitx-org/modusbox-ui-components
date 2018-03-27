@@ -37,6 +37,7 @@ class Options extends PureComponent {
 		//const items = reverse ? [...options].reverse() : options
 
 		const className = utils.composeClassNames([
+			'input',
 			'input-select__options-wrapper',
 			reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular'
 		])

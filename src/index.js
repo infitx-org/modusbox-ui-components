@@ -1,3 +1,5 @@
+import './assets/main.css'
+
 import Checkbox from './components/Checkbox'
 import Select from './components/Select'
 import TextField from './components/TextField'
