@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars/colors.scss';
+
 .input-select__options{
 	position: relative;	
 }
@@ -9,51 +11,46 @@
 	animation: fadeIn 0.15s ease-in-out;
 }
 .input-select__options-wrapper--regular{	
-	border-bottom: 2px solid #ccc;
+	border-bottom: 2px solid $color__main-tertiary;
 }
 .input-select__options-wrapper--reverse{
-	border-top: 2px solid #ccc;
+	border-top: 2px solid $color__main-tertiary;
 }
 .input-select__options-item{
 	display: flex;
 	align-items: center;
 	flex: 0 0 40px;	
-	color: #555;
+	color: $color__dark-gray-3;
 	padding-left: 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	line-height: 40px;
 	font-size: 13px;
-	background: #fff;
+	background: $color__white;
 
-	border-left: 2px solid #ccc;
-	border-right: 2px solid #ccc;
+	border-left: 2px solid $color__main-tertiary;
+	border-right: 2px solid $color__main-tertiary;
 	cursor: pointer;
-	color: #666;
-	fill: #666;
+	color: $color__dark-gray-1;
+	fill: $color__dark-gray-1;
 
-	&:hover{
-		background:#f8f8f8;
-		border-color:#00A3E0;
-		color:#00A3E0;
-	};
-
-	&.highlighted{
-		background: #f8f8f8;
-		border-color: #00A3E0;
-		color: #00A3E0;	
-		fill: #00A3E0;
+	&:hover, &.highlighted{
+		background: $color__gray-1;
+		border-color: $color__main-primary;
+		color: $color__main-primary;
+		fill: $color__main-primary;
 	}
 
 	&.selected{ 
-		background: #E8E9EA;
-		border-color: #58595A;
-		color: #516873;
+		background: $color__gray-2;
+		border-color: $color__dark-gray-2;
+		color: $color__dark-gray-2;
 	}
 
 	&.disabled{
-		color:#999;
+		color: $color__main-disabled;
+		border-color: $color__main-disabled;
 		cursor: auto;
 	}
 }

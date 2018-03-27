@@ -30,11 +30,11 @@ $color__green-3: $color__main-success;
 $color__green-4: #0E8C48;
 $color__green-5: #174D30;
 
-$color__gray-1: #F9FAFB;
-$color__gray-2: #F4F5F6;
-$color__gray-3: #E8E9EA;
-$color__gray-4: #CACBCC;
-$color__gray-5: #989A9B;
+$color__gray-1: #F4F5F6;
+$color__gray-2: #E8E9EA;
+$color__gray-3: $color__main-tertiary;
+$color__gray-4: #989A9B;
+$color__gray-5: #888A8B;
 
 $color__dark-gray-1: #6B6C6D;
 $color__dark-gray-2: #58595A;
@@ -48,7 +48,7 @@ $color__alpha-3: rgba(0,0,0,0.3);
 $color__alpha-4: rgba(0,0,0,0.4);
 $color__alpha-5: rgba(0,0,0,0.5);
 
-$color__white: #fff;
+$color__white: #FFFFFF;
 $color__yellow: #F2BE24;
 $color__viridian: #00B49D;
 $color__teal: #00B5D1;

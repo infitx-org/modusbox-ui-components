@@ -77,7 +77,7 @@ class Views extends React.Component {
 						/>
 					</Row>
 				</div>
-				<div grow='1' align='top'>	 								
+				<div>
 					<Tabs selected={ selected } onSelect={ onSelectTab }>
 						<TabList>{ AllItemTabs }</TabList>
 						<TabPanels>{ AllItemPanels }</TabPanels>
