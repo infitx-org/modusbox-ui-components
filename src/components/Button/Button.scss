@@ -1,11 +1,11 @@
+@import '../../assets/styles/vars/colors.scss';
+
+
 .input-button__input{
 	outline: none;
 	cursor: pointer;
     box-sizing: border-box;
     border: 0;
-    color: #fff;
-    fill: #fff;
-    stroke: #fff;
     display: inline-block;
     flex: 0 0 auto;
     font-size: 14px;
@@ -20,11 +20,14 @@
     -webkit-font-smoothing: antialiased;
     border: 1px solid;
     align-items: center;
+    color: $color__white;
+    fill: $color__white;
+    stroke: $color__white;
 
     &:active{        
-        color: rgba(0,0,0,0.3);
-        fill: rgba(0,0,0,0.3);
-        stroke: rgba(0,0,0,0.3);
+        color: $color__alpha-3;
+        fill: $color__alpha-3;
+        stroke: $color__alpha-3;
     }
 }
 
@@ -41,86 +44,91 @@
 }
 
 .input-button__input--primary{
-    background-color: #00a2df;
-    border-color: #00a2df;
+    background-color: $color__main-primary;
+    border-color: $color__main-primary;
+    
     &.noFill{
         background-color: transparent;
-        color: #00a2df;
-        fill: #00a2df;
-        stroke: #00a2df;
+        color: $color__main-primary;
+        fill: $color__main-primary;
+        stroke: $color__main-primary;
     }
 
     &:hover, &:focus{
-        background-color: #04b3f5;
-        border-color: #04b3f5;
+        background-color: $color__main-primary--active;
+        border-color: $color__main-primary--active;
+        
         &.noFill{
-            fill: #fff;
-            color: #fff;
-            stroke: #fff;
+            color: $color__white;
+            fill: $color__white;
+            stroke: $color__white;
         }
     };    
 }
 .input-button__input--secondary{
-	background-color: #6b8a99;
-    border-color: #6b8a99;
+	background-color: $color__main-secondary;
+    border-color: $color__main-secondary;
+    
     &.noFill{
         background: transparent;
-        color: #6b8a99;
-        fill: #6b8a99;
-        stroke: #6b8a99;
+        color: $color__main-secondary;
+        fill: $color__main-secondary;
+        stroke: $color__main-secondary;
     }
 
     &:hover, &:focus{
-		background-color: #a1b1b8;
-		border-color: #a1b1b8;
+		background-color: $color__main-secondary--active;
+		border-color: $color__main-secondary--active;
+        
         &.noFill{
-            color: #fff;
-            fill: #fff;
-            stroke: #fff;
+            color: $color__white;
+            fill: $color__white;
+            stroke: $color__white;
         }
     }    
 }
 .input-button__input--danger{
-    background-color: #d1344e;
-    border-color: #d1344e;
-    color: #fff;
-    fill: #fff;
-    stroke: #fff;
+    background-color: $color__main-danger;
+    border-color: $color__main-danger;
+    color: $color__white;
+    fill: $color__white;
+    stroke: $color__white;
     
     &.noFill{
         background: transparent;
-        color: #d1344e;
-        fill: #d1344e;
-        stroke: #d1344e;
+        color: $color__main-danger;
+        fill: $color__main-danger;
+        stroke: $color__main-danger;
      }
 
     &:hover, &:focus{
-        background-color: #e23955;
-        border-color: #e23955;
+        background-color: $color__main-danger--active;
+        border-color: $color__main-danger--active;
+        
         &.noFill{
-            color: #fff;
-            fill: #fff;
-            stroke: #fff;
+            color: $color__white;
+            fill: $color__white;
+            stroke: $color__white;
         }
     }
 }
 .input-button__input--disabled,
 .input-button__input--tertiary{
-    background-color: #cacbcc;
-    border-color: #cacbcc;
-    color: #58595a;
-	fill: #58595a;
-    stroke: #58595a;
+    background-color: $color__main-tertiary;
+    border-color: $color__main-tertiary;
+    color: $color__dark-gray-2;
+	fill: $color__dark-gray-2;
+    stroke: $color__dark-gray-2;
 
     &.noFill{
         background: transparent;
-        color: #999;
-        fill: #999;
-        stroke: #999;
+        color: $color__gray-5;
+        fill: $color__gray-5;
+        stroke: $color__gray-5;
     }
     &:hover, &:focus{
-		background-color: #e8e9ea;
-		border-color: #e8e9ea;
+		background-color: $color__main-tertiary--active;
+		border-color: $color__main-tertiary--active;
     };
 }
 
@@ -131,15 +139,15 @@
     &:hover{
         &.noFill{ 
             &:active{ 
-                color: rgba(0,0,0,0.3);
-                fill: rgba(0,0,0,0.3);
-                stroke: rgba(0,0,0,0.3);
+                color: $color__alpha-3;
+                fill: $color__alpha-3;
+                stroke: $color__alpha-3;
             }
         }
     } 
     &:active{        
-        color: rgba(0,0,0,0.3);
-        fill: rgba(0,0,0,0.3);
-        stroke: rgba(0,0,0,0.3);
+        color: $color__alpha-3;
+        fill: $color__alpha-3;
+        stroke: $color__alpha-3;
     }
 }

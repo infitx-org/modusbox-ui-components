@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars/colors.scss';
+
 .element-tabs{
     display: flex;
     flex-direction: column;
@@ -16,12 +18,13 @@
 	flex-basis: auto;
 	
 	height: 32px;	
-	font-size:14px;
+	font-size: 14px;
 	line-height: 32px;	
 	text-align: center;	
 	justify-content: flex-start;
 	align-items: center;	
-	border-bottom: 3px solid #eee;
+	color: $color__dark-gray-3;
+	border-bottom: 3px solid $color__gray-3;
 	transition: all 0.1s ease-out;
 	padding:0px 10px;
 
@@ -30,20 +33,20 @@
 	}
 
 	&:hover:not(.element-tabs__tab-item--disabled):not(.element-tabs__tab-item--selected){
-		border-bottom-color:#ddd;
+		border-bottom-color: $color__gray-4;
 		cursor: pointer;
 	}
 	&.element-tabs__tab-item--selected{
-		border-bottom-color: #00A2DF;
-		color:#0082bF;
+		border-bottom-color: $color__main-primary;
+		color: $color__main-primary;
 		cursor: pointer;
 	}
 	&.element-tabs__tab-item--focused{
-		border-bottom-color: #20c2fF;
-		color:#20c2fF;
+		border-bottom-color: $color__main-primary--active;
+		color: $color__main-primary--active;
 	}
 	&.element-tabs__tab-item--disabled{
-		color:#ccc;
+		color: $color__main-disabled;
 		cursor: default;
 	}
 }
