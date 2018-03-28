@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { isEqual } from 'lodash'
+import isEqual from 'lodash/isEqual'
 import { ScrollBar } from '../../ScrollBox'
 import './ModalTabsLayout.css' 
 

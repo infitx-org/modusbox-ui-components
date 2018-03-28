@@ -1,55 +1,103 @@
 const pkg = require('./package.json');
+const fs = require('fs')
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var aliases = {
-	'@mulesoft/anypoint-components': 'node_modules/@mulesoft/anypoint-components/lib',
-	'@mulesoft/anypoint-styles': 'node_modules/@mulesoft/anypoint-styles/lib',
-	react: path.resolve('./node_modules/react')	
+/* Return a list of all component in src */
+var componentsPath = path.join(__dirname, 'src','components')
+var componentsList = fs.readdirSync( componentsPath ).filter(function (x) {
+  return x !== '.DS_Store' && x !== 'index.js' && x !== 'variables.js' && x !== 'Common'
+})
+
+
+// Per Component Build 
+const defaultExternals = []
+const cssExternals = []
+const componentExternals = []
+const entryPoints = {
+	index: './src/components/index.js',	
 }
 
-const libraryName = pkg.name;
-const outputFile = libraryName + '.js';
-/* Assign aliases */
+/* Assign aliases, define externs, define entrypoints */
+for (var i = 0; i < componentsList.length; i++) {
+	var c = componentsList[i]
+	/* define entryPoints  */
+	entryPoints[c] = ['./src/components/' + c + '/index.js']
+	/* extern individual Components. TODO make better Regex  */
+	componentExternals.push('../' + c)
+	/* extern CSS modules  */
+	cssExternals.push('../' + c + '/' + c + '.css')
+}
+
+var externals = defaultExternals
+.concat( cssExternals )
+.concat( Object.keys( pkg.dependencies ) )
+.concat( componentExternals )
+.concat([
+	'react',
+	'react-dom'
+])
+
+console.log( componentExternals, cssExternals )
+const srcPath = path.join(__dirname, 'src')
+
 var config = {
-	entry: path.join(__dirname, '/src/index.js'),
+	entry: entryPoints,
 	output: {
 		path: path.join(__dirname, 'lib'),
-		filename: outputFile,
-		library: libraryName,
-		libraryTarget: 'commonjs2'
+		filename: '[name]/index.js',
+		libraryTarget: 'commonjs2',
+		library: pkg.name
 	},
-	externals: {
-		'react': 'React',
-		'react-dom': 'ReactDOM'
-	},
-	devtool: 'source-map',
+	externals: externals,
 	plugins: [
 		// Ignore all locale files of moment.js
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    	new webpack.optimize.OccurenceOrderPlugin(true),
+    	new webpack.optimize.DedupePlugin(),
+    	new ExtractTextPlugin('[name]/[name].css?[hash]-[chunkhash]-[contenthash]-[name]', {
+			disable: false,
+			allChunks: true,
+		}),
+
+		function () {
+			this.plugin('done', function (stats) {
+				//console.log( stats )
+				/* Write file tree to dist
+				require('fs').writeFileSync(
+				path.join(__dirname, 'webpack_files_map.conf.json'),
+				JSON.stringify(stats.toJson().assetsByChunkName)
+				)
+				*/
+			})
+		}
 	],
 
 	resolve: {		
 		root: path.resolve(__dirname),
-		alias: aliases,
-		extensions: ['', '.js','.css']
+		alias: {},
+		extensions: ['', '.js', '.jsx']
 	},
 
 	module: {
 		loaders: [
 			{
 				test: /\.js/,
-				loaders: ['react-hot', 'babel'],
-				include: [path.join(__dirname, 'src')]
-			},
-			{
-				test: /\.(css|scss)?$/,
-				loaders: ['style-loader', 'css-loader', 'postcss-loader']
+				loaders: ['babel'],
+				include: srcPath
+			},			
+			{ test: /\.(css|scss)?$/, 
+				loader: ExtractTextPlugin.extract(
+					'style-loader',
+					'css-loader?localIdentName=[hash:base64:5]&camelCase!sass-loader!postcss-loader',		
+				)
 			},
 			{
 				include: /\.json$/,
 				loaders: ['json-loader']
+				//include: srcPath
 			},
 			{
 				test: /\.png$/,
@@ -79,11 +127,11 @@ var config = {
 		/* autoprefix for different browser vendors */
 		require('autoprefixer'),
 		/* require global variables */
-		require('postcss-simple-vars')({
+		/*require('postcss-simple-vars')({
 			variables: function () {
 				return require('@mulesoft/anypoint-styles/lib/variables')
 			}
-		})
+		})*/
 	]
 }
 

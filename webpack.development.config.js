@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
-//var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 var aliases = {
 	'views': 'src/views',
