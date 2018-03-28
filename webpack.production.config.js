@@ -17,7 +17,8 @@ const defaultExternals = []
 const cssExternals = []
 const componentExternals = []
 const entryPoints = {
-	index: './src/components/index.js',	
+	index: './src/components/index.js',
+	moduscomponents: [ './src/assets/styles/default.scss']
 }
 
 /* Assign aliases, define externs, define entrypoints */
@@ -40,7 +41,6 @@ var externals = defaultExternals
 	'react-dom'
 ])
 
-console.log( componentExternals, cssExternals )
 const srcPath = path.join(__dirname, 'src')
 
 var config = {
@@ -57,6 +57,12 @@ var config = {
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     	new webpack.optimize.OccurenceOrderPlugin(true),
     	new webpack.optimize.DedupePlugin(),
+    	new webpack.optimize.UglifyJsPlugin({
+			minimize: true,
+			compress: {
+				warnings: false
+			}
+		}),
     	new ExtractTextPlugin('[name]/[name].css?[hash]-[chunkhash]-[contenthash]-[name]', {
 			disable: false,
 			allChunks: true,
@@ -78,7 +84,7 @@ var config = {
 	resolve: {		
 		root: path.resolve(__dirname),
 		alias: {},
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js', '.jsx', '.scss']
 	},
 
 	module: {
@@ -97,7 +103,6 @@ var config = {
 			{
 				include: /\.json$/,
 				loaders: ['json-loader']
-				//include: srcPath
 			},
 			{
 				test: /\.png$/,
