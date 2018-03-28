@@ -103,7 +103,7 @@ class RadioGroup extends React.PureComponent {
 				<input 
 					ref='btn'
 					type='button'
-					className='input__holder'
+					className='modus-input__holder'
 					onFocus={ this.onFocus }
 					onBlur={ this.onBlur }
 					onKeyDown={ this.testKey }

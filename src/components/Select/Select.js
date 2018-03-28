@@ -257,26 +257,26 @@ class Select extends PureComponent {
 
 		const componentClassName = utils.composeClassNames([
 			'input-select__component',
-			'component',
-			'component__borders',
-			'component__background',
-			isOpen && 'component--open component__borders--open component__background--open',
-			disabled && 'component--disabled component__borders--disabled component__background--disabled',
-			pending && 'component--pending component__borders--pending component__background--pending',
-			invalid && 'component--invalid component__borders--invalid component__background--invalid',
-			required && ( selectedLabel === undefined ) && 'component--required component__borders--required component__background--required',
+			'modus-input',
+			'modus-input__borders',
+			'modus-input__background',
+			isOpen && 'modus-input--open modus-input__borders--open modus-input__background--open',
+			disabled && 'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
+			pending && 'modus-input--pending modus-input__borders--pending modus-input__background--pending',
+			invalid && 'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			required && ( selectedLabel === undefined ) && 'modus-input--required modus-input__borders--required modus-input__background--required',
 		])
 
 		return (
-			<div id={id} className='input-select component__box' style={ style }>
+			<div id={id} className='input-select modus-input__box' style={ style }>
 				<div className={ componentClassName } onClick={ this.onClickSelect } ref='area'>
-					<div className='component__content input-select__content'>
+					<div className='modus-input__content input-select__content'>
 						
 						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
 						
 						
 							<input 
-								className={`component__input input-select__value ${filter ? 'has-filter' : ''}`}
+								className={`modus-input__input input-select__value ${filter ? 'has-filter' : ''}`}
 								type='text'
 								ref='filter'
 								onKeyDown={ this.testKey }
@@ -288,14 +288,14 @@ class Select extends PureComponent {
 							/>
 							
 							{ filter && 
-								<div className='component__inner-icon input-select-input__icon'>
+								<div className='modus-input__inner-icon input-select-modus-input__icon'>
 									<Icon name='search-small' size={16} />
 								</div>
 							}
 
 							<Loader visible={ pending } />
 
-							<div className='component__inner-icon input-select-input__icon'>
+							<div className='modus-input__inner-icon input-select-modus-input__icon'>
 								<Indicator isOpen={ isOpen } />
 						 	</div>
 											

@@ -31,15 +31,15 @@ const Spinner = ({ size, center, color }) => {
   const style = { stroke: color }
 
   return(
-    <div className={`modus-spinner ${center ? 'center' : '' }`}>
+    <div className={`element-spinner ${center ? 'center' : '' }`}>
       <svg 
-        className='modus-spinner__component'
+        className='element-spinner__component'
         width={ width }
         height={ height }
         viewBox={`0 0 ${realSize} ${realSize}`}        
       >
         <path 
-          className='modus-spinner__svg-path'
+          className='element-spinner__svg-path'
           strokeWidth={ strokeWidth }
           d={ describeArc( position, position, radius, 90, 200 )}
           style={ style }

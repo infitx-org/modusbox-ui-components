@@ -1,4 +1,4 @@
-@import '../../assets/styles/items/component.scss';
+@import '../../assets/styles/items/input.scss';
 
 .input-fileuploader{
 }
@@ -7,10 +7,10 @@
 	position: relative;	
 	cursor: pointer;
 	
-	&.input-fileuploader__component--open {
+	&.input-fileuploader__modus-input--open {
 	}	
 	
-	&.input-fileuploader__component--disabled{
+	&.input-fileuploader__modus-input--disabled{
 	}
 }
 .input-fileuploader-box{
@@ -54,12 +54,12 @@
 
 .input-fileuploader__button-add{
 	
-	&:hover, &.component__inner-button--active{
+	&:hover, &.modus-input__inner-button--active{
 		background: rgba(0,162,233,0.8);
 	}
 }
 .input-fileuploader .input-fileuploader__button-remove{
-	&:hover, &.component__inner-button--active{	
+	&:hover, &.modus-input__inner-button--active{	
 		background: rgba(255,50,50,0.8);		
 	}
 }

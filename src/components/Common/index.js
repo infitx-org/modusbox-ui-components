@@ -9,7 +9,7 @@ const Loader = ({ visible = true }) => {
 		return null
 	}
 	return (
-		<div className='component__inner-icon'>
+		<div className='modus-input__inner-icon'>
 			<Spinner size={16} /> 
 		</div>
 	)
@@ -21,8 +21,8 @@ const Placeholder = ({ label, active }) => {
 	}
 
 	const placeholderClassName = utils.composeClassNames([
-		'component__placeholder',
-		active && 'component__placeholder--active'
+		'modus-input__placeholder',
+		active && 'modus-input__placeholder--active'
 	])
 
 	return (

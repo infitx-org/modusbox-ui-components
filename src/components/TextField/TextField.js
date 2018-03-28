@@ -171,25 +171,25 @@ class TextField extends PureComponent {
 		
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
-			'component',
-			'component__borders',
-			'component__background',
-			isOpen && 'component--open component__borders--open component__background--open',
-			disabled && 'component--disabled component__borders--disabled component__background--disabled',
-			pending && 'component--pending component__borders--pending component__background--pending',
-			invalid && 'component--invalid component__borders--invalid component__background--invalid',
-			required && ( value === undefined || value === '' ) && 'component--required component__borders--required component__background--required',
+			'modus-input',
+			'modus-input__borders',
+			'modus-input__background',
+			isOpen && 'modus-input--open modus-input__borders--open modus-input__background--open',
+			disabled && 'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
+			pending && 'modus-input--pending modus-input__borders--pending modus-input__background--pending',
+			invalid && 'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			required && ( value === undefined || value === '' ) && 'modus-input--required modus-input__borders--required modus-input__background--required',
 		])
 
 		const placeholderClassName = utils.composeClassNames([
-			'component__placeholder',
-			isPlaceholderActive && 'component__placeholder--active'
+			'modus-input__placeholder',
+			isPlaceholderActive && 'modus-input__placeholder--active'
 		])
 		
 		return (
-			<div className='input-textfield component__box' style={ style }>
+			<div className='input-textfield modus-input__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onTextFieldClick } ref='area'>
-					<div className='component__content input-textfield__content'>
+					<div className='modus-input__content input-textfield__content'>
 						
 						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
 						
@@ -204,11 +204,11 @@ class TextField extends PureComponent {
 								onFocus={ this.onFocus }
 								value={ value || '' }
 								disabled={ disabled }
-								className='component__input input-textfield__value'
+								className='modus-input__input input-textfield__value'
 							/>
 							{ buttonText &&
 								<Button									
-									className={`component__inner-button input-textfield__button ${isOpen ? 'component__inner-button--active' : ''}`}
+									className={`modus-input__inner-button input-textfield__button ${isOpen ? 'modus-input__inner-button--active' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 									label={ buttonText }
@@ -218,12 +218,12 @@ class TextField extends PureComponent {
 							<Loader visible={ pending } />
 							
 							{ type == 'password' &&
-								<div className='component__inner-icon input-textfield__icon'>
+								<div className='modus-input__inner-icon input-textfield__icon'>
 									<EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> 
 								</div>
 							}	
 						 	{ icon && 
-						 		<div className='component__inner-icon input-textfield__icon'>
+						 		<div className='modus-input__inner-icon input-textfield__icon'>
 									<Icon size={16} name={ icon } /> 
 								</div>
 							}													 	

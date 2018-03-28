@@ -1,6 +1,6 @@
 @import '../../assets/styles/items/element.scss';
 
-.modus-spinner {	
+.element-spinner {	
 	animation: rotateSpinner 4s linear infinite;
 
 	&.center{ 
@@ -11,11 +11,11 @@
 		justify-content: center;
 	}
 }
-.modus-spinner__component {
+.element-spinner__component {
 	animation: rotateSpinner 0.8s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;			   
 }
 
-.modus-spinner__svg-path {
+.element-spinner__svg-path {
 	fill: none;
 	stroke-dasharray: 100;
 	stroke-dashoffset: 0;

@@ -1,4 +1,4 @@
-@import '../../assets/styles/items/component.scss';
+@import '../../assets/styles/items/input.scss';
 
 .input-datepicker{
 }
@@ -8,10 +8,10 @@
 	position: relative; 
 	cursor: pointer;
 
-	&.input-datepicker__component--open{    
+	&.input-datepicker__modus-input--open{    
 	} 
 	
-	&.input-datepicker__component--disabled{   
+	&.input-datepicker__modus-input--disabled{   
 	}
 }
 

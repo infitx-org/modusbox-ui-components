@@ -40,13 +40,13 @@ class Button extends React.PureComponent {
 	 	const { id, className, style, kind, label, icon, noFill, disabled, pending } = this.props	 	
 	 	const classNames = utils.composeClassNames([
 	 		className,
-			'input-button__input',			
-			kind === 'primary' && 'input-button__input--primary',
-			kind === 'secondary' && 'input-button__input--secondary',
-			kind === 'tertiary' && 'input-button__input--tertiary',
-			kind === 'danger' && 'input-button__input--danger',
-			disabled && 'component--disabled input-button__input--disabled',
-			pending && 'component--pending input-button__input--pending',
+			'modus-input input-button__input',			
+			kind === 'primary' && 'input-button__modus-input--primary',
+			kind === 'secondary' && 'input-button__modus-input--secondary',
+			kind === 'tertiary' && 'input-button__modus-input--tertiary',
+			kind === 'danger' && 'input-button__modus-input--danger',
+			disabled && 'modus-input--disabled input-button__modus-input--disabled',
+			pending && 'modus-input--pending input-button__modus-input--pending',
 			noFill && 'noFill'
 		])
 

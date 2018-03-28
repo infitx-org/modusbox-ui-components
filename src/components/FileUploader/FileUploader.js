@@ -167,24 +167,24 @@ class FileUploader extends Component {
 
 		const componentClassName = utils.composeClassNames([
 			'input-fileuploader__component',
-			'component',
-			'component__borders',
-			'component__background',
-			isOpen && 'component--open component__borders--open component__background--open',
-			disabled && 'component--disabled component__borders--disabled component__background--disabled',
-			pending && 'component--pending component__borders--pending component__background--pending',
-			invalid && 'component--invalid component__borders--invalid component__background--invalid',
-			required && fileName == undefined && 'component--required component__borders--required component__background--required',
+			'modus-input',
+			'modus-input__borders',
+			'modus-input__background',
+			isOpen && 'modus-input--open modus-input__borders--open modus-input__background--open',
+			disabled && 'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
+			pending && 'modus-input--pending modus-input__borders--pending modus-input__background--pending',
+			invalid && 'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			required && fileName == undefined && 'modus-input--required modus-input__borders--required modus-input__background--required',
 		])
 
 		return (
-			<div className='input-fileuploader component__box' style={ style }>
+			<div className='input-fileuploader modus-input__box' style={ style }>
 				<div id={id} className={ componentClassName } onClick={ this.onClickFileUploader} ref='area'>
 					<div className='input-fileuploader-box'>
 						
 						<Placeholder label={ placeholder } active={ isPlaceholderActive } />
 						
-						<div className='component__content input-fileuploader__content'>												
+						<div className='modus-input__content input-fileuploader__content'>												
 							<input 
 								className='input-fileuploader__input'
 								type='file'
@@ -204,7 +204,7 @@ class FileUploader extends Component {
 								: fileName 
 						 		?
 						 		<Button									
-									className={`component__inner-button input-fileuploader__button-remove ${isOpen ? 'component__inner-button--active' : ''}`}
+									className={`modus-input__inner-button input-fileuploader__button-remove ${isOpen ? 'modus-input__inner-button--active' : ''}`}
 									onClick={ this.onRemoveButtonClick }								
 									tabIndex='-1'
 									icon='close-small'
@@ -213,7 +213,7 @@ class FileUploader extends Component {
 								/>
 						 		:
 								<Button
-									className={`component__inner-button input-fileuploader__button-add ${isOpen ? 'component__inner-button--active' : ''}`}
+									className={`modus-input__inner-button input-fileuploader__button-add ${isOpen ? 'modus-input__inner-button--active' : ''}`}
 									onClick={ this.onButtonClick }								
 									tabIndex='-1'
 									icon='upload-small'

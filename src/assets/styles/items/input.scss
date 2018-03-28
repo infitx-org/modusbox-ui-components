@@ -3,10 +3,165 @@
 @import '../vars/background.scss';
 @import '../vars/general.scss';
 
-.input *{
+
+
+/********************************/
+/********************************/
+
+.modus-input *{
 	box-sizing: border-box;
-	font-family: sans-serif;
+	font-family: Open Sans, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	-webkit-font-smoothing: antialiased;	
+}
+
+/** COMPONENT */
+
+.modus-input{	
+	transition: all 0.2s ease-out;
+	border-radius: $border-radius;
+}
+.modus-input--open{
+	padding: 0px $component-open-size;		
+}
+.modus-input--disabled{
+	opacity: $component-opacity--disabled;
+	pointer-events: none;
+	cursor: auto;
+}
+
+
+/** COMPONENT **/
+
+.modus-input__box{
+	width: 100%;
+	height: 45px;	
+	display: block;
+	box-sizing: border-box;
+	position: relative;
+	margin: $component-margin 0px;
+}
+
+
+/** COMPONENT BACKGROUND **/
+
+.modus-input__background{
+	background: $background--default;
+}
+.modus-input__background--open{
+	background: $background--open;
+}
+.modus-input__background--pending{
+	background: $background--pending;	
+}
+.modus-input__background--invalid,
+.modus-input__background--required.modus-input__background--invalid{
+	background: $background--invalid;	
+}
+.modus-input__background--required{
+	background: $background--required;	
+}
+	
+
+/** COMPONENT BORDERS **/
+
+.modus-input__borders{
+	border-left: 2px solid $border-color--default;
+	border-right: 2px solid $border-color--default;
+}
+.modus-input__borders--open{
+	margin-left: -$component-open-size;
+	margin-right: -$component-open-size;	
+	border-color: $border-color--open;
+}	
+.modus-input__borders--pending{
+	border-color: $border-color--pending;
+}	
+.modus-input__borders--invalid,
+.modus-input__borders--required.modus-input__borders--invalid{
+	border-color: $border-color--invalid;
+}	
+.modus-input__borders--required{
+	border-color: $border-color--required;
+}	
+
+/** COMPONENT BLOCKS */
+
+.modus-input__content{
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	align-items: center;	
+	padding-left: 16px;
+	padding-right: 10px;
+}
+.modus-input__input{
+	flex: 2 1 auto;	
+	overflow: hidden;
+	height:20px;
+
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: 0px;
+	padding-top:1px;	
+	
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 14px;	
+
+}
+/** COMPONENT PLACEHOLDER **/
+
+.modus-input__placeholder{
+	font-size: 14px;
+	transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+	position: absolute;
+	top: 50%;
+	left: 16px;	
+	color: $placeholder-color;
+	transform: translateY(-50%);
+}
+.modus-input__placeholder--active{
+	top: 11px;
+	font-size: 11px;
+}
+
+
+/** COMPONENT INNER BUTTON **/
+
+.modus-input__inner-button{
+	outline: none;
+	flex: 0 0 auto;
+	border-radius:3px;
+	height: 24px;
+	margin-left: 5px;
+	border: 1px solid rgba(0,0,0,0.3);
+	background: transparent;
+	color: rgba(0,0,0,0.5);
+	fill: rgba(0,0,0,0.5);
+	font-size:12px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	padding: 0px 5px;
+	font-size: 11px;	
+
+	&:hover, &.modus-input__inner-button--active{
+		background: rgba(0,162,233,0.8);
+		border-color: transparent;
+		color: #fff;
+		fill: #fff;
+	}
+}
+
+
+/** COMPONENT INNER ICON **/
+
+.modus-input__inner-icon{
+	flex: 0 0 auto;
+	fill: #999;
+	margin-left: 5px;
 }

@@ -43,7 +43,7 @@
     stroke: inherit;
 }
 
-.input-button__input--primary{
+.input-button__modus-input--primary{
     background-color: $color__main-primary;
     border-color: $color__main-primary;
     
@@ -65,7 +65,7 @@
         }
     };    
 }
-.input-button__input--secondary{
+.input-button__modus-input--secondary{
 	background-color: $color__main-secondary;
     border-color: $color__main-secondary;
     
@@ -87,7 +87,7 @@
         }
     }    
 }
-.input-button__input--danger{
+.input-button__modus-input--danger{
     background-color: $color__main-danger;
     border-color: $color__main-danger;
     color: $color__white;
@@ -112,8 +112,8 @@
         }
     }
 }
-.input-button__input--disabled,
-.input-button__input--tertiary{
+.input-button__modus-input--disabled,
+.input-button__modus-input--tertiary{
     background-color: $color__main-tertiary;
     border-color: $color__main-tertiary;
     color: $color__dark-gray-1;
@@ -132,10 +132,10 @@
     };
 }
 
-.input-button__input--primary,
-.input-button__input--secondary,
-.input-button__input--tertiary,
-.input-button__input--danger{
+.input-button__modus-input--primary,
+.input-button__modus-input--secondary,
+.input-button__modus-input--tertiary,
+.input-button__modus-input--danger{
     &:hover{
         &.noFill{ 
             &:active{ 

@@ -141,7 +141,7 @@ class Tabs extends React.PureComponent {
 				<input 
 					ref='btn'
 					type='button'
-					className='element__holder'
+					className='modus-element__holder'
 					onFocus={ this.onFocus }
 					onBlur={ this.onBlur }
 					onKeyDown={ this.testKey }

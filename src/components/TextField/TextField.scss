@@ -1,4 +1,4 @@
-@import '../../assets/styles/items/component.scss';
+@import '../../assets/styles/items/input.scss';
 
 .input-textfield{	
 }
@@ -7,10 +7,10 @@
 	position: relative;		
 	cursor: pointer;
 
-	&.input-textfield__component--open{		
+	&.input-textfield__modus-input--open{		
 	}	
 	
-	&.input-textfield__component--disabled{		
+	&.input-textfield__modus-input--disabled{		
 	}
 }
 .input-textfield__content{

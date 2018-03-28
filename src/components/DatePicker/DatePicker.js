@@ -207,22 +207,22 @@ class DatePicker extends React.PureComponent {
 		
 		const componentClassName = utils.composeClassNames([
 			'input-datepicker__component',
-			'component',
-			'component__borders',
-			'component__background',
-			isOpen && 'component--open component__borders--open component__background--open',
-			disabled && 'component--disabled component__borders--disabled component__background--disabled',
-			pending && 'component--pending component__borders--pending component__background--pending',
-			invalid && 'component--invalid component__borders--invalid component__background--invalid',
-			required && 'component--required component__borders--required component__background--required',
+			'modus-input',
+			'modus-input__borders',
+			'modus-input__background',
+			isOpen && 'modus-input--open modus-input__borders--open modus-input__background--open',
+			disabled && 'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
+			pending && 'modus-input--pending modus-input__borders--pending modus-input__background--pending',
+			invalid && 'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			required && 'modus-input--required modus-input__borders--required modus-input__background--required',
 		])
 
 		return (
-			<div className='input-datepicker component__box' style={ style }>
+			<div className='input-datepicker modus-input__box' style={ style }>
 				<div className={ componentClassName }>
 					<div 
 						id={ id }
-						className='component__content input-datepicker__content'						
+						className='modus-input__content input-datepicker__content'						
 						onClick={ this.onFocus }							
 					>
 						<Placeholder label={ placeholder } active={ isPlaceholderActive } />
@@ -230,7 +230,7 @@ class DatePicker extends React.PureComponent {
 						<input
 							onFocus={ this.onFocus }
 							ref='input'
-							className='component__input input-datepicker__value'
+							className='modus-input__input input-datepicker__value'
 							value={ hasDate ? moment( dateString ).format('MMM Do YYYY, HH:mm:ss') : '' }
 							onKeyDown={ this.testKey }
 							disabled={ disabled }
@@ -239,7 +239,7 @@ class DatePicker extends React.PureComponent {
 						
 						<Loader visible={ pending } />
 
-						<div className='component__inner-icon input-datepicker__icon'> 
+						<div className='modus-input__inner-icon input-datepicker__icon'> 
 							<Icon size={16} name='calendar-small' fill='#999'/>	
 						</div>
 
