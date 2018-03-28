@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars/colors.scss';
+
 .input-textfield{	
 }
 .input-textfield__component{
@@ -25,16 +27,10 @@
 }
 
 .input-textfield__value{
-	-webkit-box-flex: 2;
-    -ms-flex: 2 1 auto;
-    flex: 2 1 auto;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: clip;
-    white-space: nowrap;
+	flex: 2 1 auto;
+    vertical-align: middle;    
     position: relative;
-    height:20px;
-
+    height: 20px;
 	background: transparent;
 	border: none;
 	outline: none;
@@ -44,13 +40,9 @@
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color:#333;	
-	justify-content:center;
-	align-items:center;
-
-    &.has-filter{
-    	color:#06c;
-    }
+	justify-content: center;
+	align-items: center;
+    color: $color__dark-gray-3;	    
 }
 .input-textfield__icon{
 	flex: 0 0 auto;

@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars/colors.scss';
+
 .input-fileuploader{
 }
 .input-fileuploader__component{
@@ -39,10 +41,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    position: relative;
-    
+    position: relative;    
+    color: $color__dark-gray-3;
+
     &.missing {
-		color:#999;
+		color: $color__gray-4;
 	}
 }
 
@@ -50,6 +53,7 @@
 }
 
 .input-fileuploader__button-add{
+	
 	&:hover, &.component__inner-button--active{
 		background: rgba(0,162,233,0.8);
 	}

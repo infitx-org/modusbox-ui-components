@@ -16,40 +16,42 @@ const AllItemTabs = ComponentMappings.map( ({name}, i) => <Tab key={ i }> { name
 const AllItemPanels = ComponentMappings.map( ({ view, name }, i) => {
 	const View = TestViews[ view ]	
 	const Content = () => (
-		<Row align='top'>
-			<Column style={{width:'70%'}}>
-				<View />
-			</Column>
-			<Column style={{width:'30%'}}>
-				<Source name={ view }/>
-			</Column>
-		</Row>
+		<Column align='top'>		
+			<View />				
+		</Column>
 	)	
 	if( name === 'DataList' ){
 		return <TabPanel key={ i }><Content /></TabPanel>
 	}
 	return <TabPanel key={ i }><ScrollBox><Content /></ScrollBox></TabPanel>
 })
-const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
-const selected = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1
-const onSelectTab = ( idx ) => window.localStorage.setItem('tab', idx);  
 
 class Views extends React.Component {
 
 	constructor(props){
 		super(props)				
-		this.onChange = this.onChange.bind(this)
+		this.onChangeStyle = this.onChangeStyle.bind(this)
 		this.onCodeToggle = this.onCodeToggle.bind(this)
+		this.onSelectTab = this.onSelectTab.bind(this)
+
+		const selectedTab = parseInt( window.localStorage.getItem('tab') || 0 )
+		const tab = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1
+
 		this.state = { 
-			selected: 'default',
+			tab, 
+			style: 'default',
 			code: false
 		}
 	}	
-	onCodeToggle(value){
-		this.setState({ code: value })
+	onCodeToggle( code ){
+		this.setState({ code })
 	}
-	onChange(value){
-		this.setState({ selected: value })
+	onChangeStyle( style ){
+		this.setState({ style })
+	}
+	onSelectTab( tab ){
+		window.localStorage.setItem( 'tab', tab );  
+		this.setState({ tab })
 	}
 	
 	render(){
@@ -57,16 +59,16 @@ class Views extends React.Component {
 			{ label:'default', value:'default'},
 			{ label:'custom', value:'custom'},
 		]
-		require('../assets/styles/' + this.state.selected + '.scss')
+		require('../assets/styles/' + this.state.style + '.scss')
 
 		return (
 			<Column style={{width:'100%', height:'100%', overflow:'hidden'}}>
 				<div style={{margin: '10px'}}>
 					<Row>
 						<Select
-							value={ this.state.selected }
+							value={ this.state.style }
 							placeholder='Select StyleSheet'						
-							onChange={ this.onChange }
+							onChange={ this.onChangeStyle }
 							options={ options }						
 						/>
 					
@@ -78,11 +80,15 @@ class Views extends React.Component {
 					</Row>
 				</div>
 				<div>
-					<Tabs selected={ selected } onSelect={ onSelectTab }>
+					<Tabs selected={ this.state.tab } onSelect={ this.onSelectTab }>
 						<TabList>{ AllItemTabs }</TabList>
 						<TabPanels>{ AllItemPanels }</TabPanels>
-					</Tabs>
-					
+					</Tabs>					
+					{ this.state.code && 
+						<div style={{position: 'absolute', top: '100', right:'20', boxShadow: '0px 1px 2px rgba(0,0,0,0.4)'}}>
+							<Source name={ ComponentMappings[ this.state.tab ].view }/>
+						</div>
+					}
 				</div>
 
 

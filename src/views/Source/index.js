@@ -33,15 +33,14 @@ class Source extends React.Component {
 	        lineNumbers: false,
 	        lineWrapping: true,
 	        smartIndent: false,  // javascript mode does bad things with jsx indents
-	        matchBrackets: true,        
-	        scrollbarStyle: null,
+	        matchBrackets: true,        	        
 	        viewportMargin: Infinity,
 	        dragDrop: false,
 	        readOnly: this.props.readOnly
     	})
 	}
 	render(){
-		return <div style={{ fontSize:'12px', padding:'10px'}}>
+		return <div style={{ background:'#fff', fontSize:'12px', padding:'10px'}}>
 			<textarea 
 				ref='editor'
 				autoComplete='off'
