@@ -11,7 +11,7 @@
     "prestart": "webpack --config webpack.dll.config.js",
     "start": "NODE_ENV=development node server.js",
     "start:prod": "NODE_ENV=production node server.js",
-    "postinstall": "NODE_ENV=production  ./node_modules/.bin/webpack --config ./webpack.production.config.js --inline --bail",
+    "install": "NODE_ENV=production  ./node_modules/.bin/webpack --config ./webpack.production.config.js --inline --bail",
     "build": "NODE_ENV=production  webpack --config webpack.production.config.js --inline --bail",
     "test": "jest",
     "test:watch": "jest --watch",
