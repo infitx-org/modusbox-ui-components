@@ -1,8 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
+
 import Row from '../Row'
 import Button from '../Button'
 import ScrollBox from '../ScrollBox'
-import './Modal.css'
+
+import './Modal.scss'
 
 export default class ModalBackground extends React.PureComponent {
 	

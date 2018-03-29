@@ -2,19 +2,11 @@ var webpack = require('webpack')
 
 module.exports = {
 	entry: {
-		vendorPackages: [			
-			'c3',
-			'classnames',						
-			'fixed-data-table',
-			'lodash',			
-			'rc-notification',
-			'rc-trigger',
-			'react',
+		vendorPackages: [						
 			'react-addons-shallow-compare',
-			'react-contenteditable',
-			'react-dom',
-			'react-virtualized',
-			'react-zeroclipboard',
+			'lodash',			
+			'react',
+			'react-dom'
 		]
 	},
 
