@@ -58,7 +58,7 @@
 		}
 	}
 	
-	&.disabled&.checked{
+	&.disabled.checked{
 		+ label{
 			&:before{
 				border-color: #60d2fd;

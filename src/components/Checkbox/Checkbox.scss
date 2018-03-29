@@ -57,7 +57,7 @@
 			transition: all .2s ease-out;
 		}		
 	}
-
+	
 	&:disabled{
 		+ label{ 
 			color: #999;
@@ -66,13 +66,12 @@
 				box-shadow: none;
 			}
 		}
-	}
-	
-	&:disabled&:checked{
-		+ label{
-			&:before{
-				border-color: #60d2fd;
-				background: #60d2fd;
+		&:checked{
+			+ label{
+				&:before{
+					border-color: #60d2fd;
+					background: #60d2fd;
+				}
 			}
 		}
 	}
