@@ -132,11 +132,6 @@ var config = {
 		/* autoprefix for different browser vendors */
 		require('autoprefixer'),
 		/* require global variables */
-		/*require('postcss-simple-vars')({
-			variables: function () {
-				return require('@mulesoft/anypoint-styles/lib/variables')
-			}
-		})*/
 	]
 }
 
