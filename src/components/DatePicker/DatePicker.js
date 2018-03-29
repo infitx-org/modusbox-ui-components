@@ -344,8 +344,9 @@ class TimeInput extends React.PureComponent{
 	}
 
 	onChangeValue( e ){
-		const value = parseInt( e.target.value )
-		this.props.onChange(value)
+		let { value } = e.target
+		const time = value === '' ? 0 : parseInt( value )
+		this.props.onChange( time )
 	}
 
 	render(){
