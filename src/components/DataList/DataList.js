@@ -13,7 +13,7 @@ import Icon from '../Icon'
 import { NotifyResize } from 'react-notify-resize'
 import './DataList.scss'
 
-import { ScrollBar } from '../ScrollBox'
+import ScrollBar from '../ScrollBox/ScrollBar'
 import Link from './Link'
 import Header from './Header'
 import ListItem from './ListItem'

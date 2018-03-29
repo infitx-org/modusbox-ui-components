@@ -57,12 +57,12 @@ var config = {
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     	new webpack.optimize.OccurenceOrderPlugin(true),
     	new webpack.optimize.DedupePlugin(),
-    	new webpack.optimize.UglifyJsPlugin({
+    	/*new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
 			compress: {
 				warnings: false
 			}
-		}),
+		}),*/
     	new ExtractTextPlugin('[name]/[name].css?[hash]-[chunkhash]-[contenthash]-[name]', {
 			disable: false,
 			allChunks: true,
