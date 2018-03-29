@@ -5,7 +5,7 @@ var cwd = process.cwd()
 if (cwd.indexOf('@') === -1) {
   console.log('in local dev context. Build DLL')
   var webpackPath = path.join(cwd, 'node_modules', '.bin', 'webpack')
-  var command = webpackPath + ' --config webpack.production.config.js --inline --bail"
+  var command = webpackPath + ' --config webpack.production.config.js --inline --bail'
   exec(command, {cwd: cwd}, function (error, stdout, stderr) {
     if (error) {
       console.warn(error)
