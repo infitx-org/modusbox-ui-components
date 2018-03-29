@@ -48,15 +48,15 @@ var config = {
 	output: {
 		path: path.join(__dirname, 'lib'),
 		filename: '[name]/index.js',
-		libraryTarget: 'commonjs2',
-		library: pkg.name
+		library: pkg.name,
+		libraryTarget: 'commonjs2'
 	},
 	externals: externals,
 	plugins: [
 		// Ignore all locale files of moment.js
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    	new webpack.optimize.OccurenceOrderPlugin(true),
-    	new webpack.optimize.DedupePlugin(),
+    	// new webpack.optimize.OccurenceOrderPlugin(true),
+    	// new webpack.optimize.DedupePlugin(),
     	/*new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
 			compress: {

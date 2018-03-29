@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
+
 import './Spinner.scss'
+
 
 
 const polarToCartesian = ( centerX, centerY, radius, angleInDegrees ) => {

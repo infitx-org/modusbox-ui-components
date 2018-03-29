@@ -51,7 +51,7 @@ class Button extends React.PureComponent {
 		])
 
 		return (			
-			<button
+			<Btn
 				ref='input'
 				id={ id }
 				style={ style }
@@ -71,7 +71,7 @@ class Button extends React.PureComponent {
 					}
 					{ label && <span>{ label }</span> }
 				</div>
-			</button>							
+			</Btn>							
 		)
 	}
 }
@@ -98,5 +98,28 @@ Button.defaultProps = {
 	disabled: false,
 	pending: false,
 	onClick: undefined
+}
+
+
+
+class Btn extends React.PureComponent {
+	constructor(props){
+		super(props)
+	}
+	render(){
+		const { id, style, className, onKeyDown, onClick, disabled, children } = this.props
+		return (
+			<button
+				id={ id }
+				style={ style }
+				className={ className }
+				onKeyDown={ this.testKey }					
+				onClick={ this.onClick }
+				disabled={ disabled }				
+			>
+				{ children }
+			</button>
+		)
+	}
 }
 export default Button
