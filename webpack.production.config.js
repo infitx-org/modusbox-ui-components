@@ -55,8 +55,8 @@ var config = {
 	plugins: [
 		// Ignore all locale files of moment.js
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    	// new webpack.optimize.OccurenceOrderPlugin(true),
-    	// new webpack.optimize.DedupePlugin(),
+    	new webpack.optimize.OccurenceOrderPlugin(true),
+    	new webpack.optimize.DedupePlugin(),
     	/*new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
 			compress: {
