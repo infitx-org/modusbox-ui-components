@@ -1,8 +1,8 @@
 {
-  "name": "ModusboxComponents",
+  "name": "modus-ui-components",
   "version": "1.0.0",
-  "description": "ModusBox Components",
-  "main": "dist",
+  "description": "ModusBox UI Components",
+  "main": "lib",
   "author": {
     "name": "Ivan Annovazzi",
     "email": "ivan@modusbox.com"
