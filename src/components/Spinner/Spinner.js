@@ -33,7 +33,7 @@ const Spinner = ({ size, center, color }) => {
   const style = { stroke: color }
 
   return(
-    <div className={`element-spinner ${center ? 'center' : '' }`}>
+    <div className={`element-spinner ${center ? 'center' : '' }`} style={{ width, height }}>
       <svg 
         className='element-spinner__component'
         width={ width }
