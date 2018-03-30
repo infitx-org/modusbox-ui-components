@@ -1,6 +1,6 @@
 import '../assets/main.css'
-import '../assets/styles/default.scss'
 import '../assets/styles/components.scss'
+import '../assets/styles/default.scss'
 
 import Button from './Button'
 import Checkbox from './Checkbox'
