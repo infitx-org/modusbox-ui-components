@@ -3,8 +3,6 @@
 @import '../vars/background.scss';
 @import '../vars/general.scss';
 
-
-
 /********************************/
 /********************************/
 
@@ -113,8 +111,15 @@
 	font-size: 14px;	
 
 }
-/** COMPONENT PLACEHOLDER **/
-
+.modus-input__holder{
+	padding: 0px;
+	margin: 0px;
+	width: 0px;
+	height: 0px;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
 .modus-input__placeholder{
 	font-size: 14px;
 	transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -130,7 +135,7 @@
 }
 
 
-/** COMPONENT INNER BUTTON **/
+/** COMPONENT INNER BLOCKS **/
 
 .modus-input__inner-button{
 	outline: none;
@@ -156,10 +161,6 @@
 		fill: #fff;
 	}
 }
-
-
-/** COMPONENT INNER ICON **/
-
 .modus-input__inner-icon{
 	flex: 0 0 auto;
 	fill: #999;

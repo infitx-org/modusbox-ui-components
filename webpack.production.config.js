@@ -37,8 +37,8 @@ var externals = defaultExternals
 .concat( Object.keys( pkg.dependencies ) )
 .concat( componentExternals )
 .concat([
-	'react',
-	'react-dom'
+	{ "react": "React" },
+	{'react-dom': "ReactDOM" }
 ])
 
 const srcPath = path.join(__dirname, 'src')
@@ -55,8 +55,8 @@ var config = {
 	plugins: [
 		// Ignore all locale files of moment.js
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    	new webpack.optimize.OccurenceOrderPlugin(true),
-    	new webpack.optimize.DedupePlugin(),
+    	/*new webpack.optimize.OccurenceOrderPlugin(true),
+    	new webpack.optimize.DedupePlugin(),*/
     	/*new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
 			compress: {
@@ -69,15 +69,7 @@ var config = {
 		}),
 
 		function () {
-			this.plugin('done', function (stats) {
-				//console.log( stats )
-				/* Write file tree to dist
-				require('fs').writeFileSync(
-				path.join(__dirname, 'webpack_files_map.conf.json'),
-				JSON.stringify(stats.toJson().assetsByChunkName)
-				)
-				*/
-			})
+			this.plugin('done', function (stats) {})
 		}
 	],
 

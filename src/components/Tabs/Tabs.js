@@ -212,5 +212,4 @@ class Tab extends React.PureComponent{
 	}
 }
 
-
 export { Tab, Tabs, TabList, TabPanel, TabPanels }

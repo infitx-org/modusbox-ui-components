@@ -113,8 +113,8 @@ class Btn extends React.PureComponent {
 				id={ id }
 				style={ style }
 				className={ className }
-				onKeyDown={ this.testKey }					
-				onClick={ this.onClick }
+				onKeyDown={ onKeyDown }					
+				onClick={ onClick }
 				disabled={ disabled }				
 			>
 				{ children }

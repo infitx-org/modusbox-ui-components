@@ -6,6 +6,7 @@
 	display: flex;
 	position: relative;	
 	cursor: pointer;
+	height: 100%;
 	
 	&.input-fileuploader__modus-input--open {
 	}	
@@ -42,6 +43,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     position: relative;    
+    font-size: 14px;
     color: $color__dark-gray-3;
 
     &.missing {

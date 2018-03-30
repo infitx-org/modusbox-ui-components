@@ -40,10 +40,14 @@ class Checkbox extends React.PureComponent {
 		}
 	}
 	testKey(e){
-		if( e.nativeEvent.keyCode === 9 || e.nativeEvent.keyCode === 13 ){
+		if( e.nativeEvent.keyCode === 9 ){
 			e.preventDefault()			
 			focusNextFocusableElement( this.refs.input, ! e.nativeEvent.shiftKey );			
 			return
+		}
+		if( e.nativeEvent.keyCode === 13 ){
+			e.preventDefault()			
+			this.onChange(e)			
 		}
 	}
 	render(){	 	

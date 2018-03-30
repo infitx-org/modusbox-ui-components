@@ -3,6 +3,7 @@
 	padding: 3px;
 	display: flex;
 	font-size: 14px;
+	align-items: center;
 }
 .input-radio__option{
 	&:not(:first-child){
@@ -17,6 +18,7 @@
 
 	+ label{
 
+		align-items: center;
 		max-width: 100%;
 		display: flex;
 		position: relative;		
