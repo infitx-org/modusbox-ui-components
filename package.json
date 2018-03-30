@@ -10,8 +10,7 @@
   "scripts": {
     "prestart": "webpack --config webpack.dll.config.js",
     "start": "NODE_ENV=development node server.js",
-    "start:prod": "NODE_ENV=production node server.js",
-    "install": "npm install",
+    "start:prod": "NODE_ENV=production node server.js",    
     "postinstall": "node scripts/postinstall.js",
     "build": "NODE_ENV=production  webpack --config webpack.production.config.js --inline --bail",
     "test": "jest",
