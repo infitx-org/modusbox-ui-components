@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import configureStore from './redux/configureStore'
 import Views from './views'
 
-//import './assets/main.css'
+import './assets/main.css'
 var store = configureStore()
 
 class Root extends React.Component{	

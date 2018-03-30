@@ -7,6 +7,9 @@ import keyCodes from '../../utils/keyCodes'
 import { Loader, Placeholder } from '../Common'
 import Button from '../Button'
 
+import '../../icons/mule/upload-small.svg'
+import '../../icons/mule/close-small.svg'
+
 import './FileUploader.scss'
 
 class FileUploader extends Component { 

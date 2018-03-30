@@ -17,8 +17,7 @@ const defaultExternals = []
 const cssExternals = []
 const componentExternals = []
 const entryPoints = {
-	index: './src/components/index.js',
-	moduscomponents: [ './src/assets/styles/default.scss']
+	index: './src/components/index.js',	
 }
 
 /* Assign aliases, define externs, define entrypoints */
@@ -55,22 +54,18 @@ var config = {
 	plugins: [
 		// Ignore all locale files of moment.js
     	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    	/*new webpack.optimize.OccurenceOrderPlugin(true),
-    	new webpack.optimize.DedupePlugin(),*/
+    	new webpack.optimize.OccurenceOrderPlugin(true),
+    	new webpack.optimize.DedupePlugin(),
     	/*new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
 			compress: {
 				warnings: false
 			}
 		}),*/
-    	new ExtractTextPlugin('[name]/[name].css?[hash]-[chunkhash]-[contenthash]-[name]', {
+    	new ExtractTextPlugin('[name]/[name].css', {
 			disable: false,
 			allChunks: true,
-		}),
-
-		function () {
-			this.plugin('done', function (stats) {})
-		}
+		})		
 	],
 
 	resolve: {		
