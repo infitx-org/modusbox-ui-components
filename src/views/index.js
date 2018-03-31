@@ -16,7 +16,7 @@ const AllItemTabs = ComponentMappings.map( ({name}, i) => <Tab key={ i }> { name
 const AllItemPanels = ComponentMappings.map( ({ view, name }, i) => {
 	const View = TestViews[ view ]	
 	const Content = () => (
-		<Column align='top'>		
+		<Column grow='1' align='top'>		
 			<View />				
 		</Column>
 	)	
@@ -79,7 +79,7 @@ class Views extends React.Component {
 						/>
 					</Row>
 				</div>
-				<div>
+				<Column grow='1'>
 					<Tabs selected={ this.state.tab } onSelect={ this.onSelectTab }>
 						<TabList>{ AllItemTabs }</TabList>
 						<TabPanels>{ AllItemPanels }</TabPanels>
@@ -89,7 +89,7 @@ class Views extends React.Component {
 							<Source name={ ComponentMappings[ this.state.tab ].view }/>
 						</div>
 					}
-				</div>
+				</Column>
 
 
 			</Column>

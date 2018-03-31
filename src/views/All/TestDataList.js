@@ -16,7 +16,7 @@ const columns1 = [
 
 
 const TestDataList = () => (	
-	<div style={{ padding:'10px', margin:'5px 0px', border: '1px solid #ccc', flex: '2 1 auto', display: 'flex'}}>
+	<div style={{ padding:'10px', margin:'5px 0px', border: '1px solid #ccc', flex: '2 1 auto', display: 'flex', flex: '2 1 auto'}}>
 		<DataList
 			id='1'
 			columns={ columns1 }
