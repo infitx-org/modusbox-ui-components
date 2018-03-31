@@ -1,116 +1,72 @@
-import React, { PropTypes } from 'react'
-import Select from '../../components/Select'
+import React, { PropTypes } from 'react';
+import Select from '../../components/Select';
 
 const options = [
 	{
 		label: 'test',
-		value:'z'
+		value: 'z',
 	},
 	{
 		label: 'test11231231312313123',
-		value:'z1',
-		icon: 'close-small'
+		value: 'z1',
+		icon: 'close-small',
 	},
 	{
 		label: 'test2',
-		value:'z2'
+		value: 'z2',
 	},
 	{
 		label: 'test3',
-		value:'z3'
+		value: 'z3',
 	},
 	{
 		label: 'disabled',
 		value: 'disabled',
-		disabled: true
-
+		disabled: true,
 	},
 	{
 		label: 'test4',
-		value:'z4'
+		value: 'z4',
 	},
 	{
 		label: 'test5',
-		value:'z5'
+		value: 'z5',
 	},
 	{
 		label: 'disabled2',
 		value: 'disabled2',
-		disabled: true
-
-	}
-]
+		disabled: true,
+	},
+];
 
 const TestSelect = () => (
-	<div>		
-		<div style={{padding:10, border: '1px solid #ccc'}}>
+	<div>
+		<div style={{ padding: 10, border: '1px solid #ccc' }}>
+			<Select placeholder="Default" options={options} />
+			<Select placeholder="Pending" options={options} pending />
+			<Select placeholder="Invalid" options={options} invalid />
+			<Select placeholder="Required" options={options} required />
+			<Select placeholder="Disabled" options={options} disabled />
 			<Select
-				placeholder='Default'
-				options={ options }				
-			/>
-			<Select
-				placeholder='Pending'
-				options={ options }		
-				pending		
-			/>
-			<Select
-				placeholder='Invalid'
-				options={ options }
-				invalid
-			/>
-			<Select
-				placeholder='Required'
-				options={ options }
-				required
-			/>
-			<Select
-				placeholder='Disabled'
-				options={ options }
-				disabled
-			/>
-			<Select
-				placeholder='Events (console)'
-				options={ options }
-				onChange={ console.log }
+				placeholder="Events (console)"
+				options={options}
+				onChange={console.log}
 			/>
 		</div>
-		<div style={{padding:10, border: '1px solid #ccc'}}>
+		<div style={{ padding: 10, border: '1px solid #ccc' }}>
+			<Select id="x" placeholder="placeholder" options={options} pending />
 			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
-				pending
-			/>
-			<Select
-				placeholder='Position 2 options'
-				options={ [ options[0], options[1] ] }				
+				placeholder="Position 2 options"
+				options={[options[0], options[1]]}
 			/>
 			{/*<select> { options.map( i => <option value={i.label}>{i.label}</option> ) } </select>*/}
-			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
-				disabled
-			/>
-			
-			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
-			/>			
-			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
-			/>	
-			<Select
-				id='x'
-				placeholder='placeholder'
-				options={ options }
-			/>	
-		</div>
-		
-	</div>
-)
+			<Select id="x" placeholder="placeholder" options={options} disabled />
 
-export default TestSelect
+			<Select id="x" placeholder="placeholder" options={options} />
+			<Select id="x" placeholder="placeholder" options={options} />
+			<Select id="x" placeholder="placeholder" options={options} />
+		</div>
+	</div>
+);
+
+export default TestSelect;

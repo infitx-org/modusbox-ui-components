@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import Icon from '../../components/Icon'
+import React, { PropTypes } from 'react';
+import Icon from '../../components/Icon';
 
-import '../../icons/index.js'
+import '../../icons/index.js';
 
 const modusboxIcons = [
 	'business-processes',
@@ -23,8 +23,8 @@ const modusboxIcons = [
 	'saved',
 	'editing',
 	'magic-wand',
-	'settings'
-]
+	'settings',
+];
 
 const mulesoftIcons = [
 	'access-manager-color',
@@ -224,36 +224,57 @@ const mulesoftIcons = [
 	'warning',
 	'xchange-color',
 	'xchange-greyscale',
-]
-
+];
 
 const Block = ({ icon }) => (
-	<div style={{ height: '140px', width: '140px', justifyContent:'center', display:'flex', flexDirection:'column'}}>
-		<div style={{flex:'0 0 auto', justifyContent:'center', display:'flex'}}>
-			<Icon 
-				size={40}
-				fill='#999'
-				name={ icon }
-				style={{display:'flex'}}
-			/>
+	<div
+		style={{
+			height: '140px',
+			width: '140px',
+			justifyContent: 'center',
+			display: 'flex',
+			flexDirection: 'column',
+		}}
+	>
+		<div
+			style={{ flex: '0 0 auto', justifyContent: 'center', display: 'flex' }}
+		>
+			<Icon size={40} fill="#999" name={icon} style={{ display: 'flex' }} />
 		</div>
-		<div style={{flex:'0 0 auto', justifyContent:'center', display:'flex', fontSize:'11px'}}> { icon } </div>
+		<div
+			style={{
+				flex: '0 0 auto',
+				justifyContent: 'center',
+				display: 'flex',
+				fontSize: '11px',
+			}}
+		>
+			{' '}
+			{icon}{' '}
+		</div>
 	</div>
-)
+);
 
-const IconBox = ({ icons }) => (	
-		<div style={{ margin:'5px 0px', border: '1px solid #ccc', display:'flex', flexWrap:'wrap'}}>
-			{ icons.map( (icon,i) => <Block key={i} icon={ icon }/>	) }
-		</div>
-)
+const IconBox = ({ icons }) => (
+	<div
+		style={{
+			margin: '5px 0px',
+			border: '1px solid #ccc',
+			display: 'flex',
+			flexWrap: 'wrap',
+		}}
+	>
+		{icons.map((icon, i) => <Block key={i} icon={icon} />)}
+	</div>
+);
 
-const TestIcon = () => (	
-	<div style={{padding:'10px'}}>
+const TestIcon = () => (
+	<div style={{ padding: '10px' }}>
 		<h3> Modusbox </h3>
-		<IconBox icons={ modusboxIcons }/>
+		<IconBox icons={modusboxIcons} />
 
 		<h3> Mulesoft </h3>
-		<IconBox icons={ mulesoftIcons }/>
+		<IconBox icons={mulesoftIcons} />
 	</div>
-) 
-export default TestIcon
+);
+export default TestIcon;

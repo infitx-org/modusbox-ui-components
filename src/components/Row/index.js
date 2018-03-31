@@ -1,2 +1,2 @@
-import Row from './Row'
-export default Row
+import Row from './Row';
+export default Row;

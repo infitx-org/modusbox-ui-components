@@ -1,4 +1,4 @@
-const keyCodes = {}
+const keyCodes = {};
 
 keyCodes.KEY_CANCEL = 3;
 keyCodes.KEY_HELP = 6;
@@ -116,4 +116,4 @@ keyCodes.KEY_CLOSE_BRACKET = 221;
 keyCodes.KEY_QUOTE = 222;
 keyCodes.KEY_META = 224;
 
-export default keyCodes
+export default keyCodes;

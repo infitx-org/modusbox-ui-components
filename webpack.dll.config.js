@@ -1,13 +1,13 @@
-var webpack = require('webpack')
+var webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		vendorPackages: [						
+		vendorPackages: [
 			'react-addons-shallow-compare',
-			'lodash',			
+			'lodash',
 			'react',
-			'react-dom'
-		]
+			'react-dom',
+		],
 	},
 
 	output: {
@@ -20,7 +20,7 @@ module.exports = {
 		new webpack.DllPlugin({
 			context: process.cwd(),
 			name: '[name]',
-			path: './dist/[name].json'
-		})
-	]
-}
+			path: './dist/[name].json',
+		}),
+	],
+};

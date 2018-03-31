@@ -1,2 +1,2 @@
-import ModalTabsLayout from './ModalTabsLayout'
-export default ModalTabsLayout
+import ModalTabsLayout from './ModalTabsLayout';
+export default ModalTabsLayout;

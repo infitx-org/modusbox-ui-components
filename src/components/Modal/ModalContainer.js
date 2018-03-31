@@ -10,21 +10,13 @@ import ModalBackground from './ModalBackground';
  * Portal.
  */
 export default class ModalContainer extends React.PureComponent {
-	
-	render(){
-		const {
-			props: {
-				children,
-				...otherProps,
-			}
-		} = this;
-				
+	render() {
+		const { props: { children, ...otherProps } } = this;
+
 		return (
 			<ModalPortal {...otherProps}>
-				<ModalBackground {...otherProps}>
-					{children}
-				</ModalBackground>
+				<ModalBackground {...otherProps}>{children}</ModalBackground>
 			</ModalPortal>
-		)
+		);
 	}
 }

@@ -1,252 +1,279 @@
-import React, { PureComponent, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
-import find from 'lodash/find'
+import React, { PureComponent, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import find from 'lodash/find';
 
-import * as utils from '../../utils/common'
-import keyCodes from '../../utils/keyCodes'
+import * as utils from '../../utils/common';
+import keyCodes from '../../utils/keyCodes';
 
-import Button from '../Button'
-import Icon from '../Icon'
-import { Loader, Placeholder } from '../Common'
+import Button from '../Button';
+import Icon from '../Icon';
+import { Loader, Placeholder } from '../Common';
 
-import './TextField.scss'
+import './TextField.scss';
 
-class TextField extends PureComponent { 
-	constructor( props ){
-		super( props )
+class TextField extends PureComponent {
+	constructor(props) {
+		super(props);
 
-		// Events 
-		this.onShowPasswordClick = this.onShowPasswordClick.bind(this)
-		this.onPageClick = this.onPageClick.bind(this)	
-		this.onTextFieldClick = this.onTextFieldClick.bind(this)
-		this.onButtonClick = this.onButtonClick.bind(this)
+		// Events
+		this.onShowPasswordClick = this.onShowPasswordClick.bind(this);
+		this.onPageClick = this.onPageClick.bind(this);
+		this.onTextFieldClick = this.onTextFieldClick.bind(this);
+		this.onButtonClick = this.onButtonClick.bind(this);
 
 		// Wrapper events
-		this.onClick = this.onClick.bind(this)
-		this.onChange = this.onChange.bind(this)
-		this.onKeyPress = this.onKeyPress.bind(this)		
-		this.onBlur = this.onBlur.bind(this)
-		this.onFocus = this.onFocus.bind(this)
+		this.onClick = this.onClick.bind(this);
+		this.onChange = this.onChange.bind(this);
+		this.onKeyPress = this.onKeyPress.bind(this);
+		this.onBlur = this.onBlur.bind(this);
+		this.onFocus = this.onFocus.bind(this);
 
 		// Internal lifecycle methods
-		this.setValue = this.setValue.bind(this)
-		this.closeTextField = this.closeTextField.bind(this)
-		this.leaveTextField = this.leaveTextField.bind(this)
-		this.enterTextField = this.enterTextField.bind(this)
-		this.testKey = this.testKey.bind(this)		
+		this.setValue = this.setValue.bind(this);
+		this.closeTextField = this.closeTextField.bind(this);
+		this.leaveTextField = this.leaveTextField.bind(this);
+		this.enterTextField = this.enterTextField.bind(this);
+		this.testKey = this.testKey.bind(this);
 
-		const { value } = this.props
+		const { value } = this.props;
 		this.state = {
 			isOpen: false,
 			isPasswordVisible: false,
 			value,
-		}		
+		};
 	}
 
-	componentWillReceiveProps(nextProps, nextState){
-		const changes = {}
-		const { value, disabled } = nextProps
-		
-		if( value !== this.props.value ){						
-			changes.value = value			
+	componentWillReceiveProps(nextProps, nextState) {
+		const changes = {};
+		const { value, disabled } = nextProps;
+
+		if (value !== this.props.value) {
+			changes.value = value;
 		}
-		if( disabled !== this.props.disabled ){			
-			changes.isOpen = false
+		if (disabled !== this.props.disabled) {
+			changes.isOpen = false;
 		}
-		
-		if( Object.keys(changes).length > 0 ){
-			this.setState( changes )
+
+		if (Object.keys(changes).length > 0) {
+			this.setState(changes);
 		}
 	}
 	componentDidMount() {
-		window.addEventListener( 'mouseup', this.onPageClick, false );
+		window.addEventListener('mouseup', this.onPageClick, false);
 	}
 	componentWillUnmount() {
-		window.removeEventListener( 'mouseup', this.onPageClick, false );
+		window.removeEventListener('mouseup', this.onPageClick, false);
 	}
 
-	closeTextField(){		
-		this.setState({ isOpen: false })
+	closeTextField() {
+		this.setState({ isOpen: false });
 	}
-	leaveTextField( next ){				
-		this.closeTextField()		
-		utils.focusNextFocusableElement( this.refs.input, next );
+	leaveTextField(next) {
+		this.closeTextField();
+		utils.focusNextFocusableElement(this.refs.input, next);
 	}
-	enterTextField(){		
-		
-		if( this.props.disabled ){
-			this.leaveTextField()
-			return
-		}		
-		this.setState({ isOpen: true })
-	}
-	testKey( e ){		
-		const { keyCode, shiftKey } = e.nativeEvent
-		if( keyCode === keyCodes.KEY_TAB ){
-			e.preventDefault()
-			this.leaveTextField( ! shiftKey )
-			return
+	enterTextField() {
+		if (this.props.disabled) {
+			this.leaveTextField();
+			return;
 		}
-		if( keyCode === keyCodes.KEY_RETURN ){
-			if( this.props.buttonText ){
-				this.onButtonClick( e )
-			}
-			else{
-				e.preventDefault()
-				this.leaveTextField( ! shiftKey )
-				return
+		this.setState({ isOpen: true });
+	}
+	testKey(e) {
+		const { keyCode, shiftKey } = e.nativeEvent;
+		if (keyCode === keyCodes.KEY_TAB) {
+			e.preventDefault();
+			this.leaveTextField(!shiftKey);
+			return;
+		}
+		if (keyCode === keyCodes.KEY_RETURN) {
+			if (this.props.buttonText) {
+				this.onButtonClick(e);
+			} else {
+				e.preventDefault();
+				this.leaveTextField(!shiftKey);
+				return;
 			}
 		}
 	}
-	setValue( e ){		
-		const value = e.target.value
-		if( this.state.value != value ){
-			this.setState({ value })			
-		}
-	}	
-	onTextFieldClick( e ){		
-		this.refs.input.click()		
-	}
-	onButtonClick( e ){
-		e.stopPropagation()
-		if( typeof this.props.onButtonClick === 'function'){
-			this.props.onButtonClick( e )
+	setValue(e) {
+		const value = e.target.value;
+		if (this.state.value != value) {
+			this.setState({ value });
 		}
 	}
-	onClick( e ){
-		if( typeof this.props.onClick === 'function'){
-			this.props.onClick( e )
-		}		
-		if( this.state.isOpen === true ){
-			return
-		}
-		this.refs.input.focus()
-		this.setState({ isOpen: true })		
+	onTextFieldClick(e) {
+		this.refs.input.click();
 	}
-	onChange( e ){
-		if( typeof this.props.onChange === 'function'){
-			this.props.onChange( e )
-		}
-		this.setValue( e )
-	}
-	onKeyPress( e ){
-		if( typeof this.props.onKeyPress === 'function'){
-			this.props.onKeyPress( e )
+	onButtonClick(e) {
+		e.stopPropagation();
+		if (typeof this.props.onButtonClick === 'function') {
+			this.props.onButtonClick(e);
 		}
 	}
-	onBlur( e ){		
-		if( typeof this.props.onBlur === 'function'){
-			this.props.onBlur( e )
-		}		
-		this.closeTextField()
-	}
-	onFocus( e ){
-		if( typeof this.props.onFocus === 'function'){
-			this.props.onFocus( e )
+	onClick(e) {
+		if (typeof this.props.onClick === 'function') {
+			this.props.onClick(e);
 		}
-		this.enterTextField( e )
+		if (this.state.isOpen === true) {
+			return;
+		}
+		this.refs.input.focus();
+		this.setState({ isOpen: true });
+	}
+	onChange(e) {
+		if (typeof this.props.onChange === 'function') {
+			this.props.onChange(e);
+		}
+		this.setValue(e);
+	}
+	onKeyPress(e) {
+		if (typeof this.props.onKeyPress === 'function') {
+			this.props.onKeyPress(e);
+		}
+	}
+	onBlur(e) {
+		if (typeof this.props.onBlur === 'function') {
+			this.props.onBlur(e);
+		}
+		this.closeTextField();
+	}
+	onFocus(e) {
+		if (typeof this.props.onFocus === 'function') {
+			this.props.onFocus(e);
+		}
+		this.enterTextField(e);
 	}
 
-	onPageClick(evt) {		
-	
-		if( ! this.state.isOpen ){
-			return 
+	onPageClick(evt) {
+		if (!this.state.isOpen) {
+			return;
 		}
-		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(this.refs.area).contains(evt.target)		
-	    if ( ! isClickWithinTextFieldBox ){
-	    	this.closeTextField()	    	
-			this.refs.input.blur();		
-	   }
+		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(
+			this.refs.area
+		).contains(evt.target);
+		if (!isClickWithinTextFieldBox) {
+			this.closeTextField();
+			this.refs.input.blur();
+		}
 	}
-	onShowPasswordClick( e ){
-		e.stopPropagation()
-		this.setState({ isPasswordVisible: ! this.state.isPasswordVisible })
+	onShowPasswordClick(e) {
+		e.stopPropagation();
+		this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
 	}
 
-	render(){
-		
-		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props 
-		const { isOpen, value, isPasswordVisible } = this.state		
-		const isPlaceholderActive = isOpen || value 
-		
+	render() {
+		const {
+			id,
+			type,
+			style,
+			placeholder,
+			buttonText,
+			icon,
+			disabled,
+			pending,
+			required,
+			invalid,
+		} = this.props;
+		const { isOpen, value, isPasswordVisible } = this.state;
+		const isPlaceholderActive = isOpen || value;
+
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
 			'modus-input',
 			'modus-input__borders',
 			'modus-input__background',
-			isOpen && 'modus-input--open modus-input__borders--open modus-input__background--open',
-			disabled && 'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
-			pending && 'modus-input--pending modus-input__borders--pending modus-input__background--pending',
-			invalid && 'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
-			required && ( value === undefined || value === '' ) && 'modus-input--required modus-input__borders--required modus-input__background--required',
-		])
+			isOpen &&
+				'modus-input--open modus-input__borders--open modus-input__background--open',
+			disabled &&
+				'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
+			pending &&
+				'modus-input--pending modus-input__borders--pending modus-input__background--pending',
+			invalid &&
+				'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			required &&
+				(value === undefined || value === '') &&
+				'modus-input--required modus-input__borders--required modus-input__background--required',
+		]);
 
 		const placeholderClassName = utils.composeClassNames([
 			'modus-input__placeholder',
-			isPlaceholderActive && 'modus-input__placeholder--active'
-		])
-		
+			isPlaceholderActive && 'modus-input__placeholder--active',
+		]);
+
 		return (
-			<div className='input-textfield modus-input__box' style={ style }>
-				<div id={id} className={ componentClassName } onClick={ this.onTextFieldClick } ref='area'>
-					<div className='modus-input__content input-textfield__content'>
-						
-						<Placeholder label={ placeholder } active={ isPlaceholderActive }/>
-						
-							<input 
-								ref='input'
-								type={ type === 'password' ? isPasswordVisible ? 'text' : 'password' : type }								
-								onClick={ this.onClick }
-								onChange={ this.onChange }
-								onKeyDown={ this.testKey }
-								onKeyPress={ this.onKeyPress }
-								onBlur={ this.onBlur }
-								onFocus={ this.onFocus }
-								value={ value || '' }
-								disabled={ disabled }
-								className='modus-input__input input-textfield__value'
-							/>
-							{ buttonText &&
-								<Button									
-									className={`modus-input__inner-button input-textfield__button ${isOpen ? 'modus-input__inner-button--active' : ''}`}
-									onClick={ this.onButtonClick }								
-									tabIndex='-1'
-									label={ buttonText }
-									disabled={ disabled }
-								/>
+			<div className="input-textfield modus-input__box" style={style}>
+				<div
+					id={id}
+					className={componentClassName}
+					onClick={this.onTextFieldClick}
+					ref="area"
+				>
+					<div className="modus-input__content input-textfield__content">
+						<Placeholder label={placeholder} active={isPlaceholderActive} />
+
+						<input
+							ref="input"
+							type={
+								type === 'password'
+									? isPasswordVisible ? 'text' : 'password'
+									: type
 							}
-							<Loader visible={ pending } />
-							
-							{ type == 'password' &&
-								<div className='modus-input__inner-icon input-textfield__icon'>
-									<EyeIcon open={ isPasswordVisible } onClick={ this.onShowPasswordClick } /> 
-								</div>
-							}	
-						 	{ icon && 
-						 		<div className='modus-input__inner-icon input-textfield__icon'>
-									<Icon size={16} name={ icon } /> 
-								</div>
-							}													 	
-															
+							onClick={this.onClick}
+							onChange={this.onChange}
+							onKeyDown={this.testKey}
+							onKeyPress={this.onKeyPress}
+							onBlur={this.onBlur}
+							onFocus={this.onFocus}
+							value={value || ''}
+							disabled={disabled}
+							className="modus-input__input input-textfield__value"
+						/>
+						{buttonText && (
+							<Button
+								className={`modus-input__inner-button input-textfield__button ${
+									isOpen ? 'modus-input__inner-button--active' : ''
+								}`}
+								onClick={this.onButtonClick}
+								tabIndex="-1"
+								label={buttonText}
+								disabled={disabled}
+							/>
+						)}
+						<Loader visible={pending} />
+
+						{type == 'password' && (
+							<div className="modus-input__inner-icon input-textfield__icon">
+								<EyeIcon
+									open={isPasswordVisible}
+									onClick={this.onShowPasswordClick}
+								/>
+							</div>
+						)}
+						{icon && (
+							<div className="modus-input__inner-icon input-textfield__icon">
+								<Icon size={16} name={icon} />
+							</div>
+						)}
 					</div>
-				</div>				
+				</div>
 			</div>
-		)
+		);
 	}
 }
 
 const EyeIcon = ({ open, onClick }) => (
-	<Icon 
-		onClick={ onClick }
-		name={ open ? 'toggle-invisible' : 'toggle-visible' }
+	<Icon
+		onClick={onClick}
+		name={open ? 'toggle-invisible' : 'toggle-visible'}
 		size={16}
-		fill={ open ? '#999' : '#39f' }		
+		fill={open ? '#999' : '#39f'}
 	/>
-)
+);
 
 TextField.propTypes = {
 	style: PropTypes.object,
-	type: PropTypes.oneOf(['text','password']),
+	type: PropTypes.oneOf(['text', 'password']),
 	id: PropTypes.string,
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
@@ -254,20 +281,20 @@ TextField.propTypes = {
 	onButtonClick: PropTypes.func,
 	onChange: PropTypes.func,
 	onKeyPress: PropTypes.func,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
+	onBlur: PropTypes.func,
+	onFocus: PropTypes.func,
 	icon: PropTypes.string,
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
-	disabled: PropTypes.bool
-}
+	disabled: PropTypes.bool,
+};
 
 TextField.defaultProps = {
 	type: 'text',
 	id: undefined,
-	style: {},	
-	placeholder: undefined,	
+	style: {},
+	placeholder: undefined,
 	value: undefined,
 	buttonText: undefined,
 	onButtonClick: undefined,
@@ -278,10 +305,8 @@ TextField.defaultProps = {
 	icon: undefined,
 	pending: false,
 	required: false,
-	invalid: false, 
-	disabled: false
-}
+	invalid: false,
+	disabled: false,
+};
 
-
-
-export default TextField
+export default TextField;

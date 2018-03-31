@@ -1,5 +1,5 @@
-import ScrollBox from './ScrollBox'
-import ScrollBar from './ScrollBar'
+import ScrollBox from './ScrollBox';
+import ScrollBar from './ScrollBar';
 
-export default ScrollBox
-export { ScrollBar }
+export default ScrollBox;
+export { ScrollBar };

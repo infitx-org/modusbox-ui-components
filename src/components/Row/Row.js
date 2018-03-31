@@ -1,37 +1,45 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 
-
-const mapFlexToProperty = ( property ) => {
+const mapFlexToProperty = property => {
 	const flexMappers = {
 		top: 'flex-start',
 		bottom: 'flex-end',
 		left: 'flex-start',
-		right: 'flex-end'
-	}
-	return property ? ( flexMappers[ property ] || property ) : undefined
-}
+		right: 'flex-end',
+	};
+	return property ? flexMappers[property] || property : undefined;
+};
 class Row extends React.PureComponent {
-	render(){
-		const { align, wrap, grow, shrink, basis, className, style, children } = this.props		
-		const [ alignItems, justifyContent ] = align.split(' ')
+	render() {
+		const {
+			align,
+			wrap,
+			grow,
+			shrink,
+			basis,
+			className,
+			style,
+			children,
+		} = this.props;
+		const [alignItems, justifyContent] = align.split(' ');
 		const styles = {
-			'display': 'flex',    		
-			'flexDirection': 'row',
-			'flexWrap': wrap ? 'wrap' : '',			
-    		'flexGrow': grow,
-			'flexShrink': shrink,
-			'flexBasis': basis,
-			'alignItems': mapFlexToProperty( alignItems ),
-			'justifyContent': mapFlexToProperty( justifyContent ),
-			...style
-		}
+			display: 'flex',
+			flexDirection: 'row',
+			flexWrap: wrap ? 'wrap' : '',
+			flexGrow: grow,
+			flexShrink: shrink,
+			flexBasis: basis,
+			alignItems: mapFlexToProperty(alignItems),
+			justifyContent: mapFlexToProperty(justifyContent),
+			...style,
+		};
 		return (
-			<div className={ className } style={ styles }>{children}</div>
-		)
+			<div className={className} style={styles}>
+				{children}
+			</div>
+		);
 	}
 }
-
-	
 
 Row.propTypes = {
 	align: PropTypes.string,
@@ -40,8 +48,8 @@ Row.propTypes = {
 	shrink: PropTypes.string,
 	basis: PropTypes.string,
 	className: PropTypes.string,
-	style: PropTypes.object
-}
+	style: PropTypes.object,
+};
 Row.defaultProps = {
 	align: 'center',
 	wrap: false,
@@ -49,6 +57,6 @@ Row.defaultProps = {
 	shrink: undefined,
 	basis: 'auto',
 	className: undefined,
-	style: undefined
-}
-export default Row
+	style: undefined,
+};
+export default Row;
