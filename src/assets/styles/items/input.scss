@@ -152,7 +152,11 @@
 	align-items: center;
 	display: flex;
 	padding: 0px 5px;
-	font-size: 11px;	
+	font-size: 12px;	
+	
+	.input-button__icon{
+		display: flex;
+	}
 
 	&:hover, &.modus-input__inner-button--active{
 		background: rgba(0,162,233,0.8);
