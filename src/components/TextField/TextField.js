@@ -91,7 +91,6 @@ class TextField extends PureComponent {
 			} else {
 				e.preventDefault();
 				this.leaveTextField(!shiftKey);
-				return;
 			}
 		}
 	}
@@ -160,7 +159,9 @@ class TextField extends PureComponent {
 	}
 
 	render() {
-		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props;
+		const {
+			id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid,
+		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value;
 
@@ -198,27 +199,27 @@ class TextField extends PureComponent {
 							className="mb-input__input input-textfield__value"
 						/>
 						{buttonText && (
-							<Button
-								className={`mb-input__inner-button input-textfield__button ${
+						<Button
+							className={`mb-input__inner-button input-textfield__button ${
 									isOpen ? 'mb-input__inner-button--active' : ''
 								}`}
-								onClick={this.onButtonClick}
-								tabIndex="-1"
-								label={buttonText}
-								disabled={disabled}
-							/>
+							onClick={this.onButtonClick}
+							tabIndex="-1"
+							label={buttonText}
+							disabled={disabled}
+						/>
 						)}
 						<Loader visible={pending} />
 
 						{type == 'password' && (
-							<div className="mb-input__inner-icon input-textfield__icon">
-								<EyeIcon open={isPasswordVisible} onClick={this.onShowPasswordClick} />
-							</div>
+						<div className="mb-input__inner-icon input-textfield__icon">
+							<EyeIcon open={isPasswordVisible} onClick={this.onShowPasswordClick} />
+						</div>
 						)}
 						{icon && (
-							<div className="mb-input__inner-icon input-textfield__icon">
-								<Icon size={16} name={icon} />
-							</div>
+						<div className="mb-input__inner-icon input-textfield__icon">
+							<Icon size={16} name={icon} />
+						</div>
 						)}
 					</div>
 				</div>
@@ -278,7 +279,7 @@ const EyeIcon = ({ open, onClick }) => (
 
 EyeIcon.propTypes = {
 	open: PropTypes.bool,
-	onClick: PropTypes.fund
-}
+	onClick: PropTypes.fund,
+};
 
 export default TextField;
