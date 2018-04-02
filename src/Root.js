@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
@@ -36,10 +36,9 @@ export default Root;
  */
 
 const rootEl = document.getElementById('root');
-const render = () => ReactDOM.render(<Root />, rootEl);
 
 // React Performance Tool
-console.warn = args => {
+console.warn = () => {
 	console.log('%c warn', 'background:#ff9; color:#333;');
 };
 const Perf = require('react-addons-perf');
@@ -56,7 +55,7 @@ if (module.hot) {
 
 	const renderWithModuleHot = () => {
 		try {
-			render();
+			ReactDOM.render(<Root />, rootEl)
 		} catch (error) {
 			renderError(error);
 		}
@@ -64,4 +63,4 @@ if (module.hot) {
 
 	module.hot.accept('./Root', () => setTimeout(renderWithModuleHot));
 }
-render();
+ReactDOM.render(<Root />, rootEl)

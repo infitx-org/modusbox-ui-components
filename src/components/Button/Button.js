@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 import * as utils from '../../utils/common';
 
 import Icon from '../Icon';
@@ -12,7 +13,7 @@ class Button extends React.PureComponent {
 		this.testKey = this.testKey.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {}
+	componentWillReceiveProps(){}
 
 	onClick(e) {
 		if (this.props.disabled) return;
@@ -23,7 +24,7 @@ class Button extends React.PureComponent {
 	testKey(e) {
 		if (e.nativeEvent.keyCode === 9) {
 			e.preventDefault();
-			utils.focusNextFocusableElement(this.refs.input, !e.nativeEvent.shiftKey);
+			utils.focusNextFocusableElement(this.input, !e.nativeEvent.shiftKey);
 			return;
 		}
 
@@ -58,8 +59,8 @@ class Button extends React.PureComponent {
 		]);
 
 		return (
-			<Btn
-				ref="input"
+			<button
+				ref={ (input) => this.input = input }
 				id={id}
 				style={style}
 				className={classNames}
@@ -79,7 +80,7 @@ class Button extends React.PureComponent {
 					)}
 					{label && <span>{label}</span>}
 				</div>
-			</Btn>
+			</button>
 		);
 	}
 }
@@ -108,7 +109,7 @@ Button.defaultProps = {
 	onClick: undefined,
 };
 
-class Btn extends React.PureComponent {
+/*class Btn extends React.PureComponent {
 	constructor(props) {
 		super(props);
 	}
@@ -135,5 +136,5 @@ class Btn extends React.PureComponent {
 			</button>
 		);
 	}
-}
+}*/
 export default Button;
