@@ -1,4 +1,5 @@
-import React, { PureComponent, Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
@@ -18,10 +19,10 @@ class Options extends PureComponent {
 			selected: this.props.selected,
 			filter: this.props.filter,
 		};
+		this.items = []
 	}
 
-	componentWillReceiveProps(nextProps, nextState) {
-		const changes = {};
+	componentWillReceiveProps(nextProps) {
 		const { options, selected, filter, highlighted } = nextProps;
 		this.setState({ options, selected, filter, highlighted });
 	}
@@ -29,9 +30,12 @@ class Options extends PureComponent {
 		this.props.onSelect(item);
 	}
 	render() {
+		
 		const { options, selected, highlighted } = this.state;
-		const { maxHeight, reverse } = this.props;
-		const marginTop = reverse ? -maxHeight - 45 : 0;
+		const { maxHeight, reverse, open } = this.props;
+		if(!open){
+			return null
+		}
 		const top = reverse ? undefined : 0;
 		const bottom = reverse ? 45 : undefined;
 		//const items = reverse ? [...options].reverse() : options
@@ -39,9 +43,7 @@ class Options extends PureComponent {
 		const className = utils.composeClassNames([
 			'input',
 			'input-select__options-wrapper',
-			reverse
-				? 'input-select__options-wrapper--reverse'
-				: 'input-select__options-wrapper--regular',
+			reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular',
 		]);
 		return (
 			<div className={className} style={{ position: 'absolute', top, bottom }}>
@@ -51,7 +53,7 @@ class Options extends PureComponent {
 					trackStyle={{ top: '2px', bottom: '2px', right: '4px', width: '5px' }}
 					showTrack={false}
 				>
-					<div ref="items">
+					<div ref={items => this.items = items}>
 						{options.map((item, index) => {
 							const isSelected = selected === item.value;
 							return (
@@ -80,9 +82,24 @@ Options.propTypes = {
 			value: PropTypes.string,
 		})
 	),
+	highlighted: PropTypes.number,
+	selected: PropTypes.string,
+	filter: PropTypes.string,
+	onSelect: PropTypes.func,
+	maxHeight: PropTypes.number,
+	reverse: PropTypes.bool,
+	open: PropTypes.bool	
 };
+
 Options.defaultProps = {
 	options: [],
+	highlighted: undefined,
+	selected: undefined,
+	filter: undefined,
+	onSelect: undefined,
+	maxHeight: 0,
+	reverse: false,
+	open: false
 };
 
 class Option extends PureComponent {
@@ -104,17 +121,19 @@ class Option extends PureComponent {
 		]);
 		return (
 			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1">
-				{icon && (
-					<Icon
-						className="input-select__options-item__icon"
-						name={icon}
-						size={16}
-					/>
-				)}
+				{icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
 				{label}
 			</div>
 		);
 	}
 }
 
+Option.propTypes = {
+	highlighted: PropTypes.bool,
+	selected: PropTypes.bool,
+	disabled: PropTypes.bool,
+	onClick: PropTypes.func,
+	label: PropTypes.string,
+	icon: PropTypes.string,	
+}
 export default Options;

@@ -41,12 +41,7 @@ class Source extends React.Component {
 	render() {
 		return (
 			<div style={{ background: '#fff', fontSize: '12px', padding: '10px' }}>
-				<textarea
-					ref="editor"
-					autoComplete="off"
-					onChange={console.log}
-					value={this.state.content}
-				/>
+				<textarea ref="editor" autoComplete="off" onChange={console.log} value={this.state.content} />
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Select from '../../components/Select';
 
 const options = [
@@ -47,18 +48,11 @@ const TestSelect = () => (
 			<Select placeholder="Invalid" options={options} invalid />
 			<Select placeholder="Required" options={options} required />
 			<Select placeholder="Disabled" options={options} disabled />
-			<Select
-				placeholder="Events (console)"
-				options={options}
-				onChange={console.log}
-			/>
+			<Select placeholder="Events (console)" options={options} onChange={console.log} />
 		</div>
 		<div style={{ padding: 10, border: '1px solid #ccc' }}>
 			<Select id="x" placeholder="placeholder" options={options} pending />
-			<Select
-				placeholder="Position 2 options"
-				options={[options[0], options[1]]}
-			/>
+			<Select placeholder="Position 2 options" options={[options[0], options[1]]} />
 			{/*<select> { options.map( i => <option value={i.label}>{i.label}</option> ) } </select>*/}
 			<Select id="x" placeholder="placeholder" options={options} disabled />
 

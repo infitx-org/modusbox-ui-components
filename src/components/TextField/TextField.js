@@ -1,6 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import find from 'lodash/find';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
@@ -43,7 +42,7 @@ class TextField extends PureComponent {
 		};
 	}
 
-	componentWillReceiveProps(nextProps, nextState) {
+	componentWillReceiveProps(nextProps) {
 		const changes = {};
 		const { value, disabled } = nextProps;
 
@@ -70,7 +69,7 @@ class TextField extends PureComponent {
 	}
 	leaveTextField(next) {
 		this.closeTextField();
-		utils.focusNextFocusableElement(this.refs.input, next);
+		utils.focusNextFocusableElement(this.input, next);
 	}
 	enterTextField() {
 		if (this.props.disabled) {
@@ -102,8 +101,8 @@ class TextField extends PureComponent {
 			this.setState({ value });
 		}
 	}
-	onTextFieldClick(e) {
-		this.refs.input.click();
+	onTextFieldClick() {
+		this.input.click();
 	}
 	onButtonClick(e) {
 		e.stopPropagation();
@@ -118,7 +117,7 @@ class TextField extends PureComponent {
 		if (this.state.isOpen === true) {
 			return;
 		}
-		this.refs.input.focus();
+		this.input.focus();
 		this.setState({ isOpen: true });
 	}
 	onChange(e) {
@@ -149,12 +148,10 @@ class TextField extends PureComponent {
 		if (!this.state.isOpen) {
 			return;
 		}
-		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(
-			this.refs.area
-		).contains(evt.target);
+		const isClickWithinTextFieldBox = this.area.contains(evt.target);
 		if (!isClickWithinTextFieldBox) {
 			this.closeTextField();
-			this.refs.input.blur();
+			this.input.blur();
 		}
 	}
 	onShowPasswordClick(e) {
@@ -163,62 +160,33 @@ class TextField extends PureComponent {
 	}
 
 	render() {
-		const {
-			id,
-			type,
-			style,
-			placeholder,
-			buttonText,
-			icon,
-			disabled,
-			pending,
-			required,
-			invalid,
-		} = this.props;
+		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value;
 
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
-			'modus-input',
-			'modus-input__borders',
-			'modus-input__background',
-			isOpen &&
-				'modus-input--open modus-input__borders--open modus-input__background--open',
-			disabled &&
-				'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
-			pending &&
-				'modus-input--pending modus-input__borders--pending modus-input__background--pending',
-			invalid &&
-				'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			'mb-input',
+			'mb-input__borders',
+			'mb-input__background',
+			isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
+			disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
+			pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
+			invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
 			required &&
 				(value === undefined || value === '') &&
-				'modus-input--required modus-input__borders--required modus-input__background--required',
-		]);
-
-		const placeholderClassName = utils.composeClassNames([
-			'modus-input__placeholder',
-			isPlaceholderActive && 'modus-input__placeholder--active',
+				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
 		return (
-			<div className="input-textfield modus-input__box" style={style}>
-				<div
-					id={id}
-					className={componentClassName}
-					onClick={this.onTextFieldClick}
-					ref="area"
-				>
-					<div className="modus-input__content input-textfield__content">
+			<div className="input-textfield mb-input__box" style={style}>
+				<div id={id} className={componentClassName} onClick={this.onTextFieldClick} ref={area => this.area = area}>
+					<div className="mb-input__content input-textfield__content">
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
-							ref="input"
-							type={
-								type === 'password'
-									? isPasswordVisible ? 'text' : 'password'
-									: type
-							}
+							ref={input => this.input = input}
+							type={type === 'password' ? (isPasswordVisible ? 'text' : 'password') : type}
 							onClick={this.onClick}
 							onChange={this.onChange}
 							onKeyDown={this.testKey}
@@ -227,12 +195,12 @@ class TextField extends PureComponent {
 							onFocus={this.onFocus}
 							value={value || ''}
 							disabled={disabled}
-							className="modus-input__input input-textfield__value"
+							className="mb-input__input input-textfield__value"
 						/>
 						{buttonText && (
 							<Button
-								className={`modus-input__inner-button input-textfield__button ${
-									isOpen ? 'modus-input__inner-button--active' : ''
+								className={`mb-input__inner-button input-textfield__button ${
+									isOpen ? 'mb-input__inner-button--active' : ''
 								}`}
 								onClick={this.onButtonClick}
 								tabIndex="-1"
@@ -243,15 +211,12 @@ class TextField extends PureComponent {
 						<Loader visible={pending} />
 
 						{type == 'password' && (
-							<div className="modus-input__inner-icon input-textfield__icon">
-								<EyeIcon
-									open={isPasswordVisible}
-									onClick={this.onShowPasswordClick}
-								/>
+							<div className="mb-input__inner-icon input-textfield__icon">
+								<EyeIcon open={isPasswordVisible} onClick={this.onShowPasswordClick} />
 							</div>
 						)}
 						{icon && (
-							<div className="modus-input__inner-icon input-textfield__icon">
+							<div className="mb-input__inner-icon input-textfield__icon">
 								<Icon size={16} name={icon} />
 							</div>
 						)}
@@ -262,15 +227,6 @@ class TextField extends PureComponent {
 	}
 }
 
-const EyeIcon = ({ open, onClick }) => (
-	<Icon
-		onClick={onClick}
-		name={open ? 'toggle-invisible' : 'toggle-visible'}
-		size={16}
-		fill={open ? '#999' : '#39f'}
-	/>
-);
-
 TextField.propTypes = {
 	style: PropTypes.object,
 	type: PropTypes.oneOf(['text', 'password']),
@@ -278,6 +234,7 @@ TextField.propTypes = {
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
 	buttonText: PropTypes.string,
+	onClick: PropTypes.func,
 	onButtonClick: PropTypes.func,
 	onChange: PropTypes.func,
 	onKeyPress: PropTypes.func,
@@ -298,6 +255,7 @@ TextField.defaultProps = {
 	value: undefined,
 	buttonText: undefined,
 	onButtonClick: undefined,
+	onClick: undefined,
 	onChange: undefined,
 	onKeyPress: undefined,
 	onBlur: undefined,
@@ -308,5 +266,19 @@ TextField.defaultProps = {
 	invalid: false,
 	disabled: false,
 };
+
+const EyeIcon = ({ open, onClick }) => (
+	<Icon
+		onClick={onClick}
+		name={open ? 'toggle-invisible' : 'toggle-visible'}
+		size={16}
+		fill={open ? '#999' : '#39f'}
+	/>
+);
+
+EyeIcon.propTypes = {
+	open: PropTypes.bool,
+	onClick: PropTypes.fund
+}
 
 export default TextField;

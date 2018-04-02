@@ -8,12 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 /* Return a list of all component in src */
 var componentsPath = path.join(__dirname, 'src', 'components');
 var componentsList = fs.readdirSync(componentsPath).filter(function(x) {
-	return (
-		x !== '.DS_Store' &&
-		x !== 'index.js' &&
-		x !== 'variables.js' &&
-		x !== 'Common'
-	);
+	return x !== '.DS_Store' && x !== 'index.js' && x !== 'variables.js' && x !== 'Common';
 });
 
 // Per Component Build

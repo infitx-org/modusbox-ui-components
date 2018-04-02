@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { ScrollBar } from '../../ScrollBox';
 import './ModalTabsLayout.css';
 
-class ModalTabsLayout extends React.PureComponent {
+class ModalTabsLayout extends PureComponent {
 	constructor(props) {
 		super(props);
 
@@ -21,12 +22,12 @@ class ModalTabsLayout extends React.PureComponent {
 	}
 	componentDidMount() {
 		window.addEventListener('resize', this.updateScrollbar);
-		this.refs.wrapper.addEventListener('scroll', this.updateScrollbar);
+		this.wrapper.addEventListener('scroll', this.updateScrollbar);
 		this.updateScrollbar();
 	}
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.updateScrollbar);
-		this.refs.wrapper.removeEventListener('scroll', this.updateScrollbar);
+		this.wrapper.removeEventListener('scroll', this.updateScrollbar);
 	}
 	componentWillReceiveProps(nextProps) {
 		const { items } = nextProps;
@@ -38,16 +39,15 @@ class ModalTabsLayout extends React.PureComponent {
 		this.updateScrollbar();
 	}
 	updateScrollbar() {
-		if (!this.refs.wrapper) {
+		if (!this.wrapper) {
 			return;
 		}
-		const { scrollTop } = this.refs.wrapper;
-		const { height } = this.refs.wrapper.getBoundingClientRect();
-		const rowsHeight = this.refs.wrapper.childNodes[0].getBoundingClientRect()
-			.height;
+		const { scrollTop } = this.wrapper;
+		const { height } = this.wrapper.getBoundingClientRect();
+		const rowsHeight = this.wrapper.childNodes[0].getBoundingClientRect().height;
 		const offset = 0;
-		if (this.refs.scrollbar) {
-			this.refs.scrollbar.setPosition({
+		if (this.scrollbar) {
+			this.scrollbar.setPosition({
 				scrollTop,
 				offset,
 				rowsHeight,
@@ -71,17 +71,20 @@ class ModalTabsLayout extends React.PureComponent {
 			<div className="modal-tab-layout">
 				<ModalTabs items={items} selected={selected} onSelect={this.onSelect} />
 				<div className="modal-tab-content-wrapper">
-					<div
-						ref="wrapper"
-						className={`modal-tab-content ${flex ? 'flexible' : ''}`}
-					>
+					<div ref={wrapper => this.wrapper = wrapper} className={`modal-tab-content ${flex ? 'flexible' : ''}`}>
 						{children[selected]}
 					</div>
-					<ScrollBar ref="scrollbar" onInit={this.updateScrollbar} />
+					<ScrollBar ref={scrollbar => this.scrollbar = scrollbar} onInit={this.updateScrollbar} />
 				</div>
 			</div>
 		);
 	}
+}
+
+ModalTabsLayout.propTypes = {
+	items: PropTypes.arrayOf([ PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin }) ]),
+	selected: PropTypes.string,
+	children: PropTypes.node
 }
 
 const ModalTabs = ({ items, selected, onSelect }) => {
@@ -91,9 +94,7 @@ const ModalTabs = ({ items, selected, onSelect }) => {
 				<div
 					key={index}
 					onClick={() => onSelect(index, item.disabled)}
-					className={`modal-tab-item ${index === selected ? 'selected' : ''} ${
-						item.disabled ? 'disabled' : ''
-					} `}
+					className={`modal-tab-item ${index === selected ? 'selected' : ''} ${item.disabled ? 'disabled' : ''} `}
 				>
 					{item.name}
 				</div>
@@ -101,5 +102,13 @@ const ModalTabs = ({ items, selected, onSelect }) => {
 		</div>
 	);
 };
+
+ModalTabs.propTypes = {
+	items: PropTypes.arrayOf([ PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin }) ]),
+	selected: PropTypes.string,
+	children: PropTypes.node,
+	onSelect: PropTypes.func
+}
+
 
 export default ModalTabsLayout;

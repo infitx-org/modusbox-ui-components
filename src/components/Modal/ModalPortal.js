@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 // Render into subtree is necessary for parent contexts to transfer over
 // For example, for react-router
 const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
 
-export default class ModalPortal extends React.PureComponent {
+class ModalPortal extends PureComponent {
 	componentDidMount() {
 		// Create a div and append it to the body
 		// Mount a component on that div
@@ -21,22 +22,14 @@ export default class ModalPortal extends React.PureComponent {
 		});
 		this._modalIndex = modalIndex;
 		this._target = document.body.appendChild(this._div);
-		this._component = renderSubtreeIntoContainer(
-			this,
-			childrenWithIndex,
-			this._target
-		);
+		this._component = renderSubtreeIntoContainer(this, childrenWithIndex, this._target);
 	}
 	componentDidUpdate() {
 		// When the child component updates, we have to make sure the content rendered to the DOM is updated too
 		const childrenWithIndex = React.cloneElement(this.props.children, {
 			modalIndex: this._modalIndex,
 		});
-		this._component = renderSubtreeIntoContainer(
-			this,
-			childrenWithIndex,
-			this._target
-		);
+		this._component = renderSubtreeIntoContainer(this, childrenWithIndex, this._target);
 	}
 	componentWillUnmount() {
 		const done = () => {
@@ -63,3 +56,14 @@ export default class ModalPortal extends React.PureComponent {
 		return null;
 	}
 }
+ModalPortal.defaultProps = {
+	id: undefined,
+	children: undefined
+};
+
+ModalPortal.propTypes = {
+	id: PropTypes.string,
+	children: PropTypes.node
+};
+
+export default ModalPortal

@@ -15,9 +15,7 @@ export default function configureStore() {
 		return result;
 	};
 
-	const devToolsMiddleware = window.devToolsExtension
-		? window.devToolsExtension()
-		: f => f;
+	const devToolsMiddleware = window.devToolsExtension ? window.devToolsExtension() : f => f;
 
 	let middlewareList = [ReduxThunk, logger, TestMiddleware];
 	middlewares = compose(applyMiddleware(...middlewareList), devToolsMiddleware);

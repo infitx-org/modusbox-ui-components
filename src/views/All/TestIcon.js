@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../../components/Icon';
 
 import '../../icons/index.js';
@@ -236,9 +237,7 @@ const Block = ({ icon }) => (
 			flexDirection: 'column',
 		}}
 	>
-		<div
-			style={{ flex: '0 0 auto', justifyContent: 'center', display: 'flex' }}
-		>
+		<div style={{ flex: '0 0 auto', justifyContent: 'center', display: 'flex' }}>
 			<Icon size={40} fill="#999" name={icon} style={{ display: 'flex' }} />
 		</div>
 		<div

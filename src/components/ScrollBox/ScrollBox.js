@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
@@ -6,7 +7,7 @@ import ScrollBar from './ScrollBar';
 
 import './ScrollBox.scss';
 
-class ScrollBox extends React.PureComponent {
+class ScrollBox extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.handleResize = this.handleResize.bind(this);
@@ -19,11 +20,11 @@ class ScrollBox extends React.PureComponent {
 		this.updateContentSize();
 
 		window.addEventListener('resize', this.handleResize);
-		this.refs.contentBox.addEventListener('scroll', this.updateScrollbar);
+		this.contentBox.addEventListener('scroll', this.updateScrollbar);
 	}
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleResize);
-		this.refs.contentBox.removeEventListener('scroll', this.updateScrollbar);
+		this.contentBox.removeEventListener('scroll', this.updateScrollbar);
 	}
 
 	componentDidUpdate() {
@@ -35,13 +36,12 @@ class ScrollBox extends React.PureComponent {
 		this.updateContentSize();
 	}
 	updateScrollbar() {
-		const { scrollTop } = this.refs.contentBox;
-		const { height } = this.refs.contentBox.getBoundingClientRect();
-		const contentHeight = this.refs.content.childNodes[0].getBoundingClientRect()
-			.height;
+		const { scrollTop } = this.contentBox;
+		const { height } = this.contentBox.getBoundingClientRect();
+		const contentHeight = this.content.childNodes[0].getBoundingClientRect().height;
 		const offset = 0;
-		if (this.refs.scrollbar) {
-			this.refs.scrollbar.setPosition({
+		if (this.scrollbar) {
+			this.scrollbar.setPosition({
 				scrollTop,
 				offset,
 				contentHeight,
@@ -50,49 +50,33 @@ class ScrollBox extends React.PureComponent {
 		}
 	}
 	updateContentSize() {
-		const { width } = this.refs.contentBox.getBoundingClientRect();
-		this.refs.content.style.width = width - 20;
+		const { width } = this.contentBox.getBoundingClientRect();
+		this.content.style.width = width - 20;
 	}
 	onDrag(ratio) {
-		const { height } = this.refs.content.getBoundingClientRect();
-		const boxHeight = this.refs.contentBox.getBoundingClientRect().height;
+		const { height } = this.content.getBoundingClientRect();
+		const boxHeight = this.contentBox.getBoundingClientRect().height;
 
 		const scrollTop = ratio * (height - boxHeight);
-		this.refs.contentBox.scrollTop = scrollTop;
+		this.contentBox.scrollTop = scrollTop;
 	}
 	render() {
-		const {
-			showTrack,
-			handleStyle,
-			trackStyle,
-			style,
-			children,
-			flex,
-		} = this.props;
+		const { showTrack, handleStyle, trackStyle, style, children, flex } = this.props;
 
-		const wrapperClassName = utils.composeClassNames([
-			'element-scrollbox__wrapper',
-			flex && 'flexible',
-		]);
-		const contentBoxClassName = utils.composeClassNames([
-			'element-scrollbox__content-box',
-			flex && 'flexible',
-		]);
-		const contentClassName = utils.composeClassNames([
-			'element-scrollbox__content',
-			flex && 'flexible',
-		]);
+		const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', flex && 'flexible']);
+		const contentBoxClassName = utils.composeClassNames(['element-scrollbox__content-box', flex && 'flexible']);
+		const contentClassName = utils.composeClassNames(['element-scrollbox__content', flex && 'flexible']);
 
 		return (
 			<div className={wrapperClassName} style={style}>
-				<div ref="contentBox" className={contentBoxClassName}>
-					<div ref="content" className={contentClassName}>
+				<div ref={contentBox => this.contentBox = contentBox} className={contentBoxClassName}>
+					<div ref={content => this.content = content} className={contentClassName}>
 						{children}
 					</div>
 				</div>
 
 				<ScrollBar
-					ref="scrollbar"
+					ref={scrollbar => this.scrollbar = scrollbar}
 					trackStyle={trackStyle}
 					handleStyle={handleStyle}
 					showTrack={showTrack}
@@ -103,17 +87,19 @@ class ScrollBox extends React.PureComponent {
 	}
 }
 ScrollBox.propTypes = {
-	flex: React.PropTypes.bool,
-	style: React.PropTypes.object,
-	trackerStyle: React.PropTypes.object,
-	handleStyle: React.PropTypes.object,
-	showTrack: React.PropTypes.bool,
+	flex: PropTypes.bool,
+	style: PropTypes.object,
+	trackStyle: PropTypes.object,
+	handleStyle: PropTypes.object,
+	showTrack: PropTypes.bool,
+	children: PropTypes.node
 };
 ScrollBox.defaultProps = {
 	flex: false,
 	style: {},
-	trackerStyle: {},
+	trackStyle: {},
 	handleStyle: {},
 	showTrack: false,
+	children: undefined
 };
 export default ScrollBox;

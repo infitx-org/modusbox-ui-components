@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 
 import Icon from '../Icon';
 import Spinner from '../Spinner';
 import './Button.scss';
 
-class Button extends React.PureComponent {
+class Button extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.onClick = this.onClick.bind(this);
 		this.testKey = this.testKey.bind(this);
 	}
 
-	componentWillReceiveProps(){}
+	componentWillReceiveProps() {}
 
 	onClick(e) {
 		if (this.props.disabled) return;
@@ -35,32 +35,22 @@ class Button extends React.PureComponent {
 		}
 	}
 	render() {
-		const {
-			id,
-			className,
-			style,
-			kind,
-			label,
-			icon,
-			noFill,
-			disabled,
-			pending,
-		} = this.props;
+		const { id, className, style, kind, label, icon, noFill, disabled, pending } = this.props;
 		const classNames = utils.composeClassNames([
 			className,
-			'modus-input input-button__input',
-			kind === 'primary' && 'input-button__modus-input--primary',
-			kind === 'secondary' && 'input-button__modus-input--secondary',
-			kind === 'tertiary' && 'input-button__modus-input--tertiary',
-			kind === 'danger' && 'input-button__modus-input--danger',
-			disabled && 'modus-input--disabled input-button__modus-input--disabled',
-			pending && 'modus-input--pending input-button__modus-input--pending',
+			'mb-input input-button__input',
+			kind === 'primary' && 'input-button__mb-input--primary',
+			kind === 'secondary' && 'input-button__mb-input--secondary',
+			kind === 'tertiary' && 'input-button__mb-input--tertiary',
+			kind === 'danger' && 'input-button__mb-input--danger',
+			disabled && 'mb-input--disabled input-button__mb-input--disabled',
+			pending && 'mb-input--pending input-button__mb-input--pending',
 			noFill && 'noFill',
 		]);
 
 		return (
 			<button
-				ref={ (input) => this.input = input }
+				ref={input => (this.input = input)}
 				id={id}
 				style={style}
 				className={classNames}
@@ -109,32 +99,4 @@ Button.defaultProps = {
 	onClick: undefined,
 };
 
-/*class Btn extends React.PureComponent {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		const {
-			id,
-			style,
-			className,
-			onKeyDown,
-			onClick,
-			disabled,
-			children,
-		} = this.props;
-		return (
-			<button
-				id={id}
-				style={style}
-				className={className}
-				onKeyDown={onKeyDown}
-				onClick={onClick}
-				disabled={disabled}
-			>
-				{children}
-			</button>
-		);
-	}
-}*/
 export default Button;

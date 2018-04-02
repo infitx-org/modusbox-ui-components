@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import './RadioGroup.scss';
 
-class RadioGroup extends React.PureComponent {
+class RadioGroup extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -37,7 +38,7 @@ class RadioGroup extends React.PureComponent {
 
 		//this.preventDefault(e)
 		this.setState({ value, focused: value });
-		this.refs.btn.focus();
+		this.btn.focus();
 
 		if (typeof this.props.onChange === 'function') {
 			this.props.onChange(value);
@@ -51,7 +52,7 @@ class RadioGroup extends React.PureComponent {
 		}
 		return;
 	}
-	onBlur(e) {
+	onBlur() {
 		this.setState({ focused: undefined });
 	}
 	testKey(e) {
@@ -59,7 +60,7 @@ class RadioGroup extends React.PureComponent {
 		if (keyCode === keyCodes.KEY_TAB) {
 			e.preventDefault();
 			this.setState({ focused: undefined });
-			utils.focusNextFocusableElement(this.refs.btn, !shiftKey);
+			utils.focusNextFocusableElement(this.btn, !shiftKey);
 			return;
 		}
 		if (keyCode === keyCodes.KEY_LEFT) {
@@ -75,33 +76,36 @@ class RadioGroup extends React.PureComponent {
 	}
 	selectSiblingRadio(next) {
 		const { value } = this.state;
-		const { options } = this.props;
+		const { options } = this.props;		
 		let nextIndex = options.map(o => o.value).indexOf(value) || 0;
+		let found = false
 
-		while (true) {
+		while (!found) {
 			nextIndex += next ? 1 : -1;
 			if (nextIndex == options.length || nextIndex < 0) {
-				break;
+				found = true
+				break
 			}
 			if (!options[nextIndex].disabled) {
 				console.log(options[nextIndex]);
 				const { value } = options[nextIndex];
 				this.setState({ value, focused: value });
+				found = true
 				break;
 			}
 		}
 	}
 	render() {
 		const { value, focused } = this.state;
-		const { id, label, disabled, round, options } = this.props;
+		const { id, label, disabled, options } = this.props;
 		const name = this.props.name || 'default-radio-name';
 
 		return (
 			<div className="input input-radio">
 				<input
-					ref="btn"
+					ref={button => this.button = button}
 					type="button"
-					className="modus-input__holder"
+					className="mb-input__holder"
 					onFocus={this.onFocus}
 					onBlur={this.onBlur}
 					onKeyDown={this.testKey}
@@ -127,24 +131,35 @@ class RadioGroup extends React.PureComponent {
 	}
 }
 
-const Radio = ({
-	id,
-	onClick,
-	onChange,
-	checked,
-	label,
-	focused,
-	value,
-	disabled,
-}) => {
+
+RadioGroup.propTypes = {
+	id: PropTypes.string,
+	label: PropTypes.string,	
+	options: PropTypes.arrayOf(PropTypes.object).isRequired,
+	value: PropTypes.string,
+	disabled: PropTypes.bool,
+	onChange: PropTypes.func,
+	name: PropTypes.string,
+};
+RadioGroup.defaultProps = {
+	id: undefined,
+	label: undefined,
+	options: [],
+	value: false,
+	disabled: false,
+	onChange: undefined,
+	name: undefined
+};
+
+const Radio = ({ id, onClick, onChange, checked, label, focused, value, disabled }) => {
 	return (
 		<div className="input-radio__option">
 			<div
 				name={name}
 				id={id}
-				className={`input-radio__input ${checked ? 'checked' : ''} ${
-					disabled ? 'disabled' : ''
-				} ${focused ? 'focused' : ''}`}
+				className={`input-radio__input ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''} ${
+					focused ? 'focused' : ''
+				}`}
 				value={value}
 				onChange={onChange}
 				onClick={e => onClick(e, value, disabled)}
@@ -155,15 +170,14 @@ const Radio = ({
 		</div>
 	);
 };
-
-RadioGroup.propTypes = {
-	options: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+Radio.propTypes = {
+	id: PropTypes.string,
+	onClick: PropTypes.func,
+	onChange: PropTypes.func,
+	checked: PropTypes.bool,
+	label: PropTypes.string,
+	focused: PropTypes.bool,
 	value: PropTypes.string,
-	disabled: PropTypes.bool,
-};
-RadioGroup.defaultProps = {
-	options: [],
-	value: false,
-	disabled: false,
-};
+	disabled: PropTypes.bool
+}
 export default RadioGroup;

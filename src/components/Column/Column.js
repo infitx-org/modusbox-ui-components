@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 const mapFlexToProperty = property => {
 	const flexMappers = {
@@ -9,18 +10,9 @@ const mapFlexToProperty = property => {
 	};
 	return property ? flexMappers[property] || property : undefined;
 };
-class Column extends React.PureComponent {
+class Column extends PureComponent {
 	render() {
-		const {
-			align,
-			wrap,
-			grow,
-			shrink,
-			basis,
-			className,
-			style,
-			children,
-		} = this.props;
+		const { align, wrap, grow, shrink, basis, className, style, children } = this.props;
 		const [justifyContent, alignItems] = align.split(' ');
 		const styles = {
 			display: 'flex',
@@ -49,6 +41,7 @@ Column.propTypes = {
 	basis: PropTypes.string,
 	className: PropTypes.string,
 	style: PropTypes.object,
+	children: PropTypes.node,
 };
 Column.defaultProps = {
 	align: 'top',
@@ -58,5 +51,6 @@ Column.defaultProps = {
 	basis: 'auto',
 	className: undefined,
 	style: undefined,
+	children: undefined,
 };
 export default Column;

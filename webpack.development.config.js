@@ -57,16 +57,15 @@ var config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loaders: ['react-hot', 'babel', 'eslint-loader'],
+				loaders: [
+					'react-hot',
+					'babel',
+					//'eslint-loader'
+				],
 			},
 			{
 				test: /\.(css|scss)?$/,
-				loaders: [
-					'style-loader',
-					'css-loader',
-					'sass-loader',
-					'postcss-loader',
-				],
+				loaders: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
 			},
 			{
 				include: /\.json$/,

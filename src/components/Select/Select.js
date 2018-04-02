@@ -1,5 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import find from 'lodash/find';
 
 import * as utils from '../../utils/common';
@@ -9,6 +9,7 @@ import Icon from '../Icon';
 import { Loader, Placeholder } from '../Common';
 
 import Options from './Options';
+import Indicator from './Indicator';
 
 import './Select.scss';
 
@@ -45,9 +46,9 @@ class Select extends PureComponent {
 			filter: undefined,
 		};
 	}
-	componentWillReceiveProps(nextProps, nextState) {
+	componentWillReceiveProps(nextProps) {
 		const changes = {};
-		const { options, value, pending, disabled } = nextProps;
+		const { options, value, disabled } = nextProps;
 
 		if (value !== this.props.value) {
 			const selectedItem = find(options, { value });
@@ -80,14 +81,14 @@ class Select extends PureComponent {
 	}
 
 	setValue(value) {
-		this.refs.filter.value = value;
+		this.filter.value = value;
 	}
 	closeSelect() {
 		this.setState({ isOpen: false, filter: undefined, highlightedOption: 0 });
 	}
 	leaveSelect(next) {
 		this.closeSelect();
-		utils.focusNextFocusableElement(this.refs.filter, next);
+		utils.focusNextFocusableElement(this.filter, next);
 	}
 	openSelect() {
 		this.setState({ isOpen: true });
@@ -100,8 +101,7 @@ class Select extends PureComponent {
 				return elem.parentNode;
 			}
 			if (overflowY === 'scroll') {
-				if (elem.getBoundingClientRect().height > elem.parentNode.offsetHeight)
-					return elem.parentNode;
+				if (elem.getBoundingClientRect().height > elem.parentNode.offsetHeight) return elem.parentNode;
 				else return elem;
 			}
 			if (elem.parentNode === document.body) {
@@ -110,24 +110,13 @@ class Select extends PureComponent {
 			return getParentOverflow(elem.parentNode);
 		};
 
-		const wrapper = getParentOverflow(
-			ReactDOM.findDOMNode(this.refs['options-position'])
-		);
+		const wrapper = getParentOverflow(this.optionsPosition);
 		const wrapperRect = wrapper.getBoundingClientRect();
-		const { top, bottom } = ReactDOM.findDOMNode(
-			this.refs['options-position']
-		).getBoundingClientRect();
-		const maxLowerHeight =
-			Math.min(
-				wrapperRect.height + wrapperRect.top - top,
-				window.innerHeight - bottom
-			) - 10;
-		const maxUpperHeight =
-			Math.min(top, top - wrapperRect.top - wrapper.parentNode.scrollTop - 45) -
-			10;
+		const { top, bottom } = this.optionsPosition.getBoundingClientRect();
+		const maxLowerHeight = Math.min(wrapperRect.height + wrapperRect.top - top, window.innerHeight - bottom) - 10;
+		const maxUpperHeight = Math.min(top, top - wrapperRect.top - wrapper.parentNode.scrollTop - 45) - 10;
 		const optionsHeight = Math.min(240, this.state.options.length * 30);
-		this.reverse =
-			maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight;
+		this.reverse = maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight;
 		this.maxHeight = Math.min(240, Math.max(maxLowerHeight, maxUpperHeight));
 
 		clearTimeout(this._forceUpdateTimeout);
@@ -155,11 +144,8 @@ class Select extends PureComponent {
 			}
 		}
 	}
-	applyFilter(e) {
-		/*if( ! this.state.isOpen ){
-			return 
-		}*/
-		const { value } = this.refs.filter;
+	applyFilter() {
+		const { value } = this.filter;
 		this.setState({ filter: value, isOpen: true });
 		if (value === '') {
 			this.setState({
@@ -191,10 +177,9 @@ class Select extends PureComponent {
 		while (nextHighlightedOption === -1) {
 			nextHighlightedOption = getNextEnabledOption();
 		}
-		ReactDOM.findDOMNode(this.refs.options.refs.items).childNodes[
-			nextHighlightedOption
-		].focus();
-		this.refs.filter.focus();
+		
+		this.options.items.children[nextHighlightedOption].focus()		
+		this.filter.focus();
 		this.setState({ highlightedOption: nextHighlightedOption });
 	}
 
@@ -203,15 +188,14 @@ class Select extends PureComponent {
 		if (!this.state.isOpen) {
 			return;
 		}
-		const isClickWithinSelectBox = ReactDOM.findDOMNode(
-			this.refs.area
-		).contains(e.target);
-		const isClickWithinOptionsBox = this.refs.options
-			? ReactDOM.findDOMNode(this.refs.options).contains(e.target)
+		const isClickWithinSelectBox = this.area.contains(e.target);
+		
+		const isClickWithinOptionsBox = this.optionsPosition.childNodes[0]
+			? this.optionsPosition.childNodes[0].contains(e.target)
 			: false;
 		if (!isClickWithinSelectBox && !isClickWithinOptionsBox) {
 			this.closeSelect();
-			this.refs.filter.blur();
+			this.filter.blur();
 		}
 	}
 
@@ -227,7 +211,7 @@ class Select extends PureComponent {
 	}
 
 	onSelectFilter() {
-		this.refs.filter.focus();
+		this.filter.focus();
 	}
 
 	// when selecting the options item itself
@@ -256,60 +240,36 @@ class Select extends PureComponent {
 	}
 
 	render() {
-		const {
-			id,
-			style,
-			placeholder,
-			pending,
-			disabled,
-			invalid,
-			required,
-		} = this.props;
-		const {
-			isOpen,
-			selectedLabel,
-			value,
-			filter,
-			highlightedOption,
-		} = this.state;
+		const { id, style, placeholder, pending, disabled, invalid, required } = this.props;
+		const { isOpen, selectedLabel, value, filter, highlightedOption } = this.state;
 
 		const inputValue = filter || selectedLabel || '';
-		const isPlaceholderActive = isOpen || selectedLabel;
+		const isPlaceholderActive = isOpen || selectedLabel != undefined;
 
 		const componentClassName = utils.composeClassNames([
 			'input-select__component',
-			'modus-input',
-			'modus-input__borders',
-			'modus-input__background',
-			isOpen &&
-				'modus-input--open modus-input__borders--open modus-input__background--open',
-			disabled &&
-				'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
-			pending &&
-				'modus-input--pending modus-input__borders--pending modus-input__background--pending',
-			invalid &&
-				'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			'mb-input',
+			'mb-input__borders',
+			'mb-input__background',
+			isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
+			disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
+			pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
+			invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
 			required &&
 				selectedLabel === undefined &&
-				'modus-input--required modus-input__borders--required modus-input__background--required',
+				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
 		return (
-			<div id={id} className="input-select modus-input__box" style={style}>
-				<div
-					className={componentClassName}
-					onClick={this.onClickSelect}
-					ref="area"
-				>
-					<div className="modus-input__content input-select__content">
+			<div id={id} className="input-select mb-input__box" style={style}>
+				<div className={componentClassName} onClick={this.onClickSelect} ref={area => this.area = area}>
+					<div className="mb-input__content input-select__content">
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
-							className={`modus-input__input input-select__value ${
-								filter ? 'has-filter' : ''
-							}`}
+							className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
 							type="text"
-							ref="filter"
+							ref={filter => this.filter = filter}
 							onKeyDown={this.testKey}
 							onChange={this.applyFilter}
 							onFocus={this.openSelect}
@@ -319,53 +279,41 @@ class Select extends PureComponent {
 						/>
 
 						{filter && (
-							<div className="modus-input__inner-icon input-select-modus-input__icon">
+							<div className="mb-input__inner-icon input-select-mb-input__icon">
 								<Icon name="search-small" size={16} />
 							</div>
 						)}
 
 						<Loader visible={pending} />
 
-						<div className="modus-input__inner-icon input-select-modus-input__icon">
+						<div className="mb-input__inner-icon input-select-mb-input__icon">
 							<Indicator isOpen={isOpen} />
 						</div>
 					</div>
 				</div>
 
-				<div className="input-select__options" ref="options-position">
-					{isOpen && (
-						<Options
-							ref="options"
-							options={this.filterOptions()}
-							maxHeight={this.maxHeight || 0}
-							reverse={this.reverse}
-							selected={value}
-							highlighted={highlightedOption}
-							onSelect={this.onSelectOption}
-						/>
-					)}
+				<div className="input-select__options" ref={ position => this.optionsPosition = position}>					
+					<Options
+						open={isOpen}
+						ref={options => this.options = options}
+						options={this.filterOptions()}
+						maxHeight={this.maxHeight || 0}
+						reverse={this.reverse}
+						selected={value}
+						highlighted={highlightedOption}
+						onSelect={this.onSelectOption}
+					/>					
 				</div>
 			</div>
 		);
 	}
 }
 
-const Indicator = ({ isOpen }) => (
-	<Icon
-		className="input-select__indicator"
-		name="arrow"
-		style={{
-			marginTop: '2px',
-			transform: `rotateZ(90deg) rotateY(${isOpen ? '180' : 0}deg)`,
-		}}
-		size={10}
-		fill="rgba(0,0,0,0.5)"
-	/>
-);
-
 Select.propTypes = {
 	id: PropTypes.string,
 	style: PropTypes.object,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
 	placeholder: PropTypes.string,
 	options: PropTypes.arrayOf(
 		PropTypes.shape({
@@ -373,11 +321,7 @@ Select.propTypes = {
 			value: PropTypes.string,
 		})
 	),
-	selected: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number,
-		PropTypes.bool,
-	]),
+	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
@@ -387,6 +331,8 @@ Select.propTypes = {
 Select.defaultProps = {
 	id: 'select',
 	style: {},
+	value: undefined,
+	onChange: undefined,
 	placeholder: undefined,
 	options: [],
 	selected: undefined,

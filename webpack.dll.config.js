@@ -2,12 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		vendorPackages: [
-			'react-addons-shallow-compare',
-			'lodash',
-			'react',
-			'react-dom',
-		],
+		vendorPackages: ['react-addons-shallow-compare', 'lodash', 'react', 'react-dom'],
 	},
 
 	output: {

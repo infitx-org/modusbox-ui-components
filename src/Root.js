@@ -55,7 +55,7 @@ if (module.hot) {
 
 	const renderWithModuleHot = () => {
 		try {
-			ReactDOM.render(<Root />, rootEl)
+			ReactDOM.render(<Root />, rootEl);
 		} catch (error) {
 			renderError(error);
 		}
@@ -63,4 +63,4 @@ if (module.hot) {
 
 	module.hot.accept('./Root', () => setTimeout(renderWithModuleHot));
 }
-ReactDOM.render(<Root />, rootEl)
+ReactDOM.render(<Root />, rootEl);

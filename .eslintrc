@@ -3,10 +3,11 @@
         "react"
     ],
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 2017,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "experimentalObjectRestSpread": true
         }
     },
     "env": {
@@ -21,5 +22,6 @@
     ],    
     "rules": {
         "no-console": "off",
+        // "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false}]
     }
 }

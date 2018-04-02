@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
@@ -12,7 +12,7 @@ import '../../icons/mule/close-small.svg';
 
 import './FileUploader.scss';
 
-class FileUploader extends Component {
+class FileUploader extends PureComponent {
 	constructor(props) {
 		super(props);
 
@@ -26,23 +26,26 @@ class FileUploader extends Component {
 		this.onChangeFile = this.onChangeFile.bind(this);
 		this.onKeyDown = this.onKeyDown.bind(this);
 
-		const { fileName } = this.props;
 		this.state = {
 			isOpen: false,
 			fileContent: undefined,
-			fileName,
+			fileName: undefined,
 			filter: undefined,
 		};
 	}
 
-	componentWillReceiveProps(nextProps, nextState) {
+	componentWillReceiveProps(nextProps) {
 		const changes = {};
-		const { fileName, disabled } = nextProps;
+		const { certificate, pending, disabled } = nextProps;
 
-		if (fileName !== this.props.fileName) {
-			changes.fileName = fileName;
+		if (certificate !== this.state.fileContent) {
+			changes.fileContent = certificate;
+		}
+		if (pending !== this.props.pending) {
+			changes.pending = pending;
 		}
 		if (disabled !== this.props.disabled) {
+			changes.disabled = disabled;
 			changes.isOpen = false;
 		}
 
@@ -62,7 +65,7 @@ class FileUploader extends Component {
 		this.setState({ isOpen: false });
 	}
 	leaveFileUploader(next = true) {
-		utils.focusNextFocusableElement(this.refs.fileuploader, next);
+		utils.focusNextFocusableElement(this.fileuploader, next);
 		this.onCloseFileUploader();
 	}
 	onEnterFileUploader() {
@@ -76,14 +79,14 @@ class FileUploader extends Component {
 		const isOpen = !this.state.isOpen;
 		this.setState({ isOpen });
 		if (isOpen === true) {
-			this.refs.fileuploader.focus();
+			this.fileuploader.focus();
 		}
 	}
 	onButtonClick() {
-		this.refs.fileuploader.click();
+		this.fileuploader.click();
 	}
 	onRemoveButtonClick() {
-		this.refs.fileuploader.value = '';
+		this.fileuploader.value = '';
 		this.setState({
 			fileContent: undefined,
 			fileName: undefined,
@@ -98,14 +101,14 @@ class FileUploader extends Component {
 			return;
 		}
 		const { keyCode, shiftKey } = e.nativeEvent;
-		if (e.nativeEvent.keyCode === keyCodes.KEY_TAB) {
+		if (keyCode === keyCodes.KEY_TAB) {
 			e.preventDefault();
 			e.stopPropagation();
-			this.leaveFileUploader(!e.nativeEvent.shiftKey);
+			this.leaveFileUploader(!shiftKey);
 			return;
 		}
 
-		if (e.nativeEvent.keyCode === keyCodes.KEY_RETURN) {
+		if (keyCode === keyCodes.KEY_RETURN) {
 			e.preventDefault();
 			this.onButtonClick();
 		}
@@ -114,9 +117,7 @@ class FileUploader extends Component {
 		if (!this.state.isOpen) {
 			return;
 		}
-		const isClickWithinTextFieldBox = ReactDOM.findDOMNode(
-			this.refs.area
-		).contains(e.target);
+		const isClickWithinTextFieldBox = this.area.contains(e.target);
 		if (!isClickWithinTextFieldBox) {
 			this.onCloseFileUploader();
 		}
@@ -146,9 +147,7 @@ class FileUploader extends Component {
 
 		const { parseFileAs } = this.props;
 		const fileContent =
-			parseFileAs === 'text'
-				? await readAsText(file)
-				: parseFileAs === 'base64' ? await readAsBase64(file) : file;
+			parseFileAs === 'text' ? await readAsText(file) : parseFileAs === 'base64' ? await readAsBase64(file) : file;
 		this.setState({
 			fileContent,
 			fileName: file.name,
@@ -160,50 +159,31 @@ class FileUploader extends Component {
 	}
 
 	render() {
-		const {
-			id,
-			placeholder,
-			fileType,
-			style,
-			required,
-			invalid,
-			pending,
-			disabled,
-		} = this.props;
-		const { isOpen, fileName } = this.state;
-		const inputValue = fileName || '';
-		const isPlaceholderActive = isOpen || fileName || placeholder;
+		const { id, placeholder, fileType, style, required, invalid, pending, disabled } = this.props;
 
+		const { isOpen, fileName, fileContent } = this.state;
+		const isPlaceholderActive = isOpen || fileName || placeholder;
 		const componentClassName = utils.composeClassNames([
 			'input-fileuploader__component',
-			'modus-input',
-			'modus-input__borders',
-			'modus-input__background',
-			isOpen &&
-				'modus-input--open modus-input__borders--open modus-input__background--open',
-			disabled &&
-				'modus-input--disabled modus-input__borders--disabled modus-input__background--disabled',
-			pending &&
-				'modus-input--pending modus-input__borders--pending modus-input__background--pending',
-			invalid &&
-				'modus-input--invalid modus-input__borders--invalid modus-input__background--invalid',
+			'mb-input',
+			'mb-input__borders',
+			'mb-input__background',
+			isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
+			disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
+			pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
+			invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
 			required &&
 				fileName == undefined &&
-				'modus-input--required modus-input__borders--required modus-input__background--required',
+				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
 		return (
-			<div className="input-fileuploader modus-input__box" style={style}>
-				<div
-					id={id}
-					className={componentClassName}
-					onClick={this.onClickFileUploader}
-					ref="area"
-				>
+			<div className="input-fileuploader mb-input__box" style={style}>
+				<div id={id} className={componentClassName} onClick={this.onClickFileUploader} ref={area => (this.area = area)}>
 					<div className="input-fileuploader-box">
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
-						<div className="modus-input__content input-fileuploader__content">
+						<div className="mb-input__content input-fileuploader__content">
 							<input
 								className="input-fileuploader__input"
 								type="file"
@@ -211,23 +191,19 @@ class FileUploader extends Component {
 								onFocus={this.onEnterFileUploader}
 								onChange={this.onChangeFile}
 								disabled={disabled}
-								ref="fileuploader"
+								ref={fileuploader => (this.fileuploader = fileuploader)}
 								onKeyDown={this.onKeyDown}
 								id={id}
 							/>
-							<div
-								className={`input-fileuploader__value ${
-									fileName ? '' : 'missing'
-								}`}
-							>
+							<div className={`input-fileuploader__value ${fileName ? '' : 'missing'}`}>
 								{fileName || 'No File Choosen'}
 							</div>
 							{pending ? (
 								<Loader visible />
-							) : fileName ? (
+							) : fileContent != undefined && fileName ? (
 								<Button
-									className={`modus-input__inner-button input-fileuploader__button-remove ${
-										isOpen ? 'modus-input__inner-button--active' : ''
+									className={`mb-input__inner-button input-fileuploader__button-remove ${
+										isOpen ? 'mb-input__inner-button--active' : ''
 									}`}
 									onClick={this.onRemoveButtonClick}
 									tabIndex="-1"
@@ -237,8 +213,8 @@ class FileUploader extends Component {
 								/>
 							) : (
 								<Button
-									className={`modus-input__inner-button input-fileuploader__button-add ${
-										isOpen ? 'modus-input__inner-button--active' : ''
+									className={`mb-input__inner-button input-fileuploader__button-add ${
+										isOpen ? 'mb-input__inner-button--active' : ''
 									}`}
 									onClick={this.onButtonClick}
 									tabIndex="-1"
@@ -258,6 +234,7 @@ class FileUploader extends Component {
 FileUploader.propTypes = {
 	style: PropTypes.object,
 	id: PropTypes.string,
+	certificate: PropTypes.string,
 	fileType: PropTypes.string,
 	parseFileAs: PropTypes.oneOf(['text', 'base64']),
 	onChange: PropTypes.func,
@@ -271,6 +248,7 @@ FileUploader.propTypes = {
 FileUploader.defaultProps = {
 	style: {},
 	id: undefined,
+	certificate: undefined,
 	fileType: undefined,
 	parseFileAs: undefined,
 	onChange: undefined,

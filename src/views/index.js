@@ -14,9 +14,7 @@ const ComponentMappings = Object.keys(TestViews).map(view => ({
 	view,
 }));
 
-const AllItemTabs = ComponentMappings.map(({ name }, i) => (
-	<Tab key={i}> {name} </Tab>
-));
+const AllItemTabs = ComponentMappings.map(({ name }, i) => <Tab key={i}> {name} </Tab>);
 const AllItemPanels = ComponentMappings.map(({ view, name }, i) => {
 	const View = TestViews[view];
 	const Content = () => (
@@ -48,8 +46,7 @@ class Views extends React.Component {
 		this.onSelectTab = this.onSelectTab.bind(this);
 
 		const selectedTab = parseInt(window.localStorage.getItem('tab') || 0);
-		const tab =
-			selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1;
+		const tab = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1;
 
 		this.state = {
 			tab,
@@ -69,10 +66,7 @@ class Views extends React.Component {
 	}
 
 	render() {
-		const options = [
-			{ label: 'default', value: 'default' },
-			{ label: 'custom', value: 'custom' },
-		];
+		const options = [{ label: 'default', value: 'default' }, { label: 'custom', value: 'custom' }];
 		require('../assets/styles/' + this.state.style + '.scss');
 
 		return (
@@ -86,11 +80,7 @@ class Views extends React.Component {
 							options={options}
 						/>
 
-						<Checkbox
-							label="Code"
-							checked={this.state.code}
-							onChange={this.onCodeToggle}
-						/>
+						<Checkbox label="Code" checked={this.state.code} onChange={this.onCodeToggle} />
 					</Row>
 				</div>
 				<Column grow="1">

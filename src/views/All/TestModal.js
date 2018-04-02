@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from '../../components/Modal';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
@@ -35,15 +36,9 @@ class TestModal extends React.Component {
 				<Button onClick={() => this.onOpen(1)} label="2" />
 				<Button onClick={() => this.onOpen(2)} label="3" />
 
-				<div
-					style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}
-				>
+				<div style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
 					{first && (
-						<Modal
-							primaryAction="Hey"
-							onClose={() => this.onClose(0)}
-							title="test"
-						>
+						<Modal primaryAction="Hey" onClose={() => this.onClose(0)} title="test">
 							<span> Hello! modal 1 </span>
 						</Modal>
 					)}
@@ -56,9 +51,7 @@ class TestModal extends React.Component {
 						<Modal primaryAction="Hey" onClose={() => this.onClose(2)}>
 							<div style={{ height: '1000px' }}>
 								<span> Hello! modal 2 </span>
-								<Select
-									options={new Array(100).fill({ label: '1', value: '2' })}
-								/>
+								<Select options={new Array(100).fill({ label: '1', value: '2' })} />
 							</div>
 						</Modal>
 					)}

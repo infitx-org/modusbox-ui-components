@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import Row from '../Row';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
 import './Modal.scss';
 
-export default class ModalBackground extends React.PureComponent {
+export default class ModalBackground extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.onClickOverlay = this.onClickOverlay.bind(this);
@@ -54,11 +54,7 @@ export default class ModalBackground extends React.PureComponent {
 		return React.cloneElement(child, {});
 	}
 	onClickOverlay() {
-		if (
-			this.props.allowClose &&
-			this.props.isCloseEnabled &&
-			!this.state.isSubmitPending
-		) {
+		if (this.props.allowClose && this.props.isCloseEnabled && !this.state.isSubmitPending) {
 			this.onClose();
 		}
 	}
@@ -74,9 +70,7 @@ export default class ModalBackground extends React.PureComponent {
 	}
 	render() {
 		const width = `${this.props.width || '800px'}`;
-		const maxHeight = this.props.maximise
-			? 'auto'
-			: `calc(100% - ${60 * this.props.modalIndex + 70}px)`;
+		const maxHeight = this.props.maximise ? 'auto' : `calc(100% - ${60 * this.props.modalIndex + 70}px)`;
 		const bottom = this.props.maximise ? '20px' : undefined;
 		const modalStyle = {
 			top: 50 + 60 * this.props.modalIndex,
@@ -87,35 +81,23 @@ export default class ModalBackground extends React.PureComponent {
 			marginLeft: `-${parseInt(width) / 2}px`,
 		};
 		const customStyle = {
-			background:
-				this.props.modalIndex > 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.7)',
+			background: this.props.modalIndex > 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.7)',
 		};
 
-		const isSubmitDisabled =
-			!this.props.isSubmitEnabled || this.state.isSubmitPending;
-		const isCloseDisabled =
-			!this.props.isCloseEnabled || this.state.isSubmitPending;
+		const isSubmitDisabled = !this.props.isSubmitEnabled || this.state.isSubmitPending;
+		const isCloseDisabled = !this.props.isCloseEnabled || this.state.isSubmitPending;
 		return (
 			<div className="element element-modal">
-				<div
-					className="element-modal__overlay"
-					style={customStyle}
-					onClick={this.onClickOverlay}
-				/>
-				<div
-					className={`element-modal__container ${this.props.type}`}
-					style={modalStyle}
-				>
+				<div className="element-modal__overlay" style={customStyle} onClick={this.onClickOverlay} />
+				<div className={`element-modal__container ${this.props.type}`} style={modalStyle}>
 					<div className="element-modal__header">
-						<div className="element-modal__header-title">
-							{this.props.title}
-						</div>
+						<div className="element-modal__header-title">{this.props.title}</div>
 					</div>
 
 					<div
-						className={`element-modal__body ${
-							this.props.tabbed ? 'has-tabs' : ''
-						} ${this.props.alignItems ? 'align-items' : ''}`}
+						className={`element-modal__body ${this.props.tabbed ? 'has-tabs' : ''} ${
+							this.props.alignItems ? 'align-items' : ''
+						}`}
 					>
 						<ScrollBox>
 							<div style={{ padding: '20px' }}>{this.getChild()}</div>
@@ -148,9 +130,7 @@ export default class ModalBackground extends React.PureComponent {
 							{this.props.allowUndo && (
 								<Button
 									onClick={this.onUndo}
-									disabled={
-										!this.props.isUndoEnabled || this.state.isSubmitPending
-									}
+									disabled={!this.props.isUndoEnabled || this.state.isSubmitPending}
 									label="Undo"
 									icon="trash-small"
 									kind="secondary"
@@ -164,9 +144,7 @@ export default class ModalBackground extends React.PureComponent {
 									disabled={isSubmitDisabled}
 									onClick={this.onSubmit}
 									label={this.props.primaryAction}
-									className={`element-modal__submit ${this.props.type} ${
-										isSubmitDisabled ? 'disabled' : ''
-									}`}
+									className={`element-modal__submit ${this.props.type} ${isSubmitDisabled ? 'disabled' : ''}`}
 								/>
 							)}
 						</div>
@@ -194,23 +172,38 @@ ModalBackground.defaultProps = {
 	maximise: false,
 	tabbed: false,
 	alignItems: false,
+	children: undefined,
+	width: '300',
+	modalIndex: 0,
+	title: '',
+	allowCancel: false,
+	isCancelEnabled: false,
+	submitButtonId: ''
+
 };
 
-ModalBackground.PropTypes = {
-	type: React.PropTypes.oneOf(['danger', 'warning', 'regular']),
-	isSubmitPending: React.PropTypes.bool,
-	isCloseEnabled: React.PropTypes.bool,
-	isSubmitEnabled: React.PropTypes.bool,
-	isUndoEnabled: React.PropTypes.bool,
-	allowClose: React.PropTypes.bool,
-	allowSubmit: React.PropTypes.bool,
-	allowUndo: React.PropTypes.bool,
-	onClose: React.PropTypes.func.isRequired,
-	onUndo: React.PropTypes.func,
-	onCancel: React.PropTypes.func,
-	onSubmit: React.PropTypes.func,
-	primaryAction: React.PropTypes.string.isRequired,
-	maximise: React.PropTypes.bool,
-	tabbed: React.PropTypes.bool,
-	alignItems: React.PropTypes.bool,
+ModalBackground.propTypes = {
+	type: PropTypes.oneOf(['danger', 'warning', 'regular']),
+	isSubmitPending: PropTypes.bool,
+	isCloseEnabled: PropTypes.bool,
+	isSubmitEnabled: PropTypes.bool,
+	isUndoEnabled: PropTypes.bool,
+	allowClose: PropTypes.bool,
+	allowSubmit: PropTypes.bool,
+	allowUndo: PropTypes.bool,
+	onClose: PropTypes.func.isRequired,
+	onUndo: PropTypes.func,
+	onCancel: PropTypes.func,
+	onSubmit: PropTypes.func,
+	primaryAction: PropTypes.string.isRequired,
+	maximise: PropTypes.bool,
+	tabbed: PropTypes.bool,
+	alignItems: PropTypes.bool,
+	children: PropTypes.node,
+	width: PropTypes.string,
+	modalIndex: PropTypes.number,
+	title: PropTypes.string,
+	allowCancel: PropTypes.bool,
+	isCancelEnabled: PropTypes.bool,
+	submitButtonId: PropTypes.string
 };

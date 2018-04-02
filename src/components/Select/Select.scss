@@ -9,10 +9,10 @@
 	cursor: pointer;	
 	height: 100%;
 	
-	&.input-select__modus-input--open {		
+	&.input-select__mb-input--open {		
 	}	
 	
-	&.input-select__modus-input--disabled{		
+	&.input-select__mb-input--disabled{		
 	}
 }
 
@@ -42,7 +42,7 @@
     	color: $color__blue-4;
     }
 }
-.input-select-modus-input__icon{
+.input-select-mb-input__icon{
 	flex: 0 0 auto;
 }
 .input-select__indicator{

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '../../components/TextField';
 
 const TestTextField = () => (
@@ -21,27 +22,13 @@ const TestTextField = () => (
 				onBlur={() => console.log('onBlur')}
 				onFocus={() => console.log('onFocus')}
 			/>
-			<TextField
-				placeholder="Button"
-				onButtonClick={() => console.log('Clicked!')}
-				buttonText="Press Me"
-			/>
-			<TextField
-				placeholder="Disabled"
-				onButtonClick={() => console.log('Clicked!')}
-				buttonText="Press Me"
-				disabled
-			/>
+			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" />
+			<TextField placeholder="Disabled" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" disabled />
 		</div>
 		<div style={{ padding: '10px', border: '1px solid #ccc' }}>
 			<TextField type="password" placeholder="Password pending" pending />
 			<TextField placeholder="Required Disabled" required disabled />
-			<TextField
-				placeholder="Required Disabled Invalid"
-				required
-				disabled
-				invalid
-			/>
+			<TextField placeholder="Required Disabled Invalid" required disabled invalid />
 		</div>
 	</div>
 );

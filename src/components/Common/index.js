@@ -1,5 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 import Spinner from '../Spinner';
@@ -9,10 +9,14 @@ const Loader = ({ visible = true }) => {
 		return null;
 	}
 	return (
-		<div className="modus-input__inner-icon">
+		<div className="mb-input__inner-icon">
 			<Spinner size={16} />
 		</div>
 	);
+};
+
+Loader.propTypes = {
+	visible: PropTypes.bool,
 };
 
 const Placeholder = ({ label, active }) => {
@@ -21,11 +25,16 @@ const Placeholder = ({ label, active }) => {
 	}
 
 	const placeholderClassName = utils.composeClassNames([
-		'modus-input__placeholder',
-		active && 'modus-input__placeholder--active',
+		'mb-input__placeholder',
+		active && 'mb-input__placeholder--active',
 	]);
 
 	return <label className={placeholderClassName}>{label}</label>;
+};
+
+Placeholder.propTypes = {
+	label: PropTypes.string,
+	active: PropTypes.bool,
 };
 
 export { Loader, Placeholder };

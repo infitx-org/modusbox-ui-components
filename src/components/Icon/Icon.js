@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 
 import './Icon.scss';
 
-class Icon extends React.PureComponent {
+class Icon extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.onClick = this.onClick.bind(this);
@@ -23,17 +24,9 @@ class Icon extends React.PureComponent {
 			stroke,
 			...style,
 		};
-		const componentClassName = utils.composeClassNames([
-			'element-icon',
-			spin && 'spin',
-			className,
-		]);
+		const componentClassName = utils.composeClassNames(['element-icon', spin && 'spin', className]);
 		return (
-			<svg
-				style={svgStyle}
-				onClick={this.onClick}
-				className={componentClassName}
-			>
+			<svg style={svgStyle} onClick={this.onClick} className={componentClassName}>
 				<use xlinkHref={`#${name}`} />
 			</svg>
 		);
@@ -49,16 +42,18 @@ Icon.defaultProps = {
 	fill: undefined,
 	stroke: undefined,
 	spin: false,
+	onClick: undefined,
 };
 
 Icon.propTypes = {
-	idName: React.PropTypes.string,
-	style: React.PropTypes.object,
-	className: React.PropTypes.string,
-	size: React.PropTypes.number,
-	name: React.PropTypes.string,
-	fill: React.PropTypes.string,
-	stroke: React.PropTypes.string,
-	spin: React.PropTypes.bool,
+	idName: PropTypes.string,
+	style: PropTypes.object,
+	className: PropTypes.string,
+	size: PropTypes.number,
+	name: PropTypes.string,
+	fill: PropTypes.string,
+	stroke: PropTypes.string,
+	spin: PropTypes.bool,
+	onClick: PropTypes.func,
 };
 export default Icon;

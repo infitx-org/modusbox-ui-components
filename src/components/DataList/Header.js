@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import find from 'lodash/find';
 
 import Row from '../Row';
@@ -34,13 +35,8 @@ class Header extends React.Component {
 		} = this.props;
 		return (
 			<div className="data-list-header-row-box">
-				<Row
-					className="data-list-header-row"
-					style={{ paddingRight: showScrollbar ? '6px' : '0px' }}
-				>
-					{hasChildren && (
-						<div className="data-list-header-cell" style={style.arrowColumn} />
-					)}
+				<Row className="data-list-header-row" style={{ paddingRight: showScrollbar ? '6px' : '0px' }}>
+					{hasChildren && <div className="data-list-header-cell" style={style.arrowColumn} />}
 					{hasMultiSelect && (
 						<div
 							id={`${id}-multiselect-all`}
@@ -67,9 +63,7 @@ class Header extends React.Component {
 						const isResizable = !(column.resizable === false);
 						const filter = find(filters, { label: column.label });
 						const isSearching = filter != undefined;
-						const headerCellId = `${id}-${column.label
-							.toLowerCase()
-							.replace(/\ /g, '-')}`;
+						const headerCellId = `${id}-${column.label.toLowerCase().replace(/\ /g, '-')}`;
 						const isLastColumn = i === columns.length - 1;
 
 						return (
@@ -85,19 +79,13 @@ class Header extends React.Component {
 								sortable={isSortable} // undefined is sortable
 								label={column.label}
 								content={originalColumn.headerContent}
-								showLabel={
-									column.showLabel != undefined ? column.showLabel : true
-								}
+								showLabel={column.showLabel != undefined ? column.showLabel : true}
 								isSearching={isSearching}
 								filter={filter}
 								isSorting={sortLabel === column.label}
 								isSortingAsc={isSortingAsc}
-								onColumnClick={() =>
-									isSortable ? onColumnClick(column.label) : {}
-								}
-								onSearchClick={evt =>
-									isSearchable ? onSearchClick(evt, column.label) : {}
-								}
+								onColumnClick={() => (isSortable ? onColumnClick(column.label) : {})}
+								onSearchClick={evt => (isSearchable ? onSearchClick(evt, column.label) : {})}
 								onSearchChange={onSearchChange}
 								onSearchRemove={onSearchRemove}
 								onTriggerResizeWidth={onTriggerResizeWidth}

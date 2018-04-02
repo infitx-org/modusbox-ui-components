@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
 import { NotifyResize } from 'react-notify-resize';
@@ -55,27 +56,15 @@ class ListItem extends React.Component {
 		const changeItem = !isEqual(nextProps.item, this.props.item);
 		const changeAnimation = nextState.animate != this.state.animate;
 		const changeSelected = nextProps.isSelected !== this.props.isSelected;
-		const changeMultiSelected =
-			nextProps.isMultiSelected !== this.props.isMultiSelected;
-		const changeScrollbarVisibility =
-			nextProps.showScrollbar !== this.props.showScrollbar;
-		return (
-			isForced ||
-			changeSelected ||
-			changeMultiSelected ||
-			changeItem ||
-			changeScrollbarVisibility
-		);
+		const changeMultiSelected = nextProps.isMultiSelected !== this.props.isMultiSelected;
+		const changeScrollbarVisibility = nextProps.showScrollbar !== this.props.showScrollbar;
+		return isForced || changeSelected || changeMultiSelected || changeItem || changeScrollbarVisibility;
 	}
 
 	render() {
 		const { item, isSelected, showScrollbar } = this.props;
 		return (
-			<div
-				ref="item"
-				className="data-list-body-row-wrapper"
-				style={{ paddingRight: showScrollbar ? '6px' : '0px' }}
-			>
+			<div ref="item" className="data-list-body-row-wrapper" style={{ paddingRight: showScrollbar ? '6px' : '0px' }}>
 				<div
 					style={this.props.rowStyle}
 					onClick={this.onClick}
@@ -96,24 +85,16 @@ class ListItem extends React.Component {
 					{this.props.columns.map((column, i) => {
 						let style = {
 							...this.props.style.dataColumn,
-							width: column.width
-								? column.width
-								: this.props.style.dataColumn.width,
+							width: column.width ? column.width : this.props.style.dataColumn.width,
 							...column.style,
 						};
 						let originalColumn = this.props.originalColumns[i];
 						// check if the value needs to be transformed using the "func and icon" function
 						const prop = column.key;
 						const field = item[prop];
-						let value =
-							field != undefined
-								? column.func != undefined ? column.func(field, item) : field
-								: '';
-						const icon =
-							column.icon != undefined ? column.icon(field, item) : false;
-						let cellContent =
-							originalColumn.content &&
-							originalColumn.content(field, item, this.props.index);
+						let value = field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
+						const icon = column.icon != undefined ? column.icon(field, item) : false;
+						let cellContent = originalColumn.content && originalColumn.content(field, item, this.props.index);
 						let content = false;
 						if (cellContent) {
 							if (typeof cellContent === 'string') {

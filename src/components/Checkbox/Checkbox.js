@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { focusNextFocusableElement } from '../../utils/common';
 import './Checkbox.scss';
 
-class Checkbox extends React.PureComponent {
+class Checkbox extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -32,7 +33,7 @@ class Checkbox extends React.PureComponent {
 
 		const checked = !this.state.checked;
 		this.setState({ checked });
-		this.refs.input.focus();
+		this.input.focus();
 
 		if (typeof this.props.onChange === 'function') {
 			this.props.onChange(checked);
@@ -41,7 +42,7 @@ class Checkbox extends React.PureComponent {
 	testKey(e) {
 		if (e.nativeEvent.keyCode === 9) {
 			e.preventDefault();
-			focusNextFocusableElement(this.refs.input, !e.nativeEvent.shiftKey);
+			focusNextFocusableElement(this.input, !e.nativeEvent.shiftKey);
 			return;
 		}
 		if (e.nativeEvent.keyCode === 13) {
@@ -54,9 +55,9 @@ class Checkbox extends React.PureComponent {
 		const { semi, id, label, disabled, round } = this.props;
 
 		return (
-			<div className="modus-input input-checkbox">
+			<div className="mb-input input-checkbox">
 				<input
-					ref="input"
+					ref={input => (this.input = input)}
 					type="checkbox"
 					id={id}
 					className={`input-checkbox__input ${semi ? 'semi-checked' : ''}`}
@@ -65,11 +66,7 @@ class Checkbox extends React.PureComponent {
 					onChange={this.preventDefault}
 					disabled={disabled}
 				/>
-				<label
-					htmlFor={id}
-					onClick={this.onChange}
-					className={`${round ? 'round' : ''}`}
-				>
+				<label htmlFor={id} onClick={this.onChange} className={`${round ? 'round' : ''}`}>
 					{label}
 				</label>
 			</div>
@@ -77,10 +74,20 @@ class Checkbox extends React.PureComponent {
 	}
 }
 Checkbox.propTypes = {
+	semi: PropTypes.bool,
+	id: PropTypes.string,
+	label: PropTypes.string,
+	round: PropTypes.bool,
+	onChange: PropTypes.func,
 	checked: PropTypes.bool,
 	disabled: PropTypes.bool,
 };
 Checkbox.defaultProps = {
+	semi: false,
+	id: undefined,
+	label: undefined,
+	round: false,
+	onChange: undefined,
 	checked: false,
 	disabled: false,
 };

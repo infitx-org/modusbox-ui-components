@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs';
 
 const TestTabs = () => (
@@ -52,6 +54,17 @@ const TestTabs = () => (
 				</TabPanels>
 			</Tabs>
 		</div>
+		<div style={{ padding: 10 }}>
+			<Tabs>
+				<TabList>
+					<Tab>Tab 1</Tab>
+					<Tab>Tab 2</Tab>
+					<Tab>Tab 3</Tab>
+					<Tab disabled={true}>Tab 4 ( disabled )</Tab>
+				</TabList>				
+			</Tabs>
+		</div>
+
 	</div>
 );
 

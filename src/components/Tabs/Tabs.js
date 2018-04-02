@@ -1,16 +1,13 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import './Tabs.scss';
 
-class TabList extends React.PureComponent {
-	render() {
-		return children;
-	}
-}
-class Tabs extends React.PureComponent {
+
+class Tabs extends PureComponent {
 	constructor(props) {
 		super(props);
 
@@ -20,9 +17,7 @@ class Tabs extends React.PureComponent {
 		this.state = {
 			selected: Math.max(
 				0,
-				typeof selected === 'string'
-					? items.indexOf(selected)
-					: selected != undefined ? selected : 0
+				typeof selected === 'string' ? items.indexOf(selected) : selected != undefined ? selected : 0
 			),
 			focused: undefined,
 		};
@@ -46,9 +41,7 @@ class Tabs extends React.PureComponent {
 		}
 
 		const subElements = Array.isArray(children) ? children : [children];
-		const tabs = subElements[0].props.children.filter(
-			child => child.type === Tab
-		);
+		const tabs = subElements[0].props.children.filter(child => child.type === Tab);
 
 		const { hidden, disabled } = tabs[selected].props;
 		if (hidden || disabled) {
@@ -69,14 +62,14 @@ class Tabs extends React.PureComponent {
 		return tabList.props.children.filter(child => child.type === Tab);
 	}
 	getPanels() {
-		const [tabList, tabPanels] = this.getTabListAndTabPanels();
-		const panels = tabPanels ? tabPanels.props.children : [];
+		const tabPanels = this.getTabListAndTabPanels()[1];
+		const panels = tabPanels ? tabPanels.props.children || [] : [];
 		return panels.filter(child => child.type === TabPanel);
 	}
-	onSelect(evt, index) {
+	onSelect(index) {
 		this.setState({ selected: index, focused: index });
 
-		this.refs.btn.focus();
+		this.input.focus();
 
 		if (typeof this.props.onSelect === 'function') {
 			this.props.onSelect(index);
@@ -90,7 +83,7 @@ class Tabs extends React.PureComponent {
 		}
 		return;
 	}
-	onBlur(blurred) {
+	onBlur() {
 		this.setState({ focused: undefined });
 	}
 	testKey(e) {
@@ -98,7 +91,7 @@ class Tabs extends React.PureComponent {
 		if (keyCode === keyCodes.KEY_TAB) {
 			e.preventDefault();
 			this.setState({ focused: undefined });
-			utils.focusNextFocusableElement(this.refs.btn, !shiftKey);
+			utils.focusNextFocusableElement(this.input, !shiftKey);
 			return;
 		}
 		if (keyCode === keyCodes.KEY_LEFT) {
@@ -116,7 +109,8 @@ class Tabs extends React.PureComponent {
 		const { selected } = this.state;
 		const tabs = this.getTabs(this.props.children);
 		let nextIndex = selected;
-		while (true) {
+		let found = false
+		while (!found) {
 			nextIndex += next ? 1 : -1;
 			if (nextIndex == tabs.length || nextIndex < 0) {
 				break;
@@ -128,25 +122,35 @@ class Tabs extends React.PureComponent {
 		}
 	}
 	render() {
-		const { selected } = this.state;
+		const { selected, focused } = this.state;
 		const { children } = this.props;
-		const [tabList] = this.getTabListAndTabPanels();
-
-		const tabs = this.getTabs(children).map((child, index) =>
-			React.cloneElement(child, { ...child.props, onSelect: this.onSelect })
-		);
+		const [ tabList ] = this.getTabListAndTabPanels();
 
 		const panels = this.getPanels(children);
-		const SelectedPanel =
-			panels.length >= selected + 1 ? panels[selected] : null;
+		const panel = panels.length >= selected + 1 ? panels[selected] : null;
 
 		const { width } = tabList.props.style || {};
 		const growTab = width != undefined;
 
+		const tabs = this.getTabs(children).map((child, index) => {
+			const props = {
+				...child.props,
+				onSelect: () => this.onSelect(index),
+				key: index,
+				selected: selected === index,
+				focused: focused === index,				
+				flex: growTab
+			}
+			return React.cloneElement(child, props);
+		});
+			
+
+		//const TABS = 
+
 		return (
 			<div className="element element-tabs">
 				<input
-					ref="btn"
+					ref={input => this.input = input}
 					type="button"
 					className="modus-element__holder"
 					onFocus={this.onFocus}
@@ -154,60 +158,58 @@ class Tabs extends React.PureComponent {
 					onKeyDown={this.testKey}
 				/>
 				<div className="element-tabs__tab-items" style={tabList.props.style}>
-					{tabs.map((item, index) => (
-						<Tab
-							key={index}
-							index={index}
-							selected={this.state.selected === index}
-							focused={this.state.focused === index}
-							onSelect={item.props.onSelect}
-							hidden={item.props.hidden}
-							disabled={item.props.disabled}
-							text={item.props.children}
-							style={item.props.style}
-							flex={growTab}
-						/>
-					))}
+					{tabs}
 				</div>
-				{SelectedPanel && (
-					<div className="element-tabs__tab__content">{SelectedPanel}</div>
-				)}
+				{panel && <div className="element-tabs__tab__content">{panel}</div>}
 			</div>
 		);
 	}
+}
+
+Tabs.propTypes = {
+	selected: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+	onSelect: PropTypes.func,	
+	disabled: PropTypes.bool,	
+	flex: PropTypes.bool,
+	style: PropTypes.object,
+	children: PropTypes.node
+}
+
+const TabList = ({ children }) => {
+	children;
+};
+
+TabList.propTypes = {
+	children: PropTypes.node
 }
 
 const TabPanels = ({ children }) => {
 	children;
 };
 
-const TabPanel = ({ children }) => (
-	<div className="element-tabs__tab__panel">{children}</div>
-);
+TabPanels.propTypes = {
+	children: PropTypes.node
+}
 
-class Tab extends React.PureComponent {
+const TabPanel = ({ children }) => <div className="element-tabs__tab__panel">{children}</div>;
+
+TabPanel.propTypes = {
+	children: PropTypes.node
+}
+
+class Tab extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.onClick = this.onClick.bind(this);
 	}
-	onClick(evt) {
+	onClick() {
 		if (!this.props.disabled) {
-			this.props.onSelect(evt, this.props.index);
+			this.props.onSelect();
 		}
 	}
 	render() {
-		const {
-			selected,
-			focused,
-			onSelect,
-			index,
-			text,
-			disabled,
-			hidden,
-			flex,
-			style,
-		} = this.props;
-
+		const { selected, focused, children, disabled, hidden, flex, style } = this.props;
+		console.log(children)
 		if (hidden) {
 			return null;
 		}
@@ -221,10 +223,21 @@ class Tab extends React.PureComponent {
 
 		return (
 			<div onClick={this.onClick} className={className} style={style}>
-				{text}
+				{children}
 			</div>
 		);
 	}
+}
+Tab.propTypes = {
+	children: PropTypes.node,
+	selected: PropTypes.bool,
+	focused: PropTypes.bool,
+	onSelect: PropTypes.func,
+	text: PropTypes.string,
+	disabled: PropTypes.bool,
+	hidden: PropTypes.bool,
+	flex: PropTypes.bool,
+	style: PropTypes.object
 }
 
 export { Tab, Tabs, TabList, TabPanel, TabPanels };

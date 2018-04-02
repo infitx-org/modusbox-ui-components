@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import './ScrollBar.scss';
 
-class ScrollBar extends React.PureComponent {
+class ScrollBar extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.setPosition = this.setPosition.bind(this);
@@ -15,8 +15,7 @@ class ScrollBar extends React.PureComponent {
 			showScrollbar: false,
 			barHeight: '0%',
 			translate: 0,
-			isMoving: false,
-			height: '100%',
+			isMoving: false
 		};
 		this.state = { ...this.originalState };
 		this.movingTimeout = false;
@@ -41,10 +40,8 @@ class ScrollBar extends React.PureComponent {
 		}, 500);
 	}
 	setPosition(positions) {
-		const { tracker } = this.refs;
-		const { height } = tracker
-			? ReactDOM.findDOMNode(tracker).getBoundingClientRect()
-			: positions;
+		const { tracker } = this;
+		const { height } = tracker ? tracker.getBoundingClientRect() : positions;
 		const { contentHeight, scrollTop, offset } = positions;
 		const totalContentHeight = offset + contentHeight;
 		const viewToContentRatio = positions.height / totalContentHeight;
@@ -52,9 +49,7 @@ class ScrollBar extends React.PureComponent {
 		const barHeight = viewToContentRatio * height;
 		const realBaHeight = height / totalContentHeight * height;
 		const showScrollbar = viewToContentRatio < 1;
-		const translate = showScrollbar
-			? scrollTop / (totalContentHeight - height) * (height - realBaHeight)
-			: 0;
+		const translate = showScrollbar ? scrollTop / (totalContentHeight - height) * (height - realBaHeight) : 0;
 		const isMoving = true;
 
 		this.setState({ showScrollbar, barHeight, translate, isMoving, height });
@@ -67,9 +62,7 @@ class ScrollBar extends React.PureComponent {
 	}
 	onMouseMove(e) {
 		if (this._dragging) {
-			const { top, height } = ReactDOM.findDOMNode(
-				this.refs.tracker
-			).getBoundingClientRect();
+			const { top, height } = this.tracker.getBoundingClientRect();
 			const mousePosY = e.pageY - top;
 			if (typeof this.props.onDrag === 'function') {
 				const diff = mousePosY - this._originMouseY;
@@ -79,18 +72,12 @@ class ScrollBar extends React.PureComponent {
 			}
 		}
 	}
-	onMouseUp(e) {
+	onMouseUp() {
 		this._dragging = false;
 	}
 	render() {
 		const { showTrack, trackStyle, handleStyle } = this.props;
-		const {
-			showScrollbar,
-			barHeight,
-			translate,
-			isMoving,
-			height,
-		} = this.state;
+		const { showScrollbar, barHeight, translate, isMoving } = this.state;
 		const trackStyles = {
 			...trackStyle,
 		};
@@ -104,41 +91,33 @@ class ScrollBar extends React.PureComponent {
 			return null;
 		}
 
-		return (
-			<Tracker ref="tracker" style={trackStyles}>
+		return (			
+			<div ref={tracker => this.tracker = tracker} className={`scrollbar ${showTrack ? 'track-visible' : ''}`} style={trackStyles}>
 				<div
 					onMouseDown={this.onMouseDown}
 					className={`${isMoving ? 'moving' : ''} scrollbar-handle`}
 					style={handleStyles}
 				/>
-			</Tracker>
+			</div>
 		);
 	}
 }
 
 ScrollBar.propTypes = {
-	showTrack: React.PropTypes.bool,
-	style: React.PropTypes.object,
+	showTrack: PropTypes.bool,
+	onDrag: PropTypes.func,
+	trackStyle: PropTypes.object,
+	handleStyle: PropTypes.object,
+	style: PropTypes.object,
 };
 ScrollBar.defaultProps = {
 	showTrack: true,
+	onDrag: undefined,
+	trackStyle: {},
+	handleStyle: {},
 	style: {},
 };
 
-class Tracker extends React.PureComponent {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		return (
-			<div
-				className={`scrollbar ${this.props.showTrack ? 'track-visible' : ''}`}
-				style={this.props.style}
-			>
-				{this.props.children}
-			</div>
-		);
-	}
-}
+
 
 export default ScrollBar;

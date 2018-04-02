@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
@@ -30,19 +31,14 @@ const SpinnerBox = ({ id = 'datalist-pending-box' }) => (
 const ErrorBox = ({ id = 'datalist-error-box', message }) => (
 	<div id={`${id}`} className="datalist-error-box">
 		<Icon size={50} name="settings" fill="#ccc" />
-		<span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>
-			{' '}
-			Service Unavailable{' '}
-		</span>
+		<span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}> Service Unavailable </span>
 	</div>
 );
 
 const NoDataBox = ({ message }) => (
 	<div className="datalist-message-box">
 		<Icon name="dashboard" size={40} fill="#ccc" />
-		<span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>
-			{message}
-		</span>
+		<span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>{message}</span>
 	</div>
 );
 
@@ -58,28 +54,14 @@ const OverlayColumnResizer = props => (
 const Paging = props => {
 	const { selected, qty } = props;
 	const betweenPages = Math.max(qty - 2, 0);
-	const siblings = new Array(betweenPages)
-		.fill(0)
-		.map((i, idx) => ({ value: idx + 1, label: idx + 2 }));
-	const translation = -(
-		Math.min(Math.max(0, qty - 7), Math.max(0, selected - 3)) * 38
-	);
+	const siblings = new Array(betweenPages).fill(0).map((i, idx) => ({ value: idx + 1, label: idx + 2 }));
+	const translation = -(Math.min(Math.max(0, qty - 7), Math.max(0, selected - 3)) * 38);
 
 	return (
 		<div className="paging-box">
-			{qty > 0 && (
-				<Page
-					onClick={() => props.onSelect(0)}
-					label={1}
-					value={0}
-					isSelected={selected === 0}
-				/>
-			)}
+			{qty > 0 && <Page onClick={() => props.onSelect(0)} label={1} value={0} isSelected={selected === 0} />}
 			<div className="paging-scroller-box">
-				<div
-					className="paging-scroller "
-					style={{ transform: `translate3d(${translation}px,0px,0px)` }}
-				>
+				<div className="paging-scroller " style={{ transform: `translate3d(${translation}px,0px,0px)` }}>
 					{siblings.map((item, index) => (
 						<Page
 							onClick={() => props.onSelect(item.value)}
@@ -92,12 +74,7 @@ const Paging = props => {
 				</div>
 			</div>
 			{qty > 1 && (
-				<Page
-					onClick={() => props.onSelect(qty - 1)}
-					label={qty}
-					value={qty - 1}
-					isSelected={selected === qty - 1}
-				/>
+				<Page onClick={() => props.onSelect(qty - 1)} label={qty} value={qty - 1} isSelected={selected === qty - 1} />
 			)}
 		</div>
 	);
@@ -143,12 +120,8 @@ class ListItems extends React.Component {
 		this.handleScroll = this.handleScroll.bind(this);
 		this.handleResize = this.handleResize.bind(this);
 		this.handleResizeColumnWidth = this.handleResizeColumnWidth.bind(this);
-		this.handleStartResizeColumnWidth = this.handleStartResizeColumnWidth.bind(
-			this
-		);
-		this.handleStopResizeColumnWidth = this.handleStopResizeColumnWidth.bind(
-			this
-		);
+		this.handleStartResizeColumnWidth = this.handleStartResizeColumnWidth.bind(this);
+		this.handleStopResizeColumnWidth = this.handleStopResizeColumnWidth.bind(this);
 		this.changePage = this.changePage.bind(this);
 		this.pageClick = this.pageClick.bind(this);
 		this.nextPage = this.nextPage.bind(this);
@@ -304,29 +277,14 @@ class ListItems extends React.Component {
 			this.setState({ forceRenderItems: false });
 		}
 
-		this.storeHeights(
-			this.state.currentIndexStart,
-			this.state.currentIndexStop
-		);
+		this.storeHeights(this.state.currentIndexStart, this.state.currentIndexStop);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const forceUpdateList = !isEqual(
-			this.props.forceUpdate,
-			nextProps.forceUpdate
-		);
-		const forceRenderItems = !isEqual(
-			this.props.forceRender,
-			nextProps.forceRender
-		);
-		const multiSelectChanged = !isEqual(
-			this.state.multiSelected,
-			nextProps.multiSelected
-		);
-		const forceUpdateColumns = !isEqual(
-			this.state.forceColumnUpdate,
-			nextProps.forceColumnUpdate
-		);
+		const forceUpdateList = !isEqual(this.props.forceUpdate, nextProps.forceUpdate);
+		const forceRenderItems = !isEqual(this.props.forceRender, nextProps.forceRender);
+		const multiSelectChanged = !isEqual(this.state.multiSelected, nextProps.multiSelected);
+		const forceUpdateColumns = !isEqual(this.state.forceColumnUpdate, nextProps.forceColumnUpdate);
 
 		if (forceUpdateColumns) {
 			this.setState({ columns: nextProps.columns });
@@ -353,11 +311,7 @@ class ListItems extends React.Component {
 		if (!this.props.hasInfiniteScrolling) {
 			// if list changed we need to re-render
 			if (!isEqual(nextProps.list, this.state.list)) {
-				let newList = this.sortList(
-					nextProps.list,
-					this.state.sortKey,
-					this.state.sortAsc
-				);
+				let newList = this.sortList(nextProps.list, this.state.sortKey, this.state.sortAsc);
 				this.setState({
 					list: nextProps.list,
 					currentList: newList,
@@ -368,9 +322,7 @@ class ListItems extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const isNotforceRenderItems =
-			this.state.forceRenderItems === true &&
-			nextState.forceRenderItems === false;
+		const isNotforceRenderItems = this.state.forceRenderItems === true && nextState.forceRenderItems === false;
 		return !isNotforceRenderItems;
 	}
 
@@ -500,8 +452,7 @@ class ListItems extends React.Component {
 				if (!this.isComponentMounted) return;
 
 				let errorMsg;
-				if (err.status != undefined && err.statusText != undefined)
-					errorMsg = `${err.status} ${err.statusText}`;
+				if (err.status != undefined && err.statusText != undefined) errorMsg = `${err.status} ${err.statusText}`;
 				else errorMsg = 'Service unavailable';
 
 				this.setState({
@@ -597,8 +548,7 @@ class ListItems extends React.Component {
 			}
 
 			const column = this.getFilteringColumn(filter.label);
-			const key =
-				column != undefined && column.searchable ? column.key : undefined;
+			const key = column != undefined && column.searchable ? column.key : undefined;
 
 			if (!key) {
 				return [];
@@ -606,9 +556,7 @@ class ListItems extends React.Component {
 
 			// custom search function described outside this component
 			if (column.search) {
-				return list.filter(item =>
-					column.search(pattern.toLowerCase(), item[key], item)
-				);
+				return list.filter(item => column.search(pattern.toLowerCase(), item[key], item));
 			}
 
 			const chunks = pattern
@@ -617,10 +565,7 @@ class ListItems extends React.Component {
 				.filter(c => c != '');
 			const filtered = list.filter(item => {
 				const field = item[key];
-				const value =
-					field != undefined
-						? column.func != undefined ? column.func(field, item) : field
-						: '';
+				const value = field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
 				return chunks.every(chunk =>
 					value
 						.toString()
@@ -636,10 +581,7 @@ class ListItems extends React.Component {
 	handleScroll() {
 		this.refs.rows.classList.add('remove-pointer-events');
 		clearTimeout(this.noPointerEventsTimeout);
-		this.noPointerEventsTimeout = setTimeout(
-			() => this.refs.rows.classList.remove('remove-pointer-events'),
-			50
-		);
+		this.noPointerEventsTimeout = setTimeout(() => this.refs.rows.classList.remove('remove-pointer-events'), 50);
 		// detect scroll direction
 		const { scrollTop } = this.refs.scroller;
 		const isScrollingDown = scrollTop > (this.lastScrollPosition || 0);
@@ -650,8 +592,7 @@ class ListItems extends React.Component {
 			if (this.state.isUpdating) return;
 
 			const totalHeight = this.getTotalHeight();
-			const pixelsToEnd =
-				totalHeight - (scrollTop + this.refs.scroller.offsetHeight);
+			const pixelsToEnd = totalHeight - (scrollTop + this.refs.scroller.offsetHeight);
 
 			if (this.state.hasPages) {
 				if (pixelsToEnd === 0 && this.state.hasPages) {
@@ -662,10 +603,7 @@ class ListItems extends React.Component {
 
 			// handle scrolling down
 			// when top is close to 0 it means we need to get new data
-			if (
-				pixelsToEnd < 1000 &&
-				this.state.endOfData != this.state.currentIndexStop
-			) {
+			if (pixelsToEnd < 1000 && this.state.endOfData != this.state.currentIndexStop) {
 				// stop here if
 				if (this.state.list.length < this.state.currentIndexStop) return;
 
@@ -673,10 +611,7 @@ class ListItems extends React.Component {
 				this.hasUpdatedNewItems = false;
 
 				// detect data is cached otherwise api call
-				if (
-					this.state.list.length >=
-					this.state.currentIndexStop + this.state.itemsNumber
-				) {
+				if (this.state.list.length >= this.state.currentIndexStop + this.state.itemsNumber) {
 					let data = this.state.list.slice(
 						this.state.currentIndexStop,
 						this.state.currentIndexStop + this.state.itemsNumber
@@ -721,11 +656,7 @@ class ListItems extends React.Component {
 	}
 
 	storeHeights(start, stop) {
-		for (
-			var i = 0;
-			i < stop - start && i < this.state.currentList.length;
-			i++
-		) {
+		for (var i = 0; i < stop - start && i < this.state.currentList.length; i++) {
 			let itemIndex = start + i;
 			this.heights[itemIndex] = this.getItemHeight(i);
 		}
@@ -804,10 +735,7 @@ class ListItems extends React.Component {
 		let itemIndex = this.state.currentIndexStart + index;
 		this.heights[itemIndex] = this.getItemHeight(index);
 
-		if (
-			this.lastSelectedIndex != undefined &&
-			this.lastSelectedIndex != itemIndex
-		) {
+		if (this.lastSelectedIndex != undefined && this.lastSelectedIndex != itemIndex) {
 			// detect if the items is part of the first set which doesn't require calculation in compensation
 			// get the difference between the last element height and its new height
 			let isFirstSetItem = itemIndex < this.state.itemsToShow;
@@ -826,8 +754,7 @@ class ListItems extends React.Component {
 	// resort the table when changing and filter the current list
 	handleColumnClick(label) {
 		let nextSortKey = this.getSortingKey(label);
-		let nextSortAsc =
-			this.state.sortLabel === label ? !this.state.sortAsc : true;
+		let nextSortAsc = this.state.sortLabel === label ? !this.state.sortAsc : true;
 		if (nextSortKey === false) return;
 
 		let changes = {
@@ -849,18 +776,14 @@ class ListItems extends React.Component {
 		} else {
 			if (this.state.hasPages) {
 				// sort all records
-				const sortedList = nextSortKey
-					? this.sortList(this.state.list, nextSortKey, nextSortAsc)
-					: list;
+				const sortedList = nextSortKey ? this.sortList(this.state.list, nextSortKey, nextSortAsc) : list;
 				const filteredList = this.filterList(sortedList, this.state.filters);
 				const { currentList } = this.changePage(this.state.page, filteredList);
 				changes.list = sortedList;
 				changes.pageQty = this.getPageQty(filteredList);
 				changes.currentList = currentList;
 			} else {
-				changes.currentList = nextSortKey
-					? this.sortList(this.state.currentList, nextSortKey, nextSortAsc)
-					: list;
+				changes.currentList = nextSortKey ? this.sortList(this.state.currentList, nextSortKey, nextSortAsc) : list;
 			}
 		}
 
@@ -869,9 +792,7 @@ class ListItems extends React.Component {
 
 	handleSearchClick(evt, label) {
 		evt.stopPropagation();
-		const [filter] = this.state.filters.filter(
-			filter => filter.label === label
-		);
+		const [filter] = this.state.filters.filter(filter => filter.label === label);
 		if (filter) {
 			this.handleSearchRemove(evt, label);
 		} else {
@@ -903,10 +824,7 @@ class ListItems extends React.Component {
 			let newPage = this.state.page;
 			if (this.state.hasPages) {
 				pageQty = this.getPageQty(filteredList);
-				const { currentList, page } = this.changePage(
-					this.state.page,
-					filteredList
-				);
+				const { currentList, page } = this.changePage(this.state.page, filteredList);
 				filteredList = currentList;
 				newPage = page;
 			}
@@ -920,10 +838,7 @@ class ListItems extends React.Component {
 	handleSearchRemove(evt, label) {
 		evt.stopPropagation();
 		const index = findIndex(this.state.filters, { label });
-		const filters = [
-			...this.state.filters.slice(0, index),
-			...this.state.filters.slice(index + 1),
-		];
+		const filters = [...this.state.filters.slice(0, index), ...this.state.filters.slice(index + 1)];
 		let changes = {
 			filters,
 			pageQty: this.getPageQty(this.state.list),
@@ -972,13 +887,8 @@ class ListItems extends React.Component {
 
 			let arrowCellWidth = this.state.hasChildren ? 40 : 0;
 			let multiSelectWidth = this.state.hasMultiSelect ? 40 : 0;
-			let fixedPxAmount =
-				multiSelectWidth +
-				arrowCellWidth +
-				columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
-			let columnsAutoWidthNumber = columns.filter(
-				(col, index) => col.width == undefined
-			).length;
+			let fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+			let columnsAutoWidthNumber = columns.filter((col, index) => col.width == undefined).length;
 			let columnPerc = 100 / columnsAutoWidthNumber;
 			let columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
 			let style = {
@@ -1000,10 +910,7 @@ class ListItems extends React.Component {
 	}
 	handleResizeColumnWidth(event) {
 		if (this.state.isResizingColumn) {
-			var currentX =
-				10 +
-				event.nativeEvent.clientX -
-				this.refs.datalist.getBoundingClientRect().left;
+			var currentX = 10 + event.nativeEvent.clientX - this.refs.datalist.getBoundingClientRect().left;
 			var diff = Math.max(currentX - this.state.cellLeftPosition, 100);
 			this.setState({
 				cellWidth: diff,
@@ -1041,10 +948,7 @@ class ListItems extends React.Component {
 		this.props.onMultiSelect(multiSelected);
 	}
 	getAllItemIds() {
-		const filterItems =
-			typeof this.props.showMultiSelect === 'function'
-				? this.props.showMultiSelect
-				: item => item;
+		const filterItems = typeof this.props.showMultiSelect === 'function' ? this.props.showMultiSelect : item => item;
 		return this.state.list.filter(filterItems).map(item => item.id);
 	}
 
@@ -1062,34 +966,19 @@ class ListItems extends React.Component {
 		const { list, currentList, apiError, filters } = this.state;
 		const { allowFilter } = this.props;
 
-		const hasMultiSelectFilter =
-			typeof this.props.showMultiSelect === 'function';
+		const hasMultiSelectFilter = typeof this.props.showMultiSelect === 'function';
 		const isLoading = this.state.isLoadingNewData;
 		const isSorting = this.state.isSortingData;
 		const isFiltering = this.state.isFilteringData;
 		const isMainMultiSelected = this.detectMainMultiselected();
-		const isNoData =
-			list.length === 0 && !isLoading && !apiError && !allowFilter;
+		const isNoData = list.length === 0 && !isLoading && !apiError && !allowFilter;
 		const isNoDataInfiniteUnfiltered =
-			allowFilter &&
-			currentList.length === 0 &&
-			!isLoading &&
-			!apiError &&
-			filters.length == 0;
+			allowFilter && currentList.length === 0 && !isLoading && !apiError && filters.length == 0;
 		const isNoDataInfiniteFiltered =
-			allowFilter &&
-			currentList.length === 0 &&
-			!isLoading &&
-			!apiError &&
-			filters.length > 0;
+			allowFilter && currentList.length === 0 && !isLoading && !apiError && filters.length > 0;
 		const isSortingOrFiltering = isSorting || isFiltering;
-		const hideList =
-			(isNoDataInfiniteUnfiltered && !isFiltering) ||
-			isNoData ||
-			isLoading ||
-			apiError;
-		const isNoDataInfiniteUnfilteredNotFiltering =
-			isNoDataInfiniteUnfiltered && !isFiltering;
+		const hideList = (isNoDataInfiniteUnfiltered && !isFiltering) || isNoData || isLoading || apiError;
+		const isNoDataInfiniteUnfilteredNotFiltering = isNoDataInfiniteUnfiltered && !isFiltering;
 
 		return (
 			<div
@@ -1105,18 +994,12 @@ class ListItems extends React.Component {
 				{isLoading && <SpinnerBox id={`${this.props.id}-pending-box`} />}
 
 				{/* Empty table */}
-				{(isNoData || isNoDataInfiniteUnfilteredNotFiltering) && (
-					<NoDataBox message={this.props.noData} />
-				)}
+				{(isNoData || isNoDataInfiniteUnfilteredNotFiltering) && <NoDataBox message={this.props.noData} />}
 
 				{/* API ERROR */}
 				{apiError && <ErrorBox message={apiError} />}
 
-				<div
-					className="data-list"
-					id={this.props.id}
-					style={hideList ? { display: 'none' } : undefined}
-				>
+				<div className="data-list" id={this.props.id} style={hideList ? { display: 'none' } : undefined}>
 					{this.state.isOverlayColumnVisible && (
 						<OverlayColumnResizer
 							start={this.state.cellLeftPosition}
@@ -1132,9 +1015,7 @@ class ListItems extends React.Component {
 						hasMultiSelect={this.state.hasMultiSelect}
 						onMultiSelectAll={this.handleMultiSelectAll}
 						allSelected={isMainMultiSelected}
-						someSelected={
-							isMainMultiSelected == false && this.state.multiSelected.length
-						}
+						someSelected={isMainMultiSelected == false && this.state.multiSelected.length}
 						style={this.state.style}
 						originalColumns={this.props.columns}
 						columns={this.state.columns}
@@ -1150,14 +1031,9 @@ class ListItems extends React.Component {
 					/>
 
 					{/* Sorting */}
-					{isSortingOrFiltering && (
-						<SpinnerBox id={`${this.props.id}-pending-box`} />
-					)}
+					{isSortingOrFiltering && <SpinnerBox id={`${this.props.id}-pending-box`} />}
 
-					<div
-						className="central-box"
-						style={{ display: isSortingOrFiltering ? 'none' : 'flex' }}
-					>
+					<div className="central-box" style={{ display: isSortingOrFiltering ? 'none' : 'flex' }}>
 						<Paginator
 							show={this.hasUpdatedNewItems}
 							hide={this.hasUpdatedPreviousItems}
@@ -1185,35 +1061,19 @@ class ListItems extends React.Component {
 								}}
 							/>
 
-							<div
-								ref="rows"
-								style={{ width: this.state.bodyWidth }}
-								className="datalist-body-rows"
-							>
+							<div ref="rows" style={{ width: this.state.bodyWidth }} className="datalist-body-rows">
 								{this.state.currentList.map((item, i) => {
 									let style = { ...this.state.style, ...item.style };
 									const isSelected = this.props.selected === item.id;
-									const onItemClick = isSelected
-										? this.props.onUnselect
-										: this.props.onSelect;
-									const isMultiSelected = this.state.multiSelected.includes(
-										item.id
-									);
-									const showMultiSelect = hasMultiSelectFilter
-										? this.props.showMultiSelect(item)
-										: true;
+									const onItemClick = isSelected ? this.props.onUnselect : this.props.onSelect;
+									const isMultiSelected = this.state.multiSelected.includes(item.id);
+									const showMultiSelect = hasMultiSelectFilter ? this.props.showMultiSelect(item) : true;
 
 									// detect necessary fade-in animation
 									const isNewData = this.isNewData;
-									const isAnimatingUp =
-										(this.hasUpdatedPreviousItems &&
-											i < this.state.itemsNumber) ||
-										false;
-									const isAnimatingDown =
-										(this.hasUpdatedNewItems && i >= this.state.itemsNumber) ||
-										false;
-									const animateItem =
-										isAnimatingUp || isAnimatingDown || isNewData;
+									const isAnimatingUp = (this.hasUpdatedPreviousItems && i < this.state.itemsNumber) || false;
+									const isAnimatingDown = (this.hasUpdatedNewItems && i >= this.state.itemsNumber) || false;
+									const animateItem = isAnimatingUp || isAnimatingDown || isNewData;
 
 									return (
 										<ListItem
@@ -1234,11 +1094,7 @@ class ListItems extends React.Component {
 											showCheckbox={this.state.hasMultiSelect}
 											forceUpdate={this.state.forceRenderItems}
 											animate={animateItem}
-											children={
-												isSelected && this.state.hasChildren
-													? this.props.childrens
-													: undefined
-											}
+											children={isSelected && this.state.hasChildren ? this.props.childrens : undefined}
 											onResize={height => this.handleResize(i, height)}
 											showScrollbar={this.state.isScrollbarVisible}
 										/>
@@ -1246,14 +1102,8 @@ class ListItems extends React.Component {
 								})}
 							</div>
 
-							{this.state.isUpdating && (
-								<SpinnerBox id={`${this.props.id}-updating-box`} />
-							)}
-							{isNoDataInfiniteFiltered && (
-								<NoDataBox
-									message={`${this.props.noData} with these filters`}
-								/>
-							)}
+							{this.state.isUpdating && <SpinnerBox id={`${this.props.id}-updating-box`} />}
+							{isNoDataInfiniteFiltered && <NoDataBox message={`${this.props.noData} with these filters`} />}
 						</div>
 						<ScrollBar ref="scrollbar" onInit={this.updateScrollbar} />
 
@@ -1269,11 +1119,7 @@ class ListItems extends React.Component {
 						/>
 					</div>
 					{this.state.hasPages && (
-						<Paging
-							qty={this.state.pageQty}
-							selected={this.state.page}
-							onSelect={this.pageClick}
-						/>
+						<Paging qty={this.state.pageQty} selected={this.state.page} onSelect={this.pageClick} />
 					)}
 				</div>
 			</div>
@@ -1322,16 +1168,11 @@ class Paginator extends React.Component {
 
 	render() {
 		const rangeClass = this.state.animate ? 'fadeInOut' : '';
-		const top = this.state.animate
-			? this.state.showingTop
-			: this.state.originalTop;
+		const top = this.state.animate ? this.state.showingTop : this.state.originalTop;
 
 		return (
 			<div className="paginator">
-				<div
-					className={` paginator-animator ${rangeClass}`}
-					style={{ transform: `translateY(${top}px)` }}
-				>
+				<div className={` paginator-animator ${rangeClass}`} style={{ transform: `translateY(${top}px)` }}>
 					<div className="paginator-range">
 						{this.state.valueStart} - {this.state.valueStop}
 					</div>
@@ -1381,12 +1222,8 @@ const DataList = ({
 	const multiSelectWidth = multiSelect ? 40 : 0;
 	const scrollbarWidth = showScrollbar ? 6 : 0;
 	const fixedPxAmount =
-		scrollbarWidth +
-		multiSelectWidth +
-		arrowCellWidth +
-		columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
-	const columnsAutoWidthNumber = columns.filter(col => col.width == undefined)
-		.length;
+		scrollbarWidth + multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+	const columnsAutoWidthNumber = columns.filter(col => col.width == undefined).length;
 	const columnPerc = 100 / columnsAutoWidthNumber;
 	const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
 	const hasInfiniteScrolling = typeof update === 'function';
@@ -1412,12 +1249,7 @@ const DataList = ({
 	// apply searchable property to every column
 	columns.forEach(column => {
 		if (column.searchable == undefined) {
-			if (
-				column.searchable === false ||
-				column.showLabel === false ||
-				column.label === '' ||
-				hasInfiniteScrolling
-			) {
+			if (column.searchable === false || column.showLabel === false || column.label === '' || hasInfiniteScrolling) {
 				column.searchable = false;
 			} else {
 				column.searchable = true;
@@ -1470,18 +1302,11 @@ const DataList = ({
 
 DataList.propTypes = {
 	id: React.PropTypes.string,
-	height: React.PropTypes.oneOfType([
-		React.PropTypes.string,
-		React.PropTypes.number,
-	]),
+	height: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 	rowStyle: React.PropTypes.object,
 	list: React.PropTypes.arrayOf(React.PropTypes.object),
 	columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-	selected: React.PropTypes.oneOfType([
-		React.PropTypes.string,
-		React.PropTypes.number,
-		React.PropTypes.bool,
-	]),
+	selected: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool]),
 	onSelect: React.PropTypes.func,
 	onUnselect: React.PropTypes.func,
 	multiSelect: React.PropTypes.bool,
