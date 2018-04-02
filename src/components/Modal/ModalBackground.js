@@ -96,7 +96,7 @@ export default class ModalBackground extends React.PureComponent {
 		const isCloseDisabled =
 			!this.props.isCloseEnabled || this.state.isSubmitPending;
 		return (
-			<div className="element-modal">
+			<div className="element element-modal">
 				<div
 					className="element-modal__overlay"
 					style={customStyle}

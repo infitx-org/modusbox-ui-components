@@ -39,7 +39,11 @@ class TestModal extends React.Component {
 					style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}
 				>
 					{first && (
-						<Modal primaryAction="Hey" onClose={() => this.onClose(0)}>
+						<Modal
+							primaryAction="Hey"
+							onClose={() => this.onClose(0)}
+							title="test"
+						>
 							<span> Hello! modal 1 </span>
 						</Modal>
 					)}

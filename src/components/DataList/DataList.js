@@ -1176,7 +1176,6 @@ class ListItems extends React.Component {
 								display: this.state.isLoadingNewData ? 'hidden' : 'block',
 							}}
 						>
-							{/* this element is used to compensate the difference of missing elements to keep the same scrollbar position */}
 							<div
 								id="compensator"
 								style={{
