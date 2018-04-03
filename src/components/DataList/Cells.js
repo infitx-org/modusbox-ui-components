@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
 import Icon from '../Icon';
 import Checkbox from './Checkbox';
 
 // the icon is throwing an error, but the code and the functionality isn't broken
-class ArrowCell extends Component {
+class ArrowCell extends PureComponent {
 	constructor(props) {
 		super(props);
 	}
 
-	shouldComponentUpdate(nextProps) {
-		return nextProps.isSelected != this.props.selected;
-	}
 	render() {
 		return (
-			<div className="data-list-body-cell arrow-cell">
+			<div className="element-datalist__body-cell arrow-cell">
 				<Icon
 					size="xs"
 					name="arrow-down-small"
-					className={'data-list-body-arrowIcon ' + (!this.props.isSelected ? 'rotated' : '')}
+					className={'element-datalist__body-arrowIcon ' + (!this.props.isSelected ? 'rotated' : '')}
 				/>
 			</div>
 		);
 	}
 }
 
-class CheckboxCell extends Component {
+ArrowCell.propTypes = {
+	isSelected: PropTypes.bool
+}
+
+class CheckboxCell extends PureComponent {
 	constructor(props) {
 		super(props);
 	}
@@ -41,7 +41,7 @@ class CheckboxCell extends Component {
 	render() {
 		const { show, id, isSelected, onMultiSelect, style } = this.props;
 		return (
-			<div style={style} className="data-list-body-cell data-list-body-column-cell">
+			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell">
 				<div style={{ width: '100%' }}>
 					{show && <Checkbox id={id} isSelected={isSelected} onChange={onMultiSelect} />}
 				</div>
@@ -50,7 +50,16 @@ class CheckboxCell extends Component {
 	}
 }
 
-class ListItemCell extends React.Component {
+CheckboxCell.propTypes = {
+	show: PropTypes.bool,
+	isSelected: PropTypes.bool,
+	id: PropTypes.string,
+	onMultiSelect: PropTypes.func,
+	style: PropTypes.shape(),
+
+}
+
+class ListItemCell extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.detectTooltipRequired = this.detectTooltipRequired.bind(this);
@@ -91,16 +100,16 @@ class ListItemCell extends React.Component {
 		let overflowScreen = left + width > screenWidth;
 		let text = this.props.content ? this.props.content : this.props.value;
 		var p = document.createElement('div');
-		p.className = 'datalist-tooltip';
+		p.className = 'element-datalist__tooltip';
 		p.style.width = width;
 		p.style.top = top - 30;
 		p.style.left = overflowScreen ? right - width : left;
-		p.id = `datalist-tooltip-${this.cellIndex}`;
+		p.id = `element-datalist__tooltip-${this.cellIndex}`;
 		p.innerText = text;
 		document.body.appendChild(p);
 	}
 	hideToolTip() {
-		let tooltip = document.getElementById(`datalist-tooltip-${this.cellIndex}`);
+		let tooltip = document.getElementById(`element-datalist__tooltip-${this.cellIndex}`);
 		if (tooltip) {
 			tooltip.parentNode.removeChild(tooltip);
 		}
@@ -116,7 +125,7 @@ class ListItemCell extends React.Component {
 		this.removeTooltip();
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps) {
 		const iconChanged = !isEqual(nextProps.icon, this.props.icon);
 		const contentChanged = !isEqual(nextProps.content, this.props.content);
 		const valueChanged = !isEqual(nextProps.value, this.props.value);
@@ -131,15 +140,15 @@ class ListItemCell extends React.Component {
 		const cellContent = isContent ? content : value;
 
 		return (
-			<div style={style} className="data-list-body-cell data-list-body-column-cell" ref={cell => (this.cell = cell)}>
-				<div className="data-list-body-cell-content-wrapper">
+			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell" ref={cell => (this.cell = cell)}>
+				<div className="element-datalist__body-cell-content-wrapper">
 					{icon && (
-						<Icon size={size || 16} name={name || ''} color={color || '#333'} className="data-list-body-cell-icon" />
+						<Icon size={size || 16} name={name || ''} color={color || '#333'} className="element-datalist__body-cell-icon" />
 					)}
 					{isContent ? (
-						<div className="data-list-body-cell-content"> {cellContent} </div>
+						<div className="element-datalist__body-cell-content"> {cellContent} </div>
 					) : (
-						<div className="data-list-body-cell-text" ref={box => (this.box = box)} onClick={onClick}>
+						<div className="element-datalist__body-cell-text" ref={box => (this.box = box)} onClick={onClick}>
 							{' '}
 							{cellContent}{' '}
 						</div>
@@ -150,8 +159,19 @@ class ListItemCell extends React.Component {
 	}
 }
 
+ListItemCell.propTypes = {
+	rowIndex: PropTypes.number,
+	index: PropTypes.number,
+	content: PropTypes.func,
+	value: PropTypes.string,
+	icon: PropTypes.shape(),
+	style: PropTypes.shape(),
+	onClick: PropTypes.func,
+	id: PropTypes.string
+}
+
 // Cell in the Header
-class HeaderCell extends React.Component {
+class HeaderCell extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.detectTooltipRequired = this.detectTooltipRequired.bind(this);
@@ -206,22 +226,22 @@ class HeaderCell extends React.Component {
 		let overflowScreen = left + width > screenWidth;
 		let text = this.props.content ? this.props.content(this.props.column) : this.props.label;
 		var p = document.createElement('div');
-		p.className = 'datalist-tooltip';
+		p.className = 'element-datalist__tooltip';
 		p.style.width = width;
 		p.style.top = top - 30;
 		p.style.left = overflowScreen ? right - width : left;
-		p.id = `datalist-tooltip-${this.cellIndex}`;
+		p.id = `element-datalist__tooltip-${this.cellIndex}`;
 		p.innerText = text;
 		document.body.appendChild(p);
 	}
 	hideToolTip() {
-		let tooltip = document.getElementById(`datalist-tooltip-${this.cellIndex}`);
+		let tooltip = document.getElementById(`element-datalist__tooltip-${this.cellIndex}`);
 		if (tooltip) {
 			tooltip.parentNode.removeChild(tooltip);
 		}
 	}
 	pageClick(evt) {
-		if (this.refs['search-input'] == undefined) {
+		if (this.searchInput == undefined) {
 			return;
 		}
 		if (!this.props.isSearching) {
@@ -229,9 +249,8 @@ class HeaderCell extends React.Component {
 		}
 		if (this.props.filter.value != undefined && this.props.filter.value != '') {
 			return;
-		}
-		const area = ReactDOM.findDOMNode(this.refs['search-input']);
-		if (!area.contains(evt.target)) {
+		}		
+		if (!this.searchInput.contains(evt.target)) {
 			this.props.onSearchRemove(evt, this.props.label);
 		}
 	}
@@ -251,7 +270,7 @@ class HeaderCell extends React.Component {
 
 		if (prevProps.isSearching != this.props.isSearching) {
 			if (this.props.isSearching) {
-				this.refs['search-input'].focus();
+				this.searchInput.focus();
 				this.setState({ growInput: true });
 			} else {
 				this.setState({ growInput: false });
@@ -280,17 +299,17 @@ class HeaderCell extends React.Component {
 		} = this.props;
 		const labelContent = content ? content(column) : showLabel ? label : '';
 		const isLabelEmpty = labelContent === '';
-		const sortingArrowIconClassName = ['data-list-header-cell-arrowIcon', !isSortingAsc && 'rotated']
+		const sortingArrowIconClassName = ['element-datalist__header-cell-arrowIcon', !isSortingAsc && 'rotated']
 			.filter(x => typeof x === 'string')
 			.join(' ');
 
-		const sortingArrowIconBoxClassName = ['data-list-header-cell-arrowIcon-box', isLabelEmpty && 'center']
+		const sortingArrowIconBoxClassName = ['element-datalist__header-cell-arrowIcon-box', isLabelEmpty && 'center']
 			.filter(x => typeof x === 'string')
 			.join(' ');
 
 		const columnClassNames = [
-			'data-list-header-cell',
-			'data-list-header-column-cell',
+			'element-datalist__header-cell',
+			'element-datalist__header-column-cell',
 			isSorting ? 'isSorting ' : '',
 			sortable ? 'sortable' : 'non-sortable',
 			searchable ? 'searchable' : 'non-searchable',
@@ -303,41 +322,41 @@ class HeaderCell extends React.Component {
 
 		return (
 			<div ref={cell => (this.cell = cell)} id={id} onClick={onColumnClick} style={style} className={columnClassNames}>
-				<div className="data-list-header-cell-box">
+				<div className="element-datalist__header-cell-box">
 					{searchable && (
 						<div
-							className="data-list-header-cell-searchIcon-box"
+							className="element-datalist__header-cell-searchIcon-box"
 							onClick={isSearching ? onRemoveFilter : onSearchClick}
 						>
 							<Icon
 								size={16}
 								name="search-small"
-								className={'data-list-header-cell-searchIcon ' + (isSearching ? 'rotated' : '')}
+								className={'element-datalist__header-cell-searchIcon ' + (isSearching ? 'rotated' : '')}
 							/>
 						</div>
 					)}
 					{isSearching && (
-						<div className="data-list-header-cell-searchInput-box">
+						<div className="element-datalist__header-cell-searchInput-box">
 							<input
 								type="text"
-								className={`data-list-header-cell-searchInput-input ${this.state.growInput ? 'grow' : ''} `}
+								className={`element-datalist__header-cell-searchInput-input ${this.state.growInput ? 'grow' : ''} `}
 								placeholder={`Search on ${label}`}
 								onClick={e => e.stopPropagation()}
 								onChange={e => onSearchChange(e, label)}
 								/*onBlur={ onRemoveFilter } */
-								ref="search-input"
+								ref={searchInput => this.searchInput = searchInput}
 							/>
 							<Icon
 								size={16}
 								name="close-small"
-								className="data-list-header-cell-searchInput-remove"
+								className="element-datalist__header-cell-searchInput-remove"
 								onClick={onRemoveFilter}
 							/>
 						</div>
 					)}
 					{!isSearching &&
 						!isLabelEmpty && (
-							<div className="data-list-header-cell-label" ref={box => (this.box = box)}>
+							<div className="element-datalist__header-cell-label" ref={box => (this.box = box)}>
 								{' '}
 								{labelContent}{' '}
 							</div>
@@ -349,7 +368,7 @@ class HeaderCell extends React.Component {
 						</div>
 					)}
 					{allowResizeWidth && (
-						<div className="data-list-header-cell-holder" onClick={this.changeColumnWidthStart}>
+						<div className="element-datalist__header-cell-holder" onClick={this.changeColumnWidthStart}>
 							<div className="resize-icon">
 								<div className="resizer-left" />
 								<div className="resizer-right" />
@@ -363,11 +382,33 @@ class HeaderCell extends React.Component {
 	}
 }
 
+HeaderCell.propTypes = {
+	id: PropTypes.string,
+	content: PropTypes.func,
+	column: PropTypes.shape(),
+	label: PropTypes.string,
+	isSearching: PropTypes.bool,
+	filter: PropTypes.string,
+	onSearchRemove: PropTypes.func,
+	showLabel: PropTypes.bool,
+	onTriggerResizeWidth: PropTypes.func,
+	index: PropTypes.number,
+	isLastColumn: PropTypes.bool,
+	resizable: PropTypes.bool,
+	searchable: PropTypes.bool,
+	style: PropTypes.shape(),
+	sortable: PropTypes.bool,
+	isSorting: PropTypes.bool,
+	isSortingAsc: PropTypes.bool,
+	onColumnClick: PropTypes.func,
+	onSearchClick: PropTypes.func,
+	onSearchChange: PropTypes.func,
+}
 const ScrollBarCell = () => {
-	return <div className="data-list-body-cell data-list-scrollbar-cell" />;
+	return <div className="element-datalist__body-cell element-datalist__scrollbar-cell" />;
 };
 
 const ScrollBarHeaderCell = () => {
-	return <div className="data-list-header-cell data-list-scrollbar-cell" />;
+	return <div className="element-datalist__header-cell element-datalist__scrollbar-cell" />;
 };
 export { ArrowCell, CheckboxCell, ListItemCell, HeaderCell, ScrollBarHeaderCell, ScrollBarCell };

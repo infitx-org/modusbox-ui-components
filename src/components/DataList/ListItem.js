@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual';
 import { NotifyResize } from 'react-notify-resize';
 
 import Link from './Link';
-import { ArrowCell, CheckboxCell, ListItemCell, ScrollBarCell } from './Cells';
+import { ArrowCell, CheckboxCell, ListItemCell } from './Cells';
 
 class ListItem extends React.Component {
 	constructor(props) {
@@ -49,10 +49,9 @@ class ListItem extends React.Component {
 		}
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps) {
 		const isForced = nextProps.forceUpdate === true;
-		const changeItem = !isEqual(nextProps.item, this.props.item);
-		const changeAnimation = nextState.animate != this.state.animate;
+		const changeItem = !isEqual(nextProps.item, this.props.item);		
 		const changeSelected = nextProps.isSelected !== this.props.isSelected;
 		const changeMultiSelected = nextProps.isMultiSelected !== this.props.isMultiSelected;
 		const changeScrollbarVisibility = nextProps.showScrollbar !== this.props.showScrollbar;
@@ -64,13 +63,13 @@ class ListItem extends React.Component {
 		return (
 			<div
 				ref={item => (this.item = item)}
-				className="data-list-body-row-wrapper"
+				className="element-datalist__body-row-wrapper"
 				style={{ paddingRight: showScrollbar ? '6px' : '0px' }}
 			>
 				<div
 					style={this.props.rowStyle}
 					onClick={this.onClick}
-					className={' data-list-body-row ' + (isSelected ? 'selected' : '')}
+					className={' element-datalist__body-row ' + (isSelected ? 'selected' : '')}
 				>
 					{this.props.showArrow && <ArrowCell isSelected={isSelected} />}
 
@@ -132,7 +131,7 @@ class ListItem extends React.Component {
 				</div>
 
 				{this.props.children != undefined && (
-					<div className="data-list-children-row">
+					<div className="element-datalist__children-row">
 						{this.props.children}
 						<NotifyResize onResize={this.onResize} />
 					</div>
@@ -140,6 +139,27 @@ class ListItem extends React.Component {
 			</div>
 		);
 	}
+}
+
+ListItem.propTypes = {
+	onResize: PropTypes.func,
+	onItemClick: PropTypes.func,
+	item: PropTypes.shape(),
+	onMultiSelect: PropTypes.func,
+	animate: PropTypes.bool,
+	forceUpdate: PropTypes.bool,
+	isSelected: PropTypes.bool,
+	isMultiSelected: PropTypes.bool,
+	showScrollbar: PropTypes.bool,
+	rowStyle: PropTypes.shape(),
+	showArrow: PropTypes.bool,
+	showCheckbox: PropTypes.bool,
+	showMultiSelect: PropTypes.bool,
+	index: PropTypes.number,
+	style: PropTypes.shape(),
+	columns: PropTypes.array,
+	originalColumns: PropTypes.array,
+	children: PropTypes.node,
 }
 
 export default ListItem;

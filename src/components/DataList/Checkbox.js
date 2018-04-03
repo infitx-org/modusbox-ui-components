@@ -6,7 +6,7 @@ const Checkbox = ({ id, isSelected, halfChecked, onChange }) => (
 		<input
 			type="checkbox"
 			id={id}
-			className={`datalist-checkbox ${halfChecked && 'half-checked'}`}
+			className={`element-datalist__checkbox ${halfChecked && 'half-checked'}`}
 			checked={isSelected}
 			onChange={e => {
 				e.stopPropagation();
@@ -21,4 +21,11 @@ const Checkbox = ({ id, isSelected, halfChecked, onChange }) => (
 		<label htmlFor={id} onClick={e => e.stopPropagation()} />
 	</div>
 );
+
+Checkbox.propTypes = {
+	id: PropTypes.string,
+	isSelected: PropTypes.bool,
+	halfChecked: PropTypes.bool,
+	onChange: PropTypes.func
+}
 export default Checkbox;

@@ -1,5 +1,5 @@
 /* CHECKBOX RULES */
-.datalist{
+.element-datalist{
 	display: flex;
 	flex-direction: column;
 
@@ -11,7 +11,7 @@
 }
 
 /* MULTI SELECTION */
-.datalist-checkbox{
+.element-datalist__checkbox{
 	appearance: none;
 	display: none;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);		
@@ -87,8 +87,8 @@
 	}
 }
 
-.datalist-error-box,
-.datalist-message-box{
+.element-datalist__error-box,
+.element-datalist__message-box{
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -220,19 +220,19 @@
 	animation: fadeUp 0.3s ease-out 1 forwards;
 }
 
-.data-list-wrapper{	
+.element-datalist__wrapper{	
     flex: 2;
 	position: relative;    
 	/*height:100%;*/
 	max-height: 100%;
 }
 
-* .data-list label {
+* .element-datalist label {
 	display: inline-block;
 }
 
 
-.data-list{
+.element-datalist{
 	display: flex;
 	flex-direction: column;
 	position:absolute;
@@ -260,7 +260,7 @@
 		flex-direction:column;
 		flex: 1 1 auto;
 	}	
-	.data-list-body-box{
+	.element-datalist__body-box{
 		position: relative;
 		max-height:100%;
 		overflow-y: scroll;
@@ -270,18 +270,18 @@
 		}		
 	}
 
-	.data-list-scroller{
+	.element-datalist__scroller{
 	}
 
 
 	/* PAGINATION */
-	.data-list-pagination-box{
+	.element-datalist__pagination-box{
 		border-top:2px solid #ccc;
 		height:40px;		
 		display: flex;
 		flex-flow: row;
 	}	
-	.data-list-pagination-center{
+	.element-datalist__pagination-center{
 		flex-shrink: 1;
 		flex-grow: 1;
 
@@ -290,7 +290,7 @@
 		align-items: center;
 		justify-content: center;
 
-		.data-list-pagination-total-count{
+		.element-datalist__pagination-total-count{
 			align-self: flex-start;
 			font-size:13px;
 			height:30px;
@@ -299,7 +299,7 @@
 			.count{ color:#999; }
 			.text{ color:#bbb;}
 		}
-		.data-list-pagination-items{
+		.element-datalist__pagination-items{
 			display: flex;
 			flex-direction:row;
 			border-bottom:1px solid #333;
@@ -350,7 +350,7 @@
 	/***********************/
 	/* inside the data box */
 	/***********************/
-	.data-list-body-row-wrapper{
+	.element-datalist__body-row-wrapper{
 		width:100%;
 		&.fadeIn{			
 			animation: fadeInRow 0.3s ease-out 1;
@@ -361,7 +361,7 @@
 	}
 
 	
-	.data-list-body-row{
+	.element-datalist__body-row{
 		display: flex;
 		width:100%;
 		border-bottom: 1px solid #e0e0e0;
@@ -385,7 +385,7 @@
 	 * OVERWRITE RULES FOR NESTED DATALISTS!! 
 	 * REMOVE SCROLLING
 	 * */
-	.data-list-children-row{
+	.element-datalist__children-row{
 		background: #fff;
 		position:relative;		
 		width:calc( 100% + 20px);			
@@ -394,12 +394,12 @@
 		overflow-x: hidden;
 		padding-right:20px;		
 		
-		.data-list-wrapper{			
+		.element-datalist__wrapper{			
 			margin-bottom:10px;
 			overflow: hidden;
 			min-height: min-content;
 		}
-		.data-list{
+		.element-datalist{
 			position:relative;
 			top:0;
 			animation: fadeIn 0.3s linear 1 ;
@@ -408,7 +408,7 @@
 			position:relative;
 			top: 0;
 		}
-		.data-list-body-box{
+		.element-datalist__body-box{
 			display:block;
 			flex:none;
 			height: auto;			
@@ -419,17 +419,17 @@
 	}
 
 
-	.data-list-header-row-box{	
+	.element-datalist__header-row-box{	
 		flex: 0 0 auto;
 		background: linear-gradient(0deg, #ccc, #ccc 3px, #fff 3px);
 	}	
 
-	.data-list-scrollbar-cell{
+	.element-datalist__scrollbar-cell{
 		width: 6px;
 	}
 
-	.data-list-body-cell,
-	.data-list-header-cell{		
+	.element-datalist__body-cell,
+	.element-datalist__header-cell{		
 		font-size: 13px;
 		border: none;
 		text-align: left;
@@ -438,7 +438,7 @@
 		transform: translate3d(0,0,0);
 
 	}
-	.data-list-header-cell{
+	.element-datalist__header-cell{
 		padding-right: 0;
 		padding-left: 0;
 		padding-bottom: 7;
@@ -471,13 +471,13 @@
 		}
 
 		&:hover{
-			.data-list-header-cell-holder{
+			.element-datalist__header-cell-holder{
 				display: flex;
 			};
 		}
 	}
 
-	.data-list-body-cell{
+	.element-datalist__body-cell{
 		position:relative;
 		overflow: hidden;
 		box-sizing: border-box;
@@ -503,14 +503,14 @@
 
 		}	
 	}
-	.data-list-body-cell-content-wrapper{
+	.element-datalist__body-cell-content-wrapper{
 		width: 100%;
 	    display: flex;
 	    align-items: center;
 	    flex-direction: row;
 	}
-	.data-list-body-cell-icon,
-	.data-list-body-cell-text{
+	.element-datalist__body-cell-icon,
+	.element-datalist__body-cell-text{
 		vertical-align: middle;
 		overflow: hidden;		
 		text-overflow: ellipsis;
@@ -518,26 +518,26 @@
 		position:relative;
 
 	}
-	.data-list-body-cell-content{
+	.element-datalist__body-cell-content{
 		position:relative;
 		display: flex;
 	}
 
-	.data-list-header-cell-box{
+	.element-datalist__header-cell-box{
 		width:100%;
 		display: flex;
 	}
-	.data-list-header-cell-searchIcon-box{
+	.element-datalist__header-cell-searchIcon-box{
 		padding:2;		
 		flex: 0 1 20px;
 	}
-	.data-list-header-cell-searchInput-box{		
+	.element-datalist__header-cell-searchInput-box{		
 		height:20px;
 		overflow: hidden;
 		flex: 2 1 auto;
 		display: flex;
 
-		.data-list-header-cell-searchInput-input{
+		.element-datalist__header-cell-searchInput-input{
 			min-width: 0;
 			background: transparent;
 			height: 28px;
@@ -560,7 +560,7 @@
 				color:#fff;
 			}
 		}
-		.data-list-header-cell-searchInput-remove{
+		.element-datalist__header-cell-searchInput-remove{
 			float:left;
 			fill:#c33;
 			flex: 0 1 20px;
@@ -570,13 +570,13 @@
 		}
 	}
 
-	.data-list-header-cell-label{
+	.element-datalist__header-cell-label{
 		flex: 2 1 auto;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
-	.data-list-header-cell-arrowIcon-box{
+	.element-datalist__header-cell-arrowIcon-box{
 		padding:2;		
 		flex: 0 1 20px;
 		&.center{ 
@@ -586,7 +586,7 @@
 		}
 	}
 	
-	.data-list-header-cell-searchIcon{
+	.element-datalist__header-cell-searchIcon{
 		
 		fill: #ccc;
 		transition:all 0.2s ease-out;
@@ -597,14 +597,14 @@
 		}
 	}
 
-	.data-list-header-cell-arrowIcon{
+	.element-datalist__header-cell-arrowIcon{
 		transform:rotateZ(0deg);
 		transition:all 0.2s ease-out;		
 		&.rotated{
 			transform:rotateZ(180deg);	
 		}
 	}
-	.data-list-header-cell-holder{
+	.element-datalist__header-cell-holder{
 
 		display: none;
 		height:100%;
@@ -657,7 +657,7 @@
 		}		
 	}
 
-	.data-list-body-arrowIcon{
+	.element-datalist__body-arrowIcon{
 		transform:rotateZ(0deg);
 		transition:all 0.2s ease-out;
 		&.rotated{
@@ -666,7 +666,7 @@
 	}
 }
 
-.datalist-tooltip {
+.element-datalist__tooltip {
 	position:absolute;
 	background:rgba(0,0,0,0.8);
 	z-index:1000000;

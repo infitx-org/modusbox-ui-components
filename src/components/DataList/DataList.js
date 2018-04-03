@@ -19,7 +19,7 @@ import Link from './Link';
 import Header from './Header';
 import ListItem from './ListItem';
 
-const SpinnerBox = ({ id = 'datalist-pending-box' }) => (
+const SpinnerBox = ({ id = 'element-datalist__pending-box' }) => (
 	<div id={`${id}`} style={{ width: '100%' }}>
 		<Row align="center center" className="loading-box">
 			<Icon size={16} className="loading-spinner" name="warning-sign" />
@@ -28,15 +28,15 @@ const SpinnerBox = ({ id = 'datalist-pending-box' }) => (
 	</div>
 );
 
-const ErrorBox = ({ id = 'datalist-error-box', message }) => (
-	<div id={`${id}`} className="datalist-error-box">
+const ErrorBox = ({ id = 'element-datalist__error-box', message }) => (
+	<div id={`${id}`} className="element-datalist__error-box">
 		<Icon size={50} name="settings" fill="#ccc" />
 		<span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}> Service Unavailable </span>
 	</div>
 );
 
 const NoDataBox = ({ message }) => (
-	<div className="datalist-message-box">
+	<div className="element-datalist__message-box">
 		<Icon name="dashboard" size={40} fill="#ccc" />
 		<span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>{message}</span>
 	</div>
@@ -652,7 +652,7 @@ class ListItems extends React.Component {
 	}
 
 	getItemHeight(index) {
-		return this.refs[index + '-reference'].item.clientHeight;
+		return this[index + '-reference'].item.clientHeight;
 	}
 
 	storeHeights(start, stop) {
@@ -877,7 +877,7 @@ class ListItems extends React.Component {
 				if (this.state.columns[i].width && this.state.columns[i].width < 100) {
 					continue;
 				}
-				let cell = this.header.refs[`headerCell${i}`];
+				let cell = this.header[`headerCell${i}`];
 				const domNode = ReactDOM.findDOMNode(cell);
 				let { left, right } = domNode.getBoundingClientRect();
 				columns[i].width = right - left;
@@ -982,7 +982,7 @@ class ListItems extends React.Component {
 
 		return (
 			<div
-				className="data-list-wrapper"
+				className="element-datalist__wrapper"
 				ref={datalist => (this.datalist = datalist)}
 				onMouseMove={this.handleResizeColumnWidth}
 				onClick={this.handleStopResizeColumnWidth}
@@ -999,7 +999,7 @@ class ListItems extends React.Component {
 				{/* API ERROR */}
 				{apiError && <ErrorBox message={apiError} />}
 
-				<div className="data-list" id={this.props.id} style={hideList ? { display: 'none' } : undefined}>
+				<div className="element-datalist" id={this.props.id} style={hideList ? { display: 'none' } : undefined}>
 					{this.state.isOverlayColumnVisible && (
 						<OverlayColumnResizer
 							start={this.state.cellLeftPosition}
@@ -1045,7 +1045,7 @@ class ListItems extends React.Component {
 
 						<div
 							ref={scroller => (this.scroller = scroller)}
-							className="data-list-body-box"
+							className="element-datalist__body-box"
 							style={{
 								width: this.state.bodyWidth,
 								paddingRight: this.state.scrollbarWidth,
@@ -1064,7 +1064,7 @@ class ListItems extends React.Component {
 							<div
 								ref={rows => (this.rows = rows)}
 								style={{ width: this.state.bodyWidth }}
-								className="datalist-body-rows"
+								className="element-datalist__body-rows"
 							>
 								{this.state.currentList.map((item, i) => {
 									let style = { ...this.state.style, ...item.style };
