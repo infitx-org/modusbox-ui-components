@@ -1,29 +1,24 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 
-import configureStore from './redux/configureStore';
 import Views from './views';
 
 import './assets/main.css';
-var store = configureStore();
 
 class Root extends React.Component {
 	render() {
 		return (
-			<Provider store={store}>
-				<div
-					style={{
-						width: '100%',
-						height: '100%',
-						overflow: 'hidden',
-						display: 'flex',
-					}}
-				>
-					<Views />
-				</div>
-			</Provider>
+			<div
+				style={{
+					width: '100%',
+					height: '100%',
+					overflow: 'hidden',
+					display: 'flex',
+				}}
+			>
+				<Views />
+			</div>
 		);
 	}
 }

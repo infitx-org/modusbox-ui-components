@@ -61,10 +61,9 @@ const TestTabs = () => (
 					<Tab>Tab 2</Tab>
 					<Tab>Tab 3</Tab>
 					<Tab disabled={true}>Tab 4 ( disabled )</Tab>
-				</TabList>				
+				</TabList>
 			</Tabs>
 		</div>
-
 	</div>
 );
 

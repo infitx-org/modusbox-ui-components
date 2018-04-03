@@ -58,12 +58,12 @@ class ModalPortal extends PureComponent {
 }
 ModalPortal.defaultProps = {
 	id: undefined,
-	children: undefined
+	children: undefined,
 };
 
 ModalPortal.propTypes = {
 	id: PropTypes.string,
-	children: PropTypes.node
+	children: PropTypes.node,
 };
 
-export default ModalPortal
+export default ModalPortal;

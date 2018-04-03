@@ -19,7 +19,7 @@ class Options extends PureComponent {
 			selected: this.props.selected,
 			filter: this.props.filter,
 		};
-		this.items = []
+		this.items = [];
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -30,11 +30,10 @@ class Options extends PureComponent {
 		this.props.onSelect(item);
 	}
 	render() {
-		
 		const { options, selected, highlighted } = this.state;
 		const { maxHeight, reverse, open } = this.props;
-		if(!open){
-			return null
+		if (!open) {
+			return null;
 		}
 		const top = reverse ? undefined : 0;
 		const bottom = reverse ? 45 : undefined;
@@ -53,7 +52,7 @@ class Options extends PureComponent {
 					trackStyle={{ top: '2px', bottom: '2px', right: '4px', width: '5px' }}
 					showTrack={false}
 				>
-					<div ref={items => this.items = items}>
+					<div ref={items => (this.items = items)}>
 						{options.map((item, index) => {
 							const isSelected = selected === item.value;
 							return (
@@ -88,7 +87,7 @@ Options.propTypes = {
 	onSelect: PropTypes.func,
 	maxHeight: PropTypes.number,
 	reverse: PropTypes.bool,
-	open: PropTypes.bool	
+	open: PropTypes.bool,
 };
 
 Options.defaultProps = {
@@ -99,7 +98,7 @@ Options.defaultProps = {
 	onSelect: undefined,
 	maxHeight: 0,
 	reverse: false,
-	open: false
+	open: false,
 };
 
 class Option extends PureComponent {
@@ -134,6 +133,6 @@ Option.propTypes = {
 	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
 	label: PropTypes.string,
-	icon: PropTypes.string,	
-}
+	icon: PropTypes.string,
+};
 export default Options;

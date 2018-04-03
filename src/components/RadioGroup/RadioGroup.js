@@ -76,21 +76,21 @@ class RadioGroup extends PureComponent {
 	}
 	selectSiblingRadio(next) {
 		const { value } = this.state;
-		const { options } = this.props;		
+		const { options } = this.props;
 		let nextIndex = options.map(o => o.value).indexOf(value) || 0;
-		let found = false
+		let found = false;
 
 		while (!found) {
 			nextIndex += next ? 1 : -1;
 			if (nextIndex == options.length || nextIndex < 0) {
-				found = true
-				break
+				found = true;
+				break;
 			}
 			if (!options[nextIndex].disabled) {
 				console.log(options[nextIndex]);
 				const { value } = options[nextIndex];
 				this.setState({ value, focused: value });
-				found = true
+				found = true;
 				break;
 			}
 		}
@@ -103,7 +103,7 @@ class RadioGroup extends PureComponent {
 		return (
 			<div className="input input-radio">
 				<input
-					ref={button => this.button = button}
+					ref={button => (this.button = button)}
 					type="button"
 					className="mb-input__holder"
 					onFocus={this.onFocus}
@@ -131,10 +131,9 @@ class RadioGroup extends PureComponent {
 	}
 }
 
-
 RadioGroup.propTypes = {
 	id: PropTypes.string,
-	label: PropTypes.string,	
+	label: PropTypes.string,
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
 	value: PropTypes.string,
 	disabled: PropTypes.bool,
@@ -148,7 +147,7 @@ RadioGroup.defaultProps = {
 	value: false,
 	disabled: false,
 	onChange: undefined,
-	name: undefined
+	name: undefined,
 };
 
 const Radio = ({ id, onClick, onChange, checked, label, focused, value, disabled }) => {
@@ -178,6 +177,6 @@ Radio.propTypes = {
 	label: PropTypes.string,
 	focused: PropTypes.bool,
 	value: PropTypes.string,
-	disabled: PropTypes.bool
-}
+	disabled: PropTypes.bool,
+};
 export default RadioGroup;

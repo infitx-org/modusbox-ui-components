@@ -16,14 +16,12 @@ class ModalContainer extends PureComponent {
 	}
 }
 
-
 ModalContainer.defaultProps = {
 	children: undefined,
 };
 
 ModalContainer.propTypes = {
-	children: PropTypes.node
+	children: PropTypes.node,
 };
 
-export default ModalContainer
-
+export default ModalContainer;

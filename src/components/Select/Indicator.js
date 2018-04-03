@@ -17,7 +17,7 @@ const Indicator = ({ isOpen = false }) => (
 );
 
 Indicator.propTypes = {
-	isOpen: PropTypes.bool
-}
+	isOpen: PropTypes.bool,
+};
 
 export default Indicator;

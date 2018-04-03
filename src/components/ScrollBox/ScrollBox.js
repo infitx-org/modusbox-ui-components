@@ -69,14 +69,14 @@ class ScrollBox extends PureComponent {
 
 		return (
 			<div className={wrapperClassName} style={style}>
-				<div ref={contentBox => this.contentBox = contentBox} className={contentBoxClassName}>
-					<div ref={content => this.content = content} className={contentClassName}>
+				<div ref={contentBox => (this.contentBox = contentBox)} className={contentBoxClassName}>
+					<div ref={content => (this.content = content)} className={contentClassName}>
 						{children}
 					</div>
 				</div>
 
 				<ScrollBar
-					ref={scrollbar => this.scrollbar = scrollbar}
+					ref={scrollbar => (this.scrollbar = scrollbar)}
 					trackStyle={trackStyle}
 					handleStyle={handleStyle}
 					showTrack={showTrack}
@@ -92,7 +92,7 @@ ScrollBox.propTypes = {
 	trackStyle: PropTypes.object,
 	handleStyle: PropTypes.object,
 	showTrack: PropTypes.bool,
-	children: PropTypes.node
+	children: PropTypes.node,
 };
 ScrollBox.defaultProps = {
 	flex: false,
@@ -100,6 +100,6 @@ ScrollBox.defaultProps = {
 	trackStyle: {},
 	handleStyle: {},
 	showTrack: false,
-	children: undefined
+	children: undefined,
 };
 export default ScrollBox;

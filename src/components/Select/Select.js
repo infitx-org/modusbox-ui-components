@@ -177,8 +177,8 @@ class Select extends PureComponent {
 		while (nextHighlightedOption === -1) {
 			nextHighlightedOption = getNextEnabledOption();
 		}
-		
-		this.options.items.children[nextHighlightedOption].focus()		
+
+		this.options.items.children[nextHighlightedOption].focus();
 		this.filter.focus();
 		this.setState({ highlightedOption: nextHighlightedOption });
 	}
@@ -189,7 +189,7 @@ class Select extends PureComponent {
 			return;
 		}
 		const isClickWithinSelectBox = this.area.contains(e.target);
-		
+
 		const isClickWithinOptionsBox = this.optionsPosition.childNodes[0]
 			? this.optionsPosition.childNodes[0].contains(e.target)
 			: false;
@@ -262,14 +262,14 @@ class Select extends PureComponent {
 
 		return (
 			<div id={id} className="input-select mb-input__box" style={style}>
-				<div className={componentClassName} onClick={this.onClickSelect} ref={area => this.area = area}>
+				<div className={componentClassName} onClick={this.onClickSelect} ref={area => (this.area = area)}>
 					<div className="mb-input__content input-select__content">
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
 							className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
 							type="text"
-							ref={filter => this.filter = filter}
+							ref={filter => (this.filter = filter)}
 							onKeyDown={this.testKey}
 							onChange={this.applyFilter}
 							onFocus={this.openSelect}
@@ -292,17 +292,17 @@ class Select extends PureComponent {
 					</div>
 				</div>
 
-				<div className="input-select__options" ref={ position => this.optionsPosition = position}>					
+				<div className="input-select__options" ref={position => (this.optionsPosition = position)}>
 					<Options
 						open={isOpen}
-						ref={options => this.options = options}
+						ref={options => (this.options = options)}
 						options={this.filterOptions()}
 						maxHeight={this.maxHeight || 0}
 						reverse={this.reverse}
 						selected={value}
 						highlighted={highlightedOption}
 						onSelect={this.onSelectOption}
-					/>					
+					/>
 				</div>
 			</div>
 		);

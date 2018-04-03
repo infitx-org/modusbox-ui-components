@@ -41,7 +41,7 @@ Row.propTypes = {
 	basis: PropTypes.string,
 	className: PropTypes.string,
 	style: PropTypes.object,
-	children: PropTypes.node
+	children: PropTypes.node,
 };
 Row.defaultProps = {
 	align: 'center',
@@ -51,6 +51,6 @@ Row.defaultProps = {
 	basis: 'auto',
 	className: undefined,
 	style: undefined,
-	children: undefined
+	children: undefined,
 };
 export default Row;

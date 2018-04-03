@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import './Link.scss';
 
@@ -13,12 +14,12 @@ class Link extends Component {
 	}
 	// mount and unmount
 	componentDidMount() {
-		this.refs.link.addEventListener('mouseenter', this.showIcon);
-		this.refs.link.addEventListener('mouseleave', this.hideIcon);
+		this.link.addEventListener('mouseenter', this.showIcon);
+		this.link.addEventListener('mouseleave', this.hideIcon);
 	}
 	componentWillUnmount() {
-		this.refs.link.removeEventListener('mouseenter', this.showIcon);
-		this.refs.link.removeEventListener('mouseleave', this.hideIcon);
+		this.link.removeEventListener('mouseenter', this.showIcon);
+		this.link.removeEventListener('mouseleave', this.hideIcon);
 	}
 	showIcon() {
 		this.setState({ isIconVisible: true });
@@ -34,7 +35,7 @@ class Link extends Component {
 	render() {
 		const text = this.props.value != undefined ? this.props.value.toString() : undefined;
 		return (
-			<div ref="link" className="datalist-link" onClick={this.onClick}>
+			<div ref={link => (this.link = link)} className="datalist-link" onClick={this.onClick}>
 				<div className="link-box">
 					<span className="link-text-box">{text || this.props.children} </span>
 				</div>

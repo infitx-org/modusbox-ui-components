@@ -71,10 +71,10 @@ class ModalTabsLayout extends PureComponent {
 			<div className="modal-tab-layout">
 				<ModalTabs items={items} selected={selected} onSelect={this.onSelect} />
 				<div className="modal-tab-content-wrapper">
-					<div ref={wrapper => this.wrapper = wrapper} className={`modal-tab-content ${flex ? 'flexible' : ''}`}>
+					<div ref={wrapper => (this.wrapper = wrapper)} className={`modal-tab-content ${flex ? 'flexible' : ''}`}>
 						{children[selected]}
 					</div>
-					<ScrollBar ref={scrollbar => this.scrollbar = scrollbar} onInit={this.updateScrollbar} />
+					<ScrollBar ref={scrollbar => (this.scrollbar = scrollbar)} onInit={this.updateScrollbar} />
 				</div>
 			</div>
 		);
@@ -82,10 +82,10 @@ class ModalTabsLayout extends PureComponent {
 }
 
 ModalTabsLayout.propTypes = {
-	items: PropTypes.arrayOf([ PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin }) ]),
+	items: PropTypes.arrayOf([PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin })]),
 	selected: PropTypes.string,
-	children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 const ModalTabs = ({ items, selected, onSelect }) => {
 	return (
@@ -104,11 +104,10 @@ const ModalTabs = ({ items, selected, onSelect }) => {
 };
 
 ModalTabs.propTypes = {
-	items: PropTypes.arrayOf([ PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin }) ]),
+	items: PropTypes.arrayOf([PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin })]),
 	selected: PropTypes.string,
 	children: PropTypes.node,
-	onSelect: PropTypes.func
-}
-
+	onSelect: PropTypes.func,
+};
 
 export default ModalTabsLayout;

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
 import { NotifyResize } from 'react-notify-resize';
-import Icon from '../Icon';
-import Row from '../Row';
 
 import Link from './Link';
 import { ArrowCell, CheckboxCell, ListItemCell, ScrollBarCell } from './Cells';
@@ -32,10 +30,10 @@ class ListItem extends React.Component {
 		this.props.onMultiSelect(this.props.item);
 	}
 	setAnimation() {
-		this.refs.item.classList.add('fadeIn');
+		this.item.classList.add('fadeIn');
 	}
 	removeAnimation() {
-		this.refs.item.classList.remove('fadeIn');
+		this.item.classList.remove('fadeIn');
 	}
 	componentWillUnmount() {
 		clearTimeout(this.animationTimeout);
@@ -64,7 +62,11 @@ class ListItem extends React.Component {
 	render() {
 		const { item, isSelected, showScrollbar } = this.props;
 		return (
-			<div ref="item" className="data-list-body-row-wrapper" style={{ paddingRight: showScrollbar ? '6px' : '0px' }}>
+			<div
+				ref={item => (this.item = item)}
+				className="data-list-body-row-wrapper"
+				style={{ paddingRight: showScrollbar ? '6px' : '0px' }}
+			>
 				<div
 					style={this.props.rowStyle}
 					onClick={this.onClick}

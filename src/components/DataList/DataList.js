@@ -231,11 +231,11 @@ class ListItems extends React.Component {
 
 		if (this.props.showScrollbar) {
 			window.addEventListener('resize', this.updateScrollbar);
-			this.refs.scroller.addEventListener('scroll', this.updateScrollbar);
+			this.scroller.addEventListener('scroll', this.updateScrollbar);
 			this.updateScrollbar();
 		}
 
-		this.refs.scroller.addEventListener('scroll', this.handleScroll);
+		this.scroller.addEventListener('scroll', this.handleScroll);
 		// don't apply external loading data logic if it is a static table
 		if (this.props.hasInfiniteScrolling) {
 			this.getData({ count: this.state.itemsToShow });
@@ -246,18 +246,18 @@ class ListItems extends React.Component {
 		this.isComponentMounted = false;
 		if (this.props.showScrollbar) {
 			window.removeEventListener('resize', this.updateScrollbar);
-			this.refs.scroller.removeEventListener('scroll', this.updateScrollbar);
+			this.scroller.removeEventListener('scroll', this.updateScrollbar);
 		}
 
 		// don't apply external loading data logic if it is a static table
 		//if( ! this.props.hasInfiniteScrolling ) return
-		this.refs.scroller.removeEventListener('scroll', this.handleScroll);
+		this.scroller.removeEventListener('scroll', this.handleScroll);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		this.updateScrollbar();
 		if (this.lastScrollPosition != undefined) {
-			this.refs.scroller.scrollTop = this.lastScrollPosition;
+			this.scroller.scrollTop = this.lastScrollPosition;
 		}
 
 		if (this.isNewData) {
@@ -330,13 +330,13 @@ class ListItems extends React.Component {
 
 	updateScrollbar() {
 		if (!this.props.showScrollbar) return;
-		const { scrollTop } = this.refs.scroller;
-		const { height } = this.refs.scroller.getBoundingClientRect();
-		const contentHeight = this.refs.rows.getBoundingClientRect().height;
+		const { scrollTop } = this.scroller;
+		const { height } = this.scroller.getBoundingClientRect();
+		const contentHeight = this.rows.getBoundingClientRect().height;
 		const offset = this.state.compensatorIndex;
 
-		if (this.refs.scrollbar) {
-			this.refs.scrollbar.setPosition({
+		if (this.scrollbar) {
+			this.scrollbar.setPosition({
 				scrollTop,
 				offset,
 				contentHeight,
@@ -381,14 +381,14 @@ class ListItems extends React.Component {
 	nextPage() {
 		if (this.state.page < this.state.pageQty - 1) {
 			this.pageClick(this.state.page + 1);
-			this.refs.scroller.scrollTop = 0;
+			this.scroller.scrollTop = 0;
 		}
 	}
 	prevPage() {
 		if (this.state.page > 0) {
 			this.pageClick(this.state.page - 1);
-			const { height } = this.refs.scroller.getBoundingClientRect();
-			this.refs.scroller.scrollTop = height;
+			const { height } = this.scroller.getBoundingClientRect();
+			this.scroller.scrollTop = height;
 		}
 	}
 
@@ -476,7 +476,7 @@ class ListItems extends React.Component {
 		// everytime we change the scroll position, the handler is called,
 		// it is necesssary to avoid it when refreshing data
 		this.avoidNextScroll = true;
-		if (this.refs.scroller) {
+		if (this.scroller) {
 			this.lastScrollPosition = 0;
 		}
 
@@ -579,20 +579,20 @@ class ListItems extends React.Component {
 	}
 
 	handleScroll() {
-		this.refs.rows.classList.add('remove-pointer-events');
+		this.rows.classList.add('remove-pointer-events');
 		clearTimeout(this.noPointerEventsTimeout);
-		this.noPointerEventsTimeout = setTimeout(() => this.refs.rows.classList.remove('remove-pointer-events'), 50);
+		this.noPointerEventsTimeout = setTimeout(() => this.rows.classList.remove('remove-pointer-events'), 50);
 		// detect scroll direction
-		const { scrollTop } = this.refs.scroller;
+		const { scrollTop } = this.scroller;
 		const isScrollingDown = scrollTop > (this.lastScrollPosition || 0);
-		this.lastScrollPosition = this.refs.scroller.scrollTop;
+		this.lastScrollPosition = this.scroller.scrollTop;
 
 		if (isScrollingDown) {
 			if (this.avoidNextScroll) return;
 			if (this.state.isUpdating) return;
 
 			const totalHeight = this.getTotalHeight();
-			const pixelsToEnd = totalHeight - (scrollTop + this.refs.scroller.offsetHeight);
+			const pixelsToEnd = totalHeight - (scrollTop + this.scroller.offsetHeight);
 
 			if (this.state.hasPages) {
 				if (pixelsToEnd === 0 && this.state.hasPages) {
@@ -652,7 +652,7 @@ class ListItems extends React.Component {
 	}
 
 	getItemHeight(index) {
-		return this.refs[index + '-reference'].refs.item.clientHeight;
+		return this.refs[index + '-reference'].item.clientHeight;
 	}
 
 	storeHeights(start, stop) {
@@ -742,7 +742,7 @@ class ListItems extends React.Component {
 			if (!isFirstSetItem) {
 				let difference = this.heights[this.lastSelectedIndex] - 41;
 				let newCompensatorIndex = this.state.compensatorIndex - difference;
-				this.refs.scroller.scrollTop -= difference;
+				this.scroller.scrollTop -= difference;
 				this.setState({ compensatorIndex: newCompensatorIndex });
 			}
 			this.heights[this.lastSelectedIndex] = 41;
@@ -856,7 +856,7 @@ class ListItems extends React.Component {
 	}
 
 	handleStartResizeColumnWidth(cellIndex, cellStart, cellStop, cellName) {
-		let { left, right } = this.refs.datalist.getBoundingClientRect();
+		let { left, right } = this.datalist.getBoundingClientRect();
 		this.setState({
 			isResizingColumn: true,
 			resizingColumnIndex: cellIndex,
@@ -877,7 +877,7 @@ class ListItems extends React.Component {
 				if (this.state.columns[i].width && this.state.columns[i].width < 100) {
 					continue;
 				}
-				let cell = this.refs.header.refs[`headerCell${i}`];
+				let cell = this.header.refs[`headerCell${i}`];
 				const domNode = ReactDOM.findDOMNode(cell);
 				let { left, right } = domNode.getBoundingClientRect();
 				columns[i].width = right - left;
@@ -910,7 +910,7 @@ class ListItems extends React.Component {
 	}
 	handleResizeColumnWidth(event) {
 		if (this.state.isResizingColumn) {
-			var currentX = 10 + event.nativeEvent.clientX - this.refs.datalist.getBoundingClientRect().left;
+			var currentX = 10 + event.nativeEvent.clientX - this.datalist.getBoundingClientRect().left;
 			var diff = Math.max(currentX - this.state.cellLeftPosition, 100);
 			this.setState({
 				cellWidth: diff,
@@ -983,7 +983,7 @@ class ListItems extends React.Component {
 		return (
 			<div
 				className="data-list-wrapper"
-				ref="datalist"
+				ref={datalist => (this.datalist = datalist)}
 				onMouseMove={this.handleResizeColumnWidth}
 				onClick={this.handleStopResizeColumnWidth}
 			>
@@ -1009,7 +1009,7 @@ class ListItems extends React.Component {
 						/>
 					)}
 					<Header
-						ref="header"
+						ref={header => (this.header = header)}
 						id={this.props.id}
 						hasChildren={this.state.hasChildren}
 						hasMultiSelect={this.state.hasMultiSelect}
@@ -1044,7 +1044,7 @@ class ListItems extends React.Component {
 						/>
 
 						<div
-							ref="scroller"
+							ref={scroller => (this.scroller = scroller)}
 							className="data-list-body-box"
 							style={{
 								width: this.state.bodyWidth,
@@ -1061,7 +1061,11 @@ class ListItems extends React.Component {
 								}}
 							/>
 
-							<div ref="rows" style={{ width: this.state.bodyWidth }} className="datalist-body-rows">
+							<div
+								ref={rows => (this.rows = rows)}
+								style={{ width: this.state.bodyWidth }}
+								className="datalist-body-rows"
+							>
 								{this.state.currentList.map((item, i) => {
 									let style = { ...this.state.style, ...item.style };
 									const isSelected = this.props.selected === item.id;
@@ -1077,7 +1081,7 @@ class ListItems extends React.Component {
 
 									return (
 										<ListItem
-											ref={i + '-reference'}
+											ref={item => (this[i + '-reference'] = item)}
 											key={i.toString()}
 											index={i}
 											style={style}
@@ -1105,7 +1109,7 @@ class ListItems extends React.Component {
 							{this.state.isUpdating && <SpinnerBox id={`${this.props.id}-updating-box`} />}
 							{isNoDataInfiniteFiltered && <NoDataBox message={`${this.props.noData} with these filters`} />}
 						</div>
-						<ScrollBar ref="scrollbar" onInit={this.updateScrollbar} />
+						<ScrollBar ref={scrollbar => (this.scrollbar = scrollbar)} onInit={this.updateScrollbar} />
 
 						{/* this.props.showScrollbar &&  */}
 
@@ -1301,36 +1305,36 @@ const DataList = ({
 };
 
 DataList.propTypes = {
-	id: React.PropTypes.string,
-	height: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-	rowStyle: React.PropTypes.object,
-	list: React.PropTypes.arrayOf(React.PropTypes.object),
-	columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-	selected: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool]),
-	onSelect: React.PropTypes.func,
-	onUnselect: React.PropTypes.func,
-	multiSelect: React.PropTypes.bool,
-	multiSelected: React.PropTypes.arrayOf(React.PropTypes.string),
-	onMultiSelect: React.PropTypes.func,
-	showMultiSelect: React.PropTypes.func,
-	sortColumn: React.PropTypes.string,
-	sortAsc: React.PropTypes.bool,
-	onChangeFilters: React.PropTypes.func,
-	paging: React.PropTypes.bool,
-	forceRender: React.PropTypes.any,
-	forceUpdate: React.PropTypes.any,
-	forceColumnUpdate: React.PropTypes.any,
-	children: React.PropTypes.node,
-	noData: React.PropTypes.string,
-	update: React.PropTypes.func,
-	api: React.PropTypes.string,
-	wrapper: React.PropTypes.func,
-	showScrollbar: React.PropTypes.bool,
-	isPending: React.PropTypes.bool,
-	isError: React.PropTypes.bool,
-	errorMsg: React.PropTypes.string,
-	allowFilter: React.PropTypes.bool,
-	debug: React.PropTypes.bool,
+	id: PropTypes.string,
+	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	rowStyle: PropTypes.object,
+	list: PropTypes.arrayOf(PropTypes.object),
+	columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+	onSelect: PropTypes.func,
+	onUnselect: PropTypes.func,
+	multiSelect: PropTypes.bool,
+	multiSelected: PropTypes.arrayOf(PropTypes.string),
+	onMultiSelect: PropTypes.func,
+	showMultiSelect: PropTypes.func,
+	sortColumn: PropTypes.string,
+	sortAsc: PropTypes.bool,
+	onChangeFilters: PropTypes.func,
+	paging: PropTypes.bool,
+	forceRender: PropTypes.any,
+	forceUpdate: PropTypes.any,
+	forceColumnUpdate: PropTypes.any,
+	children: PropTypes.node,
+	noData: PropTypes.string,
+	update: PropTypes.func,
+	api: PropTypes.string,
+	wrapper: PropTypes.func,
+	showScrollbar: PropTypes.bool,
+	isPending: PropTypes.bool,
+	isError: PropTypes.bool,
+	errorMsg: PropTypes.string,
+	allowFilter: PropTypes.bool,
+	debug: PropTypes.bool,
 };
 
 export default DataList;

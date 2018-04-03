@@ -6,7 +6,6 @@ import keyCodes from '../../utils/keyCodes';
 
 import './Tabs.scss';
 
-
 class Tabs extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -109,7 +108,7 @@ class Tabs extends PureComponent {
 		const { selected } = this.state;
 		const tabs = this.getTabs(this.props.children);
 		let nextIndex = selected;
-		let found = false
+		let found = false;
 		while (!found) {
 			nextIndex += next ? 1 : -1;
 			if (nextIndex == tabs.length || nextIndex < 0) {
@@ -124,7 +123,7 @@ class Tabs extends PureComponent {
 	render() {
 		const { selected, focused } = this.state;
 		const { children } = this.props;
-		const [ tabList ] = this.getTabListAndTabPanels();
+		const [tabList] = this.getTabListAndTabPanels();
 
 		const panels = this.getPanels(children);
 		const panel = panels.length >= selected + 1 ? panels[selected] : null;
@@ -138,19 +137,18 @@ class Tabs extends PureComponent {
 				onSelect: () => this.onSelect(index),
 				key: index,
 				selected: selected === index,
-				focused: focused === index,				
-				flex: growTab
-			}
+				focused: focused === index,
+				flex: growTab,
+			};
 			return React.cloneElement(child, props);
 		});
-			
 
-		//const TABS = 
+		//const TABS =
 
 		return (
 			<div className="element element-tabs">
 				<input
-					ref={input => this.input = input}
+					ref={input => (this.input = input)}
 					type="button"
 					className="modus-element__holder"
 					onFocus={this.onFocus}
@@ -167,35 +165,35 @@ class Tabs extends PureComponent {
 }
 
 Tabs.propTypes = {
-	selected: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
-	onSelect: PropTypes.func,	
-	disabled: PropTypes.bool,	
+	selected: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	onSelect: PropTypes.func,
+	disabled: PropTypes.bool,
 	flex: PropTypes.bool,
 	style: PropTypes.object,
-	children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 const TabList = ({ children }) => {
 	children;
 };
 
 TabList.propTypes = {
-	children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 const TabPanels = ({ children }) => {
 	children;
 };
 
 TabPanels.propTypes = {
-	children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 const TabPanel = ({ children }) => <div className="element-tabs__tab__panel">{children}</div>;
 
 TabPanel.propTypes = {
-	children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 class Tab extends PureComponent {
 	constructor(props) {
@@ -209,7 +207,6 @@ class Tab extends PureComponent {
 	}
 	render() {
 		const { selected, focused, children, disabled, hidden, flex, style } = this.props;
-		console.log(children)
 		if (hidden) {
 			return null;
 		}
@@ -237,7 +234,7 @@ Tab.propTypes = {
 	disabled: PropTypes.bool,
 	hidden: PropTypes.bool,
 	flex: PropTypes.bool,
-	style: PropTypes.object
-}
+	style: PropTypes.object,
+};
 
 export { Tab, Tabs, TabList, TabPanel, TabPanels };

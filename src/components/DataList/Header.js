@@ -89,7 +89,7 @@ class Header extends React.Component {
 								onSearchChange={onSearchChange}
 								onSearchRemove={onSearchRemove}
 								onTriggerResizeWidth={onTriggerResizeWidth}
-								ref={`headerCell${i}`}
+								ref={cell => (this[`headerCell${i}`] = cell)}
 							/>
 						);
 					})}

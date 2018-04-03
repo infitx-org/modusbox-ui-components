@@ -15,7 +15,7 @@ class ScrollBar extends PureComponent {
 			showScrollbar: false,
 			barHeight: '0%',
 			translate: 0,
-			isMoving: false
+			isMoving: false,
 		};
 		this.state = { ...this.originalState };
 		this.movingTimeout = false;
@@ -91,8 +91,12 @@ class ScrollBar extends PureComponent {
 			return null;
 		}
 
-		return (			
-			<div ref={tracker => this.tracker = tracker} className={`scrollbar ${showTrack ? 'track-visible' : ''}`} style={trackStyles}>
+		return (
+			<div
+				ref={tracker => (this.tracker = tracker)}
+				className={`scrollbar ${showTrack ? 'track-visible' : ''}`}
+				style={trackStyles}
+			>
 				<div
 					onMouseDown={this.onMouseDown}
 					className={`${isMoving ? 'moving' : ''} scrollbar-handle`}
@@ -117,7 +121,5 @@ ScrollBar.defaultProps = {
 	handleStyle: {},
 	style: {},
 };
-
-
 
 export default ScrollBar;

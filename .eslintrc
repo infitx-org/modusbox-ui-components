@@ -23,6 +23,7 @@
     ],    
     "rules": {
         "no-console": "off",
+        "space-in-brackets": ["always"]
         // "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false}]
     }
 }

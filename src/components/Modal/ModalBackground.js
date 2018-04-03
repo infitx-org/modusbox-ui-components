@@ -178,8 +178,7 @@ ModalBackground.defaultProps = {
 	title: '',
 	allowCancel: false,
 	isCancelEnabled: false,
-	submitButtonId: ''
-
+	submitButtonId: '',
 };
 
 ModalBackground.propTypes = {
@@ -205,5 +204,5 @@ ModalBackground.propTypes = {
 	title: PropTypes.string,
 	allowCancel: PropTypes.bool,
 	isCancelEnabled: PropTypes.bool,
-	submitButtonId: PropTypes.string
+	submitButtonId: PropTypes.string,
 };

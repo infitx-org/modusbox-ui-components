@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
 import Icon from '../Icon';
@@ -63,30 +64,30 @@ class ListItemCell extends React.Component {
 	}
 	// check if we need to apply to tooltip
 	detectTooltipRequired() {
-		if (this.refs.box) {
-			if (this.refs.box.scrollWidth > this.refs.box.offsetWidth) {
+		if (this.box) {
+			if (this.box.scrollWidth > this.box.offsetWidth) {
 				this.applyTooltip();
 			}
 		}
 	}
 	applyTooltip() {
-		this.refs.box.addEventListener('mouseenter', this.showToolTip);
-		this.refs.box.addEventListener('mouseleave', this.hideToolTip);
+		this.box.addEventListener('mouseenter', this.showToolTip);
+		this.box.addEventListener('mouseleave', this.hideToolTip);
 		this.hasTooltip = true;
 	}
 	removeTooltip() {
 		if (this.hasTooltip) {
-			this.refs.box.removeEventListener('mouseenter', this.showToolTip);
-			this.refs.box.removeEventListener('mouseleave', this.hideToolTip);
+			this.box.removeEventListener('mouseenter', this.showToolTip);
+			this.box.removeEventListener('mouseleave', this.hideToolTip);
 			this.hideToolTip();
 		}
 	}
 	showToolTip() {
-		var viewportOffset = this.refs.cell.getBoundingClientRect();
+		var viewportOffset = this.cell.getBoundingClientRect();
 		let screenWidth = window.screen.availWidth;
 		// these are relative to the viewport, i.e. the window
 		const { top, left, right } = viewportOffset;
-		let width = this.refs.box.scrollWidth;
+		let width = this.box.scrollWidth;
 		let overflowScreen = left + width > screenWidth;
 		let text = this.props.content ? this.props.content : this.props.value;
 		var p = document.createElement('div');
@@ -130,7 +131,7 @@ class ListItemCell extends React.Component {
 		const cellContent = isContent ? content : value;
 
 		return (
-			<div style={style} className="data-list-body-cell data-list-body-column-cell" ref="cell">
+			<div style={style} className="data-list-body-cell data-list-body-column-cell" ref={cell => (this.cell = cell)}>
 				<div className="data-list-body-cell-content-wrapper">
 					{icon && (
 						<Icon size={size || 16} name={name || ''} color={color || '#333'} className="data-list-body-cell-icon" />
@@ -138,7 +139,7 @@ class ListItemCell extends React.Component {
 					{isContent ? (
 						<div className="data-list-body-cell-content"> {cellContent} </div>
 					) : (
-						<div className="data-list-body-cell-text" ref="box" onClick={onClick}>
+						<div className="data-list-body-cell-text" ref={box => (this.box = box)} onClick={onClick}>
 							{' '}
 							{cellContent}{' '}
 						</div>
@@ -176,32 +177,32 @@ class HeaderCell extends React.Component {
 	}
 	// check if we need to apply to tooltip
 	detectTooltipRequired() {
-		if (this.refs.box) {
-			if (this.refs.box.scrollWidth > this.refs.box.offsetWidth) {
+		if (this.box) {
+			if (this.box.scrollWidth > this.box.offsetWidth) {
 				this.applyTooltip();
 			}
 		}
 	}
 	applyTooltip() {
-		this.refs.box.addEventListener('mouseenter', this.showToolTip);
-		this.refs.box.addEventListener('mouseleave', this.hideToolTip);
+		this.box.addEventListener('mouseenter', this.showToolTip);
+		this.box.addEventListener('mouseleave', this.hideToolTip);
 		this.hasTooltip = true;
 	}
 	removeTooltip() {
 		if (this.hasTooltip) {
-			if (this.refs.box) {
-				this.refs.box.removeEventListener('mouseenter', this.showToolTip);
-				this.refs.box.removeEventListener('mouseleave', this.hideToolTip);
+			if (this.box) {
+				this.box.removeEventListener('mouseenter', this.showToolTip);
+				this.box.removeEventListener('mouseleave', this.hideToolTip);
 			}
 			this.hideToolTip();
 		}
 	}
 	showToolTip() {
-		var viewportOffset = this.refs.cell.getBoundingClientRect();
+		var viewportOffset = this.cell.getBoundingClientRect();
 		let screenWidth = window.screen.availWidth;
 		// these are relative to the viewport, i.e. the window
 		const { top, left, right } = viewportOffset;
-		let width = this.refs.box.scrollWidth;
+		let width = this.box.scrollWidth;
 		let overflowScreen = left + width > screenWidth;
 		let text = this.props.content ? this.props.content(this.props.column) : this.props.label;
 		var p = document.createElement('div');
@@ -237,7 +238,7 @@ class HeaderCell extends React.Component {
 
 	changeColumnWidthStart(event) {
 		event.stopPropagation();
-		let { left, right } = this.refs.cell.getBoundingClientRect();
+		let { left, right } = this.cell.getBoundingClientRect();
 		let name = this.props.content
 			? this.props.content(this.props.column)
 			: this.props.showLabel ? this.props.label : '';
@@ -301,7 +302,7 @@ class HeaderCell extends React.Component {
 		const onRemoveFilter = e => onSearchRemove(e, label);
 
 		return (
-			<div ref="cell" id={id} onClick={onColumnClick} style={style} className={columnClassNames}>
+			<div ref={cell => (this.cell = cell)} id={id} onClick={onColumnClick} style={style} className={columnClassNames}>
 				<div className="data-list-header-cell-box">
 					{searchable && (
 						<div
@@ -336,7 +337,7 @@ class HeaderCell extends React.Component {
 					)}
 					{!isSearching &&
 						!isLabelEmpty && (
-							<div className="data-list-header-cell-label" ref="box">
+							<div className="data-list-header-cell-label" ref={box => (this.box = box)}>
 								{' '}
 								{labelContent}{' '}
 							</div>
