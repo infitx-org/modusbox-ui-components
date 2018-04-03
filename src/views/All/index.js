@@ -1,3 +1,4 @@
+import TestTooltip from './TestTooltip';
 import TestButton from './TestButton';
 import TestCheckbox from './TestCheckbox';
 import TestSelect from './TestSelect';
@@ -15,6 +16,7 @@ import TestRow from './TestRow';
 import TestColumn from './TestColumn';
 
 export {
+	TestTooltip,
 	TestButton,
 	TestCheckbox,
 	TestSelect,

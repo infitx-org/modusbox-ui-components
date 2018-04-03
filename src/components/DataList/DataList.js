@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import { NotifyResize } from 'react-notify-resize';
+
 import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
 import find from 'lodash/find';
@@ -11,8 +13,6 @@ import Row from '../Row';
 import TextField from '../TextField';
 import Icon from '../Icon';
 
-import { NotifyResize } from 'react-notify-resize';
-
 import ScrollBox, { ScrollBar } from '../ScrollBox';
 import Link from './Link';
 import Header from './Header';
@@ -22,8 +22,6 @@ import { SpinnerBox, ErrorBox, NoDataBox } from './Boxes'
 import { Paging, Page, Paginator } from './Paging'
 
 import './DataList.scss';
-
-
 
 class ListItems extends React.Component {
 	constructor(props) {
@@ -45,8 +43,7 @@ class ListItems extends React.Component {
 		this.filterList = this.filterList.bind(this);
 		this.getPageQty = this.getPageQty.bind(this);
 		this.detectMainMultiselected = this.detectMainMultiselected.bind(this);
-		this.getAllItemIds = this.getAllItemIds.bind(this);
-		this.updateScrollbar = this.updateScrollbar.bind(this);
+		this.getAllItemIds = this.getAllItemIds.bind(this);		
 
 		// exposed methods to HTML components
 		this.handleMultiSelect = this.handleMultiSelect.bind(this);
@@ -162,38 +159,20 @@ class ListItems extends React.Component {
 		if (this.isNewData) {
 			this.isNewData = false;
 		}
-
-		if (this.props.showScrollbar) {
-			/*window.addEventListener('resize', this.updateScrollbar);
-			this.scroller.addEventListener('scroll', this.updateScrollbar);
-			this.updateScrollbar();*/
-		}
-
-		//this.scroller.addEventListener('scroll', this.handleScroll);
-		// don't apply external loading data logic if it is a static table
+		
 		if (this.props.hasInfiniteScrolling) {
 			this.getData({ count: this.state.itemsToShow });
 		}
 	}
 
 	componentWillUnmount() {
-		this.isComponentMounted = false;
-		if (this.props.showScrollbar) {
-			window.removeEventListener('resize', this.updateScrollbar);
-			this.scroller.removeEventListener('scroll', this.updateScrollbar);
-		}
-
-		// don't apply external loading data logic if it is a static table
-		//if( ! this.props.hasInfiniteScrolling ) return
-		this.scroller.removeEventListener('scroll', this.handleScroll);
+		this.isComponentMounted = false;		
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		this.updateScrollbar();
+	componentDidUpdate(prevProps, prevState) {	
 		if (this.lastScrollPosition != undefined) {
 			this.scroller.scrollTop = this.lastScrollPosition;
 		}
-
 		if (this.isNewData) {
 			this.isNewData = false;
 		}
@@ -260,34 +239,7 @@ class ListItems extends React.Component {
 		return !isNotforceRenderItems;
 	}
 
-	///////////////////////////////////////////////////////////////////
-
-	updateScrollbar() {
-		if (!this.props.showScrollbar) return;
-		const { scrollTop } = this.scroller;
-		const { height } = this.scroller.getBoundingClientRect();
-		const contentHeight = this.rows.getBoundingClientRect().height;
-		const offset = this.state.compensatorIndex;
-
-		if (this.scrollbar) {
-			this.scrollbar.setPosition({
-				scrollTop,
-				offset,
-				contentHeight,
-				height,
-			});
-		}
-
-		const barHeight = height / contentHeight * 100;
-		const showScrollbar = barHeight < 100;
-
-		if (showScrollbar != this.state.isScrollbarVisible) {
-			this.setState({
-				isScrollbarVisible: showScrollbar,
-				forceRenderItems: true,
-			});
-		}
-	}
+	///////////////////////////////////////////////////////////////////	
 
 	getPageQty(list) {
 		return -Math.floor(-(list || []).length / 50);

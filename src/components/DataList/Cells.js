@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import Icon from '../Icon';
+import Tooltip from  '../Tooltip';
 import Checkbox from './Checkbox';
 
 // the icon is throwing an error, but the code and the functionality isn't broken
@@ -61,68 +62,14 @@ CheckboxCell.propTypes = {
 
 class ListItemCell extends PureComponent {
 	constructor(props) {
-		super(props);
-		this.detectTooltipRequired = this.detectTooltipRequired.bind(this);
-		this.applyTooltip = this.applyTooltip.bind(this);
-		this.removeTooltip = this.removeTooltip.bind(this);
-		this.showToolTip = this.showToolTip.bind(this);
-		this.hideToolTip = this.hideToolTip.bind(this);
-
-		this.hasTooltip = false;
-		this.cellIndex = `${this.props.rowIndex}-${this.props.index}`;
+		super(props);		
 	}
-	// check if we need to apply to tooltip
-	detectTooltipRequired() {
-		if (this.box) {
-			if (this.box.scrollWidth > this.box.offsetWidth) {
-				this.applyTooltip();
-			}
-		}
-	}
-	applyTooltip() {
-		this.box.addEventListener('mouseenter', this.showToolTip);
-		this.box.addEventListener('mouseleave', this.hideToolTip);
-		this.hasTooltip = true;
-	}
-	removeTooltip() {
-		if (this.hasTooltip) {
-			this.box.removeEventListener('mouseenter', this.showToolTip);
-			this.box.removeEventListener('mouseleave', this.hideToolTip);
-			this.hideToolTip();
-		}
-	}
-	showToolTip() {
-		var viewportOffset = this.cell.getBoundingClientRect();
-		let screenWidth = window.screen.availWidth;
-		// these are relative to the viewport, i.e. the window
-		const { top, left, right } = viewportOffset;
-		let width = this.box.scrollWidth;
-		let overflowScreen = left + width > screenWidth;
-		let text = this.props.content ? this.props.content : this.props.value;
-		var p = document.createElement('div');
-		p.className = 'element-datalist__tooltip';
-		p.style.width = width;
-		p.style.top = top - 30;
-		p.style.left = overflowScreen ? right - width : left;
-		p.id = `element-datalist__tooltip-${this.cellIndex}`;
-		p.innerText = text;
-		document.body.appendChild(p);
-	}
-	hideToolTip() {
-		let tooltip = document.getElementById(`element-datalist__tooltip-${this.cellIndex}`);
-		if (tooltip) {
-			tooltip.parentNode.removeChild(tooltip);
-		}
-	}
+	
 	componentDidMount() {
-		this.detectTooltipRequired();
 	}
 	componentDidUpdate() {
-		this.removeTooltip();
-		this.detectTooltipRequired();
 	}
 	componentWillUnmount() {
-		this.removeTooltip();
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -140,18 +87,15 @@ class ListItemCell extends PureComponent {
 		const cellContent = isContent ? content : value;
 
 		return (
-			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell" ref={cell => (this.cell = cell)}>
+			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell">
 				<div className="element-datalist__body-cell-content-wrapper">
 					{icon && (
 						<Icon size={size || 16} name={name || ''} color={color || '#333'} className="element-datalist__body-cell-icon" />
 					)}
 					{isContent ? (
-						<div className="element-datalist__body-cell-content"> {cellContent} </div>
+						<div className="element-datalist__body-cell-content"><Tooltip>{cellContent}</Tooltip></div>
 					) : (
-						<div className="element-datalist__body-cell-text" ref={box => (this.box = box)} onClick={onClick}>
-							{' '}
-							{cellContent}{' '}
-						</div>
+						<div className="element-datalist__body-cell-text" onClick={onClick}><Tooltip>{cellContent}</Tooltip></div>
 					)}
 				</div>
 			</div>
