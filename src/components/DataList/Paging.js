@@ -24,17 +24,29 @@ const Paging = props => {
 				</div>
 			</div>
 			{qty > 1 && (
-				<Page onClick={() => props.onSelect(qty - 1)} label={qty} value={qty - 1} isSelected={selected === qty - 1} />
+				<Page onClick={() => props.onSelect(qty - 1)} label={qty} isSelected={selected === qty - 1} />
 			)}
 		</div>
 	);
 };
 
-const Page = ({ onClick, label, value, isSelected }) => (
+Paging.propTypes = {
+	selected: PropTypes.number,
+	qty: PropTypes.number,
+	onSelect: PropTypes.func	
+}
+
+const Page = ({ onClick, label, isSelected }) => (
 	<div onClick={onClick} className={`paging-page ${isSelected && 'selected'}`}>
 		{label}
 	</div>
 );
+
+Page.propTypes = {
+	onClick: PropTypes.func,
+	label: PropTypes.string,
+	isSelected: PropTypes.bool
+}
 
 class Paginator extends React.Component {
 	constructor(props) {
@@ -89,6 +101,15 @@ class Paginator extends React.Component {
 			</div>
 		);
 	}
+}
+
+Paginator.propTypes = {
+	direction: PropTypes.string,
+	position: PropTypes.number,
+	start: PropTypes.number,
+	stop: PropTypes.number,
+	hide: PropTypes.bool,
+	show: PropTypes.bool
 }
 
 export { Paging, Page, Paginator };

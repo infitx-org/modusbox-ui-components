@@ -17,9 +17,11 @@ import Select from './Select';
 import Spinner from './Spinner';
 import { Tab, TabList, Tabs, TabPanels, TabPanel } from './Tabs';
 import TextField from './TextField';
+import Tooltip from './Tooltip';
 
 export {
 	Button,
+	Column,
 	Checkbox,
 	DataList,
 	DatePicker,
@@ -27,6 +29,7 @@ export {
 	Icon,
 	Modal,
 	RadioGroup,
+	Row,
 	ScrollBox,
 	Select,
 	Spinner,
@@ -36,6 +39,5 @@ export {
 	TabPanels,
 	TabPanel,
 	TextField,
-	Row,
-	Column,
+	Tooltip
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { NotifyResize } from 'react-notify-resize';
 
 import isEqual from 'lodash/isEqual';
@@ -8,26 +7,21 @@ import orderBy from 'lodash/orderBy';
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 
-import Column from '../Column';
-import Row from '../Row';
-import TextField from '../TextField';
-import Icon from '../Icon';
-
-import ScrollBox, { ScrollBar } from '../ScrollBox';
-import Link from './Link';
+import ScrollBox from '../ScrollBox';
 import Header from './Header';
 import ListItem from './ListItem';
 import OverlayColumnResizer from './Overlay';
 import { SpinnerBox, ErrorBox, NoDataBox } from './Boxes';
-import { Paging, Page, Paginator } from './Paging';
+import { Paging, Paginator } from './Paging';
 
 import './DataList.scss';
 
-class ListItems extends React.Component {
+class DataList extends React.Component {
 	constructor(props) {
 		super(props);
 
 		// internal method for sorting, filtering and async loading
+		this.setContainerState = this.setContainerState.bind(this);
 		this.getSortingKey = this.getSortingKey.bind(this);
 		this.getFilteringColumn = this.getFilteringColumn.bind(this);
 		this.renderNextChunk = this.renderNextChunk.bind(this);
@@ -75,7 +69,7 @@ class ListItems extends React.Component {
 		this._reqNumber = 0;
 
 		// computations to set the initial state
-		let hasChildren = this.props.childrens != undefined;
+		let hasChildren = this.props.children != undefined;
 		let hasMultiSelect = this.props.multiSelect;
 		let sortKey = this.getSortingKey(this.props.sortColumn);
 		let sortAsc = this.props.sortAsc;
@@ -153,9 +147,12 @@ class ListItems extends React.Component {
 		};
 	}
 
+	componentWillMount(){
+		this.setContainerState(this.props)		
+	}
 	componentDidMount() {
 		this.isComponentMounted = true;
-
+		
 		if (this.isNewData) {
 			this.isNewData = false;
 		}
@@ -169,7 +166,7 @@ class ListItems extends React.Component {
 		this.isComponentMounted = false;
 	}
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate() {
 		if (this.lastScrollPosition != undefined) {
 			this.scroller.scrollTop = this.lastScrollPosition;
 		}
@@ -193,7 +190,44 @@ class ListItems extends React.Component {
 		this.storeHeights(this.state.currentIndexStart, this.state.currentIndexStop);
 	}
 
+	setContainerState(props){
+		const hasChildren = props.children != undefined;
+		const arrowCellWidth = hasChildren ? 40 : 0;
+		const multiSelectWidth = props.multiSelect ? 40 : 0;
+		const fixedPxAmount = multiSelectWidth + arrowCellWidth + props.columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+		const columnsAutoWidthNumber = props.columns.filter(col => col.width == undefined).length;
+		const columnPerc = 100 / columnsAutoWidthNumber;
+		const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
+		const hasInfiniteScrolling = typeof update === 'function';
+		const style = {
+			multiSelectColumn: {
+				width: multiSelectWidth + 'px',
+				padding: '9px',
+				overflow: 'hidden',
+			},
+			arrowColumn: { width: arrowCellWidth },
+			dataColumn: {
+				width: 'calc(' + columnPerc + '%' + ' - ' + columnPxToRemove + 'px )',
+			},
+		};		
+		const containerStyle = {
+			position: 'relative',
+			display: 'flex',
+			width: '100%',
+			...(typeof props.height === 'undefined' ? { flex: '2' } : { height: props.height }),
+		};
+		setSearchableColumns(props.columns, hasInfiniteScrolling)
+		this.setState({
+			style, containerStyle
+		})
+		
+	}
 	componentWillReceiveProps(nextProps) {
+
+		this.setContainerState(nextProps)
+
+		//////////////////////////////////////////////////////////////////
+		
 		const forceUpdateList = !isEqual(this.props.forceUpdate, nextProps.forceUpdate);
 		const forceRenderItems = !isEqual(this.props.forceRender, nextProps.forceRender);
 		const multiSelectChanged = !isEqual(this.state.multiSelected, nextProps.multiSelected);
@@ -224,10 +258,10 @@ class ListItems extends React.Component {
 		if (!this.props.hasInfiniteScrolling) {
 			// if list changed we need to re-render
 			if (!isEqual(nextProps.list, this.state.list)) {
-				let newList = this.sortList(nextProps.list, this.state.sortKey, this.state.sortAsc);
+				const currentList = this.sortList(nextProps.list, this.state.sortKey, this.state.sortAsc);
 				this.setState({
 					list: nextProps.list,
-					currentList: newList,
+					currentList,
 					pageQty: this.getPageQty(nextProps.list),
 				});
 			}
@@ -245,8 +279,7 @@ class ListItems extends React.Component {
 		return -Math.floor(-(list || []).length / 50);
 	}
 	changePage(page, list) {
-		const sourceList = list || this.state.list;
-		const sourceListLength = sourceList.length;
+		const sourceList = list || this.state.list;		
 		// get last available page if new number of pages is minor than selected page number
 		if (sourceList.length <= page * 50) {
 			page = Math.floor(sourceList.length / 50);
@@ -318,8 +351,6 @@ class ListItems extends React.Component {
 			...cfg,
 		};
 
-		const reqN = ++this._reqNumber;
-
 		this.props
 			.update(config)
 			.then(json => {
@@ -331,7 +362,7 @@ class ListItems extends React.Component {
 				if (isPartialRequest) {
 					this.renderNextChunk(data, false);
 				} else {
-					this.parseData(data, reqN);
+					this.parseData(data);
 				}
 			})
 			.catch(err => {
@@ -353,7 +384,7 @@ class ListItems extends React.Component {
 			});
 	}
 
-	parseData(data, reqN) {
+	parseData(data) {
 		// loading data logic
 		if (!this.isComponentMounted) return;
 		if (this._reqProcessed != this._reqNumber) {
@@ -601,7 +632,7 @@ class ListItems extends React.Component {
 	}
 
 	// handle resize on list items
-	handleResize(index, height) {
+	handleResize(index) {
 		let itemIndex = this.state.currentIndexStart + index;
 		this.heights[itemIndex] = this.getItemHeight(index);
 
@@ -644,11 +675,13 @@ class ListItems extends React.Component {
 			this.getData(updateConfig);
 			changes.isSortingData = true;
 		} else {
-			if (this.state.hasPages) {
+
+			const { hasPages, list, page, filters } = this.state
+			if (hasPages) {
 				// sort all records
-				const sortedList = nextSortKey ? this.sortList(this.state.list, nextSortKey, nextSortAsc) : list;
-				const filteredList = this.filterList(sortedList, this.state.filters);
-				const { currentList } = this.changePage(this.state.page, filteredList);
+				const sortedList = nextSortKey ? this.sortList(list, nextSortKey, nextSortAsc) : list;
+				const filteredList = this.filterList(sortedList, filters);
+				const { currentList } = this.changePage(page, filteredList);
 				changes.list = sortedList;
 				changes.pageQty = this.getPageQty(filteredList);
 				changes.currentList = currentList;
@@ -726,7 +759,7 @@ class ListItems extends React.Component {
 	}
 
 	handleStartResizeColumnWidth(cellIndex, cellStart, cellStop, cellName) {
-		let { left, right } = this.datalist.getBoundingClientRect();
+		let { left } = this.datalist.getBoundingClientRect();
 		this.setState({
 			isResizingColumn: true,
 			resizingColumnIndex: cellIndex,
@@ -747,9 +780,8 @@ class ListItems extends React.Component {
 				if (this.state.columns[i].width && this.state.columns[i].width < 100) {
 					continue;
 				}
-				let cell = this.header[`headerCell${i}`];
-				const domNode = ReactDOM.findDOMNode(cell);
-				let { left, right } = domNode.getBoundingClientRect();
+				const cell = this.header[`headerCell${i}`];				
+				const { left, right } = cell.getBoundingClientRect();
 				columns[i].width = right - left;
 			}
 
@@ -758,7 +790,7 @@ class ListItems extends React.Component {
 			let arrowCellWidth = this.state.hasChildren ? 40 : 0;
 			let multiSelectWidth = this.state.hasMultiSelect ? 40 : 0;
 			let fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
-			let columnsAutoWidthNumber = columns.filter((col, index) => col.width == undefined).length;
+			let columnsAutoWidthNumber = columns.filter((col) => col.width == undefined).length;
 			let columnPerc = 100 / columnsAutoWidthNumber;
 			let columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
 			let style = {
@@ -833,9 +865,16 @@ class ListItems extends React.Component {
 	}
 
 	render() {
+
+		if (this.props.isPending) {
+			return (<SpinnerBox id={`${this.props.id}-pending-box`} />);
+		}
+		if (this.props.isError){
+			return (<ErrorBox id={`${this.props.id}-error-box`} />);
+		}
+
 		const { list, currentList, apiError, filters } = this.state;
 		const { allowFilter } = this.props;
-
 		const hasMultiSelectFilter = typeof this.props.showMultiSelect === 'function';
 		const isLoading = this.state.isLoadingNewData;
 		const isSorting = this.state.isSortingData;
@@ -850,8 +889,9 @@ class ListItems extends React.Component {
 		const hideList = (isNoDataInfiniteUnfiltered && !isFiltering) || isNoData || isLoading || apiError;
 		const isNoDataInfiniteUnfilteredNotFiltering = isNoDataInfiniteUnfiltered && !isFiltering;
 		const scrollboxStyle = { display: this.state.isLoadingNewData ? 'hidden' : undefined };
+
 		return (
-			<div style={this.props.containerStyle}>
+			<div style={this.state.containerStyle}>
 				<div
 					className="element-datalist__wrapper"
 					ref={datalist => (this.datalist = datalist)}
@@ -962,10 +1002,11 @@ class ListItems extends React.Component {
 													showCheckbox={this.state.hasMultiSelect}
 													forceUpdate={this.state.forceRenderItems}
 													animate={animateItem}
-													children={isSelected && this.state.hasChildren ? this.props.childrens : undefined}
-													onResize={height => this.handleResize(i, height)}
+													onResize={() => this.handleResize(i)}
 													showScrollbar={this.state.isScrollbarVisible}
-												/>
+												>
+													{isSelected && this.state.hasChildren ? this.props.children : null}
+												</ListItem>
 											);
 										})}
 									</div>
@@ -996,152 +1037,50 @@ class ListItems extends React.Component {
 	}
 }
 
+DataList.propTypes = {
+	children: PropTypes.node,
+	api: PropTypes.string,	
+	multiSelect: PropTypes.bool,
+	sortColumn: PropTypes.string,
+	sortAsc: PropTypes.bool,
+	paging: PropTypes.bool,
+	list: PropTypes.array,
+	hasInfiniteScrolling: PropTypes.bool,
+	style: PropTypes.shape(),
+	forceUpdate: PropTypes.array,
+	forceRender: PropTypes.array,
+	multiSelected: PropTypes.array,
+	forceColumnUpdate: PropTypes.bool,
+	wrapper: PropTypes.string,
+	update: PropTypes.func,
+	columns: PropTypes.array,
+	onMultiSelect: PropTypes.func,
+	showMultiSelect: PropTypes.bool,
+	isPending: PropTypes.bool,
+	id: PropTypes.string,
+	isError: PropTypes.bool,
+	allowFilter: PropTypes.bool,
+	noData: PropTypes.string,
+	selected: PropTypes.string,
+	onUnselect: PropTypes.func,
+	onSelect: PropTypes.func,
+	rowStyle: PropTypes.shape(),
+}
+
 /////////////////////////////////////////////////////////
 
-const DataList = ({
-	id = 'datalist',
-	height = 'auto',
-	rowStyle = {},
-	list = undefined,
-	isPending = false,
-	isError = false,
-	errorMsg = '',
-	columns,
-	selected,
-	onSelect = () => {},
-	onUnselect = () => {},
-	multiSelect = false,
-	multiSelected = [],
-	onMultiSelect = () => {},
-	showMultiSelect = undefined,
-	sortColumn = undefined,
-	sortAsc = true,
-	onChangeFilters = undefined,
-	paging = undefined,
-	forceRender = undefined,
-	forceUpdate = undefined,
-	forceColumnUpdate = undefined,
-	children,
-	noData = 'no data found',
-	debug = false,
-	update = undefined,
-	api = undefined,
-	wrapper = undefined,
-	allowFilter,
-	showScrollbar = true,
-}) => {
-	// perform necessary calculations
-	const hasChildren = children != undefined;
-	const arrowCellWidth = hasChildren ? 40 : 0;
-	const multiSelectWidth = multiSelect ? 40 : 0;
 
-	const fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
-	const columnsAutoWidthNumber = columns.filter(col => col.width == undefined).length;
-	const columnPerc = 100 / columnsAutoWidthNumber;
-	const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
-	const hasInfiniteScrolling = typeof update === 'function';
-	let style = {
-		multiSelectColumn: {
-			width: multiSelectWidth + 'px',
-			padding: '9px',
-			overflow: 'hidden',
-		},
-		arrowColumn: { width: arrowCellWidth },
-		dataColumn: {
-			width: 'calc(' + columnPerc + '%' + ' - ' + columnPxToRemove + 'px )',
-		},
-	};
-
-	const containerStyle = {
-		position: 'relative',
-		display: 'flex',
-		width: '100%',
-		...(height == 'auto' ? { flex: 2 } : { height }),
-	};
-
-	// apply searchable property to every column
+const setSearchableColumns = ( columns, hasInfiniteScrolling ) => {
 	columns.forEach(column => {
-		if (column.searchable == undefined) {
-			if (column.searchable === false || column.showLabel === false || column.label === '' || hasInfiniteScrolling) {
+		const { searchable, showLabel, label } = column
+		if (searchable == undefined) {
+			if (searchable === false || showLabel === false || label === '' || hasInfiniteScrolling) {
 				column.searchable = false;
 			} else {
 				column.searchable = true;
 			}
 		}
 	});
-
-	const listItemsProps = {
-		id,
-		rowStyle,
-		style,
-		columns,
-		list,
-		selected,
-		onSelect,
-		onUnselect,
-		multiSelect,
-		multiSelected,
-		onMultiSelect,
-		showMultiSelect,
-		childrens: children,
-		sortColumn,
-		sortAsc,
-		onChangeFilters,
-		paging,
-		forceRender,
-		forceUpdate,
-		forceColumnUpdate,
-		update,
-		debug,
-		api,
-		wrapper,
-		noData,
-		allowFilter,
-		hasInfiniteScrolling,
-		showScrollbar,
-		containerStyle,
-	};
-
-	return isPending ? (
-		<SpinnerBox id={`${id}-pending-box`} />
-	) : isError ? (
-		<ErrorBox message={errorMsg} id={`${id}-error-box`} />
-	) : (
-		<ListItems {...listItemsProps} />
-	);
-};
-
-DataList.propTypes = {
-	id: PropTypes.string,
-	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	rowStyle: PropTypes.object,
-	list: PropTypes.arrayOf(PropTypes.object),
-	columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-	onSelect: PropTypes.func,
-	onUnselect: PropTypes.func,
-	multiSelect: PropTypes.bool,
-	multiSelected: PropTypes.arrayOf(PropTypes.string),
-	onMultiSelect: PropTypes.func,
-	showMultiSelect: PropTypes.func,
-	sortColumn: PropTypes.string,
-	sortAsc: PropTypes.bool,
-	onChangeFilters: PropTypes.func,
-	paging: PropTypes.bool,
-	forceRender: PropTypes.any,
-	forceUpdate: PropTypes.any,
-	forceColumnUpdate: PropTypes.any,
-	children: PropTypes.node,
-	noData: PropTypes.string,
-	update: PropTypes.func,
-	api: PropTypes.string,
-	wrapper: PropTypes.func,
-	showScrollbar: PropTypes.bool,
-	isPending: PropTypes.bool,
-	isError: PropTypes.bool,
-	errorMsg: PropTypes.string,
-	allowFilter: PropTypes.bool,
-	debug: PropTypes.bool,
-};
+}
 
 export default DataList;

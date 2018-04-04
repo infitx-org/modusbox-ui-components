@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../../components/Tabs';
 import DataList from '../../components/DataList';
 
 const columns = ['a', 'b', 'c', 'd', 'e'];
-const list1 = new Array(15)
+const list1 = new Array(150)
 	.fill(0)
 	.map((row, rowi) =>
 		columns.reduce(
@@ -32,7 +34,27 @@ const TestDataList = () => (
 			flex: '2 1 auto',
 		}}
 	>
-		<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
+		<Tabs>
+			<TabList>
+				<Tab>1</Tab>
+				<Tab>2</Tab>
+				<Tab>3</Tab>
+			</TabList>
+			<TabPanels>
+				<TabPanel>
+					<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
+				</TabPanel>
+				<TabPanel>				
+					<DataList id="2" columns={columns1} list={list1.concat(list1)} selected={'a'} paging />
+				</TabPanel>
+				<TabPanel>					
+					<div> hey</div>
+					<div> hey</div>
+					<div> hey</div>
+					
+				</TabPanel>
+			</TabPanels>
+		</Tabs>
 	</div>
 );
 
