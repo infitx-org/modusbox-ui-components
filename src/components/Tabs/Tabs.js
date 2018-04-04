@@ -33,15 +33,12 @@ class Tabs extends PureComponent {
 		this.selectSiblingTab = this.selectSiblingTab.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
-		const { children } = nextProps;
 		let { selected } = this.state;
 		if (nextProps.selected != this.props.selected) {
 			selected = nextProps.selected;
 		}
-
-		const subElements = Array.isArray(children) ? children : [children];
-		const tabs = subElements[0].props.children.filter(child => child.type === Tab);
-
+		
+		const tabs = this.getTabs()
 		const { hidden, disabled } = tabs[selected].props;
 		if (hidden || disabled) {
 			selected = 0;
@@ -72,7 +69,7 @@ class Tabs extends PureComponent {
 
 		if (typeof this.props.onSelect === 'function') {
 			this.props.onSelect(index);
-		}
+		}		
 	}
 	onFocus(e) {
 		e.preventDefault();
@@ -127,10 +124,8 @@ class Tabs extends PureComponent {
 
 		const panels = this.getPanels(children);
 		const panel = panels.length >= selected + 1 ? panels[selected] : null;
-
 		const { width } = tabList.props.style || {};
-		const growTab = width != undefined;
-
+		const growTab = width != undefined;		
 		const tabs = this.getTabs(children).map((child, index) => {
 			const props = {
 				...child.props,
@@ -142,8 +137,6 @@ class Tabs extends PureComponent {
 			};
 			return React.cloneElement(child, props);
 		});
-
-		//const TABS =
 
 		return (
 			<div className="element element-tabs">
@@ -158,7 +151,7 @@ class Tabs extends PureComponent {
 				<div className="element-tabs__tab-items" style={tabList.props.style}>
 					{tabs}
 				</div>
-				{panel && <div className="element-tabs__tab__content">{panel}</div>}
+				{panel}
 			</div>
 		);
 	}
@@ -170,28 +163,6 @@ Tabs.propTypes = {
 	disabled: PropTypes.bool,
 	flex: PropTypes.bool,
 	style: PropTypes.object,
-	children: PropTypes.node,
-};
-
-const TabList = ({ children }) => {
-	children;
-};
-
-TabList.propTypes = {
-	children: PropTypes.node,
-};
-
-const TabPanels = ({ children }) => {
-	children;
-};
-
-TabPanels.propTypes = {
-	children: PropTypes.node,
-};
-
-const TabPanel = ({ children }) => <div className="element-tabs__tab__panel">{children}</div>;
-
-TabPanel.propTypes = {
 	children: PropTypes.node,
 };
 
@@ -235,6 +206,30 @@ Tab.propTypes = {
 	hidden: PropTypes.bool,
 	flex: PropTypes.bool,
 	style: PropTypes.object,
+};
+
+
+const TabList = ({ children }) => {
+	return children;
+};
+
+TabList.propTypes = {
+	children: PropTypes.node,
+};
+
+const TabPanel = ({ children }) => {
+	return <div className="element-tabs__tab__content">{children}</div>	
+};
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+};
+const TabPanels = ({ children }) => {
+	return children;
+};
+
+TabPanels.propTypes = {
+	children: PropTypes.node,
 };
 
 export { Tab, Tabs, TabList, TabPanel, TabPanels };
