@@ -91,7 +91,7 @@ class Header extends React.Component {
 								ref={cell => (this[`headerCell${i}`] = cell)}
 							/>
 						);
-					})}					
+					})}
 				</Row>
 			</div>
 		);
@@ -117,5 +117,5 @@ Header.propTypes = {
 	onSearchRemove: PropTypes.func,
 	onTriggerResizeWidth: PropTypes.func,
 	showScrollbar: PropTypes.bool,
-}
+};
 export default Header;

@@ -17,9 +17,9 @@ import ScrollBox, { ScrollBar } from '../ScrollBox';
 import Link from './Link';
 import Header from './Header';
 import ListItem from './ListItem';
-import OverlayColumnResizer from './Overlay'
-import { SpinnerBox, ErrorBox, NoDataBox } from './Boxes'
-import { Paging, Page, Paginator } from './Paging'
+import OverlayColumnResizer from './Overlay';
+import { SpinnerBox, ErrorBox, NoDataBox } from './Boxes';
+import { Paging, Page, Paginator } from './Paging';
 
 import './DataList.scss';
 
@@ -43,7 +43,7 @@ class ListItems extends React.Component {
 		this.filterList = this.filterList.bind(this);
 		this.getPageQty = this.getPageQty.bind(this);
 		this.detectMainMultiselected = this.detectMainMultiselected.bind(this);
-		this.getAllItemIds = this.getAllItemIds.bind(this);		
+		this.getAllItemIds = this.getAllItemIds.bind(this);
 
 		// exposed methods to HTML components
 		this.handleMultiSelect = this.handleMultiSelect.bind(this);
@@ -137,7 +137,7 @@ class ListItems extends React.Component {
 			pageQty: pageQty,
 			page: 0,
 
-			// Composite HTML rules related state			
+			// Composite HTML rules related state
 			isScrollbarVisible: false,
 			listWidth: 0,
 
@@ -159,17 +159,17 @@ class ListItems extends React.Component {
 		if (this.isNewData) {
 			this.isNewData = false;
 		}
-		
+
 		if (this.props.hasInfiniteScrolling) {
 			this.getData({ count: this.state.itemsToShow });
 		}
 	}
 
 	componentWillUnmount() {
-		this.isComponentMounted = false;		
+		this.isComponentMounted = false;
 	}
 
-	componentDidUpdate(prevProps, prevState) {	
+	componentDidUpdate(prevProps, prevState) {
 		if (this.lastScrollPosition != undefined) {
 			this.scroller.scrollTop = this.lastScrollPosition;
 		}
@@ -239,7 +239,7 @@ class ListItems extends React.Component {
 		return !isNotforceRenderItems;
 	}
 
-	///////////////////////////////////////////////////////////////////	
+	///////////////////////////////////////////////////////////////////
 
 	getPageQty(list) {
 		return -Math.floor(-(list || []).length / 50);
@@ -849,7 +849,7 @@ class ListItems extends React.Component {
 		const isSortingOrFiltering = isSorting || isFiltering;
 		const hideList = (isNoDataInfiniteUnfiltered && !isFiltering) || isNoData || isLoading || apiError;
 		const isNoDataInfiniteUnfilteredNotFiltering = isNoDataInfiniteUnfiltered && !isFiltering;
-		const scrollboxStyle = { display: this.state.isLoadingNewData ? 'hidden' : undefined }
+		const scrollboxStyle = { display: this.state.isLoadingNewData ? 'hidden' : undefined };
 		return (
 			<div style={this.props.containerStyle}>
 				<div
@@ -917,7 +917,7 @@ class ListItems extends React.Component {
 							<ScrollBox
 								ref={scroller => (this.scroller = scroller)}
 								className="element-datalist__body-box"
-								style={ scrollboxStyle }
+								style={scrollboxStyle}
 							>
 								<div>
 									<div
@@ -929,10 +929,7 @@ class ListItems extends React.Component {
 										}}
 									/>
 
-									<div
-										ref={rows => (this.rows = rows)}									
-										className="element-datalist__body-rows"
-									>
+									<div ref={rows => (this.rows = rows)} className="element-datalist__body-rows">
 										{this.state.currentList.map((item, i) => {
 											let style = { ...this.state.style, ...item.style };
 											const isSelected = this.props.selected === item.id;
@@ -975,7 +972,7 @@ class ListItems extends React.Component {
 
 									{this.state.isUpdating && <SpinnerBox id={`${this.props.id}-updating-box`} />}
 									{isNoDataInfiniteFiltered && <NoDataBox message={`${this.props.noData} with these filters`} />}
-								</div>							
+								</div>
 							</ScrollBox>
 
 							{/* this.props.showScrollbar &&  */}
@@ -998,7 +995,6 @@ class ListItems extends React.Component {
 		);
 	}
 }
-
 
 /////////////////////////////////////////////////////////
 
@@ -1038,7 +1034,7 @@ const DataList = ({
 	const hasChildren = children != undefined;
 	const arrowCellWidth = hasChildren ? 40 : 0;
 	const multiSelectWidth = multiSelect ? 40 : 0;
-	
+
 	const fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
 	const columnsAutoWidthNumber = columns.filter(col => col.width == undefined).length;
 	const columnPerc = 100 / columnsAutoWidthNumber;
@@ -1074,7 +1070,6 @@ const DataList = ({
 		}
 	});
 
-
 	const listItemsProps = {
 		id,
 		rowStyle,
@@ -1104,15 +1099,15 @@ const DataList = ({
 		allowFilter,
 		hasInfiniteScrolling,
 		showScrollbar,
-		containerStyle
-	}
+		containerStyle,
+	};
 
 	return isPending ? (
 		<SpinnerBox id={`${id}-pending-box`} />
 	) : isError ? (
 		<ErrorBox message={errorMsg} id={`${id}-error-box`} />
 	) : (
-		<ListItems { ...listItemsProps } />
+		<ListItems {...listItemsProps} />
 	);
 };
 

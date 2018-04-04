@@ -7,23 +7,25 @@ import Column from '../../components/Column';
 import Tooltip from '../../components/Tooltip';
 
 const TestButton = () => (
-	<Column style={{ padding: '10px' }}>		
+	<Column style={{ padding: '10px' }}>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-			<Tooltip style={{ width:'100px' }}> Very loooooooooooooong content... </Tooltip>
+			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-			<Tooltip style={{ width:'100px' }}> Very loooooooooooooong content... </Tooltip>
+			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-			<Tooltip style={{ width:'100px' }}> Very loooooooooooooong content... </Tooltip>
+			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-			<Tooltip style={{ width:'100px' }}> <Icon name='close-small' size={16}/> Very loooooooooooooong content... </Tooltip>
+			<Tooltip style={{ width: '100px' }}>
+				{' '}
+				<Icon name="close-small" size={16} /> Very loooooooooooooong content...{' '}
+			</Tooltip>
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-			<Tooltip style={{ width:'100px' }}> Very loooooooooooooong content... </Tooltip>
+			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
 		</Row>
-		
 	</Column>
 );
 

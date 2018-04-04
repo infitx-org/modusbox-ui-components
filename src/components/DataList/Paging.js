@@ -91,5 +91,4 @@ class Paginator extends React.Component {
 	}
 }
 
-
-export { Paging, Page, Paginator }
+export { Paging, Page, Paginator };

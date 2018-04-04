@@ -24,5 +24,4 @@ const NoDataBox = ({ message }) => (
 	</div>
 );
 
-
-export { SpinnerBox, ErrorBox, NoDataBox }
+export { SpinnerBox, ErrorBox, NoDataBox };

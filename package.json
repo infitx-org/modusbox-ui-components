@@ -8,16 +8,14 @@
     "email": "ivan@modusbox.com"
   },
   "scripts": {
-    "prestart": "webpack --config webpack.dll.config.js",
-    "start": "NODE_ENV=development node server.js",
-    "start:prod": "NODE_ENV=production node server.js",
-    "postinstall": "node scripts/postinstall.js",
     "build": "NODE_ENV=production  webpack --config webpack.production.config.js --inline --bail",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "esw webpack.config.* src tools --color",
-    "lint:watch": "npm run lint -- --watch"
+    "lint": "esw webpack.config.* src/components --color",
+    "lint:watch": "npm run lint -- --watch",
+    "prestart": "webpack --config webpack.dll.config.js",
+    "postinstall": "node scripts/postinstall.js",
+    "pretty": "prettier --single-quote --use-tabs --print-width 120 --trailing-comma es5 --write './**/*.js'",
+    "start": "NODE_ENV=development node server.js",
+    "test": "jest"
   },
   "jest": {
     "setupFiles": [
@@ -101,7 +99,7 @@
     "react-dom": "15.4.2",
     "react-hot-loader": "1.3.1",
     "react-motion": "^0.2.7",
-    "react-notify-resize": "^2.0.2",    
+    "react-notify-resize": "^2.0.2",
     "redbox-react": "1.2.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.12.4",
@@ -133,6 +131,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "7.7.0",
     "eslint-watch": "^3.1.4",
-    "prettier": "1.11.1"
+    "prettier": "^1.11.1"
   }
 }

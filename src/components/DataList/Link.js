@@ -52,6 +52,6 @@ class Link extends Component {
 Link.propTypes = {
 	onClick: PropTypes.func,
 	value: PropTypes.string,
-	children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 export default Link;

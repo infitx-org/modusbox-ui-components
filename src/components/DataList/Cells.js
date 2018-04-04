@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import Icon from '../Icon';
-import Tooltip from  '../Tooltip';
+import Tooltip from '../Tooltip';
 import Checkbox from './Checkbox';
 
 // the icon is throwing an error, but the code and the functionality isn't broken
@@ -25,8 +25,8 @@ class ArrowCell extends PureComponent {
 }
 
 ArrowCell.propTypes = {
-	isSelected: PropTypes.bool
-}
+	isSelected: PropTypes.bool,
+};
 
 class CheckboxCell extends PureComponent {
 	constructor(props) {
@@ -57,20 +57,16 @@ CheckboxCell.propTypes = {
 	id: PropTypes.string,
 	onMultiSelect: PropTypes.func,
 	style: PropTypes.shape(),
-
-}
+};
 
 class ListItemCell extends PureComponent {
 	constructor(props) {
-		super(props);		
+		super(props);
 	}
-	
-	componentDidMount() {
-	}
-	componentDidUpdate() {
-	}
-	componentWillUnmount() {
-	}
+
+	componentDidMount() {}
+	componentDidUpdate() {}
+	componentWillUnmount() {}
 
 	shouldComponentUpdate(nextProps) {
 		const iconChanged = !isEqual(nextProps.icon, this.props.icon);
@@ -90,12 +86,21 @@ class ListItemCell extends PureComponent {
 			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell">
 				<div className="element-datalist__body-cell-content-wrapper">
 					{icon && (
-						<Icon size={size || 16} name={name || ''} color={color || '#333'} className="element-datalist__body-cell-icon" />
+						<Icon
+							size={size || 16}
+							name={name || ''}
+							color={color || '#333'}
+							className="element-datalist__body-cell-icon"
+						/>
 					)}
 					{isContent ? (
-						<div className="element-datalist__body-cell-content"><Tooltip>{cellContent}</Tooltip></div>
+						<div className="element-datalist__body-cell-content">
+							<Tooltip>{cellContent}</Tooltip>
+						</div>
 					) : (
-						<div className="element-datalist__body-cell-text" onClick={onClick}><Tooltip>{cellContent}</Tooltip></div>
+						<div className="element-datalist__body-cell-text" onClick={onClick}>
+							<Tooltip>{cellContent}</Tooltip>
+						</div>
 					)}
 				</div>
 			</div>
@@ -111,8 +116,8 @@ ListItemCell.propTypes = {
 	icon: PropTypes.shape(),
 	style: PropTypes.shape(),
 	onClick: PropTypes.func,
-	id: PropTypes.string
-}
+	id: PropTypes.string,
+};
 
 // Cell in the Header
 class HeaderCell extends PureComponent {
@@ -193,7 +198,7 @@ class HeaderCell extends PureComponent {
 		}
 		if (this.props.filter.value != undefined && this.props.filter.value != '') {
 			return;
-		}		
+		}
 		if (!this.searchInput.contains(evt.target)) {
 			this.props.onSearchRemove(evt, this.props.label);
 		}
@@ -288,7 +293,7 @@ class HeaderCell extends PureComponent {
 								onClick={e => e.stopPropagation()}
 								onChange={e => onSearchChange(e, label)}
 								/*onBlur={ onRemoveFilter } */
-								ref={searchInput => this.searchInput = searchInput}
+								ref={searchInput => (this.searchInput = searchInput)}
 							/>
 							<Icon
 								size={16}
@@ -347,7 +352,7 @@ HeaderCell.propTypes = {
 	onColumnClick: PropTypes.func,
 	onSearchClick: PropTypes.func,
 	onSearchChange: PropTypes.func,
-}
+};
 const ScrollBarCell = () => {
 	return <div className="element-datalist__body-cell element-datalist__scrollbar-cell" />;
 };

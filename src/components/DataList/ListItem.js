@@ -51,7 +51,7 @@ class ListItem extends React.Component {
 
 	shouldComponentUpdate(nextProps) {
 		const isForced = nextProps.forceUpdate === true;
-		const changeItem = !isEqual(nextProps.item, this.props.item);		
+		const changeItem = !isEqual(nextProps.item, this.props.item);
 		const changeSelected = nextProps.isSelected !== this.props.isSelected;
 		const changeMultiSelected = nextProps.isMultiSelected !== this.props.isMultiSelected;
 		const changeScrollbarVisibility = nextProps.showScrollbar !== this.props.showScrollbar;
@@ -160,6 +160,6 @@ ListItem.propTypes = {
 	columns: PropTypes.array,
 	originalColumns: PropTypes.array,
 	children: PropTypes.node,
-}
+};
 
 export default ListItem;

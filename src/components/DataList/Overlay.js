@@ -10,4 +10,4 @@ const OverlayColumnResizer = props => (
 	</div>
 );
 
-export default OverlayColumnResizer
+export default OverlayColumnResizer;
