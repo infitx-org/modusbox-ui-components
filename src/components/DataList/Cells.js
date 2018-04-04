@@ -123,72 +123,18 @@ ListItemCell.propTypes = {
 class HeaderCell extends PureComponent {
 	constructor(props) {
 		super(props);
-		this.detectTooltipRequired = this.detectTooltipRequired.bind(this);
-		this.applyTooltip = this.applyTooltip.bind(this);
-		this.removeTooltip = this.removeTooltip.bind(this);
-		this.showToolTip = this.showToolTip.bind(this);
-		this.hideToolTip = this.hideToolTip.bind(this);
 		this.pageClick = this.pageClick.bind(this);
 		this.changeColumnWidthStart = this.changeColumnWidthStart.bind(this);
-
-		this.hasTooltip = false;
 		this.cellIndex = `${this.props.id}`;
-
 		this.state = { growInput: false };
 	}
 	componentDidMount() {
-		this.detectTooltipRequired();
 		window.addEventListener('mouseup', this.pageClick, false);
 	}
 	componentWillUnmount() {
-		this.removeTooltip();
 		window.removeEventListener('mouseup', this.pageClick, false);
 	}
-	// check if we need to apply to tooltip
-	detectTooltipRequired() {
-		if (this.box) {
-			if (this.box.scrollWidth > this.box.offsetWidth) {
-				this.applyTooltip();
-			}
-		}
-	}
-	applyTooltip() {
-		this.box.addEventListener('mouseenter', this.showToolTip);
-		this.box.addEventListener('mouseleave', this.hideToolTip);
-		this.hasTooltip = true;
-	}
-	removeTooltip() {
-		if (this.hasTooltip) {
-			if (this.box) {
-				this.box.removeEventListener('mouseenter', this.showToolTip);
-				this.box.removeEventListener('mouseleave', this.hideToolTip);
-			}
-			this.hideToolTip();
-		}
-	}
-	showToolTip() {
-		var viewportOffset = this.cell.getBoundingClientRect();
-		let screenWidth = window.screen.availWidth;
-		// these are relative to the viewport, i.e. the window
-		const { top, left, right } = viewportOffset;
-		let width = this.box.scrollWidth;
-		let overflowScreen = left + width > screenWidth;
-		let text = this.props.content ? this.props.content(this.props.column) : this.props.label;
-		var p = document.createElement('div');
-		p.className = 'element-datalist__tooltip';
-		p.style.width = width;
-		p.style.top = top - 30;
-		p.style.left = overflowScreen ? right - width : left;
-		p.id = `element-datalist__tooltip-${this.cellIndex}`;
-		p.innerText = text;
-		document.body.appendChild(p);
-	}
-	hideToolTip() {
-		let tooltip = document.getElementById(`element-datalist__tooltip-${this.cellIndex}`);
-		if (tooltip) {
-			tooltip.parentNode.removeChild(tooltip);
-		}
-	}
+	
 	pageClick(evt) {
 		if (this.searchInput == undefined) {
 			return;
@@ -214,9 +160,7 @@ class HeaderCell extends PureComponent {
 	}
 
 	componentDidUpdate(prevProps) {
-		this.removeTooltip();
-		this.detectTooltipRequired();
-
+		
 		if (prevProps.isSearching != this.props.isSearching) {
 			if (this.props.isSearching) {
 				this.searchInput.focus();
@@ -305,9 +249,8 @@ class HeaderCell extends PureComponent {
 					)}
 					{!isSearching &&
 						!isLabelEmpty && (
-							<div className="element-datalist__header-cell-label" ref={box => (this.box = box)}>
-								{' '}
-								{labelContent}{' '}
+							<div className="element-datalist__header-cell-label">
+								<Tooltip>{labelContent}</Tooltip>
 							</div>
 						)}
 

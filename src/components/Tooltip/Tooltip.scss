@@ -1,23 +1,26 @@
 .element-tooltip{
 	position: relative;
 	max-width: 100%;
-
-}
-.element-tooltip__content{
 	overflow: hidden;
 	text-overflow: ellipsis;
     white-space: nowrap;
     position: relative;
 }
+.element-tooltip__content{
+}
 
 .element-tooltip__viewer{
-	display: none;
+	display: block;
 	position: absolute;
-	bottom: 0px;
 	z-index: 1000000;
 	color: #fff;
 	background: rgba(0,0,0,0.8);
 	padding: 5px;
+	border-radius: 3px;
+	font-size: 12px;
 	white-space: nowrap;
 	fill: #fff;	
+	transition: opacity 0.2s linear;
+	opacity: 0;
+	opacity: 1;
 }

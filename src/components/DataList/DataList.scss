@@ -513,11 +513,14 @@
 	}
 	.element-datalist__body-cell-icon,
 	.element-datalist__body-cell-text{
-		vertical-align: middle;
+		/* vertical-align: middle;
 		overflow: hidden;		
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		position:relative;
+		position:relative; */
+		flex-shrink: 1;
+		display: flex;
+		overflow: hidden;
 
 	}
 	.element-datalist__body-cell-content{
