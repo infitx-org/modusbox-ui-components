@@ -8,14 +8,12 @@
 	
 }
 .element-scrollbox__content-box{
-	/*height: 100%;*/
-	/*display: flex;*/
 	width: calc( 100% + 20px );
 	overflow-y: scroll;
 	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
 	padding-right: 20px;
-	flex: 1 0 auto;
-	/*max-height: 100%;*/
+	flex: 1 0 auto;	
 }
 .element-scrollbox__content{
 	width: calc( 100% + 20px );
