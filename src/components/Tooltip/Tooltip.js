@@ -28,7 +28,7 @@ class Tooltip extends PureComponent {
 			if (scrollWidth > offsetWidth) {
 				this.hasTooltip = true;
 				
-				const { left, right, top, bottom, height } = this.box.getBoundingClientRect();
+				const { left, top } = this.box.getBoundingClientRect();
 
 				const tooltipTop = ( top - 40 )
 
@@ -54,13 +54,18 @@ class Tooltip extends PureComponent {
 	}
 
 	render() {
-		const { style, children, content } = this.props;
+		const { style, children } = this.props;
 		return (
 			<span className="element-tooltip" style={style} ref={box => (this.box = box)}>				
 				{children}				
 			</span>
 		);
 	}
+}
+
+Tooltip.propTypes = {
+	children: PropTypes.node,
+	style: PropTypes.shape()
 }
 
 export default Tooltip;
