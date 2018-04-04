@@ -132,6 +132,30 @@
     };
 }
 
+.input-button__mb-input--warning{
+    background-color: $color__main-warning;
+    border-color: $color__main-warning;
+    
+    &.noFill{
+        background-color: transparent;
+        color: $color__main-warning;
+        fill: $color__main-warning;
+        stroke: $color__main-warning;
+    }
+
+    &:hover, &:focus{
+        background-color: $color__main-warning--active;
+        border-color: $color__main-warning--active;
+        
+        &.noFill{
+            color: $color__white;
+            fill: $color__white;
+            stroke: $color__white;
+        }
+    };    
+}
+
+
 .input-button__mb-input--primary,
 .input-button__mb-input--secondary,
 .input-button__mb-input--tertiary,

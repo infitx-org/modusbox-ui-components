@@ -13,6 +13,7 @@ const TestButton = () => (
 			<Button label="Secondary" kind="secondary" />
 			<Button label="Tertiary" kind="tertiary" />
 			<Button label="Danger" kind="danger" />
+			<Button label="Warning" kind="warning" />
 			<Button label="Disabled" disabled />
 			<Button label="Pending" pending />
 			<Button label="Events" onClick={console.log} />
@@ -28,6 +29,7 @@ const TestButton = () => (
 			<Button label="Secondary" kind="secondary" pending />
 			<Button label="Tertiary" kind="tertiary" pending />
 			<Button label="Danger" kind="danger" pending />
+			<Button label="Warning" kind="warning" pending />
 			<Button label="Disabled" disabled pending />
 			<Button label="Icon" icon="deploy-small" pending />
 			<Button label="No Fill" icon="deploy-small" noFill pending />
@@ -41,6 +43,7 @@ const TestButton = () => (
 			<Button label="Secondary" kind="secondary" disabled />
 			<Button label="Tertiary" kind="tertiary" disabled />
 			<Button label="Danger" kind="danger" disabled />
+			<Button label="Warning" kind="warning" disabled />
 			<Button label="Pending" pending disabled />
 			<Button label="Icon" icon="deploy-small" disabled />
 			<Button label="No Fill" icon="deploy-small" noFill disabled />

@@ -89,7 +89,7 @@ export default class ModalBackground extends PureComponent {
 		return (
 			<div className="element element-modal">
 				<div className="element-modal__overlay" style={customStyle} onClick={this.onClickOverlay} />
-				<div className={`element-modal__container ${this.props.type}`} style={modalStyle}>
+				<div className={`element-modal__container ${this.props.kind}`} style={modalStyle}>
 					<div className="element-modal__header">
 						<div className="element-modal__header-title">{this.props.title}</div>
 					</div>
@@ -144,7 +144,8 @@ export default class ModalBackground extends PureComponent {
 									disabled={isSubmitDisabled}
 									onClick={this.onSubmit}
 									label={this.props.primaryAction}
-									className={`element-modal__submit ${this.props.type} ${isSubmitDisabled ? 'disabled' : ''}`}
+									kind={this.props.kind}
+									className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
 								/>
 							)}
 						</div>
@@ -156,7 +157,7 @@ export default class ModalBackground extends PureComponent {
 }
 
 ModalBackground.defaultProps = {
-	type: 'regular',
+	kind: 'primary',
 	isSubmitPending: false,
 	isCloseEnabled: true,
 	isSubmitEnabled: undefined,
@@ -182,7 +183,7 @@ ModalBackground.defaultProps = {
 };
 
 ModalBackground.propTypes = {
-	type: PropTypes.oneOf(['danger', 'warning', 'regular']),
+	kind: PropTypes.oneOf(['danger', 'warning', 'primary']),
 	isSubmitPending: PropTypes.bool,
 	isCloseEnabled: PropTypes.bool,
 	isSubmitEnabled: PropTypes.bool,

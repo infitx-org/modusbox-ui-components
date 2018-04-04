@@ -242,7 +242,7 @@ class DataList extends React.Component {
 		if (multiSelectChanged) {
 			this.setState({
 				forceRenderItems: true,
-				multiSelected: nextProps.multiSelected,
+				multiSelected: nextProps.multiSelected || [],
 			});
 		}
 		if (forceUpdateList) {
