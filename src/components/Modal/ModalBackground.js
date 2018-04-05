@@ -59,7 +59,7 @@ export default class ModalBackground extends PureComponent {
 		}
 	}
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.isSubmitPending != this.state.isSubmitPending)
+		if (nextProps.isSubmitPending != this.state.isSubmitPending) {
 			if (nextProps.isSubmitPending === false) {
 				if (this._isMounted) {
 					this.setState({ isSubmitPending: false });
@@ -67,6 +67,7 @@ export default class ModalBackground extends PureComponent {
 			} else {
 				this.setState({ isSubmitPending: true });
 			}
+		}
 	}
 	render() {
 		const width = `${this.props.width || '800px'}`;

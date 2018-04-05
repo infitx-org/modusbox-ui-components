@@ -95,14 +95,14 @@ class Select extends PureComponent {
 		this.handleResize();
 	}
 	handleResize() {
-		const getParentOverflow = elem => {
+		const getParentOverflow = (elem) => {
 			const { overflowY } = window.getComputedStyle(elem.parentNode);
 			if (overflowY === 'hidden') {
 				return elem.parentNode;
 			}
 			if (overflowY === 'scroll') {
 				if (elem.getBoundingClientRect().height > elem.parentNode.offsetHeight) return elem.parentNode;
-				else return elem;
+				return elem;
 			}
 			if (elem.parentNode === document.body) {
 				return document.body;
@@ -223,7 +223,7 @@ class Select extends PureComponent {
 		const selectedLabel = selectedItem ? selectedItem.label : undefined;
 		this.setState({
 			filter: undefined,
-			value: value,
+			value,
 			selectedLabel,
 		});
 		this.setState({ isOpen: false });
@@ -240,8 +240,12 @@ class Select extends PureComponent {
 	}
 
 	render() {
-		const { id, style, placeholder, pending, disabled, invalid, required } = this.props;
-		const { isOpen, selectedLabel, value, filter, highlightedOption } = this.state;
+		const {
+			id, style, placeholder, pending, disabled, invalid, required,
+		} = this.props;
+		const {
+			isOpen, selectedLabel, value, filter, highlightedOption,
+		} = this.state;
 
 		const inputValue = filter || selectedLabel || '';
 		const isPlaceholderActive = isOpen || selectedLabel != undefined;
@@ -315,12 +319,10 @@ Select.propTypes = {
 	value: PropTypes.string,
 	onChange: PropTypes.func,
 	placeholder: PropTypes.string,
-	options: PropTypes.arrayOf(
-		PropTypes.shape({
-			label: PropTypes.string,
-			value: PropTypes.string,
-		})
-	),
+	options: PropTypes.arrayOf(PropTypes.shape({
+		label: PropTypes.string,
+		value: PropTypes.string,
+	})),
 	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	pending: PropTypes.bool,
 	required: PropTypes.bool,

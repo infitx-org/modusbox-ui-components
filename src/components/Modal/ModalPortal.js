@@ -41,10 +41,10 @@ class ModalPortal extends PureComponent {
 		};
 
 		// A similar API to react-transition-group
-		if (typeof this._component.componentWillUnmount == 'function') {
+		if (typeof this._component.componentWillUnmount === 'function') {
 			this._component.componentWillUnmount(done);
 		}
-		if (typeof this._component.componentWillLeave == 'function') {
+		if (typeof this._component.componentWillLeave === 'function') {
 			this._component.componentWillLeave(done);
 		} else {
 			done();

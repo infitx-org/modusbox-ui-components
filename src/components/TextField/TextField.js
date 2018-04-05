@@ -159,7 +159,9 @@ class TextField extends PureComponent {
 	}
 
 	render() {
-		const { id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid } = this.props;
+		const {
+			id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid,
+		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value;
 

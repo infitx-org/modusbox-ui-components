@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Checkbox = ({ id, isSelected, halfChecked, onChange }) => (
+const Checkbox = ({
+	id, isSelected, halfChecked, onChange,
+}) => (
 	<div>
 		<input
 			type="checkbox"
 			id={id}
 			className={`element-datalist__checkbox ${halfChecked && 'half-checked'}`}
 			checked={isSelected}
-			onChange={e => {
+			onChange={(e) => {
 				e.stopPropagation();
 				e.nativeEvent.stopPropagation();
 				e.nativeEvent.stopImmediatePropagation();
 				onChange();
 			}}
-			onClick={e => {
+			onClick={(e) => {
 				e.stopPropagation();
 			}}
 		/>

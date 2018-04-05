@@ -58,7 +58,9 @@ class DatePicker extends PureComponent {
 		window.removeEventListener('mouseup', this.handlePageClick, false);
 	}
 	componentWillReceiveProps(props) {
-		const { value, defaultHour, defaultMinute, defaultSecond } = props;
+		const {
+			value, defaultHour, defaultMinute, defaultSecond,
+		} = props;
 		const defaultTime = {
 			hour: defaultHour,
 			minute: defaultMinute,
@@ -89,7 +91,6 @@ class DatePicker extends PureComponent {
 		if (keyCode === keyCodes.KEY_TAB) {
 			e.preventDefault();
 			this.leaveDatePicker(!shiftKey);
-			return;
 		}
 	}
 	getDate(value) {
@@ -108,7 +109,7 @@ class DatePicker extends PureComponent {
 	}
 
 	getDayAndString(value) {
-		var myValue = value;
+		let myValue = value;
 		if (typeof value === 'string') {
 			myValue = parseInt(value);
 		}
@@ -121,8 +122,8 @@ class DatePicker extends PureComponent {
 	getDateString(day, hour, minute, second) {
 		const date = day
 			? moment(day)
-					.startOf('day')
-					.format('x')
+				.startOf('day')
+				.format('x')
 			: 0;
 		const dateTime = parseInt(date) + hour * 3600000 + minute * 60000 + second * 1000;
 		return dateTime;
@@ -148,7 +149,7 @@ class DatePicker extends PureComponent {
 		this.setState({ hour, dateString });
 		this.deferredTimeChangeTimeout = setTimeout(
 			() => this.handleDateTimeChange(this.state.selectedDay, hour, this.state.minute, this.state.second),
-			500
+			500,
 		);
 	}
 
@@ -159,7 +160,7 @@ class DatePicker extends PureComponent {
 		this.setState({ minute, dateString });
 		this.deferredTimeChangeTimeout = setTimeout(
 			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, minute, this.state.second),
-			500
+			500,
 		);
 	}
 
@@ -170,7 +171,7 @@ class DatePicker extends PureComponent {
 		this.setState({ second, dateString });
 		this.deferredTimeChangeTimeout = setTimeout(
 			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, this.state.minute, second),
-			500
+			500,
 		);
 	}
 
@@ -186,10 +187,10 @@ class DatePicker extends PureComponent {
 		// convert the value into the specified format if necessary
 		let exportDay = selectedDay == null || selectedDay == undefined ? undefined : selectedDay;
 		if (exportDay != undefined && this.props.exportFormat) {
-			let dayStamp = moment(exportDay)
+			const dayStamp = moment(exportDay)
 				.startOf('day')
 				.format(this.props.exportFormat);
-			let date = parseInt(dayStamp) + hour * 3600000 + minute * 60000 + second * 1000;
+			const date = parseInt(dayStamp) + hour * 3600000 + minute * 60000 + second * 1000;
 
 			// convert the string into integer when dealing with milliseconds
 			if (this.props.exportFormat === 'x') {
@@ -205,7 +206,9 @@ class DatePicker extends PureComponent {
 	}
 
 	render() {
-		const { placeholder, id, style, disabled, pending, invalid, required } = this.props;
+		const {
+			placeholder, id, style, disabled, pending, invalid, required,
+		} = this.props;
 		const { isOpen, dateString, selectedDay } = this.state;
 		const initialMonth = selectedDay == undefined ? this.getDate(this.props.initialMonth) : selectedDay;
 		const hasDate = dateString != 0 && dateString != undefined;
@@ -310,7 +313,9 @@ DatePicker.defaultProps = {
 	initialMonth: undefined,
 };
 
-const TimePicker = ({ hour, minute, second, onHourChange, onMinuteChange, onSecondChange, disabled }) => (
+const TimePicker = ({
+	hour, minute, second, onHourChange, onMinuteChange, onSecondChange, disabled,
+}) => (
 	<div className="timepicker-position">
 		<TimeInput name="Hours" limit={23} selected={hour} onChange={onHourChange} disabled={disabled} />
 		<TimeInput name="Minutes" limit={59} selected={minute} onChange={onMinuteChange} disabled={disabled} />
@@ -327,7 +332,7 @@ TimePicker.propTypes = {
 	disabled: PropTypes.bool,
 };
 
-////////////////////////////////////////////////
+// //////////////////////////////////////////////
 
 class TimeInput extends PureComponent {
 	constructor(props) {
@@ -354,7 +359,7 @@ class TimeInput extends PureComponent {
 	}
 
 	onChangeValue(e) {
-		let { value } = e.target;
+		const { value } = e.target;
 		const time = value === '' ? 0 : parseInt(value);
 		this.props.onChange(time);
 	}

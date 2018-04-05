@@ -72,7 +72,6 @@ class FileUploader extends PureComponent {
 		this.setState({ isOpen: true });
 		if (this.state.disabled) {
 			this.leaveFileUploader();
-			return;
 		}
 	}
 	onClickFileUploader() {
@@ -123,7 +122,7 @@ class FileUploader extends PureComponent {
 		}
 	}
 	async onChangeFile(e) {
-		const readAsText = file => {
+		const readAsText = (file) => {
 			const reader = new FileReader();
 			return new Promise((resolve, reject) => {
 				reader.onload = event => resolve(event.target.result);
@@ -131,7 +130,7 @@ class FileUploader extends PureComponent {
 				reader.readAsText(file);
 			});
 		};
-		const readAsBase64 = file => {
+		const readAsBase64 = (file) => {
 			const reader = new FileReader();
 			return new Promise((resolve, reject) => {
 				reader.readAsDataURL(file);
@@ -159,7 +158,9 @@ class FileUploader extends PureComponent {
 	}
 
 	render() {
-		const { id, placeholder, fileType, style, required, invalid, pending, disabled } = this.props;
+		const {
+			id, placeholder, fileType, style, required, invalid, pending, disabled,
+		} = this.props;
 
 		const { isOpen, fileName, fileContent } = this.state;
 		const isPlaceholderActive = isOpen || fileName || placeholder;

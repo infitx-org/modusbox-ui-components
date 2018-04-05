@@ -52,7 +52,9 @@ class Checkbox extends PureComponent {
 	}
 	render() {
 		const { checked } = this.state;
-		const { semi, id, label, disabled, round } = this.props;
+		const {
+			semi, id, label, disabled, round,
+		} = this.props;
 
 		return (
 			<div className="mb-input input-checkbox">

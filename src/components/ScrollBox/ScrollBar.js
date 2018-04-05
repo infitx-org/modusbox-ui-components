@@ -52,7 +52,9 @@ class ScrollBar extends PureComponent {
 		const translate = showScrollbar ? scrollTop / (totalContentHeight - height) * (height - realBaHeight) : 0;
 		const isMoving = true;
 
-		this.setState({ showScrollbar, barHeight, translate, isMoving, height });
+		this.setState({
+			showScrollbar, barHeight, translate, isMoving, height,
+		});
 		this.fadeMovingHandle();
 	}
 
@@ -77,7 +79,9 @@ class ScrollBar extends PureComponent {
 	}
 	render() {
 		const { showTrack, trackStyle, handleStyle } = this.props;
-		const { showScrollbar, barHeight, translate, isMoving } = this.state;
+		const {
+			showScrollbar, barHeight, translate, isMoving,
+		} = this.state;
 		const trackStyles = {
 			...trackStyle,
 		};

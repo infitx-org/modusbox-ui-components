@@ -17,7 +17,7 @@ class ArrowCell extends PureComponent {
 				<Icon
 					size="xs"
 					name="arrow-down-small"
-					className={'element-datalist__body-arrowIcon ' + (!this.props.isSelected ? 'rotated' : '')}
+					className={`element-datalist__body-arrowIcon ${!this.props.isSelected ? 'rotated' : ''}`}
 				/>
 			</div>
 		);
@@ -33,14 +33,16 @@ class CheckboxCell extends PureComponent {
 		super(props);
 	}
 	shouldComponentUpdate(nextProps) {
-		let isShowChanged = nextProps.show != this.props.show;
-		let isSelectedChanged = nextProps.isSelected != this.props.isSelected;
-		let isIdChanged = nextProps.id != this.props.id;
+		const isShowChanged = nextProps.show != this.props.show;
+		const isSelectedChanged = nextProps.isSelected != this.props.isSelected;
+		const isIdChanged = nextProps.id != this.props.id;
 		return isShowChanged || isSelectedChanged || isIdChanged;
 	}
 
 	render() {
-		const { show, id, isSelected, onMultiSelect, style } = this.props;
+		const {
+			show, id, isSelected, onMultiSelect, style,
+		} = this.props;
 		return (
 			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell">
 				<div style={{ width: '100%' }}>
@@ -77,7 +79,9 @@ class ListItemCell extends PureComponent {
 	}
 
 	render() {
-		const { onClick, icon, value, content, style } = this.props;
+		const {
+			onClick, icon, value, content, style,
+		} = this.props;
 		const { name, color, size } = typeof icon === 'object' ? icon : {};
 		const isContent = content != false;
 		const cellContent = isContent ? content : value;
@@ -134,7 +138,7 @@ class HeaderCell extends PureComponent {
 	componentWillUnmount() {
 		window.removeEventListener('mouseup', this.pageClick, false);
 	}
-	
+
 	pageClick(evt) {
 		if (this.searchInput == undefined) {
 			return;
@@ -152,15 +156,14 @@ class HeaderCell extends PureComponent {
 
 	changeColumnWidthStart(event) {
 		event.stopPropagation();
-		let { left, right } = this.cell.getBoundingClientRect();
-		let name = this.props.content
+		const { left, right } = this.cell.getBoundingClientRect();
+		const name = this.props.content
 			? this.props.content(this.props.column)
 			: this.props.showLabel ? this.props.label : '';
 		this.props.onTriggerResizeWidth(this.props.index, left, right, name);
 	}
 
 	componentDidUpdate(prevProps) {
-		
 		if (prevProps.isSearching != this.props.isSearching) {
 			if (this.props.isSearching) {
 				this.searchInput.focus();
@@ -224,7 +227,7 @@ class HeaderCell extends PureComponent {
 							<Icon
 								size={16}
 								name="search-small"
-								className={'element-datalist__header-cell-searchIcon ' + (isSearching ? 'rotated' : '')}
+								className={`element-datalist__header-cell-searchIcon ${isSearching ? 'rotated' : ''}`}
 							/>
 						</div>
 					)}
@@ -236,7 +239,7 @@ class HeaderCell extends PureComponent {
 								placeholder={`Search on ${label}`}
 								onClick={e => e.stopPropagation()}
 								onChange={e => onSearchChange(e, label)}
-								/*onBlur={ onRemoveFilter } */
+								/* onBlur={ onRemoveFilter } */
 								ref={searchInput => (this.searchInput = searchInput)}
 							/>
 							<Icon
@@ -249,10 +252,10 @@ class HeaderCell extends PureComponent {
 					)}
 					{!isSearching &&
 						!isLabelEmpty && (
-							<div className="element-datalist__header-cell-label">
-								<Tooltip>{labelContent}</Tooltip>
-							</div>
-						)}
+						<div className="element-datalist__header-cell-label">
+							<Tooltip>{labelContent}</Tooltip>
+						</div>
+					)}
 
 					{isSorting && (
 						<div className={sortingArrowIconBoxClassName}>
@@ -265,7 +268,7 @@ class HeaderCell extends PureComponent {
 								<div className="resizer-left" />
 								<div className="resizer-right" />
 							</div>
-							{/*<Icon className='holder-icon' name='contextmenu' size={16} />*/}
+							{/* <Icon className='holder-icon' name='contextmenu' size={16} /> */}
 						</div>
 					)}
 				</div>
@@ -296,11 +299,7 @@ HeaderCell.propTypes = {
 	onSearchClick: PropTypes.func,
 	onSearchChange: PropTypes.func,
 };
-const ScrollBarCell = () => {
-	return <div className="element-datalist__body-cell element-datalist__scrollbar-cell" />;
-};
+const ScrollBarCell = () => <div className="element-datalist__body-cell element-datalist__scrollbar-cell" />;
 
-const ScrollBarHeaderCell = () => {
-	return <div className="element-datalist__header-cell element-datalist__scrollbar-cell" />;
-};
+const ScrollBarHeaderCell = () => <div className="element-datalist__header-cell element-datalist__scrollbar-cell" />;
 export { ArrowCell, CheckboxCell, ListItemCell, HeaderCell, ScrollBarHeaderCell, ScrollBarCell };

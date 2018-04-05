@@ -16,7 +16,9 @@ class Icon extends PureComponent {
 		}
 	}
 	render() {
-		const { className, style, size, name, fill, stroke, spin } = this.props;
+		const {
+			className, style, size, name, fill, stroke, spin,
+		} = this.props;
 		const svgStyle = {
 			height: `${size}px`,
 			width: `${size}px`,

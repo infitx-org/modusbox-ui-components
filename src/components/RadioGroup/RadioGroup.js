@@ -36,7 +36,7 @@ class RadioGroup extends PureComponent {
 	onChange(e, value, disabled) {
 		if (this.props.disabled || disabled) return;
 
-		//this.preventDefault(e)
+		// this.preventDefault(e)
 		this.setState({ value, focused: value });
 		this.btn.focus();
 
@@ -50,7 +50,6 @@ class RadioGroup extends PureComponent {
 		if (this.state.focused === undefined) {
 			this.setState(state => ({ focused: state.value }));
 		}
-		return;
 	}
 	onBlur() {
 		this.setState({ focused: undefined });
@@ -71,7 +70,6 @@ class RadioGroup extends PureComponent {
 		if (keyCode === keyCodes.KEY_RIGHT) {
 			e.preventDefault();
 			this.selectSiblingRadio(true);
-			return;
 		}
 	}
 	selectSiblingRadio(next) {
@@ -97,7 +95,9 @@ class RadioGroup extends PureComponent {
 	}
 	render() {
 		const { value, focused } = this.state;
-		const { id, label, disabled, options } = this.props;
+		const {
+			id, label, disabled, options,
+		} = this.props;
 		const name = this.props.name || 'default-radio-name';
 
 		return (
@@ -150,25 +150,25 @@ RadioGroup.defaultProps = {
 	name: undefined,
 };
 
-const Radio = ({ id, onClick, onChange, checked, label, focused, value, disabled }) => {
-	return (
-		<div className="input-radio__option">
-			<div
-				name={name}
-				id={id}
-				className={`input-radio__input ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''} ${
-					focused ? 'focused' : ''
-				}`}
-				value={value}
-				onChange={onChange}
-				onClick={e => onClick(e, value, disabled)}
-			/>
-			<label htmlFor={id} onClick={e => onClick(e, value, disabled)}>
-				<span>{label}</span>
-			</label>
-		</div>
-	);
-};
+const Radio = ({
+	id, onClick, onChange, checked, label, focused, value, disabled,
+}) => (
+	<div className="input-radio__option">
+		<div
+			name={name}
+			id={id}
+			className={`input-radio__input ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''} ${
+				focused ? 'focused' : ''
+			}`}
+			value={value}
+			onChange={onChange}
+			onClick={e => onClick(e, value, disabled)}
+		/>
+		<label htmlFor={id} onClick={e => onClick(e, value, disabled)}>
+			<span>{label}</span>
+		</label>
+	</div>
+);
 Radio.propTypes = {
 	id: PropTypes.string,
 	onClick: PropTypes.func,

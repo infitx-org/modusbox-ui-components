@@ -69,12 +69,12 @@ class DataList extends React.Component {
 		this._reqNumber = 0;
 
 		// computations to set the initial state
-		let hasChildren = this.props.children != undefined;
-		let hasMultiSelect = this.props.multiSelect;
-		let sortKey = this.getSortingKey(this.props.sortColumn);
-		let sortAsc = this.props.sortAsc;
-		let hasPages = typeof this.props.paging != 'undefined';
-		let pageQty = this.getPageQty(this.props.list);
+		const hasChildren = this.props.children != undefined;
+		const hasMultiSelect = this.props.multiSelect;
+		const sortKey = this.getSortingKey(this.props.sortColumn);
+		const sortAsc = this.props.sortAsc;
+		const hasPages = typeof this.props.paging !== 'undefined';
+		const pageQty = this.getPageQty(this.props.list);
 
 		// detect if it uses internal data or has function to async retrieve data
 		let list = [],
@@ -88,7 +88,7 @@ class DataList extends React.Component {
 			}
 		}
 
-		const isLoadingNewData = this.props.hasInfiniteScrolling ? true : false;
+		const isLoadingNewData = !!this.props.hasInfiniteScrolling;
 
 		const ITEMS_NUMBER = 50;
 		const ITEMS_TO_SHOW = 100;
@@ -108,8 +108,8 @@ class DataList extends React.Component {
 			currentIndexStart: 0,
 			currentIndexStop: ITEMS_TO_SHOW,
 			compensatorIndex: 0,
-			list: list,
-			currentList: currentList,
+			list,
+			currentList,
 			columns: this.props.columns,
 			multiSelected: [],
 
@@ -120,15 +120,15 @@ class DataList extends React.Component {
 			filters: [],
 
 			// Sorting
-			sortKey: sortKey,
+			sortKey,
 			sortLabel: this.props.sortColumn,
-			sortAsc: sortAsc,
-			hasChildren: hasChildren,
-			hasMultiSelect: hasMultiSelect,
+			sortAsc,
+			hasChildren,
+			hasMultiSelect,
 
 			// Paging
-			hasPages: hasPages,
-			pageQty: pageQty,
+			hasPages,
+			pageQty,
 			page: 0,
 
 			// Composite HTML rules related state
@@ -147,12 +147,12 @@ class DataList extends React.Component {
 		};
 	}
 
-	componentWillMount(){
-		this.setContainerState(this.props)		
+	componentWillMount() {
+		this.setContainerState(this.props);
 	}
 	componentDidMount() {
 		this.isComponentMounted = true;
-		
+
 		if (this.isNewData) {
 			this.isNewData = false;
 		}
@@ -190,7 +190,7 @@ class DataList extends React.Component {
 		this.storeHeights(this.state.currentIndexStart, this.state.currentIndexStop);
 	}
 
-	setContainerState(props){
+	setContainerState(props) {
 		const hasChildren = props.children != undefined;
 		const arrowCellWidth = hasChildren ? 40 : 0;
 		const multiSelectWidth = props.multiSelect ? 40 : 0;
@@ -201,33 +201,31 @@ class DataList extends React.Component {
 		const hasInfiniteScrolling = typeof update === 'function';
 		const style = {
 			multiSelectColumn: {
-				width: multiSelectWidth + 'px',
+				width: `${multiSelectWidth}px`,
 				padding: '9px',
 				overflow: 'hidden',
 			},
 			arrowColumn: { width: arrowCellWidth },
 			dataColumn: {
-				width: 'calc(' + columnPerc + '%' + ' - ' + columnPxToRemove + 'px )',
+				width: `calc(${columnPerc}%` + ` - ${columnPxToRemove}px )`,
 			},
-		};		
+		};
 		const containerStyle = {
 			position: 'relative',
 			display: 'flex',
 			width: '100%',
 			...(typeof props.height === 'undefined' ? { flex: '2' } : { height: props.height }),
 		};
-		setSearchableColumns(props.columns, hasInfiniteScrolling)
+		setSearchableColumns(props.columns, hasInfiniteScrolling);
 		this.setState({
-			style, containerStyle
-		})
-		
+			style, containerStyle,
+		});
 	}
 	componentWillReceiveProps(nextProps) {
+		this.setContainerState(nextProps);
 
-		this.setContainerState(nextProps)
+		// ////////////////////////////////////////////////////////////////
 
-		//////////////////////////////////////////////////////////////////
-		
 		const forceUpdateList = !isEqual(this.props.forceUpdate, nextProps.forceUpdate);
 		const forceRenderItems = !isEqual(this.props.forceRender, nextProps.forceRender);
 		const multiSelectChanged = !isEqual(this.state.multiSelected, nextProps.multiSelected);
@@ -273,13 +271,13 @@ class DataList extends React.Component {
 		return !isNotforceRenderItems;
 	}
 
-	///////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
 
 	getPageQty(list) {
 		return -Math.floor(-(list || []).length / 50);
 	}
 	changePage(page, list) {
-		const sourceList = list || this.state.list;		
+		const sourceList = list || this.state.list;
 		// get last available page if new number of pages is minor than selected page number
 		if (sourceList.length <= page * 50) {
 			page = Math.floor(sourceList.length / 50);
@@ -327,7 +325,7 @@ class DataList extends React.Component {
 				offset: 0,
 				orderBy,
 				desc: !this.state.sortAsc,
-				filters: filters,
+				filters,
 			};
 			this.getData(updateConfig, false);
 		}, 300);
@@ -353,11 +351,11 @@ class DataList extends React.Component {
 
 		this.props
 			.update(config)
-			.then(json => {
+			.then((json) => {
 				if (this.props.wrapper) return this.props.wrapper(json);
-				else return json;
+				return json;
 			})
-			.then(data => {
+			.then((data) => {
 				this._reqProcessed++;
 				if (isPartialRequest) {
 					this.renderNextChunk(data, false);
@@ -365,7 +363,7 @@ class DataList extends React.Component {
 					this.parseData(data);
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				if (!this.isComponentMounted) return;
 
 				let errorMsg;
@@ -412,11 +410,11 @@ class DataList extends React.Component {
 	}
 
 	getSortingKey(label) {
-		let sortingKey = undefined;
+		let sortingKey;
 
 		// if the label is a string, get the column for that label and set the item key
 		if (label != undefined) {
-			let columns = this.props.columns.filter(col => col.label === label);
+			const columns = this.props.columns.filter(col => col.label === label);
 			if (columns.length) {
 				if (columns[0].sortable === false) sortingKey = false;
 				else sortingKey = columns[0].key;
@@ -429,7 +427,7 @@ class DataList extends React.Component {
 	getFilteringColumn(label) {
 		// if the label is a string, get the column for that label and set the item key
 		if (label != undefined) return find(this.props.columns, { label });
-		else return undefined;
+		return undefined;
 	}
 
 	sortList(list, key, asc) {
@@ -464,15 +462,14 @@ class DataList extends React.Component {
 				.toLowerCase()
 				.split(' ')
 				.filter(c => c != '');
-			const filtered = list.filter(item => {
+			const filtered = list.filter((item) => {
 				const field = item[key];
 				const value = field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
 				return chunks.every(chunk =>
 					value
 						.toString()
 						.toLowerCase()
-						.includes(chunk)
-				);
+						.includes(chunk));
 			});
 
 			return filtered;
@@ -513,9 +510,9 @@ class DataList extends React.Component {
 
 				// detect data is cached otherwise api call
 				if (this.state.list.length >= this.state.currentIndexStop + this.state.itemsNumber) {
-					let data = this.state.list.slice(
+					const data = this.state.list.slice(
 						this.state.currentIndexStop,
-						this.state.currentIndexStop + this.state.itemsNumber
+						this.state.currentIndexStop + this.state.itemsNumber,
 					);
 					this.renderNextChunk(data, true);
 				} else {
@@ -542,10 +539,10 @@ class DataList extends React.Component {
 
 	getTotalHeight(limit = false) {
 		let height = this.state.compensatorIndex;
-		let listLength = this.state.currentList.length;
+		const listLength = this.state.currentList.length;
 		limit = limit && limit < listLength ? limit : listLength;
 
-		for (var i = 0; i < limit; i++) {
+		for (let i = 0; i < limit; i++) {
 			height += this.getItemHeight(i);
 		}
 
@@ -553,32 +550,32 @@ class DataList extends React.Component {
 	}
 
 	getItemHeight(index) {
-		return this[index + '-reference'].item.clientHeight;
+		return this[`${index}-reference`].item.clientHeight;
 	}
 
 	storeHeights(start, stop) {
-		for (var i = 0; i < stop - start && i < this.state.currentList.length; i++) {
-			let itemIndex = start + i;
+		for (let i = 0; i < stop - start && i < this.state.currentList.length; i++) {
+			const itemIndex = start + i;
 			this.heights[itemIndex] = this.getItemHeight(i);
 		}
 	}
 
 	renderPrevChunk() {
 		// get the indexes
-		let start = this.state.currentIndexStart - this.state.itemsNumber;
-		let stop = start + this.state.itemsToShow;
+		const start = this.state.currentIndexStart - this.state.itemsNumber;
+		const stop = start + this.state.itemsToShow;
 
 		// set the current list, no need to changes the whole list
-		let newCurrentList = this.state.list.slice(start, stop);
+		const newCurrentList = this.state.list.slice(start, stop);
 		let elementsHeight = 0;
 
 		// get the new elements height and remove it from the
 		// total compensation value to keep the same scrolling position
-		for (var i = start; i < start + this.state.itemsNumber; i++) {
+		for (let i = start; i < start + this.state.itemsNumber; i++) {
 			elementsHeight += this.heights[i];
 		}
 
-		let newCompensatorIndex = this.state.compensatorIndex - elementsHeight;
+		const newCompensatorIndex = this.state.compensatorIndex - elementsHeight;
 
 		this.hasUpdatedPreviousItems = true;
 		this.setState({
@@ -592,11 +589,11 @@ class DataList extends React.Component {
 
 	renderNextChunk(data, wasCached) {
 		// there is no more data
-		let endOfData = data.length == 0 ? this.state.currentIndexStop : false;
+		const endOfData = data.length == 0 ? this.state.currentIndexStop : false;
 
 		// describe the changes to apply to the state
 		let changes = {
-			endOfData: endOfData,
+			endOfData,
 			isUpdating: false,
 		};
 
@@ -604,8 +601,8 @@ class DataList extends React.Component {
 			let newList = [...this.state.list];
 
 			// get the new indexes for showing items
-			let start = this.state.currentIndexStart + this.state.itemsNumber;
-			let stop = start + this.state.itemsToShow;
+			const start = this.state.currentIndexStart + this.state.itemsNumber;
+			const stop = start + this.state.itemsToShow;
 
 			if (!wasCached) {
 				// updates the whole store list just if data was fetched new
@@ -614,8 +611,8 @@ class DataList extends React.Component {
 			}
 
 			// set new lists and new blank elements
-			let newCurrentList = newList.slice(start, stop);
-			let newcompensatorIndex = this.getTotalHeight(this.state.itemsNumber);
+			const newCurrentList = newList.slice(start, stop);
+			const newcompensatorIndex = this.getTotalHeight(this.state.itemsNumber);
 
 			changes = {
 				...changes,
@@ -633,16 +630,16 @@ class DataList extends React.Component {
 
 	// handle resize on list items
 	handleResize(index) {
-		let itemIndex = this.state.currentIndexStart + index;
+		const itemIndex = this.state.currentIndexStart + index;
 		this.heights[itemIndex] = this.getItemHeight(index);
 
 		if (this.lastSelectedIndex != undefined && this.lastSelectedIndex != itemIndex) {
 			// detect if the items is part of the first set which doesn't require calculation in compensation
 			// get the difference between the last element height and its new height
-			let isFirstSetItem = itemIndex < this.state.itemsToShow;
+			const isFirstSetItem = itemIndex < this.state.itemsToShow;
 			if (!isFirstSetItem) {
-				let difference = this.heights[this.lastSelectedIndex] - 41;
-				let newCompensatorIndex = this.state.compensatorIndex - difference;
+				const difference = this.heights[this.lastSelectedIndex] - 41;
+				const newCompensatorIndex = this.state.compensatorIndex - difference;
 				this.scroller.scrollTop -= difference;
 				this.setState({ compensatorIndex: newCompensatorIndex });
 			}
@@ -654,11 +651,11 @@ class DataList extends React.Component {
 
 	// resort the table when changing and filter the current list
 	handleColumnClick(label) {
-		let nextSortKey = this.getSortingKey(label);
-		let nextSortAsc = this.state.sortLabel === label ? !this.state.sortAsc : true;
+		const nextSortKey = this.getSortingKey(label);
+		const nextSortAsc = this.state.sortLabel === label ? !this.state.sortAsc : true;
 		if (nextSortKey === false) return;
 
-		let changes = {
+		const changes = {
 			sortAsc: nextSortAsc,
 			sortKey: nextSortKey,
 			sortLabel: label,
@@ -675,8 +672,9 @@ class DataList extends React.Component {
 			this.getData(updateConfig);
 			changes.isSortingData = true;
 		} else {
-
-			const { hasPages, list, page, filters } = this.state
+			const {
+				hasPages, list, page, filters,
+			} = this.state;
 			if (hasPages) {
 				// sort all records
 				const sortedList = nextSortKey ? this.sortList(list, nextSortKey, nextSortAsc) : list;
@@ -700,7 +698,7 @@ class DataList extends React.Component {
 			this.handleSearchRemove(evt, label);
 		} else {
 			this.setState({
-				filters: this.state.filters.concat({ label: label, value: undefined }),
+				filters: this.state.filters.concat({ label, value: undefined }),
 			});
 		}
 	}
@@ -722,7 +720,7 @@ class DataList extends React.Component {
 			};
 		} else {
 			// filter the list
-			let pageQty = undefined;
+			let pageQty;
 			let filteredList = this.filterList(this.state.list, filters);
 			let newPage = this.state.page;
 			if (this.state.hasPages) {
@@ -759,13 +757,13 @@ class DataList extends React.Component {
 	}
 
 	handleStartResizeColumnWidth(cellIndex, cellStart, cellStop, cellName) {
-		let { left } = this.datalist.getBoundingClientRect();
+		const { left } = this.datalist.getBoundingClientRect();
 		this.setState({
 			isResizingColumn: true,
 			resizingColumnIndex: cellIndex,
 			cellLeftPosition: cellStart - left,
 			cellWidth: cellStop - cellStart,
-			cellName: cellName,
+			cellName,
 			isOverlayColumnVisible: true,
 		});
 	}
@@ -774,30 +772,30 @@ class DataList extends React.Component {
 			event.stopPropagation();
 			event.nativeEvent.stopImmediatePropagation();
 
-			let columns = [...this.state.columns];
+			const columns = [...this.state.columns];
 
-			for (var i = 0; i < this.state.resizingColumnIndex; i++) {
+			for (let i = 0; i < this.state.resizingColumnIndex; i++) {
 				if (this.state.columns[i].width && this.state.columns[i].width < 100) {
 					continue;
 				}
-				const cell = this.header[`headerCell${i}`];				
+				const cell = this.header[`headerCell${i}`];
 				const { left, right } = cell.getBoundingClientRect();
 				columns[i].width = right - left;
 			}
 
 			columns[this.state.resizingColumnIndex].width = this.state.cellWidth;
 
-			let arrowCellWidth = this.state.hasChildren ? 40 : 0;
-			let multiSelectWidth = this.state.hasMultiSelect ? 40 : 0;
-			let fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
-			let columnsAutoWidthNumber = columns.filter((col) => col.width == undefined).length;
-			let columnPerc = 100 / columnsAutoWidthNumber;
-			let columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
-			let style = {
-				multiSelectColumn: { width: multiSelectWidth + 'px', padding: '9px' },
+			const arrowCellWidth = this.state.hasChildren ? 40 : 0;
+			const multiSelectWidth = this.state.hasMultiSelect ? 40 : 0;
+			const fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+			const columnsAutoWidthNumber = columns.filter(col => col.width == undefined).length;
+			const columnPerc = 100 / columnsAutoWidthNumber;
+			const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
+			const style = {
+				multiSelectColumn: { width: `${multiSelectWidth}px`, padding: '9px' },
 				arrowColumn: { width: arrowCellWidth },
 				dataColumn: {
-					width: 'calc(' + columnPerc + '%' + ' - ' + columnPxToRemove + 'px )',
+					width: `calc(${columnPerc}%` + ` - ${columnPxToRemove}px )`,
 				},
 			};
 
@@ -812,8 +810,8 @@ class DataList extends React.Component {
 	}
 	handleResizeColumnWidth(event) {
 		if (this.state.isResizingColumn) {
-			var currentX = 10 + event.nativeEvent.clientX - this.datalist.getBoundingClientRect().left;
-			var diff = Math.max(currentX - this.state.cellLeftPosition, 100);
+			const currentX = 10 + event.nativeEvent.clientX - this.datalist.getBoundingClientRect().left;
+			const diff = Math.max(currentX - this.state.cellLeftPosition, 100);
 			this.setState({
 				cellWidth: diff,
 				isMinimumWidth: diff == 100,
@@ -822,8 +820,8 @@ class DataList extends React.Component {
 	}
 
 	handleMultiSelect(item) {
-		let { id } = item;
-		let arrayIds = [...this.state.multiSelected];
+		const { id } = item;
+		const arrayIds = [...this.state.multiSelected];
 		if (arrayIds.includes(id)) {
 			const pos = arrayIds.indexOf(id);
 			arrayIds.splice(pos, 1);
@@ -865,15 +863,16 @@ class DataList extends React.Component {
 	}
 
 	render() {
-
 		if (this.props.isPending) {
 			return (<SpinnerBox id={`${this.props.id}-pending-box`} />);
 		}
-		if (this.props.isError){
+		if (this.props.isError) {
 			return (<ErrorBox id={`${this.props.id}-error-box`} />);
 		}
 
-		const { list, currentList, apiError, filters } = this.state;
+		const {
+			list, currentList, apiError, filters,
+		} = this.state;
 		const { allowFilter } = this.props;
 		const hasMultiSelectFilter = typeof this.props.showMultiSelect === 'function';
 		const isLoading = this.state.isLoadingNewData;
@@ -898,7 +897,7 @@ class DataList extends React.Component {
 					onMouseMove={this.handleResizeColumnWidth}
 					onClick={this.handleStopResizeColumnWidth}
 				>
-					{/*Resize detector*/}
+					{/* Resize detector */}
 					<NotifyResize onResize={this.resizeList} />
 
 					{/* Loading data */}
@@ -971,7 +970,7 @@ class DataList extends React.Component {
 
 									<div ref={rows => (this.rows = rows)} className="element-datalist__body-rows">
 										{this.state.currentList.map((item, i) => {
-											let style = { ...this.state.style, ...item.style };
+											const style = { ...this.state.style, ...item.style };
 											const isSelected = this.props.selected === item.id;
 											const onItemClick = isSelected ? this.props.onUnselect : this.props.onSelect;
 											const isMultiSelected = this.state.multiSelected.includes(item.id);
@@ -985,7 +984,7 @@ class DataList extends React.Component {
 
 											return (
 												<ListItem
-													ref={item => (this[i + '-reference'] = item)}
+													ref={item => (this[`${i}-reference`] = item)}
 													key={i.toString()}
 													index={i}
 													style={style}
@@ -1039,7 +1038,7 @@ class DataList extends React.Component {
 
 DataList.propTypes = {
 	children: PropTypes.node,
-	api: PropTypes.string,	
+	api: PropTypes.string,
 	multiSelect: PropTypes.bool,
 	sortColumn: PropTypes.string,
 	sortAsc: PropTypes.bool,
@@ -1065,14 +1064,14 @@ DataList.propTypes = {
 	onUnselect: PropTypes.func,
 	onSelect: PropTypes.func,
 	rowStyle: PropTypes.shape(),
-}
+};
 
-/////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////
 
 
-const setSearchableColumns = ( columns, hasInfiniteScrolling ) => {
-	columns.forEach(column => {
-		const { searchable, showLabel, label } = column
+const setSearchableColumns = (columns, hasInfiniteScrolling) => {
+	columns.forEach((column) => {
+		const { searchable, showLabel, label } = column;
 		if (searchable == undefined) {
 			if (searchable === false || showLabel === false || label === '' || hasInfiniteScrolling) {
 				column.searchable = false;
@@ -1081,6 +1080,6 @@ const setSearchableColumns = ( columns, hasInfiniteScrolling ) => {
 			}
 		}
 	});
-}
+};
 
 export default DataList;

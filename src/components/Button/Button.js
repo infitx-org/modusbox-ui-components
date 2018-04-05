@@ -31,11 +31,12 @@ class Button extends PureComponent {
 		if (e.nativeEvent.keyCode === 13) {
 			e.preventDefault();
 			this.onClick(e);
-			return;
 		}
 	}
 	render() {
-		const { id, className, style, kind, label, icon, noFill, disabled, pending } = this.props;
+		const {
+			id, className, style, kind, label, icon, noFill, disabled, pending,
+		} = this.props;
 		const classNames = utils.composeClassNames([
 			className,
 			'mb-input input-button__input',

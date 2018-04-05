@@ -69,7 +69,7 @@ class ListItem extends React.Component {
 				<div
 					style={this.props.rowStyle}
 					onClick={this.onClick}
-					className={' element-datalist__body-row ' + (isSelected ? 'selected' : '')}
+					className={` element-datalist__body-row ${isSelected ? 'selected' : ''}`}
 				>
 					{this.props.showArrow && <ArrowCell isSelected={isSelected} />}
 
@@ -84,18 +84,18 @@ class ListItem extends React.Component {
 					)}
 
 					{this.props.columns.map((column, i) => {
-						let style = {
+						const style = {
 							...this.props.style.dataColumn,
 							width: column.width ? column.width : this.props.style.dataColumn.width,
 							...column.style,
 						};
-						let originalColumn = this.props.originalColumns[i];
+						const originalColumn = this.props.originalColumns[i];
 						// check if the value needs to be transformed using the "func and icon" function
 						const prop = column.key;
 						const field = item[prop];
 						let value = field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
 						const icon = column.icon != undefined ? column.icon(field, item) : false;
-						let cellContent = originalColumn.content && originalColumn.content(field, item, this.props.index);
+						const cellContent = originalColumn.content && originalColumn.content(field, item, this.props.index);
 						let content = false;
 						if (cellContent) {
 							if (typeof cellContent === 'string') {
@@ -127,7 +127,7 @@ class ListItem extends React.Component {
 						);
 					})}
 
-					{/*this.props.showScrollbar && <ScrollBarCell />  */}
+					{/* this.props.showScrollbar && <ScrollBarCell />  */}
 				</div>
 
 				{this.props.children != undefined && (

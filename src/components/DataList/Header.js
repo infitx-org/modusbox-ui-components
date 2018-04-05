@@ -51,7 +51,7 @@ class Header extends React.Component {
 						</div>
 					)}
 					{columns.map((column, i) => {
-						let newStyle = {
+						const newStyle = {
 							...(column.headerStyle || {}),
 							width: column.width ? column.width : style.dataColumn.width,
 						};

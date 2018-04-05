@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Paging = props => {
+const Paging = (props) => {
 	const { selected, qty } = props;
 	const betweenPages = Math.max(qty - 2, 0);
 	const siblings = new Array(betweenPages).fill(0).map((i, idx) => ({ value: idx + 1, label: idx + 2 }));
@@ -33,8 +33,8 @@ const Paging = props => {
 Paging.propTypes = {
 	selected: PropTypes.number,
 	qty: PropTypes.number,
-	onSelect: PropTypes.func	
-}
+	onSelect: PropTypes.func,
+};
 
 const Page = ({ onClick, label, isSelected }) => (
 	<div onClick={onClick} className={`paging-page ${isSelected && 'selected'}`}>
@@ -45,8 +45,8 @@ const Page = ({ onClick, label, isSelected }) => (
 Page.propTypes = {
 	onClick: PropTypes.func,
 	label: PropTypes.string,
-	isSelected: PropTypes.bool
-}
+	isSelected: PropTypes.bool,
+};
 
 class Paginator extends React.Component {
 	constructor(props) {
@@ -66,7 +66,7 @@ class Paginator extends React.Component {
 		clearTimeout(this.rangeChangeTimeout);
 	}
 	componentWillReceiveProps(nextProps) {
-		let changes = {};
+		const changes = {};
 		if (nextProps.hide && nextProps.hide != this.props.hide) {
 			changes.animate = false;
 		}
@@ -109,7 +109,7 @@ Paginator.propTypes = {
 	start: PropTypes.number,
 	stop: PropTypes.number,
 	hide: PropTypes.bool,
-	show: PropTypes.bool
-}
+	show: PropTypes.bool,
+};
 
 export { Paging, Page, Paginator };

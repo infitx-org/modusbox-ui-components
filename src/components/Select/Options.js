@@ -23,8 +23,12 @@ class Options extends PureComponent {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { options, selected, filter, highlighted } = nextProps;
-		this.setState({ options, selected, filter, highlighted });
+		const {
+			options, selected, filter, highlighted,
+		} = nextProps;
+		this.setState({
+			options, selected, filter, highlighted,
+		});
 	}
 	onClickOption(item) {
 		this.props.onSelect(item);
@@ -37,7 +41,7 @@ class Options extends PureComponent {
 		}
 		const top = reverse ? undefined : 0;
 		const bottom = reverse ? 45 : undefined;
-		//const items = reverse ? [...options].reverse() : options
+		// const items = reverse ? [...options].reverse() : options
 
 		const className = utils.composeClassNames([
 			'input',
@@ -47,9 +51,11 @@ class Options extends PureComponent {
 		return (
 			<div className={className} style={{ position: 'absolute', top, bottom }}>
 				<ScrollBox
-					style={{ maxHeight: maxHeight }}
+					style={{ maxHeight }}
 					handleStyle={{ borderRadius: '3px' }}
-					trackStyle={{ top: '2px', bottom: '2px', right: '4px', width: '5px' }}
+					trackStyle={{
+						top: '2px', bottom: '2px', right: '4px', width: '5px',
+					}}
 					showTrack={false}
 				>
 					<div ref={items => (this.items = items)}>
@@ -75,12 +81,10 @@ class Options extends PureComponent {
 	}
 }
 Options.propTypes = {
-	options: PropTypes.arrayOf(
-		PropTypes.shape({
-			label: PropTypes.string,
-			value: PropTypes.string,
-		})
-	),
+	options: PropTypes.arrayOf(PropTypes.shape({
+		label: PropTypes.string,
+		value: PropTypes.string,
+	})),
 	highlighted: PropTypes.number,
 	selected: PropTypes.string,
 	filter: PropTypes.string,
@@ -111,7 +115,9 @@ class Option extends PureComponent {
 		this.props.onClick();
 	}
 	render() {
-		const { label, icon, selected, disabled, highlighted } = this.props;
+		const {
+			label, icon, selected, disabled, highlighted,
+		} = this.props;
 		const optionsClassNames = utils.composeClassNames([
 			'input-select__options-item',
 			selected && 'selected',

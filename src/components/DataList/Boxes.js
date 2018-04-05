@@ -6,15 +6,15 @@ import Icon from '../Icon';
 import Row from '../Row';
 import Column from '../Column';
 
-const SpinnerBox = ({ id = 'element-datalist__pending-box' }) => (	
+const SpinnerBox = ({ id = 'element-datalist__pending-box' }) => (
 	<Row id={`${id}`} align="center center" className="loading-box">
-		<Spinner size='s' className='loading-spinner'/>
+		<Spinner size="s" className="loading-spinner" />
 	</Row>
 );
 
 SpinnerBox.propTypes = {
-	id: PropTypes.string
-}
+	id: PropTypes.string,
+};
 
 const ErrorBox = ({ id = 'element-datalist__error-box' }) => (
 	<Column id={`${id}`} className="element-datalist__error-box">
@@ -24,8 +24,8 @@ const ErrorBox = ({ id = 'element-datalist__error-box' }) => (
 );
 
 ErrorBox.propTypes = {
-	id: PropTypes.string
-}
+	id: PropTypes.string,
+};
 
 const NoDataBox = ({ message }) => (
 	<Column className="element-datalist__message-box">
@@ -35,7 +35,7 @@ const NoDataBox = ({ message }) => (
 );
 
 NoDataBox.propTypes = {
-	message: PropTypes.string
-}
+	message: PropTypes.string,
+};
 
 export { SpinnerBox, ErrorBox, NoDataBox };

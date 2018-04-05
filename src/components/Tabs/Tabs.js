@@ -16,7 +16,7 @@ class Tabs extends PureComponent {
 		this.state = {
 			selected: Math.max(
 				0,
-				typeof selected === 'string' ? items.indexOf(selected) : selected != undefined ? selected : 0
+				typeof selected === 'string' ? items.indexOf(selected) : selected != undefined ? selected : 0,
 			),
 			focused: undefined,
 		};
@@ -37,8 +37,8 @@ class Tabs extends PureComponent {
 		if (nextProps.selected != this.props.selected) {
 			selected = nextProps.selected;
 		}
-		
-		const tabs = this.getTabs()
+
+		const tabs = this.getTabs();
 		const { hidden, disabled } = tabs[selected].props;
 		if (hidden || disabled) {
 			selected = 0;
@@ -69,7 +69,7 @@ class Tabs extends PureComponent {
 
 		if (typeof this.props.onSelect === 'function') {
 			this.props.onSelect(index);
-		}		
+		}
 	}
 	onFocus(e) {
 		e.preventDefault();
@@ -77,7 +77,6 @@ class Tabs extends PureComponent {
 		if (this.state.focused === undefined) {
 			this.setState(state => ({ focused: state.selected }));
 		}
-		return;
 	}
 	onBlur() {
 		this.setState({ focused: undefined });
@@ -98,14 +97,13 @@ class Tabs extends PureComponent {
 		if (keyCode === keyCodes.KEY_RIGHT) {
 			e.preventDefault();
 			this.selectSiblingTab(true);
-			return;
 		}
 	}
 	selectSiblingTab(next) {
 		const { selected } = this.state;
 		const tabs = this.getTabs(this.props.children);
 		let nextIndex = selected;
-		let found = false;
+		const found = false;
 		while (!found) {
 			nextIndex += next ? 1 : -1;
 			if (nextIndex == tabs.length || nextIndex < 0) {
@@ -125,7 +123,7 @@ class Tabs extends PureComponent {
 		const panels = this.getPanels(children);
 		const panel = panels.length >= selected + 1 ? panels[selected] : null;
 		const { width } = tabList.props.style || {};
-		const growTab = width != undefined;		
+		const growTab = width != undefined;
 		const tabs = this.getTabs(children).map((child, index) => {
 			const props = {
 				...child.props,
@@ -177,7 +175,9 @@ class Tab extends PureComponent {
 		}
 	}
 	render() {
-		const { selected, focused, children, disabled, hidden, flex, style } = this.props;
+		const {
+			selected, focused, children, disabled, hidden, flex, style,
+		} = this.props;
 		if (hidden) {
 			return null;
 		}
@@ -209,24 +209,18 @@ Tab.propTypes = {
 };
 
 
-const TabList = ({ children }) => {
-	return children;
-};
+const TabList = ({ children }) => children;
 
 TabList.propTypes = {
 	children: PropTypes.node,
 };
 
-const TabPanel = ({ children }) => {
-	return <div className="element-tabs__tab__content">{children}</div>	
-};
+const TabPanel = ({ children }) => <div className="element-tabs__tab__content">{children}</div>;
 
 TabPanel.propTypes = {
 	children: PropTypes.node,
 };
-const TabPanels = ({ children }) => {
-	return children;
-};
+const TabPanels = ({ children }) => children;
 
 TabPanels.propTypes = {
 	children: PropTypes.node,
