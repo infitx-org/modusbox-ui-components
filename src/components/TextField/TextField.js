@@ -164,7 +164,7 @@ class TextField extends PureComponent {
 			id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid,
 		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
-		const isPlaceholderActive = isOpen || value;
+		const isPlaceholderActive = isOpen || value !== undefined;
 
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',

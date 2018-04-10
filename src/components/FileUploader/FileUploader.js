@@ -166,7 +166,7 @@ class FileUploader extends PureComponent {
 		const { isOpen, fileName, fileContent } = this.state;
 		const hasFile = fileContent !== undefined && fileName;
 
-		const isPlaceholderActive = isOpen || fileName || placeholder;
+		const isPlaceholderActive = isOpen === true || fileName !== undefined || placeholder !== undefined;
 		const componentClassName = utils.composeClassNames([
 			'input-fileuploader__component',
 			'mb-input',
