@@ -123,14 +123,14 @@ class DatePicker extends PureComponent {
 	handleDateTimeChange(selectedDay, hour, minute, second) {
 		// convert the value into the specified format if necessary
 		let exportDay = selectedDay === null || selectedDay === undefined ? undefined : selectedDay;
-		if (exportDay !== undefined && this.props.exportFormat) {
+		if (exportDay !== undefined && this.props.format) {
 			const dayStamp = moment(exportDay)
 				.startOf('day')
-				.format(this.props.exportFormat);
+				.format(this.props.format);
 			const date = parseInt(dayStamp) + hour * 3600000 + minute * 60000 + second * 1000;
 
 			// convert the string into integer when dealing with milliseconds
-			if (this.props.exportFormat === 'x') {
+			if (this.props.format === 'x') {
 				exportDay = moment(date).format('x');
 				exportDay = parseInt(exportDay);
 			}
@@ -281,7 +281,7 @@ DatePicker.propTypes = {
 	value: PropTypes.string,
 	placeholder: PropTypes.string,
 	onSelect: PropTypes.func,
-	exportFormat: PropTypes.string,
+	format: PropTypes.string,
 	withTime: PropTypes.bool,
 	defaultHour: PropTypes.number,
 	defaultMinute: PropTypes.number,
@@ -299,7 +299,7 @@ DatePicker.defaultProps = {
 	value: undefined,
 	placeholder: undefined,
 	onSelect: undefined,
-	exportFormat: undefined,
+	format: undefined,
 	withTime: false,
 	defaultHour: 0,
 	defaultMinute: 0,
