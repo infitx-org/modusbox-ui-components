@@ -81,7 +81,7 @@ class Button extends PureComponent {
 Button.propTypes = {
 	className: PropTypes.string,
 	id: PropTypes.string,
-	style: PropTypes.string,
+	style: PropTypes.shape(),
 	kind: PropTypes.string,
 	label: PropTypes.string,
 	icon: PropTypes.string,
