@@ -1,0 +1,175 @@
+@import './items/input';
+@import './items/element';
+
+@import './vars/colors.scss';
+@import './vars/border.scss';
+@import './vars/background.scss';
+@import './vars/general.scss';
+
+/********************************/
+/********************************/
+
+.mb-input *{
+	box-sizing: border-box;
+	font-family: Open Sans, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;	
+}
+
+/** COMPONENT */
+
+.mb-input{	
+	transition: all 0.2s ease-out;
+	border-radius: $border-radius;
+}
+.mb-input--open{
+	padding: 0px $component-open-size;		
+}
+.mb-input--disabled{
+	opacity: $component-opacity--disabled;
+	pointer-events: none;
+	cursor: auto;
+}
+
+
+/** COMPONENT **/
+
+.mb-input__box{
+	width: 100%;
+	height: 45px;	
+	display: block;
+	box-sizing: border-box;
+	position: relative;
+	margin: $component-margin 0px;
+}
+
+
+/** COMPONENT BACKGROUND **/
+
+.mb-input__background{
+	background: $background--default;
+}
+.mb-input__background--open{
+	background: $background--open;
+}
+.mb-input__background--pending{
+	background: $background--pending;	
+}
+.mb-input__background--invalid,
+.mb-input__background--required.mb-input__background--invalid{
+	background: $background--invalid;	
+}
+.mb-input__background--required{
+	background: $background--required;	
+}
+	
+
+/** COMPONENT BORDERS **/
+
+.mb-input__borders{
+	border-left: 2px solid $border-color--default;
+	border-right: 2px solid $border-color--default;
+}
+.mb-input__borders--open{
+	margin-left: -$component-open-size;
+	margin-right: -$component-open-size;	
+	border-color: $border-color--open;
+}	
+.mb-input__borders--pending{
+	border-color: $border-color--pending;
+}	
+.mb-input__borders--invalid,
+.mb-input__borders--required.mb-input__borders--invalid{
+	border-color: $border-color--invalid;
+}	
+.mb-input__borders--required{
+	border-color: $border-color--required;
+}	
+
+/** COMPONENT BLOCKS */
+
+.mb-input__content{
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	align-items: center;	
+	padding-left: 16px;
+	padding-right: 10px;
+}
+.mb-input__input{
+	flex: 2 1 auto;	
+	overflow: hidden;
+	height:20px;
+
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: 0px;
+	padding-top:1px;	
+	
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 14px;	
+
+}
+.mb-input__holder{
+	padding: 0px;
+	margin: 0px;
+	width: 0px;
+	height: 0px;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.mb-input__placeholder{
+	font-size: 14px;
+	transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+	position: absolute;
+	top: 50%;
+	left: 16px;	
+	color: $placeholder-color;
+	transform: translateY(-50%);
+}
+.mb-input__placeholder--active{
+	top: 11px;
+	font-size: 11px;
+}
+
+
+/** COMPONENT INNER BLOCKS **/
+
+.mb-input__inner-button{
+	outline: none;
+	flex: 0 0 auto;
+	border-radius:3px;
+	height: 24px;
+	margin-left: 5px;
+	border: 1px solid rgba(0,0,0,0.3);
+	background: transparent;
+	color: rgba(0,0,0,0.5);
+	fill: rgba(0,0,0,0.5);
+	font-size:12px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	padding: 0px 5px;
+	font-size: 11px;	
+	
+	.input-button__icon{
+		display: flex;
+	}
+
+	&:hover, &.mb-input__inner-button--active{
+		background: rgba(0,162,233,0.8);
+		border-color: transparent;
+		color: #fff;
+		fill: #fff;
+	}
+}
+.mb-input__inner-icon{
+	flex: 0 0 auto;
+	fill: #999;
+	margin-left: 5px;
+}
