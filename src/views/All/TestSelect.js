@@ -59,7 +59,7 @@ const TestSelect = () => (
 			<Select id="x" placeholder="placeholder" options={options} />
 			<Select id="x" placeholder="placeholder" options={options} />
 			<Select id="x" placeholder="placeholder" options={options} />
-		</div>
+		</div>		
 	</div>
 );
 

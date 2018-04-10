@@ -30,7 +30,7 @@ class Select extends PureComponent {
 		this.openSelect = this.openSelect.bind(this);
 		this.testKey = this.testKey.bind(this);
 		this.applyFilter = this.applyFilter.bind(this);
-		this.filterOptions = this.filterOptions.bind(this);
+		this.getOptions = this.getOptions.bind(this);
 		this.highlightNextOption = this.highlightNextOption.bind(this);
 		this.handleResize = this.handleResize.bind(this);
 
@@ -128,12 +128,13 @@ class Select extends PureComponent {
 	setValue(value) {
 		this.inputFilter.value = value;
 	}
-	filterOptions() {
+	getOptions() {
 		const { options, filter } = this.state;
 		if (filter === undefined || filter === '') {
 			return options;
 		}
-		return options.filter(item => item.label.includes(filter));
+		const lowerCaseFilter = filter.toLowerCase()
+		return options.filter(item => item.label.toLowerCase().includes(lowerCaseFilter));
 	}
 	closeSelect() {
 		this.setState({ isOpen: false, filter: undefined, highlightedOption: 0 });
@@ -189,7 +190,7 @@ class Select extends PureComponent {
 		if (keyCode === keyCodes.KEY_RETURN) {
 			e.preventDefault();
 			if (this.state.isOpen) {
-				const options = this.filterOptions();
+				const options = this.getOptions();
 				this.onSelectOption(options[this.state.highlightedOption]);
 			} else {
 				this.openSelect();
@@ -302,7 +303,7 @@ class Select extends PureComponent {
 					<Options
 						open={isOpen}
 						ref={(options) => { this.options = options; }}
-						options={this.filterOptions()}
+						options={this.getOptions()}
 						maxHeight={this.maxHeight || 0}
 						reverse={this.reverse}
 						selected={value}

@@ -56,8 +56,8 @@ class ScrollBox extends PureComponent {
 		}
 	}
 	updateContentSize() {
-		const { width } = this.contentBox.getBoundingClientRect();
-		this.content.style.width = width - 20;
+		const { width } = this.wrapper.getBoundingClientRect();
+		this.content.style.width = width;
 	}
 	render() {
 		const {
@@ -69,7 +69,7 @@ class ScrollBox extends PureComponent {
 		const contentClassName = utils.composeClassNames(['element-scrollbox__content', flex && 'flexible']);
 
 		return (
-			<div className={wrapperClassName} style={style}>
+			<div ref={(wrapper) => { this.wrapper = wrapper; }}className={wrapperClassName} style={style}>
 				<div ref={(contentBox) => { this.contentBox = contentBox; }} className={contentBoxClassName}>
 					<div ref={(content) => { this.content = content; }} className={contentClassName}>
 						{children}
