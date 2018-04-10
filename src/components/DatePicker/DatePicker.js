@@ -18,7 +18,7 @@ class DatePicker extends PureComponent {
 		}
 		return undefined;
 	}
-	static getTime(value) {
+	static getTimeObject(value) {
 		let intValue = value;
 		if (typeof value === 'undefined') {
 			intValue = 0;
@@ -32,17 +32,17 @@ class DatePicker extends PureComponent {
 		const second = value ? moment(intValue).get('second') : 0;
 		return { hour, minute, second };
 	}
-	static getDayAndString(value) {
+	static getSelectedDayAndTimestamp(value) {
 		let myValue = value;
 		if (typeof value === 'string') {
 			myValue = parseInt(value);
 		}
 		return {
 			selectedDay: myValue ? new Date(myValue) : null,
-			dateString: myValue,
+			timestamp: myValue,
 		};
 	}
-	static getDateString(day, hour, minute, second) {
+	static getTimestamp(day, hour, minute, second) {
 		const date = day
 			? moment(day)
 				.startOf('day')
@@ -70,12 +70,12 @@ class DatePicker extends PureComponent {
 		// internal timeout
 		this.deferredTimeChangeTimeout = undefined;
 
-		const { selectedDay, dateString } = DatePicker.getDayAndString(this.props.value);
-		const { hour, minute, second } = DatePicker.getTime(this.props.value);
+		const { selectedDay, timestamp } = DatePicker.getSelectedDayAndTimestamp(this.props.value);
+		const { hour, minute, second } = DatePicker.getTimeObject(this.props.value);
 
 		this.state = {
 			selectedDay,
-			dateString,
+			timestamp,
 			hour,
 			minute,
 			second,
@@ -100,12 +100,12 @@ class DatePicker extends PureComponent {
 		if (typeof value === 'string') {
 			timeValue = parseInt(value);
 		}
-		const { selectedDay, dateString } = DatePicker.getDayAndString(timeValue);
-		const { hour, minute, second } = value ? DatePicker.getTime(timeValue) : defaultTime;
+		const { selectedDay, timestamp } = DatePicker.getSelectedDayAndTimestamp(timeValue);
+		const { hour, minute, second } = value ? DatePicker.getTimeObject(timeValue) : defaultTime;
 
 		this.setState({
 			selectedDay,
-			dateString,
+			timestamp,
 			hour,
 			minute,
 			second,
@@ -144,15 +144,15 @@ class DatePicker extends PureComponent {
 	handleDayClick(e, day, { selected, disabled }) {
 		if (disabled) return;
 		const selectedDay = selected ? null : day;
-		const dateString = DatePicker.getDateString(selected ? undefined : day, 0, 0, 0);
-		this.setState({ selectedDay, dateString });
+		const timestamp = DatePicker.getTimestamp(selected ? undefined : day, 0, 0, 0);
+		this.setState({ selectedDay, timestamp });
 		this.handleDateTimeChange(selectedDay, this.state.hour, this.state.minute, this.state.second);
 	}
 	handleHourClick(hour) {
 		clearTimeout(this.deferredTimeChangeTimeout);
-		const dateString = DatePicker.getDateString(this.state.selectedDay, hour, this.state.minute, this.state.second);
+		const timestamp = DatePicker.getTimestamp(this.state.selectedDay, hour, this.state.minute, this.state.second);
 		if (hour > 23) return;
-		this.setState({ hour, dateString });
+		this.setState({ hour, timestamp });
 		this.deferredTimeChangeTimeout = setTimeout(
 			() => this.handleDateTimeChange(this.state.selectedDay, hour, this.state.minute, this.state.second),
 			500,
@@ -160,9 +160,9 @@ class DatePicker extends PureComponent {
 	}
 	handleMinuteClick(minute) {
 		clearTimeout(this.deferredTimeChangeTimeout);
-		const dateString = DatePicker.getDateString(this.state.selectedDay, this.state.hour, minute, this.state.second);
+		const timestamp = DatePicker.getTimestamp(this.state.selectedDay, this.state.hour, minute, this.state.second);
 		if (minute > 59) return;
-		this.setState({ minute, dateString });
+		this.setState({ minute, timestamp });
 		this.deferredTimeChangeTimeout = setTimeout(
 			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, minute, this.state.second),
 			500,
@@ -175,9 +175,9 @@ class DatePicker extends PureComponent {
 	}
 	handleSecondClick(second) {
 		clearTimeout(this.deferredTimeChangeTimeout);
-		const dateString = DatePicker.getDateString(this.state.selectedDay, this.state.hour, this.state.minute, second);
+		const timestamp = DatePicker.getTimestamp(this.state.selectedDay, this.state.hour, this.state.minute, second);
 		if (second > 59) return;
-		this.setState({ second, dateString });
+		this.setState({ second, timestamp });
 		this.deferredTimeChangeTimeout = setTimeout(
 			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, this.state.minute, second),
 			500,
@@ -199,9 +199,9 @@ class DatePicker extends PureComponent {
 		const {
 			placeholder, id, style, disabled, pending, invalid, required,
 		} = this.props;
-		const { isOpen, dateString, selectedDay } = this.state;
-		const initialMonth = selectedDay === undefined ? DatePicker.getDate(this.props.initialMonth) : selectedDay;
-		const hasDate = dateString !== 0 && dateString !== undefined;
+		const { isOpen, timestamp, selectedDay } = this.state;
+		const initialMonth = selectedDay || DatePicker.getDate(this.props.initialMonth);
+		const hasDate = timestamp !== 0 && timestamp !== undefined;
 		const isPlaceholderActive = isOpen || hasDate;
 
 		const componentClassName = utils.composeClassNames([
@@ -234,7 +234,7 @@ class DatePicker extends PureComponent {
 								this.input = input;
 							}}
 							className="mb-input__input input-datepicker__value"
-							value={hasDate ? moment(dateString).format('MMM Do YYYY, HH:mm:ss') : ''}
+							value={hasDate ? moment(timestamp).format('MMM Do YYYY, HH:mm:ss') : ''}
 							onKeyDown={this.testKey}
 							disabled={disabled}
 						/>
@@ -247,11 +247,7 @@ class DatePicker extends PureComponent {
 					</div>
 				</div>
 
-				<div
-					ref={(area) => {
-						this.area = area;
-					}}
-				>
+				<div ref={(area) => { this.area = area; }}>
 					{this.state.isOpen && (
 						<div className="daypicker-position">
 							<DayPicker
