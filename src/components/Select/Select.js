@@ -189,7 +189,7 @@ class Select extends PureComponent {
 		if (keyCode === keyCodes.KEY_RETURN) {
 			e.preventDefault();
 			if (this.state.isOpen) {
-				const options = this.inputFilterOptions();
+				const options = this.filterOptions();
 				this.onSelectOption(options[this.state.highlightedOption]);
 			} else {
 				this.openSelect();
