@@ -19,7 +19,9 @@ const TestButton = () => (
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
 			<Tooltip style={{ width: '100px' }}>
-				<Row><Icon name="close-small" size={16} /> Very loooooooooooooong content...</Row>
+				<Row>
+					<Icon name="close-small" size={16} /> Very loooooooooooooong content...
+				</Row>
 			</Tooltip>
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">

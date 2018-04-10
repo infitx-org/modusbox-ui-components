@@ -17,7 +17,7 @@ class Icon extends PureComponent {
 	}
 	render() {
 		const {
-			className, style, size, name, fill, stroke, spin,
+			id, className, style, size, name, fill, stroke, spin,
 		} = this.props;
 		const svgStyle = {
 			height: `${size}px`,
@@ -28,13 +28,24 @@ class Icon extends PureComponent {
 		};
 		const componentClassName = utils.composeClassNames(['element-icon', spin && 'spin', className]);
 		return (
-			<svg style={svgStyle} onClick={this.onClick} className={componentClassName}>
+			<svg id={id} style={svgStyle} onClick={this.onClick} className={componentClassName}>
 				<use xlinkHref={`#${name}`} />
 			</svg>
 		);
 	}
 }
 
+Icon.propTypes = {
+	id: PropTypes.string,
+	style: PropTypes.shape(),
+	className: PropTypes.string,
+	size: PropTypes.number,
+	name: PropTypes.string,
+	fill: PropTypes.string,
+	stroke: PropTypes.string,
+	spin: PropTypes.bool,
+	onClick: PropTypes.func,
+};
 Icon.defaultProps = {
 	id: undefined,
 	style: undefined,
@@ -47,15 +58,4 @@ Icon.defaultProps = {
 	onClick: undefined,
 };
 
-Icon.propTypes = {
-	idName: PropTypes.string,
-	style: PropTypes.object,
-	className: PropTypes.string,
-	size: PropTypes.number,
-	name: PropTypes.string,
-	fill: PropTypes.string,
-	stroke: PropTypes.string,
-	spin: PropTypes.bool,
-	onClick: PropTypes.func,
-};
 export default Icon;

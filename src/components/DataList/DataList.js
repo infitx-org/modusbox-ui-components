@@ -194,7 +194,8 @@ class DataList extends React.Component {
 		const hasChildren = props.children != undefined;
 		const arrowCellWidth = hasChildren ? 40 : 0;
 		const multiSelectWidth = props.multiSelect ? 40 : 0;
-		const fixedPxAmount = multiSelectWidth + arrowCellWidth + props.columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+		const fixedPxAmount =
+			multiSelectWidth + arrowCellWidth + props.columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
 		const columnsAutoWidthNumber = props.columns.filter(col => col.width == undefined).length;
 		const columnPerc = 100 / columnsAutoWidthNumber;
 		const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
@@ -218,7 +219,8 @@ class DataList extends React.Component {
 		};
 		setSearchableColumns(props.columns, hasInfiniteScrolling);
 		this.setState({
-			style, containerStyle,
+			style,
+			containerStyle,
 		});
 	}
 	componentWillReceiveProps(nextProps) {
@@ -787,7 +789,8 @@ class DataList extends React.Component {
 
 			const arrowCellWidth = this.state.hasChildren ? 40 : 0;
 			const multiSelectWidth = this.state.hasMultiSelect ? 40 : 0;
-			const fixedPxAmount = multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+			const fixedPxAmount =
+				multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
 			const columnsAutoWidthNumber = columns.filter(col => col.width == undefined).length;
 			const columnPerc = 100 / columnsAutoWidthNumber;
 			const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
@@ -864,10 +867,10 @@ class DataList extends React.Component {
 
 	render() {
 		if (this.props.isPending) {
-			return (<SpinnerBox id={`${this.props.id}-pending-box`} />);
+			return <SpinnerBox id={`${this.props.id}-pending-box`} />;
 		}
 		if (this.props.isError) {
-			return (<ErrorBox id={`${this.props.id}-error-box`} />);
+			return <ErrorBox id={`${this.props.id}-error-box`} />;
 		}
 
 		const {
@@ -1067,7 +1070,6 @@ DataList.propTypes = {
 };
 
 // ///////////////////////////////////////////////////////
-
 
 const setSearchableColumns = (columns, hasInfiniteScrolling) => {
 	columns.forEach((column) => {

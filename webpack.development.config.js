@@ -23,7 +23,7 @@ var config = {
 		publicPath: '/dist/',
 	},
 
-	devtool: 'source-map',
+	devtool: 'cheap-module-eval-source-map',
 	plugins: [
 		//new HardSourceWebpackPlugin(),
 		new webpack.DllReferencePlugin({

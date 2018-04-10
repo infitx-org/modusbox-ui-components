@@ -22,14 +22,20 @@ class ScrollBox extends PureComponent {
 		window.addEventListener('resize', this.handleResize);
 		this.contentBox.addEventListener('scroll', this.updateScrollbar);
 	}
+	componentDidUpdate() {
+		this.updateScrollbar();
+		this.updateContentSize();
+	}
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleResize);
 		this.contentBox.removeEventListener('scroll', this.updateScrollbar);
 	}
+	onDrag(ratio) {
+		const { height } = this.content.getBoundingClientRect();
+		const boxHeight = this.contentBox.getBoundingClientRect().height;
 
-	componentDidUpdate() {
-		this.updateScrollbar();
-		this.updateContentSize();
+		const scrollTop = ratio * (height - boxHeight);
+		this.contentBox.scrollTop = scrollTop;
 	}
 	handleResize() {
 		this.updateScrollbar();
@@ -53,13 +59,6 @@ class ScrollBox extends PureComponent {
 		const { width } = this.contentBox.getBoundingClientRect();
 		this.content.style.width = width - 20;
 	}
-	onDrag(ratio) {
-		const { height } = this.content.getBoundingClientRect();
-		const boxHeight = this.contentBox.getBoundingClientRect().height;
-
-		const scrollTop = ratio * (height - boxHeight);
-		this.contentBox.scrollTop = scrollTop;
-	}
 	render() {
 		const {
 			showTrack, handleStyle, trackStyle, style, children, flex,
@@ -71,14 +70,14 @@ class ScrollBox extends PureComponent {
 
 		return (
 			<div className={wrapperClassName} style={style}>
-				<div ref={contentBox => (this.contentBox = contentBox)} className={contentBoxClassName}>
-					<div ref={content => (this.content = content)} className={contentClassName}>
+				<div ref={(contentBox) => { this.contentBox = contentBox; }} className={contentBoxClassName}>
+					<div ref={(content) => { this.content = content; }} className={contentClassName}>
 						{children}
 					</div>
 				</div>
 
 				<ScrollBar
-					ref={scrollbar => (this.scrollbar = scrollbar)}
+					ref={(scrollbar) => { this.scrollbar = scrollbar; }}
 					trackStyle={trackStyle}
 					handleStyle={handleStyle}
 					showTrack={showTrack}
@@ -90,9 +89,9 @@ class ScrollBox extends PureComponent {
 }
 ScrollBox.propTypes = {
 	flex: PropTypes.bool,
-	style: PropTypes.object,
-	trackStyle: PropTypes.object,
-	handleStyle: PropTypes.object,
+	style: PropTypes.shape(),
+	trackStyle: PropTypes.shape(),
+	handleStyle: PropTypes.shape(),
 	showTrack: PropTypes.bool,
 	children: PropTypes.node,
 };

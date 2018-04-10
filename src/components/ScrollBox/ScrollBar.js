@@ -30,14 +30,27 @@ class ScrollBar extends PureComponent {
 		window.removeEventListener('mousemove', this.onMouseMove);
 		window.removeEventListener('mouseup', this.onMouseUp);
 	}
-	fadeMovingHandle() {
-		clearTimeout(this.movingTimeout);
 
-		this.movingTimeout = setTimeout(() => {
-			if (this._isMounted) {
-				this.setState({ isMoving: false });
+	onMouseDown(e) {
+		this._originMouseY = e.nativeEvent.offsetY;
+		this._dragging = true;
+	}
+	onMouseMove(e) {
+		if (this._dragging) {
+			const { top, height } = this.tracker.getBoundingClientRect();
+			const mousePosY = e.pageY - top;
+			if (typeof this.props.onDrag === 'function') {
+				const diff = mousePosY - this._originMouseY;
+				const max = Math.round(height - this.state.barHeight);
+				let ratio = diff / max;
+				if (diff > max) { ratio = 1; }
+				if (diff < 0) { ratio = 0; }
+				this.props.onDrag(ratio);
 			}
-		}, 500);
+		}
+	}
+	onMouseUp() {
+		this._dragging = false;
 	}
 	setPosition(positions) {
 		const { tracker } = this;
@@ -53,29 +66,21 @@ class ScrollBar extends PureComponent {
 		const isMoving = true;
 
 		this.setState({
-			showScrollbar, barHeight, translate, isMoving, height,
+			showScrollbar,
+			barHeight,
+			translate,
+			isMoving,
 		});
 		this.fadeMovingHandle();
 	}
+	fadeMovingHandle() {
+		clearTimeout(this.movingTimeout);
 
-	onMouseDown(e) {
-		this._originMouseY = e.nativeEvent.offsetY;
-		this._dragging = true;
-	}
-	onMouseMove(e) {
-		if (this._dragging) {
-			const { top, height } = this.tracker.getBoundingClientRect();
-			const mousePosY = e.pageY - top;
-			if (typeof this.props.onDrag === 'function') {
-				const diff = mousePosY - this._originMouseY;
-				const max = Math.round(height - this.state.barHeight);
-				const ratio = diff > max ? 1 : diff < 0 ? 0 : diff / max;
-				this.props.onDrag(ratio);
+		this.movingTimeout = setTimeout(() => {
+			if (this._isMounted) {
+				this.setState({ isMoving: false });
 			}
-		}
-	}
-	onMouseUp() {
-		this._dragging = false;
+		}, 500);
 	}
 	render() {
 		const { showTrack, trackStyle, handleStyle } = this.props;
@@ -97,11 +102,12 @@ class ScrollBar extends PureComponent {
 
 		return (
 			<div
-				ref={tracker => (this.tracker = tracker)}
+				ref={(tracker) => { this.tracker = tracker; }}
 				className={`scrollbar ${showTrack ? 'track-visible' : ''}`}
 				style={trackStyles}
 			>
 				<div
+					role="presentation"
 					onMouseDown={this.onMouseDown}
 					className={`${isMoving ? 'moving' : ''} scrollbar-handle`}
 					style={handleStyles}
@@ -114,16 +120,14 @@ class ScrollBar extends PureComponent {
 ScrollBar.propTypes = {
 	showTrack: PropTypes.bool,
 	onDrag: PropTypes.func,
-	trackStyle: PropTypes.object,
-	handleStyle: PropTypes.object,
-	style: PropTypes.object,
+	trackStyle: PropTypes.shape(),
+	handleStyle: PropTypes.shape(),
 };
 ScrollBar.defaultProps = {
 	showTrack: true,
 	onDrag: undefined,
 	trackStyle: {},
 	handleStyle: {},
-	style: {},
 };
 
 export default ScrollBar;

@@ -31,5 +31,5 @@ export {
 	TestSpinner,
 	TestModal,
 	TestRow,
-	TestColumn,
+	TestColumn
 };

@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 const OverlayColumnResizer = ({
 	isMinimumWidth, start, stop, name,
 }) => (
-	<div
-		className={`overlay-column-resizer ${isMinimumWidth && 'minimum'}`}
-		style={{ left: start, width: stop }}
-	>
+	<div className={`overlay-column-resizer ${isMinimumWidth && 'minimum'}`} style={{ left: start, width: stop }}>
 		<div className="overlay-column-resizer-label">{name}</div>
 	</div>
 );

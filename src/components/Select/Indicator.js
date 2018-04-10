@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
 
-const Indicator = ({ isOpen = false }) => (
+const Indicator = ({ isOpen }) => (
 	<Icon
 		className="input-select__indicator"
 		name="arrow"
@@ -18,6 +18,9 @@ const Indicator = ({ isOpen = false }) => (
 
 Indicator.propTypes = {
 	isOpen: PropTypes.bool,
+};
+Indicator.defaultProps = {
+	isOpen: false,
 };
 
 export default Indicator;

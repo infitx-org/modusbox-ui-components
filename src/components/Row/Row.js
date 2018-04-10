@@ -8,7 +8,7 @@ const mapFlexToProperty = (property) => {
 		left: 'flex-start',
 		right: 'flex-end',
 	};
-	return property ? (flexMappers[property] || property) : undefined;
+	return property ? flexMappers[property] || property : undefined;
 };
 class Row extends PureComponent {
 	render() {
@@ -42,7 +42,7 @@ Row.propTypes = {
 	shrink: PropTypes.string,
 	basis: PropTypes.string,
 	className: PropTypes.string,
-	style: PropTypes.object,
+	style: PropTypes.shape(),
 	children: PropTypes.node,
 };
 Row.defaultProps = {

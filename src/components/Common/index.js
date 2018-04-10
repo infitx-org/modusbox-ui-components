@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import Spinner from '../Spinner';
 
-const Loader = ({ visible = true }) => {
+const Loader = ({ visible }) => {
 	if (!visible) {
 		return null;
 	}
@@ -17,6 +17,9 @@ const Loader = ({ visible = true }) => {
 
 Loader.propTypes = {
 	visible: PropTypes.bool,
+};
+Loader.defaultProps = {
+	visible: true,
 };
 
 const Placeholder = ({ label, active }) => {
@@ -35,6 +38,11 @@ const Placeholder = ({ label, active }) => {
 Placeholder.propTypes = {
 	label: PropTypes.string,
 	active: PropTypes.bool,
+};
+
+Placeholder.defaultProps = {
+	label: undefined,
+	active: false,
 };
 
 export { Loader, Placeholder };

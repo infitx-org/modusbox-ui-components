@@ -33,20 +33,34 @@ class TestModal extends React.Component {
 		const [first, second, third] = modals;
 		return (
 			<div>
-				<Row align='space-between'>
-					<Button kind='primary' onClick={() => this.onOpen(0)} label="Regular" />
-					<Button kind='danger' onClick={() => this.onOpen(1)} label="Danger" />
-					<Button kind='warning' onClick={() => this.onOpen(2)} label="Warning" />
+				<Row align="space-between">
+					<Button kind="primary" onClick={() => this.onOpen(0)} label="Regular" />
+					<Button kind="danger" onClick={() => this.onOpen(1)} label="Danger" />
+					<Button kind="warning" onClick={() => this.onOpen(2)} label="Warning" />
 				</Row>
 
 				<div style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
 					{first && (
-						<Modal primaryAction="Submit" onClose={() => this.onClose(0)} title="Primary" kind='primary' allowSubmit isSubmitEnabled>
+						<Modal
+							primaryAction="Submit"
+							onClose={() => this.onClose(0)}
+							title="Primary"
+							kind="primary"
+							allowSubmit
+							isSubmitEnabled
+						>
 							<span> Hello! modal 1 </span>
 						</Modal>
 					)}
 					{second && (
-						<Modal primaryAction="Submit" onClose={() => this.onClose(1)} title='danger' kind='danger' allowSubmit isSubmitEnabled>
+						<Modal
+							primaryAction="Submit"
+							onClose={() => this.onClose(1)}
+							title="danger"
+							kind="danger"
+							allowSubmit
+							isSubmitEnabled
+						>
 							<div style={{ height: '1000px' }}>
 								<span> Hello! modal 2 </span>
 								<Select options={new Array(100).fill({ label: '1', value: '2' })} />
@@ -54,7 +68,14 @@ class TestModal extends React.Component {
 						</Modal>
 					)}
 					{third && (
-						<Modal primaryAction="Submit" onClose={() => this.onClose(2)} title='Warning' kind='warning' allowSubmit isSubmitEnabled>
+						<Modal
+							primaryAction="Submit"
+							onClose={() => this.onClose(2)}
+							title="Warning"
+							kind="warning"
+							allowSubmit
+							isSubmitEnabled
+						>
 							<span> Hello! modal 2 </span>
 						</Modal>
 					)}

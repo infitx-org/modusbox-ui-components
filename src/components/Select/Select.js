@@ -46,6 +46,10 @@ class Select extends PureComponent {
 			filter: undefined,
 		};
 	}
+	componentDidMount() {
+		window.addEventListener('resize', this.handleResize);
+		window.addEventListener('mouseup', this.onPageClick, false);
+	}
 	componentWillReceiveProps(nextProps) {
 		const changes = {};
 		const { options, value, disabled } = nextProps;
@@ -70,25 +74,73 @@ class Select extends PureComponent {
 			this.setState(changes);
 		}
 	}
-
-	componentDidMount() {
-		window.addEventListener('resize', this.handleResize);
-		window.addEventListener('mouseup', this.onPageClick, false);
-	}
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleResize);
 		window.removeEventListener('mouseup', this.onPageClick, false);
 	}
+	onPageClick(e) {
+		if (!this.state.isOpen) {
+			return;
+		}
+		const isClickWithinSelectBox = this.area.contains(e.target);
 
+		const isClickWithinOptionsBox = this.optionsPosition.childNodes[0]
+			? this.optionsPosition.childNodes[0].contains(e.target)
+			: false;
+		if (!isClickWithinSelectBox && !isClickWithinOptionsBox) {
+			this.closeSelect();
+			this.inputFilter.blur();
+		}
+	}
+
+	// when opening the list of options...
+	onClickSelect() {
+		const isOpen = !this.state.isOpen;
+		if (isOpen === true) {
+			this.onSelectFilter();
+			this.setState({ isOpen });
+		} else {
+			this.closeSelect();
+		}
+	}
+
+	onSelectFilter() {
+		this.inputFilter.focus();
+	}
+
+	// when selecting the options item itself
+	onSelectOption({ value } = {}) {
+		if (value === undefined) {
+			return;
+		}
+		const selectedItem = find(this.state.options, { value });
+		const selectedLabel = selectedItem ? selectedItem.label : undefined;
+		this.setState({
+			filter: undefined,
+			value,
+			selectedLabel,
+		});
+		this.setState({ isOpen: false });
+		if (typeof this.props.onChange === 'function') {
+			this.props.onChange(value);
+		}
+	}
 	setValue(value) {
-		this.filter.value = value;
+		this.inputFilter.value = value;
+	}
+	filterOptions() {
+		const { options, filter } = this.state;
+		if (filter === undefined || filter === '') {
+			return options;
+		}
+		return options.filter(item => item.label.includes(filter));
 	}
 	closeSelect() {
 		this.setState({ isOpen: false, filter: undefined, highlightedOption: 0 });
 	}
 	leaveSelect(next) {
 		this.closeSelect();
-		utils.focusNextFocusableElement(this.filter, next);
+		utils.focusNextFocusableElement(this.inputFilter, next);
 	}
 	openSelect() {
 		this.setState({ isOpen: true });
@@ -137,7 +189,7 @@ class Select extends PureComponent {
 		if (keyCode === keyCodes.KEY_RETURN) {
 			e.preventDefault();
 			if (this.state.isOpen) {
-				const options = this.filterOptions();
+				const options = this.inputFilterOptions();
 				this.onSelectOption(options[this.state.highlightedOption]);
 			} else {
 				this.openSelect();
@@ -145,7 +197,7 @@ class Select extends PureComponent {
 		}
 	}
 	applyFilter() {
-		const { value } = this.filter;
+		const { value } = this.inputFilter;
 		this.setState({ filter: value, isOpen: true });
 		if (value === '') {
 			this.setState({
@@ -179,65 +231,10 @@ class Select extends PureComponent {
 		}
 
 		this.options.items.children[nextHighlightedOption].focus();
-		this.filter.focus();
+		this.inputFilter.focus();
 		this.setState({ highlightedOption: nextHighlightedOption });
 	}
 
-	// when clicking on the page
-	onPageClick(e) {
-		if (!this.state.isOpen) {
-			return;
-		}
-		const isClickWithinSelectBox = this.area.contains(e.target);
-
-		const isClickWithinOptionsBox = this.optionsPosition.childNodes[0]
-			? this.optionsPosition.childNodes[0].contains(e.target)
-			: false;
-		if (!isClickWithinSelectBox && !isClickWithinOptionsBox) {
-			this.closeSelect();
-			this.filter.blur();
-		}
-	}
-
-	// when opening the list of options...
-	onClickSelect() {
-		const isOpen = !this.state.isOpen;
-		if (isOpen === true) {
-			this.onSelectFilter();
-			this.setState({ isOpen });
-		} else {
-			this.closeSelect();
-		}
-	}
-
-	onSelectFilter() {
-		this.filter.focus();
-	}
-
-	// when selecting the options item itself
-	onSelectOption({ value } = {}) {
-		if (value == undefined) {
-			return;
-		}
-		const selectedItem = find(this.state.options, { value });
-		const selectedLabel = selectedItem ? selectedItem.label : undefined;
-		this.setState({
-			filter: undefined,
-			value,
-			selectedLabel,
-		});
-		this.setState({ isOpen: false });
-		if (typeof this.props.onChange === 'function') {
-			this.props.onChange(value);
-		}
-	}
-	filterOptions() {
-		const { options, filter } = this.state;
-		if (filter == undefined || filter == '') {
-			return options;
-		}
-		return options.filter(item => item.label.includes(filter));
-	}
 
 	render() {
 		const {
@@ -248,7 +245,7 @@ class Select extends PureComponent {
 		} = this.state;
 
 		const inputValue = filter || selectedLabel || '';
-		const isPlaceholderActive = isOpen || selectedLabel != undefined;
+		const isPlaceholderActive = isOpen || selectedLabel !== undefined;
 
 		const componentClassName = utils.composeClassNames([
 			'input-select__component',
@@ -266,14 +263,19 @@ class Select extends PureComponent {
 
 		return (
 			<div id={id} className="input-select mb-input__box" style={style}>
-				<div className={componentClassName} onClick={this.onClickSelect} ref={area => (this.area = area)}>
+				<div
+					className={componentClassName}
+					onClick={this.onClickSelect}
+					ref={(area) => { this.area = area; }}
+					role="presentation"
+				>
 					<div className="mb-input__content input-select__content">
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
 							className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
 							type="text"
-							ref={filter => (this.filter = filter)}
+							ref={(inputFilter) => { this.inputFilter = inputFilter; }}
 							onKeyDown={this.testKey}
 							onChange={this.applyFilter}
 							onFocus={this.openSelect}
@@ -296,10 +298,10 @@ class Select extends PureComponent {
 					</div>
 				</div>
 
-				<div className="input-select__options" ref={position => (this.optionsPosition = position)}>
+				<div className="input-select__options" ref={(position) => { this.optionsPosition = position; }}>
 					<Options
 						open={isOpen}
-						ref={options => (this.options = options)}
+						ref={(options) => { this.options = options; }}
 						options={this.filterOptions()}
 						maxHeight={this.maxHeight || 0}
 						reverse={this.reverse}
@@ -315,15 +317,14 @@ class Select extends PureComponent {
 
 Select.propTypes = {
 	id: PropTypes.string,
-	style: PropTypes.object,
-	value: PropTypes.string,
+	style: PropTypes.shape(),
 	onChange: PropTypes.func,
 	placeholder: PropTypes.string,
 	options: PropTypes.arrayOf(PropTypes.shape({
 		label: PropTypes.string,
 		value: PropTypes.string,
 	})),
-	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
@@ -337,7 +338,6 @@ Select.defaultProps = {
 	onChange: undefined,
 	placeholder: undefined,
 	options: [],
-	selected: undefined,
 	pending: false,
 	required: false,
 	invalid: false,

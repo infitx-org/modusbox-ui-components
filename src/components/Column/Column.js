@@ -42,7 +42,7 @@ Column.propTypes = {
 	shrink: PropTypes.string,
 	basis: PropTypes.string,
 	className: PropTypes.string,
-	style: PropTypes.object,
+	style: PropTypes.shape(),
 	children: PropTypes.node,
 };
 Column.defaultProps = {

@@ -44,14 +44,13 @@ const TestDataList = () => (
 				<TabPanel>
 					<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
 				</TabPanel>
-				<TabPanel>				
+				<TabPanel>
 					<DataList id="2" columns={columns1} list={list1.concat(list1)} selected={'a'} paging />
 				</TabPanel>
-				<TabPanel>					
+				<TabPanel>
 					<div> hey</div>
 					<div> hey</div>
 					<div> hey</div>
-					
 				</TabPanel>
 			</TabPanels>
 		</Tabs>

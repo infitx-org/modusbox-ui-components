@@ -17,17 +17,18 @@ class Options extends PureComponent {
 			highlighted: this.props.highlighted,
 			options: this.props.options,
 			selected: this.props.selected,
-			filter: this.props.filter,
 		};
 		this.items = [];
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const {
-			options, selected, filter, highlighted,
+			options, selected, highlighted,
 		} = nextProps;
 		this.setState({
-			options, selected, filter, highlighted,
+			options,
+			selected,
+			highlighted,
 		});
 	}
 	onClickOption(item) {
@@ -54,11 +55,14 @@ class Options extends PureComponent {
 					style={{ maxHeight }}
 					handleStyle={{ borderRadius: '3px' }}
 					trackStyle={{
-						top: '2px', bottom: '2px', right: '4px', width: '5px',
+						top: '2px',
+						bottom: '2px',
+						right: '4px',
+						width: '5px',
 					}}
 					showTrack={false}
 				>
-					<div ref={items => (this.items = items)}>
+					<div ref={(items) => { this.items = items; }}>
 						{options.map((item, index) => {
 							const isSelected = selected === item.value;
 							return (
@@ -68,7 +72,7 @@ class Options extends PureComponent {
 									value={item.value}
 									icon={item.icon}
 									disabled={item.disabled === true}
-									key={index}
+									key={index.toString()}
 									selected={isSelected}
 									onClick={() => this.onClickOption(item)}
 								/>
@@ -87,7 +91,6 @@ Options.propTypes = {
 	})),
 	highlighted: PropTypes.number,
 	selected: PropTypes.string,
-	filter: PropTypes.string,
 	onSelect: PropTypes.func,
 	maxHeight: PropTypes.number,
 	reverse: PropTypes.bool,
@@ -98,7 +101,6 @@ Options.defaultProps = {
 	options: [],
 	highlighted: undefined,
 	selected: undefined,
-	filter: undefined,
 	onSelect: undefined,
 	maxHeight: 0,
 	reverse: false,
@@ -125,13 +127,22 @@ class Option extends PureComponent {
 			highlighted && 'highlighted',
 		]);
 		return (
-			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1">
+			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1" role="presentation">
 				{icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
 				{label}
 			</div>
 		);
 	}
 }
+
+Option.defaultProps = {
+	highlighted: false,
+	selected: false,
+	disabled: false,
+	onClick: undefined,
+	label: undefined,
+	icon: undefined,
+};
 
 Option.propTypes = {
 	highlighted: PropTypes.bool,

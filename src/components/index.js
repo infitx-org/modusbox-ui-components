@@ -39,5 +39,5 @@ export {
 	TabPanels,
 	TabPanel,
 	TextField,
-	Tooltip
+	Tooltip,
 };

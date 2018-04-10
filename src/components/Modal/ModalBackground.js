@@ -20,11 +20,19 @@ export default class ModalBackground extends PureComponent {
 			isSubmitPending: this.props.isSubmitPending,
 		};
 	}
-	componentWillLeave(callback) {
-		callback();
-	}
 	componentDidMount() {
 		this._isMounted = true;
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.isSubmitPending !== this.state.isSubmitPending) {
+			if (nextProps.isSubmitPending === false) {
+				if (this._isMounted) {
+					this.setState({ isSubmitPending: false });
+				}
+			} else {
+				this.setState({ isSubmitPending: true });
+			}
+		}
 	}
 	componentWillUnmount() {
 		this._isMounted = false;
@@ -49,26 +57,16 @@ export default class ModalBackground extends PureComponent {
 			this.props.onSubmit();
 		}
 	}
-	getChild() {
-		const child = React.Children.only(this.props.children);
-		return React.cloneElement(child, {});
-	}
 	onClickOverlay() {
 		if (this.props.allowClose && this.props.isCloseEnabled && !this.state.isSubmitPending) {
 			this.onClose();
 		}
 	}
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.isSubmitPending != this.state.isSubmitPending) {
-			if (nextProps.isSubmitPending === false) {
-				if (this._isMounted) {
-					this.setState({ isSubmitPending: false });
-				}
-			} else {
-				this.setState({ isSubmitPending: true });
-			}
-		}
+	getChild() {
+		const child = React.Children.only(this.props.children);
+		return React.cloneElement(child, {});
 	}
+
 	render() {
 		const width = `${this.props.width || '800px'}`;
 		const maxHeight = this.props.maximise ? 'auto' : `calc(100% - ${60 * this.props.modalIndex + 70}px)`;
@@ -89,7 +87,12 @@ export default class ModalBackground extends PureComponent {
 		const isCloseDisabled = !this.props.isCloseEnabled || this.state.isSubmitPending;
 		return (
 			<div className="element element-modal">
-				<div className="element-modal__overlay" style={customStyle} onClick={this.onClickOverlay} />
+				<div
+					className="element-modal__overlay"
+					style={customStyle}
+					onClick={this.onClickOverlay}
+					role="presentation"
+				/>
 				<div className={`element-modal__container ${this.props.kind}`} style={modalStyle}>
 					<div className="element-modal__header">
 						<div className="element-modal__header-title">{this.props.title}</div>
@@ -192,11 +195,11 @@ ModalBackground.propTypes = {
 	allowClose: PropTypes.bool,
 	allowSubmit: PropTypes.bool,
 	allowUndo: PropTypes.bool,
-	onClose: PropTypes.func.isRequired,
+	onClose: PropTypes.func,
 	onUndo: PropTypes.func,
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,
-	primaryAction: PropTypes.string.isRequired,
+	primaryAction: PropTypes.string,
 	maximise: PropTypes.bool,
 	tabbed: PropTypes.bool,
 	alignItems: PropTypes.bool,

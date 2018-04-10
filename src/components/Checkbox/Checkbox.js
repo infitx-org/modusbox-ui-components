@@ -10,26 +10,17 @@ class Checkbox extends PureComponent {
 			checked: this.props.checked,
 		};
 		this.onChange = this.onChange.bind(this);
-		this.preventDefault = this.preventDefault.bind(this);
 		this.testKey = this.testKey.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const { checked } = nextProps;
-		if (checked != this.state.checked) {
+		if (checked !== this.state.checked) {
 			this.setState({ checked });
 		}
 	}
-
-	preventDefault(e) {
-		e.stopPropagation();
-		e.nativeEvent.stopPropagation();
-		e.nativeEvent.stopImmediatePropagation();
-	}
-	onChange(e) {
+	onChange() {
 		if (this.props.disabled) return;
-
-		this.preventDefault(e);
 
 		const checked = !this.state.checked;
 		this.setState({ checked });
@@ -41,11 +32,13 @@ class Checkbox extends PureComponent {
 	}
 	testKey(e) {
 		if (e.nativeEvent.keyCode === 9) {
+			e.stopPropagation();
 			e.preventDefault();
 			focusNextFocusableElement(this.input, !e.nativeEvent.shiftKey);
 			return;
 		}
 		if (e.nativeEvent.keyCode === 13) {
+			e.stopPropagation();
 			e.preventDefault();
 			this.onChange(e);
 		}
@@ -59,16 +52,19 @@ class Checkbox extends PureComponent {
 		return (
 			<div className="mb-input input-checkbox">
 				<input
-					ref={input => (this.input = input)}
+					ref={(input) => {
+						this.input = input;
+					}}
 					type="checkbox"
 					id={id}
 					className={`input-checkbox__input ${semi ? 'semi-checked' : ''}`}
 					onKeyDown={this.testKey}
-					checked={checked && semi != true}
+					checked={checked && semi !== true}
 					onChange={this.preventDefault}
+					onClick={this.onChange}
 					disabled={disabled}
 				/>
-				<label htmlFor={id} onClick={this.onChange} className={`${round ? 'round' : ''}`}>
+				<label htmlFor={id} className={`${round ? 'round' : ''}`}>
 					{label}
 				</label>
 			</div>

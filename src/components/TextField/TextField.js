@@ -42,6 +42,9 @@ class TextField extends PureComponent {
 		};
 	}
 
+	componentDidMount() {
+		window.addEventListener('mouseup', this.onPageClick, false);
+	}
 	componentWillReceiveProps(nextProps) {
 		const changes = {};
 		const { value, disabled } = nextProps;
@@ -57,49 +60,10 @@ class TextField extends PureComponent {
 			this.setState(changes);
 		}
 	}
-	componentDidMount() {
-		window.addEventListener('mouseup', this.onPageClick, false);
-	}
 	componentWillUnmount() {
 		window.removeEventListener('mouseup', this.onPageClick, false);
 	}
 
-	closeTextField() {
-		this.setState({ isOpen: false });
-	}
-	leaveTextField(next) {
-		this.closeTextField();
-		utils.focusNextFocusableElement(this.input, next);
-	}
-	enterTextField() {
-		if (this.props.disabled) {
-			this.leaveTextField();
-			return;
-		}
-		this.setState({ isOpen: true });
-	}
-	testKey(e) {
-		const { keyCode, shiftKey } = e.nativeEvent;
-		if (keyCode === keyCodes.KEY_TAB) {
-			e.preventDefault();
-			this.leaveTextField(!shiftKey);
-			return;
-		}
-		if (keyCode === keyCodes.KEY_RETURN) {
-			if (this.props.buttonText) {
-				this.onButtonClick(e);
-			} else {
-				e.preventDefault();
-				this.leaveTextField(!shiftKey);
-			}
-		}
-	}
-	setValue(e) {
-		const value = e.target.value;
-		if (this.state.value != value) {
-			this.setState({ value });
-		}
-	}
 	onTextFieldClick() {
 		this.input.click();
 	}
@@ -158,6 +122,43 @@ class TextField extends PureComponent {
 		this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
 	}
 
+	setValue(e) {
+		const { value } = e.target;
+		if (this.state.value !== value) {
+			this.setState({ value });
+		}
+	}
+	closeTextField() {
+		this.setState({ isOpen: false });
+	}
+	leaveTextField(next) {
+		this.closeTextField();
+		utils.focusNextFocusableElement(this.input, next);
+	}
+	enterTextField() {
+		if (this.props.disabled) {
+			this.leaveTextField();
+			return;
+		}
+		this.setState({ isOpen: true });
+	}
+	testKey(e) {
+		const { keyCode, shiftKey } = e.nativeEvent;
+		if (keyCode === keyCodes.KEY_TAB) {
+			e.preventDefault();
+			this.leaveTextField(!shiftKey);
+			return;
+		}
+		if (keyCode === keyCodes.KEY_RETURN) {
+			if (this.props.buttonText) {
+				this.onButtonClick(e);
+			} else {
+				e.preventDefault();
+				this.leaveTextField(!shiftKey);
+			}
+		}
+	}
+
 	render() {
 		const {
 			id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid,
@@ -179,15 +180,26 @@ class TextField extends PureComponent {
 				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
+		let inputType = type;
+		if (type === 'password' && isPasswordVisible === false) {
+			inputType = 'password';
+		}
+
 		return (
 			<div className="input-textfield mb-input__box" style={style}>
-				<div id={id} className={componentClassName} onClick={this.onTextFieldClick} ref={area => (this.area = area)}>
+				<div
+					id={id}
+					className={componentClassName}
+					onClick={this.onTextFieldClick}
+					ref={(area) => { this.area = area; }}
+					role="presentation"
+				>
 					<div className="mb-input__content input-textfield__content">
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
-							ref={input => (this.input = input)}
-							type={type === 'password' ? (isPasswordVisible ? 'text' : 'password') : type}
+							ref={(input) => { this.input = input; }}
+							type={inputType}
 							onClick={this.onClick}
 							onChange={this.onChange}
 							onKeyDown={this.testKey}
@@ -211,7 +223,7 @@ class TextField extends PureComponent {
 						)}
 						<Loader visible={pending} />
 
-						{type == 'password' && (
+						{type === 'password' && (
 							<div className="mb-input__inner-icon input-textfield__icon">
 								<EyeIcon open={isPasswordVisible} onClick={this.onShowPasswordClick} />
 							</div>
@@ -229,7 +241,7 @@ class TextField extends PureComponent {
 }
 
 TextField.propTypes = {
-	style: PropTypes.object,
+	style: PropTypes.shape(),
 	type: PropTypes.oneOf(['text', 'password']),
 	id: PropTypes.string,
 	placeholder: PropTypes.string,
@@ -268,13 +280,20 @@ TextField.defaultProps = {
 	disabled: false,
 };
 
-const EyeIcon = ({ open, onClick }) => (
-	<Icon onClick={onClick} name={open ? 'toggle-invisible' : 'toggle-visible'} size={16} fill={open ? '#999' : '#39f'} />
-);
+const EyeIcon = ({ open, onClick }) => (<Icon
+	onClick={onClick}
+	name={open ? 'toggle-invisible' : 'toggle-visible'}
+	size={16}
+	fill={open ? '#999' : '#39f'}
+/>);
 
 EyeIcon.propTypes = {
 	open: PropTypes.bool,
-	onClick: PropTypes.fund,
+	onClick: PropTypes.func,
+};
+EyeIcon.defaultProps = {
+	open: false,
+	onClick: undefined,
 };
 
 export default TextField;

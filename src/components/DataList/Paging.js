@@ -23,9 +23,7 @@ const Paging = (props) => {
 					))}
 				</div>
 			</div>
-			{qty > 1 && (
-				<Page onClick={() => props.onSelect(qty - 1)} label={qty} isSelected={selected === qty - 1} />
-			)}
+			{qty > 1 && <Page onClick={() => props.onSelect(qty - 1)} label={qty} isSelected={selected === qty - 1} />}
 		</div>
 	);
 };

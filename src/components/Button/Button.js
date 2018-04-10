@@ -52,7 +52,9 @@ class Button extends PureComponent {
 
 		return (
 			<button
-				ref={input => (this.input = input)}
+				ref={(input) => {
+					this.input = input;
+				}}
 				id={id}
 				style={style}
 				className={classNames}

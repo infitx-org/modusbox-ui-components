@@ -15,8 +15,7 @@ class Tooltip extends PureComponent {
 		this.box.addEventListener('mouseenter', this.showTooltip);
 		this.box.addEventListener('mouseleave', this.hideTooltip);
 	}
-	componentDidUpdate() {
-	}
+	componentDidUpdate() {}
 	componentWillUnmount() {
 		this.box.removeEventListener('mouseenter', this.showTooltip);
 		this.box.removeEventListener('mouseleave', this.hideTooltip);
@@ -29,10 +28,9 @@ class Tooltip extends PureComponent {
 				this.hasTooltip = true;
 
 				const { left, top } = this.box.getBoundingClientRect();
+				const tooltipTop = top - 40;
+				const CMP = () => <span>{this.props.children}</span>;
 
-				const tooltipTop = (top - 40);
-
-				const CMP = () => (<span>{this.props.children}</span>);
 				this._div = document.createElement('div');
 				this._div.className = 'element-tooltip__viewer';
 				this._div.style.top = tooltipTop;
@@ -54,7 +52,13 @@ class Tooltip extends PureComponent {
 	render() {
 		const { style, children } = this.props;
 		return (
-			<span className="element-tooltip" style={style} ref={(box) => { this.box = box; }}>
+			<span
+				className="element-tooltip"
+				style={style}
+				ref={(box) => {
+					this.box = box;
+				}}
+			>
 				{children}
 			</span>
 		);

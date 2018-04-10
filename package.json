@@ -13,7 +13,7 @@
     "lint:watch": "npm run lint -- --watch",
     "prestart": "webpack --config webpack.dll.config.js",
     "postinstall": "node scripts/postinstall.js",
-    "pretty": "prettier --single-quote --use-tabs --print-width 120 --trailing-comma es5 --write './**/*.js'",
+    "prettier": "prettier --single-quote --use-tabs --print-width 120 --trailing-comma es5 --write './**/*.js'",
     "start": "NODE_ENV=development node server.js",
     "test": "jest"
   },
@@ -64,8 +64,7 @@
     "copy-webpack-plugin": "^2.1.1",
     "css-loader": "^0.15.6",
     "enzyme": "^3.3.0",
-    "enzyme-adapter-react-15": "^1.0.5",
-    "eslint-plugin-babel": "^3.0.0",
+    "enzyme-adapter-react-15": "^1.0.5",    
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.9.1",
     "fs": "0.0.1-security",
@@ -124,6 +123,7 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "7.7.0",
     "eslint-watch": "^3.1.4",
     "prettier": "^1.11.1"

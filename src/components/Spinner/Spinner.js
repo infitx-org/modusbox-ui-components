@@ -19,21 +19,22 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
 };
 
 class Spinner extends PureComponent {
-	constructor(props) {
-		super(props);
-	}
 	render() {
 		const { size, center, color } = this.props;
 		const realSize = typeof size === 'string' ? { s: 16, m: 30, l: 50 }[size] : size;
 		const strokeWidth = realSize / 10;
-		const width = `${realSize}px`,
-			height = `${realSize}px`;
+		const width = `${realSize}px`;
+		const height = `${realSize}px`;
 		const position = realSize / 2;
 		const radius = position - strokeWidth;
-		const style = { stroke: color };
+		const spinnerStyle = {
+			width: center === false && width,
+			height: center === false && height,
+		};
+		const pathStyle = { stroke: color };
 
 		return (
-			<div className={`element-spinner ${center ? 'center' : ''}`} style={{ width, height }}>
+			<div className={`element-spinner ${center ? 'center' : ''}`} style={spinnerStyle}>
 				<svg
 					className="element-spinner__component"
 					width={width}
@@ -44,7 +45,7 @@ class Spinner extends PureComponent {
 						className="element-spinner__svg-path"
 						strokeWidth={strokeWidth}
 						d={describeArc(position, position, radius, 90, 200)}
-						style={style}
+						style={pathStyle}
 					/>
 				</svg>
 			</div>

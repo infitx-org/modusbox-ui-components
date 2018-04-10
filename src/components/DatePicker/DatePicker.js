@@ -12,36 +12,68 @@ import { Loader, Placeholder } from '../Common';
 import './DatePicker.scss';
 
 class DatePicker extends PureComponent {
+	static getDate(value) {
+		if (typeof value === 'string' || typeof value === 'number') {
+			return new Date(parseInt(value));
+		}
+		return undefined;
+	}
+	static getTime(value) {
+		let intValue = value;
+		if (typeof value === 'undefined') {
+			intValue = 0;
+		}
+		if (typeof value === 'string') {
+			intValue = parseInt(value);
+		}
+
+		const hour = value ? moment(intValue).get('hour') : 0;
+		const minute = value ? moment(intValue).get('minute') : 0;
+		const second = value ? moment(intValue).get('second') : 0;
+		return { hour, minute, second };
+	}
+	static getDayAndString(value) {
+		let myValue = value;
+		if (typeof value === 'string') {
+			myValue = parseInt(value);
+		}
+		return {
+			selectedDay: myValue ? new Date(myValue) : null,
+			dateString: myValue,
+		};
+	}
+	static getDateString(day, hour, minute, second) {
+		const date = day
+			? moment(day)
+				.startOf('day')
+				.format('x')
+			: 0;
+		const dateTime = parseInt(date) + hour * 3600000 + minute * 60000 + second * 1000;
+		return dateTime;
+	}
+
 	constructor(props) {
 		super(props);
 
-		// interaction methods
-		this.handlePageClick = this.handlePageClick.bind(this);
-		this.onFocus = this.onFocus.bind(this);
-
-		// time methods
+		this.handleDateTimeChange = this.handleDateTimeChange.bind(this);
 		this.handleDayClick = this.handleDayClick.bind(this);
 		this.handleHourClick = this.handleHourClick.bind(this);
 		this.handleMinuteClick = this.handleMinuteClick.bind(this);
 		this.handleSecondClick = this.handleSecondClick.bind(this);
-		this.handleDateTimeChange = this.handleDateTimeChange.bind(this);
+		this.handlePageClick = this.handlePageClick.bind(this);
 
 		// internal methods
-		this.getDateString = this.getDateString.bind(this);
-		this.getDayAndString = this.getDayAndString.bind(this);
-		this.getTime = this.getTime.bind(this);
-		this.getDate = this.getDate.bind(this);
 		this.leaveDatePicker = this.leaveDatePicker.bind(this);
+		this.onFocus = this.onFocus.bind(this);
 		this.testKey = this.testKey.bind(this);
 
 		// internal timeout
 		this.deferredTimeChangeTimeout = undefined;
 
-		const { selectedDay, dateString } = this.getDayAndString(this.props.value);
-		const { hour, minute, second } = this.getTime(this.props.value);
+		const { selectedDay, dateString } = DatePicker.getDayAndString(this.props.value);
+		const { hour, minute, second } = DatePicker.getTime(this.props.value);
 
 		this.state = {
-			disabled: this.props.disabled,
 			selectedDay,
 			dateString,
 			hour,
@@ -53,9 +85,6 @@ class DatePicker extends PureComponent {
 
 	componentDidMount() {
 		window.addEventListener('mouseup', this.handlePageClick, false);
-	}
-	componentWillUnmount() {
-		window.removeEventListener('mouseup', this.handlePageClick, false);
 	}
 	componentWillReceiveProps(props) {
 		const {
@@ -71,8 +100,8 @@ class DatePicker extends PureComponent {
 		if (typeof value === 'string') {
 			timeValue = parseInt(value);
 		}
-		const { selectedDay, dateString } = this.getDayAndString(timeValue);
-		const { hour, minute, second } = value ? this.getTime(timeValue) : defaultTime;
+		const { selectedDay, dateString } = DatePicker.getDayAndString(timeValue);
+		const { hour, minute, second } = value ? DatePicker.getTime(timeValue) : defaultTime;
 
 		this.setState({
 			selectedDay,
@@ -82,111 +111,19 @@ class DatePicker extends PureComponent {
 			second,
 		});
 	}
-	leaveDatePicker(next) {
-		this.setState({ isOpen: false });
-		utils.focusNextFocusableElement(this.input, next);
+	componentWillUnmount() {
+		window.removeEventListener('mouseup', this.handlePageClick, false);
 	}
-	testKey(e) {
-		const { keyCode, shiftKey } = e.nativeEvent;
-		if (keyCode === keyCodes.KEY_TAB) {
-			e.preventDefault();
-			this.leaveDatePicker(!shiftKey);
-		}
-	}
-	getDate(value) {
-		if (typeof value === 'string' || typeof value === 'number') {
-			return new Date(parseInt(value));
-		}
-		return undefined;
-	}
-	getTime(value) {
-		const intValue = typeof value === 'undefined' ? 0 : typeof value === 'string' ? parseInt(value) : value;
-
-		const hour = value ? moment(intValue).get('hour') : 0;
-		const minute = value ? moment(intValue).get('minute') : 0;
-		const second = value ? moment(intValue).get('second') : 0;
-		return { hour, minute, second };
-	}
-
-	getDayAndString(value) {
-		let myValue = value;
-		if (typeof value === 'string') {
-			myValue = parseInt(value);
-		}
-		return {
-			selectedDay: myValue ? new Date(myValue) : null,
-			dateString: myValue,
-		};
-	}
-
-	getDateString(day, hour, minute, second) {
-		const date = day
-			? moment(day)
-				.startOf('day')
-				.format('x')
-			: 0;
-		const dateTime = parseInt(date) + hour * 3600000 + minute * 60000 + second * 1000;
-		return dateTime;
-	}
-
 	onFocus() {
 		if (this.state.isOpen === false) {
 			this.input.focus();
 			this.setState({ isOpen: true });
 		}
 	}
-	// detect if the used clicks outside the datepicker box
-	handlePageClick(e) {
-		if (!this.area.contains(e.target)) {
-			this.setState({ isOpen: false });
-		}
-	}
-
-	handleHourClick(hour) {
-		clearTimeout(this.deferredTimeChangeTimeout);
-		const dateString = this.getDateString(this.state.selectedDay, hour, this.state.minute, this.state.second);
-		if (hour > 23) return;
-		this.setState({ hour, dateString });
-		this.deferredTimeChangeTimeout = setTimeout(
-			() => this.handleDateTimeChange(this.state.selectedDay, hour, this.state.minute, this.state.second),
-			500,
-		);
-	}
-
-	handleMinuteClick(minute) {
-		clearTimeout(this.deferredTimeChangeTimeout);
-		const dateString = this.getDateString(this.state.selectedDay, this.state.hour, minute, this.state.second);
-		if (minute > 59) return;
-		this.setState({ minute, dateString });
-		this.deferredTimeChangeTimeout = setTimeout(
-			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, minute, this.state.second),
-			500,
-		);
-	}
-
-	handleSecondClick(second) {
-		clearTimeout(this.deferredTimeChangeTimeout);
-		const dateString = this.getDateString(this.state.selectedDay, this.state.hour, this.state.minute, second);
-		if (second > 59) return;
-		this.setState({ second, dateString });
-		this.deferredTimeChangeTimeout = setTimeout(
-			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, this.state.minute, second),
-			500,
-		);
-	}
-
-	handleDayClick(e, day, { selected, disabled }) {
-		if (disabled) return;
-		const selectedDay = selected ? null : day;
-		const dateString = this.getDateString(selected ? undefined : day, 0, 0, 0);
-		this.setState({ selectedDay, dateString });
-		this.handleDateTimeChange(selectedDay, this.state.hour, this.state.minute, this.state.second);
-	}
-
 	handleDateTimeChange(selectedDay, hour, minute, second) {
 		// convert the value into the specified format if necessary
-		let exportDay = selectedDay == null || selectedDay == undefined ? undefined : selectedDay;
-		if (exportDay != undefined && this.props.exportFormat) {
+		let exportDay = selectedDay === null || selectedDay === undefined ? undefined : selectedDay;
+		if (exportDay !== undefined && this.props.exportFormat) {
 			const dayStamp = moment(exportDay)
 				.startOf('day')
 				.format(this.props.exportFormat);
@@ -204,14 +141,67 @@ class DatePicker extends PureComponent {
 			this.props.onSelect(exportDay);
 		}
 	}
+	handleDayClick(e, day, { selected, disabled }) {
+		if (disabled) return;
+		const selectedDay = selected ? null : day;
+		const dateString = DatePicker.getDateString(selected ? undefined : day, 0, 0, 0);
+		this.setState({ selectedDay, dateString });
+		this.handleDateTimeChange(selectedDay, this.state.hour, this.state.minute, this.state.second);
+	}
+	handleHourClick(hour) {
+		clearTimeout(this.deferredTimeChangeTimeout);
+		const dateString = DatePicker.getDateString(this.state.selectedDay, hour, this.state.minute, this.state.second);
+		if (hour > 23) return;
+		this.setState({ hour, dateString });
+		this.deferredTimeChangeTimeout = setTimeout(
+			() => this.handleDateTimeChange(this.state.selectedDay, hour, this.state.minute, this.state.second),
+			500,
+		);
+	}
+	handleMinuteClick(minute) {
+		clearTimeout(this.deferredTimeChangeTimeout);
+		const dateString = DatePicker.getDateString(this.state.selectedDay, this.state.hour, minute, this.state.second);
+		if (minute > 59) return;
+		this.setState({ minute, dateString });
+		this.deferredTimeChangeTimeout = setTimeout(
+			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, minute, this.state.second),
+			500,
+		);
+	}
+	handlePageClick(e) {
+		if (!this.area.contains(e.target)) {
+			this.setState({ isOpen: false });
+		}
+	}
+	handleSecondClick(second) {
+		clearTimeout(this.deferredTimeChangeTimeout);
+		const dateString = DatePicker.getDateString(this.state.selectedDay, this.state.hour, this.state.minute, second);
+		if (second > 59) return;
+		this.setState({ second, dateString });
+		this.deferredTimeChangeTimeout = setTimeout(
+			() => this.handleDateTimeChange(this.state.selectedDay, this.state.hour, this.state.minute, second),
+			500,
+		);
+	}
+	leaveDatePicker(next) {
+		this.setState({ isOpen: false });
+		utils.focusNextFocusableElement(this.input, next);
+	}
+	testKey(e) {
+		const { keyCode, shiftKey } = e.nativeEvent;
+		if (keyCode === keyCodes.KEY_TAB) {
+			e.preventDefault();
+			this.leaveDatePicker(!shiftKey);
+		}
+	}
 
 	render() {
 		const {
 			placeholder, id, style, disabled, pending, invalid, required,
 		} = this.props;
 		const { isOpen, dateString, selectedDay } = this.state;
-		const initialMonth = selectedDay == undefined ? this.getDate(this.props.initialMonth) : selectedDay;
-		const hasDate = dateString != 0 && dateString != undefined;
+		const initialMonth = selectedDay === undefined ? DatePicker.getDate(this.props.initialMonth) : selectedDay;
+		const hasDate = dateString !== 0 && dateString !== undefined;
 		const isPlaceholderActive = isOpen || hasDate;
 
 		const componentClassName = utils.composeClassNames([
@@ -229,12 +219,20 @@ class DatePicker extends PureComponent {
 		return (
 			<div className="input-datepicker mb-input__box" style={style}>
 				<div className={componentClassName}>
-					<div id={id} className="mb-input__content input-datepicker__content" onClick={this.onFocus}>
+					<div
+						id={id}
+						className="mb-input__content input-datepicker__content"
+						onClick={this.onFocus}
+						onKeyDown={this.onFocus}
+						role="presentation"
+					>
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
 							onFocus={this.onFocus}
-							ref={input => (this.input = input)}
+							ref={(input) => {
+								this.input = input;
+							}}
 							className="mb-input__input input-datepicker__value"
 							value={hasDate ? moment(dateString).format('MMM Do YYYY, HH:mm:ss') : ''}
 							onKeyDown={this.testKey}
@@ -249,7 +247,11 @@ class DatePicker extends PureComponent {
 					</div>
 				</div>
 
-				<div ref={area => (this.area = area)}>
+				<div
+					ref={(area) => {
+						this.area = area;
+					}}
+				>
 					{this.state.isOpen && (
 						<div className="daypicker-position">
 							<DayPicker
@@ -266,7 +268,7 @@ class DatePicker extends PureComponent {
 									onHourChange={this.handleHourClick}
 									onMinuteChange={this.handleMinuteClick}
 									onSecondChange={this.handleSecondClick}
-									disabled={selectedDay == undefined || selectedDay == null}
+									disabled={selectedDay === undefined || selectedDay == null}
 								/>
 							)}
 						</div>
@@ -279,7 +281,7 @@ class DatePicker extends PureComponent {
 
 DatePicker.propTypes = {
 	id: PropTypes.string,
-	style: PropTypes.object,
+	style: PropTypes.shape(),
 	value: PropTypes.string,
 	placeholder: PropTypes.string,
 	onSelect: PropTypes.func,
@@ -311,6 +313,7 @@ DatePicker.defaultProps = {
 	required: false,
 	invalid: false,
 	initialMonth: undefined,
+	disabledDays: undefined,
 };
 
 const TimePicker = ({
@@ -331,31 +334,39 @@ TimePicker.propTypes = {
 	onSecondChange: PropTypes.func,
 	disabled: PropTypes.bool,
 };
+TimePicker.defaultProps = {
+	hour: 0,
+	minute: 0,
+	second: 0,
+	onHourChange: undefined,
+	onMinuteChange: undefined,
+	onSecondChange: undefined,
+	disabled: false,
+};
 
 // //////////////////////////////////////////////
 
 class TimeInput extends PureComponent {
+	static getDoubleDigitTime(value) {
+		const intValue = parseInt(value);
+		return intValue < 10 ? `0${intValue}` : intValue;
+	}
 	constructor(props) {
 		super(props);
-		this.getDoubleDigitTime = this.getDoubleDigitTime.bind(this);
+
 		this.onChangeValue = this.onChangeValue.bind(this);
 		this.state = {
 			value: parseInt(this.props.selected),
-			shown: this.getDoubleDigitTime(this.props.selected),
+			shown: TimeInput.getDoubleDigitTime(this.props.selected),
 		};
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (parseInt(nextProps.selected) == this.state.value) return;
+		if (parseInt(nextProps.selected) === this.state.value) return;
 		this.setState({
 			value: parseInt(nextProps.selected),
-			shown: this.getDoubleDigitTime(nextProps.selected),
+			shown: TimeInput.getDoubleDigitTime(nextProps.selected),
 		});
-	}
-
-	getDoubleDigitTime(value) {
-		value = parseInt(value);
-		return value < 10 ? `0${value}` : value;
 	}
 
 	onChangeValue(e) {
@@ -389,5 +400,12 @@ TimeInput.propTypes = {
 	selected: PropTypes.number,
 	onChange: PropTypes.func,
 	disabled: PropTypes.bool,
+};
+TimeInput.defaultProps = {
+	name: '',
+	limit: 0,
+	selected: false,
+	onChange: undefined,
+	disabled: false,
 };
 export default DatePicker;
