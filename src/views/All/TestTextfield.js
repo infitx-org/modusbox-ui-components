@@ -15,7 +15,7 @@ const TestTextField = () => (
 			<TextField placeholder="Icon" icon="close-small" />
 			<TextField
 				placeholder="Events (console)"
-				onChange={() => console.log('onChange')}
+				onChange={(value) => console.log('onChange', value)}
 				onClick={() => console.log('onClick')}
 				onKeyPress={() => console.log('onKeyPress')}
 				onEnter={() => console.log('onEnter')}

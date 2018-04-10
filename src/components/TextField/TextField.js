@@ -28,7 +28,6 @@ class TextField extends PureComponent {
 		this.onFocus = this.onFocus.bind(this);
 
 		// Internal lifecycle methods
-		this.setValue = this.setValue.bind(this);
 		this.closeTextField = this.closeTextField.bind(this);
 		this.leaveTextField = this.leaveTextField.bind(this);
 		this.enterTextField = this.enterTextField.bind(this);
@@ -84,10 +83,14 @@ class TextField extends PureComponent {
 		this.setState({ isOpen: true });
 	}
 	onChange(e) {
-		if (typeof this.props.onChange === 'function') {
-			this.props.onChange(e);
+		const { value } = e.target;
+		if (this.state.value !== value) {
+			this.setState({ value });
+			
+			if (typeof this.props.onChange === 'function') {
+				this.props.onChange(e.target.value);
+			}
 		}
-		this.setValue(e);
 	}
 	onKeyPress(e) {
 		if (typeof this.props.onKeyPress === 'function') {
@@ -122,12 +125,6 @@ class TextField extends PureComponent {
 		this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
 	}
 
-	setValue(e) {
-		const { value } = e.target;
-		if (this.state.value !== value) {
-			this.setState({ value });
-		}
-	}
 	closeTextField() {
 		this.setState({ isOpen: false });
 	}
