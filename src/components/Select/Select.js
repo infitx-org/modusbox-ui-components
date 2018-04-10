@@ -133,7 +133,7 @@ class Select extends PureComponent {
 		if (filter === undefined || filter === '') {
 			return options;
 		}
-		const lowerCaseFilter = filter.toLowerCase()
+		const lowerCaseFilter = filter.toLowerCase();
 		return options.filter(item => item.label.toLowerCase().includes(lowerCaseFilter));
 	}
 	closeSelect() {
@@ -323,7 +323,7 @@ Select.propTypes = {
 	placeholder: PropTypes.string,
 	options: PropTypes.arrayOf(PropTypes.shape({
 		label: PropTypes.string,
-		value: PropTypes.string,
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	})),
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	pending: PropTypes.bool,
