@@ -25,7 +25,7 @@ class Checkbox extends PureComponent {
 		const checked = !this.state.checked;
 		this.setState({ checked });
 		this.input.focus();
-
+		console.log();
 		if (typeof this.props.onChange === 'function') {
 			this.props.onChange(checked);
 		}
@@ -60,11 +60,10 @@ class Checkbox extends PureComponent {
 					className={`input-checkbox__input ${semi ? 'semi-checked' : ''}`}
 					onKeyDown={this.testKey}
 					checked={checked && semi !== true}
-					onChange={this.preventDefault}
-					onClick={this.onChange}
+					onChange={e => e.preventDefault()}
 					disabled={disabled}
 				/>
-				<label htmlFor={id} className={`${round ? 'round' : ''}`}>
+				<label htmlFor={id} className={`${round ? 'round' : ''}`} onClick={this.onChange} role="presentation">
 					{label}
 				</label>
 			</div>
