@@ -86,7 +86,7 @@ class TextField extends PureComponent {
 		const { value } = e.target;
 		if (this.state.value !== value) {
 			this.setState({ value });
-			
+
 			if (typeof this.props.onChange === 'function') {
 				this.props.onChange(e.target.value);
 			}
@@ -158,7 +158,7 @@ class TextField extends PureComponent {
 
 	render() {
 		const {
-			id, type, style, placeholder, buttonText, icon, disabled, pending, required, invalid,
+			id, type, style, placeholder, buttonText, buttonKind, icon, disabled, pending, required, invalid,
 		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value !== undefined;
@@ -209,9 +209,11 @@ class TextField extends PureComponent {
 						/>
 						{buttonText && (
 							<Button
+								kind={buttonKind}
 								className={`mb-input__inner-button input-textfield__button ${
 									isOpen ? 'mb-input__inner-button--active' : ''
 								}`}
+								noFill
 								onClick={this.onButtonClick}
 								tabIndex="-1"
 								label={buttonText}
@@ -243,9 +245,10 @@ TextField.propTypes = {
 	id: PropTypes.string,
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
-	buttonText: PropTypes.string,
 	onClick: PropTypes.func,
 	onButtonClick: PropTypes.func,
+	buttonText: PropTypes.string,
+	buttonKind: PropTypes.string,
 	onChange: PropTypes.func,
 	onKeyPress: PropTypes.func,
 	onBlur: PropTypes.func,
@@ -265,6 +268,7 @@ TextField.defaultProps = {
 	value: undefined,
 	buttonText: undefined,
 	onButtonClick: undefined,
+	buttonKind: undefined,
 	onClick: undefined,
 	onChange: undefined,
 	onKeyPress: undefined,
