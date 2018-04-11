@@ -28,7 +28,6 @@ class FileUploader extends PureComponent {
 
 		this.state = {
 			isOpen: false,
-			fileContent: undefined,
 			fileName: undefined,
 		};
 	}
@@ -38,10 +37,10 @@ class FileUploader extends PureComponent {
 	}
 	componentWillReceiveProps(nextProps) {
 		const changes = {};
-		const { certificate, pending, disabled } = nextProps;
+		const { file, pending, disabled } = nextProps;
 
-		if (certificate !== this.state.fileContent) {
-			changes.fileContent = certificate;
+		if (file !== this.fileContent) {
+			this.fileContent = file;
 		}
 		if (pending !== this.props.pending) {
 			changes.pending = pending;
@@ -51,9 +50,8 @@ class FileUploader extends PureComponent {
 			changes.isOpen = false;
 		}
 
-		if (Object.keys(changes).length > 0) {
-			this.setState(changes);
-		}
+		this.setState(changes);
+		
 	}
 	componentWillUnmount() {
 		window.removeEventListener('mouseup', this.onPageClick, false);
@@ -71,7 +69,7 @@ class FileUploader extends PureComponent {
 			const reader = new FileReader();
 			return new Promise((resolve, reject) => {
 				reader.readAsDataURL(file);
-				reader.onload = event => resolve(event.target.result);
+				reader.onload = event => resolve(event.target.result.split(',')[1])
 				reader.onerror = error => reject(error);
 			});
 		};
@@ -89,8 +87,8 @@ class FileUploader extends PureComponent {
 		if (parseFileAs === 'base64') {
 			fileContent = await readAsBase64(file);
 		}
+		this.fileContent = file
 		this.setState({
-			fileContent,
 			fileName: file.name,
 		});
 
@@ -119,8 +117,8 @@ class FileUploader extends PureComponent {
 	}
 	onRemoveButtonClick() {
 		this.fileuploader.value = '';
+		this.fileContent = undefined;
 		this.setState({
-			fileContent: undefined,
 			fileName: undefined,
 		});
 		if (typeof this.props.onChange === 'function') {
@@ -163,8 +161,8 @@ class FileUploader extends PureComponent {
 		const {
 			id, placeholder, fileType, style, required, invalid, pending, disabled,
 		} = this.props;
-		const { isOpen, fileName, fileContent } = this.state;
-		const hasFile = fileContent !== undefined && fileName;
+		const { isOpen, fileName } = this.state;
+		const hasFile = this.fileContent !== undefined && fileName;
 
 		const isPlaceholderActive = isOpen === true || fileName !== undefined || placeholder !== undefined;
 		const componentClassName = utils.composeClassNames([
@@ -210,9 +208,15 @@ class FileUploader extends PureComponent {
 								onKeyDown={this.onKeyDown}
 								id={id}
 							/>
-							<div className={`input-fileuploader__value ${fileName ? '' : 'missing'}`}>
-								{fileName || 'No File Choosen'}
-							</div>
+							
+							{ hasFile
+								? 
+								<div className='input-fileuploader__filename'> { fileName } </div>
+								:
+								<div className='input-fileuploader__filename input-fileuploader__filename--no-file'> No File Choosen </div>
+							}
+
+
 							{pending && <Loader visible />}
 							{!pending &&
 								hasFile && (
@@ -255,7 +259,7 @@ class FileUploader extends PureComponent {
 FileUploader.propTypes = {
 	style: PropTypes.shape(),
 	id: PropTypes.string,
-	certificate: PropTypes.string,
+	file: PropTypes.string,
 	fileType: PropTypes.string,
 	parseFileAs: PropTypes.oneOf(['text', 'base64']),
 	onChange: PropTypes.func,
@@ -269,7 +273,7 @@ FileUploader.propTypes = {
 FileUploader.defaultProps = {
 	style: {},
 	id: undefined,
-	certificate: undefined,
+	file: undefined,
 	fileType: undefined,
 	parseFileAs: undefined,
 	onChange: undefined,
