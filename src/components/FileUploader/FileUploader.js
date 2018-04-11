@@ -220,6 +220,8 @@ class FileUploader extends PureComponent {
 									className={`mb-input__inner-button input-fileuploader__button-remove ${
 										isOpen ? 'mb-input__inner-button--active' : ''
 									}`}
+									kind={isOpen ? 'danger' : 'dark'}
+									noFill={!isOpen}
 									onClick={this.onRemoveButtonClick}
 									tabIndex="-1"
 									icon="close-small"
@@ -235,6 +237,8 @@ class FileUploader extends PureComponent {
 									}`}
 									onClick={this.onButtonClick}
 									tabIndex="-1"
+									kind={isOpen ? 'primary' : 'dark'}
+									noFill={!isOpen}
 									icon="upload-small"
 									label="Choose File"
 									disabled={disabled}
