@@ -87,7 +87,7 @@ class Options extends PureComponent {
 Options.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.shape({
 		label: PropTypes.string,
-		value: PropTypes.string,
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	})),
 	highlighted: PropTypes.number,
 	selected: PropTypes.string,
