@@ -11,9 +11,9 @@ class Tab extends PureComponent {
 		super(props);
 		this.onClick = this.onClick.bind(this);
 	}
-	onClick() {
+	onClick(e) {
 		if (!this.props.disabled) {
-			this.props.onSelect();
+			this.props.onSelect(e);
 		}
 	}
 	render() {
@@ -135,13 +135,13 @@ class Tabs extends PureComponent {
 		this.setState({ selected: currentSelected });
 	}
 
-	onSelect(index) {
+	onSelect(evt, index) {
 		this.setState({ selected: index, focused: index });
 
 		this.input.focus();
 
 		if (typeof this.props.onSelect === 'function') {
-			this.props.onSelect(index);
+			this.props.onSelect(evt, index);
 		}
 	}
 	onFocus(e) {
@@ -216,7 +216,7 @@ class Tabs extends PureComponent {
 		const tabs = this.getTabs(children).map((child, index) => {
 			const props = {
 				...child.props,
-				onSelect: () => this.onSelect(index),
+				onSelect: (evt) => this.onSelect(evt, index),
 				key: index,
 				selected: selected === index,
 				focused: focused === index,

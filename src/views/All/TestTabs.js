@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs';
 const TestTabs = () => (
 	<div>
 		<div style={{ padding: 10 }}>
-			<Tabs>
+			<Tabs onSelect={console.log}>
 				<TabList style={{ width: '500px' }}>
 					<Tab>Tab 1</Tab>
 					<Tab>Tab 2</Tab>
