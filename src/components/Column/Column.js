@@ -15,7 +15,7 @@ class Column extends PureComponent {
 		const {
 			align, wrap, grow, shrink, basis, className, style, children,
 		} = this.props;
-		const [justifyContent, alignItems] = align.split(' ');
+		const [alignItems, justifyContent] = align.split(' ');
 		const styles = {
 			display: 'flex',
 			flexDirection: 'column',
@@ -23,7 +23,7 @@ class Column extends PureComponent {
 			flexGrow: grow,
 			flexShrink: shrink,
 			flexBasis: basis,
-			alignItems: mapFlexToProperty(alignItems) || 'top',
+			alignItems: mapFlexToProperty(alignItems),
 			justifyContent: mapFlexToProperty(justifyContent),
 			...style,
 		};
@@ -46,9 +46,9 @@ Column.propTypes = {
 	children: PropTypes.node,
 };
 Column.defaultProps = {
-	align: 'top',
+	align: 'left top',
 	wrap: false,
-	grow: undefined,
+	grow: 1,
 	shrink: undefined,
 	basis: 'auto',
 	className: undefined,

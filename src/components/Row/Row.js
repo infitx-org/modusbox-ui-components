@@ -15,8 +15,9 @@ class Row extends PureComponent {
 		const {
 			align, wrap, grow, shrink, basis, className, style, children,
 		} = this.props;
-		const [alignItems, justifyContent] = align.split(' ');
+		const [justifyContent, alignItems] = align.split(' ');
 		const styles = {
+			width: '100%',
 			display: 'flex',
 			flexDirection: 'row',
 			flexWrap: wrap ? 'wrap' : '',
@@ -46,7 +47,7 @@ Row.propTypes = {
 	children: PropTypes.node,
 };
 Row.defaultProps = {
-	align: 'center',
+	align: 'space-between center',
 	wrap: false,
 	grow: undefined,
 	shrink: undefined,

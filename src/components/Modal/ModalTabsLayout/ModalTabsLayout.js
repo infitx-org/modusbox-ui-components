@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { ScrollBar } from '../../ScrollBox';
-import './ModalTabsLayout.css';
+import './ModalTabsLayout.scss';
 
 class ModalTabsLayout extends PureComponent {
 	constructor(props) {

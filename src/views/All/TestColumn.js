@@ -13,8 +13,8 @@ const columnStyle = {
 };
 const wrapStyle = { border: '1px solid #ccc', height: '100px' };
 
-const jcs = ['top', 'center', 'bottom'];
-const ais = ['left', 'center', 'right'];
+const jcs = ['left', 'center', 'right'];
+const ais = ['top', 'center', 'bottom'];
 
 const Items = jcs.reduce(
 	(p, jc, i) => [

@@ -8,14 +8,14 @@ const BlockBig = () => <div style={{ background: '#eee', margin: '5px', height: 
 
 const rowStyle = { border: '1px solid #ccc' };
 
-const jcs = ['top', 'center', 'bottom'];
-const ais = ['left', 'center', 'right'];
+const jcs = ['left', 'center', 'right'];
+const ais = ['top', 'center', 'bottom'];
 
 const Items = jcs.reduce(
 	(p, jc, i) => [
 		...p,
 		...ais.map((ai, j) => (
-			<div key={i * ais.length + j}>
+			<div key={i * ais.length + j} style={{width: '100%'}}>
 				<span>
 					{' '}
 					{jc} {ai}{' '}
@@ -33,11 +33,11 @@ const Items = jcs.reduce(
 );
 
 const TestRow = () => (
-	<div>
-		<div style={{ padding: 10, border: '1px solid #ccc' }}>
-			<Column align="center space-between">{Items}</Column>
-		</div>
-	</div>
+	<Row style={{ padding: 10, border: '1px solid #ccc' }}>
+		<Column align="center space-between">
+			{Items}				
+		</Column>		
+	</Row>
 );
 
 export default TestRow;
