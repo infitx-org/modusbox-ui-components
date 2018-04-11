@@ -51,7 +51,6 @@ class FileUploader extends PureComponent {
 		}
 
 		this.setState(changes);
-		
 	}
 	componentWillUnmount() {
 		window.removeEventListener('mouseup', this.onPageClick, false);
@@ -69,7 +68,7 @@ class FileUploader extends PureComponent {
 			const reader = new FileReader();
 			return new Promise((resolve, reject) => {
 				reader.readAsDataURL(file);
-				reader.onload = event => resolve(event.target.result.split(',')[1])
+				reader.onload = event => resolve(event.target.result.split(',')[1]);
 				reader.onerror = error => reject(error);
 			});
 		};
@@ -87,7 +86,7 @@ class FileUploader extends PureComponent {
 		if (parseFileAs === 'base64') {
 			fileContent = await readAsBase64(file);
 		}
-		this.fileContent = file
+		this.fileContent = file;
 		this.setState({
 			fileName: file.name,
 		});
@@ -179,6 +178,12 @@ class FileUploader extends PureComponent {
 				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
+		const fileNameClassName = utils.composeClassNames([
+			'input-fileuploader__filename',
+			hasFile && 'input-fileuploader__filename--no-file',
+		]);
+		const fileNameLabel = hasFile ? fileName : 'No File Choosen';
+
 		return (
 			<div className="input-fileuploader mb-input__box" style={style}>
 				<div
@@ -208,13 +213,8 @@ class FileUploader extends PureComponent {
 								onKeyDown={this.onKeyDown}
 								id={id}
 							/>
-							
-							{ hasFile
-								? 
-								<div className='input-fileuploader__filename'> { fileName } </div>
-								:
-								<div className='input-fileuploader__filename input-fileuploader__filename--no-file'> No File Choosen </div>
-							}
+
+							<div className={fileNameClassName}>{fileNameLabel}</div>;
 
 
 							{pending && <Loader visible />}

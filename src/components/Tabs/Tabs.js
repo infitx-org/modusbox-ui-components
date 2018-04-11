@@ -216,7 +216,7 @@ class Tabs extends PureComponent {
 		const tabs = this.getTabs(children).map((child, index) => {
 			const props = {
 				...child.props,
-				onSelect: (evt) => this.onSelect(evt, index),
+				onSelect: evt => this.onSelect(evt, index),
 				key: index,
 				selected: selected === index,
 				focused: focused === index,

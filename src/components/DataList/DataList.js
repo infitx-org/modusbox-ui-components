@@ -514,7 +514,7 @@ class DataList extends React.Component {
 				if (this.state.list.length >= this.state.currentIndexStop + this.state.itemsNumber) {
 					const data = this.state.list.slice(
 						this.state.currentIndexStop,
-						this.state.currentIndexStop + this.state.itemsNumber,
+						this.state.currentIndexStop + this.state.itemsNumber
 					);
 					this.renderNextChunk(data, true);
 				} else {
