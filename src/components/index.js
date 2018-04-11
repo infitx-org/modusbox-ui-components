@@ -8,6 +8,7 @@ import Checkbox from './Checkbox';
 import DataList from './DataList';
 import DatePicker from './DatePicker';
 import FileUploader from './FileUploader';
+import Heading from './Heading';
 import Icon from './Icon';
 import Modal from './Modal';
 import RadioGroup from './RadioGroup';
@@ -26,6 +27,7 @@ export {
 	DataList,
 	DatePicker,
 	FileUploader,
+	Heading,
 	Icon,
 	Modal,
 	RadioGroup,
