@@ -21,7 +21,7 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
 class Spinner extends PureComponent {
 	render() {
 		const { size, center, color } = this.props;
-		const realSize = typeof size === 'string' ? { s: 16, m: 30, l: 50 }[size] : size;
+		const realSize = typeof size === 'string' ? { s: 20, m: 40, l: 60 }[size] : size;
 		const strokeWidth = realSize / 10;
 		const width = `${realSize}px`;
 		const height = `${realSize}px`;
