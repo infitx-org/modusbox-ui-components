@@ -112,25 +112,6 @@
         }
     }
 }
-.input-button__mb-input--disabled,
-.input-button__mb-input--tertiary{
-    background-color: $color__main-tertiary;
-    border-color: $color__main-tertiary;
-    color: $color__dark-gray-1;
-	fill: $color__dark-gray-1;
-    stroke: $color__dark-gray-1;
-
-    &.noFill{
-        background: transparent;
-        color: $color__gray-5;
-        fill: $color__gray-5;
-        stroke: $color__gray-5;
-    }
-    &:hover, &:focus{
-		background-color: $color__main-tertiary--active;
-		border-color: $color__main-tertiary--active;
-    };
-}
 
 .input-button__mb-input--warning{
     background-color: $color__main-warning;
@@ -155,11 +136,59 @@
     };    
 }
 
+.input-button__mb-input--dark{
+    background-color: $color__alpha-5;
+    border-color: transparent;
+    color: $color__white;
+    fill: $color__white;
+    stroke: $color__white;
+    
+    &.noFill{
+        background-color: transparent;
+        border-color: $color__alpha-5;
+        color: $color__alpha-4;
+        fill: $color__alpha-4;
+        stroke: $color__alpha-4;
+    }
+
+    &:hover, &:focus{
+        background-color: $color__alpha-4;
+        border-color: transparent;
+        
+        &.noFill{
+            color: $color__white;
+            fill: $color__white;
+            stroke: $color__white;
+        }
+    };    
+}
+
+.input-button__mb-input--disabled,
+.input-button__mb-input--tertiary{
+    background-color: $color__main-tertiary;
+    border-color: $color__main-tertiary;
+    color: $color__dark-gray-1;
+	fill: $color__dark-gray-1;
+    stroke: $color__dark-gray-1;
+
+    &.noFill{
+        background: transparent;
+        color: $color__gray-5;
+        fill: $color__gray-5;
+        stroke: $color__gray-5;
+    }
+    &:hover, &:focus{
+		background-color: $color__main-tertiary--active;
+		border-color: $color__main-tertiary--active;
+    };
+}
 
 .input-button__mb-input--primary,
 .input-button__mb-input--secondary,
 .input-button__mb-input--tertiary,
-.input-button__mb-input--danger{
+.input-button__mb-input--danger,
+.input-button__mb-input--warning,
+.input-button__mb-input--dark{
     &:hover{
         &.noFill{ 
             &:active{ 

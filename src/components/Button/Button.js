@@ -45,6 +45,7 @@ class Button extends PureComponent {
 			kind === 'tertiary' && 'input-button__mb-input--tertiary',
 			kind === 'danger' && 'input-button__mb-input--danger',
 			kind === 'warning' && 'input-button__mb-input--warning',
+			kind === 'dark' && 'input-button__mb-input--dark',
 			disabled && 'mb-input--disabled input-button__mb-input--disabled',
 			pending && 'mb-input--pending input-button__mb-input--pending',
 			noFill && 'noFill',
