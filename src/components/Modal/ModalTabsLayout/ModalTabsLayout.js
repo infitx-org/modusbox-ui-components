@@ -87,21 +87,19 @@ ModalTabsLayout.propTypes = {
 	children: PropTypes.node,
 };
 
-const ModalTabs = ({ items, selected, onSelect }) => {
-	return (
-		<div className="modal-tab-items">
-			{items.map((item, index) => (
-				<div
-					key={index}
-					onClick={() => onSelect(index, item.disabled)}
-					className={`modal-tab-item ${index === selected ? 'selected' : ''} ${item.disabled ? 'disabled' : ''} `}
-				>
-					{item.name}
-				</div>
-			))}
-		</div>
-	);
-};
+const ModalTabs = ({ items, selected, onSelect }) => (
+	<div className="modal-tab-items">
+		{items.map((item, index) => (
+			<div
+				key={index}
+				onClick={() => onSelect(index, item.disabled)}
+				className={`modal-tab-item ${index === selected ? 'selected' : ''} ${item.disabled ? 'disabled' : ''} `}
+			>
+				{item.name}
+			</div>
+		))}
+	</div>
+);
 
 ModalTabs.propTypes = {
 	items: PropTypes.arrayOf([PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin })]),

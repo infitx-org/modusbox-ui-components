@@ -22,7 +22,9 @@ const TestTextField = () => (
 				onBlur={() => console.log('onBlur')}
 				onFocus={() => console.log('onFocus')}
 			/>
-			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" />
+			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" buttonKind='primary'/>
+			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" buttonKind='secondary'/>
+			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" buttonKind='danger'/>
 			<TextField placeholder="Disabled" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" disabled />
 		</div>
 		<div style={{ padding: '10px', border: '1px solid #ccc' }}>
