@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import * as utils from '../../utils/common';
+
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
+import ModalTabsLayout from './ModalTabsLayout';
 import './Modal.scss';
 
 export default class ModalBackground extends PureComponent {
@@ -85,6 +88,22 @@ export default class ModalBackground extends PureComponent {
 
 		const isSubmitDisabled = !this.props.isSubmitEnabled || this.state.isSubmitPending;
 		const isCloseDisabled = !this.props.isCloseEnabled || this.state.isSubmitPending;
+
+		const child = this.getChild();
+		const hasTabs = child.type === ModalTabsLayout;
+		let content = child;
+		if (!hasTabs) {
+			content = (
+				<ScrollBox>
+					<div style={{ padding: '20px' }}>{child}</div>
+				</ScrollBox>
+			);
+		}
+		const bodyClassName = utils.composeClassNames([
+			'element-modal__body',
+			hasTabs && 'element-modal__body--tabbed',
+		]);
+
 		return (
 			<div className="element element-modal">
 				<div
@@ -98,14 +117,8 @@ export default class ModalBackground extends PureComponent {
 						<div className="element-modal__header-title">{this.props.title}</div>
 					</div>
 
-					<div
-						className={`element-modal__body ${this.props.tabbed ? 'has-tabs' : ''} ${
-							this.props.alignItems ? 'align-items' : ''
-						}`}
-					>
-						<ScrollBox>
-							<div style={{ padding: '20px' }}>{this.getChild()}</div>
-						</ScrollBox>
+					<div className={bodyClassName}>
+						{content}
 					</div>
 
 					<div className="element-modal__footer">
@@ -175,10 +188,8 @@ ModalBackground.defaultProps = {
 	onSubmit: undefined,
 	primaryAction: 'Submit',
 	maximise: false,
-	tabbed: false,
-	alignItems: false,
 	children: undefined,
-	width: '300',
+	width: '600',
 	modalIndex: 0,
 	title: '',
 	allowCancel: false,
@@ -201,8 +212,6 @@ ModalBackground.propTypes = {
 	onSubmit: PropTypes.func,
 	primaryAction: PropTypes.string,
 	maximise: PropTypes.bool,
-	tabbed: PropTypes.bool,
-	alignItems: PropTypes.bool,
 	children: PropTypes.node,
 	width: PropTypes.string,
 	modalIndex: PropTypes.number,

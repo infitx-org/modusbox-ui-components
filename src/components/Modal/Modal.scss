@@ -108,12 +108,10 @@
     flex: 1;
     min-height: 0;
     position: relative;
-    display: flex;
-
-	&.has-tabs{
-		overflow: hidden;
-		padding: 0px;
-	}
+    display: flex;    
+}
+.element-modal__body--tabbed{
+	overflow: hidden;
 }
 .element-modal__footer{
 	width:100%;
