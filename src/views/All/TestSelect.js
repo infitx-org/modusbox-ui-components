@@ -41,7 +41,7 @@ const options = [
 ];
 
 const TestSelect = () => (
-	<div style={{ width:'50%' }}>
+	<div>
 		<div style={{ padding: 10, border: '1px solid #ccc' }}>
 			<Select placeholder="Default" options={options} selected='z5'/>
 			<Select placeholder="Pending" options={options} pending />
