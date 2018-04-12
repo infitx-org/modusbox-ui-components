@@ -13,14 +13,20 @@
 	display: block;
 	position: absolute;
 	z-index: 1000000;
-	color: #fff;
-	background: rgba(0,0,0,0.8);
-	padding: 5px;
-	border-radius: 3px;
-	font-size: 12px;
-	white-space: nowrap;
-	fill: #fff;	
-	transition: opacity 0.2s linear;
+	white-space: nowrap;	
 	opacity: 0;
+	transition: all 0.2s linear;
+}
+
+.element-tooltip__viewer--default{
+	background: rgba(0,0,0,0.8);
+	color: #fff;
+	fill: #fff;	
+	padding: 8px;
+	border-radius: 3px;	
+	font-size: 12px;
+}
+
+.element-tooltip__viewer--fade-in{
 	opacity: 1;
 }
