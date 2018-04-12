@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 
+import Tooltip from '../Tooltip';
+
 import './Icon.scss';
 
 class Icon extends PureComponent {
@@ -17,7 +19,7 @@ class Icon extends PureComponent {
 	}
 	render() {
 		const {
-			id, className, style, size, name, fill, stroke, spin,
+			id, className, style, size, name, fill, stroke, spin, tooltip,
 		} = this.props;
 		const svgStyle = {
 			height: `${size}px`,
@@ -27,11 +29,20 @@ class Icon extends PureComponent {
 			...style,
 		};
 		const componentClassName = utils.composeClassNames(['element-icon', spin && 'spin', className]);
-		return (
-			<svg id={id} style={svgStyle} onClick={this.onClick} className={componentClassName}>
+		const svg = (
+			<svg
+				id={id}
+				style={svgStyle}
+				onClick={this.onClick}
+				className={componentClassName}
+			>
 				<use xlinkHref={`#${name}`} />
 			</svg>
 		);
+		if (tooltip) {
+			return <Tooltip label={tooltip}>{svg}</Tooltip>;
+		}
+		return svg;
 	}
 }
 
@@ -45,6 +56,7 @@ Icon.propTypes = {
 	stroke: PropTypes.string,
 	spin: PropTypes.bool,
 	onClick: PropTypes.func,
+	tooltip: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 Icon.defaultProps = {
 	id: undefined,
@@ -56,6 +68,7 @@ Icon.defaultProps = {
 	stroke: undefined,
 	spin: false,
 	onClick: undefined,
+	tooltip: undefined,
 };
 
 export default Icon;
