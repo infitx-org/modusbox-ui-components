@@ -34,15 +34,16 @@ class Select extends PureComponent {
 		this.highlightNextOption = this.highlightNextOption.bind(this);
 		this.handleResize = this.handleResize.bind(this);
 
-		const { options, value } = this.props;
-		const selectedItem = find(options, { value });
+		const { options, selected } = this.props;
+		const selectedItem = find(options, { value: selected });
 		const selectedLabel = selectedItem ? selectedItem.label : undefined;
+
 		this.state = {
 			isOpen: false,
 			highlightedOption: 0,
 			options,
 			selectedLabel,
-			value,
+			selected,
 			filter: undefined,
 		};
 	}
@@ -52,12 +53,12 @@ class Select extends PureComponent {
 	}
 	componentWillReceiveProps(nextProps) {
 		const changes = {};
-		const { options, value, disabled } = nextProps;
+		const { options, selected, disabled } = nextProps;
 
-		if (value !== this.props.value) {
-			const selectedItem = find(options, { value });
+		if (selected !== this.props.selected) {
+			const selectedItem = find(options, { value: selected });
 			const selectedLabel = selectedItem ? selectedItem.label : undefined;
-			changes.value = value;
+			changes.selected = selected;
 			changes.selectedLabel = selectedLabel;
 			this.setValue(selectedLabel);
 		}
@@ -116,7 +117,7 @@ class Select extends PureComponent {
 		const selectedItem = find(this.state.options, { value });
 		const selectedLabel = selectedItem ? selectedItem.label : undefined;
 		this.setState({
-			value,
+			selected: value,
 			selectedLabel,
 		});
 		this.closeSelect();
@@ -143,8 +144,8 @@ class Select extends PureComponent {
 		utils.focusNextFocusableElement(this.inputFilter, next);
 	}
 	openSelect() {
-		const { options, value } = this.state;
-		const highlightedOption = Math.max(options.map(option => option.value).indexOf(value), 0);
+		const { options, selected } = this.state;
+		const highlightedOption = Math.max(options.map(option => option.selected).indexOf(selected), 0);
 		this.setState({ isOpen: true, highlightedOption });
 		this.handleResize();
 	}
@@ -204,7 +205,7 @@ class Select extends PureComponent {
 		if (value === '') {
 			this.setState({
 				selectedLabel: undefined,
-				value: undefined,
+				selected: undefined,
 			});
 			this.openSelect();
 		}
@@ -243,7 +244,7 @@ class Select extends PureComponent {
 			id, style, placeholder, pending, disabled, invalid, required,
 		} = this.props;
 		const {
-			isOpen, selectedLabel, value, filter, highlightedOption,
+			isOpen, selectedLabel, selected, filter, highlightedOption,
 		} = this.state;
 
 		const inputValue = filter || selectedLabel || '';
@@ -307,7 +308,7 @@ class Select extends PureComponent {
 						options={this.getOptions()}
 						maxHeight={this.maxHeight || 0}
 						reverse={this.reverse}
-						selected={value}
+						selected={selected}
 						highlighted={highlightedOption}
 						onSelect={this.onSelectOption}
 					/>
@@ -326,7 +327,7 @@ Select.propTypes = {
 		label: PropTypes.string,
 		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	})),
-	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	pending: PropTypes.bool,
 	required: PropTypes.bool,
 	invalid: PropTypes.bool,
@@ -336,7 +337,7 @@ Select.propTypes = {
 Select.defaultProps = {
 	id: 'select',
 	style: {},
-	value: undefined,
+	selected: undefined,
 	onChange: undefined,
 	placeholder: undefined,
 	options: [],
