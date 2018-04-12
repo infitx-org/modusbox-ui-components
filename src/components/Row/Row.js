@@ -24,7 +24,7 @@ class Row extends PureComponent {
 			flexGrow: grow,
 			flexShrink: shrink,
 			flexBasis: basis,
-			alignItems: mapFlexToProperty(alignItems),
+			alignItems: mapFlexToProperty(alignItems || 'center'),
 			justifyContent: mapFlexToProperty(justifyContent),
 			...style,
 		};

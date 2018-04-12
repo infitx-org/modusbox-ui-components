@@ -24,7 +24,7 @@ class Column extends PureComponent {
 			flexShrink: shrink,
 			flexBasis: basis,
 			alignItems: mapFlexToProperty(alignItems),
-			justifyContent: mapFlexToProperty(justifyContent),
+			justifyContent: mapFlexToProperty(justifyContent || 'top'),
 			...style,
 		};
 		return (
