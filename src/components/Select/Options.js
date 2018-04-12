@@ -129,7 +129,7 @@ class Option extends PureComponent {
 		return (
 			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1" role="presentation">
 				{icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
-				{label}
+				<div className="input-select__options-item__label">{label}</div>
 			</div>
 		);
 	}
