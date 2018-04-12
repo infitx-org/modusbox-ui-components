@@ -214,9 +214,7 @@ class FileUploader extends PureComponent {
 								id={id}
 							/>
 
-							<div className={fileNameClassName}>{fileNameLabel}</div>;
-
-
+							<div className={fileNameClassName}>{fileNameLabel}</div>
 							{pending && <Loader visible />}
 							{!pending &&
 								hasFile && (
