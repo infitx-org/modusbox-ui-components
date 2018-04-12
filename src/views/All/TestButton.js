@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 const TestButton = () => (
 	<Column style={{ padding: '10px' }}>
 		All kinds
-		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
+		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
 			<Button label="Primary" kind="primary" />
 			<Button label="Secondary" kind="secondary" />
 			<Button label="Tertiary" kind="tertiary" />
@@ -25,7 +25,7 @@ const TestButton = () => (
 			<Button label="No Fill" icon="deploy-small" noFill kind="dark" />
 		</Row>
 		Pending
-		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
+		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
 			<Button label="Primary" kind="primary" pending />
 			<Button label="Secondary" kind="secondary" pending />
 			<Button label="Tertiary" kind="tertiary" pending />
@@ -42,7 +42,7 @@ const TestButton = () => (
 			<Button label="No Fill" icon="deploy-small" noFill kind="dark" pending />
 		</Row>
 		Disabled
-		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
+		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
 			<Button label="Primary" kind="primary" disabled />
 			<Button label="Secondary" kind="secondary" disabled />
 			<Button label="Tertiary" kind="tertiary" disabled />

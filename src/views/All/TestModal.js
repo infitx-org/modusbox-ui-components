@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../components/Modal';
+import Modal, {ModalTabsLayout} from '../../components/Modal';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 import Row from '../../components/Row';
@@ -13,34 +13,28 @@ class TestModal extends React.Component {
 		this.onOpen = this.onOpen.bind(this);
 
 		this.state = {
-			modals: [false, false, false],
+			opened: null,
 		};
 	}
 	onOpen(n) {
-		const { modals } = this.state;
-		const opened = [...modals];
-		opened[n] = true;
-		this.setState({ modals: opened });
+		this.setState({ opened: n });
 	}
-	onClose(n) {
-		const { modals } = this.state;
-		const opened = [...modals];
-		opened[n] = false;
-		this.setState({ modals: opened });
+	onClose(n) {		
+		this.setState({ opened: null });
 	}
 	render() {
-		const { modals } = this.state;
-		const [first, second, third] = modals;
+		const { opened } = this.state;
 		return (
 			<div>
 				<Row align="space-between">
 					<Button kind="primary" onClick={() => this.onOpen(0)} label="Regular" />
 					<Button kind="danger" onClick={() => this.onOpen(1)} label="Danger" />
 					<Button kind="warning" onClick={() => this.onOpen(2)} label="Warning" />
+					<Button kind='primary' onClick={() => this.onOpen(3)} label='tabs' />
 				</Row>
 
 				<div style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
-					{first && (
+					{opened === 0 && (
 						<Modal
 							primaryAction="Submit"
 							onClose={() => this.onClose(0)}
@@ -52,7 +46,7 @@ class TestModal extends React.Component {
 							<span> Hello! modal 1 </span>
 						</Modal>
 					)}
-					{second && (
+					{opened === 1 && (
 						<Modal
 							primaryAction="Submit"
 							onClose={() => this.onClose(1)}
@@ -67,7 +61,7 @@ class TestModal extends React.Component {
 							</div>
 						</Modal>
 					)}
-					{third && (
+					{opened === 2 && (
 						<Modal
 							primaryAction="Submit"
 							onClose={() => this.onClose(2)}
@@ -77,6 +71,26 @@ class TestModal extends React.Component {
 							isSubmitEnabled
 						>
 							<span> Hello! modal 2 </span>
+						</Modal>
+					)}
+
+					{opened === 3 && (
+						<Modal
+							primaryAction="Submit"
+							onClose={() => this.onClose(2)}
+							title="Warning"
+							kind="warning"
+							allowSubmit
+							isSubmitEnabled
+						>
+							<ModalTabsLayout items={[{ name: "Tab1"},{ name: "Tab2"}]} selected='Tab2'>
+								<div style={{height:'12000px' ,background:'#999'}}>
+									TEST TAB 1
+								</div>
+								<div style={{height:'120px' ,background:'#9f9'}}>
+									TEST TAB 2
+								</div>
+							</ModalTabsLayout>		
 						</Modal>
 					)}
 				</div>

@@ -9,6 +9,11 @@ import Tooltip from '../../components/Tooltip';
 const TestButton = () => (
 	<Column style={{ padding: '10px' }}>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
+			<Tooltip content={ <div>ciao</div>}> Very loooooooooooooong content... </Tooltip>
+			<Tooltip label='boh...'> Very loooooooooooooong content... </Tooltip>
+			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
+		</Row>
+		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
 			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
 		</Row>
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
@@ -27,6 +32,7 @@ const TestButton = () => (
 		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
 			<Tooltip style={{ width: '100px' }}> Very loooooooooooooong content... </Tooltip>
 		</Row>
+		
 	</Column>
 );
 

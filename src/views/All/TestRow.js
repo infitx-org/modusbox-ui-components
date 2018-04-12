@@ -11,15 +11,12 @@ const rowStyle = { border: '1px solid #ccc' };
 const jcs = ['left', 'center', 'right'];
 const ais = ['top', 'center', 'bottom'];
 
-const Items = jcs.reduce(
+const ComposedItems = jcs.reduce(
 	(p, jc, i) => [
 		...p,
 		...ais.map((ai, j) => (
 			<div key={i * ais.length + j} style={{width: '100%'}}>
-				<span>
-					{' '}
-					{jc} {ai}{' '}
-				</span>
+				<span>{jc} {ai}</span>
 				<Row style={rowStyle} align={`${jc} ${ai}`}>
 					<Block />
 					<BlockBig />
@@ -32,10 +29,22 @@ const Items = jcs.reduce(
 	[]
 );
 
+const SimpleItems = [
+	<div style={{width: '100%'}}>
+		<Row style={rowStyle} align='left'>
+			<Block />
+			<BlockBig />
+			<Block />
+			<BlockBig />
+		</Row>
+	</div>
+];
+
 const TestRow = () => (
 	<Row style={{ padding: 10, border: '1px solid #ccc' }}>
 		<Column align="center space-between">
-			{Items}				
+			{SimpleItems}
+			{ComposedItems}				
 		</Column>		
 	</Row>
 );

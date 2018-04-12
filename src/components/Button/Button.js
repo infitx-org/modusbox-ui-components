@@ -37,6 +37,7 @@ class Button extends PureComponent {
 		const {
 			id, className, style, kind, label, icon, noFill, disabled, pending,
 		} = this.props;
+		const isDisabledOrPending = disabled === true || pending === true;
 		const classNames = utils.composeClassNames([
 			className,
 			'mb-input input-button__input',
@@ -46,7 +47,7 @@ class Button extends PureComponent {
 			kind === 'danger' && 'input-button__mb-input--danger',
 			kind === 'warning' && 'input-button__mb-input--warning',
 			kind === 'dark' && 'input-button__mb-input--dark',
-			disabled && 'mb-input--disabled input-button__mb-input--disabled',
+			isDisabledOrPending && 'mb-input--disabled input-button__mb-input--disabled',
 			pending && 'mb-input--pending input-button__mb-input--pending',
 			noFill && 'noFill',
 		]);
@@ -61,7 +62,7 @@ class Button extends PureComponent {
 				className={classNames}
 				onKeyDown={this.testKey}
 				onClick={this.onClick}
-				disabled={disabled}
+				disabled={isDisabledOrPending}
 			>
 				<div className="input-button__content">
 					{(pending || icon) && (

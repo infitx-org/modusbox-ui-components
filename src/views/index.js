@@ -18,9 +18,9 @@ const AllItemTabs = ComponentMappings.map(({ name }, i) => <Tab key={i}> {name} 
 const AllItemPanels = ComponentMappings.map(({ view, name }, i) => {
 	const View = TestViews[view];
 	const Content = () => (
-		<Column grow="1" align="top">
-			<View />
-		</Column>
+		<div>
+			<View />			
+		</div>
 	);
 	if (name === 'DataList') {
 		return (
@@ -46,8 +46,7 @@ class Views extends React.Component {
 		this.onSelectTab = this.onSelectTab.bind(this);
 
 		const selectedTab = parseInt(window.localStorage.getItem('tab') || 0);
-		const tab = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1;
-
+		const tab = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1;		
 		this.state = {
 			tab,
 			style: 'default',
@@ -60,7 +59,7 @@ class Views extends React.Component {
 	onChangeStyle(style) {
 		this.setState({ style });
 	}
-	onSelectTab(tab) {
+	onSelectTab(e, tab) {
 		window.localStorage.setItem('tab', tab);
 		this.setState({ tab });
 	}
@@ -70,20 +69,22 @@ class Views extends React.Component {
 		require('../assets/styles/' + this.state.style + '.scss');
 
 		return (
-			<Column style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+			<div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
 				<div style={{ margin: '10px' }}>
 					<Row>
-						<Select
-							value={this.state.style}
-							placeholder="Select StyleSheet"
-							onChange={this.onChangeStyle}
-							options={options}
-						/>
+						<Row>
+							<Select
+								value={this.state.style}
+								placeholder="Select StyleSheet"
+								onChange={this.onChangeStyle}
+								options={options}
+							/>
 
+						</Row>
 						<Checkbox label="Code" checked={this.state.code} onChange={this.onCodeToggle} />
 					</Row>
 				</div>
-				<Column grow="1">
+				<div grow="1">
 					<Tabs selected={this.state.tab} onSelect={this.onSelectTab}>
 						<TabList>{AllItemTabs}</TabList>
 						<TabPanels>{AllItemPanels}</TabPanels>
@@ -100,8 +101,8 @@ class Views extends React.Component {
 							<Source name={ComponentMappings[this.state.tab].view} />
 						</div>
 					)}
-				</Column>
-			</Column>
+				</div>
+			</div>
 		);
 	}
 }

@@ -8,7 +8,7 @@ const options = [
 		value: 'z',
 	},
 	{
-		label: 'test11231231312313123',
+		label: 'test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123',
 		value: 'z1',
 		icon: 'close-small',
 	},
@@ -41,9 +41,9 @@ const options = [
 ];
 
 const TestSelect = () => (
-	<div>
+	<div style={{ width:'50%' }}>
 		<div style={{ padding: 10, border: '1px solid #ccc' }}>
-			<Select placeholder="Default" options={options} />
+			<Select placeholder="Default" options={options} selected='z5'/>
 			<Select placeholder="Pending" options={options} pending />
 			<Select placeholder="Invalid" options={options} invalid />
 			<Select placeholder="Required" options={options} required />

@@ -94,15 +94,6 @@ class RadioGroup extends PureComponent {
 
 		return (
 			<div className="input input-radio">
-				<input
-					ref={(button) => { this.button = button; }}
-					type="button"
-					className="mb-input__holder"
-					onFocus={this.onFocus}
-					onBlur={this.onBlur}
-					onKeyDown={this.testKey}
-					disabled={disabled}
-				/>
 				{label && <span>{label}</span>}
 				{options.map((option, idx) => (
 					<Radio
@@ -116,6 +107,15 @@ class RadioGroup extends PureComponent {
 						disabled={option.disabled || disabled}
 					/>
 				))}
+				<input
+					ref={(button) => { this.button = button; }}
+					type="button"
+					className="mb-input__holder"
+					onFocus={this.onFocus}
+					onBlur={this.onBlur}
+					onKeyDown={this.testKey}
+					disabled={disabled}
+				/>
 			</div>
 		);
 	}
