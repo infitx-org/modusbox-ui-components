@@ -1,11 +1,11 @@
 import '../assets/main.css';
-import '../assets/styles/components.scss';
+//import '../assets/styles/components.scss';
 import '../assets/styles/default.scss';
 
 import Button from './Button';
 import Column from './Column';
 import Checkbox from './Checkbox';
-import DataList from './DataList';
+/*import DataList from './DataList';*/
 import DatePicker from './DatePicker';
 import FileUploader from './FileUploader';
 import Heading from './Heading';
@@ -24,7 +24,7 @@ export {
 	Button,
 	Column,
 	Checkbox,
-	DataList,
+	/*DataList,*/
 	DatePicker,
 	FileUploader,
 	Heading,
