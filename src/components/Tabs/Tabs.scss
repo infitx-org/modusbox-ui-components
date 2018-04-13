@@ -1,11 +1,14 @@
 @import '../../assets/styles/vars/colors.scss';
 
 .element-tabs{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    max-height: 100%;    	
+	&.element-tabs--flexible{
+	    display: flex;
+	    flex-direction: column;
+	    flex-grow: 1;
+	    max-height: 100%;    			
+	}
 }
+
 .element-tabs__tab-items{
 	display: flex;
 	flex-grow: 1;
@@ -53,9 +56,12 @@
 }
 
 .element-tabs__tab__content{
-	display: flex;
-	flex-grow: 1;
-	flex-direction: column;		
+	&.element-tabs__tab__content--flexible{
+		display: flex;
+		flex-grow: 1;
+		flex-direction: column;	    
+	    /* max-height: 100%; */		
+	}
 }
 .element-tabs__tab__panel{
 	display: flex;
