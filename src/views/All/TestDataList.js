@@ -42,7 +42,9 @@ const TestDataList = () => (
 			</TabList>
 			<TabPanels>
 				<TabPanel>
-					<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
+					<div style={{height:'300px'}}>
+						<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
+					</div>
 				</TabPanel>
 				<TabPanel>
 					<DataList id="2" columns={columns1} list={list1.concat(list1)} selected={'a'} paging />

@@ -61,15 +61,15 @@ class ScrollBox extends PureComponent {
 	}
 	render() {
 		const {
-			showTrack, handleStyle, trackStyle, style, children, flex,
+			showTrack, handleStyle, trackStyle, style, children, flex, className
 		} = this.props;
 
-		const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', flex && 'flexible']);
+		const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', flex && 'flexible', className]);
 		const contentBoxClassName = utils.composeClassNames(['element-scrollbox__content-box', flex && 'flexible']);
 		const contentClassName = utils.composeClassNames(['element-scrollbox__content', flex && 'flexible']);
 
 		return (
-			<div ref={(wrapper) => { this.wrapper = wrapper; }}className={wrapperClassName} style={style}>
+			<div ref={(wrapper) => { this.wrapper = wrapper; }} className={wrapperClassName} style={style}>
 				<div ref={(contentBox) => { this.contentBox = contentBox; }} className={contentBoxClassName}>
 					<div ref={(content) => { this.content = content; }} className={contentClassName}>
 						{children}
@@ -88,6 +88,7 @@ class ScrollBox extends PureComponent {
 	}
 }
 ScrollBox.propTypes = {
+	className: PropTypes.string,
 	flex: PropTypes.bool,
 	style: PropTypes.shape(),
 	trackStyle: PropTypes.shape(),
@@ -96,6 +97,7 @@ ScrollBox.propTypes = {
 	children: PropTypes.node,
 };
 ScrollBox.defaultProps = {
+	className: undefined,
 	flex: false,
 	style: {},
 	trackStyle: {},
