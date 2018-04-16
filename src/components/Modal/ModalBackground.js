@@ -123,6 +123,7 @@ export default class ModalBackground extends PureComponent {
 										name="close-small"
 										size={24}									
 										disabled={isCloseDisabled}
+										tooltip='close'
 									/>
 								)
 							}

@@ -23,6 +23,7 @@
 	flex: 0 0 40px;	
 	color: $color__dark-gray-3;
 	padding-left: 10px;	
+	padding-right: 10px;	
 	line-height: 40px;
 	font-size: 13px;
 	background: $color__white;
@@ -57,9 +58,7 @@
 	margin-right: 2px;
 }
 .input-select__options-item__label{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	min-width: 0;
 }
 
 @keyframes fadeIn{

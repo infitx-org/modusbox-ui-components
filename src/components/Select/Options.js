@@ -5,6 +5,7 @@ import * as utils from '../../utils/common';
 
 import ScrollBox from '../ScrollBox';
 import Icon from '../Icon';
+import Tooltip from '../Tooltip';
 
 import './Options.scss';
 
@@ -129,7 +130,7 @@ class Option extends PureComponent {
 		return (
 			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1" role="presentation">
 				{icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
-				<div className="input-select__options-item__label">{label}</div>
+				<div className="input-select__options-item__label"><Tooltip>{label}</Tooltip></div>
 			</div>
 		);
 	}
