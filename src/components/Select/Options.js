@@ -50,6 +50,34 @@ class Options extends PureComponent {
 			'input-select__options-wrapper',
 			reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular',
 		]);
+
+		let optionItems = null;
+		if (options.length > 0) {
+				optionItems = options.map((item, index) => {
+				const isSelected = selected === item.value;
+				return (
+					<Option
+						highlighted={highlighted === index}
+						label={item.label}
+						value={item.value}
+						icon={item.icon}
+						disabled={item.disabled === true}
+						key={index.toString()}
+						selected={isSelected}
+						onClick={() => this.onClickOption(item)}
+					/>
+				);
+			})
+		} else {
+			optionItems = (
+			 	<div className='input-select__options-item--no-options__box'>
+			 		<Icon name='info-small' size={20}/>
+			 		<div className='input-select__options-item--no-options__message'>
+			 			No options available
+			 		</div>
+			 	</div>
+			 );
+		}
 		return (
 			<div className={className} style={{ position: 'absolute', top, bottom }}>
 				<ScrollBox
@@ -64,21 +92,7 @@ class Options extends PureComponent {
 					showTrack={false}
 				>
 					<div ref={(items) => { this.items = items; }}>
-						{options.map((item, index) => {
-							const isSelected = selected === item.value;
-							return (
-								<Option
-									highlighted={highlighted === index}
-									label={item.label}
-									value={item.value}
-									icon={item.icon}
-									disabled={item.disabled === true}
-									key={index.toString()}
-									selected={isSelected}
-									onClick={() => this.onClickOption(item)}
-								/>
-							);
-						})}
+						{optionItems}
 					</div>
 				</ScrollBox>
 			</div>
@@ -123,9 +137,9 @@ class Option extends PureComponent {
 		} = this.props;
 		const optionsClassNames = utils.composeClassNames([
 			'input-select__options-item',
-			selected && 'selected',
-			disabled && 'disabled',
-			highlighted && 'highlighted',
+			selected && 'input-select__options-item--selected',
+			disabled && 'input-select__options-item--disabled',
+			highlighted && 'input-select__options-item--highlighted',
 		]);
 		return (
 			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1" role="presentation">
