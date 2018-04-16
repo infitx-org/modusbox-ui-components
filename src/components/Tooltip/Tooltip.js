@@ -113,7 +113,7 @@ class Tooltip extends PureComponent {
 	render() {
 		const { style, children } = this.props;
 		return (
-			<span
+			<div
 				className="element-tooltip"
 				style={style}
 				ref={(box) => {
@@ -121,7 +121,7 @@ class Tooltip extends PureComponent {
 				}}
 			>
 				{children}
-			</span>
+			</div>
 		);
 	}
 }
