@@ -16,15 +16,15 @@ class ScrollBox extends PureComponent {
 		this.onDrag = this.onDrag.bind(this);
 	}
 	componentDidMount() {
-		this.updateScrollbar();
 		this.updateContentSize();
+		this.updateScrollbar();
 
 		window.addEventListener('resize', this.handleResize);
 		this.contentBox.addEventListener('scroll', this.updateScrollbar);
 	}
 	componentDidUpdate() {
-		this.updateScrollbar();
 		this.updateContentSize();
+		this.updateScrollbar();
 	}
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleResize);
@@ -38,8 +38,8 @@ class ScrollBox extends PureComponent {
 		this.contentBox.scrollTop = scrollTop;
 	}
 	handleResize() {
-		this.updateScrollbar();
 		this.updateContentSize();
+		this.updateScrollbar();
 	}
 	updateScrollbar() {
 		const { scrollTop } = this.contentBox;

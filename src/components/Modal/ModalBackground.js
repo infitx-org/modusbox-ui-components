@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
+import Icon from '../Icon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
@@ -115,6 +116,18 @@ export default class ModalBackground extends PureComponent {
 				<div className={`element-modal__container ${this.props.kind}`} style={modalStyle}>
 					<div className="element-modal__header">
 						<div className="element-modal__header-title">{this.props.title}</div>
+						<div className='element-modal__header-close'>
+							{this.props.allowClose && (
+									<Icon
+										onClick={this.onClose}
+										name="close-small"
+										size={24}									
+										disabled={isCloseDisabled}
+									/>
+								)
+							}
+						</div>
+
 					</div>
 
 					<div className={bodyClassName}>
@@ -122,17 +135,7 @@ export default class ModalBackground extends PureComponent {
 					</div>
 
 					<div className="element-modal__footer">
-						<div className="element-modal__footer-left">
-							{this.props.allowClose && (
-								<Button
-									onClick={this.onClose}
-									label="Close"
-									icon="close-small"
-									kind="danger"
-									noFill
-									disabled={isCloseDisabled}
-								/>
-							)}
+						<div className="element-modal__footer-left">							
 						</div>
 						<div className="element-modal__footer-right">
 							{this.props.allowCancel && (
