@@ -20,7 +20,7 @@ const TestTextField = () => (
 				onKeyPress={() => console.log('onKeyPress')}
 				onEnter={() => console.log('onEnter')}
 				onBlur={() => console.log('onBlur')}
-				onFocus={() => console.log('onFocus')}
+				onFocus={() => console.log('onFocus')}				
 			/>
 			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" buttonKind='primary'/>
 			<TextField placeholder="Button" onButtonClick={() => console.log('Clicked!')} buttonText="Press Me" buttonKind='secondary'/>
