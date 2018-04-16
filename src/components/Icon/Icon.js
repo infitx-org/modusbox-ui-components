@@ -19,7 +19,7 @@ class Icon extends PureComponent {
 	}
 	render() {
 		const {
-			id, className, style, size, name, fill, stroke, spin, tooltip,
+			id, className, style, size, name, fill, stroke, spin, tooltip, tooltipPosition
 		} = this.props;
 		const svgStyle = {
 			height: `${size}px`,
@@ -40,7 +40,7 @@ class Icon extends PureComponent {
 			</svg>
 		);
 		if (tooltip) {
-			return <Tooltip label={tooltip}>{svg}</Tooltip>;
+			return <Tooltip label={tooltip} position={tooltipPosition}>{svg}</Tooltip>;
 		}
 		return svg;
 	}
@@ -57,6 +57,7 @@ Icon.propTypes = {
 	spin: PropTypes.bool,
 	onClick: PropTypes.func,
 	tooltip: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+	tooltipPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
 Icon.defaultProps = {
 	id: undefined,
@@ -69,6 +70,7 @@ Icon.defaultProps = {
 	spin: false,
 	onClick: undefined,
 	tooltip: undefined,
+	tooltipPosition: undefined
 };
 
 export default Icon;
