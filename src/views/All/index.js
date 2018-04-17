@@ -15,6 +15,7 @@ import TestIcon from './TestIcon';
 import TestSpinner from './TestSpinner';
 import TestModal from './TestModal';
 import TestRow from './TestRow';
+import TestToast from './TestToast';
 
 export {
 	TestTooltip,
@@ -33,5 +34,6 @@ export {
 	TestSpinner,
 	TestModal,
 	TestRow,
-	TestColumn
+	TestColumn,
+	TestToast
 };

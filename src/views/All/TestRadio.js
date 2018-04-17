@@ -33,6 +33,11 @@ const TestRadioGroup = () => (
 			<RadioGroup id="x4" label="Events (console)" onChange={() => alert()} options={options} value="value5" />
 			<RadioGroup id="x5" label="Disabled" disabled value="value1" options={options} />
 		</div>
+		<div style={{ padding: '10px', border: '1px solid #ccc' }}>
+			<RadioGroup id="test-radio-1" value='value1' options={options} />
+			<RadioGroup id="test-radio-2" value='value2' options={options} />
+			<RadioGroup id="test-radio-3" value='value2' options={options} disabled/>
+		</div>
 	</div>
 );
 

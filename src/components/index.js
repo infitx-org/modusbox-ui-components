@@ -18,6 +18,7 @@ import Select from './Select';
 import Spinner from './Spinner';
 import { Tab, TabList, Tabs, TabPanels, TabPanel } from './Tabs';
 import TextField from './TextField';
+import Toast from './Toast';
 import Tooltip from './Tooltip';
 
 export {
@@ -42,5 +43,6 @@ export {
 	TabPanels,
 	TabPanel,
 	TextField,
+	Toast,
 	Tooltip,
 };

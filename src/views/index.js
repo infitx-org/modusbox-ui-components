@@ -85,7 +85,7 @@ class Views extends React.Component {
 					</Row>
 				</div>
 				<div grow="1">
-					<Tabs selected={this.state.tab} onSelect={this.onSelectTab} flex>
+					<Tabs selected={this.state.tab} onSelect={this.onSelectTab} flex id='main-tabs'>
 						<TabList>{AllItemTabs}</TabList>
 						<TabPanels>{AllItemPanels}</TabPanels>
 					</Tabs>

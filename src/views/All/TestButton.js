@@ -56,6 +56,15 @@ const TestButton = () => (
 			<Button label="No Fill" icon="deploy-small" noFill kind="tertiary" disabled />
 			<Button label="No Fill" icon="deploy-small" noFill kind="danger" disabled />
 		</Row>
+		<Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
+			<Button label="Test Button 1" />
+			<Button label="Test Button 2" disabled />
+			<Button label="Test Button 3" disabled />
+			<Button label="Test Button 4" pending />
+			
+
+
+		</Row>
 	</Column>
 );
 

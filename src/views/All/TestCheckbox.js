@@ -17,6 +17,12 @@ const TestCheckbox = () => (
 			<Checkbox id="x6" disabled checked={true} label="I am disabled checked" />
 			<Checkbox id="x7" label="Round Corners" round />
 		</Column>
+		<Column style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
+			<Checkbox id="test-checkbox-1" label="Test checkbox 1" checked />
+			<Checkbox id="test-checkbox-2" label="Test checkbox 2" />
+			<Checkbox id="test-checkbox-3" label="Test checkbox 3" disabled/>
+			<Checkbox id="test-checkbox-4" label="Test checkbox 4" />
+		</Column>
 	</div>
 );
 

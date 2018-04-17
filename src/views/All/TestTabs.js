@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs';
 const TestTabs = () => (
 	<div>
 		<div style={{ padding: 10 }}>
-			<Tabs onSelect={console.log}>
+			<Tabs onSelect={console.log} id='tab-row-1'>
 				<TabList style={{ width: '500px' }}>
 					<Tab>Tab 1</Tab>
 					<Tab>Tab 2</Tab>
@@ -23,7 +23,7 @@ const TestTabs = () => (
 		</div>
 
 		<div style={{ padding: 10 }}>
-			<Tabs>
+			<Tabs id='tab-row-2'>
 				<TabList style={{ width: '500px' }}>
 					<Tab>Tab 1</Tab>
 					<Tab>Tab 2</Tab>
@@ -39,7 +39,7 @@ const TestTabs = () => (
 			</Tabs>
 		</div>
 		<div style={{ padding: 10 }}>
-			<Tabs>
+			<Tabs id='tab-row-3'>
 				<TabList>
 					<Tab>Tab 1</Tab>
 					<Tab>Tab 2</Tab>
@@ -55,7 +55,7 @@ const TestTabs = () => (
 			</Tabs>
 		</div>
 		<div style={{ padding: 10 }}>
-			<Tabs>
+			<Tabs id='tab-row-4'>
 				<TabList>
 					<Tab>Tab 1</Tab>
 					<Tab>Tab 2</Tab>

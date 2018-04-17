@@ -1,11 +1,12 @@
-import React, { PropTypes, Component } from 'react'
-import Notification from 'rc-notification'
-import styles from './Toast.css'
+import React, { PropTypes, Component } from 'react';
+import Notification from 'rc-notification';
+import styles from './Toast.css';
 
 /* initialized Toast Lib */
-const notification = Notification.newInstance({
+let notification;
+Notification.newInstance({
 	style: {'bottom': 0, right: '20px'}
-})
+},  (n) => notification = n)
 
 let toastID
 let toastCount = 0

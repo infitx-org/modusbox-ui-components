@@ -119,7 +119,7 @@ class Tooltip extends PureComponent {
 				ref={(box) => {
 					this.box = box;
 				}}
-			>
+			>				
 				{children}
 			</div>
 		);

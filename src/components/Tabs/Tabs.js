@@ -208,7 +208,7 @@ class Tabs extends PureComponent {
 	}
 	render() {
 		const { selected, focused } = this.state;
-		const { children, flex } = this.props;
+		const { id, children, flex } = this.props;
 		const [tabList] = this.getTabListAndTabPanels();
 
 		const panels = this.getPanels();
@@ -238,7 +238,7 @@ class Tabs extends PureComponent {
 		])
 
 		return (
-			<div className={tabClassNames}>
+			<div className={tabClassNames} id={id}>
 				<input
 					ref={(input) => { this.input = input; }}
 					type="button"
@@ -257,6 +257,7 @@ class Tabs extends PureComponent {
 }
 
 Tabs.propTypes = {
+	id: PropTypes.string,
 	selected: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	onSelect: PropTypes.func,
 	disabled: PropTypes.bool,
@@ -265,6 +266,7 @@ Tabs.propTypes = {
 };
 
 Tabs.defaultProps = {
+	id: 'element-tabs',
 	selected: 0,
 	onSelect: undefined,
 	disabled: false,
