@@ -7,7 +7,6 @@ import Icon from '../Icon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
-import ModalTabsLayout from './ModalTabsLayout';
 import './Modal.scss';
 
 export default class ModalBackground extends PureComponent {
@@ -72,11 +71,12 @@ export default class ModalBackground extends PureComponent {
 	}
 
 	render() {
+		const { tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled } = this.props;
 		const width = `${this.props.width || '800px'}`;
-		const maxHeight = this.props.maximise ? 'auto' : `calc(100% - ${60 * this.props.modalIndex + 70}px)`;
-		const bottom = this.props.maximise ? '20px' : undefined;
+		const maxHeight = maximise ? 'auto' : `calc(100% - ${60 * modalIndex + 70}px)`;
+		const bottom = maximise ? '20px' : undefined;
 		const modalStyle = {
-			top: 50 + 60 * this.props.modalIndex,
+			top: 50 + 60 * modalIndex,
 			bottom,
 			maxHeight,
 			width,
@@ -84,16 +84,15 @@ export default class ModalBackground extends PureComponent {
 			marginLeft: `-${parseInt(width) / 2}px`,
 		};
 		const customStyle = {
-			background: this.props.modalIndex > 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.7)',
+			background: modalIndex > 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.7)',
 		};
 
-		const isSubmitDisabled = !this.props.isSubmitEnabled || this.state.isSubmitPending;
-		const isCloseDisabled = !this.props.isCloseEnabled || this.state.isSubmitPending;
+		const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
+		const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
 
 		const child = this.getChild();
-		const hasTabs = child.type === ModalTabsLayout;
 		let content = child;
-		if (!hasTabs) {
+		if (!tabbed) {
 			content = (
 				<ScrollBox>
 					<div style={{ padding: '20px' }}>{child}</div>
@@ -102,7 +101,7 @@ export default class ModalBackground extends PureComponent {
 		}
 		const bodyClassName = utils.composeClassNames([
 			'element-modal__body',
-			hasTabs && 'element-modal__body--tabbed',
+			tabbed && 'element-modal__body--tabbed',
 		]);
 
 		return (
@@ -123,7 +122,8 @@ export default class ModalBackground extends PureComponent {
 										name="close-small"
 										size={24}									
 										disabled={isCloseDisabled}
-										tooltip='close'
+										tooltip='Close'
+										tooltipPosition='left'
 									/>
 								)
 							}
@@ -191,6 +191,7 @@ ModalBackground.defaultProps = {
 	onCancel: undefined,
 	onSubmit: undefined,
 	primaryAction: 'Submit',
+	tabbed: false,
 	maximise: false,
 	children: undefined,
 	width: '600',
@@ -215,6 +216,7 @@ ModalBackground.propTypes = {
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,
 	primaryAction: PropTypes.string,
+	tabbed: PropTypes.bool,
 	maximise: PropTypes.bool,
 	children: PropTypes.node,
 	width: PropTypes.string,

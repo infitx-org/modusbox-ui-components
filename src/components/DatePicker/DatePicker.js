@@ -130,8 +130,8 @@ class DatePicker extends PureComponent {
 			const date = parseInt(dayStamp) + hour * 3600000 + minute * 60000 + second * 1000;
 
 			// convert the string into integer when dealing with milliseconds
-			if (this.props.format === 'x') {
-				exportDay = moment(date).format('x');
+			if (this.props.format) {
+				exportDay = moment(date).format(this.props.format);
 				exportDay = parseInt(exportDay);
 			}
 		}
@@ -197,12 +197,14 @@ class DatePicker extends PureComponent {
 
 	render() {
 		const {
-			placeholder, id, style, disabled, pending, invalid, required,
+			placeholder, id, style, disabled, pending, invalid, required, dateFormat
 		} = this.props;
 		const { isOpen, timestamp, selectedDay } = this.state;
 		const initialMonth = selectedDay || DatePicker.getDate(this.props.initialMonth);
 		const hasDate = timestamp !== 0 && timestamp !== undefined;
 		const isPlaceholderActive = isOpen || hasDate;
+		const valueFormat = dateFormat || 'MMM Do YYYY, HH:mm:ss';
+		const value = hasDate ? moment(timestamp).format(valueFormat) : ''
 
 		const componentClassName = utils.composeClassNames([
 			'input-datepicker__component',
@@ -234,7 +236,7 @@ class DatePicker extends PureComponent {
 								this.input = input;
 							}}
 							className="mb-input__input input-datepicker__value"
-							value={hasDate ? moment(timestamp).format('MMM Do YYYY, HH:mm:ss') : ''}
+							value={value}
 							onKeyDown={this.testKey}
 							disabled={disabled}
 						/>
@@ -278,10 +280,11 @@ class DatePicker extends PureComponent {
 DatePicker.propTypes = {
 	id: PropTypes.string,
 	style: PropTypes.shape(),
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
 	placeholder: PropTypes.string,
 	onSelect: PropTypes.func,
 	format: PropTypes.string,
+	dateFormat: PropTypes.string,
 	withTime: PropTypes.bool,
 	defaultHour: PropTypes.number,
 	defaultMinute: PropTypes.number,
@@ -300,6 +303,7 @@ DatePicker.defaultProps = {
 	placeholder: undefined,
 	onSelect: undefined,
 	format: undefined,
+	dateFormat: undefined,
 	withTime: false,
 	defaultHour: 0,
 	defaultMinute: 0,

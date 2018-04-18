@@ -121,7 +121,7 @@ class TextField extends PureComponent {
 		}
 	}
 	onShowPasswordClick(e) {
-		e.stopPropagation();
+		e.stopPropagation();		
 		this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
 	}
 
@@ -177,11 +177,8 @@ class TextField extends PureComponent {
 				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
-		let inputType = type;
-		if (type === 'password' && isPasswordVisible === false) {
-			inputType = 'password';
-		}
-
+		const inputType = (isPasswordVisible && 'password') || 'text';
+		
 		return (
 			<div className="input-textfield mb-input__box" style={style}>
 				<div
