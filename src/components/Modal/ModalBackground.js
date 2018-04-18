@@ -115,19 +115,18 @@ export default class ModalBackground extends PureComponent {
 				<div className={`element-modal__container ${this.props.kind}`} style={modalStyle}>
 					<div className="element-modal__header">
 						<div className="element-modal__header-title">{this.props.title}</div>
-						<div className='element-modal__header-close'>
-							{this.props.allowClose && (
-									<Icon
-										onClick={this.onClose}
-										name="close-small"
-										size={24}									
-										disabled={isCloseDisabled}
-										tooltip='Close'
-										tooltipPosition='left'
-									/>
-								)
-							}
-						</div>
+						{this.props.allowClose && (
+							<div className='element-modal__header-close'>
+							 	<Icon
+									onClick={this.onClose}
+									name="close-small"
+									size={20}									
+									disabled={isCloseDisabled}
+									tooltip='Close'
+									tooltipPosition='left'
+								/>
+							</div>						
+						)}
 
 					</div>
 

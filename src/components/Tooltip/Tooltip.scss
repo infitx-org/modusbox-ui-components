@@ -6,11 +6,6 @@
     white-space: nowrap;
     position: relative;
 }
-.element-tooltip__holder{
-	width: 8px;
-	height: 8px;
-	background: #c33;
-}
 .element-tooltip__content{
 }
 
@@ -30,6 +25,7 @@
 	padding: 8px;
 	border-radius: 3px;	
 	font-size: 12px;
+	line-height: 12px;
 }
 
 .element-tooltip__viewer--fade-in{
