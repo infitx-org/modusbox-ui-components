@@ -87,9 +87,7 @@ class ScrollBar extends PureComponent {
 		const {
 			showScrollbar, barHeight, translate, isMoving,
 		} = this.state;
-		const trackStyles = {
-			...trackStyle,
-		};
+		
 		const handleStyles = {
 			height: `${Math.round(barHeight)}px`,
 			transform: `translate3d(0,${Math.round(translate)}px,0)`,
@@ -104,7 +102,7 @@ class ScrollBar extends PureComponent {
 			<div
 				ref={(tracker) => { this.tracker = tracker; }}
 				className={`scrollbar ${showTrack ? 'track-visible' : ''}`}
-				style={trackStyles}
+				style={trackStyle}
 			>
 				<div
 					role="presentation"

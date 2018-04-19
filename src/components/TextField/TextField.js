@@ -6,7 +6,7 @@ import keyCodes from '../../utils/keyCodes';
 
 import Button from '../Button';
 import Icon from '../Icon';
-import { Loader, Placeholder } from '../Common';
+import { Loader, Placeholder, InnerButton } from '../Common';
 
 import './TextField.scss';
 
@@ -162,6 +162,7 @@ class TextField extends PureComponent {
 		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value !== undefined;
+		const hasButton = typeof this.props.onButtonClick === 'function';
 
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
@@ -205,19 +206,17 @@ class TextField extends PureComponent {
 							disabled={disabled}
 							className="mb-input__input input-textfield__value"
 						/>
-						{buttonText && (
-							<Button
+						{hasButton && (
+							<InnerButton 						
 								kind={buttonKind}
-								className={`mb-input__inner-button input-textfield__button ${
-									isOpen ? 'mb-input__inner-button--active' : ''
-								}`}
-								noFill
 								onClick={this.onButtonClick}
-								tabIndex="-1"
 								label={buttonText}
 								disabled={disabled}
+								isOpen={isOpen}
+								visible={hasButton}
 							/>
 						)}
+						
 						<Loader visible={pending} />
 
 						{type === 'password' && (

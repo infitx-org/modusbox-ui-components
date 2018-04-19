@@ -45,4 +45,22 @@ Placeholder.defaultProps = {
 	active: false,
 };
 
-export { Loader, Placeholder };
+const InnerButton = ({ kind, isOpen, onClick, label, disabled }) => {
+	const className = utils.composeClassNames([
+		'mb-input__inner-button',
+		isOpen && 'mb-input__inner-button--active'
+	])
+	return (
+		<Button
+			kind={kind}
+			className={className}
+			noFill
+			onClick={onClick}
+			tabIndex="-1"
+			label={label}
+			disabled={disabled}
+		/>
+	);
+}
+
+export { Loader, Placeholder, InnerButton };

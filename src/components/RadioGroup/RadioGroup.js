@@ -78,7 +78,6 @@ class RadioGroup extends PureComponent {
 				break;
 			}
 			if (!options[nextIndex].disabled) {
-				console.log(options[nextIndex]);
 				const currentValue = options[nextIndex].value;
 				this.setState({ value: currentValue, focused: currentValue });
 				found = true;
