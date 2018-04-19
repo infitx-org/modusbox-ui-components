@@ -71,7 +71,9 @@ export default class ModalBackground extends PureComponent {
 	}
 
 	render() {
-		const { tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled } = this.props;
+		const {
+			tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled,
+		} = this.props;
 		const width = `${this.props.width || '800px'}`;
 		const maxHeight = maximise ? 'auto' : `calc(100% - ${60 * modalIndex + 70}px)`;
 		const bottom = maximise ? '20px' : undefined;
@@ -116,16 +118,16 @@ export default class ModalBackground extends PureComponent {
 					<div className="element-modal__header">
 						<div className="element-modal__header-title">{this.props.title}</div>
 						{this.props.allowClose && (
-							<div className='element-modal__header-close'>
-							 	<Icon
+							<div className="element-modal__header-close">
+								<Icon
 									onClick={this.onClose}
 									name="close-small"
-									size={20}									
+									size={20}
 									disabled={isCloseDisabled}
-									tooltip='Close'
-									tooltipPosition='left'
+									tooltip="Close"
+									tooltipPosition="left"
 								/>
-							</div>						
+							</div>
 						)}
 
 					</div>
@@ -135,8 +137,7 @@ export default class ModalBackground extends PureComponent {
 					</div>
 
 					<div className="element-modal__footer">
-						<div className="element-modal__footer-left">							
-						</div>
+						<div className="element-modal__footer-left" />
 						<div className="element-modal__footer-right">
 							{this.props.allowCancel && (
 								<Button

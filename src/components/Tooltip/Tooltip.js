@@ -6,13 +6,13 @@ import './Tooltip.scss';
 const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
 
 class Tooltip extends PureComponent {
-	static getPosition(box, target, position){
+	static getPosition(box, target, position) {
 		let top;
 		let left;
 		const { innerWidth } = window;
 		const boxRect = box.getBoundingClientRect();
 		const tooltipRect = target.getBoundingClientRect();
-		
+
 		const leftCenteredByY = boxRect.left + ((boxRect.width - tooltipRect.width) / 2);
 		const topCenteredByX = boxRect.top + ((boxRect.height - tooltipRect.height) / 2);
 
@@ -20,18 +20,15 @@ class Tooltip extends PureComponent {
 		if (position === 'top') {
 			top = boxRect.top - tooltipRect.height - 10;
 			left = leftCenteredByY;
-		}
-		else if (position === 'bottom') {
+		} else if (position === 'bottom') {
 			top = boxRect.top + boxRect.height + 10;
 			left = leftCenteredByY;
-		}
-		else if (position === 'left'){
+		} else if (position === 'left') {
 			top = topCenteredByX;
 			left = boxRect.left - tooltipRect.width - 10;
-		}
-		else if (position === 'right'){
+		} else if (position === 'right') {
 			top = topCenteredByX;
-			left = boxRect.left + boxRect.width + 10;	
+			left = boxRect.left + boxRect.width + 10;
 		}
 
 		if (left < 10) {
@@ -43,7 +40,7 @@ class Tooltip extends PureComponent {
 		if (top < 10) {
 			top = top + boxRect.height + 10;
 		}
-		return { left, top }
+		return { left, top };
 	}
 	constructor(props) {
 		super(props);
@@ -65,7 +62,9 @@ class Tooltip extends PureComponent {
 			return;
 		}
 
-		const { content, label, position, children } = this.props;
+		const {
+			content, label, position, children,
+		} = this.props;
 		const { scrollWidth, offsetWidth } = this.box;
 		const shouldShowTooltip = scrollWidth > offsetWidth || label !== undefined || content !== undefined;
 
@@ -91,7 +90,7 @@ class Tooltip extends PureComponent {
 		this._component = renderSubtreeIntoContainer(this, cmp, this._target);
 
 		// Get By Position
-		const { top, left } = Tooltip.getPosition(this.box, this._target, position)
+		const { top, left } = Tooltip.getPosition(this.box, this._target, position);
 
 		// Apply final updates to the tooltip itself
 		this._target.style.top = top;
@@ -119,7 +118,7 @@ class Tooltip extends PureComponent {
 				ref={(box) => {
 					this.box = box;
 				}}
-			>				
+			>
 				{children}
 			</div>
 		);
@@ -131,14 +130,14 @@ Tooltip.propTypes = {
 	children: PropTypes.node,
 	style: PropTypes.shape(),
 	label: PropTypes.string,
-	position: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
+	position: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
 };
 Tooltip.defaultProps = {
 	content: undefined,
 	children: null,
 	style: {},
 	label: undefined,
-	position: 'top'
+	position: 'top',
 };
 
 export default Tooltip;

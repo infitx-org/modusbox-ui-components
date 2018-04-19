@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
-import Button from '../Button';
 import Icon from '../Icon';
 import { Loader, Placeholder, InnerButton } from '../Common';
 
@@ -121,7 +120,7 @@ class TextField extends PureComponent {
 		}
 	}
 	onShowPasswordClick(e) {
-		e.stopPropagation();		
+		e.stopPropagation();
 		this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
 	}
 
@@ -179,10 +178,10 @@ class TextField extends PureComponent {
 		]);
 
 		const inputType = (isPasswordVisible && 'password') || 'text';
-		
+
 		return (
 			<div className="input-textfield mb-input__box" style={style}>
-				<div					
+				<div
 					className={componentClassName}
 					onClick={this.onTextFieldClick}
 					ref={(area) => { this.area = area; }}
@@ -207,7 +206,7 @@ class TextField extends PureComponent {
 							className="mb-input__input input-textfield__value"
 						/>
 						{hasButton && (
-							<InnerButton 						
+							<InnerButton
 								kind={buttonKind}
 								onClick={this.onButtonClick}
 								label={buttonText}
@@ -216,7 +215,7 @@ class TextField extends PureComponent {
 								visible={hasButton}
 							/>
 						)}
-						
+
 						<Loader visible={pending} />
 
 						{type === 'password' && (

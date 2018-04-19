@@ -53,7 +53,7 @@ class Options extends PureComponent {
 
 		let optionItems = null;
 		if (options.length > 0) {
-				optionItems = options.map((item, index) => {
+			optionItems = options.map((item, index) => {
 				const isSelected = selected === item.value;
 				return (
 					<Option
@@ -67,16 +67,16 @@ class Options extends PureComponent {
 						onClick={() => this.onClickOption(item)}
 					/>
 				);
-			})
+			});
 		} else {
 			optionItems = (
-			 	<div className='input-select__options-item--no-options__box'>
-			 		<Icon name='info-small' size={20}/>
-			 		<div className='input-select__options-item--no-options__message'>
-			 			No options available
-			 		</div>
-			 	</div>
-			 );
+				<div className="input-select__options-item--no-options__box">
+					<Icon name="info-small" size={20} />
+					<div className="input-select__options-item--no-options__message">
+						No options available
+					</div>
+				</div>
+			);
 		}
 		return (
 			<div className={className} style={{ position: 'absolute', top, bottom }}>
@@ -133,7 +133,7 @@ class Option extends PureComponent {
 	}
 	render() {
 		const {
-			label, icon, selected, disabled, highlighted,
+			value, label, icon, selected, disabled, highlighted,
 		} = this.props;
 		const optionsClassNames = utils.composeClassNames([
 			'input-select__options-item',
@@ -142,7 +142,14 @@ class Option extends PureComponent {
 			highlighted && 'input-select__options-item--highlighted',
 		]);
 		return (
-			<div className={optionsClassNames} onClick={this.onClick} tabIndex="1" role="presentation">
+			<div
+				className={optionsClassNames}
+				onClick={this.onClick}
+				tabIndex="1"
+				role="presentation"
+				label={label}
+				value={value}
+			>
 				{icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
 				<div className="input-select__options-item__label"><Tooltip>{label}</Tooltip></div>
 			</div>

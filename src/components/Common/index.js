@@ -10,7 +10,7 @@ const Loader = ({ visible }) => {
 		return null;
 	}
 	return (
-		<div className="mb-input__inner-icon">
+		<div className="mb-input__inner-icon mb-loader">
 			<Spinner size={16} />
 		</div>
 	);
@@ -46,11 +46,13 @@ Placeholder.defaultProps = {
 	active: false,
 };
 
-const InnerButton = ({ kind, isOpen, onClick, label, disabled }) => {
+const InnerButton = ({
+	kind, isOpen, onClick, label, disabled,
+}) => {
 	const className = utils.composeClassNames([
 		'mb-input__inner-button',
-		isOpen && 'mb-input__inner-button--active'
-	])
+		isOpen && 'mb-input__inner-button--active',
+	]);
 	return (
 		<Button
 			kind={kind}
@@ -62,22 +64,22 @@ const InnerButton = ({ kind, isOpen, onClick, label, disabled }) => {
 			disabled={disabled}
 		/>
 	);
-}
+};
 
 InnerButton.propTypes = {
 	kind: PropTypes.string,
 	isOpen: PropTypes.bool,
 	onClick: PropTypes.func,
 	label: PropTypes.string,
-	disabled: PropTypes.bool
-}
+	disabled: PropTypes.bool,
+};
 
 InnerButton.defaultProps = {
 	kind: 'primary',
 	isOpen: false,
 	onClick: undefined,
 	label: undefined,
-	disabled: false
-}
+	disabled: false,
+};
 
 export { Loader, Placeholder, InnerButton };

@@ -87,7 +87,7 @@ class ScrollBar extends PureComponent {
 		const {
 			showScrollbar, barHeight, translate, isMoving,
 		} = this.state;
-		
+
 		const handleStyles = {
 			height: `${Math.round(barHeight)}px`,
 			transform: `translate3d(0,${Math.round(translate)}px,0)`,

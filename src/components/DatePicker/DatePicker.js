@@ -197,14 +197,14 @@ class DatePicker extends PureComponent {
 
 	render() {
 		const {
-			placeholder, id, style, disabled, pending, invalid, required, dateFormat
+			placeholder, id, style, disabled, pending, invalid, required, dateFormat,
 		} = this.props;
 		const { isOpen, timestamp, selectedDay } = this.state;
 		const initialMonth = selectedDay || DatePicker.getDate(this.props.initialMonth);
 		const hasDate = timestamp !== 0 && timestamp !== undefined;
 		const isPlaceholderActive = isOpen || hasDate;
 		const valueFormat = dateFormat || 'MMM Do YYYY, HH:mm:ss';
-		const value = hasDate ? moment(timestamp).format(valueFormat) : ''
+		const value = hasDate ? moment(timestamp).format(valueFormat) : '';
 
 		const componentClassName = utils.composeClassNames([
 			'input-datepicker__component',
@@ -280,7 +280,7 @@ class DatePicker extends PureComponent {
 DatePicker.propTypes = {
 	id: PropTypes.string,
 	style: PropTypes.shape(),
-	value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	placeholder: PropTypes.string,
 	onSelect: PropTypes.func,
 	format: PropTypes.string,

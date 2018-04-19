@@ -2,43 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from '../../components/Select';
 
-const options = [
+let options = [
 	{
-		label: 'test',
-		value: 'z',
-	},
-	{
-		label: 'test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123test11231231312313123',
-		value: 'z1',
+		label: new Array(100).fill('superLong'),
+		value: 'superStrangeValue',
 		icon: 'close-small',
-	},
-	{
-		label: 'test2',
-		value: 'z2',
-	},
-	{
-		label: 'test3',
-		value: 'z3',
 	},
 	{
 		label: 'disabled',
 		value: 'disabled',
 		disabled: true,
-	},
-	{
-		label: 'test4',
-		value: 'z4',
-	},
-	{
-		label: 'test5',
-		value: 'z5',
-	},
+	},	
 	{
 		label: 'disabled2',
 		value: 'disabled2',
-		disabled: true,
-	},
+		disabled: true
+	}
 ];
+
+const otherOptions = new Array(500).fill({}).map( (item, index) => ({ label: 'label' + index, value: 'value' + index }) );
+
+options = [...options, ...otherOptions ];
+
 
 const TestSelect = () => (
 	<div>
@@ -59,6 +44,11 @@ const TestSelect = () => (
 			<Select id="x" placeholder="placeholder" options={options} />
 			<Select id="x" placeholder="placeholder" options={options} />
 			<Select id="x" placeholder="placeholder" options={options} />
+		</div>
+		<div style={{ padding: 10, border: '1px solid #ccc' }}>
+			<Select id="test-select-1" placeholder="placeholder" options={options} />			
+			<Select id="test-select-2" placeholder="placeholder" options={options} pending/>
+			<Select id="test-select-3" placeholder="placeholder" options={options} disabled/>			
 		</div>		
 	</div>
 );

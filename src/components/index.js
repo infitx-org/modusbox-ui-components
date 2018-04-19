@@ -1,16 +1,16 @@
 import '../assets/main.css';
-//import '../assets/styles/components.scss';
+// import '../assets/styles/components.scss';
 import '../assets/styles/default.scss';
 
 import Button from './Button';
 import Column from './Column';
 import Checkbox from './Checkbox';
-/*import DataList from './DataList';*/
+/* import DataList from './DataList'; */
 import DatePicker from './DatePicker';
 import FileUploader from './FileUploader';
 import Heading from './Heading';
 import Icon from './Icon';
-import Modal, {ModalTabsLayout} from './Modal';
+import Modal, { ModalTabsLayout } from './Modal';
 import RadioGroup from './RadioGroup';
 import Row from './Row';
 import ScrollBox from './ScrollBox';
@@ -25,7 +25,7 @@ export {
 	Button,
 	Column,
 	Checkbox,
-	/*DataList,*/
+	/* DataList, */
 	DatePicker,
 	FileUploader,
 	Heading,

@@ -71,16 +71,20 @@ TabList.defaultProps = {
 	children: undefined,
 };
 
-const TabPanel = ({ children, flex }) => <div className={`element-tabs__tab__content ${flex ? 'element-tabs__tab__content--flexible' :''}`}>{children}</div>;
+const TabPanel = ({ children, flex }) => (
+	<div className={`element-tabs__tab__content ${flex ? 'element-tabs__tab__content--flexible' : ''}`}>
+		{children}
+	</div>
+);
 
 TabPanel.propTypes = {
 	children: PropTypes.node,
-	flex: PropTypes.bool
+	flex: PropTypes.bool,
 };
 
 TabPanel.defaultProps = {
 	children: undefined,
-	flex: false
+	flex: false,
 };
 
 const TabPanels = ({ children }) => children;
@@ -215,8 +219,8 @@ class Tabs extends PureComponent {
 		let panel = null;
 		if (panels.length >= selected + 1) {
 			panel = panels[selected];
-			panel = React.cloneElement(panel, {...panel.props, flex});
-		}		
+			panel = React.cloneElement(panel, { ...panel.props, flex });
+		}
 		const { width } = tabList.props.style || {};
 		const growTab = width !== undefined;
 		const tabs = this.getTabs(children).map((child, index) => {
@@ -234,8 +238,8 @@ class Tabs extends PureComponent {
 		const tabClassNames = utils.composeClassNames([
 			'element',
 			'element-tabs',
-			flex === true && 'element-tabs--flexible'
-		])
+			flex === true && 'element-tabs--flexible',
+		]);
 
 		return (
 			<div className={tabClassNames} id={id}>
@@ -262,7 +266,7 @@ Tabs.propTypes = {
 	onSelect: PropTypes.func,
 	disabled: PropTypes.bool,
 	children: PropTypes.node,
-	flex: PropTypes.bool
+	flex: PropTypes.bool,
 };
 
 Tabs.defaultProps = {
@@ -271,7 +275,7 @@ Tabs.defaultProps = {
 	onSelect: undefined,
 	disabled: false,
 	children: undefined,
-	flex: false
+	flex: false,
 };
 
 export { Tab, Tabs, TabList, TabPanel, TabPanels };

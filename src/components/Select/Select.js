@@ -62,7 +62,7 @@ class Select extends PureComponent {
 				filter: undefined,
 			});
 		}
-		this.setSelectedLabel(selected, options)
+		this.setSelectedLabel(selected, options);
 	}
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleResize);
@@ -117,15 +117,15 @@ class Select extends PureComponent {
 	setInputValue(value) {
 		this.inputFilter.value = value;
 	}
-	setSelectedLabel(selected, options){
+	setSelectedLabel(selected, options) {
 		const selectedItem = find(options, { value: selected });
 		const selectedLabel = selectedItem ? selectedItem.label : undefined;
-		
+
 		this.setState({
 			options,
 			selected,
-			selectedLabel
-		})		
+			selectedLabel,
+		});
 	}
 	getOptions() {
 		const { options, filter } = this.state;
@@ -133,7 +133,7 @@ class Select extends PureComponent {
 			return options;
 		}
 		const lowerCaseFilter = filter.toLowerCase();
-		return options.filter(item => item.label.toLowerCase().includes(lowerCaseFilter));
+		return options.filter(item => item.label.toString().toLowerCase().includes(lowerCaseFilter));
 	}
 	closeSelect() {
 		this.setState({ isOpen: false, filter: undefined });
@@ -200,7 +200,7 @@ class Select extends PureComponent {
 	}
 	applyFilter() {
 		const { value } = this.inputFilter;
-		this.setState({ filter: value, isOpen: true });		
+		this.setState({ filter: value, isOpen: true });
 	}
 	highlightNextOption(next = true) {
 		const { highlightedOption, options } = this.state;
@@ -224,9 +224,9 @@ class Select extends PureComponent {
 		while (nextHighlightedOption === -1) {
 			nextHighlightedOption = getNextEnabledOption();
 		}
-		const nextOption = this.options.items.children[nextHighlightedOption]
+		const nextOption = this.options.items.children[nextHighlightedOption];
 		if (nextOption) {
-			nextOption.focus()
+			nextOption.focus();
 		}
 		this.inputFilter.focus();
 		this.setState({ highlightedOption: nextHighlightedOption });
@@ -240,6 +240,7 @@ class Select extends PureComponent {
 		const {
 			isOpen, selectedLabel, selected, filter, highlightedOption,
 		} = this.state;
+		const options = this.getOptions();
 
 		const inputValue = (filter === undefined) ? (selectedLabel || '') : filter;
 		const isPlaceholderActive = isOpen || selectedLabel !== undefined;
@@ -280,6 +281,7 @@ class Select extends PureComponent {
 							value={inputValue}
 							disabled={disabled}
 						/>
+						<input type="hidden" value={JSON.stringify(options)} />
 
 						{filter && (
 							<div className="mb-input__inner-icon input-select-mb-input__icon">
@@ -298,8 +300,8 @@ class Select extends PureComponent {
 				<div className="input-select__options" ref={(position) => { this.optionsPosition = position; }}>
 					<Options
 						open={isOpen}
-						ref={(options) => { this.options = options; }}
-						options={this.getOptions()}
+						ref={(wrapper) => { this.options = wrapper; }}
+						options={options}
 						maxHeight={this.maxHeight || 0}
 						reverse={this.reverse}
 						selected={selected}
@@ -329,7 +331,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-	id: 'select',
+	id: undefined,
 	style: {},
 	selected: undefined,
 	onChange: undefined,

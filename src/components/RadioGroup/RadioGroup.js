@@ -94,7 +94,7 @@ class RadioGroup extends PureComponent {
 		const classNames = utils.composeClassNames([
 			'input',
 			'input-radio',
-			disabled && 'disabled'
+			disabled && 'disabled',
 		]);
 		return (
 			<div className={classNames} id={id}>
