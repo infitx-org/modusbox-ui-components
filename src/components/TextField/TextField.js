@@ -157,11 +157,11 @@ class TextField extends PureComponent {
 
 	render() {
 		const {
-			autofocus, id, type, style, placeholder, buttonText, buttonKind, icon, disabled, pending, required, invalid,
+			autofocus, id, type, style, placeholder, onButtonClick, buttonText, buttonKind, icon, disabled, pending, required, invalid,
 		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value !== undefined;
-		const hasButton = typeof this.props.onButtonClick === 'function';
+		const hasButton = typeof onButtonClick === 'function';
 
 		const componentClassName = utils.composeClassNames([
 			'input-textfield__component',
@@ -211,8 +211,7 @@ class TextField extends PureComponent {
 								onClick={this.onButtonClick}
 								label={buttonText}
 								disabled={disabled}
-								isOpen={isOpen}
-								visible={hasButton}
+								isOpen={isOpen}								
 							/>
 						)}
 
