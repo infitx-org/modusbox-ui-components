@@ -177,7 +177,7 @@ class TextField extends PureComponent {
 				'mb-input--required mb-input__borders--required mb-input__background--required',
 		]);
 
-		const inputType = (isPasswordVisible && 'password') || 'text';
+		const inputType = (isPasswordVisible && 'text') || type;
 
 		return (
 			<div className="input-textfield mb-input__box" style={style}>
@@ -279,12 +279,15 @@ TextField.defaultProps = {
 	disabled: false,
 };
 
-const EyeIcon = ({ open, onClick }) => (<Icon
-	onClick={onClick}
-	name={open ? 'toggle-invisible' : 'toggle-visible'}
-	size={16}
-	fill={open ? '#999' : '#39f'}
-/>);
+const EyeIcon = ({ open, onClick }) => (
+	<Icon
+		style={{cursor:'pointer'}}
+		onClick={onClick}
+		name={open ? 'toggle-invisible' : 'toggle-visible'}
+		size={16}
+		fill={open ? '#999' : '#39f'}
+	/>
+);
 
 EyeIcon.propTypes = {
 	open: PropTypes.bool,
