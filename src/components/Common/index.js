@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 import Spinner from '../Spinner';
+import Button from '../Button';
 
 const Loader = ({ visible }) => {
 	if (!visible) {
@@ -61,6 +62,22 @@ const InnerButton = ({ kind, isOpen, onClick, label, disabled }) => {
 			disabled={disabled}
 		/>
 	);
+}
+
+InnerButton.propTypes = {
+	kind: PropTypes.string,
+	isOpen: PropTypes.bool,
+	onClick: PropTypes.func,
+	label: PropTypes.string,
+	disabled: PropTypes.bool
+}
+
+InnerButton.defaultProps = {
+	kind: 'primary',
+	isOpen: false,
+	onClick: undefined,
+	label: undefined,
+	disabled: false
 }
 
 export { Loader, Placeholder, InnerButton };
