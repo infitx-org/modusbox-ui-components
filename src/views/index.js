@@ -84,7 +84,7 @@ class Views extends React.Component {
 						<Checkbox label="Code" checked={this.state.code} onChange={this.onCodeToggle} />
 					</Row>
 				</div>
-				<div grow="1">
+				<div style={{position:'absolute', top: 60, bottom: 0, width: '100%'}}>
 					<Tabs selected={this.state.tab} onSelect={this.onSelectTab} flex id='main-tabs'>
 						<TabList>{AllItemTabs}</TabList>
 						<TabPanels>{AllItemPanels}</TabPanels>

@@ -88,7 +88,7 @@ class TextField extends PureComponent {
 			this.setState({ value });
 
 			if (typeof this.props.onChange === 'function') {
-				this.props.onChange(e.target.value);
+				this.props.onChange(value);
 			}
 		}
 	}
@@ -158,7 +158,7 @@ class TextField extends PureComponent {
 
 	render() {
 		const {
-			id, type, style, placeholder, buttonText, buttonKind, icon, disabled, pending, required, invalid,
+			autofocus, id, type, style, placeholder, buttonText, buttonKind, icon, disabled, pending, required, invalid,
 		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value !== undefined;
@@ -181,8 +181,7 @@ class TextField extends PureComponent {
 		
 		return (
 			<div className="input-textfield mb-input__box" style={style}>
-				<div
-					id={id}
+				<div					
 					className={componentClassName}
 					onClick={this.onTextFieldClick}
 					ref={(area) => { this.area = area; }}
@@ -192,7 +191,9 @@ class TextField extends PureComponent {
 						<Placeholder label={placeholder} active={isPlaceholderActive} />
 
 						<input
+							id={id}
 							ref={(input) => { this.input = input; }}
+							autoFocus={(!!autofocus).toString()}
 							type={inputType}
 							onClick={this.onClick}
 							onChange={this.onChange}
@@ -237,6 +238,7 @@ class TextField extends PureComponent {
 }
 
 TextField.propTypes = {
+	autofocus: PropTypes.bool,
 	style: PropTypes.shape(),
 	type: PropTypes.oneOf(['text', 'password']),
 	id: PropTypes.string,
@@ -258,6 +260,7 @@ TextField.propTypes = {
 };
 
 TextField.defaultProps = {
+	autofocus: false,
 	type: 'text',
 	id: undefined,
 	style: {},

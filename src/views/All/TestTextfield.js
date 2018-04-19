@@ -4,7 +4,7 @@ import TextField from '../../components/TextField';
 
 const TestTextField = () => (
 	<div>
-		<div style={{ padding: '10px', border: '1px solid #ccc' }}>
+		<div style={{ padding: '10px', border: '1px solid #ccc' }}>			
 			<TextField type="text" placeholder="Default" />
 			<TextField type="password" placeholder="Password" />
 			<TextField placeholder="Pending" pending />
@@ -32,6 +32,11 @@ const TestTextField = () => (
 			<TextField placeholder="Required Disabled" required disabled />
 			<TextField placeholder="Required Disabled Invalid" required disabled invalid />
 		</div>
+		<div style={{ padding: '10px', border: '1px solid #ccc' }}>				
+				<TextField id='test-textfield-1' />
+				<TextField id='test-textfield-2' pending/>
+				<TextField id='test-textfield-3' disabled/>			
+			</div>
 	</div>
 );
 
