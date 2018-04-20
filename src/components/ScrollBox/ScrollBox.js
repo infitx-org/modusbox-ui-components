@@ -56,8 +56,10 @@ class ScrollBox extends PureComponent {
 		}
 	}
 	updateContentSize() {
-		const { width } = this.wrapper.getBoundingClientRect();
-		this.content.style.width = width;
+		const { width } = this.wrapper.getBoundingClientRect();		
+		const paddingLeft = parseFloat( window.getComputedStyle(this.wrapper, null).getPropertyValue('padding-left') );
+		const paddingRight = parseFloat( window.getComputedStyle(this.wrapper, null).getPropertyValue('padding-right') );		
+		this.content.style.width = width - (paddingLeft + paddingRight);
 	}
 	render() {
 		const {

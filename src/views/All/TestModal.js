@@ -80,6 +80,7 @@ class TestModal extends React.Component {
 							onClose={() => this.onClose(2)}
 							title="Warning"
 							kind="warning"
+							tabbed
 							allowSubmit
 							isSubmitEnabled
 						>

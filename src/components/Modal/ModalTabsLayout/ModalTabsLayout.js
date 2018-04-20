@@ -49,11 +49,13 @@ class ModalTabsLayout extends PureComponent {
 	render() {
 		const { items, selected } = this.state;
 		const { children } = this.props;
+		const child = children[selected];
+		const content = React.cloneElement(child, {...child.props, style: {...child.props.style, padding:'10px', flex:'2'}});
 		return (
 			<div className="element-modal-tab-layout">
 				<ModalTabs items={items} selected={selected} onSelect={this.onSelect} />
 				<div className="element-modal-tab-layout__content">
-					<ScrollBox>{children[selected]}</ScrollBox>
+					<ScrollBox>{content}</ScrollBox>
 				</div>
 			</div>
 		);
@@ -61,7 +63,7 @@ class ModalTabsLayout extends PureComponent {
 }
 
 ModalTabsLayout.propTypes = {
-	items: PropTypes.arrayOf([PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin })]),
+	items: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.strin })),
 	selected: PropTypes.string,
 	children: PropTypes.node,
 };
@@ -96,7 +98,7 @@ const ModalTabs = ({ items, selected, onSelect }) => (
 
 ModalTabs.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string, value: PropTypes.string })),
-	selected: PropTypes.string,
+	selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onSelect: PropTypes.func,
 };
 
