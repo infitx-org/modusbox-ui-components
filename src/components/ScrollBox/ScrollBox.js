@@ -69,7 +69,7 @@ class ScrollBox extends PureComponent {
 		} = this.props;
 
 		const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', className]);
-		const contentBoxClassName = utils.composeClassNames(['element-scrollbox__content-box']);
+		const contentBoxClassName = utils.composeClassNames(['element-scrollbox__content-box', flex && 'element-scrollbox__content-box--flexible']);
 		const contentClassName = utils.composeClassNames(['element-scrollbox__content', flex && 'element-scrollbox__content--flexible']);
 
 		return (

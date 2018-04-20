@@ -55,7 +55,7 @@ class ModalTabsLayout extends PureComponent {
 			<div className="element-modal-tab-layout">
 				<ModalTabs items={items} selected={selected} onSelect={this.onSelect} />
 				<div className="element-modal-tab-layout__content">
-					<ScrollBox>{content}</ScrollBox>
+					<ScrollBox flex>{content}</ScrollBox>
 				</div>
 			</div>
 		);
