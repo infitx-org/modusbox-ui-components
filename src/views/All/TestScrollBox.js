@@ -43,16 +43,16 @@ const Content = ({ color }) => (
 );
 
 const TestScrollBox = () => (
-	<div>
-		<ScrollBox style={{ height: '100px', margin: '10px' }}>
+	<div style={{padding:'10px'}}>
+		<ScrollBox style={{ height: '100px', marginBottom: '10px' }}>
 			<Content color="white" />
 		</ScrollBox>
 
-		<ScrollBox style={{ height: '200px', margin: '10px' }}>
+		<ScrollBox style={{ height: '200px', marginBottom: '10px' }}>
 			<Content color="red" />
 		</ScrollBox>
 
-		<ScrollBox style={{ height: '300px', margin: '10px' }}>
+		<ScrollBox style={{ height: '300px', marginBottom: '10px' }}>
 			<Content color="white" />
 		</ScrollBox>
 	</div>

@@ -59,6 +59,8 @@ class ScrollBox extends PureComponent {
 		const { width } = this.wrapper.getBoundingClientRect();		
 		const paddingLeft = parseFloat( window.getComputedStyle(this.wrapper, null).getPropertyValue('padding-left') );
 		const paddingRight = parseFloat( window.getComputedStyle(this.wrapper, null).getPropertyValue('padding-right') );		
+		this.content.style.minWidth = width - (paddingLeft + paddingRight);
+		this.content.style.maxWidth = width - (paddingLeft + paddingRight);
 		this.content.style.width = width - (paddingLeft + paddingRight);
 	}
 	render() {
@@ -66,9 +68,9 @@ class ScrollBox extends PureComponent {
 			showTrack, handleStyle, trackStyle, style, children, flex, className,
 		} = this.props;
 
-		const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', flex && 'flexible', className]);
-		const contentBoxClassName = utils.composeClassNames(['element-scrollbox__content-box', flex && 'flexible']);
-		const contentClassName = utils.composeClassNames(['element-scrollbox__content', flex && 'flexible']);
+		const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', className]);
+		const contentBoxClassName = utils.composeClassNames(['element-scrollbox__content-box']);
+		const contentClassName = utils.composeClassNames(['element-scrollbox__content', flex && 'element-scrollbox__content--flexible']);
 
 		return (
 			<div ref={(wrapper) => { this.wrapper = wrapper; }} className={wrapperClassName} style={style}>

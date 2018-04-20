@@ -83,6 +83,7 @@ class TestModal extends React.Component {
 							tabbed
 							allowSubmit
 							isSubmitEnabled
+							maximise
 						>
 							<ModalTabsLayout items={[{ name: "Tab1"},{ name: "Tab2"}]} selected='Tab2'>
 								<div style={{height:'12000px' ,background:'#999'}}>
