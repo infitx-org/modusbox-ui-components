@@ -160,7 +160,7 @@ export default class ModalBackground extends PureComponent {
 							{this.props.allowSubmit && (
 								<Button
 									id={this.props.submitButtonId}
-									isLoading={this.state.isSubmitPending}
+									pending={this.state.isSubmitPending}
 									icon="check-small"
 									disabled={isSubmitDisabled}
 									onClick={this.onSubmit}

@@ -64,6 +64,7 @@ class Button extends PureComponent {
 				onClick={this.onClick}
 				disabled={isDisabledOrPending}
 				label={label}
+				kind={kind}
 			>
 				<div className="input-button__content">
 					{(pending || icon) && (

@@ -193,7 +193,7 @@ class TextField extends PureComponent {
 						<input
 							id={id}
 							ref={(input) => { this.input = input; }}
-							autoFocus={(!!autofocus).toString()}
+							autoFocus={autofocus === true}
 							type={inputType}
 							onClick={this.onClick}
 							onChange={this.onChange}

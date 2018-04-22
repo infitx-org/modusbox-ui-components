@@ -7,7 +7,7 @@ const TestTextField = () => (
 		<div style={{ padding: '10px', border: '1px solid #ccc' }}>			
 			<TextField type="text" placeholder="Default" />
 			<TextField type="password" placeholder="Password" />
-			<TextField placeholder="Pending" pending />
+			<TextField placeholder="Pending" pending/>
 			<TextField placeholder="Invalid" invalid />
 			<TextField placeholder="Required" required />
 			<TextField placeholder="Disabled" disabled />
