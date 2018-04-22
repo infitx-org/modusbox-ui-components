@@ -16,23 +16,18 @@ const ComponentMappings = Object.keys(TestViews).map(view => ({
 
 const AllItemTabs = ComponentMappings.map(({ name }, i) => <Tab key={i}> {name} </Tab>);
 const AllItemPanels = ComponentMappings.map(({ view, name }, i) => {
-	const View = TestViews[view];
-	const Content = () => (
-		<div>
-			<View />			
-		</div>
-	);
+	const View = TestViews[view];	
 	if (name === 'DataList') {
 		return (
-			<TabPanel key={i}>
-				<Content />
+			<TabPanel key={i}>				
+				<View />
 			</TabPanel>
 		);
 	}
 	return (
 		<TabPanel key={i}>
 			<ScrollBox>
-				<Content />
+				<View />
 			</ScrollBox>
 		</TabPanel>
 	);
@@ -84,7 +79,7 @@ class Views extends React.Component {
 						<Checkbox label="Code" checked={this.state.code} onChange={this.onCodeToggle} />
 					</Row>
 				</div>
-				<div style={{position:'absolute', top: 60, bottom: 0, width: '100%'}}>
+				<div style={{position:'absolute', top: 60, bottom: 0, width: '100%', display:'flex', flexDirection: 'column'}}>
 					<Tabs selected={this.state.tab} onSelect={this.onSelectTab} flex id='main-tabs'>
 						<TabList>{AllItemTabs}</TabList>
 						<TabPanels>{AllItemPanels}</TabPanels>

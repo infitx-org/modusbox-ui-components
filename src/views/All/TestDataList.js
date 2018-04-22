@@ -34,7 +34,7 @@ const TestDataList = () => (
 			flex: '2 1 auto',
 		}}
 	>
-		<Tabs>
+		<Tabs flex>
 			<TabList>
 				<Tab>1</Tab>
 				<Tab>2</Tab>
@@ -42,9 +42,9 @@ const TestDataList = () => (
 			</TabList>
 			<TabPanels>
 				<TabPanel>
-					<div style={{height:'300px'}}>
+					
 						<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
-					</div>
+					
 				</TabPanel>
 				<TabPanel>
 					<DataList id="2" columns={columns1} list={list1.concat(list1)} selected={'a'} paging />
