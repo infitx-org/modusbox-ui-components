@@ -46,22 +46,41 @@ class Tooltip extends PureComponent {
 		super(props);
 		this.showTooltip = this.showTooltip.bind(this);
 		this.hideTooltip = this.hideTooltip.bind(this);
+		this.delayShowTooltip = this.delayShowTooltip.bind(this);
+		this.delayHideTooltip = this.delayHideTooltip.bind(this);
 	}
 	componentDidMount() {
-		this.box.addEventListener('mouseenter', this.showTooltip);
-		this.box.addEventListener('mouseleave', this.hideTooltip);
+		this.box.addEventListener('mouseenter', this.delayShowTooltip);
+		this.box.addEventListener('mouseleave', this.delayHideTooltip);
+		this._mounted = true;
 	}
 	componentDidUpdate() {}
 	componentWillUnmount() {
+		this._mounted = false;
 		this.hideTooltip();
-		this.box.removeEventListener('mouseenter', this.showTooltip);
-		this.box.removeEventListener('mouseleave', this.hideTooltip);
+		this.box.removeEventListener('mouseenter', this.delayShowTooltip);
+		this.box.removeEventListener('mouseleave', this.delayHideTooltip);
+	}
+	delayShowTooltip(){
+		this._isHoveringTooltip = true;
+		clearTimeout( this.tooltipTimeout )
+		this.tooltipTimeout = setTimeout( this.showTooltip, 200 );
+	}
+	delayHideTooltip(){
+		this._isHoveringTooltip = false;
+		clearTimeout( this.tooltipTimeout )
+		this.tooltipTimeout = setTimeout( this.hideTooltip, 200 );
 	}
 	showTooltip() {
+		if(this._isHoveringTooltip === false){
+			return;
+		}
 		if (this.box === undefined) {
 			return;
 		}
-
+		if(this._hasMountedTooltip === true){
+			return;
+		}
 		const {
 			content, label, position, children,
 		} = this.props;
@@ -100,6 +119,9 @@ class Tooltip extends PureComponent {
 		this._hasMountedTooltip = true;
 	}
 	hideTooltip() {
+		if(this._isHoveringTooltip === true){
+			return;
+		}
 		if (this._hasMountedTooltip) {
 			ReactDOM.unmountComponentAtNode(this._target);
 			document.body.removeChild(this._target);

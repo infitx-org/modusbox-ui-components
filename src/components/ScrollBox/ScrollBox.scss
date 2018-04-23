@@ -30,6 +30,7 @@
 
 }
 .element-scrollbox__content--flexible{
+	min-height: auto;
 	display: flex;
 	height: auto;
 }
