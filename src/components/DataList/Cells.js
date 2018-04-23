@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
-import Checkbox from './Checkbox';
+import Checkbox from '../Checkbox';
 
 // the icon is throwing an error, but the code and the functionality isn't broken
 class ArrowCell extends PureComponent {
@@ -46,7 +46,7 @@ class CheckboxCell extends PureComponent {
 		return (
 			<div style={style} className="element-datalist__body-cell element-datalist__body-column-cell">
 				<div style={{ width: '100%' }}>
-					{show && <Checkbox id={id} isSelected={isSelected} onChange={onMultiSelect} />}
+					{show && <Checkbox id={id} checked={isSelected} onChange={onMultiSelect} round/>}
 				</div>
 			</div>
 		);

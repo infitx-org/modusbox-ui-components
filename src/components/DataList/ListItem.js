@@ -24,7 +24,9 @@ class ListItem extends React.Component {
 		this.props.onResize(data.height);
 	}
 	onClick() {
-		this.props.onItemClick(this.props.item);
+		if(typeof this.props.onItemClick === 'function'){
+			this.props.onItemClick(this.props.item);
+		}
 	}
 	onMultiSelect() {
 		this.props.onMultiSelect(this.props.item);

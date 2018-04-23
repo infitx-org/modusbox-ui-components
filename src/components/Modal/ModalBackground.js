@@ -96,7 +96,7 @@ export default class ModalBackground extends PureComponent {
 		let content = child;
 		if (!tabbed) {
 			content = (
-				<ScrollBox>
+				<ScrollBox flex>
 					<div style={{ padding: '20px' }}>{child}</div>
 				</ScrollBox>
 			);

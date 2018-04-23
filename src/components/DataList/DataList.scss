@@ -7,7 +7,6 @@
 		margin: 0;
 		padding: 0;
 	}
-
 }
 
 /* MULTI SELECTION */
@@ -260,18 +259,11 @@
 		flex-direction:column;
 		flex: 1 1 auto;
 	}	
-	.element-datalist__body-box{
-		/* width: calc( 100% + 20px );
-		padding-right: 20px;
-		position: relative;
-		max-height:100%;
-		overflow-y: scroll;
-		overflow-x: hidden; */
+	.element-datalist__body-box{		
 		&.remove-pointer-events{
 			pointer-events:none;
 		}		
 	}
-
 	.element-datalist__scroller{
 	}
 

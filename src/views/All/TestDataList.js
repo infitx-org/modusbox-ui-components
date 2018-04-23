@@ -41,10 +41,17 @@ const TestDataList = () => (
 				<Tab>3</Tab>
 			</TabList>
 			<TabPanels>
-				<TabPanel>
-					
-						<DataList id="1" columns={columns1} list={list1} selected={'a'} paging />
-					
+				<TabPanel>					
+						<DataList
+							id="1"
+							columns={columns1}
+							list={list1}
+							selected={'a'}
+							paging
+							multiSelect={ true }
+							multiSelected={[]}
+							onMultiSelect={ console.log }							
+						/>					
 				</TabPanel>
 				<TabPanel>
 					<DataList id="2" columns={columns1} list={list1.concat(list1)} selected={'a'} paging />
