@@ -57,7 +57,7 @@ class Tooltip extends PureComponent {
 	componentDidUpdate() {}
 	componentWillUnmount() {
 		this._mounted = false;
-		this.hideTooltip();
+		this.hideTooltip(true);
 		this.box.removeEventListener('mouseenter', this.delayShowTooltip);
 		this.box.removeEventListener('mouseleave', this.delayHideTooltip);
 	}
@@ -118,8 +118,8 @@ class Tooltip extends PureComponent {
 
 		this._hasMountedTooltip = true;
 	}
-	hideTooltip() {
-		if(this._isHoveringTooltip === true){
+	hideTooltip(force = false) {
+		if(this._isHoveringTooltip === true && force === false){
 			return;
 		}
 		if (this._hasMountedTooltip) {
