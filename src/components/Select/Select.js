@@ -103,6 +103,9 @@ class Select extends PureComponent {
 		if (value === undefined) {
 			return;
 		}
+		if(value === this.state.selected) {
+			return;
+		}
 		const selectedItem = find(this.state.options, { value });
 		const selectedLabel = selectedItem ? selectedItem.label : undefined;
 		this.setState({
