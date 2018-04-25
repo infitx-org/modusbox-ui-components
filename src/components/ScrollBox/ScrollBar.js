@@ -58,9 +58,8 @@ class ScrollBar extends PureComponent {
 		const { contentHeight, scrollTop, offset } = positions;
 		const totalContentHeight = offset + contentHeight;
 		const viewToContentRatio = positions.height / totalContentHeight;
-		this.viewToContentRatio = viewToContentRatio;
-		const barHeight = viewToContentRatio * height;
-		const realBaHeight = height / totalContentHeight * height;
+		const barHeight = Math.max(10, viewToContentRatio * height);
+		const realBaHeight = Math.max(10, height / totalContentHeight * height);
 		const showScrollbar = viewToContentRatio < 1;
 		const translate = showScrollbar ? scrollTop / (totalContentHeight - height) * (height - realBaHeight) : 0;
 		const isMoving = true;
