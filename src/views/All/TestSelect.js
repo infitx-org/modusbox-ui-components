@@ -4,7 +4,7 @@ import Select from '../../components/Select';
 
 let options = [
 	{
-		label: new Array(100).fill('superLong'),
+		label: new Array(100).fill('super Long'),
 		value: 'superStrangeValue',
 		icon: 'close-small',
 	},
