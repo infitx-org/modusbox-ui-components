@@ -157,7 +157,7 @@ class TextField extends PureComponent {
 
 	render() {
 		const {
-			autofocus, id, type, style, placeholder, onButtonClick, buttonText, buttonKind, icon, disabled, pending, required, invalid,
+			autofocus, id, type, style, placeholder, onButtonClick, buttonText, buttonKind, buttonDisabled, icon, disabled, pending, required, invalid,
 		} = this.props;
 		const { isOpen, value, isPasswordVisible } = this.state;
 		const isPlaceholderActive = isOpen || value !== undefined;
@@ -210,7 +210,7 @@ class TextField extends PureComponent {
 								kind={buttonKind}
 								onClick={this.onButtonClick}
 								label={buttonText}
-								disabled={disabled}
+								disabled={disabled||buttonDisabled}
 								isOpen={isOpen}								
 							/>
 						)}
@@ -241,10 +241,11 @@ TextField.propTypes = {
 	id: PropTypes.string,
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
-	onClick: PropTypes.func,
-	onButtonClick: PropTypes.func,
 	buttonText: PropTypes.string,
 	buttonKind: PropTypes.string,
+	buttonDisabled: PropTypes.bool,
+	onClick: PropTypes.func,
+	onButtonClick: PropTypes.func,
 	onChange: PropTypes.func,
 	onKeyPress: PropTypes.func,
 	onBlur: PropTypes.func,
@@ -264,9 +265,10 @@ TextField.defaultProps = {
 	placeholder: undefined,
 	value: undefined,
 	buttonText: undefined,
-	onButtonClick: undefined,
 	buttonKind: undefined,
+	buttonDisabled: false,
 	onClick: undefined,
+	onButtonClick: undefined,
 	onChange: undefined,
 	onKeyPress: undefined,
 	onBlur: undefined,
