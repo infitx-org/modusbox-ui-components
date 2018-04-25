@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correct sizes 1`] = `
+<h3>
+  <span>
+     Text 
+  </span>
+</h3>
+`;
+
+exports[`renders correct sizes 2`] = `
+<h1>
+  <span>
+     Text 
+  </span>
+</h1>
+`;
+
+exports[`renders correct sizes 3`] = `
+<h2>
+  <span>
+     Text 
+  </span>
+</h2>
+`;
+
+exports[`renders correct sizes 4`] = `
+<h3>
+  <span>
+     Text 
+  </span>
+</h3>
+`;
+
+exports[`renders correct sizes 5`] = `
+<h4>
+  <span>
+     Text 
+  </span>
+</h4>
+`;
+
+exports[`renders correct sizes 6`] = `
+<h5>
+  <span>
+     Text 
+  </span>
+</h5>
+`;
+
+exports[`renders correct sizes 7`] = `
+<h6>
+  <span>
+     Text 
+  </span>
+</h6>
+`;
+
+exports[`renders correct sizes 8`] = `
+<h3>
+  <span>
+     Text 
+  </span>
+</h3>
+`;
+
+exports[`renders correct sizes 9`] = `
+<h3>
+  <span>
+     Text 
+  </span>
+</h3>
+`;
+
+exports[`renders correct sizes 10`] = `
+<h3>
+  <span>
+     Text 
+  </span>
+</h3>
+`;
