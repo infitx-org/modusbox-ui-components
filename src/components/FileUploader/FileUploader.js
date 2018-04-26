@@ -211,7 +211,7 @@ class FileUploader extends PureComponent {
 									this.fileuploader = fileuploader;
 								}}
 								onKeyDown={this.onKeyDown}
-								id={id}
+								id={`${id}-file`}
 							/>
 
 							<div className={fileNameClassName}>{fileNameLabel}</div>
