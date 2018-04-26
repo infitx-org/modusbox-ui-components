@@ -8,7 +8,7 @@ const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
 class Tooltip extends PureComponent {
 	static getPosition(box, target, position) {
 		let top;
-		let left;
+		let left;		
 		const { innerWidth } = window;
 		const boxRect = box.getBoundingClientRect();
 		const tooltipRect = target.getBoundingClientRect();
@@ -30,7 +30,6 @@ class Tooltip extends PureComponent {
 			top = topCenteredByX;
 			left = boxRect.left + boxRect.width + 10;
 		}
-
 		if (left < 10) {
 			left = 10;
 		}
@@ -102,29 +101,38 @@ class Tooltip extends PureComponent {
 
 		this._div = document.createElement('div');
 		this._div.className = 'element-tooltip__viewer';
+		this._div.className += ` element-tooltip__viewer--fade-in-${position}`;
 		if (defaultAppearance === true) {
 			this._div.className += ' element-tooltip__viewer--default';
 		}
-		this._target = document.body.appendChild(this._div);
-		this._component = renderSubtreeIntoContainer(this, cmp, this._target);
+		this._box = document.createElement('div');
+		this._box.className = `elemenet-tooltip__box`;
 
-		// Get By Position
-		const { top, left } = Tooltip.getPosition(this.box, this._target, position);
+		this._handle = document.createElement('div');
+		this._handle.className = `elemenet-tooltip__handle elemenet-tooltip__handle--${position}`;
+
+		this._div.appendChild(this._handle);
+		this._target = this._div.appendChild(this._box);
+
+		this._location = document.body.appendChild(this._div);
+		this._component = renderSubtreeIntoContainer(this, cmp, this._target);
+		
+		const { top, left } = Tooltip.getPosition(this.box, this._location, position);
 
 		// Apply final updates to the tooltip itself
-		this._target.style.top = top;
-		this._target.style.left = left;
-		this._target.className += ' element-tooltip__viewer--fade-in';
+		this._location.style.top = top;
+		this._location.style.left = left;
+		this._location.className += ' element-tooltip__viewer--fade-in';		
 
 		this._hasMountedTooltip = true;
 	}
-	hideTooltip(force = false) {
+	hideTooltip(force = false) {		
 		if(this._isHoveringTooltip === true && force === false){
 			return;
 		}
 		if (this._hasMountedTooltip) {
 			ReactDOM.unmountComponentAtNode(this._target);
-			document.body.removeChild(this._target);
+			document.body.removeChild(this._location);
 			this._target = null;
 			this._component = null;
 			this._hasMountedTooltip = false;
@@ -140,7 +148,7 @@ class Tooltip extends PureComponent {
 				ref={(box) => {
 					this.box = box;
 				}}
-			>
+			>				
 				{children}
 			</div>
 		);
