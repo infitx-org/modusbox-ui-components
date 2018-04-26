@@ -1,34 +1,35 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+function headerTag(size) {
+  if (size >= 1 && size <= 6) {
+    return `h${size}`;
+  } else {
+    return 'h3';
+  }
+}
+
 class Heading extends PureComponent {
-	render() {
-		const { size, children, style } = this.props;
-		const intSize = parseInt(size);
-		const number = Number.isNaN(intSize) === false && intSize;
-		let component = null;
-		switch (number) {
-		case 1: component = <h1 style={style}><span>{children}</span></h1>; break;
-		case 2: component = <h2 style={style}><span>{children}</span></h2>; break;
-		case 3: component = <h3 style={style}><span>{children}</span></h3>; break;
-		case 4: component = <h4 style={style}><span>{children}</span></h4>; break;
-		case 5: component = <h5 style={style}><span>{children}</span></h5>; break;
-		case 6: component = <h6 style={style}><span>{children}</span></h6>; break;
-		default: component = <h3 style={style}><span>{children}</span></h3>; break;
-		}
-		return component;
-	}
+  render() {
+    const { size, children, style } = this.props;
+    const Header = headerTag(parseInt(size));
+    return (
+      <Header style={style}>
+        <span>{children}</span>
+      </Header>
+    );
+  }
 }
 
 Heading.propTypes = {
-	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	style: PropTypes.shape(),
-	children: PropTypes.node,
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  style: PropTypes.shape(),
+  children: PropTypes.node
 };
 Heading.defaultProps = {
-	size: 3,
-	style: undefined,
-	children: undefined,
+  size: 3,
+  style: undefined,
+  children: undefined
 };
 
 export default Heading;
