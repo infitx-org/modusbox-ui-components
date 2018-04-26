@@ -180,7 +180,7 @@ class FileUploader extends PureComponent {
 
 		const fileNameClassName = utils.composeClassNames([
 			'input-fileuploader__filename',
-			hasFile && 'input-fileuploader__filename--no-file',
+			!hasFile && 'input-fileuploader__filename--no-file',
 		]);
 		const fileNameLabel = hasFile ? fileName : 'No File Choosen';
 
