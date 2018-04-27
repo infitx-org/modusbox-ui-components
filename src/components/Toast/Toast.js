@@ -1,6 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import Notification from 'rc-notification';
-import styles from './Toast.css';
+
+import Icon from '../Icon';
+import './Toast.scss';
+import * as utils from '../../utils/common';
 
 /* initialized Toast Lib */
 let notification;
@@ -12,7 +15,7 @@ let toastCount = 0;
 const now = Date.now();
 function toastUID() {
 	toastCount += 1;
-	return `anypoint_toast_${now}_${toastCount}`;
+	return `element-toast_${now}_${toastCount}`;
 }
 function close(key) {
 	notification.removeNotice(key);
@@ -22,6 +25,12 @@ const noOp = () => {};
 /**
  Toast is used to diplay quick notifications to the user in the corners of the screen
  */
+
+const iconNameMaps = {
+	'success': 'check-small',
+	'error': 'close-small',
+	'info': 'info-small'
+}
 export default class Toast extends Component {
 	static show(config) {
 		const text = (config.title) ? config.title : '';
@@ -31,7 +40,6 @@ export default class Toast extends Component {
 		const toastOnClose = (config.onClose) ? config.onClose : noOp;
 		const toastStyle = (config.style) ? config.style : {};
 		const closeable = (config.closeable) ? close.bind(null, toastKey) : noOp;
-
 		const toastContent = (
 			<span id={toastKey} onClick={closeable} role="presentation">
 				<Toast title={text} kind={toastKind}>
@@ -58,23 +66,36 @@ export default class Toast extends Component {
 	}
 
 	getClassNames() {
-		const { kind, className } = this.props;
-		const classProp = className || '';
-		const toastPadding = (kind === 'custom') ? styles.noPadding : styles.padding;
-		const toastClass = `anypoint-toast ${styles[`toast-${kind}`]}`;
-		return `${styles.toast} ${toastClass} ${classProp} ${toastPadding}`;
+		const { kind, className } = this.props;		
+		const isCustom = (kind === 'custom');
+		const componentClassName = utils.composeClassNames([
+			'element-toast',
+			`element-toast--${kind}`,
+			className,
+			isCustom && 'element-toast-noPadding',
+			!isCustom && 'element-toast-padding',
+		])
+		return componentClassName
 	}
 	render() {
-		const { children, title } = this.props;
-		const classes = this.getClassNames();
+		const { kind, children, title } = this.props;
+		const className = this.getClassNames();
+		const isCustom = (kind === 'custom');
+
+		let icon = null;
+		if (!isCustom) {			
+			const iconName = iconNameMaps[kind];			
+			icon = <div className='element-toast__icon'><Icon name={iconName} size={16}/></div>;
+		}
+
 		return (
-			<div className={classes}>
-				<div if={title} className={styles.title}>
+			<div className={className}>				
+				{title && <div className='element-toast__title'>
+					{icon}
 					{title}
 				</div>
-				<div if={children} className={styles.custom}>
-					{children}
-				</div>
+			}
+				{children && <div className='element-toast__custom'>{children}</div>}
 			</div>
 		);
 	}
