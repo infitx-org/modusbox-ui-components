@@ -35,17 +35,17 @@
 	fill: $color__dark-gray-1;
 }
 
+.input-select__options-item--selected{
+	background: $color__gray-2;
+	border-color: $color__dark-gray-2;
+	color: $color__dark-gray-2;
+}
 .input-select__options-item:hover,
 .input-select__options-item--highlighted{
 	background: $color__gray-1;
 	border-color: $color__main-primary;
 	color: $color__main-primary;
 	fill: $color__main-primary;
-}
-.input-select__options-item--selected{
-	background: $color__gray-2;
-	border-color: $color__dark-gray-2;
-	color: $color__dark-gray-2;
 }
 .input-select__options-item--disabled,
 .input-select__options-item--disabled:hover{
