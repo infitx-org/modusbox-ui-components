@@ -1,20 +1,13 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - npm install -g yarn
-      - yarn install
   build:
     commands:
-      - yarn run test
-  post_build:
-    commands:
-      - yarn pack
-artifacts:
-  files:
-    - modus-ui-components*.tgz
-  discard-paths: yes
-cache:
-  paths:
-    - 'node_modules/**/*'
+      - make bare_build
+  # post_build:
+  #   commands:
+  #     - make bare_extract
+# artifacts:
+#   files:
+#     - dist/index.js
+#   discard-paths: yes
