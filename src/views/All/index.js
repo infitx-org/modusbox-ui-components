@@ -1,39 +1,39 @@
-import TestButton from './TestButton';
-import TestTooltip from './TestTooltip';
-import TestCheckbox from './TestCheckbox';
-import TestColumn from './TestColumn';
-import TestDataList from './TestDataList';
-import TestDatePicker from './TestDatePicker';
-import TestHeading from './TestHeading';
-import TestSelect from './TestSelect';
-import TestTextField from './TestTextField';
-import TestTabs from './TestTabs';
-import TestRadio from './TestRadio';
-import TestScrollBox from './TestScrollBox';
-import TestFileUploader from './TestFileUploader';
-import TestIcon from './TestIcon';
-import TestSpinner from './TestSpinner';
-import TestModal from './TestModal';
-import TestRow from './TestRow';
-import TestToast from './TestToast';
+import ComponentButton from './ComponentButton';
+import ComponentTooltip from './ComponentTooltip';
+import ComponentCheckbox from './ComponentCheckbox';
+import ComponentColumn from './ComponentColumn';
+import ComponentDataList from './ComponentDataList';
+import ComponentDatePicker from './ComponentDatePicker';
+import ComponentHeading from './ComponentHeading';
+import ComponentSelect from './ComponentSelect';
+import ComponentTextField from './ComponentTextField';
+import ComponentTabs from './ComponentTabs';
+import ComponentRadio from './ComponentRadio';
+import ComponentScrollBox from './ComponentScrollBox';
+import ComponentFileUploader from './ComponentFileUploader';
+import ComponentIcon from './ComponentIcon';
+import ComponentSpinner from './ComponentSpinner';
+import ComponentModal from './ComponentModal';
+import ComponentRow from './ComponentRow';
+import ComponentToast from './ComponentToast';
 
 export {
-	TestTooltip,
-	TestButton,
-	TestCheckbox,
-	TestHeading,
-	TestSelect,
-	TestTextField,
-	TestTabs,
-	TestRadio,
-	TestDataList,
-	TestScrollBox,
-	TestFileUploader,
-	TestDatePicker,
-	TestIcon,
-	TestSpinner,
-	TestModal,
-	TestRow,
-	TestColumn,
-	TestToast
+	ComponentTooltip,
+	ComponentButton,
+	ComponentCheckbox,
+	ComponentHeading,
+	ComponentSelect,
+	ComponentTextField,
+	ComponentTabs,
+	ComponentRadio,
+	ComponentDataList,
+	ComponentScrollBox,
+	ComponentFileUploader,
+	ComponentDatePicker,
+	ComponentIcon,
+	ComponentSpinner,
+	ComponentModal,
+	ComponentRow,
+	ComponentColumn,
+	ComponentToast
 };

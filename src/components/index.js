@@ -1,11 +1,16 @@
 import '../assets/main.css';
-// import '../assets/styles/components.scss';
 import '../assets/styles/default.scss';
+
+
+// TODO: DataList needs heavy refactoring. 
+// The promise based internal logic (infinite scrolling) should be removed 
+// The component should just render what is being passed, 
+// therefore async data coming in chunks should be handled externally
+// import DataList from './DataList'; 
 
 import Button from './Button';
 import Column from './Column';
 import Checkbox from './Checkbox';
-/* import DataList from './DataList'; */
 import DatePicker from './DatePicker';
 import FileUploader from './FileUploader';
 import Heading from './Heading';
@@ -25,7 +30,6 @@ export {
 	Button,
 	Column,
 	Checkbox,
-	/* DataList, */
 	DatePicker,
 	FileUploader,
 	Heading,

@@ -4,16 +4,16 @@ import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs';
 import Select from '../components/Select';
 import ScrollBox from '../components/ScrollBox';
 import Row from '../components/Row';
-import * as TestViews from './All';
+import * as ComponentViews from './All';
 
-const ComponentMappings = Object.keys(TestViews).map(view => ({
-  name: view.substring(4),
+const componentMappings = Object.keys(ComponentViews).map(view => ({
+  name: view.substring(9), // 'Remove the prefix "component" 
   view,
 }));
 
-const AllItemTabs = ComponentMappings.map(({ name }, i) => <Tab key={i}> {name} </Tab>);
-const AllItemPanels = ComponentMappings.map(({ view, name }, i) => {
-  const View = TestViews[view];
+const AllItemTabs = componentMappings.map(({ name }, i) => <Tab key={i}> {name} </Tab>);
+const AllItemPanels = componentMappings.map(({ view, name }, i) => {
+  const View = ComponentViews[view];
   if (name === 'DataList') {
     return (
       <TabPanel key={i}>
@@ -37,15 +37,25 @@ class Views extends React.Component {
     this.onSelectTab = this.onSelectTab.bind(this);
 
     const selectedTab = parseInt(window.localStorage.getItem('tab') || 0, 10);
-    const tab = selectedTab !== undefined ? selectedTab : ComponentMappings.length - 1;
+    const tab = selectedTab !== undefined ? selectedTab : componentMappings.length - 1;
+    const style = window.localStorage.getItem('style') || 'default';
     this.state = {
       tab,
-      style: 'default',
+      style
     };
+  }
+  componentDidMount(){
+    // the style file needs to be imported dynamically.
+    // Since this a SCSS file, it needs to be parsed and properly loaded with Webpack
+    // so it cannot be just imported via a link tag and eventually replaced    
+    require(`../assets/styles/${this.state.style}.scss`);    
   }
 
   onChangeStyle(style) {
     this.setState({ style });
+    window.localStorage.setItem('style', style);
+    // When changing the file we need to reload the page in order to remove the previous style file
+    window.location.reload();
   }
 
   onSelectTab(e, tab) {
@@ -54,17 +64,14 @@ class Views extends React.Component {
   }
 
   render() {
-    const options = [{ label: 'default', value: 'default' }, { label: 'custom', value: 'custom' }];
-    // FIXME: There has got to be a better way than this
-    require('../assets/styles/' + this.state.style + '.scss');
-
+    const options = ['default', 'custom'].map( value => ({ label: value, value }));
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
         <div style={{ margin: '10px' }}>
           <Row>
             <Row>
               <Select
-                value={this.state.style}
+                selected={this.state.style}
                 placeholder="Select StyleSheet"
                 onChange={this.onChangeStyle}
                 options={options}
