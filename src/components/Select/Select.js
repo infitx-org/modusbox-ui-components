@@ -288,7 +288,7 @@ class Select extends PureComponent {
 							value={inputValue}
 							disabled={disabled}
 						/>
-						<input type="hidden" value={JSON.stringify(options)} />
+						<input type="hidden" disabled value={JSON.stringify(options)} />
 
 						{filter && (
 							<div className="mb-input__inner-icon input-select-mb-input__icon">
