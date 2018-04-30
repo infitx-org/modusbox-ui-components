@@ -1,17 +1,69 @@
 @import './items/input';
 @import './items/element';
 
+@import './vars/fonts.scss';
 @import './vars/colors.scss';
 @import './vars/border.scss';
 @import './vars/background.scss';
 @import './vars/general.scss';
 
+
+// General rules that apply across different components
+.mb-input {
+	/* margin-top: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-bottom: 3px; */
+}
 .mb-input__borders {
 	border-right-width: 0px;
 	border-left-width: 0px;
+	
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
 }
 .mb-input__background{
 	background: transparent;
+}
+
+// Button custom style
+.input-button__input {	
+	border-bottom-width: 2px;
+	&:not(.noFill){
+		border-bottom-color: rgba(0,0,0,0.2);		
+	}
+	&:hover, &:focus{		
+		border-bottom-width: 2px;
+		border-bottom-color: rgba(0,0,0,0.2);
+		&:active{			
+			border-bottom-color: transparent;			
+		}
+	}
+}
+
+// Checkbox custom style
+.input-checkbox__input {	
+	+ label {
+		&:before {		
+			flex-basis: 22px;
+			width: 22px;
+			border: none;
+			height: 19px;
+			border-bottom: 3px solid rgba(0,0,0,0.2);
+		}		
+		&.round {			
+			&:before {
+				height: 22px;
+				border-bottom: 0px solid #333; 
+			}
+		}
+	}
+	&:checked {
+		+ label:not(.round) {	
+			&:before {
+				height: 20px;
+				border-bottom: 2px solid rgba(0,0,0,0.2);
+			}		
+		}
+	}	
 }

@@ -13,7 +13,7 @@
     white-space: nowrap;
     user-select: none;
     text-decoration: none;
-    transition: background .3s;    
+    transition: background .3s linear, margin 0.01s linear;
     font-style: normal;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;

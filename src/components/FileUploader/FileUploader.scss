@@ -1,4 +1,5 @@
 @import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/transitions.scss';
 
 .input-fileuploader{
 }
@@ -7,6 +8,7 @@
 	position: relative;	
 	cursor: pointer;
 	height: 100%;
+	transition: $input__main-transition;
 	
 	&.input-fileuploader__mb-input--open {
 	}	

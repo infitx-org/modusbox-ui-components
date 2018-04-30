@@ -40,7 +40,8 @@ class Button extends PureComponent {
 		const isDisabledOrPending = disabled === true || pending === true;
 		const classNames = utils.composeClassNames([
 			className,
-			'mb-input input-button__input',
+			'mb-input',
+			'input-button__input',
 			kind === 'primary' && 'input-button__mb-input--primary',
 			kind === 'secondary' && 'input-button__mb-input--secondary',
 			kind === 'tertiary' && 'input-button__mb-input--tertiary',

@@ -1,4 +1,5 @@
 @import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/transitions.scss';
 
 .input-textfield{	
 }
@@ -7,6 +8,7 @@
 	position: relative;		
 	cursor: text;
 	height: 100%;
+	transition: $input__main-transition;
 
 	&.input-textfield__mb-input--open{		
 	}	
