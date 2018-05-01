@@ -1,3 +1,4 @@
+import ComponentColors from './ComponentColors';
 import ComponentButton from './ComponentButton';
 import ComponentTooltip from './ComponentTooltip';
 import ComponentCheckbox from './ComponentCheckbox';
@@ -18,6 +19,7 @@ import ComponentRow from './ComponentRow';
 import ComponentToast from './ComponentToast';
 
 export {
+	ComponentColors,
 	ComponentTooltip,
 	ComponentButton,
 	ComponentCheckbox,

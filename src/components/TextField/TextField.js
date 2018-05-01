@@ -7,8 +7,6 @@ import keyCodes from '../../utils/keyCodes';
 import Icon from '../Icon';
 import { Loader, Placeholder, InnerButton } from '../Common';
 
-import './TextField.scss';
-
 class TextField extends PureComponent {
 	constructor(props) {
 		super(props);

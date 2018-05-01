@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
-import './Tabs.scss';
-
 class Tab extends PureComponent {
 	constructor(props) {
 		super(props);

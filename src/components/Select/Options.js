@@ -7,8 +7,6 @@ import ScrollBox from '../ScrollBox';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 
-import './Options.scss';
-
 class Options extends PureComponent {
 	constructor(props) {
 		super(props);

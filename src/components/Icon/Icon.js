@@ -4,8 +4,6 @@ import * as utils from '../../utils/common';
 
 import Tooltip from '../Tooltip';
 
-import './Icon.scss';
-
 class Icon extends PureComponent {
 	constructor(props) {
 		super(props);

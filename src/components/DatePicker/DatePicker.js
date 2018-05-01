@@ -9,8 +9,6 @@ import keyCodes from '../../utils/keyCodes';
 import Icon from '../Icon';
 import { Loader, Placeholder } from '../Common';
 
-import './DatePicker.scss';
-
 class DatePicker extends PureComponent {
 	static getDate(value) {
 		if (typeof value === 'string' || typeof value === 'number') {

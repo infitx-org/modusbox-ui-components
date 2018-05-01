@@ -1,16 +1,29 @@
 const path = require('path');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './src/components/index.js',
+  entry: {
+    index: './src/components/index.js',
+    mulesoft: './src/assets/styles/themes/mulesoft.scss',
+    modusbox: './src/assets/styles/themes/modusbox.scss',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'umd',
     library: 'modusbox-ui-components',
   },
-  plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+  plugins: [
+    new CleanWebpackPlugin('dist', {}),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new ExtractTextPlugin('[name].css', {
+      disable: false,
+      allChunks: true,
+    }),
+  ],
   module: {
     rules: [
       {
@@ -26,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)?$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
+        loader: ExtractTextPlugin.extract('css-loader!sass-loader!postcss-loader'),
       },
       {
         test: /\.svg$/,
@@ -35,7 +48,6 @@ module.exports = {
       {
         test: /\.(eot|ttf|woff|woff2)$/,
         loader: 'file-loader',
-        query: 'assets/fonts/[name].[ext]',
       },
     ],
   },

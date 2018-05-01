@@ -11,8 +11,6 @@ import { Loader, Placeholder } from '../Common';
 import Options from './Options';
 import Indicator from './Indicator';
 
-import './Select.scss';
-
 class Select extends PureComponent {
 	constructor(props) {
 		super(props);

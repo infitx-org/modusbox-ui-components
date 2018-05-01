@@ -38,7 +38,7 @@ class Views extends React.Component {
 
     const selectedTab = parseInt(window.localStorage.getItem('tab') || 0, 10);
     const tab = selectedTab !== undefined ? selectedTab : componentMappings.length - 1;
-    const style = window.localStorage.getItem('style') || 'default';
+    const style = window.localStorage.getItem('style') || 'mulesoft';
     this.state = {
       tab,
       style
@@ -64,7 +64,7 @@ class Views extends React.Component {
   }
 
   render() {
-    const options = ['default', 'custom'].map( value => ({ label: value, value }));
+    const options = ['mulesoft', 'modusbox'].map( value => ({ label: value, value }));
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
         <div style={{ margin: '10px' }}>

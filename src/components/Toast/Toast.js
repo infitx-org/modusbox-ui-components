@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import Notification from 'rc-notification';
 
 import Icon from '../Icon';
-import './Toast.scss';
 import * as utils from '../../utils/common';
 
 /* initialized Toast Lib */

@@ -10,8 +10,6 @@ import Button from '../Button';
 import '../../icons/mule/upload-small.svg';
 import '../../icons/mule/close-small.svg';
 
-import './FileUploader.scss';
-
 class FileUploader extends PureComponent {
 	constructor(props) {
 		super(props);

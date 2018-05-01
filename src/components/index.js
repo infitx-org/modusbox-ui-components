@@ -1,7 +1,3 @@
-import '../assets/main.css';
-import '../assets/styles/default.scss';
-
-
 // TODO: DataList needs heavy refactoring. 
 // The promise based internal logic (infinite scrolling) should be removed 
 // The component should just render what is being passed, 

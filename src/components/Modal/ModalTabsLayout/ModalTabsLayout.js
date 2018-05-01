@@ -4,7 +4,6 @@ import isEqual from 'lodash/isEqual';
 
 import * as utils from '../../../utils/common';
 import ScrollBox from '../../ScrollBox';
-import './ModalTabsLayout.scss';
 
 class ModalTabsLayout extends PureComponent {
 	constructor(props) {

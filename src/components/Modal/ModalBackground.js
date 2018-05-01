@@ -7,8 +7,6 @@ import Icon from '../Icon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
-import './Modal.scss';
-
 export default class ModalBackground extends PureComponent {
 	constructor(props) {
 		super(props);

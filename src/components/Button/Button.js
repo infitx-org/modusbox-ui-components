@@ -4,7 +4,6 @@ import * as utils from '../../utils/common';
 
 import Icon from '../Icon';
 import Spinner from '../Spinner';
-import './Button.scss';
 
 class Button extends PureComponent {
 	constructor(props) {
