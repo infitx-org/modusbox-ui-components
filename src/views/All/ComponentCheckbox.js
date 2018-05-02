@@ -1,10 +1,18 @@
 /* eslint no-alert: "off" */
 import React from 'react';
-import Column from '../../components/Column';
+import Button from '../../components/Button';
 import Checkbox from '../../components/Checkbox';
+import Column from '../../components/Column';
+import Row from '../../components/Row';
 
 const TestCheckbox = () => (
   <div>
+    <Row style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }} align="left center">
+      <Button label="x" />
+      <Checkbox id="x" label="my Checkbox" checked={false} />
+      <Checkbox id="x1" label="my checkbox semi-checked" checked semi />
+      <Checkbox id="x2" label="other checkbox semi-checked" checked={false} semi />
+    </Row>
     <Column style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
       <Checkbox id="x" label="my Checkbox" checked={false} />
       <Checkbox id="x1" label="my checkbox semi-checked" checked semi />

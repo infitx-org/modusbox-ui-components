@@ -7,10 +7,12 @@ module.exports = {
     bundle: ['babel-polyfill', './src/Root'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
-  devtool: 'eval',
-  plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+  devtool: 'cheap-module-source-map',
+  plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  ],
   module: {
     rules: [
       {

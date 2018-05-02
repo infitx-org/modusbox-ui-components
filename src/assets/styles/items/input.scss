@@ -5,173 +5,168 @@
 
 /********************************/
 /********************************/
-*{
-	box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
-.mb-input *{
-	box-sizing: border-box;
-	font-family: Open Sans, sans-serif;
-	font-style: normal;
-	font-weight: 400;
-	-webkit-font-smoothing: antialiased;	
+.mb-input * {
+  box-sizing: border-box;
+  font-family: Open Sans, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 
 /** COMPONENT */
 
-.mb-input{		
-	border-radius: $border-radius;
+.mb-input {
+  border-radius: $border-radius;
 }
-.mb-input--open{
-	padding: 0px $component-open-size;		
+.mb-input--open {
+  padding: 0px $component-open-size;
 }
-.mb-input--disabled{
-	opacity: $component-opacity--disabled;
-	pointer-events: none;
-	cursor: auto;
+.mb-input--disabled {
+  opacity: $component-opacity--disabled;
+  pointer-events: none;
+  cursor: auto;
 }
-
 
 /** COMPONENT **/
 
-.mb-input__box{
-	width: 100%;
-	height: 45px;	
-	display: block;
-	box-sizing: border-box;
-	position: relative;
+.mb-input__box {
+  width: 100%;
+  height: 45px;
+  display: block;
+  box-sizing: border-box;
+  position: relative;
 }
-
 
 /** COMPONENT BACKGROUND **/
 
-.mb-input__background{
-	background: $background--default;
+.mb-input__background {
+  background: $background--default;
 }
-.mb-input__background--open{
-	background: $background--open;
+.mb-input__background--open {
+  background: $background--open;
 }
-.mb-input__background--pending{
-	background: $background--pending;	
+.mb-input__background--pending {
+  background: $background--pending;
 }
 .mb-input__background--invalid,
-.mb-input__background--required.mb-input__background--invalid{
-	background: $background--invalid;	
+.mb-input__background--required.mb-input__background--invalid {
+  background: $background--invalid;
 }
-.mb-input__background--required{
-	background: $background--required;	
+.mb-input__background--required {
+  background: $background--required;
 }
-	
 
 /** COMPONENT BORDERS **/
 
-.mb-input__borders{
-	border-left: 2px solid;
-	border-right: 2px solid;
-	border-color: $border-color--default;
+.mb-input__borders {
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-color: $border-color--default;
 }
-.mb-input__borders--open{
-	margin-left: -$component-open-size;
-	margin-right: -$component-open-size;	
-	border-color: $border-color--open;
-}	
-.mb-input__borders--pending{
-	border-color: $border-color--pending;
-}	
+.mb-input__borders--open {
+  margin-left: -$component-open-size;
+  margin-right: -$component-open-size;
+  border-color: $border-color--open;
+}
+.mb-input__borders--pending {
+  border-color: $border-color--pending;
+}
 .mb-input__borders--invalid,
-.mb-input__borders--required.mb-input__borders--invalid{
-	border-color: $border-color--invalid;
-}	
-.mb-input__borders--required{
-	border-color: $border-color--required;
-}	
+.mb-input__borders--required.mb-input__borders--invalid {
+  border-color: $border-color--invalid;
+}
+.mb-input__borders--required {
+  border-color: $border-color--required;
+}
 
 /** COMPONENT BLOCKS */
 
-.mb-input__content{
-	display: flex;
-	position: relative;
-	height: 100%;
-	width: 100%;
-	align-items: center;	
-	padding-left: 16px;
-	padding-right: 10px;
+.mb-input__content {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 10px;
 }
-.mb-input__input{
-	flex: 2 1 auto;	
-	overflow: hidden;
-	height:20px;
+.mb-input__input {
+  flex: 2 1 auto;
+  overflow: hidden;
+  height: 20px;
 
-	background: transparent;
-	border: none;
-	outline: none;
-	padding: 0px;
-	padding-top:1px;	
-	
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-size: 14px;	
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0px;
+  padding-top: 1px;
 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
 }
-.mb-input__holder{
-	padding: 0px;
-	margin: 0px;
-	width: 0px;
-	height: 0px;
-	border: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+.mb-input__holder {
+  padding: 0px;
+  margin: 0px;
+  width: 0px;
+  height: 0px;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
-.mb-input__placeholder{
-	font-size: 14px;
-	transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
-	position: absolute;
-	top: 50%;
-	left: 16px;	
-	color: $placeholder-color;
-	transform: translateY(-50%);
+.mb-input__placeholder {
+  font-size: 14px;
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  color: $placeholder-color;
+  transform: translateY(-50%);
 }
-.mb-input__placeholder--active{
-	top: 11px;
-	font-size: 11px;
+.mb-input__placeholder--active {
+  top: 11px;
+  font-size: 11px;
 }
-
 
 /** COMPONENT INNER BLOCKS **/
 
-.mb-input__inner-button{
-	outline: none;
-	flex: 0 0 auto;
-	border-radius:3px;
-	height: 24px;
-	margin-left: 5px;	
-	font-size:12px;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-	padding: 0px 5px;
-	font-size: 11px;	
-	
-	.input-button__icon{
-		display: flex;
-	}
+.mb-input__inner-button {
+  outline: none;
+  flex: 0 0 auto;
+  height: 24px;
+  margin-left: 5px;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 0px 5px;
+  font-size: 11px;
 
-	&:hover, &.mb-input__inner-button--active{		
-	}
+  .input-button__icon {
+    display: flex;
+  }
+
+  &:hover,
+  &.mb-input__inner-button--active {
+  }
 }
-.mb-input__inner-icon{
-	animation: animateIconFadeIn 0.2s linear forwards;
-	flex: 0 0 auto;
-	fill: #999;
-	margin-left: 5px;
+.mb-input__inner-icon {
+  animation: animateIconFadeIn 0.2s linear forwards;
+  flex: 0 0 auto;
+  fill: #999;
+  margin-left: 5px;
 }
 
-@keyframes animateIconFadeIn{ 
-	0%{ 
-		transform: scale(0.8,0.8);
-		opacity:0.5;
-	}
-	100%{
-		transform: scale(1,1);
-		opacity:1;
-	}
+@keyframes animateIconFadeIn {
+  0% {
+    transform: scale(0.8, 0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
 }

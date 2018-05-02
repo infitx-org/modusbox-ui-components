@@ -14,7 +14,8 @@ const colors = {
     'main-danger',
     'main-warning',
     'main-disabled',
-    'main-primary--active',
+  ],
+  'main-active': ['main-primary--active',
     'main-secondary--active',
     'main-tertiary--active',
     'main-success--active',
@@ -76,24 +77,31 @@ const colors = {
   ],
 };
 
-const ColorRow = ({ type, rowColors }) => (
-  <Column align="center left">
-    <span>{type}</span>
-    {rowColors.map(color => <ColorBlock color={color} />)}
-  </Column>
-);
-
 const ColorBlock = ({ color }) => (
-  <div className={`color-box color-box--${color}`}>
+  <div className={`color-box bg--${color}`}>
     <div className="color-box__title">{color}</div>
   </div>
 );
-const TestColor = () => (
-  <Column style={{ padding: '10px' }}>
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between top" wrap>
-      {Object.keys(colors).map(type => <ColorRow type={type} colors={colors[type]} />)}
-    </Row>
+
+const ColorRow = ({ type, rowColors }) => (
+  <Column align="center left">
+    <span>{type}</span>
+    {rowColors.map(color => <ColorBlock key={color} color={color} />)}
   </Column>
 );
+
+const TestColor = () => {
+  const colorRows = Object.keys(colors).map(type => (
+    <ColorRow key={type} type={type} rowColors={colors[type]} />
+  ));
+
+  return (
+    <Column style={{ padding: '10px' }}>
+      <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between top" wrap>
+        {colorRows}
+      </Row>
+    </Column>
+  );
+};
 
 export default TestColor;

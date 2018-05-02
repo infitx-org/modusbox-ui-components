@@ -1,0 +1,315 @@
+@import '../vars/colors.scss';
+
+.bg--main-primary {
+  background-color: $color__main-primary;
+}
+.bg--main-secondary {
+  background-color: $color__main-secondary;
+}
+.bg--main-tertiary {
+  background-color: $color__main-tertiary;
+}
+.bg--main-success {
+  background-color: $color__main-success;
+}
+.bg--main-danger {
+  background-color: $color__main-danger;
+}
+.bg--main-warning {
+  background-color: $color__main-warning;
+}
+.bg--main-disabled {
+  background-color: $color__main-disabled;
+}
+.bg--main-primary--active {
+  background-color: $color__main-primary--active;
+}
+.bg--main-secondary--active {
+  background-color: $color__main-secondary--active;
+}
+.bg--main-tertiary--active {
+  background-color: $color__main-tertiary--active;
+}
+.bg--main-success--active {
+  background-color: $color__main-success--active;
+}
+.bg--main-danger--active {
+  background-color: $color__main-danger--active;
+}
+.bg--main-warning--active {
+  background-color: $color__main-warning--active;
+}
+.bg--main-disabled--active {
+  background-color: $color__main-disabled--active;
+}
+.bg--blue-1 {
+  background-color: $color__blue-1;
+}
+.bg--blue-2 {
+  background-color: $color__blue-2;
+}
+.bg--blue-3 {
+  background-color: $color__blue-3;
+}
+.bg--blue-4 {
+  background-color: $color__blue-4;
+}
+.bg--blue-5 {
+  background-color: $color__blue-5;
+}
+.bg--dark-blue-1 {
+  background-color: $color__dark-blue-1;
+}
+.bg--dark-blue-2 {
+  background-color: $color__dark-blue-2;
+}
+.bg--dark-blue-3 {
+  background-color: $color__dark-blue-3;
+}
+.bg--dark-blue-4 {
+  background-color: $color__dark-blue-4;
+}
+.bg--dark-blue-5 {
+  background-color: $color__dark-blue-5;
+}
+.bg--green-1 {
+  background-color: $color__green-1;
+}
+.bg--green-2 {
+  background-color: $color__green-2;
+}
+.bg--green-3 {
+  background-color: $color__green-3;
+}
+.bg--green-4 {
+  background-color: $color__green-4;
+}
+.bg--green-5 {
+  background-color: $color__green-5;
+}
+.bg--gray-1 {
+  background-color: $color__gray-1;
+}
+.bg--gray-2 {
+  background-color: $color__gray-2;
+}
+.bg--gray-3 {
+  background-color: $color__gray-3;
+}
+.bg--gray-4 {
+  background-color: $color__gray-4;
+}
+.bg--gray-5 {
+  background-color: $color__gray-5;
+}
+.bg--dark-gray-1 {
+  background-color: $color__dark-gray-1;
+}
+.bg--dark-gray-2 {
+  background-color: $color__dark-gray-2;
+}
+.bg--dark-gray-3 {
+  background-color: $color__dark-gray-3;
+}
+.bg--dark-gray-4 {
+  background-color: $color__dark-gray-4;
+}
+.bg--dark-gray-5 {
+  background-color: $color__dark-gray-5;
+}
+.bg--alpha-1 {
+  background-color: $color__alpha-1;
+}
+.bg--alpha-2 {
+  background-color: $color__alpha-2;
+}
+.bg--alpha-3 {
+  background-color: $color__alpha-3;
+}
+.bg--alpha-4 {
+  background-color: $color__alpha-4;
+}
+.bg--alpha-5 {
+  background-color: $color__alpha-5;
+}
+.bg--white {
+  background-color: $color__white;
+}
+.bg--yellow {
+  background-color: $color__yellow;
+}
+.bg--viridian {
+  background-color: $color__viridian;
+}
+.bg--teal {
+  background-color: $color__teal;
+}
+.bg--navy {
+  background-color: $color__navy;
+}
+.bg--indigo {
+  background-color: $color__indigo;
+}
+.bg--violet {
+  background-color: $color__violet;
+}
+.bg--red {
+  background-color: $color__red;
+}
+
+.bd--main-primary {
+  border-color: $color__main-primary;
+}
+.bd--main-secondary {
+  border-color: $color__main-secondary;
+}
+.bd--main-tertiary {
+  border-color: $color__main-tertiary;
+}
+.bd--main-success {
+  border-color: $color__main-success;
+}
+.bd--main-danger {
+  border-color: $color__main-danger;
+}
+.bd--main-warning {
+  border-color: $color__main-warning;
+}
+.bd--main-disabled {
+  border-color: $color__main-disabled;
+}
+.bd--main-primary--active {
+  border-color: $color__main-primary--active;
+}
+.bd--main-secondary--active {
+  border-color: $color__main-secondary--active;
+}
+.bd--main-tertiary--active {
+  border-color: $color__main-tertiary--active;
+}
+.bd--main-success--active {
+  border-color: $color__main-success--active;
+}
+.bd--main-danger--active {
+  border-color: $color__main-danger--active;
+}
+.bd--main-warning--active {
+  border-color: $color__main-warning--active;
+}
+.bd--main-disabled--active {
+  border-color: $color__main-disabled--active;
+}
+.bd--blue-1 {
+  border-color: $color__blue-1;
+}
+.bd--blue-2 {
+  border-color: $color__blue-2;
+}
+.bd--blue-3 {
+  border-color: $color__blue-3;
+}
+.bd--blue-4 {
+  border-color: $color__blue-4;
+}
+.bd--blue-5 {
+  border-color: $color__blue-5;
+}
+.bd--dark-blue-1 {
+  border-color: $color__dark-blue-1;
+}
+.bd--dark-blue-2 {
+  border-color: $color__dark-blue-2;
+}
+.bd--dark-blue-3 {
+  border-color: $color__dark-blue-3;
+}
+.bd--dark-blue-4 {
+  border-color: $color__dark-blue-4;
+}
+.bd--dark-blue-5 {
+  border-color: $color__dark-blue-5;
+}
+.bd--green-1 {
+  border-color: $color__green-1;
+}
+.bd--green-2 {
+  border-color: $color__green-2;
+}
+.bd--green-3 {
+  border-color: $color__green-3;
+}
+.bd--green-4 {
+  border-color: $color__green-4;
+}
+.bd--green-5 {
+  border-color: $color__green-5;
+}
+.bd--gray-1 {
+  border-color: $color__gray-1;
+}
+.bd--gray-2 {
+  border-color: $color__gray-2;
+}
+.bd--gray-3 {
+  border-color: $color__gray-3;
+}
+.bd--gray-4 {
+  border-color: $color__gray-4;
+}
+.bd--gray-5 {
+  border-color: $color__gray-5;
+}
+.bd--dark-gray-1 {
+  border-color: $color__dark-gray-1;
+}
+.bd--dark-gray-2 {
+  border-color: $color__dark-gray-2;
+}
+.bd--dark-gray-3 {
+  border-color: $color__dark-gray-3;
+}
+.bd--dark-gray-4 {
+  border-color: $color__dark-gray-4;
+}
+.bd--dark-gray-5 {
+  border-color: $color__dark-gray-5;
+}
+.bd--alpha-1 {
+  border-color: $color__alpha-1;
+}
+.bd--alpha-2 {
+  border-color: $color__alpha-2;
+}
+.bd--alpha-3 {
+  border-color: $color__alpha-3;
+}
+.bd--alpha-4 {
+  border-color: $color__alpha-4;
+}
+.bd--alpha-5 {
+  border-color: $color__alpha-5;
+}
+.bd--white {
+  border-color: $color__white;
+}
+.bd--yellow {
+  border-color: $color__yellow;
+}
+.bd--viridian {
+  border-color: $color__viridian;
+}
+.bd--teal {
+  border-color: $color__teal;
+}
+.bd--navy {
+  border-color: $color__navy;
+}
+.bd--indigo {
+  border-color: $color__indigo;
+}
+.bd--violet {
+  border-color: $color__violet;
+}
+.bd--red {
+  border-color: $color__red;
+}

@@ -31,32 +31,19 @@ const AllItemPanels = componentMappings.map(({ view, name }) => {
 });
 
 class Views extends React.Component {
+  static onChangeStyle(style) {
+    window.location.href = `http://localhost:8080/${style}.html`;
+  }
+
   constructor(props) {
     super(props);
-    this.onChangeStyle = this.onChangeStyle.bind(this);
     this.onSelectTab = this.onSelectTab.bind(this);
 
     const selectedTab = parseInt(window.localStorage.getItem('tab') || 0, 10);
     const tab = selectedTab !== undefined ? selectedTab : componentMappings.length - 1;
-    const style = window.localStorage.getItem('style') || 'mulesoft';
     this.state = {
       tab,
-      style,
     };
-  }
-  componentDidMount() {
-    // the style file needs to be imported dynamically.
-    // Since this a SCSS file, it needs to be parsed and properly loaded with Webpack
-    // so it cannot be just imported via a link tag and eventually replaced
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    require(`../assets/styles/${this.state.style}.scss`);
-  }
-
-  onChangeStyle(style) {
-    this.setState({ style });
-    window.localStorage.setItem('style', style);
-    // When changing the file we need to reload the page in order to remove the previous style file
-    window.location.reload();
   }
 
   onSelectTab(e, tab) {
@@ -74,7 +61,7 @@ class Views extends React.Component {
               <Select
                 selected={this.state.style}
                 placeholder="Select StyleSheet"
-                onChange={this.onChangeStyle}
+                onChange={Views.onChangeStyle}
                 options={options}
               />
             </Row>
