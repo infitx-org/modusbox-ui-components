@@ -1,9 +1,41 @@
 
+.DEFAULT_GOAL := yarn
 
-bare_build:
+MAKE_DIRECTORY := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
+
+DATE := $(shell date +'%Y%m%d%H%M%S')
+CONTAINER_NAME := ui_components_$(DATE)
+
+
+
+yarn:
+	@docker run -it --rm -v $(MAKE_DIRECTORY)/src:/usr/local/code/src $(options) ui-components $(cmd)
+
+test: cmd = run test
+test: yarn
+
+add: cmd = add $(package)
+remove: cmd = remove $(package)
+add remove : options = -v $(MAKE_DIRECTORY)/:/usr/local/code
+add remove : yarn install
+
+
+start: cmd = start
+start: options = -p 8080:8080 -p 8081:8081
+start: yarn
+
+lint: cmd = lint
+lint: yarn
+
+extract: install bare_build bare_extract
+
+install:
 	@docker build --pull --tag ui-components .
 
+bare_build:
+	@docker run --rm ui-components run test
+
 bare_extract:
-	@docker create --name ui-components ui-components
-	@docker cp ui-components:/usr/local/code/dist/. ./dist
-	@docker rm ui-components
+	@docker run --name $(CONTAINER_NAME) ui-components build
+	@docker cp $(CONTAINER_NAME):/usr/local/code/dist/. ./dist
+	@docker rm $(CONTAINER_NAME)

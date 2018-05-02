@@ -5,11 +5,14 @@ WORKDIR /usr/local/code
 
 
 COPY package.json /usr/local/code/
+COPY yarn.lock /usr/local/code/
 
 RUN yarn install
 
 COPY . /usr/local/code/
 
-RUN yarn run test
+EXPOSE 8080
+EXPOSE 8081
 
-RUN yarn build
+ENTRYPOINT ["yarn"]
+CMD ["run", "test"]

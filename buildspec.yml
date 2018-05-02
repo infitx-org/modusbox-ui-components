@@ -1,12 +1,15 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - make install
   build:
     commands:
       - make bare_build
-  # post_build:
-  #   commands:
-  #     - make bare_extract
+  post_build:
+    commands:
+      - make bare_extract
 # artifacts:
 #   files:
 #     - dist/index.js

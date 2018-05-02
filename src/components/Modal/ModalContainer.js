@@ -5,23 +5,23 @@ import ModalPortal from './ModalPortal';
 import ModalBackground from './ModalBackground';
 
 class ModalContainer extends PureComponent {
-	render() {
-		const { props: { children, ...otherProps } } = this;
+  render() {
+    const { props: { children, ...otherProps } } = this;
 
-		return (
-			<ModalPortal {...otherProps}>
-				<ModalBackground {...otherProps}>{children}</ModalBackground>
-			</ModalPortal>
-		);
-	}
+    return (
+      <ModalPortal {...otherProps}>
+        <ModalBackground {...otherProps}>{children}</ModalBackground>
+      </ModalPortal>
+    );
+  }
 }
 
 ModalContainer.defaultProps = {
-	children: undefined,
+  children: undefined,
 };
 
 ModalContainer.propTypes = {
-	children: PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default ModalContainer;

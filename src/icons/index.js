@@ -1,4 +1,4 @@
-////////////////////////////////////////////
+// //////////////////////////////////////////
 // Modusbox icons
 
 import './modusbox/business-processes.svg';
@@ -22,7 +22,7 @@ import './modusbox/editing.svg';
 import './modusbox/magic-wand.svg';
 import './modusbox/settings.svg';
 
-////////////////////////////////////////////
+// //////////////////////////////////////////
 // Mulesoft icons
 
 import './mule/access-manager-color.svg';

@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 function headerTag(size) {
   if (size >= 1 && size <= 6) {
     return `h${size}`;
-  } else {
-    return 'h3';
   }
+  return 'h3';
 }
 
 class Heading extends PureComponent {
   render() {
     const { size, children, style } = this.props;
-    const Header = headerTag(parseInt(size));
+    const Header = headerTag(parseInt(size, 10));
     return (
       <Header style={style}>
         <span>{children}</span>
@@ -24,12 +23,12 @@ class Heading extends PureComponent {
 Heading.propTypes = {
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   style: PropTypes.shape(),
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 Heading.defaultProps = {
   size: 3,
   style: undefined,
-  children: undefined
+  children: undefined,
 };
 
 export default Heading;

@@ -1,8 +1,8 @@
-// TODO: DataList needs heavy refactoring. 
-// The promise based internal logic (infinite scrolling) should be removed 
-// The component should just render what is being passed, 
+// TODO: DataList needs heavy refactoring.
+// The promise based internal logic (infinite scrolling) should be removed
+// The component should just render what is being passed,
 // therefore async data coming in chunks should be handled externally
-// import DataList from './DataList'; 
+// import DataList from './DataList';
 
 import Button from './Button';
 import Column from './Column';
@@ -23,26 +23,26 @@ import Toast from './Toast';
 import Tooltip from './Tooltip';
 
 export {
-	Button,
-	Column,
-	Checkbox,
-	DatePicker,
-	FileUploader,
-	Heading,
-	Icon,
-	Modal,
-	ModalTabsLayout,
-	RadioGroup,
-	Row,
-	ScrollBox,
-	Select,
-	Spinner,
-	Tabs,
-	Tab,
-	TabList,
-	TabPanels,
-	TabPanel,
-	TextField,
-	Toast,
-	Tooltip,
+  Button,
+  Column,
+  Checkbox,
+  DatePicker,
+  FileUploader,
+  Heading,
+  Icon,
+  Modal,
+  ModalTabsLayout,
+  RadioGroup,
+  Row,
+  ScrollBox,
+  Select,
+  Spinner,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
+  TextField,
+  Toast,
+  Tooltip,
 };

@@ -9,10 +9,8 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "lint": "esw webpack.config.* src/components --color --fix",
-    "lint:watch": "npm run lint -- --watch",
-    "prettier": "prettier --write 'src/**/*'",
-    "start": "NODE_ENV=development webpack-serve webpack.dev.config.js",
+    "lint": "eslint --color --fix webpack.*.js src",
+    "start": "NODE_ENV=development webpack-serve --host 0.0.0.0 webpack.dev.config.js",
     "test": "jest"
   },
   "jest": {
@@ -44,10 +42,12 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
+    "babel-jest": "^22.4.3",
     "codemirror": "^5.36.0",
     "codemirror-highlight": "^1.1.1",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "lodash": "^4.12.0",
+    "lorem-ipsum": "^1.0.4",
     "moment": ">= 2.6.0",
     "node-sass": "^4.8.3",
     "prop-types": "^15.6.1",
@@ -73,6 +73,7 @@
     "autoprefixer": "^8.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.2",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
@@ -90,6 +91,7 @@
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "7.7.0",
     "express": "^4.13.3",
     "file-loader": "^1.1.11",

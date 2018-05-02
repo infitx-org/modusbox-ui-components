@@ -7,22 +7,22 @@ import Row from '../components/Row';
 import * as ComponentViews from './All';
 
 const componentMappings = Object.keys(ComponentViews).map(view => ({
-  name: view.substring(9), // 'Remove the prefix "component" 
+  name: view.substring(9), // 'Remove the prefix "component"
   view,
 }));
 
-const AllItemTabs = componentMappings.map(({ name }, i) => <Tab key={i}> {name} </Tab>);
-const AllItemPanels = componentMappings.map(({ view, name }, i) => {
+const AllItemTabs = componentMappings.map(({ name }) => <Tab key={name}> {name} </Tab>);
+const AllItemPanels = componentMappings.map(({ view, name }) => {
   const View = ComponentViews[view];
   if (name === 'DataList') {
     return (
-      <TabPanel key={i}>
+      <TabPanel key={name}>
         <View />
       </TabPanel>
     );
   }
   return (
-    <TabPanel key={i}>
+    <TabPanel key={name}>
       <ScrollBox>
         <View />
       </ScrollBox>
@@ -41,14 +41,15 @@ class Views extends React.Component {
     const style = window.localStorage.getItem('style') || 'mulesoft';
     this.state = {
       tab,
-      style
+      style,
     };
   }
-  componentDidMount(){
+  componentDidMount() {
     // the style file needs to be imported dynamically.
     // Since this a SCSS file, it needs to be parsed and properly loaded with Webpack
-    // so it cannot be just imported via a link tag and eventually replaced    
-    require(`../assets/styles/${this.state.style}.scss`);    
+    // so it cannot be just imported via a link tag and eventually replaced
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    require(`../assets/styles/${this.state.style}.scss`);
   }
 
   onChangeStyle(style) {
@@ -64,7 +65,7 @@ class Views extends React.Component {
   }
 
   render() {
-    const options = ['mulesoft', 'modusbox'].map( value => ({ label: value, value }));
+    const options = ['mulesoft', 'modusbox'].map(value => ({ label: value, value }));
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
         <div style={{ margin: '10px' }}>
