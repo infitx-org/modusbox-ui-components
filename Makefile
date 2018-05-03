@@ -39,3 +39,10 @@ bare_extract:
 	@docker run --name $(CONTAINER_NAME) ui-components build
 	@docker cp $(CONTAINER_NAME):/usr/local/code/dist/. ./dist
 	@docker rm $(CONTAINER_NAME)
+
+release:
+	@git add -f dist/index.js
+	@git add -f dist/mulesoft.css
+	@git add -f dist/modusbox.css
+	@git commit -m 'Automatically releasing...'
+	@git push origin master
