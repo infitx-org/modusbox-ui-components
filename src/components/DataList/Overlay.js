@@ -2,9 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OverlayColumnResizer = ({
-  isMinimumWidth, start, stop, name,
-}) => (
+const OverlayColumnResizer = ({ isMinimumWidth, start, stop, name }) => (
   <div
     className={`overlay-column-resizer ${isMinimumWidth && 'minimum'}`}
     style={{ left: start, width: stop }}

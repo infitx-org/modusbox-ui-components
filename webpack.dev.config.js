@@ -10,9 +10,7 @@ module.exports = {
     filename: '[name].js',
   },
   devtool: 'cheap-module-source-map',
-  plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-  ],
+  plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   module: {
     rules: [
       {
@@ -31,6 +29,9 @@ module.exports = {
             options: {
               fix: true,
             },
+          },
+          {
+            loader: 'prettier-loader',
           },
         ],
       },

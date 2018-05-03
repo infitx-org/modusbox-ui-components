@@ -246,7 +246,9 @@ class Tabs extends PureComponent {
     return (
       <div className={tabClassNames} id={id}>
         <input
-          ref={(input) => { this.input = input; }}
+          ref={(input) => {
+            this.input = input;
+          }}
           type="button"
           className="modus-element__holder"
           onFocus={this.onFocus}

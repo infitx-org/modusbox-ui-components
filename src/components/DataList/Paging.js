@@ -3,20 +3,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Paging = (props) => {
+const Paging = props => {
   const { selected, qty } = props;
   const betweenPages = Math.max(qty - 2, 0);
-  const siblings = new Array(betweenPages).map((i, idx) => ({ value: idx + 1, label: idx + 2 }));
+  const siblings = new Array(betweenPages)
+    .fill()
+    .map((i, idx) => ({ value: idx + 1, label: idx + 2 }));
   const translation = -(Math.min(Math.max(0, qty - 7), Math.max(0, selected - 3)) * 38);
 
   return (
     <div className="paging-box">
-      {qty > 0 && <Page
-        onClick={() => props.onSelect(0)}
-        label={1}
-        value={0}
-        isSelected={selected === 0}
-      />}
+      {qty > 0 && (
+        <Page onClick={() => props.onSelect(0)} label={1} value={0} isSelected={selected === 0} />
+      )}
       <div className="paging-scroller-box">
         <div
           className="paging-scroller "
@@ -33,11 +32,13 @@ const Paging = (props) => {
           ))}
         </div>
       </div>
-      {qty > 1 && <Page
-        onClick={() => props.onSelect(qty - 1)}
-        label={qty}
-        isSelected={selected === qty - 1}
-      />}
+      {qty > 1 && (
+        <Page
+          onClick={() => props.onSelect(qty - 1)}
+          label={qty}
+          isSelected={selected === qty - 1}
+        />
+      )}
     </div>
   );
 };
@@ -105,7 +106,10 @@ class Paginator extends React.Component {
 
     return (
       <div className="paginator">
-        <div className={` paginator-animator ${rangeClass}`} style={{ transform: `translateY(${top}px)` }}>
+        <div
+          className={` paginator-animator ${rangeClass}`}
+          style={{ transform: `translateY(${top}px)` }}
+        >
           <div className="paginator-range">
             {this.state.valueStart} - {this.state.valueStop}
           </div>

@@ -89,11 +89,7 @@ class RadioGroup extends PureComponent {
       id, label, disabled, options,
     } = this.props;
 
-    const classNames = utils.composeClassNames([
-      'input',
-      'input-radio',
-      disabled && 'disabled',
-    ]);
+    const classNames = utils.composeClassNames(['input', 'input-radio', disabled && 'disabled']);
     return (
       <div className={classNames} id={id}>
         {label && <span>{label}</span>}
@@ -110,7 +106,9 @@ class RadioGroup extends PureComponent {
           />
         ))}
         <input
-          ref={(button) => { this.button = button; }}
+          ref={(button) => {
+            this.button = button;
+          }}
           type="button"
           className="mb-input__holder"
           onFocus={this.onFocus}

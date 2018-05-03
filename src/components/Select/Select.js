@@ -134,7 +134,11 @@ class Select extends PureComponent {
       return options;
     }
     const lowerCaseFilter = filter.toLowerCase();
-    return options.filter(item => item.label.toString().toLowerCase().includes(lowerCaseFilter));
+    return options.filter(item =>
+      item.label
+        .toString()
+        .toLowerCase()
+        .includes(lowerCaseFilter));
   }
   closeSelect() {
     this.setState({ isOpen: false, filter: undefined });
@@ -171,7 +175,7 @@ class Select extends PureComponent {
     const wrapperRect = wrapper.getBoundingClientRect();
     const { top, bottom } = this.optionsPosition.getBoundingClientRect();
 
-    const lowerWrapper = (wrapperRect.height + wrapperRect.top) - top;
+    const lowerWrapper = wrapperRect.height + wrapperRect.top - top;
     const lowerInner = window.innerHeight - bottom;
     const maxLowerHeight = Math.min(lowerWrapper, lowerInner) - 10;
 
@@ -243,7 +247,6 @@ class Select extends PureComponent {
     }
   }
 
-
   render() {
     const {
       id, style, placeholder, pending, disabled, invalid, required,
@@ -253,7 +256,7 @@ class Select extends PureComponent {
     } = this.state;
     const options = this.getOptions();
 
-    const inputValue = (filter === undefined) ? (selectedLabel || '') : filter;
+    const inputValue = filter === undefined ? selectedLabel || '' : filter;
     const isPlaceholderActive = isOpen || selectedLabel !== undefined;
 
     const componentClassName = utils.composeClassNames([
@@ -265,7 +268,8 @@ class Select extends PureComponent {
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
       invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
-      required && selectedLabel === undefined &&
+      required &&
+        selectedLabel === undefined &&
         'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
 
@@ -274,7 +278,9 @@ class Select extends PureComponent {
         <div
           className={componentClassName}
           onClick={this.onClickSelect}
-          ref={(area) => { this.area = area; }}
+          ref={(area) => {
+            this.area = area;
+          }}
           role="presentation"
         >
           <div className="mb-input__content input-select__content">
@@ -283,7 +289,9 @@ class Select extends PureComponent {
             <input
               className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
               type="text"
-              ref={(inputFilter) => { this.inputFilter = inputFilter; }}
+              ref={(inputFilter) => {
+                this.inputFilter = inputFilter;
+              }}
               onKeyDown={this.testKey}
               onChange={this.applyFilter}
               onFocus={this.openSelect}
@@ -309,11 +317,15 @@ class Select extends PureComponent {
 
         <div
           className="input-select__options"
-          ref={(position) => { this.optionsPosition = position; }}
+          ref={(position) => {
+            this.optionsPosition = position;
+          }}
         >
           <Options
             open={isOpen}
-            ref={(wrapper) => { this.options = wrapper; }}
+            ref={(wrapper) => {
+              this.options = wrapper;
+            }}
             options={options}
             maxHeight={this.maxHeight || 0}
             reverse={this.reverse}

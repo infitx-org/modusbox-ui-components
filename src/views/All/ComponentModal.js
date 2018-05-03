@@ -85,12 +85,8 @@ class TestModal extends React.Component {
               maximise
             >
               <ModalTabsLayout items={[{ name: 'Tab1' }, { name: 'Tab2' }]} selected="Tab2">
-                <div style={{ height: '12000px', background: '#999' }}>
-                  TEST TAB 1
-                </div>
-                <div style={{ height: '120px', background: '#9f9' }}>
-                  TEST TAB 2
-                </div>
+                <div style={{ height: '12000px', background: '#999' }}>TEST TAB 1</div>
+                <div style={{ height: '120px', background: '#9f9' }}>TEST TAB 2</div>
               </ModalTabsLayout>
             </Modal>
           )}

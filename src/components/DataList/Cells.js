@@ -41,9 +41,7 @@ class CheckboxCell extends PureComponent {
   }
 
   render() {
-    const {
-      show, id, isSelected, onMultiSelect, style,
-    } = this.props;
+    const { show, id, isSelected, onMultiSelect, style } = this.props;
     return (
       <div style={style} className="element-datalist__body-cell element-datalist__body-column-cell">
         <div style={{ width: '100%' }}>
@@ -80,9 +78,7 @@ class ListItemCell extends PureComponent {
   }
 
   render() {
-    const {
-      onClick, icon, value, content, style,
-    } = this.props;
+    const { onClick, icon, value, content, style } = this.props;
     const { name, color, size } = typeof icon === 'object' ? icon : {};
     const isContent = content != false;
     const cellContent = isContent ? content : value;
@@ -160,7 +156,9 @@ class HeaderCell extends PureComponent {
     const { left, right } = this.cell.getBoundingClientRect();
     const name = this.props.content
       ? this.props.content(this.props.column)
-      : this.props.showLabel ? this.props.label : '';
+      : this.props.showLabel
+        ? this.props.label
+        : '';
     this.props.onTriggerResizeWidth(this.props.index, left, right, name);
   }
 
@@ -196,11 +194,17 @@ class HeaderCell extends PureComponent {
     } = this.props;
     const labelContent = content ? content(column) : showLabel ? label : '';
     const isLabelEmpty = labelContent === '';
-    const sortingArrowIconClassName = ['element-datalist__header-cell-arrowIcon', !isSortingAsc && 'rotated']
+    const sortingArrowIconClassName = [
+      'element-datalist__header-cell-arrowIcon',
+      !isSortingAsc && 'rotated',
+    ]
       .filter(x => typeof x === 'string')
       .join(' ');
 
-    const sortingArrowIconBoxClassName = ['element-datalist__header-cell-arrowIcon-box', isLabelEmpty && 'center']
+    const sortingArrowIconBoxClassName = [
+      'element-datalist__header-cell-arrowIcon-box',
+      isLabelEmpty && 'center',
+    ]
       .filter(x => typeof x === 'string')
       .join(' ');
 
@@ -214,11 +218,19 @@ class HeaderCell extends PureComponent {
     ].join(' ');
 
     const allowResizeWidth =
-			resizable && !isSearching && !((typeof style.width === 'number' && style.width < 50) || isLastColumn);
+      resizable &&
+      !isSearching &&
+      !((typeof style.width === 'number' && style.width < 50) || isLastColumn);
     const onRemoveFilter = e => onSearchRemove(e, label);
 
     return (
-      <div ref={cell => (this.cell = cell)} id={id} onClick={onColumnClick} style={style} className={columnClassNames}>
+      <div
+        ref={cell => (this.cell = cell)}
+        id={id}
+        onClick={onColumnClick}
+        style={style}
+        className={columnClassNames}
+      >
         <div className="element-datalist__header-cell-box">
           {searchable && (
             <div
@@ -228,7 +240,9 @@ class HeaderCell extends PureComponent {
               <Icon
                 size={16}
                 name="search-small"
-                className={`element-datalist__header-cell-searchIcon ${isSearching ? 'rotated' : ''}`}
+                className={`element-datalist__header-cell-searchIcon ${
+                  isSearching ? 'rotated' : ''
+                }`}
               />
             </div>
           )}
@@ -236,7 +250,9 @@ class HeaderCell extends PureComponent {
             <div className="element-datalist__header-cell-searchInput-box">
               <input
                 type="text"
-                className={`element-datalist__header-cell-searchInput-input ${this.state.growInput ? 'grow' : ''} `}
+                className={`element-datalist__header-cell-searchInput-input ${
+                  this.state.growInput ? 'grow' : ''
+                } `}
                 placeholder={`Search on ${label}`}
                 onClick={e => e.stopPropagation()}
                 onChange={e => onSearchChange(e, label)}
@@ -252,11 +268,11 @@ class HeaderCell extends PureComponent {
             </div>
           )}
           {!isSearching &&
-						!isLabelEmpty && (
-<div className="element-datalist__header-cell-label">
-              <Tooltip>{labelContent}</Tooltip>
-            </div>
-          )}
+            !isLabelEmpty && (
+              <div className="element-datalist__header-cell-label">
+                <Tooltip>{labelContent}</Tooltip>
+              </div>
+            )}
 
           {isSorting && (
             <div className={sortingArrowIconBoxClassName}>
@@ -264,7 +280,10 @@ class HeaderCell extends PureComponent {
             </div>
           )}
           {allowResizeWidth && (
-            <div className="element-datalist__header-cell-holder" onClick={this.changeColumnWidthStart}>
+            <div
+              className="element-datalist__header-cell-holder"
+              onClick={this.changeColumnWidthStart}
+            >
               <div className="resize-icon">
                 <div className="resizer-left" />
                 <div className="resizer-right" />
@@ -300,7 +319,11 @@ HeaderCell.propTypes = {
   onSearchClick: PropTypes.func,
   onSearchChange: PropTypes.func,
 };
-const ScrollBarCell = () => <div className="element-datalist__body-cell element-datalist__scrollbar-cell" />;
+const ScrollBarCell = () => (
+  <div className="element-datalist__body-cell element-datalist__scrollbar-cell" />
+);
 
-const ScrollBarHeaderCell = () => <div className="element-datalist__header-cell element-datalist__scrollbar-cell" />;
+const ScrollBarHeaderCell = () => (
+  <div className="element-datalist__header-cell element-datalist__scrollbar-cell" />
+);
 export { ArrowCell, CheckboxCell, ListItemCell, HeaderCell, ScrollBarHeaderCell, ScrollBarCell };

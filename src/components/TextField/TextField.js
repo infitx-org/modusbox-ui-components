@@ -155,8 +155,20 @@ class TextField extends PureComponent {
 
   render() {
     const {
-      autofocus, id, type, style, placeholder, onButtonClick, buttonText, buttonKind,
-      buttonDisabled, icon, disabled, pending, required, invalid,
+      autofocus,
+      id,
+      type,
+      style,
+      placeholder,
+      onButtonClick,
+      buttonText,
+      buttonKind,
+      buttonDisabled,
+      icon,
+      disabled,
+      pending,
+      required,
+      invalid,
     } = this.props;
     const { isOpen, value, isPasswordVisible } = this.state;
     const isPlaceholderActive = isOpen || value !== undefined;
@@ -171,7 +183,8 @@ class TextField extends PureComponent {
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
       invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
-      required && (value === undefined || value === '') &&
+      required &&
+        (value === undefined || value === '') &&
         'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
 
@@ -182,7 +195,9 @@ class TextField extends PureComponent {
         <div
           className={componentClassName}
           onClick={this.onTextFieldClick}
-          ref={(area) => { this.area = area; }}
+          ref={(area) => {
+            this.area = area;
+          }}
           role="presentation"
         >
           <div className="mb-input__content input-textfield__content">
@@ -190,7 +205,9 @@ class TextField extends PureComponent {
 
             <input
               id={id}
-              ref={(input) => { this.input = input; }}
+              ref={(input) => {
+                this.input = input;
+              }}
               autoFocus={autofocus === true}
               type={inputType}
               onClick={this.onClick}

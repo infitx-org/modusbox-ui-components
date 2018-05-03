@@ -35,8 +35,13 @@ class Header extends React.Component {
     } = this.props;
     return (
       <div className="element-datalist__header-row-box">
-        <Row className="element-datalist__header-row" style={{ paddingRight: showScrollbar ? '6px' : '0px' }}>
-          {hasChildren && <div className="element-datalist__header-cell" style={style.arrowColumn} />}
+        <Row
+          className="element-datalist__header-row"
+          style={{ paddingRight: showScrollbar ? '6px' : '0px' }}
+        >
+          {hasChildren && (
+            <div className="element-datalist__header-cell" style={style.arrowColumn} />
+          )}
           {hasMultiSelect && (
             <div
               id={`${id}-multiselect-all`}

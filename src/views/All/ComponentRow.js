@@ -2,14 +2,26 @@ import React from 'react';
 import Column from '../../components/Column';
 import Row from '../../components/Row';
 
-const Block = () => (<div style={{
-  background: '#ddd', margin: '5px', height: '20px', width: '20px',
-}}
-/>);
-const BlockBig = () => (<div style={{
-  background: '#eee', margin: '5px', height: '40px', width: '40px',
-}}
-/>);
+const Block = () => (
+  <div
+    style={{
+      background: '#ddd',
+      margin: '5px',
+      height: '20px',
+      width: '20px',
+    }}
+  />
+);
+const BlockBig = () => (
+  <div
+    style={{
+      background: '#eee',
+      margin: '5px',
+      height: '40px',
+      width: '40px',
+    }}
+  />
+);
 
 const rowStyle = { border: '1px solid #ccc' };
 
@@ -21,7 +33,9 @@ const ComposedItems = jcs.reduce(
     ...p,
     ...ais.map(ai => (
       <div key={`${jc} ${ai}`} style={{ width: '100%' }}>
-        <span>{jc} {ai}</span>
+        <span>
+          {jc} {ai}
+        </span>
         <Row style={rowStyle} align={`${jc} ${ai}`}>
           <Block />
           <BlockBig />

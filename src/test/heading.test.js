@@ -1,7 +1,7 @@
 import React from 'react';
-import Heading from '../components/Heading';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import Heading from '../components/Heading';
 
 it('renders correct sizes', () => {
   [...Array(10).keys()].forEach((size) => {

@@ -171,7 +171,8 @@ class FileUploader extends PureComponent {
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
       invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
-      required && fileName === undefined &&
+      required &&
+        fileName === undefined &&
         'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
 
@@ -180,6 +181,36 @@ class FileUploader extends PureComponent {
       !hasFile && 'input-fileuploader__filename--no-file',
     ]);
     const fileNameLabel = hasFile ? fileName : 'No File Choosen';
+
+    const removeButton = (
+      <Button
+        className={`mb-input__inner-button input-fileuploader__button-remove ${
+          isOpen ? 'mb-input__inner-button--active' : ''
+        }`}
+        kind={isOpen ? 'danger' : 'dark'}
+        noFill={!isOpen}
+        onClick={this.onRemoveButtonClick}
+        tabIndex="-1"
+        icon="close-small"
+        label="Remove"
+        disabled={disabled}
+      />
+    );
+
+    const chooseButton = (
+      <Button
+        className={`mb-input__inner-button input-fileuploader__button-add ${
+          isOpen ? 'mb-input__inner-button--active' : ''
+        }`}
+        onClick={this.onButtonClick}
+        tabIndex="-1"
+        kind={isOpen ? 'primary' : 'dark'}
+        noFill={!isOpen}
+        icon="upload-small"
+        label="Choose File"
+        disabled={disabled}
+      />
+    );
 
     return (
       <div className="input-fileuploader mb-input__box" style={style}>
@@ -213,33 +244,8 @@ class FileUploader extends PureComponent {
 
               <div className={fileNameClassName}>{fileNameLabel}</div>
               {pending && <Loader visible />}
-              {!pending && hasFile && (
-                <Button
-                  className={`mb-input__inner-button input-fileuploader__button-remove ${
-                    isOpen ? 'mb-input__inner-button--active' : ''
-                  }`}
-                  kind={isOpen ? 'danger' : 'dark'}
-                  noFill={!isOpen}
-                  onClick={this.onRemoveButtonClick}
-                  tabIndex="-1"
-                  icon="close-small"
-                  label="Remove"
-                  disabled={disabled}
-                />
-              )}
-              {!pending && !hasFile && (<Button
-                className={`mb-input__inner-button input-fileuploader__button-add ${
-                  isOpen ? 'mb-input__inner-button--active' : ''
-                }`}
-                onClick={this.onButtonClick}
-                tabIndex="-1"
-                kind={isOpen ? 'primary' : 'dark'}
-                noFill={!isOpen}
-                icon="upload-small"
-                label="Choose File"
-                disabled={disabled}
-              />
-              )}
+              {!pending && hasFile && removeButton}
+              {!pending && !hasFile && chooseButton}
             </div>
           </div>
         </div>

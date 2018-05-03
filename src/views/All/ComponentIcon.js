@@ -237,13 +237,7 @@ const Block = ({ icon }) => (
     }}
   >
     <div style={{ flex: '0 0 auto', justifyContent: 'center', display: 'flex' }}>
-      <Icon
-        size={40}
-        fill="#999"
-        name={icon}
-        style={{ display: 'flex' }}
-        tooltip={icon}
-      />
+      <Icon size={40} fill="#999" name={icon} style={{ display: 'flex' }} tooltip={icon} />
     </div>
     <div
       style={{

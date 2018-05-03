@@ -196,7 +196,9 @@ class DataList extends React.Component {
     const arrowCellWidth = hasChildren ? 40 : 0;
     const multiSelectWidth = props.multiSelect ? 40 : 0;
     const fixedPxAmount =
-			multiSelectWidth + arrowCellWidth + props.columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+      multiSelectWidth +
+      arrowCellWidth +
+      props.columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
     const columnsAutoWidthNumber = props.columns.filter(col => col.width == undefined).length;
     const columnPerc = 100 / columnsAutoWidthNumber;
     const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
@@ -270,7 +272,8 @@ class DataList extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const isNotforceRenderItems = this.state.forceRenderItems === true && nextState.forceRenderItems === false;
+    const isNotforceRenderItems =
+      this.state.forceRenderItems === true && nextState.forceRenderItems === false;
     return !isNotforceRenderItems;
   }
 
@@ -354,11 +357,11 @@ class DataList extends React.Component {
 
     this.props
       .update(config)
-      .then((json) => {
+      .then(json => {
         if (this.props.wrapper) return this.props.wrapper(json);
         return json;
       })
-      .then((data) => {
+      .then(data => {
         this._reqProcessed++;
         if (isPartialRequest) {
           this.renderNextChunk(data, false);
@@ -366,11 +369,12 @@ class DataList extends React.Component {
           this.parseData(data);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         if (!this.isComponentMounted) return;
 
         let errorMsg;
-        if (err.status != undefined && err.statusText != undefined) errorMsg = `${err.status} ${err.statusText}`;
+        if (err.status != undefined && err.statusText != undefined)
+          errorMsg = `${err.status} ${err.statusText}`;
         else errorMsg = 'Service unavailable';
 
         this.setState({
@@ -465,14 +469,16 @@ class DataList extends React.Component {
         .toLowerCase()
         .split(' ')
         .filter(c => c != '');
-      const filtered = list.filter((item) => {
+      const filtered = list.filter(item => {
         const field = item[key];
-        const value = field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
+        const value =
+          field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
         return chunks.every(chunk =>
           value
             .toString()
             .toLowerCase()
-            .includes(chunk));
+            .includes(chunk)
+        );
       });
 
       return filtered;
@@ -482,7 +488,10 @@ class DataList extends React.Component {
   handleScroll() {
     this.rows.classList.add('remove-pointer-events');
     clearTimeout(this.noPointerEventsTimeout);
-    this.noPointerEventsTimeout = setTimeout(() => this.rows.classList.remove('remove-pointer-events'), 50);
+    this.noPointerEventsTimeout = setTimeout(
+      () => this.rows.classList.remove('remove-pointer-events'),
+      50
+    );
     // detect scroll direction
     const { scrollTop } = this.scroller;
     const isScrollingDown = scrollTop > (this.lastScrollPosition || 0);
@@ -515,7 +524,7 @@ class DataList extends React.Component {
         if (this.state.list.length >= this.state.currentIndexStop + this.state.itemsNumber) {
           const data = this.state.list.slice(
             this.state.currentIndexStop,
-            this.state.currentIndexStop + this.state.itemsNumber,
+            this.state.currentIndexStop + this.state.itemsNumber
           );
           this.renderNextChunk(data, true);
         } else {
@@ -675,9 +684,7 @@ class DataList extends React.Component {
       this.getData(updateConfig);
       changes.isSortingData = true;
     } else {
-      const {
-        hasPages, list, page, filters,
-      } = this.state;
+      const { hasPages, list, page, filters } = this.state;
       if (hasPages) {
         // sort all records
         const sortedList = nextSortKey ? this.sortList(list, nextSortKey, nextSortAsc) : list;
@@ -687,7 +694,9 @@ class DataList extends React.Component {
         changes.pageQty = this.getPageQty(filteredList);
         changes.currentList = currentList;
       } else {
-        changes.currentList = nextSortKey ? this.sortList(this.state.currentList, nextSortKey, nextSortAsc) : list;
+        changes.currentList = nextSortKey
+          ? this.sortList(this.state.currentList, nextSortKey, nextSortAsc)
+          : list;
       }
     }
 
@@ -791,7 +800,9 @@ class DataList extends React.Component {
       const arrowCellWidth = this.state.hasChildren ? 40 : 0;
       const multiSelectWidth = this.state.hasMultiSelect ? 40 : 0;
       const fixedPxAmount =
-				multiSelectWidth + arrowCellWidth + columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
+        multiSelectWidth +
+        arrowCellWidth +
+        columns.reduce((a, b) => (b.width ? b.width + a : a), 0);
       const columnsAutoWidthNumber = columns.filter(col => col.width == undefined).length;
       const columnPerc = 100 / columnsAutoWidthNumber;
       const columnPxToRemove = fixedPxAmount / columnsAutoWidthNumber;
@@ -852,7 +863,8 @@ class DataList extends React.Component {
     this.props.onMultiSelect(multiSelected);
   }
   getAllItemIds() {
-    const filterItems = typeof this.props.showMultiSelect === 'function' ? this.props.showMultiSelect : item => item;
+    const filterItems =
+      typeof this.props.showMultiSelect === 'function' ? this.props.showMultiSelect : item => item;
     return this.state.list.filter(filterItems).map(item => item.id);
   }
 
@@ -861,8 +873,8 @@ class DataList extends React.Component {
     const allSelectedIds = this.state.multiSelected;
     return (
       allItemIds.length > 0 &&
-			allItemIds.length === allSelectedIds.length &&
-			allItemIds.every(id => allSelectedIds.includes(id))
+      allItemIds.length === allSelectedIds.length &&
+      allItemIds.every(id => allSelectedIds.includes(id))
     );
   }
 
@@ -874,9 +886,7 @@ class DataList extends React.Component {
       return <ErrorBox id={`${this.props.id}-error-box`} />;
     }
 
-    const {
-      list, currentList, apiError, filters,
-    } = this.state;
+    const { list, currentList, apiError, filters } = this.state;
     const { allowFilter } = this.props;
     const hasMultiSelectFilter = typeof this.props.showMultiSelect === 'function';
     const isLoading = this.state.isLoadingNewData;
@@ -885,11 +895,12 @@ class DataList extends React.Component {
     const isMainMultiSelected = this.detectMainMultiselected();
     const isNoData = list.length === 0 && !isLoading && !apiError && !allowFilter;
     const isNoDataInfiniteUnfiltered =
-			allowFilter && currentList.length === 0 && !isLoading && !apiError && filters.length == 0;
+      allowFilter && currentList.length === 0 && !isLoading && !apiError && filters.length == 0;
     const isNoDataInfiniteFiltered =
-			allowFilter && currentList.length === 0 && !isLoading && !apiError && filters.length > 0;
+      allowFilter && currentList.length === 0 && !isLoading && !apiError && filters.length > 0;
     const isSortingOrFiltering = isSorting || isFiltering;
-    const hideList = (isNoDataInfiniteUnfiltered && !isFiltering) || isNoData || isLoading || apiError;
+    const hideList =
+      (isNoDataInfiniteUnfiltered && !isFiltering) || isNoData || isLoading || apiError;
     const isNoDataInfiniteUnfilteredNotFiltering = isNoDataInfiniteUnfiltered && !isFiltering;
     const scrollboxStyle = { display: this.state.isLoadingNewData ? 'hidden' : undefined };
 
@@ -908,12 +919,18 @@ class DataList extends React.Component {
           {isLoading && <SpinnerBox id={`${this.props.id}-pending-box`} />}
 
           {/* Empty table */}
-          {(isNoData || isNoDataInfiniteUnfilteredNotFiltering) && <NoDataBox message={this.props.noData} />}
+          {(isNoData || isNoDataInfiniteUnfilteredNotFiltering) && (
+            <NoDataBox message={this.props.noData} />
+          )}
 
           {/* API ERROR */}
           {apiError && <ErrorBox message={apiError} />}
 
-          <div className="element-datalist" id={this.props.id} style={hideList ? { display: 'none' } : undefined}>
+          <div
+            className="element-datalist"
+            id={this.props.id}
+            style={hideList ? { display: 'none' } : undefined}
+          >
             {this.state.isOverlayColumnVisible && (
               <OverlayColumnResizer
                 start={this.state.cellLeftPosition}
@@ -947,7 +964,10 @@ class DataList extends React.Component {
             {/* Sorting */}
             {isSortingOrFiltering && <SpinnerBox id={`${this.props.id}-pending-box`} />}
 
-            <div className="central-box" style={{ display: isSortingOrFiltering ? 'none' : 'flex' }}>
+            <div
+              className="central-box"
+              style={{ display: isSortingOrFiltering ? 'none' : 'flex' }}
+            >
               <Paginator
                 show={this.hasUpdatedNewItems}
                 hide={this.hasUpdatedPreviousItems}
@@ -978,12 +998,16 @@ class DataList extends React.Component {
                       const isSelected = this.props.selected === item.id;
                       const onItemClick = isSelected ? this.props.onUnselect : this.props.onSelect;
                       const isMultiSelected = this.state.multiSelected.includes(item.id);
-                      const showMultiSelect = hasMultiSelectFilter ? this.props.showMultiSelect(item) : true;
+                      const showMultiSelect = hasMultiSelectFilter
+                        ? this.props.showMultiSelect(item)
+                        : true;
 
                       // detect necessary fade-in animation
                       const isNewData = this.isNewData;
-                      const isAnimatingUp = (this.hasUpdatedPreviousItems && i < this.state.itemsNumber) || false;
-                      const isAnimatingDown = (this.hasUpdatedNewItems && i >= this.state.itemsNumber) || false;
+                      const isAnimatingUp =
+                        (this.hasUpdatedPreviousItems && i < this.state.itemsNumber) || false;
+                      const isAnimatingDown =
+                        (this.hasUpdatedNewItems && i >= this.state.itemsNumber) || false;
                       const animateItem = isAnimatingUp || isAnimatingDown || isNewData;
 
                       return (
@@ -1015,7 +1039,9 @@ class DataList extends React.Component {
                   </div>
 
                   {this.state.isUpdating && <SpinnerBox id={`${this.props.id}-updating-box`} />}
-                  {isNoDataInfiniteFiltered && <NoDataBox message={`${this.props.noData} with these filters`} />}
+                  {isNoDataInfiniteFiltered && (
+                    <NoDataBox message={`${this.props.noData} with these filters`} />
+                  )}
                 </div>
               </ScrollBox>
 
@@ -1031,7 +1057,11 @@ class DataList extends React.Component {
               />
             </div>
             {this.state.hasPages && (
-              <Paging qty={this.state.pageQty} selected={this.state.page} onSelect={this.pageClick} />
+              <Paging
+                qty={this.state.pageQty}
+                selected={this.state.page}
+                onSelect={this.pageClick}
+              />
             )}
           </div>
         </div>
@@ -1073,7 +1103,7 @@ DataList.propTypes = {
 // ///////////////////////////////////////////////////////
 
 const setSearchableColumns = (columns, hasInfiniteScrolling) => {
-  columns.forEach((column) => {
+  columns.forEach(column => {
     const { searchable, showLabel, label } = column;
     if (searchable == undefined) {
       if (searchable === false || showLabel === false || label === '' || hasInfiniteScrolling) {

@@ -27,10 +27,7 @@ class ModalTabsLayout extends PureComponent {
 
     this.onSelect = this.onSelect.bind(this);
   }
-  componentDidMount() {
-
-
-  }
+  componentDidMount() {}
   componentWillReceiveProps(nextProps) {
     const { items } = nextProps;
     if (!isEqual(this.props.items, items)) {

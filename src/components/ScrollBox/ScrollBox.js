@@ -69,27 +69,42 @@ class ScrollBox extends PureComponent {
 
     const wrapperClassName = utils.composeClassNames(['element-scrollbox__wrapper', className]);
     const contentBoxClassName = utils.composeClassNames([
-      'element-scrollbox__content-box', flex && 'element-scrollbox__content-box--flexible']);
+      'element-scrollbox__content-box',
+      flex && 'element-scrollbox__content-box--flexible',
+    ]);
     const contentClassName = utils.composeClassNames([
-      'element-scrollbox__content', flex && 'element-scrollbox__content--flexible']);
+      'element-scrollbox__content',
+      flex && 'element-scrollbox__content--flexible',
+    ]);
 
     return (
       <div
-        ref={(wrapper) => { this.wrapper = wrapper; }}
+        ref={(wrapper) => {
+          this.wrapper = wrapper;
+        }}
         className={wrapperClassName}
         style={style}
       >
         <div
-          ref={(contentBox) => { this.contentBox = contentBox; }}
+          ref={(contentBox) => {
+            this.contentBox = contentBox;
+          }}
           className={contentBoxClassName}
         >
-          <div ref={(content) => { this.content = content; }} className={contentClassName}>
+          <div
+            ref={(content) => {
+              this.content = content;
+            }}
+            className={contentClassName}
+          >
             {children}
           </div>
         </div>
 
         <ScrollBar
-          ref={(scrollbar) => { this.scrollbar = scrollbar; }}
+          ref={(scrollbar) => {
+            this.scrollbar = scrollbar;
+          }}
           trackStyle={trackStyle}
           handleStyle={handleStyle}
           showTrack={showTrack}

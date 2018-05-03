@@ -6,9 +6,14 @@ import * as utils from '../../utils/common';
 
 /* initialized Toast Lib */
 let notification;
-Notification.newInstance({
-  style: { bottom: 0, right: '20px' },
-}, (n) => { notification = n; });
+Notification.newInstance(
+  {
+    style: { bottom: 0, right: '20px' },
+  },
+  (n) => {
+    notification = n;
+  },
+);
 
 let toastCount = 0;
 const now = Date.now();
@@ -32,13 +37,13 @@ const iconNameMaps = {
 };
 export default class Toast extends Component {
   static show(config) {
-    const text = (config.title) ? config.title : '';
-    const toastKey = (config.key) ? config.key : toastUID();
-    const toastKind = (config.kind) ? config.kind : 'custom';
-    const toastDuration = (config.duration) ? config.duration : 4;
-    const toastOnClose = (config.onClose) ? config.onClose : noOp;
-    const toastStyle = (config.style) ? config.style : {};
-    const closeable = (config.closeable) ? close.bind(null, toastKey) : noOp;
+    const text = config.title ? config.title : '';
+    const toastKey = config.key ? config.key : toastUID();
+    const toastKind = config.kind ? config.kind : 'custom';
+    const toastDuration = config.duration ? config.duration : 4;
+    const toastOnClose = config.onClose ? config.onClose : noOp;
+    const toastStyle = config.style ? config.style : {};
+    const closeable = config.closeable ? close.bind(null, toastKey) : noOp;
     const toastContent = (
       <span id={toastKey} onClick={closeable} role="presentation">
         <Toast title={text} kind={toastKind}>
@@ -66,7 +71,7 @@ export default class Toast extends Component {
 
   getClassNames() {
     const { kind, className } = this.props;
-    const isCustom = (kind === 'custom');
+    const isCustom = kind === 'custom';
     const componentClassName = utils.composeClassNames([
       'element-toast',
       `element-toast--${kind}`,
@@ -79,16 +84,23 @@ export default class Toast extends Component {
   render() {
     const { kind, children, title } = this.props;
     const className = this.getClassNames();
-    const isCustom = (kind === 'custom');
-
+    const isCustom = kind === 'custom';
 
     let icon = null;
     if (!isCustom) {
       const iconName = iconNameMaps[kind];
-      icon = <div className="element-toast__icon"><Icon name={iconName} size={16} /></div>;
+      icon = (
+        <div className="element-toast__icon">
+          <Icon name={iconName} size={16} />
+        </div>
+      );
     }
 
-    const titleElement = <div className="element-toast__title">{icon} {title}</div>;
+    const titleElement = (
+      <div className="element-toast__title">
+        {icon} {title}
+      </div>
+    );
 
     const childrenElement = <div className="element-toast__custom">{children}</div>;
 
@@ -100,7 +112,6 @@ export default class Toast extends Component {
     );
   }
 }
-
 
 Toast.propsTypes = {
   closeable: PropTypes.bool,

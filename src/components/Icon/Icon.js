@@ -17,7 +17,16 @@ class Icon extends PureComponent {
   }
   render() {
     const {
-      id, className, style, size, name, fill, stroke, spin, tooltip, tooltipPosition,
+      id,
+      className,
+      style,
+      size,
+      name,
+      fill,
+      stroke,
+      spin,
+      tooltip,
+      tooltipPosition,
     } = this.props;
     const svgStyle = {
       height: `${size}px`,
@@ -28,17 +37,16 @@ class Icon extends PureComponent {
     };
     const componentClassName = utils.composeClassNames(['element-icon', spin && 'spin', className]);
     const svg = (
-      <svg
-        id={id}
-        style={svgStyle}
-        onClick={this.onClick}
-        className={componentClassName}
-      >
+      <svg id={id} style={svgStyle} onClick={this.onClick} className={componentClassName}>
         <use xlinkHref={`#${name}`} />
       </svg>
     );
     if (tooltip) {
-      return <Tooltip label={tooltip} position={tooltipPosition}>{svg}</Tooltip>;
+      return (
+        <Tooltip label={tooltip} position={tooltipPosition}>
+          {svg}
+        </Tooltip>
+      );
     }
     return svg;
   }

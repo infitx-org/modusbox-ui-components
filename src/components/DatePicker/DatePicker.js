@@ -9,6 +9,15 @@ import keyCodes from '../../utils/keyCodes';
 import Icon from '../Icon';
 import { Loader, Placeholder } from '../Common';
 
+function asDate(day) {
+  if (day) {
+    return moment(day)
+      .startOf('day')
+      .format('x');
+  }
+  return 0;
+}
+
 class DatePicker extends PureComponent {
   static getDate(value) {
     if (typeof value === 'string' || typeof value === 'number') {
@@ -41,12 +50,8 @@ class DatePicker extends PureComponent {
     };
   }
   static getTimestamp(day, hour, minute, second) {
-    const date = day
-      ? moment(day)
-        .startOf('day')
-        .format('x')
-      : 0;
-    return parseInt(date, 10) + (hour * 60 * 60 * 1000) + (minute * 60 * 1000) + (second * 1000);
+    const date = asDate(day);
+    return parseInt(date, 10) + hour * 60 * 60 * 1000 + minute * 60 * 1000 + second * 1000;
   }
 
   constructor(props) {
@@ -124,8 +129,8 @@ class DatePicker extends PureComponent {
       const dayStamp = moment(exportDay)
         .startOf('day')
         .format(this.props.format);
-      const milliseconds = parseInt(dayStamp, 10) +
-        (hour * 60 * 60 * 1000) + (minute * 60 * 1000) + (second * 1000);
+      const milliseconds =
+        parseInt(dayStamp, 10) + hour * 60 * 60 * 1000 + minute * 60 * 1000 + second * 1000;
 
       // convert the string into integer when dealing with milliseconds
       if (this.props.format) {
@@ -150,15 +155,20 @@ class DatePicker extends PureComponent {
     clearTimeout(this.deferredTimeChangeTimeout);
     const timestamp = DatePicker.getTimestamp(
       this.state.selectedDay,
-      hour, this.state.minute, this.state.second,
+      hour,
+      this.state.minute,
+      this.state.second,
     );
     if (hour > 23) return;
     this.setState({ hour, timestamp });
     this.deferredTimeChangeTimeout = setTimeout(
-      () => this.handleDateTimeChange(
-        this.state.selectedDay,
-        hour, this.state.minute, this.state.second,
-      ),
+      () =>
+        this.handleDateTimeChange(
+          this.state.selectedDay,
+          hour,
+          this.state.minute,
+          this.state.second,
+        ),
       500,
     );
   }
@@ -166,15 +176,20 @@ class DatePicker extends PureComponent {
     clearTimeout(this.deferredTimeChangeTimeout);
     const timestamp = DatePicker.getTimestamp(
       this.state.selectedDay,
-      this.state.hour, minute, this.state.second,
+      this.state.hour,
+      minute,
+      this.state.second,
     );
     if (minute > 59) return;
     this.setState({ minute, timestamp });
     this.deferredTimeChangeTimeout = setTimeout(
-      () => this.handleDateTimeChange(
-        this.state.selectedDay,
-        this.state.hour, minute, this.state.second,
-      ),
+      () =>
+        this.handleDateTimeChange(
+          this.state.selectedDay,
+          this.state.hour,
+          minute,
+          this.state.second,
+        ),
       500,
     );
   }
@@ -187,15 +202,20 @@ class DatePicker extends PureComponent {
     clearTimeout(this.deferredTimeChangeTimeout);
     const timestamp = DatePicker.getTimestamp(
       this.state.selectedDay,
-      this.state.hour, this.state.minute, second,
+      this.state.hour,
+      this.state.minute,
+      second,
     );
     if (second > 59) return;
     this.setState({ second, timestamp });
     this.deferredTimeChangeTimeout = setTimeout(
-      () => this.handleDateTimeChange(
-        this.state.selectedDay,
-        this.state.hour, this.state.minute, second,
-      ),
+      () =>
+        this.handleDateTimeChange(
+          this.state.selectedDay,
+          this.state.hour,
+          this.state.minute,
+          second,
+        ),
       500,
     );
   }
@@ -265,7 +285,11 @@ class DatePicker extends PureComponent {
           </div>
         </div>
 
-        <div ref={(area) => { this.area = area; }}>
+        <div
+          ref={(area) => {
+            this.area = area;
+          }}
+        >
           {this.state.isOpen && (
             <div className="daypicker-position">
               <DayPicker
@@ -333,7 +357,13 @@ DatePicker.defaultProps = {
 };
 
 const TimePicker = ({
-  hour, minute, second, onHourChange, onMinuteChange, onSecondChange, disabled,
+  hour,
+  minute,
+  second,
+  onHourChange,
+  onMinuteChange,
+  onSecondChange,
+  disabled,
 }) => (
   <div className="timepicker-position">
     <TimeInput

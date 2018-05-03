@@ -21,9 +21,7 @@ class Options extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {
-      options, selected, highlighted,
-    } = nextProps;
+    const { options, selected, highlighted } = nextProps;
     this.setState({
       options,
       selected,
@@ -89,7 +87,11 @@ class Options extends PureComponent {
           }}
           showTrack={false}
         >
-          <div ref={(items) => { this.items = items; }}>
+          <div
+            ref={(items) => {
+              this.items = items;
+            }}
+          >
             {optionItems}
           </div>
         </ScrollBox>
@@ -149,7 +151,9 @@ class Option extends PureComponent {
         value={value}
       >
         {icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
-        <div className="input-select__options-item__label"><Tooltip>{label}</Tooltip></div>
+        <div className="input-select__options-item__label">
+          <Tooltip>{label}</Tooltip>
+        </div>
       </div>
     );
   }

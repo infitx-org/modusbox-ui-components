@@ -12,8 +12,8 @@ class Tooltip extends PureComponent {
     const boxRect = box.getBoundingClientRect();
     const tooltipRect = target.getBoundingClientRect();
 
-    const leftCenteredByY = boxRect.left + ((boxRect.width - tooltipRect.width) / 2);
-    const topCenteredByX = boxRect.top + ((boxRect.height - tooltipRect.height) / 2);
+    const leftCenteredByY = boxRect.left + (boxRect.width - tooltipRect.width) / 2;
+    const topCenteredByX = boxRect.top + (boxRect.height - tooltipRect.height) / 2;
 
     // Calculate tooltip position, it should be centered on top of the box
     if (position === 'top') {
@@ -32,7 +32,7 @@ class Tooltip extends PureComponent {
     if (left < 10) {
       left = 10;
     }
-    if (left + tooltipRect.width > (innerWidth - 10)) {
+    if (left + tooltipRect.width > innerWidth - 10) {
       left = innerWidth - 10 - tooltipRect.width;
     }
     if (top < 10) {

@@ -21,7 +21,6 @@ let options = [
   },
 ];
 
-
 function optionMaker(item, index) {
   return {
     label: `label${index}`,
@@ -32,7 +31,6 @@ function optionMaker(item, index) {
 const otherOptions = new Array(500).map(optionMaker);
 
 options = [...options, ...otherOptions];
-
 
 const TestSelect = () => (
   <div>

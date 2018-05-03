@@ -58,7 +58,9 @@ class ListItem extends React.Component {
     const changeSelected = nextProps.isSelected !== this.props.isSelected;
     const changeMultiSelected = nextProps.isMultiSelected !== this.props.isMultiSelected;
     const changeScrollbarVisibility = nextProps.showScrollbar !== this.props.showScrollbar;
-    return isForced || changeSelected || changeMultiSelected || changeItem || changeScrollbarVisibility;
+    return (
+      isForced || changeSelected || changeMultiSelected || changeItem || changeScrollbarVisibility
+    );
   }
 
   render() {
@@ -96,9 +98,15 @@ class ListItem extends React.Component {
             // check if the value needs to be transformed using the "func and icon" function
             const prop = column.key;
             const field = item[prop];
-            let value = field != undefined ? (column.func != undefined ? column.func(field, item) : field) : '';
+            let value =
+              field != undefined
+                ? column.func != undefined
+                  ? column.func(field, item)
+                  : field
+                : '';
             const icon = column.icon != undefined ? column.icon(field, item) : false;
-            const cellContent = originalColumn.content && originalColumn.content(field, item, this.props.index);
+            const cellContent =
+              originalColumn.content && originalColumn.content(field, item, this.props.index);
             let content = false;
             if (cellContent) {
               if (typeof cellContent === 'string') {

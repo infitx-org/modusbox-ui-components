@@ -70,6 +70,6 @@ module.exports = {
       commonjs: 'react-dom',
       amd: 'react-dom',
       umd: 'react-dom',
-    }
-  }
+    },
+  },
 };

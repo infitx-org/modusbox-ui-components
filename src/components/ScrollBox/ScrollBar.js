@@ -42,8 +42,12 @@ class ScrollBar extends PureComponent {
         const diff = mousePosY - this._originMouseY;
         const max = Math.round(height - this.state.barHeight);
         let ratio = diff / max;
-        if (diff > max) { ratio = 1; }
-        if (diff < 0) { ratio = 0; }
+        if (diff > max) {
+          ratio = 1;
+        }
+        if (diff < 0) {
+          ratio = 0;
+        }
         this.props.onDrag(ratio);
       }
     }
@@ -58,9 +62,10 @@ class ScrollBar extends PureComponent {
     const totalContentHeight = offset + contentHeight;
     const viewToContentRatio = positions.height / totalContentHeight;
     const barHeight = Math.max(10, viewToContentRatio * height);
-    const realBaHeight = Math.max(10, (height / totalContentHeight) * height);
+    const heightSquared = height ** 2;
+    const realBarHeight = Math.max(10, heightSquared / totalContentHeight);
     const showScrollbar = viewToContentRatio < 1;
-    const scrollBarScale = (height - realBaHeight) / (totalContentHeight - height);
+    const scrollBarScale = (height - realBarHeight) / (totalContentHeight - height);
     const scrollBarTranslate = scrollTop * scrollBarScale;
     const translate = showScrollbar ? scrollBarTranslate : 0;
     const isMoving = true;
@@ -100,7 +105,9 @@ class ScrollBar extends PureComponent {
 
     return (
       <div
-        ref={(tracker) => { this.tracker = tracker; }}
+        ref={(tracker) => {
+          this.tracker = tracker;
+        }}
         className={`scrollbar ${showTrack ? 'track-visible' : ''}`}
         style={trackStyle}
       >

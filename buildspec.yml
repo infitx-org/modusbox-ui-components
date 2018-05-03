@@ -10,7 +10,9 @@ phases:
   post_build:
     commands:
       - make bare_extract
-# artifacts:
-#   files:
-#     - dist/index.js
-#   discard-paths: yes
+artifacts:
+  files:
+    - dist/index.js
+    - dist/modusbox.css
+    - dist/mulesoft.css
+  discard-paths: yes

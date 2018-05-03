@@ -19,8 +19,9 @@ const focusNextFocusableElement = (currentElement, next = true) => {
   }
 };
 
-const composeClassNames = items => items
-  .filter(item => item !== true && item !== false && item !== undefined && item !== null)
-  .join(' ');
+const composeClassNames = items =>
+  items
+    .filter(item => item !== true && item !== false && item !== undefined && item !== null)
+    .join(' ');
 
 export { focusNextFocusableElement, composeClassNames };

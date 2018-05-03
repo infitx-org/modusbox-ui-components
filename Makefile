@@ -11,21 +11,27 @@ CONTAINER_NAME := ui_components_$(DATE)
 yarn:
 	@docker run -it --rm -v $(MAKE_DIRECTORY)/src:/usr/local/code/src $(options) ui-components $(cmd)
 
-test: cmd = run test
+test: cmd := run test
 test: yarn
 
-add: cmd = add $(package)
-remove: cmd = remove $(package)
-add remove : options = -v $(MAKE_DIRECTORY)/:/usr/local/code
+add: cmd := add $(package)
+remove: cmd := remove $(package)
+add remove : options := -v $(MAKE_DIRECTORY)/:/usr/local/code
 add remove : yarn install
 
 
-start: cmd = start
-start: options = -p 8080:8080 -p 8081:8081
+start: cmd := start
+start: options := -p 8080:8080 -p 8081:8081
 start: yarn
 
-lint: cmd = lint
-lint: yarn
+eslint:
+	@docker run -it --rm -v $(MAKE_DIRECTORY)/src:/usr/local/code/src $(options) ui-components eslint
+
+prettier:
+	@docker run -it --rm -v $(MAKE_DIRECTORY)/src:/usr/local/code/src $(options) ui-components prettier
+
+lint: prettier eslint
+
 
 extract: install bare_build bare_extract
 

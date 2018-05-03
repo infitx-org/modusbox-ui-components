@@ -6,7 +6,9 @@ import ModalBackground from './ModalBackground';
 
 class ModalContainer extends PureComponent {
   render() {
-    const { props: { children, ...otherProps } } = this;
+    const {
+      props: { children, ...otherProps },
+    } = this;
 
     return (
       <ModalPortal {...otherProps}>

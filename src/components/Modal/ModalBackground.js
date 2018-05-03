@@ -73,10 +73,10 @@ export default class ModalBackground extends PureComponent {
       tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled,
     } = this.props;
     const width = `${this.props.width || '800px'}`;
-    const maxHeight = maximise ? 'auto' : `calc(100% - ${(60 * modalIndex) + 70}px)`;
+    const maxHeight = maximise ? 'auto' : `calc(100% - ${60 * modalIndex + 70}px)`;
     const bottom = maximise ? '20px' : undefined;
     const modalStyle = {
-      top: 50 + (60 * modalIndex),
+      top: 50 + 60 * modalIndex,
       bottom,
       maxHeight,
       width,
@@ -127,12 +127,9 @@ export default class ModalBackground extends PureComponent {
                 />
               </div>
             )}
-
           </div>
 
-          <div className={bodyClassName}>
-            {content}
-          </div>
+          <div className={bodyClassName}>{content}</div>
 
           <div className="element-modal__footer">
             <div className="element-modal__footer-left" />

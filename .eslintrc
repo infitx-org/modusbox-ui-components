@@ -14,11 +14,17 @@
     "node": true,
     "mocha": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended",
+    "airbnb"
+  ],
   "rules": {
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "indent": [2, 2],
     "no-underscore-dangle": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["webpack*.js", "**/*.test.js"]}],
     "react/prefer-stateless-function": [1, { "ignorePureComponents": true }],
     "react/prop-types": 0,
     "react/jsx-indent": [2, 2],
@@ -29,6 +35,19 @@
     "jsx-a11y/no-noninteractive-tabindex": 0,
     "jsx-a11y/tabindex-no-positive": 0,
     "jsx-a11y/no-autofocus": 0,
-    "max-len": ["error", { "code": 100 }]
+    "max-len": ["error", { "code": 100 }],
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["*", "/"],
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": false
+      }
+    ]
   }
 }

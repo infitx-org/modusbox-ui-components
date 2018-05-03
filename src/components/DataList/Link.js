@@ -36,7 +36,11 @@ class Link extends Component {
   render() {
     const text = this.props.value != undefined ? this.props.value.toString() : undefined;
     return (
-      <div ref={link => (this.link = link)} className="element-datalist__link" onClick={this.onClick}>
+      <div
+        ref={link => (this.link = link)}
+        className="element-datalist__link"
+        onClick={this.onClick}
+      >
         <div className="link-box">
           <span className="link-text-box">{text || this.props.children} </span>
         </div>
