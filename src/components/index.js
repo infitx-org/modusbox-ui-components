@@ -20,7 +20,7 @@ import Spinner from './Spinner';
 import { Tab, TabList, Tabs, TabPanels, TabPanel } from './Tabs';
 import TextField from './TextField';
 import Toast from './Toast';
-import Tooltip from './Tooltip';
+import Tooltip, { TooltipContent } from './Tooltip';
 
 export {
   Button,
@@ -45,4 +45,5 @@ export {
   TextField,
   Toast,
   Tooltip,
+  TooltipContent,
 };

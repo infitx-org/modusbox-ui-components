@@ -15,10 +15,17 @@ const TestDatePicker = () => (
         defaultMinute={0}
         defaultSecond={0}
         withTime
+        hideIcon
         disabledDays={undefined}
       />
       <DatePicker placeholder="Pending" format="x" onSelect={console.log} pending />
-      <DatePicker placeholder="Invalid" format="x" onSelect={console.log} invalid />
+      <DatePicker
+        placeholder="Invalid"
+        format="x"
+        onSelect={console.log}
+        invalid
+        invalidMessages={['This is a test', 'This is invalid']}
+      />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} required />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} disabled />
     </div>

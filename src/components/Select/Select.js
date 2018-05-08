@@ -6,7 +6,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon from '../Icon';
-import { Loader, Placeholder } from '../Common';
+import { Loader, Placeholder, InvalidIcon } from '../Common';
 
 import Options from './Options';
 import Indicator from './Indicator';
@@ -249,7 +249,14 @@ class Select extends PureComponent {
 
   render() {
     const {
-      id, style, placeholder, pending, disabled, invalid, required,
+      id,
+      style,
+      placeholder,
+      pending,
+      disabled,
+      invalid,
+      required,
+      invalidMessages,
     } = this.props;
     const {
       isOpen, selectedLabel, selected, filter, highlightedOption,
@@ -271,6 +278,12 @@ class Select extends PureComponent {
       required &&
         selectedLabel === undefined &&
         'mb-input--required mb-input__borders--required mb-input__background--required',
+    ]);
+
+    const invalidIconClassName = utils.composeClassNames([
+      'mb-input__inner-icon',
+      'mb-input__inner-icon--invalid',
+      'input-select__icon',
     ]);
 
     return (
@@ -302,14 +315,19 @@ class Select extends PureComponent {
             <input type="hidden" disabled value={JSON.stringify(options)} />
 
             {filter && (
-              <div className="mb-input__inner-icon input-select-mb-input__icon">
-                <Icon name="search-small" size={16} />
+              <div className="mb-input__inner-icon input-select__icon">
+                <Icon size={16} name="search-small" />
+              </div>
+            )}
+            {invalid && (
+              <div className={invalidIconClassName}>
+                <InvalidIcon messages={invalidMessages} />
               </div>
             )}
 
             <Loader visible={pending} />
 
-            <div className="mb-input__inner-icon input-select-mb-input__icon">
+            <div className="mb-input__inner-icon input-select__icon">
               <Indicator isOpen={isOpen} />
             </div>
           </div>
@@ -353,6 +371,7 @@ Select.propTypes = {
   required: PropTypes.bool,
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
+  invalidMessages: PropTypes.arrayOf(PropTypes.string),
 };
 
 Select.defaultProps = {
@@ -365,6 +384,7 @@ Select.defaultProps = {
   pending: false,
   required: false,
   invalid: false,
+  invalidMessages: [],
   disabled: false,
 };
 

@@ -28,16 +28,20 @@ function optionMaker(item, index) {
   };
 }
 
-const otherOptions = new Array(500).map(optionMaker);
-
+const otherOptions = new Array(500).fill({}).map(optionMaker);
 options = [...options, ...otherOptions];
 
 const TestSelect = () => (
   <div>
     <div style={{ padding: 10, border: '1px solid #ccc' }}>
-      <Select placeholder="Default" options={options} selected="z5" />
+      <Select placeholder="Default" options={options} selected="value1" />
       <Select placeholder="Pending" options={options} pending />
-      <Select placeholder="Invalid" options={options} invalid />
+      <Select
+        placeholder="Invalid"
+        options={options}
+        invalid
+        invalidMessages={['This is a test', 'This is invalid']}
+      />
       <Select placeholder="Required" options={options} required />
       <Select placeholder="Disabled" options={options} disabled />
       <Select placeholder="Events (console)" options={options} onChange={console.log} />
@@ -45,9 +49,7 @@ const TestSelect = () => (
     <div style={{ padding: 10, border: '1px solid #ccc' }}>
       <Select id="x" placeholder="placeholder" options={options} pending />
       <Select placeholder="Position 2 options" options={[options[0], options[1]]} />
-      {/* <select> { options.map( i => <option value={i.label}>{i.label}</option> ) } </select> */}
       <Select id="x" placeholder="placeholder" options={options} disabled />
-
       <Select id="x" placeholder="placeholder" options={options} />
       <Select id="x" placeholder="placeholder" options={options} />
       <Select id="x" placeholder="placeholder" options={options} />

@@ -1,186 +1,222 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.input-button__input{
-	outline: none;
-	cursor: pointer;
-    box-sizing: border-box;
-    border: 0;
-    display: inline-block;
-    flex: 0 0 auto;
-    font-size: 14px;
-    line-height: 19px;
-    padding: 10px 16px;
-    white-space: nowrap;
-    user-select: none;
-    text-decoration: none;
-    transition: background .3s linear, margin 0.01s linear;
-    font-style: normal;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    border: 1px solid;
-    align-items: center;
-    color: $color__white;
-    fill: $color__white;
-    stroke: $color__white;
+.input-button__input {
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 0;
+  display: inline-block;
+  flex: 0 0 auto;
+  font-size: 14px;
+  line-height: 19px;
+  padding: 10px 16px;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  transition: background 0.3s linear, margin 0.01s linear;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid;
+  align-items: center;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
 
-    &:active{        
-        color: $color__alpha-3;
-        fill: $color__alpha-3;
-        stroke: $color__alpha-3;
+  &:active {
+    color: $color__alpha-3;
+    fill: $color__alpha-3;
+    stroke: $color__alpha-3;
+  }
+}
+
+.input-button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input-button__icon {
+  animation: animateIconFadeIn 0.1s linear forwards;
+  margin-right: 5px;
+  margin-left: 0px;
+  fill: inherit;
+  stroke: inherit;
+}
+
+.input-button__mb-input--primary {
+  background-color: $color__main-primary;
+  border-color: $color__main-primary;
+
+  &.noFill {
+    background-color: transparent;
+    color: $color__main-primary;
+    fill: $color__main-primary;
+    stroke: $color__main-primary;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-primary--active;
+    border-color: $color__main-primary--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
     }
+  }
 }
+.input-button__mb-input--secondary {
+  background-color: $color__main-secondary;
+  border-color: $color__main-secondary;
 
-.input-button__content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.input-button__icon{
-    animation: animateIconFadeIn 0.1s linear forwards;
-    margin-right: 5px;
-    margin-left: 0px;
-    fill: inherit;
-    stroke: inherit;
-}
+  &.noFill {
+    background: transparent;
+    color: $color__main-secondary;
+    fill: $color__main-secondary;
+    stroke: $color__main-secondary;
+  }
 
-.input-button__mb-input--primary{
-    background-color: $color__main-primary;
-    border-color: $color__main-primary;
-    
-    &.noFill{
-        background-color: transparent;
-        color: $color__main-primary;
-        fill: $color__main-primary;
-        stroke: $color__main-primary;
+  &:hover,
+  &:focus {
+    background-color: $color__main-secondary--active;
+    border-color: $color__main-secondary--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
     }
-
-    &:hover, &:focus{
-        background-color: $color__main-primary--active;
-        border-color: $color__main-primary--active;
-        
-        &.noFill{
-            color: $color__white;
-            fill: $color__white;
-            stroke: $color__white;
-        }
-    };    
+  }
 }
-.input-button__mb-input--secondary{
-	background-color: $color__main-secondary;
-    border-color: $color__main-secondary;
-    
-    &.noFill{
-        background: transparent;
-        color: $color__main-secondary;
-        fill: $color__main-secondary;
-        stroke: $color__main-secondary;
+.input-button__mb-input--danger {
+  background-color: $color__main-danger;
+  border-color: $color__main-danger;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
+
+  &.noFill {
+    background: transparent;
+    color: $color__main-danger;
+    fill: $color__main-danger;
+    stroke: $color__main-danger;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-danger--active;
+    border-color: $color__main-danger--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
     }
-
-    &:hover, &:focus{
-		background-color: $color__main-secondary--active;
-		border-color: $color__main-secondary--active;
-        
-        &.noFill{
-            color: $color__white;
-            fill: $color__white;
-            stroke: $color__white;
-        }
-    }    
+  }
 }
-.input-button__mb-input--danger{
-    background-color: $color__main-danger;
-    border-color: $color__main-danger;
-    color: $color__white;
-    fill: $color__white;
-    stroke: $color__white;
-    
-    &.noFill{
-        background: transparent;
-        color: $color__main-danger;
-        fill: $color__main-danger;
-        stroke: $color__main-danger;
-     }
 
-    &:hover, &:focus{
-        background-color: $color__main-danger--active;
-        border-color: $color__main-danger--active;
-        
-        &.noFill{
-            color: $color__white;
-            fill: $color__white;
-            stroke: $color__white;
-        }
+.input-button__mb-input--warning {
+  background-color: $color__main-warning;
+  border-color: $color__main-warning;
+
+  &.noFill {
+    background-color: transparent;
+    color: $color__main-warning;
+    fill: $color__main-warning;
+    stroke: $color__main-warning;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-warning--active;
+    border-color: $color__main-warning--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
     }
+  }
 }
 
-.input-button__mb-input--warning{
-    background-color: $color__main-warning;
-    border-color: $color__main-warning;
-    
-    &.noFill{
-        background-color: transparent;
-        color: $color__main-warning;
-        fill: $color__main-warning;
-        stroke: $color__main-warning;
-    }
+.input-button__mb-input--dark {
+  background-color: $color__alpha-5;
+  border-color: transparent;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
 
-    &:hover, &:focus{
-        background-color: $color__main-warning--active;
-        border-color: $color__main-warning--active;
-        
-        &.noFill{
-            color: $color__white;
-            fill: $color__white;
-            stroke: $color__white;
-        }
-    };    
-}
+  &.noFill {
+    background-color: transparent;
+    border-color: $color__alpha-5;
+    color: $color__alpha-4;
+    fill: $color__alpha-4;
+    stroke: $color__alpha-4;
+  }
 
-.input-button__mb-input--dark{
-    background-color: $color__alpha-5;
+  &:hover,
+  &:focus {
+    background-color: $color__alpha-4;
     border-color: transparent;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+
+.input-button__mb-input--light {
+  background-color: $color__white;
+  border-color: transparent;
+  color: $color__gray-5;
+  fill: $color__gray-5;
+  stroke: $color__gray-5;
+
+  &.noFill {
+    background-color: transparent;
+    border-color: $color__white;
     color: $color__white;
     fill: $color__white;
     stroke: $color__white;
-    
-    &.noFill{
-        background-color: transparent;
-        border-color: $color__alpha-5;
-        color: $color__alpha-4;
-        fill: $color__alpha-4;
-        stroke: $color__alpha-4;
-    }
+  }
 
-    &:hover, &:focus{
-        background-color: $color__alpha-4;
-        border-color: transparent;
-        
-        &.noFill{
-            color: $color__white;
-            fill: $color__white;
-            stroke: $color__white;
-        }
-    };    
+  &:hover,
+  &:focus {
+    background-color: $color__white;
+    border-color: transparent;
+    color: $color__gray-4;
+
+    &.noFill {
+      color: $color__gray-5;
+      fill: $color__gray-5;
+      stroke: $color__gray-5;
+    }
+  }
 }
 
 .input-button__mb-input--disabled,
-.input-button__mb-input--tertiary{
-    background-color: $color__main-tertiary;
-    border-color: $color__main-tertiary;
-    color: $color__dark-gray-1;
-	fill: $color__dark-gray-1;
-    stroke: $color__dark-gray-1;
+.input-button__mb-input--tertiary {
+  background-color: $color__main-tertiary;
+  border-color: $color__main-tertiary;
+  color: $color__dark-gray-1;
+  fill: $color__gray-5;
+  stroke: $color__gray-5;
 
-    &.noFill{
-        background: transparent;
-        color: $color__gray-5;
-        fill: $color__gray-5;
-        stroke: $color__gray-5;
-    }
-    &:hover, &:focus{
-		background-color: $color__main-tertiary--active;
-		border-color: $color__main-tertiary--active;
-    };
+  &.noFill {
+    border-color: $color__main-tertiary;
+    background: transparent;
+    color: $color__gray-5;
+    fill: $color__gray-5;
+    stroke: $color__gray-5;
+  }
+  &:hover,
+  &:focus {
+    background-color: $color__main-tertiary--active;
+    border-color: $color__main-tertiary--active;
+  }
 }
 
 .input-button__mb-input--primary,
@@ -188,19 +224,20 @@
 .input-button__mb-input--tertiary,
 .input-button__mb-input--danger,
 .input-button__mb-input--warning,
-.input-button__mb-input--dark{
-    &:hover{
-        &.noFill{ 
-            &:active{ 
-                color: $color__alpha-3;
-                fill: $color__alpha-3;
-                stroke: $color__alpha-3;
-            }
-        }
-    } 
-    &:active{        
+.input-button__mb-input--dark,
+.input-button__mb-input--light {
+  &:hover {
+    &.noFill {
+      &:active {
         color: $color__alpha-3;
         fill: $color__alpha-3;
         stroke: $color__alpha-3;
+      }
     }
+  }
+  &:active {
+    color: $color__alpha-3;
+    fill: $color__alpha-3;
+    stroke: $color__alpha-3;
+  }
 }

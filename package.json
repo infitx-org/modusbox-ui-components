@@ -12,7 +12,7 @@
     "eslint": "eslint --color --fix webpack*.js src",
     "start": "NODE_ENV=development webpack-serve --host 0.0.0.0 webpack.dev.config.js",
     "test": "jest",
-    "prettier": "prettier --write webpack*.js 'src/**/*.js'"
+    "prettier": "prettier --write webpack*.js 'src/**/*.{js,scss}'"
   },
   "jest": {
     "setupFiles": [
@@ -101,7 +101,6 @@
     "karma-mocha-reporter": "^2.0.4",
     "postcss-loader": "^2.1.4",
     "prettier": "^1.11.1",
-    "prettier-loader": "^2.1.0",
     "react-addons-test-utils": "^15.6.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.21.0",

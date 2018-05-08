@@ -1,16 +1,16 @@
 @import '../../../assets/styles/vars/colors.scss';
 
-.color-box{
-	display: inline-block;
-	flex: 0 0 100px;
-	height: 100px;
-	width: 100px;
-	margin: 5px;
+.color-box {
+  display: inline-block;
+  flex: 0 0 100px;
+  height: 100px;
+  width: 100px;
+  margin: 5px;
 }
 .color-box__title {
-	font-size: 12px;
-	background: #fff;
-	margin: 2px;
-	padding: 2px;
-	background: rgba(255,255,255,0.9);
+  font-size: 12px;
+  background: #fff;
+  margin: 2px;
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.9);
 }

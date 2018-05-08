@@ -7,7 +7,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon from '../Icon';
-import { Loader, Placeholder } from '../Common';
+import { Loader, Placeholder, InvalidIcon } from '../Common';
 
 function asDate(day) {
   if (day) {
@@ -233,7 +233,16 @@ class DatePicker extends PureComponent {
 
   render() {
     const {
-      placeholder, id, style, disabled, pending, invalid, required, dateFormat,
+      placeholder,
+      id,
+      style,
+      disabled,
+      pending,
+      invalid,
+      invalidMessages,
+      required,
+      dateFormat,
+      hideIcon,
     } = this.props;
     const { isOpen, timestamp, selectedDay } = this.state;
     const initialMonth = selectedDay || DatePicker.getDate(this.props.initialMonth);
@@ -241,6 +250,7 @@ class DatePicker extends PureComponent {
     const isPlaceholderActive = isOpen || hasDate;
     const valueFormat = dateFormat || 'MMM Do YYYY, HH:mm:ss';
     const value = hasDate ? moment(timestamp).format(valueFormat) : '';
+    const showCalendar = hasDate ? hideIcon === false : true;
 
     const componentClassName = utils.composeClassNames([
       'input-datepicker__component',
@@ -252,6 +262,12 @@ class DatePicker extends PureComponent {
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
       invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
       required && 'mb-input--required mb-input__borders--required mb-input__background--required',
+    ]);
+
+    const invalidIconClassName = utils.composeClassNames([
+      'mb-input__inner-icon',
+      'mb-input__inner-icon--invalid',
+      'input-datepicker__icon',
     ]);
 
     return (
@@ -279,9 +295,17 @@ class DatePicker extends PureComponent {
 
             <Loader visible={pending} />
 
-            <div className="mb-input__inner-icon input-datepicker__icon">
-              <Icon size={16} name="calendar-small" fill="#999" />
-            </div>
+            {invalid && (
+              <div className={invalidIconClassName}>
+                <InvalidIcon messages={invalidMessages} />
+              </div>
+            )}
+
+            {showCalendar && (
+              <div className="mb-input__inner-icon input-datepicker__icon">
+                <Icon size={16} name="calendar-small" fill="#999" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -335,6 +359,7 @@ DatePicker.propTypes = {
   invalid: PropTypes.bool,
   initialMonth: PropTypes.string,
   disabledDays: PropTypes.func,
+  hideIcon: PropTypes.bool,
 };
 DatePicker.defaultProps = {
   id: undefined,
@@ -354,6 +379,7 @@ DatePicker.defaultProps = {
   invalid: false,
   initialMonth: undefined,
   disabledDays: undefined,
+  hideIcon: false,
 };
 
 const TimePicker = ({

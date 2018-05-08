@@ -225,9 +225,8 @@ class FileUploader extends PureComponent {
           role="presentation"
         >
           <div className="input-fileuploader-box">
-            <Placeholder label={placeholder} active={isPlaceholderActive} />
-
             <div className="mb-input__content input-fileuploader__content">
+              <Placeholder label={placeholder} active={isPlaceholderActive} />
               <input
                 className="input-fileuploader__input"
                 type="file"

@@ -1,83 +1,86 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.input-select__options{
-	position: relative;	
+.input-select__options {
+  position: relative;
 }
-.input-select__options-wrapper{
-	position: absolute;
-	width: calc( 100% + 4px );
-	margin:0px -2px;
-	z-index: 1000;
-	animation: fadeIn 0.15s ease-in-out;
+.input-select__options-wrapper {
+  position: absolute;
+  width: calc(100% + 4px);
+  margin: 0px -2px;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-in-out;
 }
-.input-select__options-wrapper--regular{	
-	border-bottom: 2px solid $color__main-tertiary;
+.input-select__options-wrapper--regular {
+  border-bottom: 2px solid $color__main-tertiary;
 }
-.input-select__options-wrapper--reverse{
-	border-top: 2px solid $color__main-tertiary;
+.input-select__options-wrapper--reverse {
+  border-top: 2px solid $color__main-tertiary;
 }
-.input-select__options-item{
-	outline: none;
-	display: flex;
-	align-items: center;
-	flex: 0 0 40px;	
-	color: $color__dark-gray-3;
-	padding-left: 10px;	
-	padding-right: 10px;	
-	line-height: 40px;
-	font-size: 13px;
-	background: $color__white;
+.input-select__options-item {
+  outline: none;
+  display: flex;
+  align-items: center;
+  flex: 0 0 40px;
+  color: $color__dark-gray-3;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 40px;
+  font-size: 13px;
+  background: $color__white;
 
-	border-left: 2px solid $color__main-tertiary;
-	border-right: 2px solid $color__main-tertiary;
-	cursor: pointer;
-	color: $color__dark-gray-1;
-	fill: $color__dark-gray-1;
+  border-left: 2px solid $color__main-tertiary;
+  border-right: 2px solid $color__main-tertiary;
+  cursor: pointer;
+  color: $color__dark-gray-1;
+  fill: $color__dark-gray-1;
 }
 
-.input-select__options-item--selected{
-	background: $color__gray-2;
-	border-color: $color__dark-gray-2;
-	color: $color__dark-gray-2;
+.input-select__options-item--selected {
+  background: $color__gray-2;
+  border-color: $color__dark-gray-2;
+  color: $color__dark-gray-2;
 }
 .input-select__options-item:hover,
-.input-select__options-item--highlighted{
-	background: $color__gray-1;
-	border-color: $color__main-primary;
-	color: $color__main-primary;
-	fill: $color__main-primary;
+.input-select__options-item--highlighted {
+  background: $color__gray-1;
+  border-color: $color__main-primary;
+  color: $color__main-primary;
+  fill: $color__main-primary;
 }
 .input-select__options-item--disabled,
-.input-select__options-item--disabled:hover{
-	color: $color__main-disabled;
-	border-color: $color__main-disabled;
-	cursor: auto;
+.input-select__options-item--disabled:hover {
+  color: $color__main-disabled;
+  border-color: $color__main-disabled;
+  cursor: auto;
 }
 
-.input-select__options-item__icon{
-	margin-right: 2px;
+.input-select__options-item__icon {
+  margin-right: 2px;
 }
-.input-select__options-item__label{
-	min-width: 0;
+.input-select__options-item__label {
+  min-width: 0;
 }
 
-
-.input-select__options-item--no-options__box{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 40px;
-	background: $color__gray-2;
-	color: $color__gray-5;
-	fill: $color__gray-5;
-	line-height: 40px;
-	border-left: 2px solid $color__main-tertiary;
-	border-right: 2px solid $color__main-tertiary;
+.input-select__options-item--no-options__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background: $color__white;
+  color: $color__gray-5;
+  fill: $color__gray-5;
+  line-height: 40px;
+  border-left: 2px solid $color__main-tertiary;
+  border-right: 2px solid $color__main-tertiary;
 }
-.input-select__options-item--no-options__message{
-	margin-left: 10px;
+.input-select__options-item--no-options__message {
+  margin-left: 10px;
 }
-@keyframes fadeIn{
-	0%{ opacity: 0; }
-	100%{ opacity: 1; }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

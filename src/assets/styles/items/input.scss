@@ -3,14 +3,8 @@
 @import '../vars/background.scss';
 @import '../vars/general.scss';
 
-/********************************/
-/********************************/
-* {
-  box-sizing: border-box;
-}
 .mb-input * {
   box-sizing: border-box;
-  font-family: Open Sans, sans-serif;
   font-style: normal;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -96,17 +90,16 @@
 .mb-input__input {
   flex: 2 1 auto;
   overflow: hidden;
-  height: 20px;
-
   background: transparent;
   border: none;
   outline: none;
   padding: 0px;
-  padding-top: 1px;
-
+  padding-top: 5px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: inherit;
   font-size: 14px;
+  height: 100%;
 }
 .mb-input__holder {
   padding: 0px;
@@ -122,7 +115,6 @@
   transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
   top: 50%;
-  left: 16px;
   color: $placeholder-color;
   transform: translateY(-50%);
 }
@@ -144,6 +136,10 @@
   display: flex;
   padding: 0px 5px;
   font-size: 11px;
+  height: 30px;
+  padding: 0 9px;
+  font-size: 13px;
+  border-radius: 2px;
 
   .input-button__icon {
     display: flex;
@@ -158,6 +154,9 @@
   flex: 0 0 auto;
   fill: #999;
   margin-left: 5px;
+}
+.mb-input__inner-icon--invalid {
+  fill: $color__main-danger;
 }
 
 @keyframes animateIconFadeIn {

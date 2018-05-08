@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
-import Spinner from '../Spinner';
 import Button from '../Button';
+import Icon from '../Icon';
+import Spinner from '../Spinner';
+import Tooltip, { TooltipContent } from '../Tooltip';
 
 const Loader = ({ visible }) => {
   if (!visible) {
@@ -82,4 +84,13 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
-export { Loader, Placeholder, InnerButton };
+const InvalidIcon = ({ messages }) => {
+  const tooltipContent = <TooltipContent content={messages} size={16} kind="error" />;
+  return (
+    <Tooltip content={tooltipContent} position="right" kind="error">
+      <Icon size={16} name="warning-sign" />
+    </Tooltip>
+  );
+};
+
+export { Loader, Placeholder, InnerButton, InvalidIcon };

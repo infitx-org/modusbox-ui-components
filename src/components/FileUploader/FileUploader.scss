@@ -1,72 +1,77 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/transitions.scss';
 
-.input-fileuploader{
+.input-fileuploader {
 }
-.input-fileuploader__component{
-	display: flex;
-	position: relative;	
-	cursor: pointer;
-	height: 100%;
-	transition: $input__main-transition;
-	
-	&.input-fileuploader__mb-input--open {
-	}	
-	
-	&.input-fileuploader__mb-input--disabled{
-	}
+.input-fileuploader__component {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+  transition: $input__main-transition;
+
+  &.input-fileuploader__mb-input--open {
+  }
+
+  &.input-fileuploader__mb-input--disabled {
+  }
 }
-.input-fileuploader-box{
-	display: flex;
-	position: relative;
-	height: 100%;
-	width: 100%;
+.input-fileuploader-box {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
-.input-fileuploader__placeholder{	
+.input-fileuploader__placeholder {
 }
 
-
-.input-fileuploader__content{	
+.input-fileuploader__content {
 }
 
-.input-fileuploader__input{	
-    flex: 0 0 0;    
-    position: relative;
-    height: 20px;
-    opacity: 0;
-    width: 0;
+.input-fileuploader__input {
+  flex: 0 0 0;
+  position: relative;
+  height: 20px;
+  opacity: 0;
+  width: 0;
 }
 
-.input-fileuploader__filename{
-	flex:2 1 auto;
-	vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;    
-    font-size: 14px;
-    color: $color__dark-gray-3;
+.input-fileuploader__filename {
+  display: flex;
+  align-items: center;
+  flex: 2 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  font-size: 14px;
+  color: $color__dark-gray-3;
+  overflow: hidden;
+  padding: 0px;
+  padding-top: 5px;
+  height: 100%;
 
-    &.input-fileuploader__filename--no-file {
-		color: $color__gray-4;
-	}
+  &.input-fileuploader__filename--no-file {
+    color: $color__gray-4;
+  }
 }
 
-.input-fileuploader__button{
+.input-fileuploader__button {
 }
 
-.input-fileuploader__button-add{
-	
-	&:hover, &.mb-input__inner-button--active{
-		//background: rgba(0,162,233,0.8);
-	}
+.input-fileuploader__button-add {
+  &:hover,
+  &.mb-input__inner-button--active {
+    //background: rgba(0,162,233,0.8);
+  }
 }
-.input-fileuploader .input-fileuploader__button-remove{
-	&:hover, &.mb-input__inner-button--active{	
-		//background: rgba(255,50,50,0.8);		
-	}
+.input-fileuploader .input-fileuploader__button-remove {
+  &:hover,
+  &.mb-input__inner-button--active {
+    //background: rgba(255,50,50,0.8);
+  }
 }
-.input-fileuploader__icon{
-	flex: 0 0 auto;
+.input-fileuploader__icon {
+  flex: 0 0 auto;
 }

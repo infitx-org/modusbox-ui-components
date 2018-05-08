@@ -1,36 +1,31 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-scrollbox__wrapper{
-	position: relative;
-	overflow-x: hidden; 
-	display: flex;
-	flex: 1 1 auto;
-	flex-direction: row;
-	
+.element-scrollbox__wrapper {
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
 }
-.element-scrollbox__content-box{
-	width: calc( 100% + 20px );
-	overflow-y: scroll;
-	overflow-x: hidden;
-	-webkit-overflow-scrolling: touch;
-	padding-right: 20px;
-	flex: 1 0 auto;		
-	flex-direction: column;
+.element-scrollbox__content-box {
+  width: calc(100% + 20px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 20px;
+  flex: 1 0 auto;
+  flex-direction: column;
 }
-.element-scrollbox__content-box--flexible{
-	display: flex;
+.element-scrollbox__content-box--flexible {
+  display: flex;
 }
-.element-scrollbox__content{
-	width: calc( 100% + 20px );
-	min-height: 100%;
-    
-    flex-direction: column;
-	flex: 2 0 auto;
-	flex-direction: column;
-
+.element-scrollbox__content {
+  width: calc(100% + 20px);
+  flex-direction: column;
+  flex: 2 0 auto;
+  flex-direction: column;
 }
-.element-scrollbox__content--flexible{
-	min-height: auto;
-	display: flex;
-	height: auto;
+.element-scrollbox__content--flexible {
+  height: auto;
+  display: flex;
 }

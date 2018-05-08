@@ -13,7 +13,7 @@ class Heading extends PureComponent {
     const { size, children, style } = this.props;
     const Header = headerTag(parseInt(size, 10));
     return (
-      <Header style={style}>
+      <Header style={style} className="element">
         <span>{children}</span>
       </Header>
     );

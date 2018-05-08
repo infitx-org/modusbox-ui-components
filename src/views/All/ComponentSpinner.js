@@ -4,19 +4,19 @@ import Row from '../../components/Row';
 
 const Svg = () => (
   <div>
-    <Row>
+    <Row align="left">
       <Spinner color="#c33" />
       <Spinner color="#3c3" />
       <Spinner color="#33c" />
       <Spinner color="#cc3" />
       <Spinner color="#3cc" />
     </Row>
-    <Row>
+    <Row align="left">
       <Spinner size="s" />
       <Spinner size="m" />
       <Spinner size="l" />
     </Row>
-    <Row>
+    <Row align="left">
       <Spinner size={10} />
       <Spinner size={20} />
       <Spinner size={30} />

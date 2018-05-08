@@ -1,52 +1,51 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/transitions.scss';
 
-.input-select{
-	display: block;
+.input-select {
+  display: block;
 }
-.input-select__component{
-	display: flex;
-	position: relative;
-	cursor: pointer;	
-	height: 100%;
-	transition: $input__main-transition;
-	
-	&.input-select__mb-input--open {		
-	}	
-	
-	&.input-select__mb-input--disabled{		
-	}
+.input-select__component {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+  transition: $input__main-transition;
+
+  &.input-select__mb-input--open {
+  }
+
+  &.input-select__mb-input--disabled {
+  }
 }
 
-.input-select__content{	
+.input-select__content {
 }
 
-.input-select__placeholder{	
+.input-select__placeholder {
 }
 
+.input-select__value {
+  flex: 2 1 auto;
+  vertical-align: middle;
+  position: relative;
+  height: 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0px;
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
-.input-select__value{
-	flex: 2 1 auto;
-    vertical-align: middle;
-    position: relative;
-    height:20px;
-	background: transparent;
-	border: none;
-	outline: none;
-	padding: 0px;
-	pointer-events: none;    
-	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    color: $color__dark-gray-3;
-    &.has-filter{
-    	color: $color__blue-4;
-    }
+  color: $color__dark-gray-3;
+  &.has-filter {
+    color: $color__blue-4;
+  }
 }
-.input-select-mb-input__icon{
-	flex: 0 0 auto;
+.input-select__icon {
+  flex: 0 0 auto;
 }
-.input-select__indicator{
-	transition: all 0.2s linear;
+.input-select__indicator {
+  transition: all 0.2s linear;
 }

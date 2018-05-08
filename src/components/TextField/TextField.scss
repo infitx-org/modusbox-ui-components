@@ -1,51 +1,51 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/transitions.scss';
 
-.input-textfield{	
+.input-textfield {
 }
-.input-textfield__component{
-	display: flex;
-	position: relative;		
-	cursor: text;
-	height: 100%;
-	transition: $input__main-transition;
+.input-textfield__component {
+  display: flex;
+  position: relative;
+  cursor: text;
+  height: 100%;
+  transition: $input__main-transition;
 
-	&.input-textfield__mb-input--open{		
-	}	
-	
-	&.input-textfield__mb-input--disabled{		
-	}
-}
-.input-textfield__content{
-	display: flex;
-	position: relative;
-	height: 100%;
-	width: 100%;
-	align-items: center;	
-	padding-left: 16px;
-	padding-right: 12px;
-}
+  &.input-textfield__mb-input--open {
+  }
 
-.input-textfield__placeholder{	
+  &.input-textfield__mb-input--disabled {
+  }
+}
+.input-textfield__content {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 12px;
 }
 
-.input-textfield__value{
-	flex: 2 1 auto;
-    vertical-align: middle;    
-    position: relative;
-    height: 20px;
-	background: transparent;
-	border: none;
-	outline: none;
-	padding: 0px;
-	padding-top:1px;
-	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-	justify-content: center;
-	align-items: center;
-    color: $color__dark-gray-3;	    
+.input-textfield__placeholder {
 }
-.input-textfield__icon{
-	flex: 0 0 auto;
+
+.input-textfield__value {
+  flex: 2 1 auto;
+  vertical-align: middle;
+  position: relative;
+  height: 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0px;
+  padding-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  color: $color__dark-gray-3;
+}
+.input-textfield__icon {
+  flex: 0 0 auto;
 }

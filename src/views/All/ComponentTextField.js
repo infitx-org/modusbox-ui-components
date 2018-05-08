@@ -9,7 +9,11 @@ const TestTextField = () => (
       <TextField type="text" placeholder="Default" />
       <TextField type="password" placeholder="Password" />
       <TextField placeholder="Pending" pending />
-      <TextField placeholder="Invalid" invalid />
+      <TextField
+        placeholder="Invalid"
+        invalid
+        invalidMessages={['This is a test', 'This is invalid']}
+      />
       <TextField placeholder="Required" required />
       <TextField placeholder="Disabled" disabled />
       <TextField type="password" placeholder="4" value="text" />
@@ -46,6 +50,13 @@ const TestTextField = () => (
         onButtonClick={() => console.log('Clicked!')}
         buttonText="Press Me"
         disabled
+      />
+    </div>
+    <div style={{ padding: '10px', border: '1px solid #ccc', width: '200px' }}>
+      <TextField
+        placeholder="Invalid"
+        invalid
+        invalidMessages={['This is a test', 'This is invalid']}
       />
     </div>
     <div style={{ padding: '10px', border: '1px solid #ccc' }}>

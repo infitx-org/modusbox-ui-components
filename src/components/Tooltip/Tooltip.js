@@ -2,43 +2,68 @@ import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
+import * as utils from '../../utils/common';
+
+import TooltipContent from './TooltipContent';
+
 const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
 
 class Tooltip extends PureComponent {
   static getPosition(box, target, position) {
-    let top;
-    let left;
-    const { innerWidth } = window;
+    let coordinates = {};
+    const { innerWidth, innerHeight } = window;
     const boxRect = box.getBoundingClientRect();
     const tooltipRect = target.getBoundingClientRect();
 
     const leftCenteredByY = boxRect.left + (boxRect.width - tooltipRect.width) / 2;
     const topCenteredByX = boxRect.top + (boxRect.height - tooltipRect.height) / 2;
 
+    const getTop = () => ({
+      top: boxRect.top - tooltipRect.height - 10,
+      left: leftCenteredByY,
+      direction: 'top',
+    });
+    const getBottom = () => ({
+      top: boxRect.top + boxRect.height + 10,
+      left: leftCenteredByY,
+      direction: 'bottom',
+    });
+    const getLeft = () => ({
+      top: topCenteredByX,
+      left: boxRect.left - tooltipRect.width - 10,
+      direction: 'left',
+    });
+    const getRight = () => ({
+      top: topCenteredByX,
+      left: boxRect.left + boxRect.width + 10,
+      direction: 'right',
+    });
+
     // Calculate tooltip position, it should be centered on top of the box
     if (position === 'top') {
-      top = boxRect.top - tooltipRect.height - 10;
-      left = leftCenteredByY;
+      coordinates = getTop();
     } else if (position === 'bottom') {
-      top = boxRect.top + boxRect.height + 10;
-      left = leftCenteredByY;
+      coordinates = getBottom();
     } else if (position === 'left') {
-      top = topCenteredByX;
-      left = boxRect.left - tooltipRect.width - 10;
+      coordinates = getLeft();
     } else if (position === 'right') {
-      top = topCenteredByX;
-      left = boxRect.left + boxRect.width + 10;
+      coordinates = getRight();
     }
-    if (left < 10) {
-      left = 10;
+
+    if (coordinates.left < 10) {
+      coordinates = getRight();
     }
-    if (left + tooltipRect.width > innerWidth - 10) {
-      left = innerWidth - 10 - tooltipRect.width;
+    if (coordinates.left + tooltipRect.width > innerWidth - 10) {
+      coordinates = getLeft();
     }
-    if (top < 10) {
-      top = top + boxRect.height + 10;
+    if (coordinates.top < 10) {
+      coordinates = getBottom();
     }
-    return { left, top };
+    if (coordinates.top + tooltipRect.height > innerHeight - 10) {
+      coordinates = getTop();
+    }
+
+    return coordinates;
   }
   constructor(props) {
     super(props);
@@ -80,7 +105,7 @@ class Tooltip extends PureComponent {
       return;
     }
     const {
-      content, label, position, children,
+      content, label, position, children, kind,
     } = this.props;
     const { scrollWidth, offsetWidth } = this.box;
     const widthScroll = scrollWidth > offsetWidth;
@@ -92,39 +117,59 @@ class Tooltip extends PureComponent {
       return;
     }
 
-    let cmp = <span>{children}</span>;
+    let tooltipInnerComponent = <span>{children}</span>;
     let defaultAppearance = true;
+
     if (content) {
-      cmp = content;
+      // We need to provide the TooltipContent with the position it will be render
+      if (content.type === TooltipContent) {
+        tooltipInnerComponent = React.cloneElement(content, {
+          ...content.props,
+          position,
+        });
+      } else {
+        tooltipInnerComponent = content;
+      }
       defaultAppearance = false;
     } else if (label) {
-      cmp = <span>{label}</span>;
+      tooltipInnerComponent = <span>{label}</span>;
     }
 
     this._div = document.createElement('div');
     this._div.className = 'element-tooltip__viewer';
-    this._div.className += ` element-tooltip__viewer--fade-in-${position}`;
     if (defaultAppearance === true) {
       this._div.className += ' element-tooltip__viewer--default';
     }
     this._box = document.createElement('div');
-    this._box.className = `elemenet-tooltip__box`;
-
     this._handle = document.createElement('div');
-    this._handle.className = `elemenet-tooltip__handle elemenet-tooltip__handle--${position}`;
 
     this._div.appendChild(this._handle);
     this._target = this._div.appendChild(this._box);
-
     this._location = document.body.appendChild(this._div);
-    this._component = renderSubtreeIntoContainer(this, cmp, this._target);
 
-    const { top, left } = Tooltip.getPosition(this.box, this._location, position);
+    this._component = renderSubtreeIntoContainer(this, tooltipInnerComponent, this._target);
+
+    const { top, left, direction } = Tooltip.getPosition(this.box, this._location, position);
 
     // Apply final updates to the tooltip itself
     this._location.style.top = top;
     this._location.style.left = left;
     this._location.className += ' element-tooltip__viewer--fade-in';
+
+    this._box.className = utils.composeClassNames(['element-tooltip__box']);
+
+    this._div.className = utils.composeClassNames([
+      'element-tooltip__viewer',
+      'element-tooltip__viewer--fade-in',
+      defaultAppearance && 'element-tooltip__viewer--default',
+      `element-tooltip__viewer--fade-in-${direction}`,
+    ]);
+
+    this._handle.className = utils.composeClassNames([
+      'element-tooltip__handle',
+      `element-tooltip__handle--${direction}`,
+      `element-tooltip__handle--${kind}`,
+    ]);
 
     this._hasMountedTooltip = true;
   }
@@ -162,7 +207,7 @@ Tooltip.propTypes = {
   children: PropTypes.node,
   style: PropTypes.shape(),
   label: PropTypes.string,
-  position: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
 };
 Tooltip.defaultProps = {
   content: undefined,

@@ -20,7 +20,7 @@ const TestButton = () => (
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-      <Tooltip style={style}> {new Array(100).fill('super Long')} </Tooltip>
+      <Tooltip style={style}> {new Array(100).fill('super Long').join(' ')} </Tooltip>
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">

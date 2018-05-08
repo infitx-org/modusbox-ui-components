@@ -1,12 +1,24 @@
 @font-face {
+  font-family: 'Ubuntu';
+  src: url('/src/assets/fonts/ubuntu-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/src/assets/fonts/ubuntu-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
   font-family: 'Fira Sans';
-  src: url('/src/assets/fonts/FiraSans-Regular.ttf') format('truetype');
+  src: url('/src/assets/fonts/FiraSans-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'Fira Sans';
-  src: url('/src/assets/fonts/FiraSans-Bold.ttf') format('truetype');
+  src: url('/src/assets/fonts/FiraSans-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }

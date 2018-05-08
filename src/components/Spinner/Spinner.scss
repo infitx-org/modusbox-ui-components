@@ -1,30 +1,34 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-spinner {	
-	animation: rotateSpinner 4s linear infinite;
+.element-spinner {
+  animation: rotateSpinner 4s linear infinite;
 
-	&.center{ 
-		display: flex;
-		width: 100%;
-		height: inherit;
-		align-items: center;
-		justify-content: center;
-	}
+  &.center {
+    display: flex;
+    width: 100%;
+    height: inherit;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .element-spinner__component {
-	animation: rotateSpinner 0.8s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;			   
+  animation: rotateSpinner 0.8s cubic-bezier(0.53, 0.26, 0.54, 0.74) infinite;
 }
 
 .element-spinner__svg-path {
-	fill: none;
-	stroke-dasharray: 100;
-	stroke-dashoffset: 0;
-	transform-origin: center;	
-	stroke-linecap: round;
-	stroke: #00a2df;
+  fill: none;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  stroke-linecap: round;
+  stroke: $color__main-primary;
 }
 
 @keyframes rotateSpinner {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

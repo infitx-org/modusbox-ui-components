@@ -5,7 +5,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon from '../Icon';
-import { Loader, Placeholder, InnerButton } from '../Common';
+import { Loader, Placeholder, InnerButton, InvalidIcon } from '../Common';
 
 class TextField extends PureComponent {
   constructor(props) {
@@ -169,6 +169,7 @@ class TextField extends PureComponent {
       pending,
       required,
       invalid,
+      invalidMessages,
     } = this.props;
     const { isOpen, value, isPasswordVisible } = this.state;
     const isPlaceholderActive = isOpen || value !== undefined;
@@ -186,6 +187,11 @@ class TextField extends PureComponent {
       required &&
         (value === undefined || value === '') &&
         'mb-input--required mb-input__borders--required mb-input__background--required',
+    ]);
+    const invalidIconClassName = utils.composeClassNames([
+      'mb-input__inner-icon',
+      'mb-input__inner-icon--invalid',
+      'input-textfield__icon',
     ]);
 
     const inputType = (isPasswordVisible && 'text') || type;
@@ -209,6 +215,7 @@ class TextField extends PureComponent {
                 this.input = input;
               }}
               autoFocus={autofocus === true}
+              autoComplete="off"
               type={inputType}
               onClick={this.onClick}
               onChange={this.onChange}
@@ -232,6 +239,11 @@ class TextField extends PureComponent {
 
             <Loader visible={pending} />
 
+            {invalid && (
+              <div className={invalidIconClassName}>
+                <InvalidIcon messages={invalidMessages} />
+              </div>
+            )}
             {type === 'password' && (
               <div className="mb-input__inner-icon input-textfield__icon">
                 <EyeIcon open={isPasswordVisible} onClick={this.onShowPasswordClick} />
@@ -269,6 +281,7 @@ TextField.propTypes = {
   pending: PropTypes.bool,
   required: PropTypes.bool,
   invalid: PropTypes.bool,
+  invalidMessages: PropTypes.arrayOf([PropTypes.string]),
   disabled: PropTypes.bool,
 };
 
@@ -292,6 +305,7 @@ TextField.defaultProps = {
   pending: false,
   required: false,
   invalid: false,
+  invalidMessages: [],
   disabled: false,
 };
 

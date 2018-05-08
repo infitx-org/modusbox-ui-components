@@ -164,6 +164,16 @@ export default class ModalBackground extends PureComponent {
                   className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
                 />
               )}
+              {this.props.allowClose && (
+                <Button
+                  noFill
+                  disabled={isCloseDisabled}
+                  onClick={this.onClose}
+                  label="Close"
+                  kind="secondary"
+                  className={`element-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
+                />
+              )}
             </div>
           </div>
         </div>
