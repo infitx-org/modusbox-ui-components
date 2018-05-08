@@ -22,13 +22,13 @@ This will automatically run `install`. To install for dev, change to
 #### Building
 
 Building creates specific artifacts that the build process pulls out. To check that
-the build works, run `make extract`
+the build works, run `make build`. Build artifacts will be stored in the `dist/`.
 
 #### Linting
 
 Modern ESLint rules and AirBnb styleguide are applied to this code base. Linting runs
 automatically if you use `make start`, but if you need to run them manually,
-run `make lint`. The code is made prettier as part of linting.
+run `make lint`. Prettier is run as part of linting.
 
 ### Testing
 

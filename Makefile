@@ -32,8 +32,7 @@ prettier:
 
 lint: prettier eslint
 
-
-extract: install bare_build bare_extract
+build: install bare_build bare_extract
 
 install:
 	@docker build --pull --tag ui-components .
