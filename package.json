@@ -3,6 +3,11 @@
   "version": "1.1.0",
   "description": "ModusBox UI Components",
   "main": "dist/index.js",
+  "files": [
+    "dist/index.js",
+    "dist/modusbox.css",
+    "dist/mulesoft.css"
+  ],
   "author": {
     "name": "Ivan Annovazzi",
     "email": "ivan@modusbox.com"
@@ -12,7 +17,9 @@
     "eslint": "eslint --color --fix webpack*.js src",
     "start": "NODE_ENV=development webpack-serve --host 0.0.0.0 webpack.dev.config.js",
     "test": "jest",
-    "prettier": "prettier --write webpack*.js 'src/**/*.{js,scss}'"
+    "prettier": "prettier --write webpack*.js 'src/**/*.{js,scss}'",
+    "prepack": "yarn build",
+    "printversion": "node -p \"require('./package.json').version\""
   },
   "jest": {
     "setupFiles": [

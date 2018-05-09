@@ -6,6 +6,8 @@ MAKE_DIRECTORY := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 DATE := $(shell date +'%Y%m%d%H%M%S')
 CONTAINER_NAME := ui_components_$(DATE)
 
+VERSION = $(shell docker run -it --rm ui-components -s printversion)
+
 
 
 yarn:
@@ -41,13 +43,6 @@ bare_build:
 	@docker run --rm ui-components run test
 
 bare_extract:
-	@docker run --name $(CONTAINER_NAME) ui-components build
-	@docker cp $(CONTAINER_NAME):/usr/local/code/dist/. ./dist
+	@docker run --name $(CONTAINER_NAME) ui-components pack --filename modusbox-ui-components-$(VERSION).tgz
+	@docker cp $(CONTAINER_NAME):/usr/local/code/modusbox-ui-components-$(VERSION).tgz ./
 	@docker rm $(CONTAINER_NAME)
-
-release:
-	@git add -f dist/index.js
-	@git add -f dist/mulesoft.css
-	@git add -f dist/modusbox.css
-	@git commit -m 'Automatically releasing...'
-	@git push origin master

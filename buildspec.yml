@@ -12,7 +12,5 @@ phases:
       - make bare_extract
 artifacts:
   files:
-    - dist/index.js
-    - dist/modusbox.css
-    - dist/mulesoft.css
+    - '*.tgz'
   discard-paths: yes
