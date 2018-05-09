@@ -6,9 +6,6 @@ MAKE_DIRECTORY := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 DATE := $(shell date +'%Y%m%d_%H%M%S')
 CONTAINER_NAME := ui_components_$(DATE)
 
-VERSION = docker run -it --rm ui-components -s printversion
-
-
 yarn:
 	@docker run -it --rm -v $(MAKE_DIRECTORY)/src:/usr/local/code/src $(options) ui-components $(cmd)
 
@@ -48,6 +45,7 @@ bare_extract:
 
 upload_release:
 	@set -e ;\
-	RELEASE="ui-components/$(DATE)/$(CODEBUILD_BUILD_ID)/modusbox-ui-components-$(shell $(VERSION)).tgz" ;\
+	VERSION=$$(docker run -it --rm ui-components -s printversion) ;\
+	RELEASE="ui-components/$(DATE)/$(CODEBUILD_BUILD_ID)/modusbox-ui-components-$$VERSION.tgz" ;\
 	echo Releasing to https://modusbox-release-artifacts.s3.amazonaws.com/$$RELEASE ;\
-	aws s3 cp modusbox-ui-components.tgz s3://modusbox-release-artifacts/$$RELEASE
+	aws s3 cp modusbox-ui-components.tgz s3://modusbox-release-artifacts/$$RELEASE --acl public-read
