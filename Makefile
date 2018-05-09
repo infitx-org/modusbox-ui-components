@@ -45,7 +45,7 @@ bare_extract:
 
 upload_release:
 	@set -e ;\
-	VERSION=$$(docker run -it --rm ui-components -s printversion) ;\
+	VERSION=$$(docker run --rm ui-components -s printversion) ;\
 	RELEASE="ui-components/$(DATE)/$(CODEBUILD_BUILD_ID)/modusbox-ui-components-$$VERSION.tgz" ;\
 	echo Releasing to https://modusbox-release-artifacts.s3.amazonaws.com/$$RELEASE ;\
 	aws s3 cp modusbox-ui-components.tgz s3://modusbox-release-artifacts/$$RELEASE --acl public-read
