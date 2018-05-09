@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - make install
+  build:
+    commands:
+      - make bare_build
+  post_build:
+    commands:
+      - make bare_extract
+      - make upload_release
+artifacts:
+  files:
+    - '*.tgz'
+  discard-paths: yes
