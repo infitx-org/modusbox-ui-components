@@ -30,26 +30,30 @@
   color: #fff;
   fill: #fff;
   padding: 8px;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 12px;
   line-height: 12px;
 }
 
 .element-tooltip__viewer--fade-in-top {
-  transform: translate(0px, -3px);
+  animation-name: fade-in-top;
 }
 .element-tooltip__viewer--fade-in-left {
-  transform: translate(-3px, 0px);
+  animation-name: fade-in-left;
 }
 .element-tooltip__viewer--fade-in-bottom {
-  transform: translate(0px, 3px);
+  animation-name: fade-in-bottom;
 }
 .element-tooltip__viewer--fade-in-right {
-  transform: translate(3px, 0px);
+  animation-name: fade-in-right;
 }
 .element-tooltip__viewer--fade-in {
-  opacity: 1;
   transform: translate(0px, 0px);
+  opacity: 1;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  animation-direction: forwards;
+  animation-timing-function: ease-in-out;
 }
 
 .element-tooltip__handle {
@@ -58,7 +62,7 @@
   height: 10px;
   line-height: 30px;
   background: inherit;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .element-tooltip__handle--default {
   background: rgba(0, 0, 0, 0.9);
@@ -103,4 +107,37 @@
   margin-top: -5px;
   margin-left: -4px;
   transform: rotateZ(45deg);
+}
+
+@keyframes fade-in-top {
+  from {
+    transform: translate(0px, -3px);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+@keyframes fade-in-bottom {
+  from {
+    transform: translate(0px, 3px);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+@keyframes fade-in-left {
+  from {
+    transform: translate(-3px, 0px);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+@keyframes fade-in-right {
+  from {
+    transform: translate(3px, 0px);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
 }

@@ -154,7 +154,6 @@ class Tooltip extends PureComponent {
     // Apply final updates to the tooltip itself
     this._location.style.top = top;
     this._location.style.left = left;
-    this._location.className += ' element-tooltip__viewer--fade-in';
 
     this._box.className = utils.composeClassNames(['element-tooltip__box']);
 
