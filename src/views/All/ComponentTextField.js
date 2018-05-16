@@ -12,7 +12,10 @@ const TestTextField = () => (
       <TextField
         placeholder="Invalid"
         invalid
-        invalidMessages={['This is a test', 'This is invalid']}
+        invalidMessages={[
+          { text: 'This is a test', active: true },
+          { text: 'This is invalid', active: false },
+        ]}
       />
       <TextField placeholder="Required" required />
       <TextField placeholder="Disabled" disabled />
@@ -56,7 +59,10 @@ const TestTextField = () => (
       <TextField
         placeholder="Invalid"
         invalid
-        invalidMessages={['This is a test', 'This is invalid']}
+        invalidMessages={[
+          { text: 'This is a test', active: true },
+          { text: 'This is invalid', active: false },
+        ]}
       />
     </div>
     <div style={{ padding: '10px', border: '1px solid #ccc' }}>

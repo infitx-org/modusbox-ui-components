@@ -76,8 +76,18 @@ class Tooltip extends PureComponent {
     this.box.addEventListener('mouseenter', this.delayShowTooltip);
     this.box.addEventListener('mouseleave', this.delayHideTooltip);
     this._mounted = true;
+    if (this.props.forceVisibility === true) {
+      this.showTooltip();
+    }
   }
-  componentDidUpdate() {}
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.forceVisibility === true) {
+      this.showTooltip();
+    }
+    if (nextProps.forceVisibility === false) {
+      this.hideTooltip();
+    }
+  }
   componentWillUnmount() {
     this._mounted = false;
     this.hideTooltip(true);
@@ -95,7 +105,7 @@ class Tooltip extends PureComponent {
     this.tooltipTimeout = setTimeout(this.hideTooltip, 200);
   }
   showTooltip() {
-    if (this._isHoveringTooltip === false) {
+    if (this._isHoveringTooltip === false && this.props.forceVisibility === false) {
       return;
     }
     if (this.box === undefined) {
@@ -202,6 +212,7 @@ class Tooltip extends PureComponent {
 }
 
 Tooltip.propTypes = {
+  forceVisibility: PropTypes.bool,
   content: PropTypes.node,
   children: PropTypes.node,
   style: PropTypes.shape(),
@@ -209,6 +220,7 @@ Tooltip.propTypes = {
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
 };
 Tooltip.defaultProps = {
+  forceVisibility: false,
   content: undefined,
   children: null,
   style: {},

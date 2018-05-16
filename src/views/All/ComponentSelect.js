@@ -40,7 +40,10 @@ const TestSelect = () => (
         placeholder="Invalid"
         options={options}
         invalid
-        invalidMessages={['This is a test', 'This is invalid']}
+        invalidMessages={[
+          { text: 'This is a test', active: true },
+          { text: 'This is invalid', active: false },
+        ]}
       />
       <Select placeholder="Required" options={options} required />
       <Select placeholder="Disabled" options={options} disabled />

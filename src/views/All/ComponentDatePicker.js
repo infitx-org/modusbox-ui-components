@@ -24,7 +24,10 @@ const TestDatePicker = () => (
         format="x"
         onSelect={console.log}
         invalid
-        invalidMessages={['This is a test', 'This is invalid']}
+        invalidMessages={[
+          { text: 'This is a test', active: true },
+          { text: 'This is invalid', active: false },
+        ]}
       />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} required />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} disabled />

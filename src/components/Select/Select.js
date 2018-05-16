@@ -321,7 +321,7 @@ class Select extends PureComponent {
             )}
             {invalid && (
               <div className={invalidIconClassName}>
-                <InvalidIcon messages={invalidMessages} />
+                <InvalidIcon messages={invalidMessages} forceTooltipVisibility={isOpen} />
               </div>
             )}
 

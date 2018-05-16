@@ -84,10 +84,15 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
-const InvalidIcon = ({ messages }) => {
+const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
   const tooltipContent = <TooltipContent content={messages} size={16} kind="error" />;
   return (
-    <Tooltip content={tooltipContent} position="right" kind="error">
+    <Tooltip
+      position="right"
+      kind="error"
+      content={tooltipContent}
+      forceVisibility={forceTooltipVisibility}
+    >
       <Icon size={16} name="warning-sign" />
     </Tooltip>
   );

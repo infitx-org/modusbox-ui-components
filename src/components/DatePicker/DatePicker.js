@@ -291,13 +291,14 @@ class DatePicker extends PureComponent {
               value={value}
               onKeyDown={this.testKey}
               disabled={disabled}
+              readOnly
             />
 
             <Loader visible={pending} />
 
             {invalid && (
               <div className={invalidIconClassName}>
-                <InvalidIcon messages={invalidMessages} />
+                <InvalidIcon messages={invalidMessages} forceTooltipVisibility={isOpen} />
               </div>
             )}
 
