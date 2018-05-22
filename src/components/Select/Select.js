@@ -154,35 +154,14 @@ class Select extends PureComponent {
     this.handleResize();
   }
   handleResize() {
-    const getParentOverflow = (elem) => {
-      const { overflowY } = window.getComputedStyle(elem.parentNode);
-      if (overflowY === 'hidden') {
-        return elem.parentNode;
-      }
-      if (overflowY === 'scroll') {
-        if (elem.getBoundingClientRect().height > elem.parentNode.offsetHeight) {
-          return elem.parentNode;
-        }
-        return elem;
-      }
-      if (elem.parentNode === document.body) {
-        return document.body;
-      }
-      return getParentOverflow(elem.parentNode);
-    };
-
-    const wrapper = getParentOverflow(this.optionsPosition);
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const { top, bottom } = this.optionsPosition.getBoundingClientRect();
-
-    const lowerWrapper = wrapperRect.height + wrapperRect.top - top;
-    const lowerInner = window.innerHeight - bottom;
-    const maxLowerHeight = Math.min(lowerWrapper, lowerInner) - 10;
-
-    const upperWrapper = top - wrapperRect.top - wrapper.parentNode.scrollTop - 45;
-    const maxUpperHeight = Math.min(top, upperWrapper) - 10;
-    const optionsHeight = Math.min(240, this.state.options.length * 30);
-    this.reverse = maxLowerHeight > optionsHeight ? false : maxLowerHeight < maxUpperHeight;
+    const wrapper = utils.getParentOverflow(this.optionsPosition);
+    const maxOptionsHeight = Math.min(240, this.state.options.length * 30);
+    const { maxLowerHeight, maxUpperHeight } = utils.getSpaceAvailability(
+      maxOptionsHeight,
+      this.optionsPosition,
+      wrapper,
+    );
+    this.reverse = maxLowerHeight > maxOptionsHeight ? false : maxLowerHeight < maxUpperHeight;
     this.maxHeight = Math.min(240, Math.max(maxLowerHeight, maxUpperHeight));
 
     clearTimeout(this._forceUpdateTimeout);

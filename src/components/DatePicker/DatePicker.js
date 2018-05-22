@@ -61,8 +61,9 @@ class DatePicker extends PureComponent {
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleHourClick = this.handleHourClick.bind(this);
     this.handleMinuteClick = this.handleMinuteClick.bind(this);
-    this.handleSecondClick = this.handleSecondClick.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleSecondClick = this.handleSecondClick.bind(this);
 
     // internal methods
     this.leaveDatePicker = this.leaveDatePicker.bind(this);
@@ -86,6 +87,7 @@ class DatePicker extends PureComponent {
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
     window.addEventListener('mouseup', this.handlePageClick, false);
   }
   componentWillReceiveProps(props) {
@@ -114,12 +116,15 @@ class DatePicker extends PureComponent {
     });
   }
   componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('mouseup', this.handlePageClick, false);
   }
   onFocus() {
     if (this.state.isOpen === false) {
-      this.input.focus();
-      this.setState({ isOpen: true });
+      this.setState({ isOpen: true }, () => {
+        this.input.focus();
+      });
+      this.handleResize();
     }
   }
   handleDateTimeChange(selectedDay, hour, minute, second) {
@@ -194,9 +199,22 @@ class DatePicker extends PureComponent {
     );
   }
   handlePageClick(e) {
-    if (!this.area.contains(e.target)) {
+    if (!this.calendarPosition.contains(e.target)) {
       this.setState({ isOpen: false });
     }
+  }
+  handleResize() {
+    const wrapper = utils.getParentOverflow(this.calendarPosition);
+    const calendarHeight = 300;
+    const { maxLowerHeight, maxUpperHeight } = utils.getSpaceAvailability(
+      calendarHeight,
+      this.calendarPosition,
+      wrapper,
+    );
+    this.reverse = maxLowerHeight > calendarHeight ? false : maxLowerHeight < maxUpperHeight;
+
+    clearTimeout(this._forceUpdateTimeout);
+    this._forceUpdateTimeout = setTimeout(() => this.forceUpdate(), 50);
   }
   handleSecondClick(second) {
     clearTimeout(this.deferredTimeChangeTimeout);
@@ -270,6 +288,11 @@ class DatePicker extends PureComponent {
       'input-datepicker__icon',
     ]);
 
+    const calendarBoxClassName = utils.composeClassNames([
+      'input-datepicker__calendar-box',
+      this.reverse && 'input-datepicker__calendar-box--reverse',
+    ]);
+
     return (
       <div className="input-datepicker mb-input__box" style={style}>
         <div className={componentClassName}>
@@ -311,12 +334,13 @@ class DatePicker extends PureComponent {
         </div>
 
         <div
-          ref={(area) => {
-            this.area = area;
+          className="input-datepicker--position"
+          ref={(calendarPosition) => {
+            this.calendarPosition = calendarPosition;
           }}
         >
           {this.state.isOpen && (
-            <div className="daypicker-position">
+            <div className={calendarBoxClassName}>
               <DayPicker
                 initialMonth={initialMonth}
                 selectedDays={day => DateUtils.isSameDay(selectedDay, day)}

@@ -31,6 +31,12 @@ const TestDatePicker = () => (
       />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} required />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} disabled />
+      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
+
     </div>
   </div>
 );

@@ -45,16 +45,17 @@
 .timepicker-position {
   position: relative;
   display: flex;
+  border-top: 2px solid #eee;
+  padding-top: 10px;
 
   .timepicker-item-box {
     width: 50%;
     flex: 1 1 auto;
-    text-align: left;
-    margin: 2px;
+    text-align: left;    
 
     .placeholder {
-      color: #666;
-      font-size: 13px;
+      color: #8b9898;
+      font-size: 12px;
       text-align: center;
     }
 
@@ -66,11 +67,11 @@
       height: 30px;
       width: 100%;
       padding-left: 10;
-      border: none;
-      border-bottom: 1px solid #eee;
+      border: none;      
       background: #fff;
       cursor: pointer;
       text-align: center;
+      font-size: 12px;
       &:disabled {
         background: #eee;
         color: #999;
@@ -84,12 +85,11 @@
 .DayPicker {
   display: flex;
   flex-wrap: wrap;
-
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
   position: relative !important;
-  padding: 1rem 0;
+  padding: 10px 0px 5px 0px;
   user-select: none;
 }
 
@@ -148,9 +148,16 @@
 .DayPicker-Weekday {
   display: table-cell;
   padding: 0.5rem;
-  font-size: 0.875em;
+  font-size: 13px;
   text-align: center;
   color: #8b9898;
+}
+.DayPicker-Weekday{
+  abbr{
+    color: #8b9898;
+    font-size:12px;
+    text-decoration:none;
+  }
 }
 
 .DayPicker-Body {
@@ -162,6 +169,7 @@
 }
 
 .DayPicker-Day {
+  color: #333;
   display: table-cell;
   padding: 0.5rem;
   border: 1px solid #eaecec;
@@ -176,7 +184,7 @@
 
 /* Default modifiers */
 .DayPicker {
-  border: 1px solid #eee;
+  border: none;
   position: absolute;
   z-index: 100000;
   background: #fff;
@@ -186,7 +194,7 @@
 .DayPicker-Day {
   height: 30px;
   width: 30px;
-  font-size: 11px;
+  font-size: 12px;
   border: none;
   outline: none;
 }
@@ -224,15 +232,22 @@
   background: #eee;
 }
 
-.daypicker-position {
+.input-datepicker--position{
+  position: relative;
+}
+.input-datepicker__calendar-box {
   position: absolute;
   z-index: 100000;
   top: 100%;
   left: 0;
   width: 250px;
-  padding: 5px;
-  background: #f8f8f8;
+  padding: 10px;
+  background: #fff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  &.input-datepicker__calendar-box--reverse{
+    top: auto;
+    bottom: 45px;
+  }
 }
 
 .value-row {
