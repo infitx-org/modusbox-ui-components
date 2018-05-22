@@ -89,6 +89,33 @@
     }
   }
 }
+
+.input-button__mb-input--success {
+  background-color: $color__main-success;
+  border-color: $color__main-success;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
+
+  &.noFill {
+    background: transparent;
+    color: $color__main-success;
+    fill: $color__main-success;
+    stroke: $color__main-success;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-success--active;
+    border-color: $color__main-success--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
 .input-button__mb-input--danger {
   background-color: $color__main-danger;
   border-color: $color__main-danger;

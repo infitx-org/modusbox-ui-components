@@ -14,6 +14,7 @@ const TestButton = () => (
       <Button label="Primary" kind="primary" />
       <Button label="Secondary" kind="secondary" />
       <Button label="Tertiary" kind="tertiary" />
+      <Button label="Success" kind="success" />
       <Button label="Danger" kind="danger" />
       <Button label="Warning" kind="warning" />
       <Button label="Dark" kind="dark" />
@@ -26,6 +27,7 @@ const TestButton = () => (
       <Button noFill label="Primary" kind="primary" />
       <Button noFill label="Secondary" kind="secondary" />
       <Button noFill label="Tertiary" kind="tertiary" />
+      <Button noFill label="Success" kind="success" />
       <Button noFill label="Danger" kind="danger" />
       <Button noFill label="Warning" kind="warning" />
       <Button noFill label="Dark" kind="dark" />
@@ -38,6 +40,7 @@ const TestButton = () => (
       <Button label="Primary" kind="primary" pending />
       <Button label="Secondary" kind="secondary" pending />
       <Button label="Tertiary" kind="tertiary" pending />
+      <Button label="Success" kind="success" pending />
       <Button label="Danger" kind="danger" pending />
       <Button label="Warning" kind="warning" pending />
       <Button label="Dark" kind="dark" pending />
@@ -50,6 +53,7 @@ const TestButton = () => (
       <Button noFill label="Primary" kind="primary" pending />
       <Button noFill label="Secondary" kind="secondary" pending />
       <Button noFill label="Tertiary" kind="tertiary" pending />
+      <Button noFilllabel="Success" kind="success" pending />
       <Button noFill label="Danger" kind="danger" pending />
       <Button noFill label="Warning" kind="warning" pending />
       <Button noFill label="Dark" kind="dark" pending />
@@ -62,6 +66,7 @@ const TestButton = () => (
       <Button label="Primary" kind="primary" disabled />
       <Button label="Secondary" kind="secondary" disabled />
       <Button label="Tertiary" kind="tertiary" disabled />
+      <Button label="Success" kind="success" disabled />
       <Button label="Danger" kind="danger" disabled />
       <Button label="Warning" kind="warning" disabled />
       <Button label="Dark" kind="dark" disabled />
