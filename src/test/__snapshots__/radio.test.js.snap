@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the checkbox correctly when multiple props are set 1`] = `
+<div
+  className="input input-radio"
+  id="test-radio"
+>
+  <Radio
+    checked={false}
+    disabled={false}
+    focused={false}
+    id="test-radio-0"
+    key="0"
+    label="label1"
+    onClick={[Function]}
+    value="value1"
+  />
+  <Radio
+    checked={false}
+    disabled={true}
+    focused={false}
+    id="test-radio-1"
+    key="1"
+    label="label2"
+    onClick={[Function]}
+    value="value2"
+  />
+  <Radio
+    checked={false}
+    disabled={false}
+    focused={false}
+    id="test-radio-2"
+    key="2"
+    label="label3"
+    onClick={[Function]}
+    value="value3"
+  />
+  <Radio
+    checked={false}
+    disabled={false}
+    focused={false}
+    id="test-radio-3"
+    key="3"
+    label="label4"
+    onClick={[Function]}
+    value="value4"
+  />
+  <Radio
+    checked={false}
+    disabled={false}
+    focused={false}
+    id="test-radio-4"
+    key="4"
+    label="label5"
+    onClick={[Function]}
+    value="value5"
+  />
+  <input
+    className="mb-input__holder"
+    disabled={false}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    type="button"
+  />
+</div>
+`;

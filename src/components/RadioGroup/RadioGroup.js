@@ -31,7 +31,7 @@ class RadioGroup extends PureComponent {
     this.setState({ value, focused: value });
     this.button.focus();
 
-    if (typeof this.props.onChange === 'function') {
+    if (this.props.onChange) {
       this.props.onChange(value);
     }
   }
@@ -46,7 +46,7 @@ class RadioGroup extends PureComponent {
     this.setState({ focused: undefined });
   }
   testKey(e) {
-    const { keyCode, shiftKey } = e.nativeEvent;
+    const { keyCode, shiftKey } = e;
     if (keyCode === keyCodes.KEY_TAB) {
       e.preventDefault();
       this.setState({ focused: undefined });
@@ -78,6 +78,7 @@ class RadioGroup extends PureComponent {
       if (!options[nextIndex].disabled) {
         const currentValue = options[nextIndex].value;
         this.setState({ value: currentValue, focused: currentValue });
+        this.onChange(currentValue, false);
         found = true;
         break;
       }
@@ -133,26 +134,30 @@ RadioGroup.defaultProps = {
   id: undefined,
   label: undefined,
   options: [],
-  value: false,
+  value: undefined,
   disabled: false,
   onChange: undefined,
 };
 
 const Radio = ({
   id, onClick, checked, label, focused, value, disabled,
-}) => (
-  <div className="input-radio__option" onClick={() => onClick(value, disabled)} role="presentation">
-    <div
-      id={id}
-      className={`input-radio__input ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''} ${
-        focused ? 'focused' : ''
-      }`}
-    />
-    <label htmlFor={id}>
-      <span>{label}</span>
-    </label>
-  </div>
-);
+}) => {
+  const optionClassName = utils.composeClassNames(['input-radio__option', checked && 'checked']);
+  const inputClassName = utils.composeClassNames([
+    'input-radio__input',
+    checked && 'checked',
+    disabled && 'disabled',
+    focused && 'focused',
+  ]);
+  return (
+    <div className={optionClassName} onClick={() => onClick(value, disabled)} role="presentation">
+      <div id={id} className={inputClassName} />
+      <label htmlFor={id}>
+        <span>{label}</span>
+      </label>
+    </div>
+  );
+};
 
 Radio.propTypes = {
   id: PropTypes.string,

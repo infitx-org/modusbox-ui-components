@@ -47,7 +47,14 @@ const TestSelect = () => (
       />
       <Select placeholder="Required" options={options} required />
       <Select placeholder="Disabled" options={options} disabled />
-      <Select placeholder="Events (console)" options={options} onChange={console.log} />
+      <Select
+        placeholder="Events (console)"
+        options={options}
+        onChange={value => console.log('onChange', value)}
+        onClick={() => console.log('onClick')}
+        onBlur={() => console.log('onBlur')}
+        onFocus={() => console.log('onFocus')}
+      />
     </div>
     <div style={{ padding: 10, border: '1px solid #ccc' }}>
       <Select id="x" placeholder="placeholder" options={options} pending />

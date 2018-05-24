@@ -6,7 +6,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon from '../Icon';
-import { Loader, Placeholder, InvalidIcon } from '../Common';
+import { Loader, Placeholder, Validation } from '../Common';
 
 import Options from './Options';
 import Indicator from './Indicator';
@@ -16,6 +16,8 @@ class Select extends PureComponent {
     super(props);
 
     this.onClickSelect = this.onClickSelect.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+    this.onFocus = this.onFocus.bind(this);
     this.onSelectOption = this.onSelectOption.bind(this);
     this.onPageClick = this.onPageClick.bind(this);
     this.onSelectFilter = this.onSelectFilter.bind(this);
@@ -23,7 +25,6 @@ class Select extends PureComponent {
     // Internal lifecycle methods
     this.setInputValue = this.setInputValue.bind(this);
     this.setSelectedLabel = this.setSelectedLabel.bind(this);
-
     this.closeSelect = this.closeSelect.bind(this);
     this.leaveSelect = this.leaveSelect.bind(this);
     this.openSelect = this.openSelect.bind(this);
@@ -92,6 +93,17 @@ class Select extends PureComponent {
       this.closeSelect();
     }
   }
+  onBlur(e) {
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
+  }
+  onFocus(e) {
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
+    this.openSelect();
+  }
 
   onSelectFilter() {
     this.inputFilter.focus();
@@ -142,6 +154,7 @@ class Select extends PureComponent {
   }
   closeSelect() {
     this.setState({ isOpen: false, filter: undefined });
+    this.onBlur();
   }
   leaveSelect(next) {
     this.closeSelect();
@@ -229,6 +242,7 @@ class Select extends PureComponent {
   render() {
     const {
       id,
+      className,
       style,
       placeholder,
       pending,
@@ -241,11 +255,10 @@ class Select extends PureComponent {
       isOpen, selectedLabel, selected, filter, highlightedOption,
     } = this.state;
     const options = this.getOptions();
-
     const inputValue = filter === undefined ? selectedLabel || '' : filter;
-    const isPlaceholderActive = isOpen || selectedLabel !== undefined;
 
     const componentClassName = utils.composeClassNames([
+      className,
       'input-select__component',
       'mb-input',
       'mb-input__borders',
@@ -259,11 +272,32 @@ class Select extends PureComponent {
         'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
 
-    const invalidIconClassName = utils.composeClassNames([
-      'mb-input__inner-icon',
-      'mb-input__inner-icon--invalid',
-      'input-select__icon',
-    ]);
+    let customPlaceholder = null;
+    if (placeholder) {
+      const isPlaceholderActive = isOpen || selectedLabel !== undefined;
+      customPlaceholder = <Placeholder label={placeholder} active={isPlaceholderActive} />;
+    }
+
+    let optionsFilter = null;
+    if (filter) {
+      optionsFilter = (
+        <div className="mb-input__inner-icon input-select__icon">
+          <Icon size={16} name="search-small" />
+        </div>
+      );
+    }
+
+    let validation = null;
+    if (invalid) {
+      validation = (
+        <Validation className="input-select__icon" active={isOpen} messages={invalidMessages} />
+      );
+    }
+
+    let loader = null;
+    if (pending) {
+      loader = <Loader />;
+    }
 
     return (
       <div id={id} className="input-select mb-input__box" style={style}>
@@ -276,8 +310,7 @@ class Select extends PureComponent {
           role="presentation"
         >
           <div className="mb-input__content input-select__content">
-            <Placeholder label={placeholder} active={isPlaceholderActive} />
-
+            {customPlaceholder}
             <input
               className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
               type="text"
@@ -286,26 +319,15 @@ class Select extends PureComponent {
               }}
               onKeyDown={this.testKey}
               onChange={this.applyFilter}
-              onFocus={this.openSelect}
+              onFocus={this.onFocus}
               onClick={this.openSelect}
               value={inputValue}
               disabled={disabled}
             />
             <input type="hidden" disabled value={JSON.stringify(options)} />
-
-            {filter && (
-              <div className="mb-input__inner-icon input-select__icon">
-                <Icon size={16} name="search-small" />
-              </div>
-            )}
-            {invalid && (
-              <div className={invalidIconClassName}>
-                <InvalidIcon messages={invalidMessages} forceTooltipVisibility={isOpen} />
-              </div>
-            )}
-
-            <Loader visible={pending} />
-
+            {optionsFilter}
+            {validation}
+            {loader}
             <div className="mb-input__inner-icon input-select__icon">
               <Indicator isOpen={isOpen} />
             </div>
@@ -338,8 +360,11 @@ class Select extends PureComponent {
 
 Select.propTypes = {
   id: PropTypes.string,
+  className: PropTypes.string,
   style: PropTypes.shape(),
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
@@ -350,14 +375,20 @@ Select.propTypes = {
   required: PropTypes.bool,
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf(PropTypes.string),
+  invalidMessages: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({ active: PropTypes.bool, text: PropTypes.string }),
+  ])),
 };
 
 Select.defaultProps = {
   id: undefined,
+  className: undefined,
   style: {},
   selected: undefined,
   onChange: undefined,
+  onFocus: undefined,
+  onBlur: undefined,
   placeholder: undefined,
   options: [],
   pending: false,

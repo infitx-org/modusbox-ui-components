@@ -11,7 +11,7 @@ class Icon extends PureComponent {
   }
 
   onClick(e) {
-    if (typeof this.props.onClick === 'function') {
+    if (this.props.onClick) {
       this.props.onClick(e);
     }
   }

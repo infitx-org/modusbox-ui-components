@@ -7,7 +7,9 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon from '../Icon';
-import { Loader, Placeholder, InvalidIcon } from '../Common';
+import { Loader, Placeholder, Validation } from '../Common';
+
+import '../../icons/mule/calendar-small.svg';
 
 function asDate(day) {
   if (day) {
@@ -65,9 +67,14 @@ class DatePicker extends PureComponent {
     this.handleResize = this.handleResize.bind(this);
     this.handleSecondClick = this.handleSecondClick.bind(this);
 
-    // internal methods
-    this.leaveDatePicker = this.leaveDatePicker.bind(this);
+    // Wrapper events
+    this.onClick = this.onClick.bind(this);
+    this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
+
+    // internal methods
+    this.closeDatePicker = this.closeDatePicker.bind(this);
+    this.leaveDatePicker = this.leaveDatePicker.bind(this);
     this.testKey = this.testKey.bind(this);
 
     // internal timeout
@@ -119,13 +126,32 @@ class DatePicker extends PureComponent {
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('mouseup', this.handlePageClick, false);
   }
-  onFocus() {
+  onClick(e) {
+    if (this.props.onClick) {
+      this.props.onClick(e);
+    }
+    this.input.focus();
+  }
+  onFocus(e) {
     if (this.state.isOpen === false) {
       this.setState({ isOpen: true }, () => {
         this.input.focus();
       });
       this.handleResize();
     }
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
+  }
+  onBlur(e) {
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
+    // this.close();
+  }
+  closeDatePicker(e) {
+    this.setState({ isOpen: false });
+    this.onBlur(e);
   }
   handleDateTimeChange(selectedDay, hour, minute, second) {
     // convert the value into the specified format if necessary
@@ -145,11 +171,11 @@ class DatePicker extends PureComponent {
     }
 
     // call the external function
-    if (typeof this.props.onSelect === 'function') {
+    if (this.props.onSelect) {
       this.props.onSelect(exportDay);
     }
   }
-  handleDayClick(e, day, { selected, disabled }) {
+  handleDayClick(day, { selected, disabled }) {
     if (disabled) return;
     const selectedDay = selected ? null : day;
     const timestamp = DatePicker.getTimestamp(selected ? undefined : day, 0, 0, 0);
@@ -237,15 +263,15 @@ class DatePicker extends PureComponent {
       500,
     );
   }
-  leaveDatePicker(next) {
-    this.setState({ isOpen: false });
+  leaveDatePicker(e, next) {
+    this.closeDatePicker(e);
     utils.focusNextFocusableElement(this.input, next);
   }
   testKey(e) {
     const { keyCode, shiftKey } = e.nativeEvent;
     if (keyCode === keyCodes.KEY_TAB) {
       e.preventDefault();
-      this.leaveDatePicker(!shiftKey);
+      this.leaveDatePicker(e, !shiftKey);
     }
   }
 
@@ -253,6 +279,7 @@ class DatePicker extends PureComponent {
     const {
       placeholder,
       id,
+      className,
       style,
       disabled,
       pending,
@@ -271,6 +298,7 @@ class DatePicker extends PureComponent {
     const showCalendar = hasDate ? hideIcon === false : true;
 
     const componentClassName = utils.composeClassNames([
+      className,
       'input-datepicker__component',
       'mb-input',
       'mb-input__borders',
@@ -282,11 +310,31 @@ class DatePicker extends PureComponent {
       required && 'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
 
-    const invalidIconClassName = utils.composeClassNames([
-      'mb-input__inner-icon',
-      'mb-input__inner-icon--invalid',
-      'input-datepicker__icon',
-    ]);
+    let customPlaceholder = null;
+    if (placeholder) {
+      customPlaceholder = <Placeholder label={placeholder} active={isPlaceholderActive} />;
+    }
+
+    let loader = null;
+    if (pending) {
+      loader = <Loader />;
+    }
+
+    let validation = null;
+    if (invalid) {
+      validation = (
+        <Validation className="input-datepicker__icon" active={isOpen} messages={invalidMessages} />
+      );
+    }
+
+    let calendarIcon = null;
+    if (showCalendar) {
+      calendarIcon = (
+        <div className="mb-input__inner-icon input-datepicker__icon">
+          <Icon size={16} name="calendar-small" fill="#999" />
+        </div>
+      );
+    }
 
     const calendarBoxClassName = utils.composeClassNames([
       'input-datepicker__calendar-box',
@@ -299,11 +347,11 @@ class DatePicker extends PureComponent {
           <div
             id={id}
             className="mb-input__content input-datepicker__content"
-            onClick={this.onFocus}
+            onClick={this.onClick}
             onKeyDown={this.onFocus}
             role="presentation"
           >
-            <Placeholder label={placeholder} active={isPlaceholderActive} />
+            {customPlaceholder}
 
             <input
               onFocus={this.onFocus}
@@ -316,20 +364,9 @@ class DatePicker extends PureComponent {
               disabled={disabled}
               readOnly
             />
-
-            <Loader visible={pending} />
-
-            {invalid && (
-              <div className={invalidIconClassName}>
-                <InvalidIcon messages={invalidMessages} forceTooltipVisibility={isOpen} />
-              </div>
-            )}
-
-            {showCalendar && (
-              <div className="mb-input__inner-icon input-datepicker__icon">
-                <Icon size={16} name="calendar-small" fill="#999" />
-              </div>
-            )}
+            {loader}
+            {validation}
+            {calendarIcon}
           </div>
         </div>
 
@@ -368,10 +405,13 @@ class DatePicker extends PureComponent {
 
 DatePicker.propTypes = {
   id: PropTypes.string,
+  className: PropTypes.string,
   style: PropTypes.shape(),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   onSelect: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   format: PropTypes.string,
   dateFormat: PropTypes.string,
   withTime: PropTypes.bool,
@@ -388,10 +428,13 @@ DatePicker.propTypes = {
 };
 DatePicker.defaultProps = {
   id: undefined,
+  className: undefined,
   style: undefined,
   value: undefined,
   placeholder: undefined,
   onSelect: undefined,
+  onBlur: undefined,
+  onFocus: undefined,
   format: undefined,
   dateFormat: undefined,
   withTime: false,

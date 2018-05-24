@@ -54,7 +54,7 @@
     }
   }
   &:checked {
-    + label:not(.round) {
+    + label:not(.input-checkbox__label--round) {
       &:before {
         border-bottom: 2px solid rgba(0, 0, 0, 0.2);
       }

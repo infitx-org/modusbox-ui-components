@@ -38,7 +38,7 @@ class ScrollBar extends PureComponent {
     if (this._dragging) {
       const { top, height } = this.tracker.getBoundingClientRect();
       const mousePosY = e.pageY - top;
-      if (typeof this.props.onDrag === 'function') {
+      if (this.props.onDrag) {
         const diff = mousePosY - this._originMouseY;
         const max = Math.round(height - this.state.barHeight);
         let ratio = diff / max;

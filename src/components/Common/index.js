@@ -7,28 +7,17 @@ import Icon from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip, { TooltipContent } from '../Tooltip';
 
-const Loader = ({ visible }) => {
-  if (!visible) {
-    return null;
-  }
-  return (
-    <div className="mb-input__inner-icon mb-loader">
-      <Spinner size={16} />
-    </div>
-  );
-};
+const Loader = () => (
+  <div className="mb-input__inner-icon mb-loader">
+    <Spinner size={16} />
+  </div>
+);
 
-Loader.propTypes = {
-  visible: PropTypes.bool,
-};
-Loader.defaultProps = {
-  visible: true,
-};
+Loader.propTypes = {};
+Loader.defaultProps = {};
 
 const Placeholder = ({ label, active }) => {
-  if (!label === 'string') {
-    return null;
-  }
+  // The Placeholder that renders inside an input
 
   const placeholderClassName = utils.composeClassNames([
     'mb-input__placeholder',
@@ -49,17 +38,21 @@ Placeholder.defaultProps = {
 };
 
 const InnerButton = ({
-  kind, isOpen, onClick, label, disabled,
+  className, kind, active, onClick, label, disabled, noFill, icon,
 }) => {
-  const className = utils.composeClassNames([
+  // Internal button used by inputs
+
+  const innerButtonClassName = utils.composeClassNames([
+    className,
     'mb-input__inner-button',
-    isOpen && 'mb-input__inner-button--active',
+    active && 'mb-input__inner-button--active',
   ]);
   return (
     <Button
       kind={kind}
-      className={className}
-      noFill
+      className={innerButtonClassName}
+      icon={icon}
+      noFill={noFill}
       onClick={onClick}
       tabIndex="-1"
       label={label}
@@ -69,22 +62,28 @@ const InnerButton = ({
 };
 
 InnerButton.propTypes = {
+  className: PropTypes.string,
   kind: PropTypes.string,
-  isOpen: PropTypes.bool,
+  icon: PropTypes.string,
+  active: PropTypes.bool,
   onClick: PropTypes.func,
   label: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
 InnerButton.defaultProps = {
+  className: undefined,
   kind: 'primary',
-  isOpen: false,
+  icon: undefined,
+  active: false,
   onClick: undefined,
   label: undefined,
   disabled: false,
 };
 
 const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
+  // Icon with custom tooltip content
+
   const tooltipContent = <TooltipContent content={messages} size={16} kind="error" />;
   return (
     <Tooltip
@@ -98,4 +97,19 @@ const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
   );
 };
 
-export { Loader, Placeholder, InnerButton, InvalidIcon };
+const Validation = ({ active, className, messages }) => {
+  // Validation Icon with custom tooltip
+
+  const invalidIconClassName = utils.composeClassNames([
+    'mb-input__inner-icon',
+    'mb-input__inner-icon--invalid',
+    className,
+  ]);
+  return (
+    <div className={invalidIconClassName}>
+      <InvalidIcon messages={messages} forceTooltipVisibility={active} />
+    </div>
+  );
+};
+
+export { Loader, Placeholder, InnerButton, Validation };

@@ -10,7 +10,7 @@ class Tab extends PureComponent {
     this.onClick = this.onClick.bind(this);
   }
   onClick(e) {
-    if (!this.props.disabled) {
+    if (!this.props.disabled && !this.props.selected) {
       this.props.onSelect(e);
     }
   }
@@ -148,7 +148,7 @@ class Tabs extends PureComponent {
 
     this.input.focus();
 
-    if (typeof this.props.onSelect === 'function') {
+    if (this.props.onSelect) {
       this.props.onSelect(evt, index);
     }
   }

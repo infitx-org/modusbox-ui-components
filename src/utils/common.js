@@ -1,6 +1,4 @@
 const focusNextFocusableElement = (currentElement, next = true) => {
-  currentElement.blur();
-
   const { body, activeElement } = document;
   const forceFocusNextElement = activeElement === currentElement || activeElement === body;
 
@@ -9,12 +7,16 @@ const focusNextFocusableElement = (currentElement, next = true) => {
     const inputs = document.querySelectorAll(selector);
     const inputList = Array.prototype.slice.call(inputs);
     const nextIndex = inputList.indexOf(currentElement) + (next ? 1 : -1);
+    let nextInput = null;
     if (nextIndex < 0) {
-      inputList[inputList.length + nextIndex].focus();
+      nextInput = inputList[inputList.length + nextIndex];
     } else if (nextIndex >= inputList.length) {
-      inputList[nextIndex % inputList.length].focus();
+      nextInput = inputList[nextIndex % inputList.length];
     } else {
-      inputList[nextIndex].focus();
+      nextInput = inputList[nextIndex];
+    }
+    if (nextInput) {
+      nextInput.focus();
     }
   }
 };
@@ -25,6 +27,9 @@ const composeClassNames = items =>
     .join(' ');
 
 const getParentOverflow = (elem) => {
+  if (!elem.parentNode) {
+    return document.body;
+  }
   const { overflowY } = window.getComputedStyle(elem.parentNode);
   if (overflowY === 'hidden') {
     return elem.parentNode;

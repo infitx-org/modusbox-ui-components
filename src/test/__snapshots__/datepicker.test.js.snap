@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the datepicker correctly when multiple props are set 1`] = `
+<div
+  className="input-datepicker mb-input__box"
+>
+  <div
+    className="input-datepicker__component mb-input mb-input__borders mb-input__background"
+  >
+    <div
+      className="mb-input__content input-datepicker__content"
+      id="test-id"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="presentation"
+    >
+      <input
+        className="mb-input__input input-datepicker__value"
+        disabled={false}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        readOnly={true}
+        value="Invalid date"
+      />
+      <div
+        className="mb-input__inner-icon input-datepicker__icon"
+      >
+        <Icon
+          fill="#999"
+          name="calendar-small"
+          size={16}
+          spin={false}
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="input-datepicker--position"
+  />
+</div>
+`;

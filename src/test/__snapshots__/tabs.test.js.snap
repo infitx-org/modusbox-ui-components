@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the checkbox correctly when multiple props are set 1`] = `
+<div
+  className="element element-tabs element-tabs--flexible"
+  id="test-tabs"
+>
+  <input
+    className="modus-element__holder"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    type="button"
+  />
+  <div
+    className="element-tabs__tab-items"
+  >
+    <Tab
+      disabled={false}
+      flex={false}
+      focused={false}
+      hidden={false}
+      key="0"
+      onSelect={[Function]}
+      selected={true}
+    >
+      Tab1
+    </Tab>
+    <Tab
+      disabled={false}
+      flex={false}
+      focused={false}
+      hidden={false}
+      key="1"
+      onSelect={[Function]}
+      selected={false}
+    >
+      Tab2
+    </Tab>
+    <Tab
+      disabled={false}
+      flex={false}
+      focused={false}
+      hidden={false}
+      key="2"
+      onSelect={[Function]}
+      selected={false}
+    >
+      Tab3
+    </Tab>
+    <Tab
+      disabled={true}
+      flex={false}
+      focused={false}
+      hidden={false}
+      key="3"
+      onSelect={[Function]}
+      selected={false}
+    >
+      Tab4
+    </Tab>
+  </div>
+  <TabPanel
+    flex={true}
+  >
+    TabPanel1
+  </TabPanel>
+</div>
+`;

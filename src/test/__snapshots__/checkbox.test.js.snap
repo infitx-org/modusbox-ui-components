@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the checkbox correctly when multiple props are set 1`] = `
+<div
+  className="mb-input input-checkbox"
+>
+  <input
+    checked={true}
+    className="input-checkbox__input "
+    disabled={false}
+    id="test-id"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    type="checkbox"
+  />
+  <label
+    className=""
+    htmlFor="test-id"
+    onClick={[Function]}
+    role="presentation"
+  />
+</div>
+`;

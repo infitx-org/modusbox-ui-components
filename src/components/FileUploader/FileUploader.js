@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
-import { Loader, Placeholder } from '../Common';
-import Button from '../Button';
+import { Loader, Placeholder, InnerButton, Validation } from '../Common';
 
 import '../../icons/mule/upload-small.svg';
 import '../../icons/mule/close-small.svg';
@@ -89,7 +88,7 @@ class FileUploader extends PureComponent {
       fileName: file.name,
     });
 
-    if (typeof this.props.onChange === 'function') {
+    if (this.props.onChange) {
       this.props.onChange(fileContent);
     }
   }
@@ -118,7 +117,7 @@ class FileUploader extends PureComponent {
     this.setState({
       fileName: undefined,
     });
-    if (typeof this.props.onChange === 'function') {
+    if (this.props.onChange) {
       this.props.onChange(undefined);
     }
   }
@@ -156,13 +155,22 @@ class FileUploader extends PureComponent {
 
   render() {
     const {
-      id, placeholder, fileType, style, required, invalid, pending, disabled,
+      id,
+      className,
+      placeholder,
+      fileType,
+      style,
+      required,
+      invalid,
+      invalidMessages,
+      pending,
+      disabled,
     } = this.props;
     const { isOpen, fileName } = this.state;
     const hasFile = this.fileContent !== undefined && fileName;
 
-    const isPlaceholderActive = isOpen || fileName !== undefined || placeholder !== undefined;
     const componentClassName = utils.composeClassNames([
+      className,
       'input-fileuploader__component',
       'mb-input',
       'mb-input__borders',
@@ -176,42 +184,63 @@ class FileUploader extends PureComponent {
         'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
 
+    let customPlaceholder = null;
+    if (placeholder) {
+      customPlaceholder = <Placeholder label={placeholder} active />;
+    }
+
     const fileNameClassName = utils.composeClassNames([
       'input-fileuploader__filename',
       !hasFile && 'input-fileuploader__filename--no-file',
     ]);
     const fileNameLabel = hasFile ? fileName : 'No File Choosen';
 
-    const removeButton = (
-      <Button
-        className={`mb-input__inner-button input-fileuploader__button-remove ${
-          isOpen ? 'mb-input__inner-button--active' : ''
-        }`}
-        kind={isOpen ? 'danger' : 'dark'}
-        noFill={!isOpen}
-        onClick={this.onRemoveButtonClick}
-        tabIndex="-1"
-        icon="close-small"
-        label="Remove"
-        disabled={disabled}
-      />
-    );
+    let fileButton = null;
+    if (!pending) {
+      let buttonClassName = 'input-fileuploader__button-add';
+      let onClick = this.onButtonClick;
+      let label = 'Choose File';
+      let icon = 'upload-small';
+      let kind = isOpen ? 'primary' : 'dark';
 
-    const chooseButton = (
-      <Button
-        className={`mb-input__inner-button input-fileuploader__button-add ${
-          isOpen ? 'mb-input__inner-button--active' : ''
-        }`}
-        onClick={this.onButtonClick}
-        tabIndex="-1"
-        kind={isOpen ? 'primary' : 'dark'}
-        noFill={!isOpen}
-        icon="upload-small"
-        label="Choose File"
-        disabled={disabled}
-      />
-    );
+      if (hasFile) {
+        buttonClassName = 'input-fileuploader__button-remove';
+        onClick = this.onRemoveButtonClick;
+        label = 'Remove File';
+        icon = 'close-small';
+        if (isOpen) {
+          kind = 'danger';
+        }
+      }
+      fileButton = (
+        <InnerButton
+          tabIndex="-1"
+          className={buttonClassName}
+          onClick={onClick}
+          kind={kind}
+          noFill={!isOpen}
+          icon={icon}
+          label={label}
+          disabled={disabled}
+          active={isOpen}
+        />
+      );
+    }
 
+    let loader = null;
+    if (pending) {
+      loader = <Loader />;
+    }
+    let validation = null;
+    if (invalid) {
+      validation = (
+        <Validation
+          className="input-filuploader__icon"
+          active={isOpen}
+          messages={invalidMessages}
+        />
+      );
+    }
     return (
       <div className="input-fileuploader mb-input__box" style={style}>
         <div
@@ -226,7 +255,7 @@ class FileUploader extends PureComponent {
         >
           <div className="input-fileuploader-box">
             <div className="mb-input__content input-fileuploader__content">
-              <Placeholder label={placeholder} active={isPlaceholderActive} />
+              {customPlaceholder}
               <input
                 className="input-fileuploader__input"
                 type="file"
@@ -240,11 +269,10 @@ class FileUploader extends PureComponent {
                 onKeyDown={this.onKeyDown}
                 id={`${id}-file`}
               />
-
               <div className={fileNameClassName}>{fileNameLabel}</div>
-              {pending && <Loader visible />}
-              {!pending && hasFile && removeButton}
-              {!pending && !hasFile && chooseButton}
+              {loader}
+              {fileButton}
+              {validation}
             </div>
           </div>
         </div>
@@ -256,6 +284,7 @@ class FileUploader extends PureComponent {
 FileUploader.propTypes = {
   style: PropTypes.shape(),
   id: PropTypes.string,
+  className: PropTypes.string,
   file: PropTypes.string,
   fileType: PropTypes.string,
   parseFileAs: PropTypes.oneOf(['text', 'base64']),
@@ -264,12 +293,14 @@ FileUploader.propTypes = {
   pending: PropTypes.bool,
   disabled: PropTypes.bool,
   invalid: PropTypes.bool,
+  invalidMessages: PropTypes.arrayOf(PropTypes.string),
   required: PropTypes.bool,
 };
 
 FileUploader.defaultProps = {
   style: {},
   id: undefined,
+  className: undefined,
   file: undefined,
   fileType: undefined,
   parseFileAs: undefined,
@@ -278,6 +309,7 @@ FileUploader.defaultProps = {
   pending: false,
   disabled: false,
   invalid: false,
+  invalidMessages: [],
   required: false,
 };
 

@@ -30,13 +30,20 @@ const TestDatePicker = () => (
         ]}
       />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} required />
+
       <DatePicker placeholder="Required" format="x" onSelect={console.log} disabled />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker placeholder="Required" format="x" onSelect={console.log} />
-
+      <DatePicker
+        placeholder="Events"
+        onSelect={value => console.log('onSelect', value)}
+        onClick={() => console.log('onClick')}
+        onBlur={e => console.log('onBlur', e)}
+        onFocus={e => console.log('onFocus', e.target)}
+      />
     </div>
   </div>
 );

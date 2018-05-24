@@ -39,8 +39,6 @@ class Options extends PureComponent {
     }
     const top = reverse ? undefined : 0;
     const bottom = reverse ? 45 : undefined;
-    // const items = reverse ? [...options].reverse() : options
-
     const className = utils.composeClassNames([
       'input',
       'input-select__options-wrapper',

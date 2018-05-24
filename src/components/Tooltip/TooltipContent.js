@@ -22,7 +22,6 @@ TooltipIcon.defaultProps = {
   size: 0,
 };
 
-
 const TooltipMessage = ({ text, active }) => (
   <li className={`tooltip-content__message ${active ? 'tooltip-content__message--active' : ''}`}>
     <Icon name={active ? 'check-small' : 'close-small'} size={12} />
@@ -39,29 +38,23 @@ TooltipMessage.defaultProps = {
   active: false,
 };
 
-
 const TooltipMessages = ({ content }) => {
   let tooltipMessageList = null;
   if (!Array.isArray(content)) {
     tooltipMessageList = <TooltipMessage message={content} active={false} />;
   } else {
-    tooltipMessageList = content.map((message, i) => (<TooltipMessage
-      key={i.toString()}
-      text={message.text}
-      active={message.active}
-    />));
+    tooltipMessageList = content.map((message, i) => (
+      <TooltipMessage key={i.toString()} text={message.text} active={message.active} />
+    ));
   }
   return <ul className="tooltip-content__messages">{tooltipMessageList}</ul>;
 };
 
 TooltipMessages.propTypes = {
-  content: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(TooltipMessage.defaultProps),
-  ]),
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(TooltipMessage.defaultProps)]),
 };
 TooltipMessages.defaultProps = {
-  content: '',
+  content: undefined,
 };
 
 const TooltipContent = ({

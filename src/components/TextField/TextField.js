@@ -5,7 +5,10 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon from '../Icon';
-import { Loader, Placeholder, InnerButton, InvalidIcon } from '../Common';
+import { Loader, Placeholder, InnerButton, Validation } from '../Common';
+
+import '../../icons/modusbox/toggle-invisible.svg';
+import '../../icons/modusbox/toggle-visible.svg';
 
 class TextField extends PureComponent {
   constructor(props) {
@@ -65,12 +68,12 @@ class TextField extends PureComponent {
   }
   onButtonClick(e) {
     e.stopPropagation();
-    if (typeof this.props.onButtonClick === 'function') {
+    if (this.props.onButtonClick) {
       this.props.onButtonClick(e);
     }
   }
   onClick(e) {
-    if (typeof this.props.onClick === 'function') {
+    if (this.props.onClick) {
       this.props.onClick(e);
     }
     if (this.state.isOpen === true) {
@@ -84,24 +87,24 @@ class TextField extends PureComponent {
     if (this.state.value !== value) {
       this.setState({ value });
 
-      if (typeof this.props.onChange === 'function') {
+      if (this.props.onChange) {
         this.props.onChange(value);
       }
     }
   }
   onKeyPress(e) {
-    if (typeof this.props.onKeyPress === 'function') {
+    if (this.props.onKeyPress) {
       this.props.onKeyPress(e);
     }
   }
   onBlur(e) {
-    if (typeof this.props.onBlur === 'function') {
+    if (this.props.onBlur) {
       this.props.onBlur(e);
     }
     this.closeTextField();
   }
   onFocus(e) {
-    if (typeof this.props.onFocus === 'function') {
+    if (this.props.onFocus) {
       this.props.onFocus(e);
     }
     this.enterTextField(e);
@@ -157,6 +160,7 @@ class TextField extends PureComponent {
     const {
       autofocus,
       id,
+      className,
       type,
       style,
       placeholder,
@@ -172,10 +176,10 @@ class TextField extends PureComponent {
       invalidMessages,
     } = this.props;
     const { isOpen, value, isPasswordVisible } = this.state;
-    const isPlaceholderActive = isOpen || value !== undefined;
     const hasButton = typeof onButtonClick === 'function';
 
     const componentClassName = utils.composeClassNames([
+      className,
       'input-textfield__component',
       'mb-input',
       'mb-input__borders',
@@ -188,13 +192,63 @@ class TextField extends PureComponent {
         (value === undefined || value === '') &&
         'mb-input--required mb-input__borders--required mb-input__background--required',
     ]);
-    const invalidIconClassName = utils.composeClassNames([
-      'mb-input__inner-icon',
-      'mb-input__inner-icon--invalid',
-      'input-textfield__icon',
-    ]);
 
     const inputType = (isPasswordVisible && 'text') || type;
+
+    let passwordToggle = null;
+    if (type === 'password') {
+      passwordToggle = (
+        <div className="mb-input__inner-icon input-textfield__icon">
+          <Icon
+            style={{ cursor: 'pointer' }}
+            onClick={this.onShowPasswordClick}
+            name={isPasswordVisible ? 'toggle-invisible' : 'toggle-visible'}
+            size={16}
+            fill={isPasswordVisible ? '#999' : '#39f'}
+          />
+        </div>
+      );
+    }
+
+    let customPlaceholder = null;
+    if (placeholder) {
+      const isPlaceholderActive = isOpen || value !== undefined;
+      customPlaceholder = <Placeholder label={placeholder} active={isPlaceholderActive} />;
+    }
+
+    let innerButton = null;
+    if (hasButton) {
+      innerButton = (
+        <InnerButton
+          kind={buttonKind}
+          onClick={this.onButtonClick}
+          label={buttonText}
+          disabled={disabled || buttonDisabled}
+          active={isOpen}
+          noFill
+        />
+      );
+    }
+    let validation = null;
+    if (invalid) {
+      validation = (
+        <Validation className="input-textfield__icon" active={isOpen} messages={invalidMessages} />
+      );
+    }
+
+    let loader = null;
+    if (pending) {
+      loader = <Loader />;
+    }
+
+    let customIcon = null;
+    if (icon) {
+      customIcon = (
+        <div className="mb-input__inner-icon input-textfield__icon">
+          <Icon size={16} name={icon} />
+        </div>
+      );
+    }
 
     return (
       <div className="input-textfield mb-input__box" style={style}>
@@ -207,8 +261,7 @@ class TextField extends PureComponent {
           role="presentation"
         >
           <div className="mb-input__content input-textfield__content">
-            <Placeholder label={placeholder} active={isPlaceholderActive} />
-
+            {customPlaceholder}
             <input
               id={id}
               ref={(input) => {
@@ -227,33 +280,11 @@ class TextField extends PureComponent {
               disabled={disabled}
               className="mb-input__input input-textfield__value"
             />
-            {hasButton && (
-              <InnerButton
-                kind={buttonKind}
-                onClick={this.onButtonClick}
-                label={buttonText}
-                disabled={disabled || buttonDisabled}
-                isOpen={isOpen}
-              />
-            )}
-
-            <Loader visible={pending} />
-
-            {invalid && (
-              <div className={invalidIconClassName}>
-                <InvalidIcon messages={invalidMessages} forceTooltipVisibility={isOpen} />
-              </div>
-            )}
-            {type === 'password' && (
-              <div className="mb-input__inner-icon input-textfield__icon">
-                <EyeIcon open={isPasswordVisible} onClick={this.onShowPasswordClick} />
-              </div>
-            )}
-            {icon && (
-              <div className="mb-input__inner-icon input-textfield__icon">
-                <Icon size={16} name={icon} />
-              </div>
-            )}
+            {innerButton}
+            {loader}
+            {validation}
+            {passwordToggle}
+            {customIcon}
           </div>
         </div>
       </div>
@@ -266,6 +297,7 @@ TextField.propTypes = {
   style: PropTypes.shape(),
   type: PropTypes.oneOf(['text', 'password']),
   id: PropTypes.string,
+  className: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   buttonText: PropTypes.string,
@@ -274,14 +306,17 @@ TextField.propTypes = {
   onClick: PropTypes.func,
   onButtonClick: PropTypes.func,
   onChange: PropTypes.func,
-  onKeyPress: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  onKeyPress: PropTypes.func,
   icon: PropTypes.string,
   pending: PropTypes.bool,
   required: PropTypes.bool,
   invalid: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf([PropTypes.string]),
+  invalidMessages: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({ active: PropTypes.bool, text: PropTypes.string }),
+  ])),
   disabled: PropTypes.bool,
 };
 
@@ -289,6 +324,7 @@ TextField.defaultProps = {
   autofocus: false,
   type: 'text',
   id: undefined,
+  className: undefined,
   style: {},
   placeholder: undefined,
   value: undefined,
@@ -298,34 +334,15 @@ TextField.defaultProps = {
   onClick: undefined,
   onButtonClick: undefined,
   onChange: undefined,
-  onKeyPress: undefined,
   onBlur: undefined,
   onFocus: undefined,
+  onKeyPress: undefined,
   icon: undefined,
   pending: false,
   required: false,
   invalid: false,
   invalidMessages: [],
   disabled: false,
-};
-
-const EyeIcon = ({ open, onClick }) => (
-  <Icon
-    style={{ cursor: 'pointer' }}
-    onClick={onClick}
-    name={open ? 'toggle-invisible' : 'toggle-visible'}
-    size={16}
-    fill={open ? '#999' : '#39f'}
-  />
-);
-
-EyeIcon.propTypes = {
-  open: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-EyeIcon.defaultProps = {
-  open: false,
-  onClick: undefined,
 };
 
 export default TextField;

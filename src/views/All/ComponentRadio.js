@@ -27,7 +27,8 @@ const options = [
 const TestRadioGroup = () => (
   <div>
     <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <RadioGroup id="x" label="my RadioGroup" value="value1" options={options} />
+      <RadioGroup id="x1" label="my RadioGroup" options={options} />
+      <RadioGroup id="x2" label="my RadioGroup" value="value1" options={options} />
       <RadioGroup id="x3" label="Click me" value="value4" options={options} />
       <RadioGroup
         id="x4"

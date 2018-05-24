@@ -39,22 +39,22 @@ export default class ModalBackground extends PureComponent {
     this._isMounted = false;
   }
   onClose() {
-    if (typeof this.props.onClose === 'function') {
+    if (this.props.onClose) {
       this.props.onClose();
     }
   }
   onUndo() {
-    if (typeof this.props.onUndo === 'function') {
+    if (this.props.onUndo) {
       this.props.onUndo();
     }
   }
   onCancel() {
-    if (typeof this.props.onCancel === 'function') {
+    if (this.props.onCancel) {
       this.props.onCancel();
     }
   }
   onSubmit() {
-    if (typeof this.props.onSubmit === 'function') {
+    if (this.props.onSubmit) {
       this.props.onSubmit();
     }
   }

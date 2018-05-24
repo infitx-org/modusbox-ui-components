@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the button correctly when multiple props are set 1`] = `
+<button
+  className="mb-input input-button__input input-button__mb-input--secondary mb-input--disabled input-button__mb-input--disabled mb-input--pending input-button__mb-input--pending"
+  disabled={true}
+  kind="secondary"
+  label="Snapshot button"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+>
+  <div
+    className="input-button__content"
+  >
+    <div
+      className="input-button__icon"
+    >
+      <Spinner
+        center={false}
+        color="inherit"
+        size={16}
+      />
+    </div>
+    <span>
+      Snapshot button
+    </span>
+  </div>
+</button>
+`;
