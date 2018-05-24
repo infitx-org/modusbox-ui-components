@@ -60,7 +60,7 @@
     "prop-types": "^15.6.1",
     "rc-notification": "^3.0.0",
     "react": "15.4.2",
-    "react-day-picker": "^2.1.1",
+    "react-day-picker": "7.1.9",
     "react-dom": "15.4.2",
     "react-motion": "^0.2.7",
     "react-notify-resize": "^2.0.2"

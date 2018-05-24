@@ -7003,11 +7003,11 @@ react-class@^3.2.2:
   dependencies:
     object-assign "^4.1.0"
 
-react-day-picker@^2.1.1:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-2.5.0.tgz#7c8382822aa8b9237fe8913c10ee89a0539977f9"
+react-day-picker@7.1.9:
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.1.9.tgz#04b0d956faf1bf85bb6ec6f9ca7966433be13f36"
   dependencies:
-    react-is-deprecated "0.1.2"
+    prop-types "^15.6.1"
 
 react-dom@15.4.2:
   version "15.4.2"
@@ -7016,10 +7016,6 @@ react-dom@15.4.2:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-
-react-is-deprecated@0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-is-deprecated/-/react-is-deprecated-0.1.2.tgz#301148f86ea428fe8e673eca7a372160b7579dbd"
 
 react-motion@^0.2.7:
   version "0.2.7"
