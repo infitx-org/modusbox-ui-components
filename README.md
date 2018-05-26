@@ -19,6 +19,12 @@ Run `make add package=name-of-package` or `make remove package=name-of-package`.
 This will automatically run `install`. To install for dev, change to
 `make add/remove package="--dev name-of-package"`.
 
+#### Incrementing the package version
+Run `make version increment=type-of-increment`, where `type-of-increment` is `major`, `minor`, or `patch` (defaults to `minor`).
+For example if the version is currently `1.1.0` and you run `make version` the new version will be `1.2.0`. If you run
+`make version increment=major` the new version will be `2.0.0`. You will then need to commit the updated package.json file. This
+should be the last step before you merge a pull request into the `master` branch.
+
 #### Building
 
 Building creates specific artifacts that the build process pulls out. To check that
