@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Row from '../../components/Row';
 import Toast from '../../components/Toast';
@@ -44,42 +44,42 @@ function showCustomToast() {
     ),
   });
 }
-export default class TestToast extends Component {
-  render() {
-    const buttonStyle = { margin: '5px' };
-    return (
-      <Row align="left">
-        <Button
-          style={buttonStyle}
-          label="Info Toast"
-          kind="primary"
-          onClick={showInfoToast}
-        />
-        <Button
-          style={buttonStyle}
-          label="Closeable Info Toast"
-          kind="secondary"
-          onClick={showCloseableInfoToast}
-        />
-        <Button
-          style={buttonStyle}
-          label="Error Toast"
-          kind="danger"
-          onClick={showErrorToast}
-        />
-        <Button
-          style={buttonStyle}
-          label="Success Toast"
-          kind="secondary"
-          onClick={showSuccessToast}
-        />
-        <Button
-          style={buttonStyle}
-          label="Custom Toast"
-          kind="warning"
-          onClick={showCustomToast}
-        />
-      </Row>
-    );
-  }
-}
+const TestToast = () => {
+  const buttonStyle = { margin: '5px' };
+  return (
+    <Row align="left">
+      <Button
+        style={buttonStyle}
+        label="Info Toast"
+        kind="primary"
+        onClick={showInfoToast}
+      />
+      <Button
+        style={buttonStyle}
+        label="Closeable Info Toast"
+        kind="secondary"
+        onClick={showCloseableInfoToast}
+      />
+      <Button
+        style={buttonStyle}
+        label="Error Toast"
+        kind="danger"
+        onClick={showErrorToast}
+      />
+      <Button
+        style={buttonStyle}
+        label="Success Toast"
+        kind="secondary"
+        onClick={showSuccessToast}
+      />
+      <Button
+        style={buttonStyle}
+        label="Custom Toast"
+        kind="warning"
+        onClick={showCustomToast}
+      />
+    </Row>
+  );
+};
+
+export default TestToast;

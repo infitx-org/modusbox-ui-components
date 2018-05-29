@@ -1,5 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import Notification from 'rc-notification';
+import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
 import * as utils from '../../utils/common';

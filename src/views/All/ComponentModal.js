@@ -12,14 +12,18 @@ class TestModal extends React.Component {
     this.onOpen = this.onOpen.bind(this);
 
     this.state = {
-      opened: null,
+      opened: [],
+      counter: 0,
     };
+    setInterval(() => {
+      this.setState({ counter: this.state.counter + 1 });
+    }, 1000);
   }
   onOpen(n) {
-    this.setState({ opened: n });
+    this.setState({ opened: this.state.opened.concat(n) });
   }
-  onClose() {
-    this.setState({ opened: null });
+  onClose(n) {
+    this.setState({ opened: this.state.opened.filter(prevN => prevN !== n) });
   }
   render() {
     const { opened } = this.state;
@@ -30,10 +34,11 @@ class TestModal extends React.Component {
           <Button kind="danger" onClick={() => this.onOpen(1)} label="Danger" />
           <Button kind="warning" onClick={() => this.onOpen(2)} label="Warning" />
           <Button kind="primary" onClick={() => this.onOpen(3)} label="tabs" />
+          <Button kind="primary" onClick={() => this.onOpen(4)} label="multi" />
         </Row>
 
         <div style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
-          {opened === 0 && (
+          {opened.includes(0) && (
             <Modal
               primaryAction="Submit"
               onClose={() => this.onClose(0)}
@@ -45,7 +50,7 @@ class TestModal extends React.Component {
               <span> Hello! modal 1 </span>
             </Modal>
           )}
-          {opened === 1 && (
+          {opened.includes(1) && (
             <Modal
               primaryAction="Submit"
               onClose={() => this.onClose(1)}
@@ -60,7 +65,7 @@ class TestModal extends React.Component {
               </div>
             </Modal>
           )}
-          {opened === 2 && (
+          {opened.includes(2) && (
             <Modal
               primaryAction="Submit"
               onClose={() => this.onClose(2)}
@@ -73,10 +78,10 @@ class TestModal extends React.Component {
             </Modal>
           )}
 
-          {opened === 3 && (
+          {opened.includes(3) && (
             <Modal
               primaryAction="Submit"
-              onClose={() => this.onClose(2)}
+              onClose={() => this.onClose(3)}
               title="Warning"
               kind="warning"
               tabbed
@@ -94,6 +99,36 @@ class TestModal extends React.Component {
                   <Select options={new Array(100).fill({ label: '1', value: '2' })} />
                 </div>
               </ModalTabsLayout>
+            </Modal>
+          )}
+
+          {opened.includes(4) && (
+            <Modal
+              primaryAction="Submit"
+              onClose={() => this.onClose(4)}
+              title="Warning"
+              kind="warning"
+              allowSubmit
+              isSubmitEnabled
+            >
+              <div>
+                <Button kind="primary" onClick={() => this.onOpen(5)} label="multi" />
+                {this.state.counter}
+              </div>
+
+            </Modal>
+          )}
+          {opened.includes(5) && (
+            <Modal
+              primaryAction="Submit"
+              onClose={() => this.onClose(5)}
+              title="SubModal"
+              kind="warning"
+              allowSubmit
+              isSubmitEnabled
+            >
+              <div>I am the submodal!</div>
+              <div>I am the submodal!</div>
             </Modal>
           )}
         </div>

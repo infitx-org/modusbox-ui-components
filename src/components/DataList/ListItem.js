@@ -2,8 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
+import ReactResizeDetector from 'react-resize-detector';
 
-import { NotifyResize } from 'react-notify-resize';
 
 import Link from './Link';
 import { ArrowCell, CheckboxCell, ListItemCell } from './Cells';
@@ -144,7 +144,7 @@ class ListItem extends React.Component {
         {this.props.children != undefined && (
           <div className="element-datalist__children-row">
             {this.props.children}
-            <NotifyResize onResize={this.onResize} />
+            <ReactResizeDetector handleHeight onResize={this.onResize} />
           </div>
         )}
       </div>

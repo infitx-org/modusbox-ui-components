@@ -63,10 +63,6 @@ export default class ModalBackground extends PureComponent {
       this.onClose();
     }
   }
-  getChild() {
-    const child = React.Children.only(this.props.children);
-    return React.cloneElement(child, {});
-  }
 
   render() {
     const {
@@ -90,7 +86,7 @@ export default class ModalBackground extends PureComponent {
     const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
     const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
 
-    const child = this.getChild();
+    const child = this.props.children;
     let content = child;
     if (!tabbed) {
       content = (

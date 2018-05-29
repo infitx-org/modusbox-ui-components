@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 
 // Render into subtree is necessary for parent contexts to transfer over
 // For example, for react-router
-const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
 
 class ModalPortal extends PureComponent {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     // Create a div and append it to the body
     // Mount a component on that div
     this._div = document.createElement('div');
@@ -15,46 +15,20 @@ class ModalPortal extends PureComponent {
       this._div.id = this.props.id;
     }
     this._div.className = 'element-modal__box';
-
-    const modalIndex = document.querySelectorAll('.element-modal__box').length;
-    const childrenWithIndex = React.cloneElement(this.props.children, {
-      modalIndex,
-    });
-    this._modalIndex = modalIndex;
     this._target = document.body.appendChild(this._div);
-    this._component = renderSubtreeIntoContainer(this, childrenWithIndex, this._target);
-  }
-  componentDidUpdate() {
-    // When the child component updates, we have to make sure the content rendered to the DOM is
-    // updated too
-    const childrenWithIndex = React.cloneElement(this.props.children, {
-      modalIndex: this._modalIndex,
-    });
-    this._component = renderSubtreeIntoContainer(this, childrenWithIndex, this._target);
+    this._modalIndex = document.querySelectorAll('.element-modal__box').length;
   }
   componentWillUnmount() {
-    const done = () => {
-      // Remove the node and clean up after the target
-      ReactDOM.unmountComponentAtNode(this._target);
-      document.body.removeChild(this._target);
-      this._target = null;
-      this._component = null;
-    };
-
-    // A similar API to react-transition-group
-    if (this._component.componentWillUnmount) {
-      this._component.componentWillUnmount(done);
-    }
-    if (this._component.componentWillLeave) {
-      this._component.componentWillLeave(done);
-    } else {
-      done();
-    }
+    document.body.removeChild(this._target);
   }
 
   // This doesn't actually return anything to render
   render() {
-    return null;
+    const childrenWithIndex = React.cloneElement(this.props.children, {
+      modalIndex: this._modalIndex,
+    });
+
+    return ReactDOM.createPortal(childrenWithIndex, this._target);
   }
 }
 ModalPortal.defaultProps = {

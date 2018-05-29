@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NotifyResize } from 'react-notify-resize';
+import ReactResizeDetector from 'react-resize-detector';
 
 import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
@@ -912,8 +912,8 @@ class DataList extends React.Component {
           onMouseMove={this.handleResizeColumnWidth}
           onClick={this.handleStopResizeColumnWidth}
         >
-          {/* Resize detector */}
-          <NotifyResize onResize={this.resizeList} />
+          {/* Resize detector */}          
+          <ReactResizeDetector handleWidth onResize={this.resizeList} />
 
           {/* Loading data */}
           {isLoading && <SpinnerBox id={`${this.props.id}-pending-box`} />}
