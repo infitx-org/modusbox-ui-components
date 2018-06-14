@@ -47,7 +47,3 @@ module.exports = {
     ],
   },
 };
-
-module.exports.serve = {
-  content: [__dirname],
-};
