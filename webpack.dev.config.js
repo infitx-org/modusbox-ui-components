@@ -28,6 +28,7 @@ module.exports = {
             loader: 'eslint-loader',
             options: {
               fix: true,
+              emitWarnings: true,
             },
           },
         ],
