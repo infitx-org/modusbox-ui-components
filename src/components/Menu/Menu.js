@@ -613,7 +613,7 @@ const bindPathnameToElement = pathname => element => React.cloneElement(element,
 });
 
 const setActiveProp = pathname => element => {
-  if (element.props.path === pathname) {
+  if (element.props.path === pathname && !element.props.back) {
     return React.cloneElement(element, {
       ...element.props, 
       active: true
@@ -663,6 +663,7 @@ class Menu extends PureComponent {
           if(exact === true){
             activeRoot = node;            
           } else {
+            console.log('lppppp', path, exact)
             activeRoot = rootNode;
           }
         } else {
@@ -700,7 +701,7 @@ const MenuSection = ({ pathname, label, children, onClick }) => {
 
   return (
     <div className='element-menu__section'>
-      <div classNAme='element-menu__section-label'> {label} </div>
+      <div className='element-menu__section-label'> {label} </div>
       {menuItems}
     </div>
   );
@@ -723,14 +724,15 @@ class MenuItem extends PureComponent {
     }
     let BackIcon = null;
     if (back) {
-      BackIcon = <Icon name='arrow' size={14} fill='#999' />;
+      BackIcon = <Icon className='element-menu__item__back-icon' name='arrow' size={12} fill='#999' />;
     }
-
+    console.log(back)
     const classNames = utils.composeClassNames([
       'mb-element',
       'element-menu__item',
       active && 'element-menu__item--active',
-      disabled && 'element-menu__item--disabled'
+      disabled && 'element-menu__item--disabled',
+      back && 'element-menu__item--with-icon'
     ]);
 
     return (
@@ -739,8 +741,7 @@ class MenuItem extends PureComponent {
         onClick={this.onClick}
         role="presentation"
       >
-        {BackIcon}
-        {label} - ({path})
+        {BackIcon}{label}
       </div>
     );
   }

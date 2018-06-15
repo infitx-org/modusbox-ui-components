@@ -1,19 +1,24 @@
-.element-menu__section-label{
-  border: 1px solid #ccc;
+.element-menu__section{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .element-menu__section-label{
   text-align: center;
-  margin-bottom: 10px;
   width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 10px;  
 }
 
-
-
 .element-menu__item{
-  position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
-  padding-left: 0px;
+  padding-left: 16px;
   height: 30px;
+  cursor: pointer;
   line-height: 30px;
   border-left: 4px solid transparent;
   transition: border 0.2s linear;  
@@ -25,47 +30,18 @@
 
 .element-menu__item--active {
   border-left-color: #00a2df;
+  font-weight: bold;
 }
 .element-menu__item--disabled {
   color: #999;
   fill: #ccc;
   border-color: transparent;
 }
-
-
-
-
-
-
-
-
-.side-menu-section {
-  width: 180px;
-  margin: 10px 0px;
-}
-.side-menu-section-title {
-  text-transform: uppercase;
-  padding-left: 10px;
-  font-size: 12px;
-}
-.side-menu-section-links {
-  padding: 10px;
-  padding-left: 0;
-  padding-right: 5px;
-}
-.side-menu-section-card {
-  position: absolute;
-  right: 0;
-  top: 8px;
-
-  color: #fff;
-  line-height: 12px;
-  background: #04b3f5;
-  font-size: 11px;
-  padding: 2px;
-  border-radius: 3px;
+.element-menu__item--with-icon{
+  padding-left: 0px;
 }
 
-.side-menu-link-indent {
-  padding-left: 15px;
+.element-menu__item__back-icon{  
+  transform: rotateZ(180deg);
+  margin: 2px;
 }

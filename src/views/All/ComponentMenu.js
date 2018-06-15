@@ -14,11 +14,7 @@ const Menus = ({ pathname, onChange, disabled, hidden }) => (
 
       <MenuSection label="User Info">
         <MenuItem path="/partners/partner/contacts" label="Contacts" />
-        <MenuItem path="/partners/partner/identifiers" label="Identifiers" disabled={disabled} />        
-        
-        <MenuItem path="/partners/partner/documentDefinitions" label="Document Definitions" exact>
-          <MenuItem path="/partners/partner/documentDefinitions/documentDefinition" label="Document Definition"/>
-        </MenuItem>
+        <MenuItem path="/partners/partner/identifiers" label="Identifiers" disabled={disabled} />                      
 
       </MenuSection>
       
@@ -29,11 +25,11 @@ const Menus = ({ pathname, onChange, disabled, hidden }) => (
       </MenuSection>
 
       <MenuSection label="Configuration">      
-        <MenuItem path="/partners/partner/documentDefinitions" label="Document Definitions" exact>
-          <MenuItem path="/partners/partner/documentDefinitions/documentDefinition" label="Document Definition"/>
-        </MenuItem>
-
+        <MenuItem path="/partners/partner/documentDefinitions" label="Document Definitions">
+          <MenuItem to="/partners/partner/documentDefinitions" path="/partners/partner/documentDefinitions/documentDefinition" label="Document Definitions" back/>
+        </MenuItem>      
       </MenuSection>
+
     </MenuItem>
     
     <MenuItem path="/administration" label="administration" exact disabled={disabled}>
@@ -89,21 +85,27 @@ class MenuTester extends PureComponent {
           <Checkbox
             onChange={this.onChangeDisabled}
             checked={this.state.disabled}
-            label='Disable menu items'
+            label='Disable'
           />
 
           <Checkbox
             onChange={this.onChangeHidden}
             checked={this.state.hidden}
-            label='Hide menu items'
+            label='Hide'
+          />
+          <Button
+            onClick={()=>this.onChangePath('/partners/partner/contacts')}
+            label='Go To Contacts'
           />
         </Row>
-        <Menus
-          pathname={this.state.pathname}
-          onChange={this.onMenuChange}
-          disabled={this.state.disabled}
-          hidden={this.state.hidden}
-        />
+        <div style={{width: '200px'}}>
+          <Menus
+            pathname={this.state.pathname}
+            onChange={this.onMenuChange}
+            disabled={this.state.disabled}
+            hidden={this.state.hidden}
+          />
+        </div>
       </div>
     );
   }
