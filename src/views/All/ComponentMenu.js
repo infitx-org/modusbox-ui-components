@@ -26,7 +26,7 @@ const Menus = ({ pathname, onChange, disabled, hidden }) => (
 
       <MenuSection label="Configuration">      
         <MenuItem path="/partners/partner/documentDefinitions" label="Document Definitions">
-          <MenuItem to="/partners/partner/documentDefinitions" path="/partners/partner/documentDefinitions/documentDefinition" label="Document Definitions" back/>
+          <MenuItem path="/partners/partner/documentDefinitions/documentDefinition" to="/partners/partner/documentDefinitions" label="Document Definitions" back/>
         </MenuItem>      
       </MenuSection>
 
@@ -34,7 +34,9 @@ const Menus = ({ pathname, onChange, disabled, hidden }) => (
     
     <MenuItem path="/administration" label="administration" exact disabled={disabled}>
       <MenuItem to="/" label="Administration" back />
-      <MenuItem path="/administration/errorcodes" label="Error Codes" />
+      <MenuItem path="/administration/errorcodes" label="Error Codes">
+        <MenuItem path="/administration/errorcodes/errorCode" to="/administration/errorcodes" label="Error Code" back/>
+      </MenuItem>
     </MenuItem>
   </Menu>
 );
@@ -73,29 +75,34 @@ class MenuTester extends PureComponent {
     })
   }
   render() {
+    const style = {margin:'5px'};
     return (
       <div>
         <Row align='left'>
           <TextField
             onChange={this.onChangePath}
             value={this.state.pathname}
-            style={{ width: '200px' }}
-
+            style={{ ...style, width: '400px' }}
           />
+          <Button
+            onClick={()=>this.onChangePath('/partners/partner/contacts')}
+            label='Go To Contacts'
+            style={style}
+          />
+        </Row>
+        <Row align='left'>
           <Checkbox
             onChange={this.onChangeDisabled}
             checked={this.state.disabled}
             label='Disable'
+            style={style}
           />
 
           <Checkbox
             onChange={this.onChangeHidden}
             checked={this.state.hidden}
             label='Hide'
-          />
-          <Button
-            onClick={()=>this.onChangePath('/partners/partner/contacts')}
-            label='Go To Contacts'
+            style={style}
           />
         </Row>
         <div style={{width: '200px'}}>
