@@ -6,6 +6,7 @@ import ComponentColumn from './ComponentColumn';
 import ComponentDataList from './ComponentDataList';
 import ComponentDatePicker from './ComponentDatePicker';
 import ComponentHeading from './ComponentHeading';
+import ComponentMenu from './ComponentMenu';
 import ComponentSelect from './ComponentSelect';
 import ComponentTextField from './ComponentTextField';
 import ComponentTabs from './ComponentTabs';
@@ -24,6 +25,7 @@ export {
   ComponentButton,
   ComponentCheckbox,
   ComponentHeading,
+  ComponentMenu,
   ComponentSelect,
   ComponentTextField,
   ComponentTabs,
