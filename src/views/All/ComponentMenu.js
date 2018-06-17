@@ -32,7 +32,7 @@ const Menus = ({ pathname, onChange, disabled, hidden }) => (
 
     </MenuItem>
     
-    <MenuItem path="/administration" label="administration" exact disabled={disabled}>
+    <MenuItem path="/administration" label="administration" asRoot disabled={disabled}>
       <MenuItem to="/" label="Administration" back />
       <MenuItem path="/administration/errorcodes" label="Error Codes">
         <MenuItem path="/administration/errorcodes/errorCode" to="/administration/errorcodes" label="Error Code" back/>

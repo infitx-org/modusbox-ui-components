@@ -57,7 +57,6 @@ class MenuItem extends PureComponent {
       />);
     }
     const classNames = utils.composeClassNames([
-      'mb-element',
       'element-menu__item',
       active && 'element-menu__item--active',
       disabled && 'element-menu__item--disabled',
@@ -102,7 +101,7 @@ const MenuSection = ({
 
   return (
     <div className="element-menu__section">
-      <div className="element-menu__section-label"> {label} </div>
+      <div className="element-menu__section-label">{label}</div>
       {menuItems}
     </div>
   );
@@ -143,14 +142,14 @@ class Menu extends PureComponent {
     for (let i = 0; i < items.length && activeRoot === null; i += 1) {
       const node = items[i];
       const {
-        path, exact, children,
+        path, asRoot, children,
       } = node.props;
       const hasChildren = children !== undefined;
       if (isMenuItem(node)) {
         if (path === pathname) {
-          // exact prop is meant to be used when menu has child elements
-          // and we do not want to render the whole parent node
-          if (exact === true) {
+          // asRoot prop is meant to be used when menu has child elements
+          // and we do not want to render the parent node but the child nodes
+          if (asRoot === true) {
             activeRoot = node;
           } else {
             activeRoot = rootNode;
@@ -165,17 +164,17 @@ class Menu extends PureComponent {
 
   render() {
     const { pathname, onChange } = this.props;
+    let menuComponents = null;
     const activeRoot = this.getActiveRoot(this);
-    if (activeRoot === null) {
-      return null;
+    if (activeRoot !== null) {
+      menuComponents = React.Children
+        .toArray(activeRoot.props.children)
+        .filter(element => isMenuItem(element) || isMenuSection(element))
+        .map(bindOnClickProp(onChange))
+        .map(bindPathnameProp(pathname))
+        .map(bindActiveProp(pathname));
     }
-    const menuComponents = React.Children
-      .toArray(activeRoot.props.children)
-      .filter(element => isMenuItem(element) || isMenuSection(element))
-      .map(bindOnClickProp(onChange))
-      .map(bindPathnameProp(pathname))
-      .map(bindActiveProp(pathname));
-    return menuComponents;
+    return <div className="mb-element element-menu">{menuComponents}</div>;
   }
 }
 
