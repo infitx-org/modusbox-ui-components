@@ -16,7 +16,8 @@ const bindPathnameProp = pathname => element => React.cloneElement(element, {
 });
 
 const bindActiveProp = pathname => (element) => {
-  if (element.props.path === pathname && !element.props.back) {
+  const { path, back, active } = element.props;
+  if (path !== undefined && path === pathname && !back || active) {
     return React.cloneElement(element, {
       ...element.props,
       active: true,
@@ -131,7 +132,7 @@ class Menu extends PureComponent {
   }
   getActiveRoot(rootNode) {
     const { pathname } = this.props;
-    if (rootNode.props.path === pathname) {
+    if (rootNode.props.path !== undefined && rootNode.props.path === pathname) {
       return rootNode;
     }
 
@@ -142,11 +143,12 @@ class Menu extends PureComponent {
     for (let i = 0; i < items.length && activeRoot === null; i += 1) {
       const node = items[i];
       const {
-        path, asRoot, children,
+        path, asRoot, children, active,
       } = node.props;
       const hasChildren = children !== undefined;
+      const pathMatches = path !== undefined && path === pathname;
       if (isMenuItem(node)) {
-        if (path === pathname) {
+        if (pathMatches || active) {
           // asRoot prop is meant to be used when menu has child elements
           // and we do not want to render the parent node but the child nodes
           if (asRoot === true) {
@@ -178,11 +180,14 @@ class Menu extends PureComponent {
   }
 }
 
-Menu.defaultProps = {};
+Menu.defaultProps = {
+  path: undefined,
+  pathname: undefined,
+};
 Menu.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
-  path: PropTypes.string.isRequired,
-  pathname: PropTypes.string.isRequired,
+  path: PropTypes.string,
+  pathname: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 

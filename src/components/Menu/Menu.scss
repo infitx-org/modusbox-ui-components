@@ -21,7 +21,7 @@
   cursor: pointer;
   line-height: 30px;
   border-left: 4px solid transparent;
-  transition: border 0.2s linear;  
+  transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;  
   font-size: 13px;
 
   &:hover {

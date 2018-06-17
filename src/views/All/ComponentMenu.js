@@ -7,7 +7,7 @@ import Checkbox from '../../components/Checkbox';
 import Button from '../../components/Button';
 import Menu, { MenuItem, MenuSection } from '../../components/Menu';
 
-const Menus = ({ pathname, onChange, disabled, hidden }) => (
+const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
   <Menu path="/" pathname={pathname} onChange={onChange}>
     <MenuItem path="/tracking" label="Tracking" hidden={hidden}/>
     <MenuItem path="/partners" label="Partners" disabled={disabled}>
@@ -40,6 +40,21 @@ const Menus = ({ pathname, onChange, disabled, hidden }) => (
     </MenuItem>
   </Menu>
 );
+
+const Menu2 = ({ pathname, onChange, disabled, hidden }) => (
+  <Menu onChange={onChange}>
+    <MenuItem label="1" hidden={hidden}/>
+    <MenuItem label="2" disabled={disabled} />
+    <MenuItem label="3" disabled={disabled} />
+    <MenuItem label="4" disabled={disabled} />
+    <MenuItem label="5" disabled={disabled} />
+    <MenuItem label="6" disabled={disabled} active/>
+    <MenuItem label="7" disabled={disabled} />
+    <MenuItem label="8" disabled={disabled} />
+    <MenuItem label="9" disabled={disabled} />
+  </Menu>
+);
+
 
 class MenuTester extends PureComponent {
   constructor() {
@@ -76,8 +91,15 @@ class MenuTester extends PureComponent {
   }
   render() {
     const style = {margin:'5px'};
+    const componentWithProps = React.cloneElement(this.props.children, {
+      ...this.props.children.props,      
+      pathname: this.state.pathname,
+      onChange: this.onMenuChange,
+      disabled: this.state.disabled,
+      hidden: this.state.hidden,    
+    })
     return (
-      <div>
+      <div style={{...style, border: '3px solid #eee'}}>
         <Row align='left'>
           <TextField
             onChange={this.onChangePath}
@@ -106,12 +128,7 @@ class MenuTester extends PureComponent {
           />
         </Row>
         <div style={{width: '200px'}}>
-          <Menus
-            pathname={this.state.pathname}
-            onChange={this.onMenuChange}
-            disabled={this.state.disabled}
-            hidden={this.state.hidden}
-          />
+          {componentWithProps}          
         </div>
       </div>
     );
@@ -120,8 +137,13 @@ class MenuTester extends PureComponent {
 
 const TestMenu = () => (
   <div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <MenuTester />
+    <div style={{ padding: '10px', border: '1px solid #ccc', display: 'flex' }}>
+      <MenuTester>
+        <Menu1 />
+      </MenuTester>
+      <MenuTester>
+        <Menu2 />
+      </MenuTester>
     </div>
   </div>
 );
