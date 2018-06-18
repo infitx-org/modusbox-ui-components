@@ -110,6 +110,30 @@ it('renders the menu section if parent root matches', () => {
   expect(menuSectionLabel.text()).toBe('Menu Section');
 });
 
+it('renders the Menu when no pathname is set', () => {
+  const wrapper = mount(
+    <Menu onChange={onChangeMockEvent}>      
+      <MenuItem label='foo'/>
+      <MenuItem label='bar'/>      
+    </Menu>
+  );
+  const menuItems = wrapper.find('.element-menu__item');
+  expect(menuItems).toHaveLength(2);
+});
+
+it('renders the manually set active prop', () => {
+  const wrapper = mount(
+    <Menu onChange={onChangeMockEvent}>      
+      <MenuItem label='foo' active/>
+      <MenuItem label='bar'/>      
+    </Menu>
+  );
+  const activeMenuItem = wrapper.find('.element-menu__item--active');
+  expect(activeMenuItem).toHaveLength(1);  
+  expect(activeMenuItem.text()).toBe('foo');
+});
+
+
 it('trigger onChange when clicking a menu item', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(

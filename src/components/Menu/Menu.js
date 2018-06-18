@@ -17,7 +17,8 @@ const bindPathnameProp = pathname => element => React.cloneElement(element, {
 
 const bindActiveProp = pathname => (element) => {
   const { path, back, active } = element.props;
-  if (path !== undefined && path === pathname && !back || active) {
+  const matchesPath = path !== undefined && path === pathname && !back;
+  if (matchesPath || active) {
     return React.cloneElement(element, {
       ...element.props,
       active: true,
@@ -132,14 +133,19 @@ class Menu extends PureComponent {
   }
   getActiveRoot(rootNode) {
     const { pathname } = this.props;
+    let activeRoot = null;
+    // render Menu when pathname matches path
     if (rootNode.props.path !== undefined && rootNode.props.path === pathname) {
       return rootNode;
+    }
+    // Default to Menu when going manual - no route matching
+    if (rootNode === this && rootNode.props.pathname === undefined) {
+      activeRoot = rootNode;
     }
 
     // Flatten MenuSections in order not to have nested children when detecting active menu
     const items = Menu.flattenMenuSections(React.Children.toArray(rootNode.props.children));
 
-    let activeRoot = null;
     for (let i = 0; i < items.length && activeRoot === null; i += 1) {
       const node = items[i];
       const {
