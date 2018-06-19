@@ -1,7 +1,6 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
-import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../../components/Tabs';
 import DataList from '../../components/DataList';
 
 const columns = ['a', 'b', 'c', 'd', 'e'];
@@ -37,35 +36,7 @@ const TestDataList = () => (
       flex: '2 1 auto',
     }}
   >
-    <Tabs flex>
-      <TabList>
-        <Tab>1</Tab>
-        <Tab>2</Tab>
-        <Tab>3</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <DataList
-            id="1"
-            columns={columns1}
-            list={list1}
-            selected="a"
-            paging
-            multiSelect
-            multiSelected={[]}
-            onMultiSelect={console.log}
-          />
-        </TabPanel>
-        <TabPanel>
-          <DataList id="2" columns={columns1} list={list1.concat(list1)} selected="a" paging />
-        </TabPanel>
-        <TabPanel>
-          <div> hey</div>
-          <div> hey</div>
-          <div> hey</div>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <DataList id="2" columns={columns1} list={list1.concat(list1)} selected="a" paging />
   </div>
 );
 

@@ -4,6 +4,7 @@ import ComponentTooltip from './ComponentTooltip';
 import ComponentCheckbox from './ComponentCheckbox';
 import ComponentColumn from './ComponentColumn';
 import ComponentDataList from './ComponentDataList';
+import ComponentDataListV2 from './ComponentDataListV2';
 import ComponentDatePicker from './ComponentDatePicker';
 import ComponentHeading from './ComponentHeading';
 import ComponentMenu from './ComponentMenu';
@@ -31,6 +32,7 @@ export {
   ComponentTabs,
   ComponentRadio,
   ComponentDataList,
+  ComponentDataListV2,
   ComponentScrollBox,
   ComponentFileUploader,
   ComponentDatePicker,
