@@ -133,6 +133,41 @@ it('renders the manually set active prop', () => {
   expect(activeMenuItem.text()).toBe('foo');
 });
 
+it('renders the disabled prop on menu item', () => {
+  const wrapper = mount(
+    <Menu onChange={onChangeMockEvent}>      
+      <MenuItem label='foo' disabled/>
+      <MenuItem label='bar'/>      
+    </Menu>
+  );
+  const disabledMenuItem = wrapper.find('.element-menu__item--disabled');
+  expect(disabledMenuItem).toHaveLength(1);  
+  expect(disabledMenuItem.text()).toBe('foo');
+});
+
+it('does not render a hidden menu item', () => {
+  const wrapper = mount(
+    <Menu onChange={onChangeMockEvent}>      
+      <MenuItem label='foo' hidden/>
+      <MenuItem label='bar'/>      
+    </Menu>
+  );
+  const menuItems = wrapper.find('.element-menu__item');
+  expect(menuItems).toHaveLength(1);    
+});
+
+it('does not render a hidden menu section', () => {
+  const wrapper = mount(
+    <Menu onChange={onChangeMockEvent}>  
+      <MenuSection hidden>    
+        <MenuItem label='foo'/>
+        <MenuItem label='bar'/>
+      </MenuSection>
+    </Menu>
+  );
+  const menuSection = wrapper.find('.element-menu__section');
+  expect(menuSection).toHaveLength(0);
+});
 
 it('trigger onChange when clicking a menu item', () => {
   const mockEvent = jest.fn();
@@ -158,4 +193,17 @@ it('trigger onChange with correct value when clicking a menu item', () => {
   const menuItems = wrapper.find('.element-menu__item');  
   menuItems.at(1).simulate('click');
   expect(mockEvent).toHaveBeenCalledWith('/bar');
+});
+
+// Snapshot
+it('renders the menu correctly when multiple props are set', () => {
+  const wrapper = mount(
+    <Menu path='/' pathname='/foo' onChange={onChangeMockEvent}>
+      <MenuItem path='/foo' label='foo' asRoot>
+        <MenuItem path='/foo/nested' label='nested'/>
+      </MenuItem>
+      <MenuItem path='/bar' label='bar'/>
+    </Menu>
+  );
+  expect(shallowToJson(wrapper)).toMatchSnapshot();
 });

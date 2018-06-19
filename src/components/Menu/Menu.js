@@ -27,6 +27,11 @@ const bindActiveProp = pathname => (element) => {
   return element;
 };
 
+const bindDisabledProp = disabled => element => React.cloneElement(element, {
+  ...element.props,
+  disabled: element.props.disabled || disabled,
+});
+
 /* eslint-disable */
 const isMenuSection = element => element.type === MenuSection;
 const isMenuItem = element => element.type === MenuItem;
@@ -93,17 +98,25 @@ MenuItem.propTypes = {
 };
 
 const MenuSection = ({
-  pathname, label, children, onClick,
+  pathname, label, children, onClick, hidden, disabled,
 }) => {
+  if (hidden) {
+    return null;
+  }
   const menuItems = React.Children
     .toArray(children)
     .filter(element => isMenuItem(element))
     .map(bindOnClickProp(onClick))
-    .map(bindActiveProp(pathname));
+    .map(bindActiveProp(pathname))
+    .map(bindDisabledProp(disabled));
 
+  let menuSectionLabel = null;
+  if (label) {
+    menuSectionLabel = <div className="element-menu__section-label">{label}</div>;
+  }
   return (
     <div className="element-menu__section">
-      <div className="element-menu__section-label">{label}</div>
+      {menuSectionLabel}
       {menuItems}
     </div>
   );
