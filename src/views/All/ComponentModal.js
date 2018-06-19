@@ -115,7 +115,6 @@ class TestModal extends React.Component {
                 <Button kind="primary" onClick={() => this.onOpen(5)} label="multi" />
                 {this.state.counter}
               </div>
-
             </Modal>
           )}
           {opened.includes(5) && (

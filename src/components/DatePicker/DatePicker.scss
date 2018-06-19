@@ -51,7 +51,7 @@
   .timepicker-item-box {
     width: 50%;
     flex: 1 1 auto;
-    text-align: left;    
+    text-align: left;
 
     .placeholder {
       color: #8b9898;
@@ -67,7 +67,7 @@
       height: 30px;
       width: 100%;
       padding-left: 10;
-      border: none;      
+      border: none;
       background: #fff;
       cursor: pointer;
       text-align: center;
@@ -152,11 +152,11 @@
   text-align: center;
   color: #8b9898;
 }
-.DayPicker-Weekday{
-  abbr{
+.DayPicker-Weekday {
+  abbr {
     color: #8b9898;
-    font-size:12px;
-    text-decoration:none;
+    font-size: 12px;
+    text-decoration: none;
   }
 }
 
@@ -232,7 +232,7 @@
   background: #eee;
 }
 
-.input-datepicker--position{
+.input-datepicker--position {
   position: relative;
 }
 .input-datepicker__calendar-box {
@@ -244,7 +244,7 @@
   padding: 10px;
   background: #fff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-  &.input-datepicker__calendar-box--reverse{
+  &.input-datepicker__calendar-box--reverse {
     top: auto;
     bottom: 45px;
   }

@@ -1,18 +1,18 @@
-.element-menu__section{
+.element-menu__section {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.element-menu__section-label{
+.element-menu__section-label {
   text-align: center;
   width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: left;
-  padding-left: 10px;  
+  padding-left: 10px;
 }
 
-.element-menu__item{
+.element-menu__item {
   display: flex;
   align-items: center;
   width: 100%;
@@ -21,12 +21,12 @@
   cursor: pointer;
   line-height: 30px;
   border-left: 4px solid transparent;
-  transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;  
+  transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;
   font-size: 12px;
 
   &:hover {
     border-left-color: #ccc;
-  }  
+  }
 }
 
 .element-menu__item--active {
@@ -38,11 +38,11 @@
   fill: #ccc;
   border-color: transparent;
 }
-.element-menu__item--with-icon{
+.element-menu__item--with-icon {
   padding-left: 0px;
 }
 
-.element-menu__item__back-icon{  
+.element-menu__item__back-icon {
   transform: rotateZ(180deg);
   margin: 2px;
 }

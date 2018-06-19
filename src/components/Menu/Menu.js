@@ -5,15 +5,17 @@ import Icon from '../Icon';
 import './Menu.scss';
 import '../../icons/mule/back-small.svg';
 
-const bindOnClickProp = onClick => element => React.cloneElement(element, {
-  ...element.props,
-  onClick,
-});
+const bindOnClickProp = onClick => element =>
+  React.cloneElement(element, {
+    ...element.props,
+    onClick,
+  });
 
-const bindPathnameProp = pathname => element => React.cloneElement(element, {
-  ...element.props,
-  pathname,
-});
+const bindPathnameProp = pathname => element =>
+  React.cloneElement(element, {
+    ...element.props,
+    pathname,
+  });
 
 const bindActiveProp = pathname => (element) => {
   const { path, back, active } = element.props;
@@ -27,10 +29,11 @@ const bindActiveProp = pathname => (element) => {
   return element;
 };
 
-const bindDisabledProp = disabled => element => React.cloneElement(element, {
-  ...element.props,
-  disabled: element.props.disabled || disabled,
-});
+const bindDisabledProp = disabled => element =>
+  React.cloneElement(element, {
+    ...element.props,
+    disabled: element.props.disabled || disabled,
+  });
 
 /* eslint-disable */
 const isMenuSection = element => element.type === MenuSection;
@@ -56,12 +59,9 @@ class MenuItem extends PureComponent {
     }
     let BackIcon = null;
     if (back) {
-      BackIcon = (<Icon
-        className="element-menu__item__back-icon"
-        name="arrow"
-        size={12}
-        fill="#999"
-      />);
+      BackIcon = (
+        <Icon className="element-menu__item__back-icon" name="arrow" size={12} fill="#999" />
+      );
     }
     const classNames = utils.composeClassNames([
       'element-menu__item',
@@ -71,12 +71,9 @@ class MenuItem extends PureComponent {
     ]);
 
     return (
-      <div
-        className={classNames}
-        onClick={this.onClick}
-        role="presentation"
-      >
-        {BackIcon}{label}
+      <div className={classNames} onClick={this.onClick} role="presentation">
+        {BackIcon}
+        {label}
       </div>
     );
   }
@@ -103,8 +100,7 @@ const MenuSection = ({
   if (hidden) {
     return null;
   }
-  const menuItems = React.Children
-    .toArray(children)
+  const menuItems = React.Children.toArray(children)
     .filter(element => isMenuItem(element))
     .map(bindOnClickProp(onClick))
     .map(bindActiveProp(pathname))
@@ -132,13 +128,15 @@ MenuSection.propTypes = {
 class Menu extends PureComponent {
   static flattenMenuSections(items) {
     // It flattens nested MenuSection, MenuItem components into a one-level array
-    return items.reduce((prevItems, currentItem) => [
-      ...prevItems,
-      ...(isMenuSection(currentItem)
-        ? Menu.flattenMenuSections(React.Children.toArray(currentItem.props.children))
-        : [currentItem]
-      ),
-    ], []);
+    return items.reduce(
+      (prevItems, currentItem) => [
+        ...prevItems,
+        ...(isMenuSection(currentItem)
+          ? Menu.flattenMenuSections(React.Children.toArray(currentItem.props.children))
+          : [currentItem]),
+      ],
+      [],
+    );
   }
   constructor() {
     super();
@@ -188,8 +186,7 @@ class Menu extends PureComponent {
     let menuComponents = null;
     const activeRoot = this.getActiveRoot(this);
     if (activeRoot !== null) {
-      menuComponents = React.Children
-        .toArray(activeRoot.props.children)
+      menuComponents = React.Children.toArray(activeRoot.props.children)
         .filter(element => isMenuItem(element) || isMenuSection(element))
         .map(bindOnClickProp(onChange))
         .map(bindPathnameProp(pathname))
