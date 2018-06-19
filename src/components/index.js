@@ -12,6 +12,7 @@ import FileUploader from './FileUploader';
 import Heading from './Heading';
 import Icon from './Icon';
 import Modal, { ModalTabsLayout } from './Modal';
+import Menu, { MenuSection, MenuItem } from './Menu';
 import RadioGroup from './RadioGroup';
 import Row from './Row';
 import ScrollBox from './ScrollBox';
@@ -30,6 +31,9 @@ export {
   FileUploader,
   Heading,
   Icon,
+  Menu,
+  MenuSection,
+  MenuItem,
   Modal,
   ModalTabsLayout,
   RadioGroup,
