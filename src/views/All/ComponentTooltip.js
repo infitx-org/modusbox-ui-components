@@ -3,10 +3,9 @@ import React from 'react';
 import Icon from '../../components/Icon';
 import Row from '../../components/Row';
 import Column from '../../components/Column';
-import Tooltip from '../../components/Tooltip';
+import Tooltip, { TooltipContent } from '../../components/Tooltip';
 
 const style = { width: '100px' };
-
 const TestButton = () => (
   <Column style={{ padding: '10px' }}>
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
@@ -60,6 +59,12 @@ const TestButton = () => (
       <Tooltip style={style} position="bottom">
         {' '}
         BOTTOM POSITIONED with a super long content{' '}
+      </Tooltip>
+    </Row>
+
+    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
+      <Tooltip style={style} position="bottom" content={<TooltipContent><Icon name="deploy-small" size={22} /> This is amazing! </TooltipContent>}>
+        Test the content!
       </Tooltip>
     </Row>
   </Column>

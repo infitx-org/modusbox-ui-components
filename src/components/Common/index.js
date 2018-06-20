@@ -7,6 +7,8 @@ import Icon from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip, { TooltipContent } from '../Tooltip';
 
+import './Validation.scss';
+
 const Loader = () => (
   <div className="mb-input__inner-icon mb-loader">
     <Spinner size={16} />
@@ -81,10 +83,52 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
+const ValidationMessage = ({ text, active }) => (
+  <li className={`validation__message ${active ? 'validation__message--active' : ''}`}>
+    <Icon name={active ? 'check-small' : 'close-small'} size={12} />
+    <span className="validation__message-text">{text}</span>
+  </li>
+);
+
+ValidationMessage.propTypes = {
+  text: PropTypes.string,
+  active: PropTypes.bool,
+};
+ValidationMessage.defaultProps = {
+  text: undefined,
+  active: false,
+};
+
+const ValidationMessages = ({ messages }) => {
+  let validationMessageList = null;
+  const messageList = !Array.isArray(messages) ? [messages] : messages;
+  if (messageList.length) {
+    validationMessageList = messageList.map((message, i) => (
+      <ValidationMessage
+        key={i.toString()}
+        text={message.text}
+        active={message.active}
+      />
+    ));
+  }
+  return <ul className="validation__messages">{validationMessageList}</ul>;
+};
+
+ValidationMessages.propTypes = {
+  messages: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(ValidationMessage.defaultProps)]),
+};
+ValidationMessages.defaultProps = {
+  messages: undefined,
+};
+
+
 const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
   // Icon with custom tooltip content
-
-  const tooltipContent = <TooltipContent content={messages} size={16} kind="error" />;
+  const tooltipContent = (
+    <TooltipContent>
+      <ValidationMessages messages={messages} />
+    </TooltipContent>
+  );
   return (
     <Tooltip
       position="right"
@@ -97,9 +141,9 @@ const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
   );
 };
 
+
 const Validation = ({ active, className, messages }) => {
   // Validation Icon with custom tooltip
-
   const invalidIconClassName = utils.composeClassNames([
     'mb-input__inner-icon',
     'mb-input__inner-icon--invalid',

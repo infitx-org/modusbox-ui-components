@@ -29,27 +29,3 @@
 .tooltip-content__message-box {
   flex: 1 1 auto;
 }
-.tooltip-content__messages {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.tooltip-content__message {
-  display: flex;
-  align-items: center;
-  white-space: normal;
-  word-break: break-all;
-  font-size: 12px;
-  color: $color__dark-gray-1;
-  fill: $color__main-danger;
-}
-.tooltip-content__message--active {
-  text-decoration: line-through;
-  color: $color__gray-5;
-  fill: $color__main-success;
-}
-.tooltip-content__message-icon {
-}
-.tooltip-content__message-text {
-  margin-left: 3px;
-}
