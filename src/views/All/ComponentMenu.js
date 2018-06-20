@@ -51,14 +51,10 @@ const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
 const Menu2 = ({ pathname, onChange, disabled, hidden }) => (
   <Menu onChange={onChange}>
     <MenuItem label="1" hidden={hidden} />
-    <MenuItem label="2" disabled={disabled} />
-    <MenuItem label="3" disabled={disabled} />
-    <MenuItem label="4" disabled={disabled} />
-    <MenuItem label="5" disabled={disabled} />
-    <MenuItem label="6" disabled={disabled} active />
-    <MenuItem label="7" disabled={disabled} />
-    <MenuItem label="8" disabled={disabled} />
-    <MenuItem label="9" disabled={disabled} />
+    <MenuItem label="2" />
+    <MenuItem label="3" hidden={hidden} active />
+    <MenuItem label="4" />
+    <MenuItem label="5" hidden={hidden} />
   </Menu>
 );
 

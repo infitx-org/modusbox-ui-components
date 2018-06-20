@@ -28,6 +28,11 @@ const bindActiveProp = pathname => (element) => {
   }
   return element;
 };
+const bindKey = (element, index) =>
+  React.cloneElement(element, {
+    ...element.props,
+    key: index.toString(),
+  });
 
 const bindDisabledProp = disabled => element =>
   React.cloneElement(element, {
@@ -39,6 +44,28 @@ const bindDisabledProp = disabled => element =>
 const isMenuSection = element => element.type === MenuSection;
 const isMenuItem = element => element.type === MenuItem;
 /* eslint-enable */
+
+const groupItemsInSections = (items) => {
+  const grouped = [];
+  let currGroup = [];
+  const addCurrGroupToArray = () => {
+    if (currGroup.length) {
+      grouped.push(<MenuItemsGroup>{currGroup}</MenuItemsGroup>);
+      currGroup = [];
+    }
+  };
+  for (let i = 0; i < items.length; i += 1) {
+    const node = items[i];
+    if (isMenuSection(node) || node.props.back) {
+      addCurrGroupToArray();
+      grouped.push(node);
+    } else {
+      currGroup.push(node);
+    }
+  }
+  addCurrGroupToArray();
+  return grouped.map(bindKey);
+};
 
 class MenuItem extends PureComponent {
   constructor(props) {
@@ -60,14 +87,14 @@ class MenuItem extends PureComponent {
     let BackIcon = null;
     if (back) {
       BackIcon = (
-        <Icon className="element-menu__item__back-icon" name="arrow" size={12} fill="#999" />
+        <Icon className="element-menu__item__back-icon" name="arrow" size={10} fill="#999" />
       );
     }
     const classNames = utils.composeClassNames([
       'element-menu__item',
       active && 'element-menu__item--active',
       disabled && 'element-menu__item--disabled',
-      back && 'element-menu__item--with-icon',
+      back && 'element-menu__item--back',
     ]);
 
     return (
@@ -113,7 +140,9 @@ const MenuSection = ({
   return (
     <div className="element-menu__section">
       {menuSectionLabel}
-      {menuItems}
+      <div className="element-menu__section-items">
+        {menuItems}
+      </div>
     </div>
   );
 };
@@ -124,6 +153,10 @@ MenuSection.defaultProps = {
 MenuSection.propTypes = {
   label: PropTypes.string,
 };
+
+const MenuItemsGroup = ({ children }) => (
+  <div className="element-menu__section-items">{children}</div>
+);
 
 class Menu extends PureComponent {
   static flattenMenuSections(items) {
@@ -186,11 +219,12 @@ class Menu extends PureComponent {
     let menuComponents = null;
     const activeRoot = this.getActiveRoot(this);
     if (activeRoot !== null) {
-      menuComponents = React.Children.toArray(activeRoot.props.children)
+      menuComponents = React.Children.toArray(activeRoot.props.children);
+      menuComponents = groupItemsInSections(menuComponents
         .filter(element => isMenuItem(element) || isMenuSection(element))
         .map(bindOnClickProp(onChange))
         .map(bindPathnameProp(pathname))
-        .map(bindActiveProp(pathname));
+        .map(bindActiveProp(pathname)));
     }
     return <div className="mb-element element-menu">{menuComponents}</div>;
   }
