@@ -39,7 +39,6 @@ it('renders the spinner centered to the parent container', () => {
 });
 
 // Snapshot
-
 it('renders the button correctly when multiple props are set', () => {
   const wrapper = shallow(<Spinner color="#ff0" size={30} />);
   expect(shallowToJson(wrapper)).toMatchSnapshot();

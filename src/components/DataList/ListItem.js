@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import ReactResizeDetector from 'react-resize-detector';
 
-
 import Link from './Link';
 import { ArrowCell, CheckboxCell, ListItemCell } from './Cells';
 

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the menu correctly when multiple props are set 1`] = `
+<Menu
+  onChange={[MockFunction]}
+  path="/"
+  pathname="/foo"
+>
+  <div
+    className="mb-element element-menu"
+  >
+    <MenuItemsGroup
+      key="0"
+    >
+      <div
+        className="element-menu__section-items"
+      >
+        <MenuItem
+          back={false}
+          disabled={false}
+          hidden={false}
+          key=".0"
+          label="nested"
+          onClick={[MockFunction]}
+          path="/foo/nested"
+          pathname="/foo"
+        >
+          <div
+            className="element-menu__item"
+            onClick={[Function]}
+            role="presentation"
+          >
+            nested
+          </div>
+        </MenuItem>
+      </div>
+    </MenuItemsGroup>
+  </div>
+</Menu>
+`;

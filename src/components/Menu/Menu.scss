@@ -1,0 +1,64 @@
+@import '../../assets/styles/vars/colors.scss';
+
+.element-menu {
+  overflow: hidden;
+  background: $color__main-disabled;
+}
+.element-menu__section {
+}
+.element-menu__section-label {
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 10px;
+  background: $color__white;
+  margin-top: 1px;
+}
+.element-menu__section-items{
+  margin-top: 1px;
+  margin-bottom: 1px;
+  background: $color__gray-1;
+}
+
+.element-menu__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 16px;
+  height: 30px;
+  cursor: pointer;
+  line-height: 30px;
+  border-left: 4px solid transparent;
+  transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;
+  font-size: 12px;
+
+  &:hover:not(.element-menu__item--active) {
+    color: $color__main-primary;
+  }
+}
+
+.element-menu__item--active {
+  background: #F2F1F1;
+  font-weight: bold;
+  color: #333;
+}
+.element-menu__item--disabled {
+  color: #999;
+  fill: #ccc;
+  border-color: transparent;
+}
+.element-menu__item--back {
+  padding-left: 0px;
+  height: 40px;
+  background: $color__white;
+  margin-top: 1px;
+}
+
+.element-menu__item__back-icon {
+  transform: rotateZ(180deg);  
+  margin-left: 3px;
+  margin-right: 3px;
+}

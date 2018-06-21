@@ -912,7 +912,7 @@ class DataList extends React.Component {
           onMouseMove={this.handleResizeColumnWidth}
           onClick={this.handleStopResizeColumnWidth}
         >
-          {/* Resize detector */}          
+          {/* Resize detector */}
           <ReactResizeDetector handleWidth onResize={this.resizeList} />
 
           {/* Loading data */}

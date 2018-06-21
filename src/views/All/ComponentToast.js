@@ -48,36 +48,21 @@ const TestToast = () => {
   const buttonStyle = { margin: '5px' };
   return (
     <Row align="left">
-      <Button
-        style={buttonStyle}
-        label="Info Toast"
-        kind="primary"
-        onClick={showInfoToast}
-      />
+      <Button style={buttonStyle} label="Info Toast" kind="primary" onClick={showInfoToast} />
       <Button
         style={buttonStyle}
         label="Closeable Info Toast"
         kind="secondary"
         onClick={showCloseableInfoToast}
       />
-      <Button
-        style={buttonStyle}
-        label="Error Toast"
-        kind="danger"
-        onClick={showErrorToast}
-      />
+      <Button style={buttonStyle} label="Error Toast" kind="danger" onClick={showErrorToast} />
       <Button
         style={buttonStyle}
         label="Success Toast"
         kind="secondary"
         onClick={showSuccessToast}
       />
-      <Button
-        style={buttonStyle}
-        label="Custom Toast"
-        kind="warning"
-        onClick={showCustomToast}
-      />
+      <Button style={buttonStyle} label="Custom Toast" kind="warning" onClick={showCustomToast} />
     </Row>
   );
 };
