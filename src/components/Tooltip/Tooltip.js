@@ -220,6 +220,7 @@ Tooltip.propTypes = {
   label: PropTypes.string,
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
   kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning']),
+  custom: PropTypes.bool,
 };
 Tooltip.defaultProps = {
   forceVisibility: false,
@@ -229,6 +230,7 @@ Tooltip.defaultProps = {
   label: undefined,
   position: 'top',
   kind: 'regular',
+  custom: false,
 };
 
 export default Tooltip;
