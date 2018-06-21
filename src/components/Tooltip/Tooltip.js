@@ -82,10 +82,10 @@ class Tooltip extends PureComponent {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceVisibility === true) {
-      this.showTooltip(true);
+      this.delayShowTooltip();
     }
     if (nextProps.forceVisibility === false) {
-      this.hideTooltip();
+      this.delayHideTooltip();
     }
   }
   componentWillUnmount() {

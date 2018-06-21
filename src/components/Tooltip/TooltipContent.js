@@ -23,7 +23,7 @@ TooltipIcon.defaultProps = {
 };
 
 const TooltipContent = ({
-  icon, size, content, position, style = {}, children,
+  icon, size, position, style = {}, children,
 }) => (
   <div className={`tooltip-content__box tooltip-content__box--${position}`} style={style}>
     <TooltipIcon icon={icon} size={size} />
@@ -34,14 +34,12 @@ const TooltipContent = ({
 TooltipContent.propTypes = {
   icon: PropTypes.string,
   size: PropTypes.number,
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   position: PropTypes.string,
   style: PropTypes.shape(),
 };
 TooltipContent.defaultProps = {
   icon: undefined,
   size: undefined,
-  content: undefined,
   position: 'right',
   style: undefined,
 };

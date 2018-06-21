@@ -115,12 +115,15 @@ const ValidationMessages = ({ messages }) => {
 };
 
 ValidationMessages.propTypes = {
-  messages: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(ValidationMessage.defaultProps)]),
+  messages: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(ValidationMessage.defaultProps),
+  ]),
 };
+
 ValidationMessages.defaultProps = {
   messages: undefined,
 };
-
 
 const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
   // Icon with custom tooltip content
@@ -140,7 +143,6 @@ const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
     </Tooltip>
   );
 };
-
 
 const Validation = ({ active, className, messages }) => {
   // Validation Icon with custom tooltip
