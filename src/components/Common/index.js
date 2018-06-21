@@ -7,7 +7,7 @@ import Icon from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
 
-import './Validation.scss';
+import './Common.scss';
 
 const Loader = () => (
   <div className="mb-input__inner-icon mb-loader">
