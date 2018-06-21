@@ -7,8 +7,6 @@ import Icon from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
 
-import './Common.scss';
-
 const Loader = () => (
   <div className="mb-input__inner-icon mb-loader">
     <Spinner size={16} />
