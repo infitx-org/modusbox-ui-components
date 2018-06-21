@@ -117,10 +117,10 @@ class Tooltip extends PureComponent {
       content, label, position, children, kind, custom,
     } = this.props;
     const { scrollWidth, offsetWidth } = this.box;
-    const widthScroll = scrollWidth > offsetWidth;
-    const labelDefined = label !== undefined;
-    const contentDefined = content !== undefined;
-    const shouldShowTooltip = widthScroll || labelDefined || contentDefined;
+    const hasChildrenOverflow = scrollWidth > offsetWidth;
+    const isLabelDefined = label !== undefined;
+    const isContentDefined = content !== undefined;
+    const shouldShowTooltip = hasChildrenOverflow || isLabelDefined || isContentDefined;
 
     if (!shouldShowTooltip) {
       return;
