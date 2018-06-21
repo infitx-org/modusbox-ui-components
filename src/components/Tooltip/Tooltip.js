@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
-import TooltipContent from './TooltipContent';
-
 const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
 
 class Tooltip extends PureComponent {
@@ -116,7 +114,7 @@ class Tooltip extends PureComponent {
     }
 
     const {
-      content, label, position, children, kind,
+      content, label, position, children, kind, custom,
     } = this.props;
     const { scrollWidth, offsetWidth } = this.box;
     const widthScroll = scrollWidth > offsetWidth;
@@ -129,11 +127,10 @@ class Tooltip extends PureComponent {
     }
 
     let tooltipInnerComponent = <span>{children}</span>;
-    let defaultAppearance = true;
 
     if (content) {
-      // We need to provide the TooltipContent with the position it will be render
-      if (content.type === TooltipContent) {
+      // We need to provide the content with the position it will be render
+      if (custom) {
         tooltipInnerComponent = React.cloneElement(content, {
           ...content.props,
           position,
@@ -141,14 +138,13 @@ class Tooltip extends PureComponent {
       } else {
         tooltipInnerComponent = content;
       }
-      defaultAppearance = false;
     } else if (label) {
       tooltipInnerComponent = <span>{label}</span>;
     }
 
     this._div = document.createElement('div');
     this._div.className = 'element-tooltip__viewer';
-    if (defaultAppearance === true) {
+    if (custom !== true) {
       this._div.className += ' element-tooltip__viewer--default';
     }
     this._box = document.createElement('div');
@@ -166,12 +162,16 @@ class Tooltip extends PureComponent {
     this._location.style.top = top;
     this._location.style.left = left;
 
-    this._box.className = utils.composeClassNames(['element-tooltip__box']);
+    this._box.className = utils.composeClassNames([
+      'element-tooltip__box',
+      custom && 'element-tooltip__box--custom',
+    ]);
 
     this._div.className = utils.composeClassNames([
       'element-tooltip__viewer',
       'element-tooltip__viewer--fade-in',
-      defaultAppearance && 'element-tooltip__viewer--default',
+      (custom !== true) && 'element-tooltip__viewer--default',
+      (custom !== true) && `element-tooltip__viewer--${kind}`,
       `element-tooltip__viewer--fade-in-${direction}`,
     ]);
 
@@ -219,6 +219,7 @@ Tooltip.propTypes = {
   style: PropTypes.shape(),
   label: PropTypes.string,
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
+  kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning']),
 };
 Tooltip.defaultProps = {
   forceVisibility: false,
@@ -227,6 +228,7 @@ Tooltip.defaultProps = {
   style: {},
   label: undefined,
   position: 'top',
+  kind: 'regular',
 };
 
 export default Tooltip;

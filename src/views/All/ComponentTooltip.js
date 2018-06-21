@@ -3,7 +3,7 @@ import React from 'react';
 import Icon from '../../components/Icon';
 import Row from '../../components/Row';
 import Column from '../../components/Column';
-import Tooltip, { TooltipContent } from '../../components/Tooltip';
+import Tooltip from '../../components/Tooltip';
 
 const style = { width: '100px' };
 const TestButton = () => (
@@ -27,38 +27,34 @@ const TestButton = () => (
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
-      <Tooltip style={style}>
+      <Tooltip style={style} kind="warning">
         <Row>
-          <Icon name="close-small" size={16} /> Very loooooooooooooong content...
+          <Icon name="close-small" size={16} /> Very yellow loooooooooooooong content...
         </Row>
       </Tooltip>
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Tooltip style={style} position="left">
-        {' '}
-        LEFT POSITIONED with a super long content{' '}
+        LEFT POSITIONED with a super long content
       </Tooltip>
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Tooltip style={style} position="right">
-        {' '}
-        RIGHt POSITIONED with a super long content{' '}
+        RIGHt POSITIONED with a super long content
       </Tooltip>
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Tooltip style={style} position="top">
-        {' '}
-        TOP POSITIONED with a super long content{' '}
+        TOP POSITIONED with a super long content
       </Tooltip>
     </Row>
 
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Tooltip style={style} position="bottom">
-        {' '}
-        BOTTOM POSITIONED with a super long content{' '}
+        BOTTOM POSITIONED with a super long content
       </Tooltip>
     </Row>
 
@@ -66,10 +62,11 @@ const TestButton = () => (
       <Tooltip
         style={style}
         position="bottom"
+        custom
         content={
-          <TooltipContent>
-            <Icon name="deploy-small" size={22} /> This is amazing!
-          </TooltipContent>
+          <span>
+            <Icon name="deploy-small" size={22} fill="#fff" /> This is amazing!
+          </span>
         }
       >
         Test the content!

@@ -5,7 +5,7 @@ import * as utils from '../../utils/common';
 import Button from '../Button';
 import Icon from '../Icon';
 import Spinner from '../Spinner';
-import Tooltip, { TooltipContent } from '../Tooltip';
+import Tooltip from '../Tooltip';
 
 import './Validation.scss';
 
@@ -125,25 +125,17 @@ ValidationMessages.defaultProps = {
   messages: undefined,
 };
 
-const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
-  // Icon with custom tooltip content
-  const tooltipContent = (
-    <TooltipContent>
-      <ValidationMessages messages={messages} />
-    </TooltipContent>
-  );
-  return (
-    <Tooltip
-      position="right"
-      kind="error"
-      content={tooltipContent}
-      forceVisibility={forceTooltipVisibility}
-    >
-      <Icon size={16} name="warning-sign" />
-    </Tooltip>
-  );
-};
-
+const InvalidIcon = ({ messages, forceTooltipVisibility }) => (
+  <Tooltip
+    position="right"
+    kind="error"
+    custom
+    content={<ValidationMessages messages={messages} />}
+    forceVisibility={forceTooltipVisibility}
+  >
+    <Icon size={16} name="warning-sign" />
+  </Tooltip>
+);
 const Validation = ({ active, className, messages }) => {
   // Validation Icon with custom tooltip
   const invalidIconClassName = utils.composeClassNames([
