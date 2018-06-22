@@ -87,6 +87,7 @@
 
 .element-tooltip__handle {
   position: absolute;
+  z-index: 10000000;
   width: 10px;
   height: 10px;
   line-height: 30px;

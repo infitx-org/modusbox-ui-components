@@ -64,7 +64,14 @@ class TooltipViewer extends PureComponent {
   }
   constructor(props) {
     super(props);
-    this._location = document.body.appendChild(document.createElement('div'));
+    this._viewer = document.createElement('div');
+    this._viewer.className = utils.composeClassNames([
+      'element-tooltip__viewer',
+      'element-tooltip__viewer--fade-in',
+      (this.props.custom !== true) && 'element-tooltip__viewer--default',
+      (this.props.custom !== true) && `element-tooltip__viewer--${this.props.kind}`,
+    ]);
+    this._location = document.body.appendChild(this._viewer);
     this.state = {
       direction: undefined,
     };
@@ -102,13 +109,7 @@ class TooltipViewer extends PureComponent {
       tooltipInnerComponent = <span>{label}</span>;
     }
 
-    const viewerClassName = utils.composeClassNames([
-      'element-tooltip__viewer',
-      'element-tooltip__viewer--fade-in',
-      (custom !== true) && 'element-tooltip__viewer--default',
-      (custom !== true) && `element-tooltip__viewer--${kind}`,
-      direction && `element-tooltip__viewer--fade-in-${direction}`,
-    ]);
+
     const childClassName = utils.composeClassNames([
       'element-tooltip__child',
       custom && 'element-tooltip__child--custom',
@@ -120,7 +121,7 @@ class TooltipViewer extends PureComponent {
     ]);
 
     const rendering = (
-      <div className={viewerClassName}>
+      <div>
         <div className={handleClassName} />
         <div className={childClassName}>{tooltipInnerComponent}</div>
       </div>
