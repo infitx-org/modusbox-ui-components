@@ -11,16 +11,17 @@
 .element-tooltip__content {
 }
 
-.element-tooltip__box {
+.element-tooltip__child {
   position: relative;
   border-radius: 3px;
   word-wrap: normal;
   word-break: break-all;
+  overflow: hidden;
 }
 
-.element-tooltip__box--custom {  
+.element-tooltip__child--custom {  
+  overflow: visible;
   background: $color__gray-1;
-  box-shadow: 0px 1px 2px $color__alpha-4;
   color: #333;
   border-radius: 2px;  
 }
@@ -32,7 +33,7 @@
   white-space: nowrap;
   opacity: 0;
   transition: transform 0.2s ease-in-out;
-  max-width: 80%;  
+  max-width: calc(100% - 20px);  
 }
 
 .element-tooltip__viewer--default {

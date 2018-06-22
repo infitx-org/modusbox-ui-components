@@ -80,10 +80,10 @@ class Tooltip extends PureComponent {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceVisibility === true) {
-      this.delayShowTooltip();
+      this.delayShowTooltip(1);
     }
     if (nextProps.forceVisibility === false) {
-      this.delayHideTooltip();
+      this.delayHideTooltip(1);
     }
   }
   componentWillUnmount() {
@@ -92,15 +92,18 @@ class Tooltip extends PureComponent {
     this.box.removeEventListener('mouseenter', this.delayShowTooltip);
     this.box.removeEventListener('mouseleave', this.delayHideTooltip);
   }
-  delayShowTooltip() {
+  delayShowTooltip(delay) {
+    const customDelay = typeof delay === 'number' ? delay : null;
     this._isHoveringTooltip = true;
     clearTimeout(this.tooltipTimeout);
-    this.tooltipTimeout = setTimeout(this.showTooltip, 200);
+    this.tooltipTimeout = setTimeout(this.showTooltip, customDelay || this.props.delay);
   }
-  delayHideTooltip() {
-    this._isHoveringTooltip = false;
-    clearTimeout(this.tooltipTimeout);
-    this.tooltipTimeout = setTimeout(this.hideTooltip, 200);
+  delayHideTooltip(delay) {
+    if (this.props.forceVisibility === false) {
+      this._isHoveringTooltip = false;
+      clearTimeout(this.tooltipTimeout);
+      this.tooltipTimeout = setTimeout(this.hideTooltip, delay || 200);
+    }
   }
   showTooltip(force) {
     if (this._isHoveringTooltip === false && force === false) {
@@ -142,17 +145,29 @@ class Tooltip extends PureComponent {
       tooltipInnerComponent = <span>{label}</span>;
     }
 
-    this._div = document.createElement('div');
-    this._div.className = 'element-tooltip__viewer';
-    if (custom !== true) {
-      this._div.className += ' element-tooltip__viewer--default';
-    }
-    this._box = document.createElement('div');
-    this._handle = document.createElement('div');
+    this._viewer = document.createElement('div');
+    this._viewer.className = utils.composeClassNames([
+      'element-tooltip__viewer',
+      'element-tooltip__viewer--fade-in',
+      (custom !== true) && 'element-tooltip__viewer--default',
+      (custom !== true) && `element-tooltip__viewer--${kind}`,
+    ]);
 
-    this._div.appendChild(this._handle);
-    this._target = this._div.appendChild(this._box);
-    this._location = document.body.appendChild(this._div);
+    this._child = document.createElement('div');
+    this._child.className = utils.composeClassNames([
+      'element-tooltip__child',
+      custom && 'element-tooltip__child--custom',
+    ]);
+
+    this._handle = document.createElement('div');
+    this._handle.className = utils.composeClassNames([
+      'element-tooltip__handle',
+      `element-tooltip__handle--${kind}`,
+    ]);
+
+    this._viewer.appendChild(this._handle);
+    this._target = this._viewer.appendChild(this._child);
+    this._location = document.body.appendChild(this._viewer);
 
     this._component = renderSubtreeIntoContainer(this, tooltipInnerComponent, this._target);
 
@@ -162,24 +177,9 @@ class Tooltip extends PureComponent {
     this._location.style.top = top;
     this._location.style.left = left;
 
-    this._box.className = utils.composeClassNames([
-      'element-tooltip__box',
-      custom && 'element-tooltip__box--custom',
-    ]);
-
-    this._div.className = utils.composeClassNames([
-      'element-tooltip__viewer',
-      'element-tooltip__viewer--fade-in',
-      (custom !== true) && 'element-tooltip__viewer--default',
-      (custom !== true) && `element-tooltip__viewer--${kind}`,
-      `element-tooltip__viewer--fade-in-${direction}`,
-    ]);
-
-    this._handle.className = utils.composeClassNames([
-      'element-tooltip__handle',
-      `element-tooltip__handle--${direction}`,
-      `element-tooltip__handle--${kind}`,
-    ]);
+    // Apply direction classNames
+    this._viewer.className += ` element-tooltip__viewer--fade-in-${direction}`;
+    this._handle.className += ` element-tooltip__handle--${direction}`;
 
     this._hasMountedTooltip = true;
   }
@@ -213,6 +213,7 @@ class Tooltip extends PureComponent {
 }
 
 Tooltip.propTypes = {
+  delay: PropTypes.number,
   forceVisibility: PropTypes.bool,
   content: PropTypes.node,
   children: PropTypes.node,
@@ -223,6 +224,7 @@ Tooltip.propTypes = {
   custom: PropTypes.bool,
 };
 Tooltip.defaultProps = {
+  delay: 200,
   forceVisibility: false,
   content: undefined,
   children: null,
