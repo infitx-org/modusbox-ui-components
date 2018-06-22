@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
-const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
-
-class Tooltip extends PureComponent {
+class TooltipViewer extends PureComponent {
   static getPosition(box, target, position) {
     let coordinates = {};
     const { innerWidth, innerHeight } = window;
     const boxRect = box.getBoundingClientRect();
     const tooltipRect = target.getBoundingClientRect();
+    console.log(boxRect, tooltipRect);
 
     const leftCenteredByY = boxRect.left + (boxRect.width - tooltipRect.width) / 2;
     const topCenteredByX = boxRect.top + (boxRect.height - tooltipRect.height) / 2;
@@ -65,18 +64,84 @@ class Tooltip extends PureComponent {
   }
   constructor(props) {
     super(props);
+    this._location = document.body.appendChild(document.createElement('div'));
+    this.state = {
+      direction: undefined,
+    };
+  }
+  componentDidMount() {
+    const { box, position } = this.props;
+    const { top, left, direction } = TooltipViewer.getPosition(box, this._location, position);
+    console.log(top, left);
+
+    // Apply final updates to the tooltip itself
+    this._location.style.top = top;
+    this._location.style.left = left;
+
+    this.setState({ direction });
+  }
+  componentWillUnmount() {
+    document.body.removeChild(this._location);
+  }
+  // This doesn't actually return anything to render
+  render() {
+    const { direction } = this.state;
+    const {
+      content, label, position, children, kind, custom,
+    } = this.props;
+    let tooltipInnerComponent = <span>{children}</span>;
+
+    if (content) {
+      // We need to provide the content with the position it will be render
+      if (custom) {
+        tooltipInnerComponent = React.cloneElement(content, { ...content.props, position });
+      } else {
+        tooltipInnerComponent = content;
+      }
+    } else if (label) {
+      tooltipInnerComponent = <span>{label}</span>;
+    }
+
+    const viewerClassName = utils.composeClassNames([
+      'element-tooltip__viewer',
+      'element-tooltip__viewer--fade-in',
+      (custom !== true) && 'element-tooltip__viewer--default',
+      (custom !== true) && `element-tooltip__viewer--${kind}`,
+      direction && `element-tooltip__viewer--fade-in-${direction}`,
+    ]);
+    const childClassName = utils.composeClassNames([
+      'element-tooltip__child',
+      custom && 'element-tooltip__child--custom',
+    ]);
+    const handleClassName = utils.composeClassNames([
+      'element-tooltip__handle',
+      `element-tooltip__handle--${kind}`,
+      direction && `element-tooltip__handle--${direction}`,
+    ]);
+
+    const rendering = (
+      <div className={viewerClassName}>
+        <div className={handleClassName} />
+        <div className={childClassName}>{tooltipInnerComponent}</div>
+      </div>
+    );
+    return ReactDOM.createPortal(rendering, this._location);
+  }
+}
+
+
+class Tooltip extends PureComponent {
+  constructor(props) {
+    super(props);
     this.showTooltip = this.showTooltip.bind(this);
     this.hideTooltip = this.hideTooltip.bind(this);
     this.delayShowTooltip = this.delayShowTooltip.bind(this);
     this.delayHideTooltip = this.delayHideTooltip.bind(this);
+    this.state = { show: this.props.forceVisibility };
   }
   componentDidMount() {
     this.box.addEventListener('mouseenter', this.delayShowTooltip);
     this.box.addEventListener('mouseleave', this.delayHideTooltip);
-    this._mounted = true;
-    if (this.props.forceVisibility === true) {
-      this.delayShowTooltip();
-    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceVisibility === true) {
@@ -87,7 +152,6 @@ class Tooltip extends PureComponent {
     }
   }
   componentWillUnmount() {
-    this._mounted = false;
     this.hideTooltip(true);
     this.box.removeEventListener('mouseenter', this.delayShowTooltip);
     this.box.removeEventListener('mouseleave', this.delayHideTooltip);
@@ -117,7 +181,7 @@ class Tooltip extends PureComponent {
     }
 
     const {
-      content, label, position, children, kind, custom,
+      content, label,
     } = this.props;
     const { scrollWidth, offsetWidth } = this.box;
     const hasChildrenOverflow = scrollWidth > offsetWidth;
@@ -128,76 +192,24 @@ class Tooltip extends PureComponent {
     if (!shouldShowTooltip) {
       return;
     }
-
-    let tooltipInnerComponent = <span>{children}</span>;
-
-    if (content) {
-      // We need to provide the content with the position it will be render
-      if (custom) {
-        tooltipInnerComponent = React.cloneElement(content, {
-          ...content.props,
-          position,
-        });
-      } else {
-        tooltipInnerComponent = content;
-      }
-    } else if (label) {
-      tooltipInnerComponent = <span>{label}</span>;
-    }
-
-    this._viewer = document.createElement('div');
-    this._viewer.className = utils.composeClassNames([
-      'element-tooltip__viewer',
-      'element-tooltip__viewer--fade-in',
-      (custom !== true) && 'element-tooltip__viewer--default',
-      (custom !== true) && `element-tooltip__viewer--${kind}`,
-    ]);
-
-    this._child = document.createElement('div');
-    this._child.className = utils.composeClassNames([
-      'element-tooltip__child',
-      custom && 'element-tooltip__child--custom',
-    ]);
-
-    this._handle = document.createElement('div');
-    this._handle.className = utils.composeClassNames([
-      'element-tooltip__handle',
-      `element-tooltip__handle--${kind}`,
-    ]);
-
-    this._viewer.appendChild(this._handle);
-    this._target = this._viewer.appendChild(this._child);
-    this._location = document.body.appendChild(this._viewer);
-
-    this._component = renderSubtreeIntoContainer(this, tooltipInnerComponent, this._target);
-
-    const { top, left, direction } = Tooltip.getPosition(this.box, this._location, position);
-
-    // Apply final updates to the tooltip itself
-    this._location.style.top = top;
-    this._location.style.left = left;
-
-    // Apply direction classNames
-    this._viewer.className += ` element-tooltip__viewer--fade-in-${direction}`;
-    this._handle.className += ` element-tooltip__handle--${direction}`;
-
-    this._hasMountedTooltip = true;
+    this.setState({ show: true });
   }
   hideTooltip(force = false) {
     if (this._isHoveringTooltip === true && force === false) {
       return;
     }
-    if (this._hasMountedTooltip) {
-      ReactDOM.unmountComponentAtNode(this._target);
-      document.body.removeChild(this._location);
-      this._target = null;
-      this._component = null;
-      this._hasMountedTooltip = false;
-    }
+    this.setState({ show: false });
   }
 
   render() {
-    const { style, children } = this.props;
+    const {
+      style, children, content, label, position, kind, custom,
+    } = this.props;
+
+    const viewerProps = {
+      content, label, position, children, kind, custom,
+    };
+
     return (
       <div
         className="element-tooltip"
@@ -207,6 +219,7 @@ class Tooltip extends PureComponent {
         }}
       >
         {children}
+        {this.state.show && <TooltipViewer box={this.box} {...viewerProps} /> }
       </div>
     );
   }
