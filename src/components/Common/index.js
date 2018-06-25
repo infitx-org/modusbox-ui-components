@@ -99,9 +99,8 @@ ValidationMessage.defaultProps = {
 
 const ValidationMessages = ({ messages }) => {
   let validationMessageList = null;
-  const messageList = !Array.isArray(messages) ? [messages] : messages;
-  if (messageList.length) {
-    validationMessageList = messageList.map((message, i) => (
+  if (messages.length) {
+    validationMessageList = messages.map((message, i) => (
       <ValidationMessage
         key={i.toString()}
         text={message.text}
@@ -114,13 +113,12 @@ const ValidationMessages = ({ messages }) => {
 
 ValidationMessages.propTypes = {
   messages: PropTypes.oneOfType([
-    PropTypes.string,
     PropTypes.arrayOf(ValidationMessage.defaultProps),
   ]),
 };
 
 ValidationMessages.defaultProps = {
-  messages: undefined,
+  messages: [],
 };
 
 const InvalidIcon = ({ messages, forceTooltipVisibility }) => (
