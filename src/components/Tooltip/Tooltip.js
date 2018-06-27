@@ -83,6 +83,7 @@ class TooltipViewer extends PureComponent {
     this._location.style.top = top;
     this._location.style.left = left;
 
+    // eslint-disable-next-line
     this.setState({ direction });
   }
   componentWillUnmount() {
