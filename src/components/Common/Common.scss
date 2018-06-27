@@ -1,0 +1,26 @@
+@import '../../assets/styles/vars/colors.scss';
+.validation__messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  box-shadow: 0px 1px 2px $color__alpha-2;
+}
+.validation__message {
+  display: flex;
+  align-items: center;
+  white-space: normal;
+  word-break: break-all;
+  font-size: 12px;
+  color: $color__dark-gray-1;
+  fill: $color__main-danger;
+}
+.validation__message--active {
+  text-decoration: line-through;
+  color: $color__gray-5;
+  fill: $color__main-success;
+}
+.validation__message-icon {
+}
+.validation__message-text {
+  margin-left: 3px;
+}

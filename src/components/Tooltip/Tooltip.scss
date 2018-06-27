@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars/colors.scss';
+
 .element-tooltip {
   position: relative;
   max-width: 100%;
@@ -9,11 +11,19 @@
 .element-tooltip__content {
 }
 
-.element-tooltip__box {
+.element-tooltip__child {
   position: relative;
   border-radius: 3px;
   word-wrap: normal;
   word-break: break-all;
+  overflow: hidden;
+}
+
+.element-tooltip__child--custom {
+  overflow: visible;
+  background: $color__gray-1;
+  color: #333;
+  border-radius: 2px;
 }
 
 .element-tooltip__viewer {
@@ -22,17 +32,36 @@
   z-index: 1000000;
   white-space: nowrap;
   opacity: 0;
-  transition: all 0.2s ease-in-out;
-  max-width: 80%;
+  transition: transform 0.2s ease-in-out;
+  max-width: calc(100% - 20px);
 }
+
 .element-tooltip__viewer--default {
-  background: #000;
-  color: #fff;
-  fill: #fff;
   padding: 8px;
   border-radius: 4px;
   font-size: 12px;
   line-height: 12px;
+}
+.element-tooltip__viewer--regular {
+  background: #000;
+  color: #fff;
+  fill: #fff;
+}
+
+.element-tooltip__viewer--error {
+  color: #fff;
+  fill: #fff;
+  background: $color__main-danger;
+}
+.element-tooltip__viewer--info {
+  color: #fff;
+  fill: #fff;
+  background: #39f;
+}
+.element-tooltip__viewer--warning {
+  color: #fff;
+  fill: #fff;
+  background: $color__main-warning;
 }
 
 .element-tooltip__viewer--fade-in-top {

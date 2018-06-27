@@ -313,10 +313,8 @@ TextField.propTypes = {
   pending: PropTypes.bool,
   required: PropTypes.bool,
   invalid: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({ active: PropTypes.bool, text: PropTypes.string }),
-  ])),
+  invalidMessages: PropTypes.arrayOf(PropTypes
+    .shape({ active: PropTypes.bool, text: PropTypes.string })),
   disabled: PropTypes.bool,
 };
 

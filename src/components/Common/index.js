@@ -5,7 +5,7 @@ import * as utils from '../../utils/common';
 import Button from '../Button';
 import Icon from '../Icon';
 import Spinner from '../Spinner';
-import Tooltip, { TooltipContent } from '../Tooltip';
+import Tooltip from '../Tooltip';
 
 const Loader = () => (
   <div className="mb-input__inner-icon mb-loader">
@@ -81,25 +81,59 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
-const InvalidIcon = ({ messages, forceTooltipVisibility }) => {
-  // Icon with custom tooltip content
+const ValidationMessage = ({ text, active }) => (
+  <li className={`validation__message ${active ? 'validation__message--active' : ''}`}>
+    <Icon name={active ? 'check-small' : 'close-small'} size={12} />
+    <span className="validation__message-text">{text}</span>
+  </li>
+);
 
-  const tooltipContent = <TooltipContent content={messages} size={16} kind="error" />;
-  return (
-    <Tooltip
-      position="right"
-      kind="error"
-      content={tooltipContent}
-      forceVisibility={forceTooltipVisibility}
-    >
-      <Icon size={16} name="warning-sign" />
-    </Tooltip>
-  );
+ValidationMessage.propTypes = {
+  text: PropTypes.string,
+  active: PropTypes.bool,
+};
+ValidationMessage.defaultProps = {
+  text: undefined,
+  active: false,
 };
 
+const ValidationMessages = ({ messages }) => {
+  let validationMessageList = null;
+  if (messages.length) {
+    validationMessageList = messages.map((message, i) => (
+      <ValidationMessage
+        key={i.toString()}
+        text={message.text}
+        active={message.active}
+      />
+    ));
+  }
+  return <ul className="validation__messages">{validationMessageList}</ul>;
+};
+
+ValidationMessages.propTypes = {
+  messages: PropTypes.oneOfType([
+    PropTypes.arrayOf(ValidationMessage.defaultProps),
+  ]),
+};
+
+ValidationMessages.defaultProps = {
+  messages: [],
+};
+
+const InvalidIcon = ({ messages, forceTooltipVisibility }) => (
+  <Tooltip
+    position="right"
+    kind="error"
+    custom
+    content={<ValidationMessages messages={messages} />}
+    forceVisibility={forceTooltipVisibility}
+  >
+    <Icon size={16} name="warning-sign" />
+  </Tooltip>
+);
 const Validation = ({ active, className, messages }) => {
   // Validation Icon with custom tooltip
-
   const invalidIconClassName = utils.composeClassNames([
     'mb-input__inner-icon',
     'mb-input__inner-icon--invalid',
