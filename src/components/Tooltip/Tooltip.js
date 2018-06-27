@@ -92,7 +92,9 @@ class TooltipViewer extends PureComponent {
   // This doesn't actually return anything to render
   render() {
     const { direction } = this.state;
-    const { content, label, position, children, kind, custom } = this.props;
+    const {
+      content, label, position, children, kind, custom,
+    } = this.props;
     let tooltipInnerComponent = <span>{children}</span>;
 
     if (content) {
@@ -197,7 +199,9 @@ class Tooltip extends PureComponent {
   }
 
   render() {
-    const { style, children, content, label, position, kind, custom } = this.props;
+    const {
+      style, children, content, label, position, kind, custom,
+    } = this.props;
 
     const viewerProps = {
       content,
@@ -212,7 +216,7 @@ class Tooltip extends PureComponent {
       <div
         className="element-tooltip"
         style={style}
-        ref={box => {
+        ref={(box) => {
           this.box = box;
         }}
       >
