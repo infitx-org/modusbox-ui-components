@@ -67,8 +67,8 @@ class TooltipViewer extends PureComponent {
     this._viewer.className = utils.composeClassNames([
       'element-tooltip__viewer',
       'element-tooltip__viewer--fade-in',
-      (this.props.custom !== true) && 'element-tooltip__viewer--default',
-      (this.props.custom !== true) && `element-tooltip__viewer--${this.props.kind}`,
+      this.props.custom !== true && 'element-tooltip__viewer--default',
+      this.props.custom !== true && `element-tooltip__viewer--${this.props.kind}`,
     ]);
     this._location = document.body.appendChild(this._viewer);
     this.state = {
@@ -92,9 +92,7 @@ class TooltipViewer extends PureComponent {
   // This doesn't actually return anything to render
   render() {
     const { direction } = this.state;
-    const {
-      content, label, position, children, kind, custom,
-    } = this.props;
+    const { content, label, position, children, kind, custom } = this.props;
     let tooltipInnerComponent = <span>{children}</span>;
 
     if (content) {
@@ -115,7 +113,7 @@ class TooltipViewer extends PureComponent {
     const handleClassName = utils.composeClassNames([
       'element-tooltip__handle',
       `element-tooltip__handle--${kind}`,
-      (!custom) && 'element-tooltip__handle--default',
+      !custom && 'element-tooltip__handle--default',
       direction && `element-tooltip__handle--${direction}`,
     ]);
 
@@ -128,7 +126,6 @@ class TooltipViewer extends PureComponent {
     return ReactDOM.createPortal(rendering, this._location);
   }
 }
-
 
 class Tooltip extends PureComponent {
   constructor(props) {
@@ -180,9 +177,7 @@ class Tooltip extends PureComponent {
       return;
     }
 
-    const {
-      content, label,
-    } = this.props;
+    const { content, label } = this.props;
     const { scrollWidth, offsetWidth } = this.box;
     const hasChildrenOverflow = scrollWidth > offsetWidth;
     const isLabelDefined = label !== undefined;
@@ -202,24 +197,27 @@ class Tooltip extends PureComponent {
   }
 
   render() {
-    const {
-      style, children, content, label, position, kind, custom,
-    } = this.props;
+    const { style, children, content, label, position, kind, custom } = this.props;
 
     const viewerProps = {
-      content, label, position, children, kind, custom,
+      content,
+      label,
+      position,
+      children,
+      kind,
+      custom,
     };
 
     return (
       <div
         className="element-tooltip"
         style={style}
-        ref={(box) => {
+        ref={box => {
           this.box = box;
         }}
       >
         {children}
-        {this.state.show && <TooltipViewer box={this.box} {...viewerProps} /> }
+        {this.state.show && <TooltipViewer box={this.box} {...viewerProps} />}
       </div>
     );
   }

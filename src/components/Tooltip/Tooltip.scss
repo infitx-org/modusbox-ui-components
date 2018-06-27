@@ -19,11 +19,11 @@
   overflow: hidden;
 }
 
-.element-tooltip__child--custom {  
+.element-tooltip__child--custom {
   overflow: visible;
   background: $color__gray-1;
   color: #333;
-  border-radius: 2px;  
+  border-radius: 2px;
 }
 
 .element-tooltip__viewer {
@@ -33,7 +33,7 @@
   white-space: nowrap;
   opacity: 0;
   transition: transform 0.2s ease-in-out;
-  max-width: calc(100% - 20px);  
+  max-width: calc(100% - 20px);
 }
 
 .element-tooltip__viewer--default {
@@ -45,7 +45,7 @@
 .element-tooltip__viewer--regular {
   background: #000;
   color: #fff;
-  fill: #fff;  
+  fill: #fff;
 }
 
 .element-tooltip__viewer--error {
@@ -86,7 +86,7 @@
 }
 
 .element-tooltip__handle {
-  position: absolute; 
+  position: absolute;
   width: 10px;
   height: 10px;
   line-height: 30px;
