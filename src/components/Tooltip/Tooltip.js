@@ -10,7 +10,6 @@ class TooltipViewer extends PureComponent {
     const { innerWidth, innerHeight } = window;
     const boxRect = box.getBoundingClientRect();
     const tooltipRect = target.getBoundingClientRect();
-    console.log(boxRect, tooltipRect);
 
     const leftCenteredByY = boxRect.left + (boxRect.width - tooltipRect.width) / 2;
     const topCenteredByX = boxRect.top + (boxRect.height - tooltipRect.height) / 2;
@@ -79,7 +78,6 @@ class TooltipViewer extends PureComponent {
   componentDidMount() {
     const { box, position } = this.props;
     const { top, left, direction } = TooltipViewer.getPosition(box, this._location, position);
-    console.log(top, left);
 
     // Apply final updates to the tooltip itself
     this._location.style.top = top;
@@ -109,7 +107,6 @@ class TooltipViewer extends PureComponent {
       tooltipInnerComponent = <span>{label}</span>;
     }
 
-
     const childClassName = utils.composeClassNames([
       'element-tooltip__child',
       custom && 'element-tooltip__child--custom',
@@ -117,6 +114,7 @@ class TooltipViewer extends PureComponent {
     const handleClassName = utils.composeClassNames([
       'element-tooltip__handle',
       `element-tooltip__handle--${kind}`,
+      (!custom) && 'element-tooltip__handle--default',
       direction && `element-tooltip__handle--${direction}`,
     ]);
 
