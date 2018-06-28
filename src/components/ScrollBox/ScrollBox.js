@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactResizeDetector from 'react-resize-detector';
 import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
@@ -17,7 +18,6 @@ class ScrollBox extends PureComponent {
     this.updateContentSize();
     this.updateScrollbar();
 
-    window.addEventListener('resize', this.handleResize);
     this.contentBox.addEventListener('scroll', this.updateScrollbar);
   }
   componentDidUpdate() {
@@ -25,7 +25,6 @@ class ScrollBox extends PureComponent {
     this.updateScrollbar();
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
     this.contentBox.removeEventListener('scroll', this.updateScrollbar);
   }
   onDrag(ratio) {
@@ -89,6 +88,7 @@ class ScrollBox extends PureComponent {
         className={wrapperClassName}
         style={style}
       >
+        <ReactResizeDetector handleWidth onResize={this.handleResize} />
         <div
           ref={(contentBox) => {
             this.contentBox = contentBox;
