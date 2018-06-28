@@ -35,6 +35,7 @@ class TestModal extends React.Component {
           <Button kind="warning" onClick={() => this.onOpen(2)} label="Warning" />
           <Button kind="primary" onClick={() => this.onOpen(3)} label="tabs" />
           <Button kind="primary" onClick={() => this.onOpen(4)} label="multi" />
+          <Button kind="primary" onClick={() => this.onOpen(6)} label="noFooter" />
         </Row>
 
         <div style={{ padding: 10, margin: '5px 0px', border: '1px solid #ccc' }}>
@@ -125,6 +126,20 @@ class TestModal extends React.Component {
               kind="warning"
               allowSubmit
               isSubmitEnabled
+            >
+              <div>I am the submodal!</div>
+              <div>I am the submodal!</div>
+            </Modal>
+          )}
+          {opened.includes(6) && (
+            <Modal
+              primaryAction="Submit"
+              onClose={() => this.onClose(6)}
+              title="Modal with no footer"
+              kind="primary"
+              allowSubmit
+              isSubmitEnabled
+              noFooter
             >
               <div>I am the submodal!</div>
               <div>I am the submodal!</div>
