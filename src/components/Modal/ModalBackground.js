@@ -66,9 +66,10 @@ export default class ModalBackground extends PureComponent {
 
   render() {
     const {
-      tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled,
+      tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled, isCancelEnabled,
+      isUndoEnabled, noFooter, width, children, kind, title, allowClose, allowCancel, allowUndo,
+      allowSubmit, submitButtonId, primaryAction,
     } = this.props;
-    const width = `${this.props.width || '800px'}`;
     const maxHeight = maximise ? 'auto' : `calc(100% - ${60 * modalIndex + 70}px)`;
     const bottom = maximise ? '20px' : undefined;
     const modalStyle = {
@@ -86,7 +87,7 @@ export default class ModalBackground extends PureComponent {
     const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
     const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
 
-    const child = this.props.children;
+    const child = children;
     let content = child;
     if (!tabbed) {
       content = (
@@ -99,7 +100,6 @@ export default class ModalBackground extends PureComponent {
       'element-modal__body',
       tabbed && 'element-modal__body--tabbed',
     ]);
-
     return (
       <div className="element element-modal">
         <div
@@ -108,10 +108,10 @@ export default class ModalBackground extends PureComponent {
           onClick={this.onClickOverlay}
           role="presentation"
         />
-        <div className={`element-modal__container ${this.props.kind}`} style={modalStyle}>
+        <div className={`element-modal__container ${kind}`} style={modalStyle}>
           <div className="element-modal__header">
-            <div className="element-modal__header-title">{this.props.title}</div>
-            {this.props.allowClose && (
+            <div className="element-modal__header-title">{title}</div>
+            {allowClose && (
               <div className="element-modal__header-close">
                 <Icon
                   onClick={this.onClose}
@@ -127,51 +127,53 @@ export default class ModalBackground extends PureComponent {
 
           <div className={bodyClassName}>{content}</div>
 
-          <div className="element-modal__footer">
-            <div className="element-modal__footer-left" />
-            <div className="element-modal__footer-right">
-              {this.props.allowCancel && (
-                <Button
-                  onClick={this.onCancel}
-                  disabled={!this.props.isCancelEnabled}
-                  label="Cancel"
-                  icon="close-small"
-                  kind="secondary"
-                />
-              )}
-              {this.props.allowUndo && (
-                <Button
-                  onClick={this.onUndo}
-                  disabled={!this.props.isUndoEnabled || this.state.isSubmitPending}
-                  label="Undo"
-                  icon="trash-small"
-                  kind="secondary"
-                />
-              )}
-              {this.props.allowSubmit && (
-                <Button
-                  id={this.props.submitButtonId}
-                  pending={this.state.isSubmitPending}
-                  icon="check-small"
-                  disabled={isSubmitDisabled}
-                  onClick={this.onSubmit}
-                  label={this.props.primaryAction}
-                  kind={this.props.kind}
-                  className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
-                />
-              )}
-              {this.props.allowClose && (
-                <Button
-                  noFill
-                  disabled={isCloseDisabled}
-                  onClick={this.onClose}
-                  label="Close"
-                  kind="secondary"
-                  className={`element-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
-                />
-              )}
+          {!noFooter &&
+            <div className="element-modal__footer">
+              <div className="element-modal__footer-left" />
+              <div className="element-modal__footer-right">
+                {allowCancel && (
+                  <Button
+                    onClick={this.onCancel}
+                    disabled={!isCancelEnabled}
+                    label="Cancel"
+                    icon="close-small"
+                    kind="secondary"
+                  />
+                )}
+                {allowUndo && (
+                  <Button
+                    onClick={this.onUndo}
+                    disabled={!isUndoEnabled || this.state.isSubmitPending}
+                    label="Undo"
+                    icon="trash-small"
+                    kind="secondary"
+                  />
+                )}
+                {allowSubmit && (
+                  <Button
+                    id={submitButtonId}
+                    pending={this.state.isSubmitPending}
+                    icon="check-small"
+                    disabled={isSubmitDisabled}
+                    onClick={this.onSubmit}
+                    label={primaryAction}
+                    kind={kind}
+                    className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
+                  />
+                )}
+                {this.props.allowClose && (
+                  <Button
+                    noFill
+                    disabled={isCloseDisabled}
+                    onClick={this.onClose}
+                    label="Close"
+                    kind="secondary"
+                    className={`element-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          }
         </div>
       </div>
     );
@@ -184,9 +186,10 @@ ModalBackground.defaultProps = {
   isCloseEnabled: true,
   isSubmitEnabled: undefined,
   isUndoEnabled: undefined,
+  allowClose: true,
   allowSubmit: undefined,
   allowUndo: undefined,
-  allowClose: true,
+  noFooter: false,
   onClose: undefined,
   onUndo: undefined,
   onCancel: undefined,
@@ -212,6 +215,7 @@ ModalBackground.propTypes = {
   allowClose: PropTypes.bool,
   allowSubmit: PropTypes.bool,
   allowUndo: PropTypes.bool,
+  noFooter: PropTypes.bool,
   onClose: PropTypes.func,
   onUndo: PropTypes.func,
   onCancel: PropTypes.func,
