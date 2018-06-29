@@ -144,10 +144,10 @@ class Tooltip extends PureComponent {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceVisibility === true) {
-      this.delayShowTooltip(1);
+      this.showTooltip(true);
     }
     if (nextProps.forceVisibility === false) {
-      this.delayHideTooltip(1);
+      this.hideTooltip(true);
     }
   }
   componentWillUnmount() {
@@ -155,18 +155,18 @@ class Tooltip extends PureComponent {
     this.box.removeEventListener('mouseenter', this.delayShowTooltip);
     this.box.removeEventListener('mouseleave', this.delayHideTooltip);
   }
-  delayShowTooltip(delay) {
-    const customDelay = typeof delay === 'number' ? delay : null;
+  delayShowTooltip() {
     this._isHoveringTooltip = true;
     clearTimeout(this.tooltipTimeout);
-    this.tooltipTimeout = setTimeout(this.showTooltip, customDelay || this.props.delay);
+    this.tooltipTimeout = setTimeout(this.showTooltip, this.props.delay);
   }
-  delayHideTooltip(delay) {
-    if (this.props.forceVisibility === false) {
-      this._isHoveringTooltip = false;
-      clearTimeout(this.tooltipTimeout);
-      this.tooltipTimeout = setTimeout(this.hideTooltip, delay || 200);
+  delayHideTooltip() {
+    this._isHoveringTooltip = false;
+    if (this.props.forceVisibility === true) {
+      return;
     }
+    clearTimeout(this.tooltipTimeout);
+    this.tooltipTimeout = setTimeout(this.hideTooltip, this.props.delay);
   }
   showTooltip(force) {
     if (this._isHoveringTooltip === false && force === false) {
