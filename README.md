@@ -10,7 +10,7 @@ that with the command you want to run, for example `make install test`.
 
 #### Running
 
-Launch dev mode with `make start` and open [http://localhost:8080](http://localhost:8080). So long as you keep
+Launch dev mode with `make start` and open [http://localhost:9090](http://localhost:9090). So long as you keep
 this process running, your files will be automatically linted (with automatic fixing) and you don't need to run a separate lint step.
 
 #### Adding and removing packages

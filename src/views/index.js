@@ -32,7 +32,7 @@ const AllItemPanels = componentMappings.map(({ view, name }) => {
 
 class Views extends React.Component {
   static onChangeStyle(style) {
-    window.location.href = `http://localhost:8080/${style}.html`;
+    window.location.href = `http://localhost:9090/${style}.html`;
   }
 
   constructor(props) {

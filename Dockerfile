@@ -11,7 +11,7 @@ RUN yarn install
 
 COPY . /usr/local/code/
 
-EXPOSE 8080
+EXPOSE 9090
 EXPOSE 8081
 
 ENTRYPOINT ["yarn"]
