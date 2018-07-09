@@ -15,7 +15,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "eslint": "eslint --color --fix webpack*.js src",
-    "start": "NODE_ENV=development webpack-serve --host 0.0.0.0 webpack.dev.config.js",
+    "start": "NODE_ENV=development webpack-serve --port 9090 --host 0.0.0.0 webpack.dev.config.js",
     "test": "jest",
     "prettier": "prettier --write webpack*.js 'src/**/*.{js,scss}'",
     "prepack": "yarn build",
