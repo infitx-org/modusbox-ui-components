@@ -66,7 +66,7 @@ export default class ModalBackground extends PureComponent {
 
   render() {
     const {
-      tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled, isCancelEnabled,
+      flex, tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled, isCancelEnabled,
       isUndoEnabled, noFooter, width, children, kind, title, allowClose, allowCancel, allowUndo,
       allowSubmit, submitButtonId, primaryAction,
     } = this.props;
@@ -90,9 +90,13 @@ export default class ModalBackground extends PureComponent {
     const child = children;
     let content = child;
     if (!tabbed) {
+      const contentClassName = utils.composeClassNames([
+        'element-modal__body__content',
+        flex && 'element-modal__body__content--flexible',
+      ]);
       content = (
         <ScrollBox flex>
-          <div style={{ padding: '20px' }}>{child}</div>
+          <div className={contentClassName}>{child}</div>
         </ScrollBox>
       );
     }
@@ -195,6 +199,7 @@ ModalBackground.defaultProps = {
   onCancel: undefined,
   onSubmit: undefined,
   primaryAction: 'Submit',
+  flex: false,
   tabbed: false,
   maximise: false,
   children: undefined,
@@ -221,6 +226,7 @@ ModalBackground.propTypes = {
   onCancel: PropTypes.func,
   onSubmit: PropTypes.func,
   primaryAction: PropTypes.string,
+  flex: PropTypes.bool,
   tabbed: PropTypes.bool,
   maximise: PropTypes.bool,
   children: PropTypes.node,
