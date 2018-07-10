@@ -66,7 +66,6 @@ class TooltipViewer extends PureComponent {
     this._viewer = document.createElement('div');
     this._viewer.className = utils.composeClassNames([
       'element-tooltip__viewer',
-      'element-tooltip__viewer--fade-in',
       this.props.custom !== true && 'element-tooltip__viewer--default',
       this.props.custom !== true && `element-tooltip__viewer--${this.props.kind}`,
     ]);
@@ -83,6 +82,11 @@ class TooltipViewer extends PureComponent {
     this._location.style.top = top;
     this._location.style.left = left;
 
+    const viewerFadeInClassName = utils.composeClassNames([
+      'element-tooltip__viewer--fade-in',
+      `element-tooltip__viewer--fade-in-${direction}`,
+    ]);
+    this._viewer.className += ` ${viewerFadeInClassName}`;
     // eslint-disable-next-line
     this.setState({ direction });
   }
