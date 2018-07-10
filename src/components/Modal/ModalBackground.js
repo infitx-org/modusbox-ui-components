@@ -87,19 +87,25 @@ export default class ModalBackground extends PureComponent {
     const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
     const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
 
-    const child = children;
-    let content = child;
-    if (!tabbed) {
+    const ModalContent = () => {
+      if (tabbed) {
+        return children;
+      }
       const contentClassName = utils.composeClassNames([
         'element-modal__body__content',
         flex && 'element-modal__body__content--flexible',
       ]);
-      content = (
+      const wrappedContent = <div className={contentClassName}>{children}</div>;
+      if (flex) {
+        return wrappedContent;
+      }
+      return (
         <ScrollBox flex>
-          <div className={contentClassName}>{child}</div>
+          {wrappedContent}
         </ScrollBox>
       );
-    }
+    };
+
     const bodyClassName = utils.composeClassNames([
       'element-modal__body',
       tabbed && 'element-modal__body--tabbed',
@@ -129,7 +135,7 @@ export default class ModalBackground extends PureComponent {
             )}
           </div>
 
-          <div className={bodyClassName}>{content}</div>
+          <div className={bodyClassName}><ModalContent /></div>
 
           {!noFooter &&
             <div className="element-modal__footer">
