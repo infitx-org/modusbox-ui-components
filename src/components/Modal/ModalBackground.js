@@ -66,7 +66,7 @@ export default class ModalBackground extends PureComponent {
 
   render() {
     const {
-      tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled, isCancelEnabled,
+      flex, tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled, isCancelEnabled,
       isUndoEnabled, noFooter, width, children, kind, title, allowClose, allowCancel, allowUndo,
       allowSubmit, submitButtonId, primaryAction,
     } = this.props;
@@ -87,15 +87,25 @@ export default class ModalBackground extends PureComponent {
     const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
     const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
 
-    const child = children;
-    let content = child;
-    if (!tabbed) {
-      content = (
+    const ModalContent = () => {
+      if (tabbed) {
+        return children;
+      }
+      const contentClassName = utils.composeClassNames([
+        'element-modal__body__content',
+        flex && 'element-modal__body__content--flexible',
+      ]);
+      const wrappedContent = <div className={contentClassName}>{children}</div>;
+      if (flex) {
+        return wrappedContent;
+      }
+      return (
         <ScrollBox flex>
-          <div style={{ padding: '20px' }}>{child}</div>
+          {wrappedContent}
         </ScrollBox>
       );
-    }
+    };
+
     const bodyClassName = utils.composeClassNames([
       'element-modal__body',
       tabbed && 'element-modal__body--tabbed',
@@ -125,7 +135,7 @@ export default class ModalBackground extends PureComponent {
             )}
           </div>
 
-          <div className={bodyClassName}>{content}</div>
+          <div className={bodyClassName}><ModalContent /></div>
 
           {!noFooter &&
             <div className="element-modal__footer">
@@ -195,6 +205,7 @@ ModalBackground.defaultProps = {
   onCancel: undefined,
   onSubmit: undefined,
   primaryAction: 'Submit',
+  flex: false,
   tabbed: false,
   maximise: false,
   children: undefined,
@@ -221,6 +232,7 @@ ModalBackground.propTypes = {
   onCancel: PropTypes.func,
   onSubmit: PropTypes.func,
   primaryAction: PropTypes.string,
+  flex: PropTypes.bool,
   tabbed: PropTypes.bool,
   maximise: PropTypes.bool,
   children: PropTypes.node,

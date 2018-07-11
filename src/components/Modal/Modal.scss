@@ -97,6 +97,15 @@
 .element-modal__body--tabbed {
   overflow: hidden;
 }
+
+.element-modal__body__content{
+  padding: 20px;
+}
+.element-modal__body__content--flexible{
+  display: flex;
+  flex-direction: column;
+  flex: 2 1 auto;
+}
 .element-modal__footer {
   width: 100%;
   background: #f8f8f8;
