@@ -2,6 +2,7 @@
 
 import React from 'react';
 import TextField from '../../components/TextField';
+import Checkbox from '../../components/Checkbox';
 
 const TestTextField = () => (
   <div>
@@ -55,15 +56,8 @@ const TestTextField = () => (
         disabled
       />
     </div>
-    <div style={{ padding: '10px', border: '1px solid #ccc', width: '200px' }}>
-      <TextField
-        placeholder="Invalid"
-        invalid
-        invalidMessages={[
-          { text: 'This is a test', active: true },
-          { text: 'This is invalid', active: false },
-        ]}
-      />
+    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+      <InvalidToggle />
     </div>
     <div style={{ padding: '10px', border: '1px solid #ccc' }}>
       <TextField type="password" placeholder="Password pending" pending />
@@ -78,4 +72,35 @@ const TestTextField = () => (
   </div>
 );
 
+
+class InvalidToggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isToggled: false,
+    };
+  }
+  toggle() {
+    this.setState({
+      isToggled: !this.state.isToggled,
+    });
+  }
+  render() {
+    return (
+      <div style={{ display: 'flex' }}>
+        <Checkbox onChange={this.toggle} label="Invalid" />
+        <TextField
+          onChange={this.toggle}
+          placeholder="Invalid"
+          invalid={this.state.isToggled}
+          invalidMessages={[
+            { text: 'This is a test', active: true },
+            { text: 'This is invalid', active: false },
+          ]}
+        />
+      </div>
+    );
+  }
+}
 export default TestTextField;

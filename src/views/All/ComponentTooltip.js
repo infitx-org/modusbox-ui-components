@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Icon from '../../components/Icon';
 import Row from '../../components/Row';
@@ -9,7 +9,7 @@ const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
 
-const TestButton = () => (
+const TestTooltip = () => (
   <Column style={{ padding: '10px' }}>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
@@ -21,15 +21,20 @@ const TestButton = () => (
     </Row>
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip
-          custom
-          content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}
-        >
-          custom prop
-        </Tooltip>
+        <Flicker>
+          <Tooltip
+            custom
+            content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}
+          >
+            custom prop
+          </Tooltip>
+        </Flicker>
       </Column>
       <Column style={columnStyle}>
         <Tooltip label="boh..."> label prop </Tooltip>
+      </Column>
+      <Column style={columnStyle}>
+        <Flicker><Tooltip label="boh..."> Flickering </Tooltip></Flicker>
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style}> custom tooltip style (100px width) </Tooltip>
@@ -39,8 +44,8 @@ const TestButton = () => (
 
     <Row>
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="top">
-          {`${Array(40).fill('super').join(' ')} long content with style(100px width)`}
+        <Tooltip style={style} position="left">
+          {`${Array(10).fill('super').join(' ')} long content with style(100px width)`}
         </Tooltip>
       </Column>
 
@@ -82,4 +87,31 @@ const TestButton = () => (
   </Column>
 );
 
-export default TestButton;
+class Flicker extends Component {
+  constructor() {
+    super();
+    this.startFlickering = this.startFlickering.bind(this);
+    this.stopFlickering = this.stopFlickering.bind(this);
+    this.state = {
+      flickers: 0,
+    };
+  }
+  componentDidMount() {
+    this.startFlickering();
+  }
+  componetWillUnmount() {
+    this.stopFlickering();
+  }
+  startFlickering() {
+    this._interval = setInterval(() => {
+      this.setState({ flickers: this.state.flickers + 1 });
+    }, 1000);
+  }
+  stopFlickering() {
+    clearInterval(this._interval);
+  }
+  render() {
+    return <div>{this.state.flickers}{this.props.children}</div>;
+  }
+}
+export default TestTooltip;
