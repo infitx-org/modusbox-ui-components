@@ -4,6 +4,7 @@ import * as utils from '../../utils/common';
 
 import Icon from '../Icon';
 import Spinner from '../Spinner';
+import Tooltip from '../Tooltip';
 
 class Button extends PureComponent {
   constructor(props) {
@@ -34,7 +35,7 @@ class Button extends PureComponent {
   }
   render() {
     const {
-      id, className, style, kind, label, icon, noFill, disabled, pending,
+      id, className, style, kind, label, icon, noFill, disabled, pending, tooltip,
     } = this.props;
     const isDisabledOrPending = disabled === true || pending === true;
     const classNames = utils.composeClassNames([
@@ -54,7 +55,7 @@ class Button extends PureComponent {
       noFill && 'noFill',
     ]);
 
-    return (
+    const button = (
       <button
         ref={(input) => {
           this.input = input;
@@ -82,6 +83,16 @@ class Button extends PureComponent {
         </div>
       </button>
     );
+
+
+    if (tooltip) {
+      return (
+        <Tooltip label={tooltip} position="top">
+          {button}
+        </Tooltip>
+      );
+    }
+    return button;
   }
 }
 Button.propTypes = {
@@ -104,6 +115,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   pending: PropTypes.bool,
   onClick: PropTypes.func,
+  tooltip: PropTypes.string,
 };
 Button.defaultProps = {
   className: undefined,
@@ -116,6 +128,7 @@ Button.defaultProps = {
   disabled: false,
   pending: false,
   onClick: undefined,
+  tooltip: undefined,
 };
 
 export default Button;

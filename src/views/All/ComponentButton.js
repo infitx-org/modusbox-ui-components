@@ -82,6 +82,7 @@ const TestButton = () => (
       <Button label="Test Button 2" disabled />
       <Button label="Test Button 3" disabled />
       <Button label="Test Button 4" pending />
+      <Button label="Test Button Tooltip" tooltip="Test!" />
     </Row>
   </Column>
 );
