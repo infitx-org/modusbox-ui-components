@@ -45,6 +45,11 @@ module.exports = {
         loader: ExtractTextPlugin.extract('css-loader!sass-loader!postcss-loader'),
       },
       {
+        test: /\.(png|jpg|gif)$/,
+        loader: "url-loader",
+        query: { limit: 8192, mimetype: "image/png" }
+      },
+      {
         test: /\.svg$/,
         loader: 'svg-sprite-loader',
       },

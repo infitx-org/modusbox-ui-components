@@ -28,7 +28,7 @@ module.exports = {
             loader: 'eslint-loader',
             options: {
               fix: true,
-              emitWarnings: true,
+              emitWarning: true,
             },
           },
         ],
@@ -36,6 +36,11 @@ module.exports = {
       {
         test: /\.(css|scss)?$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: "url-loader",
+        query: { limit: 8192, mimetype: "image/png" }
       },
       {
         test: /\.svg$/,

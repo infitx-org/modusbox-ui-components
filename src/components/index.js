@@ -13,6 +13,7 @@ import Heading from './Heading';
 import Icon from './Icon';
 import Modal, { ModalTabsLayout } from './Modal';
 import Menu, { MenuSection, MenuItem } from './Menu';
+import Navbar from './Navbar';
 import RadioGroup from './RadioGroup';
 import Row from './Row';
 import ScrollBox from './ScrollBox';
@@ -34,6 +35,7 @@ export {
   Menu,
   MenuSection,
   MenuItem,
+  Navbar,
   Modal,
   ModalTabsLayout,
   RadioGroup,
