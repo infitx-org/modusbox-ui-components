@@ -7,6 +7,26 @@ import Icon from '../Icon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
+
+const ModalContent = ({ tabbed, flex, children }) => {
+  if (tabbed) {
+    return children;
+  }
+  const contentClassName = utils.composeClassNames([
+    'element-modal__body__content',
+    flex && 'element-modal__body__content--flexible',
+  ]);
+  const wrappedContent = <div className={contentClassName}>{children}</div>;
+  if (flex) {
+    return wrappedContent;
+  }
+  return (
+    <ScrollBox flex>
+      {wrappedContent}
+    </ScrollBox>
+  );
+};
+
 export default class ModalBackground extends PureComponent {
   constructor(props) {
     super(props);
@@ -87,25 +107,6 @@ export default class ModalBackground extends PureComponent {
     const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
     const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
 
-    const ModalContent = () => {
-      if (tabbed) {
-        return children;
-      }
-      const contentClassName = utils.composeClassNames([
-        'element-modal__body__content',
-        flex && 'element-modal__body__content--flexible',
-      ]);
-      const wrappedContent = <div className={contentClassName}>{children}</div>;
-      if (flex) {
-        return wrappedContent;
-      }
-      return (
-        <ScrollBox flex>
-          {wrappedContent}
-        </ScrollBox>
-      );
-    };
-
     const bodyClassName = utils.composeClassNames([
       'element-modal__body',
       tabbed && 'element-modal__body--tabbed',
@@ -135,7 +136,14 @@ export default class ModalBackground extends PureComponent {
             )}
           </div>
 
-          <div className={bodyClassName}><ModalContent /></div>
+          <div className={bodyClassName}>
+            <ModalContent
+              tabbed={tabbed}
+              flex={flex}
+            >
+              {children}
+            </ModalContent>
+          </div>
 
           {!noFooter &&
             <div className="element-modal__footer">

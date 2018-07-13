@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal, { ModalTabsLayout } from '../../components/Modal';
+import TextField from '../../components/TextField';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 import Row from '../../components/Row';
@@ -63,6 +64,7 @@ class TestModal extends React.Component {
               <div style={{ height: '100px' }}>
                 <span> Hello! modal 2 </span>
                 <Select options={new Array(100).fill({ label: '1', value: '2' })} />
+                <TextField placeholder="Test me" />
               </div>
             </Modal>
           )}
