@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 
 class TooltipViewer extends PureComponent {
-  static getPosition(parentId, target, position) {
+  static getCoordinates(parentId, target, position) {
     const parent = document.getElementById(parentId);
 
     const parentRect = parent.getBoundingClientRect();
@@ -95,11 +95,15 @@ class TooltipViewer extends PureComponent {
   }
   componentDidMount() {
     const { parentId, position } = this.props;
-    const { top, left, direction } = TooltipViewer.getPosition(parentId, this._location, position);
+    const {
+      top,
+      left,
+      direction,
+    } = TooltipViewer.getCoordinates(parentId, this._location, position);
 
     // Apply final updates to the tooltip itself
-    this._location.style.top = top;
-    this._location.style.left = left;
+    this._location.style.top = `${top}px`;
+    this._location.style.left = `${left}px`;
 
     const viewerFadeInClassName = utils.composeClassNames([
       'element-tooltip__viewer--fade-in',
