@@ -11,6 +11,7 @@ import Spinner from '../Spinner';
 import logo from './PortXLogoSmall.png';
 import '../../icons/modusbox/cloud.svg';
 import '../../icons/modusbox/business-group.svg';
+import '../../icons/mule/user-small.svg';
 
 import './Navbar.scss';
 
