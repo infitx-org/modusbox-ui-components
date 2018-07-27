@@ -45,7 +45,7 @@ class ItemCell extends PureComponent {
               className="element-datalist__body-cell-icon"
             />
           )}
-          <Tooltip>{children}</Tooltip>         
+          <Tooltip>{children}</Tooltip>
         </div>
       </div>
     );
@@ -55,12 +55,12 @@ class ItemCell extends PureComponent {
 // Cell in the Header
 class HeaderCell extends PureComponent {
   constructor(props) {
-    super(props);    
-  }  
+    super(props);
+  }
   render() {
     const { label, isSorting, isSortingAsc, onClick } = this.props;
     let sortIcon = null;
-    
+
     if (isSorting) {
       const iconClassNames = utils.composeClassNames([
         'element-datalist__header-cell__sort-icon',
@@ -80,7 +80,7 @@ class HeaderCell extends PureComponent {
         <div className="element-datalist__header-cell__label">
           {label}
         </div>
-        {sortIcon}        
+        {sortIcon}
       </div>
     );
   }
