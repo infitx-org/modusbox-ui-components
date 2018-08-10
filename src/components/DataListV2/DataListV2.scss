@@ -1,3 +1,6 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/transitions.scss';
+
 .element-datalistV2 {
   display: flex;
   flex-direction: column;
@@ -17,3 +20,6 @@
 .element-datalist__item-cell__content{
   width: 100%;
 }
+
+
+

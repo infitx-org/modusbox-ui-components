@@ -2,6 +2,7 @@
 import React from 'react';
 
 import DataList from '../../components/DataListV2';
+import Icon from '../../components/Icon';
 
 const columns = ['a', 'b', 'c', 'd', 'e'];
 const list = new Array(100).fill(0).map((row, rowIdx) => columns.reduce((prev, curr, colIdx) => {
@@ -14,11 +15,32 @@ const list = new Array(100).fill(0).map((row, rowIdx) => columns.reduce((prev, c
 }, {}));
 
 const columns1 = [
-  { label: 'Double', key: 'a', func: x => x * 2 },
-  { label: 'Square', key: 'b', func: x => x * x },
-  { label: 'c', key: 'c', func: x => <span>{x}</span> },
-  { label: 'd', key: 'd', func: x => new Array(20).fill(x).join('') },
-  { label: 'e', key: 'e' },
+  {
+    label: 'Double',
+    key: 'a',
+    func: x => x * 2,
+    sortable: true,
+  },
+  {
+    label: 'Square',
+    key: 'b',
+    func: x => x * x,
+  },
+  {
+    label: 'c',
+    key: 'c',
+    func: x => <span>{x}</span>,
+  },
+  {
+    label: 'd',
+    key: 'd',
+    func: x => new Array(20).fill(x).join(''),
+  },
+  {
+    label: 'e',
+    key: 'e',
+    func: () => <Icon name="arrow" size={20} />,
+  },
 ];
 
 const TestDataList = () => (
