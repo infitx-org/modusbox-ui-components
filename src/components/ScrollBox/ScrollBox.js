@@ -17,7 +17,6 @@ class ScrollBox extends PureComponent {
   componentDidMount() {
     this.updateContentSize();
     this.updateScrollbar();
-
     this.contentBox.addEventListener('scroll', this.updateScrollbar);
   }
   componentDidUpdate() {
@@ -57,9 +56,11 @@ class ScrollBox extends PureComponent {
     const computedStyle = window.getComputedStyle(this.wrapper, null);
     const paddingLeft = parseFloat(computedStyle.getPropertyValue('padding-left'));
     const paddingRight = parseFloat(computedStyle.getPropertyValue('padding-right'));
-    this.content.style.minWidth = width - (paddingLeft + paddingRight);
-    this.content.style.maxWidth = width - (paddingLeft + paddingRight);
-    this.content.style.width = width - (paddingLeft + paddingRight);
+    const exactWidth = `${width - paddingLeft + paddingRight}px`;
+
+    this.content.style.minWidth = exactWidth;
+    this.content.style.maxWidth = exactWidth;
+    this.content.style.width = exactWidth;
   }
   render() {
     const {
