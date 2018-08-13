@@ -149,7 +149,8 @@
 }
 
 .Navbar__company-item,
-.Navbar__environment-item{
+.Navbar__environment-item,
+.Navbar__user-item{
   &:hover{
     color: $color__main-primary--active;
     text-decoration: underline;

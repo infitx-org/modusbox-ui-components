@@ -396,7 +396,17 @@ class RightNav extends PureComponent {
 }
 
 class PopupMenu extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.setPopupPosition = this.setPopupPosition.bind(this);
+  }
   componentDidMount() {
+    this.setPopupPosition();
+  }
+  componentDidUpdate() {
+    this.setPopupPosition();
+  }
+  setPopupPosition() {
     const { size, fillWidth } = this.props;
     const { left } = this.wrapper.getBoundingClientRect();
     const rightSpace = window.innerWidth - left;
@@ -410,9 +420,9 @@ class PopupMenu extends PureComponent {
       leftPosition = rightSpace - size;
     }
 
-    this.popup.style.width = totalWidth;
+    this.popup.style.width = `${totalWidth}px`;
     if (leftPosition) {
-      this.popup.style.left = leftPosition;
+      this.popup.style.left = `${leftPosition}px`;
     }
   }
   render() {

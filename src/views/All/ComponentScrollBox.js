@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line
 import loremIpsum from 'lorem-ipsum';
 import ScrollBox from '../../components/ScrollBox';
 
