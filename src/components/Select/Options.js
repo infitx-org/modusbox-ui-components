@@ -33,7 +33,9 @@ class Options extends PureComponent {
   }
   render() {
     const { options, selected, highlighted } = this.state;
-    const { maxHeight, reverse, open } = this.props;
+    const {
+      maxHeight, reverse, open, onClear,
+    } = this.props;
     if (!open) {
       return null;
     }
@@ -44,6 +46,11 @@ class Options extends PureComponent {
       'input-select__options-wrapper',
       reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular',
     ]);
+
+    let clearOption = null;
+    if (this.props.clearable && selected !== undefined) {
+      clearOption = <ClearOption onClick={onClear} />;
+    }
 
     let optionItems = null;
     if (options.length > 0) {
@@ -90,6 +97,7 @@ class Options extends PureComponent {
               this.items = items;
             }}
           >
+            {clearOption}
             {optionItems}
           </div>
         </ScrollBox>
@@ -148,7 +156,11 @@ class Option extends PureComponent {
         label={label}
         value={value}
       >
-        {icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
+        {icon && <Icon
+          className="input-select__options-item__icon"
+          name={icon}
+          size={16}
+        />}
         <div className="input-select__options-item__label">
           <Tooltip>{label}</Tooltip>
         </div>
@@ -174,4 +186,38 @@ Option.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.string,
 };
+
+const ClearOption = ({ onClick }) => {
+  const clearOptionClassName = utils.composeClassNames([
+    'input-select__options-item',
+    'input-select__options-item--clear',
+  ]);
+  const clearOptionIconClassName = utils.composeClassNames([
+    'input-select__options-item__icon',
+    'input-select__options-item__icon--clear',
+  ]);
+  const clearOptionLabelClassName = utils.composeClassNames([
+    'input-select__options-item__label',
+    'input-select__options-item__label--clear',
+  ]);
+  return (
+    <div
+      className={clearOptionClassName}
+      onClick={onClick}
+      tabIndex="1"
+      role="presentation"
+      label="Clear"
+    >
+      <Icon
+        className={clearOptionIconClassName}
+        name="close-small"
+        size={20}
+      />
+      <div className={clearOptionLabelClassName}>
+        <Tooltip>Clear</Tooltip>
+      </div>
+    </div>
+  );
+};
+
 export default Options;

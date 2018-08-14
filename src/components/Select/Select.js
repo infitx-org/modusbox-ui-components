@@ -18,6 +18,7 @@ class Select extends PureComponent {
     this.onClickSelect = this.onClickSelect.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    this.onClearOption = this.onClearOption.bind(this);
     this.onSelectOption = this.onSelectOption.bind(this);
     this.onPageClick = this.onPageClick.bind(this);
     this.onSelectFilter = this.onSelectFilter.bind(this);
@@ -90,6 +91,16 @@ class Select extends PureComponent {
       this.onSelectFilter();
       this.setState({ isOpen });
     } else {
+      this.closeSelect();
+    }
+  }
+  onClearOption() {
+    if (this.props.onClear) {
+      this.setState({
+        selected: undefined,
+        selectedLabel: undefined,
+      });
+      this.props.onClear();
       this.closeSelect();
     }
   }
@@ -351,6 +362,8 @@ class Select extends PureComponent {
             selected={selected}
             highlighted={highlightedOption}
             onSelect={this.onSelectOption}
+            onClear={this.onClearOption}
+            clearable={this.props.onClear}
           />
         </div>
       </div>
@@ -363,6 +376,7 @@ Select.propTypes = {
   className: PropTypes.string,
   style: PropTypes.shape(),
   onChange: PropTypes.func,
+  onClear: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
@@ -385,6 +399,7 @@ Select.defaultProps = {
   style: {},
   selected: undefined,
   onChange: undefined,
+  onClear: undefined,
   onFocus: undefined,
   onBlur: undefined,
   placeholder: undefined,
