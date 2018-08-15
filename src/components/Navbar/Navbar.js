@@ -74,10 +74,13 @@ const LeftNav = () => (
 
 class RightNav extends PureComponent {
   static nestOrganizations(organizations) {
-    const organizationsById = organizations.reduce((prev, curr) => ({
-      ...prev,
-      [curr.id]: curr,
-    }), {});
+    const organizationsById = organizations.reduce(
+      (prev, curr) => ({
+        ...prev,
+        [curr.id]: curr,
+      }),
+      {},
+    );
 
     const nestedOrganizations = organizations.reduce((prev, curr) => {
       const parentId = curr.parent;
@@ -241,13 +244,11 @@ class RightNav extends PureComponent {
       companyFilter,
       organizationFilter,
       environmentFilter,
-
     } = this.state;
 
     const activeCompany = find(companies, { id: activeCompanyId });
-    const findActiveEnvironmentParentOrganization = organization => organization
-      .environments
-      .some(environment => environment.id === activeEnvironmentId);
+    const findActiveEnvironmentParentOrganization = organization =>
+      organization.environments.some(environment => environment.id === activeEnvironmentId);
     const activeOrganization = find(organizations, findActiveEnvironmentParentOrganization);
 
     let activeEnvironment;
@@ -259,9 +260,8 @@ class RightNav extends PureComponent {
 
     const cannotFindCompany = companies.length && !activeCompany;
     const isCompanyModalVisible = !activeCompanyId || cannotFindCompany;
-    const isOrganizationModalVisible = !companyOnly &&
-      !isCompanyModalVisible &&
-      !activeEnvironmentId;
+    const isOrganizationModalVisible =
+      !companyOnly && !isCompanyModalVisible && !activeEnvironmentId;
 
     // Filtered items
     const lowerCaseOrganizationFilter = organizationFilter.toLowerCase();
@@ -275,22 +275,17 @@ class RightNav extends PureComponent {
         .filter(lowerCaseNameIncludes(lowerCaseOrganizationFilter));
 
       if (matchingEnvironments.length) {
-        const currentItem = matchingEnvironments
-          .map(environment => ({
-            match: 'environment',
-            organization,
-            environment,
-          }));
-        return [
-          ...prev,
-          ...currentItem,
-        ];
+        const currentItem = matchingEnvironments.map(environment => ({
+          match: 'environment',
+          organization,
+          environment,
+        }));
+        return [...prev, ...currentItem];
       }
       return prev;
     };
 
-    const filteredEnvironmentsInOrganizations = organizations
-      .reduce(filterEnvironments, []);
+    const filteredEnvironmentsInOrganizations = organizations.reduce(filterEnvironments, []);
 
     const filteredOrganizationsInOrganizations = organizations
       .filter(lowerCaseNameIncludes(lowerCaseOrganizationFilter))
@@ -301,8 +296,7 @@ class RightNav extends PureComponent {
       ...filteredOrganizationsInOrganizations,
     ];
 
-    const filteredCompanies = companies
-      .filter(lowerCaseNameIncludes(lowerCaseCompanyFilter));
+    const filteredCompanies = companies.filter(lowerCaseNameIncludes(lowerCaseCompanyFilter));
 
     let filteredEnvironments = [];
     if (activeOrganization) {
@@ -342,8 +336,7 @@ class RightNav extends PureComponent {
           <CompanyStructure {...companyStructureProps} dark />
         </CompanyNav>
 
-
-        {!companyOnly &&
+        {!companyOnly && (
           <div className="Navbar__right__nav">
             <VertBar />
 
@@ -367,7 +360,7 @@ class RightNav extends PureComponent {
               environmentFilter={environmentFilter}
             />
           </div>
-        }
+        )}
 
         <VertBar />
 
@@ -389,7 +382,6 @@ class RightNav extends PureComponent {
             <OrganizationStructure {...organizationStructureProps} />
           </OrganizationModal>
         )}
-
       </div>
     );
   }
@@ -428,10 +420,17 @@ class PopupMenu extends PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <div className="Navbar__popup-wrapper" ref={(wrapper) => { this.wrapper = wrapper; }}>
+      <div
+        className="Navbar__popup-wrapper"
+        ref={(wrapper) => {
+          this.wrapper = wrapper;
+        }}
+      >
         <div
           className="Navbar__popup"
-          ref={(popup) => { this.popup = popup; }}
+          ref={(popup) => {
+            this.popup = popup;
+          }}
         >
           {children}
         </div>
@@ -460,10 +459,7 @@ const PopupMenuScroller = ({ children }) => {
 };
 
 const CompanyNav = ({
-  activeCompany,
-  onClick,
-  isCompanyBoxVisible,
-  children,
+  activeCompany, onClick, isCompanyBoxVisible, children,
 }) => {
   let name = '';
   let companyIcon = null;
@@ -484,26 +480,24 @@ const CompanyNav = ({
 
   return (
     <div className="Navbar__company-box">
-      <div className="Navbar__icon-box">
-        {companyIcon}
-      </div>
+      <div className="Navbar__icon-box">{companyIcon}</div>
 
       <div className="Navbar__company__name" onClick={onClick} role="presentation">
         {activeCompany ? activeCompany.name : 'Loading'}
       </div>
 
-      {isCompanyBoxVisible && (
-        <PopupMenu size={200}>
-          {children}
-        </PopupMenu>
-      )}
-
+      {isCompanyBoxVisible && <PopupMenu size={200}>{children}</PopupMenu>}
     </div>
   );
 };
 
 const CompanyStructure = ({
-  companyFilter, onCompanyFilterChange, companies, activeCompany, onClickCompanyItem, dark,
+  companyFilter,
+  onCompanyFilterChange,
+  companies,
+  activeCompany,
+  onClickCompanyItem,
+  dark,
 }) => (
   <div className="Navbar__company__menu">
     <SearchBox value={companyFilter} onChange={onCompanyFilterChange} dark={dark} />
@@ -542,10 +536,7 @@ const SearchBox = ({ value, onChange, dark }) => {
 };
 
 const Companies = ({
-  companies,
-  activeCompanyId,
-  onClickCompany,
-  dark,
+  companies, activeCompanyId, onClickCompany, dark,
 }) => (
   <div>
     {companies.map(company => (
@@ -576,24 +567,15 @@ const CompanyItem = ({
   ]);
 
   return (
-    <div
-      className={companyItemClassName}
-      onClick={onClick}
-      role="presentation"
-    >
+    <div className={companyItemClassName} onClick={onClick} role="presentation">
       <div className={companyItemIconClassName}>{name[0]}</div>
-      <div className="Navbar__company-item__name">
-        {name}
-      </div>
+      <div className="Navbar__company-item__name">{name}</div>
     </div>
   );
 };
 
 const OrganizationNav = ({
-  onClick,
-  activeOrganization,
-  isOrganizationsBoxVisible,
-  children,
+  onClick, activeOrganization, isOrganizationsBoxVisible, children,
 }) => {
   let organizationIcon = <Icon name="business-group" fill="#fff" size={16} />;
   if (!activeOrganization) {
@@ -602,23 +584,20 @@ const OrganizationNav = ({
 
   return (
     <div className="Navbar__organization-box">
-      <div className="Navbar__icon-box">
-        {organizationIcon}
-      </div>
+      <div className="Navbar__icon-box">{organizationIcon}</div>
 
       <div className="Navbar__organization__name" onClick={onClick} role="presentation">
         {activeOrganization ? activeOrganization.name : 'Loading'}
       </div>
 
-      {isOrganizationsBoxVisible &&
+      {isOrganizationsBoxVisible && (
         <PopupMenu size={400} fillWidth>
           {children}
         </PopupMenu>
-      }
+      )}
     </div>
   );
 };
-
 
 const OrganizationStructure = ({
   isSearching,
@@ -652,11 +631,7 @@ const OrganizationStructure = ({
   };
   return (
     <div className="Navbar__organization__menu">
-      <SearchBox
-        value={organizationFilter}
-        onChange={onOrganizationFilterChange}
-        dark={dark}
-      />
+      <SearchBox value={organizationFilter} onChange={onOrganizationFilterChange} dark={dark} />
       <PopupMenuScroller>
         <OrganizationContent />
       </PopupMenuScroller>
@@ -665,10 +640,7 @@ const OrganizationStructure = ({
 };
 
 const FilteredOrganizations = ({
-  items,
-  onSelectEnvironment,
-  activeEnvironment,
-  dark,
+  items, onSelectEnvironment, activeEnvironment, dark,
 }) => (
   <div>
     {items.map((item) => {
@@ -742,10 +714,7 @@ const EnvironmentSearchItem = ({
 };
 
 const Organizations = ({
-  dark,
-  activeEnvironment,
-  organizations,
-  onSelectEnvironment,
+  dark, activeEnvironment, organizations, onSelectEnvironment,
 }) => (
   <div>
     {organizations.map(organization => (
@@ -798,15 +767,16 @@ class NestedOrganization extends PureComponent {
     let subOrganizations = null;
     let environments = null;
     if (organization.subOrganizations) {
-      subOrganizations = organization.subOrganizations.map(subOrganization =>
-        (<NestedOrganization
+      subOrganizations = organization.subOrganizations.map(subOrganization => (
+        <NestedOrganization
           key={subOrganization.id}
           activeEnvironmentId={activeEnvironmentId}
           organization={subOrganization}
           onSelectEnvironment={onSelectEnvironment}
           indent={indent + 1}
           dark={dark}
-        />));
+        />
+      ));
     }
 
     if (organization.environments) {
@@ -883,19 +853,15 @@ class NestedItem extends PureComponent {
         role="presentation"
         style={{ paddingLeft: `${10 + indentation}px` }}
       >
-        {indent > 0 &&
+        {indent > 0 && (
           <div className="Navbar__organization-item__icon-box">
-            {!isEnvironment && (
-              <Icon name="arrow" size={10} className={arrowClassName} />
-            )}
+            {!isEnvironment && <Icon name="arrow" size={10} className={arrowClassName} />}
           </div>
-        }
+        )}
         <div className="Navbar__organization-item__icon-box">
           <Icon name={isEnvironment ? 'cloud' : 'business-group'} size={16} fill={itemIconColor} />
         </div>
-        <div className="Navbar__organization-item__name">
-          {name}
-        </div>
+        <div className="Navbar__organization-item__name">{name}</div>
       </div>
     );
   }
@@ -915,9 +881,7 @@ const EnvironmentNav = ({
   }
   return (
     <div className="Navbar__environment-box">
-      <div className="Navbar__icon-box">
-        {environmentIcon}
-      </div>
+      <div className="Navbar__icon-box">{environmentIcon}</div>
 
       <div className="Navbar__environment__name" onClick={onClick} role="presentation">
         {activeEnvironment ? activeEnvironment.name : 'Loading'}
@@ -937,16 +901,11 @@ const EnvironmentNav = ({
           </div>
         </PopupMenu>
       )}
-
     </div>
   );
 };
 
-const Environments = ({
-  environments,
-  activeEnvironmentId,
-  onClickEnvironment,
-}) => (
+const Environments = ({ environments, activeEnvironmentId, onClickEnvironment }) => (
   <div>
     {environments.map(environment => (
       <EnvironmentItem
@@ -968,17 +927,11 @@ const EnvironmentItem = ({ environment, isActive, onClick }) => {
   const isProd = environment.type === PROD;
 
   return (
-    <div
-      className={environmentItemClassName}
-      onClick={onClick}
-      role="presentation"
-    >
+    <div className={environmentItemClassName} onClick={onClick} role="presentation">
       <div className="Navbar__environment-item__icon-box">
         <Icon name="cloud" size={16} fill={isProd ? '#4fc7e7' : '#fff'} />
       </div>
-      <div className="Navbar__environment-item__name">
-        {name}
-      </div>
+      <div className="Navbar__environment-item__name">{name}</div>
     </div>
   );
 };

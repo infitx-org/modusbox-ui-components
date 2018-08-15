@@ -389,8 +389,10 @@ Select.propTypes = {
   required: PropTypes.bool,
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf(PropTypes
-    .shape({ active: PropTypes.bool, text: PropTypes.string })),
+  invalidMessages: PropTypes.arrayOf(PropTypes.shape({
+    active: PropTypes.bool,
+    text: PropTypes.string,
+  })),
 };
 
 Select.defaultProps = {

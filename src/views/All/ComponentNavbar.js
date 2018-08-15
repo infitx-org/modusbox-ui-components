@@ -13,12 +13,15 @@ const organizations = JSON.parse(organizationsJson).organizations;
 
 const logNavbarEvents = console.log;
 
-const getCompanies = async () => new Promise( resolve => setTimeout( () => resolve(companies), 1000) );
+const getCompanies = async () => new Promise(resolve => setTimeout(() => resolve(companies), 1000));
 
-const getOrganizations = async (companyId) => new Promise( resolve => {
-  const availableOrganizations = organizations.filter(organization => organization.company === companyId);
-  setTimeout( () => resolve(availableOrganizations), 2500 );
-})
+const getOrganizations = async companyId =>
+  new Promise(resolve => {
+    const availableOrganizations = organizations.filter(
+      organization => organization.company === companyId
+    );
+    setTimeout(() => resolve(availableOrganizations), 2500);
+  });
 /* eslint-enable */
 
 class NavbarWrapper extends React.Component {
@@ -100,17 +103,13 @@ class NavbarWrapper extends React.Component {
         user={user}
         companies={this.state.companies}
         organizations={this.state.organizations}
-
         isLoadingOrganizations={this.state.isOrganizationPending}
-
         activeCompanyId={this.state.activeCompanyId}
         activeOrganizationId={this.state.activeOrganizationId}
         activeEnvironmentId={this.state.activeEnvironmentId}
-
         onCompanyChange={this.changeCompany}
         onOrganizationChange={NavbarWrapper.changeOrganization}
         onEnvironmentChange={NavbarWrapper.changeEnvironment}
-
         onSignout={this.signout}
       />
     );

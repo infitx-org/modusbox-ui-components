@@ -53,7 +53,7 @@
   border-color: $color__main-disabled;
   cursor: auto;
 }
-.input-select__options-item--clear{  
+.input-select__options-item--clear {
   color: #999;
   fill: #999;
   background: #fee;
@@ -67,16 +67,16 @@
 .input-select__options-item__icon {
   margin-right: 2px;
 }
-.input-select__options-item__icon--clear{
+.input-select__options-item__icon--clear {
   border-radius: 10px;
   padding: 3px;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
 .input-select__options-item__label {
   min-width: 0;
 }
-.input-select__options-item__label--clear{  
-  margin-left: 10px; 
+.input-select__options-item__label--clear {
+  margin-left: 10px;
 }
 
 .input-select__options-item--no-options__box {

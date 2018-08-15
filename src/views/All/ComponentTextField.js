@@ -72,7 +72,6 @@ const TestTextField = () => (
   </div>
 );
 
-
 class InvalidToggle extends React.Component {
   constructor(props) {
     super(props);

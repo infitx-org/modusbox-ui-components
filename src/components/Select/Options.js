@@ -156,11 +156,7 @@ class Option extends PureComponent {
         label={label}
         value={value}
       >
-        {icon && <Icon
-          className="input-select__options-item__icon"
-          name={icon}
-          size={16}
-        />}
+        {icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
         <div className="input-select__options-item__label">
           <Tooltip>{label}</Tooltip>
         </div>
@@ -208,11 +204,7 @@ const ClearOption = ({ onClick }) => {
       role="presentation"
       label="Clear"
     >
-      <Icon
-        className={clearOptionIconClassName}
-        name="close-small"
-        size={20}
-      />
+      <Icon className={clearOptionIconClassName} name="close-small" size={20} />
       <div className={clearOptionLabelClassName}>
         <Tooltip>Clear</Tooltip>
       </div>

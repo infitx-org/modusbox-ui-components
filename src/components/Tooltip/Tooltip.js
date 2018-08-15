@@ -95,11 +95,11 @@ class TooltipViewer extends PureComponent {
   }
   componentDidMount() {
     const { parentId, position } = this.props;
-    const {
-      top,
-      left,
-      direction,
-    } = TooltipViewer.getCoordinates(parentId, this._location, position);
+    const { top, left, direction } = TooltipViewer.getCoordinates(
+      parentId,
+      this._location,
+      position,
+    );
 
     // Apply final updates to the tooltip itself
     this._location.style.top = `${top}px`;

@@ -101,20 +101,14 @@ const ValidationMessages = ({ messages }) => {
   let validationMessageList = null;
   if (messages.length) {
     validationMessageList = messages.map((message, i) => (
-      <ValidationMessage
-        key={i.toString()}
-        text={message.text}
-        active={message.active}
-      />
+      <ValidationMessage key={i.toString()} text={message.text} active={message.active} />
     ));
   }
   return <ul className="validation__messages">{validationMessageList}</ul>;
 };
 
 ValidationMessages.propTypes = {
-  messages: PropTypes.oneOfType([
-    PropTypes.arrayOf(ValidationMessage.defaultProps),
-  ]),
+  messages: PropTypes.oneOfType([PropTypes.arrayOf(ValidationMessage.defaultProps)]),
 };
 
 ValidationMessages.defaultProps = {

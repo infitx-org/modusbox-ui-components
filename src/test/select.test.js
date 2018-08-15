@@ -84,7 +84,7 @@ it('selects a value when clicking an option', () => {
 
 it('renders the clear option', () => {
   const mockEvent = jest.fn();
-  const wrapper = mount(<Select onClear={mockEvent} options={options}/>);
+  const wrapper = mount(<Select onClear={mockEvent} options={options} />);
 
   wrapper.find('input[type="text"]').simulate('click');
   const clearOptionBeforeSelection = wrapper.find('.input-select__options-item--clear');
@@ -103,7 +103,7 @@ it('renders the clear option', () => {
 
 it('clears the selected option when clear option is clicked', () => {
   const clearMockEvent = jest.fn();
-  const wrapper = mount(<Select onClear={clearMockEvent} options={options}/>);
+  const wrapper = mount(<Select onClear={clearMockEvent} options={options} />);
 
   wrapper.find('input[type="text"]').simulate('click');
   wrapper
@@ -114,16 +114,13 @@ it('clears the selected option when clear option is clicked', () => {
   const selectedValueBeforeClear = wrapper.find('input[type="text"]').prop('value');
 
   wrapper.find('input[type="text"]').simulate('click');
-  wrapper
-    .find('.input-select__options-item--clear')
-    .simulate('click');
+  wrapper.find('.input-select__options-item--clear').simulate('click');
 
   const selectedValueAfterClear = wrapper.find('input[type="text"]').prop('value');
 
   expect(selectedValueBeforeClear).toBe('label-50');
   expect(selectedValueAfterClear).toBe('');
   expect(clearMockEvent).toHaveBeenCalled();
-
 });
 
 it('triggers onFocus when focused', () => {

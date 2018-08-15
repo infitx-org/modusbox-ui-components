@@ -141,9 +141,7 @@ const MenuSection = ({
   return (
     <div className="element-menu__section">
       {menuSectionLabel}
-      <div className="element-menu__section-items">
-        {menuItems}
-      </div>
+      <div className="element-menu__section-items">{menuItems}</div>
     </div>
   );
 };

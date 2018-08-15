@@ -39,8 +39,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: "url-loader",
-        query: { limit: 8192, mimetype: "image/png" }
+        loader: 'url-loader',
+        query: { limit: 8192, mimetype: 'image/png' },
       },
       {
         test: /\.svg$/,
