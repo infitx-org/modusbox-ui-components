@@ -173,9 +173,6 @@ class Tooltip extends PureComponent {
   componentDidMount() {
     this.detectTooltipRequired();
   }
-  componentDidUpdate() {
-    this.detectTooltipRequired();
-  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceVisibility === true) {
       this.showTooltip(true);
@@ -186,6 +183,9 @@ class Tooltip extends PureComponent {
     if (nextProps.children !== this.props.children) {
       this.detectTooltipRequired();
     }
+  }
+  componentDidUpdate() {
+    this.detectTooltipRequired();
   }
   componentWillUnmount() {
     this.unmountTooltip();

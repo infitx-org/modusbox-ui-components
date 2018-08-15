@@ -109,7 +109,9 @@ class Ticker extends Component {
     clearInterval(this._interval);
   }
   render() {
-    return <div><Tooltip style={style}>{this.state.tickers ? this.props.odd : this.props.even}</Tooltip></div>;
+    const { tickers } = this.state;
+    const { odd, even } = this.props;
+    return <div><Tooltip style={style}>{tickers ? odd : even}</Tooltip></div>;
   }
 }
 export default TestTooltip;
