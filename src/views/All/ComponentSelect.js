@@ -47,6 +47,7 @@ const TestSelect = () => (
       />
       <Select placeholder="Required" options={options} required />
       <Select placeholder="Disabled" options={options} disabled />
+      <Select placeholder="Clearable" options={options} onClear={console.log} />
       <Select
         placeholder="Events (console)"
         options={options}
@@ -54,6 +55,7 @@ const TestSelect = () => (
         onClick={() => console.log('onClick')}
         onBlur={() => console.log('onBlur')}
         onFocus={() => console.log('onFocus')}
+        onClear={() => console.log('onClear')}
       />
     </div>
     <div style={{ padding: 10, border: '1px solid #ccc' }}>

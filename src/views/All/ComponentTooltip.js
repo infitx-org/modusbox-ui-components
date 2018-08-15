@@ -16,16 +16,16 @@ const TestTooltip = () => (
         <Tooltip style={style}> Default usage - applying style(100px width) </Tooltip>
       </Column>
       <Column style={columnStyle}>
-        <Tooltip style={style} delay={2000}> Delay prop - applying style(100px width)  </Tooltip>
+        <Tooltip style={style} delay={2000}>
+          {' '}
+          Delay prop - applying style(100px width){' '}
+        </Tooltip>
       </Column>
     </Row>
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Column style={columnStyle}>
         <Flicker>
-          <Tooltip
-            custom
-            content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}
-          >
+          <Tooltip custom content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}>
             custom prop
           </Tooltip>
         </Flicker>
@@ -34,18 +34,21 @@ const TestTooltip = () => (
         <Tooltip label="boh..."> label prop </Tooltip>
       </Column>
       <Column style={columnStyle}>
-        <Flicker><Tooltip label="boh..."> Flickering </Tooltip></Flicker>
+        <Flicker>
+          <Tooltip label="boh..."> Flickering </Tooltip>
+        </Flicker>
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style}> custom tooltip style (100px width) </Tooltip>
       </Column>
     </Row>
 
-
     <Row>
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style} position="left">
-          {`${Array(10).fill('super').join(' ')} long content with style(100px width)`}
+          {`${Array(10)
+            .fill('super')
+            .join(' ')} long content with style(100px width)`}
         </Tooltip>
       </Column>
 
@@ -59,7 +62,6 @@ const TestTooltip = () => (
     </Row>
 
     <Row style={rowStyle}>
-
       <Column style={columnStyle} align="center">
         <Tooltip style={style} position="right">
           RIGHT POSITIONED
@@ -111,7 +113,12 @@ class Flicker extends Component {
     clearInterval(this._interval);
   }
   render() {
-    return <div>{this.state.flickers}{this.props.children}</div>;
+    return (
+      <div>
+        {this.state.flickers}
+        {this.props.children}
+      </div>
+    );
   }
 }
 export default TestTooltip;

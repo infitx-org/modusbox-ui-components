@@ -35,7 +35,16 @@ class Button extends PureComponent {
   }
   render() {
     const {
-      id, className, style, kind, label, icon, noFill, disabled, pending, tooltip,
+      id,
+      className,
+      style,
+      kind,
+      label,
+      icon,
+      noFill,
+      disabled,
+      pending,
+      tooltip,
     } = this.props;
     const isDisabledOrPending = disabled === true || pending === true;
     const classNames = utils.composeClassNames([
@@ -83,7 +92,6 @@ class Button extends PureComponent {
         </div>
       </button>
     );
-
 
     if (tooltip) {
       return (

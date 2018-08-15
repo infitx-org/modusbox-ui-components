@@ -17,7 +17,7 @@
   background: $color__white;
   margin-top: 1px;
 }
-.element-menu__section-items{
+.element-menu__section-items {
   margin-top: 1px;
   margin-bottom: 1px;
   background: $color__gray-1;
@@ -41,7 +41,7 @@
 }
 
 .element-menu__item--active {
-  background: #F2F1F1;
+  background: #f2f1f1;
   font-weight: bold;
   color: #333;
 }
@@ -58,7 +58,7 @@
 }
 
 .element-menu__item__back-icon {
-  transform: rotateZ(180deg);  
+  transform: rotateZ(180deg);
   margin-left: 3px;
   margin-right: 3px;
 }

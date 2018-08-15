@@ -44,6 +44,7 @@ exports[`renders the Select correctly when multiple props are set 1`] = `
     <Options
       highlighted={0}
       maxHeight={0}
+      onClear={[Function]}
       onSelect={[Function]}
       open={false}
       options={

@@ -65,8 +65,6 @@ it('renders the required state', () => {
   expect(wrapper.find('.mb-input--required')).toHaveLength(1);
 });
 
-// Events
-
 it('renders the options when focused', () => {
   const wrapper = mount(<Select options={options} />);
   wrapper.find('input[type="text"]').simulate('click');
@@ -82,6 +80,47 @@ it('selects a value when clicking an option', () => {
     .at(50)
     .simulate('click');
   expect(wrapper.find('input[type="text"]').prop('value')).toBe('label-50');
+});
+
+it('renders the clear option', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<Select onClear={mockEvent} options={options} />);
+
+  wrapper.find('input[type="text"]').simulate('click');
+  const clearOptionBeforeSelection = wrapper.find('.input-select__options-item--clear');
+
+  wrapper
+    .find('.input-select__options-item')
+    .at(50)
+    .simulate('click');
+
+  wrapper.find('input[type="text"]').simulate('click');
+  const clearOptionAfterSelection = wrapper.find('.input-select__options-item--clear');
+
+  expect(clearOptionBeforeSelection.exists()).toEqual(false);
+  expect(clearOptionAfterSelection.exists()).toEqual(true);
+});
+
+it('clears the selected option when clear option is clicked', () => {
+  const clearMockEvent = jest.fn();
+  const wrapper = mount(<Select onClear={clearMockEvent} options={options} />);
+
+  wrapper.find('input[type="text"]').simulate('click');
+  wrapper
+    .find('.input-select__options-item')
+    .at(50)
+    .simulate('click');
+
+  const selectedValueBeforeClear = wrapper.find('input[type="text"]').prop('value');
+
+  wrapper.find('input[type="text"]').simulate('click');
+  wrapper.find('.input-select__options-item--clear').simulate('click');
+
+  const selectedValueAfterClear = wrapper.find('input[type="text"]').prop('value');
+
+  expect(selectedValueBeforeClear).toBe('label-50');
+  expect(selectedValueAfterClear).toBe('');
+  expect(clearMockEvent).toHaveBeenCalled();
 });
 
 it('triggers onFocus when focused', () => {
@@ -115,8 +154,6 @@ it('triggers onChange when selecting value', () => {
     .simulate('click');
   expect(mockEvent).toHaveBeenCalledWith('value-50');
 });
-
-// Snapshot
 
 it('renders the Select correctly when multiple props are set', () => {
   const wrapper = shallow(<Select value="value-1" id="test-id" options={options} />);

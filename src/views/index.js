@@ -30,7 +30,6 @@ const AllItemPanels = componentMappings.map(({ view, name }) => {
   );
 });
 
-
 class Views extends React.Component {
   static onChangeStyle(style) {
     window.location.href = `http://localhost:9090/${style}.html`;
@@ -56,9 +55,13 @@ class Views extends React.Component {
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
         <WrappedNavbar />
-        <div style={{
-          position: 'absolute', top: '55px', width: '100%', bottom: '0px',
-        }}
+        <div
+          style={{
+            position: 'absolute',
+            top: '55px',
+            width: '100%',
+            bottom: '0px',
+          }}
         >
           <div style={{ margin: '10px' }}>
             <Row>

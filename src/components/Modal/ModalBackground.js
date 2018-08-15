@@ -7,7 +7,6 @@ import Icon from '../Icon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
-
 const ModalContent = ({ tabbed, flex, children }) => {
   if (tabbed) {
     return children;
@@ -20,11 +19,7 @@ const ModalContent = ({ tabbed, flex, children }) => {
   if (flex) {
     return wrappedContent;
   }
-  return (
-    <ScrollBox flex>
-      {wrappedContent}
-    </ScrollBox>
-  );
+  return <ScrollBox flex>{wrappedContent}</ScrollBox>;
 };
 
 export default class ModalBackground extends PureComponent {
@@ -86,9 +81,25 @@ export default class ModalBackground extends PureComponent {
 
   render() {
     const {
-      flex, tabbed, maximise, modalIndex, isSubmitEnabled, isCloseEnabled, isCancelEnabled,
-      isUndoEnabled, noFooter, width, children, kind, title, allowClose, allowCancel, allowUndo,
-      allowSubmit, submitButtonId, primaryAction,
+      flex,
+      tabbed,
+      maximise,
+      modalIndex,
+      isSubmitEnabled,
+      isCloseEnabled,
+      isCancelEnabled,
+      isUndoEnabled,
+      noFooter,
+      width,
+      children,
+      kind,
+      title,
+      allowClose,
+      allowCancel,
+      allowUndo,
+      allowSubmit,
+      submitButtonId,
+      primaryAction,
     } = this.props;
     const maxHeight = maximise ? 'auto' : `calc(100% - ${60 * modalIndex + 70}px)`;
     const bottom = maximise ? '20px' : undefined;
@@ -137,15 +148,12 @@ export default class ModalBackground extends PureComponent {
           </div>
 
           <div className={bodyClassName}>
-            <ModalContent
-              tabbed={tabbed}
-              flex={flex}
-            >
+            <ModalContent tabbed={tabbed} flex={flex}>
               {children}
             </ModalContent>
           </div>
 
-          {!noFooter &&
+          {!noFooter && (
             <div className="element-modal__footer">
               <div className="element-modal__footer-left" />
               <div className="element-modal__footer-right">
@@ -191,7 +199,7 @@ export default class ModalBackground extends PureComponent {
                 )}
               </div>
             </div>
-          }
+          )}
         </div>
       </div>
     );
