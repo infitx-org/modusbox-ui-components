@@ -21,20 +21,18 @@ const TestTooltip = () => (
     </Row>
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Column style={columnStyle}>
-        <Flicker>
-          <Tooltip
-            custom
-            content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}
-          >
-            custom prop
-          </Tooltip>
-        </Flicker>
+        <Tooltip
+          custom
+          content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}
+        >
+          custom tooltip
+        </Tooltip>
       </Column>
       <Column style={columnStyle}>
         <Tooltip label="boh..."> label prop </Tooltip>
       </Column>
       <Column style={columnStyle}>
-        <Flicker><Tooltip label="boh..."> Flickering </Tooltip></Flicker>
+        <Ticker odd="LongLongLongLongLong" even="short" />
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style}> custom tooltip style (100px width) </Tooltip>
@@ -59,7 +57,6 @@ const TestTooltip = () => (
     </Row>
 
     <Row style={rowStyle}>
-
       <Column style={columnStyle} align="center">
         <Tooltip style={style} position="right">
           RIGHT POSITIONED
@@ -84,34 +81,35 @@ const TestTooltip = () => (
         </Tooltip>
       </Column>
     </Row>
+
   </Column>
 );
 
-class Flicker extends Component {
+class Ticker extends Component {
   constructor() {
     super();
-    this.startFlickering = this.startFlickering.bind(this);
-    this.stopFlickering = this.stopFlickering.bind(this);
+    this.startTickering = this.startTickering.bind(this);
+    this.stopTickering = this.stopTickering.bind(this);
     this.state = {
-      flickers: 0,
+      tickers: 0,
     };
   }
   componentDidMount() {
-    this.startFlickering();
+    this.startTickering();
   }
   componetWillUnmount() {
-    this.stopFlickering();
+    this.stopTickering();
   }
-  startFlickering() {
+  startTickering() {
     this._interval = setInterval(() => {
-      this.setState({ flickers: this.state.flickers + 1 });
-    }, 1000);
+      this.setState({ tickers: (this.state.tickers + 1) % 2 });
+    }, 3000);
   }
-  stopFlickering() {
+  stopTickering() {
     clearInterval(this._interval);
   }
   render() {
-    return <div>{this.state.flickers}{this.props.children}</div>;
+    return <div><Tooltip style={style}>{this.state.tickers ? this.props.odd : this.props.even}</Tooltip></div>;
   }
 }
 export default TestTooltip;
