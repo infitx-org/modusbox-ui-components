@@ -44,11 +44,21 @@ class HeaderCell extends PureComponent {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
+    this.onFilterClick = this.onFilterClick.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.isFiltering && this.props.isFiltering !== prevProps.isFiltering) {
+      this._filter.focus();
+    }
   }
   onClick() {
     if (this.props.isSortable) {
       this.props.onClick();
     }
+  }
+  onFilterClick(e) {
+    this.props.onFilterClick();
+    e.stopPropagation();
   }
   render() {
     const {
@@ -60,7 +70,6 @@ class HeaderCell extends PureComponent {
       filter,
       onFilterChange,
       onFilterBlur,
-      onFilterClick,
     } = this.props;
 
     const headerCellClassName = utils.composeClassNames([
@@ -71,20 +80,27 @@ class HeaderCell extends PureComponent {
     ]);
 
     return (
-      <div className={headerCellClassName} onClick={this.onClick} role="presentation">
+      <div
+        className={headerCellClassName}
+        onClick={this.onClick}
+        role="presentation"
+      >
 
         <FilterIcon
           isFiltering={isFiltering}
-          onClick={onFilterClick}
+          onClick={this.onFilterClick}
         />
-        <HeaderCellContent
-          label={label}
-          isFiltering={isFiltering}
-          filter={filter}
-          onFilterChange={onFilterChange}
-          onFilterBlur={onFilterBlur}
-        />
-
+        {!isFiltering && <HeaderLabel label={label} />}
+        {isFiltering &&
+          <HeaderFilter
+            isFiltering={isFiltering}
+            filter={filter}
+            onFilterClick={this.onFilterClick}
+            onFilterChange={onFilterChange}
+            onFilterBlur={onFilterBlur}
+            assignRef={(input) => { this._filter = input; }}
+          />
+        }
         <SortIcon
           isSorting={isSorting}
           isSortingAsc={isSortingAsc}
@@ -94,30 +110,28 @@ class HeaderCell extends PureComponent {
   }
 }
 
-const HeaderCellContent = ({
-  isFiltering,
+
+const HeaderLabel = ({ label }) => (
+  <div className="element-datalist__header-cell__label">
+    <Tooltip>{label}</Tooltip>
+  </div>
+);
+
+const HeaderFilter = ({
   filter,
-  label,
   onFilterChange,
   onFilterBlur,
-}) => {
-  if (!isFiltering) {
-    return (
-      <div className="element-datalist__header-cell__label">
-        <Tooltip>{label}</Tooltip>
-      </div>
-    );
-  }
-  return (
-    <input
-      type="text"
-      className="element-datalist__header-cell__filter"
-      value={filter.value || ''}
-      onChange={e => onFilterChange(e.target.value)}
-      onBlur={onFilterBlur}
-    />
-  );
-};
+  assignRef,
+}) => (
+  <input
+    type="text"
+    className="element-datalist__header-cell__filter"
+    value={filter.value || ''}
+    onChange={e => onFilterChange(e.target.value)}
+    onBlur={onFilterBlur}
+    ref={assignRef}
+  />
+);
 
 const FilterIcon = ({ isFiltering, onClick }) => {
   const searchIconClassName = utils.composeClassNames([

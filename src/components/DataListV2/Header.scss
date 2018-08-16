@@ -16,13 +16,14 @@
 
 .element-datalist__header-cell--sortable {
   cursor: pointer;
-  &:hover {
+  &:not(.element-datalist__header-cell--sorting):not(.element-datalist__header-cell--filtering):hover {
     border-bottom-color: #aaa;
   }
 }
 .element-datalist__header-cell--sorting {
-  color: #6b8a99;
+  color: $color__main-primary;
   border-bottom-color: $color__main-primary;
+  font-weight: bold;
 }
 .element-datalist__header-cell--filtering{
   border-bottom-color: #f90;
@@ -42,17 +43,22 @@
 .element-datalist__header-cell__search-icon{
   flex: 0;
   fill: #ccc;
+  transition: all 0.2s ease-out;
 }
 .element-datalist__header-cell__search-icon--active{
   fill: #f90;
+  transform: scale(1.2, 1.2);
 }
 
 .element-datalist__header-cell__filter{
   flex: 1;
   border: none;
+  outline: none;
+  height: 100%;
 }
 .element-datalist__header-cell__label {
   flex: 1;
+  font-size: 13px;
 }
 
 

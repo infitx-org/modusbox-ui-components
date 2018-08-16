@@ -113,7 +113,7 @@ class DataList extends PureComponent {
     this._columns = DataList.convertColumns(this.props.columns);
     this.transformList({ applyColumns: true, sort: true });
   }
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps) {
     const { list, columns } = nextProps;
     this._list = list;
     this._columns = DataList.convertColumns(columns);
@@ -154,7 +154,7 @@ class DataList extends PureComponent {
       this.setState({
         filters: [
           ...filters.slice(0, index),
-          ...filters.slice(index),
+          ...filters.slice(index + 1),
         ],
       });
     }

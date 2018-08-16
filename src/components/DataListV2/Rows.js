@@ -40,7 +40,7 @@ class RowItem extends PureComponent {
 
   render(){
     const { item, columns } = this.props;
-    const rowCells = columns.map( (column, cellIdx) => <ItemCell>{item[column.key]}</ItemCell> );
+    const rowCells = columns.map( (column, cellIdx) => <ItemCell key={cellIdx}>{item[column.key]}</ItemCell> );
     return (
       <Row className="element-datalist__row">
         {rowCells}
