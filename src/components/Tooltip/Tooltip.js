@@ -159,6 +159,8 @@ class TooltipViewer extends PureComponent {
 class Tooltip extends PureComponent {
   constructor(props) {
     super(props);
+    this.mountTooltip = this.mountTooltip.bind(this);
+    this.unmountTooltip = this.unmountTooltip.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
     this.hideTooltip = this.hideTooltip.bind(this);
     this.delayShowTooltip = this.delayShowTooltip.bind(this);
@@ -169,8 +171,7 @@ class Tooltip extends PureComponent {
     this._id = Math.random().toString();
   }
   componentDidMount() {
-    this.box.addEventListener('mouseenter', this.delayShowTooltip);
-    this.box.addEventListener('mouseleave', this.delayHideTooltip);
+    this.detectTooltipRequired();
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceVisibility === true) {
@@ -179,11 +180,15 @@ class Tooltip extends PureComponent {
     if (nextProps.forceVisibility === false) {
       this.hideTooltip(true);
     }
+    if (nextProps.children !== this.props.children) {
+      this.detectTooltipRequired();
+    }
+  }
+  componentDidUpdate() {
+    this.detectTooltipRequired();
   }
   componentWillUnmount() {
-    this.hideTooltip(true);
-    this.box.removeEventListener('mouseenter', this.delayShowTooltip);
-    this.box.removeEventListener('mouseleave', this.delayHideTooltip);
+    this.unmountTooltip();
   }
   delayShowTooltip() {
     this._isHoveringTooltip = true;
@@ -198,6 +203,28 @@ class Tooltip extends PureComponent {
     clearTimeout(this.tooltipTimeout);
     this.tooltipTimeout = setTimeout(this.hideTooltip, this.props.delay);
   }
+  detectTooltipRequired() {
+    const { content, label } = this.props;
+    const { scrollWidth, offsetWidth } = this.box;
+    const hasChildrenOverflow = scrollWidth > offsetWidth;
+    const isLabelDefined = label !== undefined;
+    const isContentDefined = content !== undefined;
+    const shouldShowTooltip = hasChildrenOverflow || isLabelDefined || isContentDefined;
+    if (shouldShowTooltip) {
+      this.mountTooltip();
+    } else {
+      this.unmountTooltip();
+    }
+  }
+  mountTooltip() {
+    this.box.addEventListener('mouseenter', this.delayShowTooltip);
+    this.box.addEventListener('mouseleave', this.delayHideTooltip);
+  }
+  unmountTooltip() {
+    this.hideTooltip(true);
+    this.box.removeEventListener('mouseenter', this.delayShowTooltip);
+    this.box.removeEventListener('mouseleave', this.delayHideTooltip);
+  }
   showTooltip(force) {
     if (this._isHoveringTooltip === false && force === false) {
       return;
@@ -209,16 +236,6 @@ class Tooltip extends PureComponent {
       return;
     }
 
-    const { content, label } = this.props;
-    const { scrollWidth, offsetWidth } = this.box;
-    const hasChildrenOverflow = scrollWidth > offsetWidth;
-    const isLabelDefined = label !== undefined;
-    const isContentDefined = content !== undefined;
-    const shouldShowTooltip = hasChildrenOverflow || isLabelDefined || isContentDefined;
-
-    if (!shouldShowTooltip) {
-      return;
-    }
     this.setState({ show: true });
   }
   hideTooltip(force = false) {
