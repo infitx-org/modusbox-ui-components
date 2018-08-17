@@ -110,7 +110,6 @@ class HeaderCell extends PureComponent {
   }
 }
 
-
 const HeaderLabel = ({ label }) => (
   <div className="element-datalist__header-cell__label">
     <Tooltip>{label}</Tooltip>
@@ -143,7 +142,7 @@ const FilterIcon = ({ isFiltering, onClick }) => {
     <Icon
       name="search-small"
       className={searchIconClassName}
-      size={14}
+      size={15}
       onClick={onClick}
     />
   );

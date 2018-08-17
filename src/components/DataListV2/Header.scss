@@ -10,8 +10,9 @@
   border-bottom: 3px solid #ccc;
   transition: color 0.2s linear, border-bottom-color 0.2s linear;
   overflow-x: hidden;
-  padding: 0px 10px;
+  padding: 0px;
   color: #333;
+  position: relative;
 }
 
 .element-datalist__header-cell--sortable {
@@ -29,13 +30,12 @@
   border-bottom-color: #f90;
 }
 
-
 .element-datalist__header-cell__sort-icon {
   flex: 0;
   transform: rotateZ(90deg) rotateY(0deg);
   fill: #999;
   transition: transform 0.2s ease-out;
-  
+  margin: 3px;
 }
 .element-datalist__header-cell__sort-icon--asc {
   transform: rotateZ(90deg) rotateY(180deg);
@@ -44,6 +44,7 @@
   flex: 0;
   fill: #ccc;
   transition: all 0.2s ease-out;
+  margin: 3px;
 }
 .element-datalist__header-cell__search-icon--active{
   fill: #f90;
