@@ -34,13 +34,18 @@ class Rows extends PureComponent {
 }
 
 class RowItem extends PureComponent {
+  static getCells(item) {
+    return (column, index) => (
+      <ItemCell key={index}>{item[column.key]}</ItemCell>
+    );
+  } 
   constructor(props){
     super(props);
   }
 
   render(){
     const { item, columns } = this.props;
-    const rowCells = columns.map( (column, cellIdx) => <ItemCell key={cellIdx}>{item[column.key]}</ItemCell> );
+    const rowCells = columns.map(RowItem.getCells(item));
     return (
       <Row className="element-datalist__row">
         {rowCells}
@@ -60,29 +65,12 @@ const ArrowCell = ({ isSelected }) => (
   </div>
 );
 
-class ItemCell extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { icon, children } = this.props;
-    return (
-      <div  className="element-datalist__item-cell__wrapper">
-        <div className="element-datalist__item-cell__content">
-          {icon && (
-            <Icon
-              size={16}
-              name={''}
-              color={color || '#333'}
-              className="element-datalist__body-cell-icon"
-            />
-          )}
-          <Tooltip>{children}</Tooltip>
-        </div>
-      </div>
-    );
-  }
-}
+const ItemCell = ({ children }) => (
+  <div  className="element-datalist__item-cell__wrapper">
+    <div className="element-datalist__item-cell__content">
+      <Tooltip>{children}</Tooltip>
+    </div>
+  </div>
+);
 
 export default Rows;

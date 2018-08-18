@@ -39,7 +39,6 @@ class DataList extends PureComponent {
       ...columns.reduce(reduceColumns(item), {}),
     });
 
-
     return items.map(mapItems);
   }
   static getLabelKey(columns, label) {

@@ -18,7 +18,7 @@ const Header = ({
       <HeaderCell
         key={column.__index}
         label={column.label}
-        isSortable={column.sortable}
+        isSortable={column.sortable !== false}
         isSorting={sortKey === column.key}
         isSortingAsc={sortAsc}
         isFiltering={filter !== undefined}
