@@ -3,8 +3,8 @@ import ComponentButton from './ComponentButton';
 import ComponentTooltip from './ComponentTooltip';
 import ComponentCheckbox from './ComponentCheckbox';
 import ComponentColumn from './ComponentColumn';
+import ComponentOldDataList from './ComponentOldDataList';
 import ComponentDataList from './ComponentDataList';
-import ComponentDataListV2 from './ComponentDataListV2';
 import ComponentDatePicker from './ComponentDatePicker';
 import ComponentHeading from './ComponentHeading';
 import ComponentMenu from './ComponentMenu';
@@ -31,8 +31,8 @@ export {
   ComponentTextField,
   ComponentTabs,
   ComponentRadio,
+  ComponentOldDataList,
   ComponentDataList,
-  ComponentDataListV2,
   ComponentScrollBox,
   ComponentFileUploader,
   ComponentDatePicker,

@@ -1,8 +1,8 @@
 @import '../../assets/styles/vars/colors.scss';
 
-/* MULTI SELECTION */
 .input-checkbox {
-  display: inline-flex;
+  display: flex;
+  align-items: center;
 }
 .input-checkbox__input {
   width: 0px;
@@ -30,6 +30,7 @@
     align-items: center;
     font-size: 14px;
     user-select: none;
+    height: 22px;
 
     &:hover {
       &:before {
@@ -119,6 +120,7 @@
     }
   }
 }
+
 @keyframes animateCheckboxSelectedContent {
   0% {
     margin-top: 2px;
