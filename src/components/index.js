@@ -7,6 +7,7 @@
 import Button from './Button';
 import Column from './Column';
 import Checkbox from './Checkbox';
+import DataList from './DataList';
 import DatePicker from './DatePicker';
 import FileUploader from './FileUploader';
 import Heading from './Heading';
@@ -28,6 +29,7 @@ export {
   Button,
   Column,
   Checkbox,
+  DataList,
   DatePicker,
   FileUploader,
   Heading,

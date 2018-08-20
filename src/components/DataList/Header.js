@@ -6,7 +6,6 @@ import Row from '../Row';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 
-import './Header.scss';
 import '../../icons/modusbox/arrow.svg';
 
 const Header = ({

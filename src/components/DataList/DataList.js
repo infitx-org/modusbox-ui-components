@@ -2,13 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import orderBy from 'lodash/orderBy';
 import find from 'lodash/find';
-import uuid from 'uuid-random';
+import uuid from '../../utils/uuid';
 
 import Header from './Header';
 import Rows from './Rows';
 import { NoData, Pending, ErrorMessage } from './Boxes';
-
-import './DataList.scss';
 
 class DataList extends PureComponent {
   static convertColumns(columns) {

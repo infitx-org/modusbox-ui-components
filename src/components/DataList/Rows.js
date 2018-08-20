@@ -7,8 +7,6 @@ import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import ScrollBox from '../ScrollBox';
 
-import './Rows.scss';
-
 class Rows extends PureComponent {
   constructor(props) {
     super(props);

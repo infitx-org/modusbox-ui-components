@@ -59,8 +59,7 @@
     "react-day-picker": "7.1.9",
     "react-dom": "16.4.0",
     "react-motion": "^0.2.7",
-    "react-resize-detector": "2.3.0",
-    "uuid-random": "^1.0.6"
+    "react-resize-detector": "2.3.0"
   },
   "standard": {
     "parser": "babel-eslint",
