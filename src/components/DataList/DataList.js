@@ -190,16 +190,17 @@ class DataList extends PureComponent {
       items, sortAsc, sortKey, filters,
     } = this.state;
 
+    let content = null;
     if (isPending) {
-      return <Pending />;
+      content = <Pending />;
     } else if (hasError) {
-      return <ErrorMessage />;
+      content = <ErrorMessage />;
     } else if (items.length === 0) {
-      return <NoData label={noData} />;
-    }
-    return (
-      <div className="mb-element element-datalistV2">
+      content = <NoData label={noData} />;
+    } else {
+      content = [
         <Header
+          key="datalist-header"
           columns={this._columns}
           sortKey={sortKey}
           sortAsc={sortAsc}
@@ -208,11 +209,18 @@ class DataList extends PureComponent {
           onFilterChange={this.onFilterChange}
           onFilterBlur={this.onFilterBlur}
           onFilterClick={this.onFilterClick}
-        />
+        />,
         <Rows
+          key="datalist-rows"
           items={items}
           columns={columns}
-        />
+        />,
+      ];
+    }
+
+    return (
+      <div className="mb-element element-datalist">
+        {content}
       </div>
     );
   }

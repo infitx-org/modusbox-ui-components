@@ -3,7 +3,7 @@ import ComponentButton from './ComponentButton';
 import ComponentTooltip from './ComponentTooltip';
 import ComponentCheckbox from './ComponentCheckbox';
 import ComponentColumn from './ComponentColumn';
-import ComponentOldDataList from './ComponentOldDataList';
+// import ComponentOldDataList from './ComponentOldDataList';
 import ComponentDataList from './ComponentDataList';
 import ComponentDatePicker from './ComponentDatePicker';
 import ComponentHeading from './ComponentHeading';
@@ -31,7 +31,7 @@ export {
   ComponentTextField,
   ComponentTabs,
   ComponentRadio,
-  ComponentOldDataList,
+  // ComponentOldDataList,
   ComponentDataList,
   ComponentScrollBox,
   ComponentFileUploader,
