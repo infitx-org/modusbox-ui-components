@@ -1,0 +1,9 @@
+.element-datalist__error-box,
+.element-datalist__pending-box,
+.element-datalist__nodata-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}

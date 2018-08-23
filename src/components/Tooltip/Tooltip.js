@@ -281,7 +281,7 @@ Tooltip.propTypes = {
   content: PropTypes.node,
   children: PropTypes.node,
   style: PropTypes.shape(),
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
   kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning']),
   custom: PropTypes.bool,

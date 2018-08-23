@@ -14,7 +14,7 @@ const componentMappings = Object.keys(ComponentViews).map(view => ({
 const AllItemTabs = componentMappings.map(({ name }) => <Tab key={name}> {name} </Tab>);
 const AllItemPanels = componentMappings.map(({ view, name }) => {
   const View = ComponentViews[view];
-  if (name === 'DataList') {
+  if (name.includes('DataList')) {
     return (
       <TabPanel key={name}>
         <View />

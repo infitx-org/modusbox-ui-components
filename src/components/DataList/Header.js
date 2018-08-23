@@ -1,127 +1,150 @@
-/* eslint-disable */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import find from 'lodash/find';
+import * as utils from '../../utils/common';
 
 import Row from '../Row';
+import Icon from '../Icon';
+import Tooltip from '../Tooltip';
 
-import { HeaderCell } from './Cells';
-import Checkbox from './Checkbox';
+import '../../icons/modusbox/arrow.svg';
 
-class Header extends React.Component {
+const Header = ({
+  columns,
+  sortKey,
+  sortAsc,
+  onSortClick,
+  filters,
+  onFilterChange,
+  onFilterBlur,
+  onFilterClick,
+}) => {
+  const headerCells = columns.map((column) => {
+    const filter = find(filters, { label: column.label });
+    return (
+      <HeaderCell
+        key={column.__index}
+        label={column.label}
+        isSortable={column.sortable !== false}
+        isSorting={sortKey === column.key}
+        isSortingAsc={sortAsc}
+        isFiltering={filter !== undefined}
+        filter={filter}
+        onClick={() => onSortClick(column.key)}
+        onFilterChange={value => onFilterChange(column.label, value)}
+        onFilterBlur={() => onFilterBlur(column.label)}
+        onFilterClick={() => onFilterClick(column.label)}
+      />
+    );
+  });
+
+  return (
+    <div className="element-datalist__header">
+      <Row>{headerCells}</Row>
+    </div>
+  );
+};
+
+// Cell in the Header
+class HeaderCell extends PureComponent {
   constructor(props) {
     super(props);
+    this.onClick = this.onClick.bind(this);
+    this.onFilterClick = this.onFilterClick.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.isFiltering && this.props.isFiltering !== prevProps.isFiltering) {
+      this._filter.focus();
+    }
+  }
+  onClick() {
+    if (this.props.isSortable) {
+      this.props.onClick();
+    }
+  }
+  onFilterClick(e) {
+    this.props.onFilterClick();
+    e.stopPropagation();
   }
   render() {
     const {
-      id,
-      hasChildren,
-      hasMultiSelect,
-      allSelected,
-      someSelected,
-      onMultiSelectAll,
-      style,
-      originalColumns,
-      columns,
-      filters,
-      sortLabel,
+      label,
+      isSortable,
+      isSorting,
       isSortingAsc,
-      onColumnClick,
-      onSearchClick,
-      onSearchChange,
-      onSearchRemove,
-      onTriggerResizeWidth,
-      showScrollbar,
+      isFiltering,
+      filter,
+      onFilterChange,
+      onFilterBlur,
     } = this.props;
+
+    const headerCellClassName = utils.composeClassNames([
+      'element-datalist__header-cell',
+      isSortable && 'element-datalist__header-cell--sortable',
+      isSorting && 'element-datalist__header-cell--sorting',
+      isFiltering && 'element-datalist__header-cell--filtering',
+    ]);
+
     return (
-      <div className="element-datalist__header-row-box">
-        <Row
-          className="element-datalist__header-row"
-          style={{ paddingRight: showScrollbar ? '6px' : '0px' }}
-        >
-          {hasChildren && (
-            <div className="element-datalist__header-cell" style={style.arrowColumn} />
-          )}
-          {hasMultiSelect && (
-            <div
-              id={`${id}-multiselect-all`}
-              className="element-datalist__header-cell element-datalist__header-column-cell"
-              style={{ ...style.multiSelectColumn, paddingTop: 6 }}
-            >
-              <Checkbox
-                id="general-multi-select"
-                isSelected={allSelected}
-                onChange={onMultiSelectAll}
-                halfChecked={someSelected}
-              />
-            </div>
-          )}
-          {columns.map((column, i) => {
-            const newStyle = {
-              ...(column.headerStyle || {}),
-              width: column.width ? column.width : style.dataColumn.width,
-            };
-
-            const originalColumn = originalColumns[i];
-            const isSortable = !(column.sortable === false);
-            const isSearchable = !(column.searchable === false);
-            const isResizable = !(column.resizable === false);
-            const filter = find(filters, { label: column.label });
-            const isSearching = filter != undefined;
-            const headerCellId = `${id}-${column.label.toLowerCase().replace(/ /g, '-')}`;
-            const isLastColumn = i === columns.length - 1;
-
-            return (
-              <HeaderCell
-                id={headerCellId}
-                key={i.toString()}
-                index={i}
-                isLastColumn={isLastColumn}
-                searchable={isSearchable}
-                resizable={isResizable}
-                style={newStyle}
-                column={column}
-                sortable={isSortable} // undefined is sortable
-                label={column.label}
-                content={originalColumn.headerContent}
-                showLabel={column.showLabel != undefined ? column.showLabel : true}
-                isSearching={isSearching}
-                filter={filter}
-                isSorting={sortLabel === column.label}
-                isSortingAsc={isSortingAsc}
-                onColumnClick={() => (isSortable ? onColumnClick(column.label) : {})}
-                onSearchClick={evt => (isSearchable ? onSearchClick(evt, column.label) : {})}
-                onSearchChange={onSearchChange}
-                onSearchRemove={onSearchRemove}
-                onTriggerResizeWidth={onTriggerResizeWidth}
-                ref={cell => (this[`headerCell${i}`] = cell)}
-              />
-            );
-          })}
-        </Row>
+      <div className={headerCellClassName} onClick={this.onClick} role="presentation">
+        <FilterIcon isFiltering={isFiltering} onClick={this.onFilterClick} />
+        {!isFiltering && <HeaderLabel label={label} />}
+        {isFiltering && (
+          <HeaderFilter
+            isFiltering={isFiltering}
+            filter={filter}
+            onFilterClick={this.onFilterClick}
+            onFilterChange={onFilterChange}
+            onFilterBlur={onFilterBlur}
+            assignRef={(input) => {
+              this._filter = input;
+            }}
+          />
+        )}
+        <SortIcon isSorting={isSorting} isSortingAsc={isSortingAsc} />
       </div>
     );
   }
 }
 
-Header.propTypes = {
-  id: PropTypes.string,
-  hasChildren: PropTypes.bool,
-  hasMultiSelect: PropTypes.bool,
-  allSelected: PropTypes.bool,
-  someSelected: PropTypes.bool,
-  onMultiSelectAll: PropTypes.func,
-  style: PropTypes.shape(),
-  originalColumns: PropTypes.array,
-  columns: PropTypes.array,
-  filters: PropTypes.array,
-  sortLabel: PropTypes.string,
-  isSortingAsc: PropTypes.bool,
-  onColumnClick: PropTypes.func,
-  onSearchClick: PropTypes.func,
-  onSearchChange: PropTypes.func,
-  onSearchRemove: PropTypes.func,
-  onTriggerResizeWidth: PropTypes.func,
-  showScrollbar: PropTypes.bool,
+const HeaderLabel = ({ label }) => (
+  <div className="element-datalist__header-cell__label">
+    <Tooltip>{label}</Tooltip>
+  </div>
+);
+
+const HeaderFilter = ({
+  filter, onFilterChange, onFilterBlur, assignRef,
+}) => (
+  <input
+    type="text"
+    className="element-datalist__header-cell__filter"
+    value={filter.value || ''}
+    onChange={e => onFilterChange(e.target.value)}
+    onBlur={onFilterBlur}
+    ref={assignRef}
+  />
+);
+
+const FilterIcon = ({ isFiltering, onClick }) => {
+  const searchIconClassName = utils.composeClassNames([
+    'element-datalist__header-cell__search-icon',
+    isFiltering && 'element-datalist__header-cell__search-icon--active',
+  ]);
+
+  return <Icon name="search-small" className={searchIconClassName} size={15} onClick={onClick} />;
 };
+
+const SortIcon = ({ isSorting, isSortingAsc }) => {
+  if (!isSorting) {
+    return null;
+  }
+
+  const iconClassName = utils.composeClassNames([
+    'element-datalist__header-cell__sort-icon',
+    isSortingAsc && 'element-datalist__header-cell__sort-icon--asc',
+  ]);
+
+  return <Icon className={iconClassName} name="arrow" size={10} />;
+};
+
 export default Header;

@@ -4,32 +4,30 @@
   height: 20px;
   cursor: pointer;
   width: 100%;
+  align-items: center;
 }
-.link-box {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  position: relative;
-  display: block;
-}
-.link-text-box {
+.element-datalist__link__content {
   color: #00a3e0;
   flex: 1 1 auto;
 }
-.link-icon-box {
+.element-datalist__link__icon {
+  display: none;
   flex: 0 0 25px;
   padding-top: 2px;
   padding-left: 5px;
   animation: animateLinkFadeIn 0.2s ease-out 1 forwards;
 }
+.element-datalist__link:hover .element-datalist__link__icon {
+  display: block;
+}
 
 @keyframes animateLinkFadeIn {
   0% {
-    transform: translate3d(-3px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
     opacity: 0;
   }
   100% {
-    transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(-3px, 0px, 0px);
     opacity: 1;
   }
 }

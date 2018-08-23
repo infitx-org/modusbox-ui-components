@@ -1,0 +1,67 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/transitions.scss';
+
+.element-datalist__header-cell {
+  flex: 1;
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid #ccc;
+  transition: color 0.2s linear, border-bottom-color 0.2s linear;
+  overflow-x: hidden;
+  padding: 0px;
+  color: #333;
+  position: relative;
+}
+
+.element-datalist__header-cell--sortable {
+  cursor: pointer;
+  &:not(.element-datalist__header-cell--sorting):not(.element-datalist__header-cell--filtering):hover {
+    border-bottom-color: #aaa;
+  }
+}
+.element-datalist__header-cell--sorting {
+  color: $color__main-primary;
+  border-bottom-color: $color__main-primary;
+  font-weight: bold;
+}
+.element-datalist__header-cell--filtering {
+  border-bottom-color: #f63;
+}
+
+.element-datalist__header-cell__sort-icon {
+  flex: 0;
+  transform: rotateZ(90deg) rotateY(0deg);
+  fill: #999;
+  transition: transform 0.2s ease-out;
+  margin: 3px;
+}
+.element-datalist__header-cell__sort-icon--asc {
+  transform: rotateZ(90deg) rotateY(180deg);
+}
+.element-datalist__header-cell__search-icon {
+  flex: 0;
+  fill: #ccc;
+  transition: all 0.2s ease-out;
+  margin: 3px;
+}
+.element-datalist__header-cell__search-icon:hover {
+  fill: #999;
+}
+.element-datalist__header-cell__search-icon--active,
+.element-datalist__header-cell__search-icon--active:hover {
+  fill: #f63;
+  transform: scale(1.2, 1.2);
+}
+
+.element-datalist__header-cell__filter {
+  flex: 1;
+  border: none;
+  outline: none;
+  height: 100%;
+}
+.element-datalist__header-cell__label {
+  flex: 1;
+  font-size: 13px;
+}

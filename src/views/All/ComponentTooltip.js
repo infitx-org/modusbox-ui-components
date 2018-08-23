@@ -24,10 +24,7 @@ const TestTooltip = () => (
     </Row>
     <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip
-          custom
-          content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}
-        >
+        <Tooltip custom content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}>
           custom tooltip
         </Tooltip>
       </Column>
@@ -85,7 +82,6 @@ const TestTooltip = () => (
         </Tooltip>
       </Column>
     </Row>
-
   </Column>
 );
 
@@ -115,7 +111,11 @@ class Ticker extends Component {
   render() {
     const { tickers } = this.state;
     const { odd, even } = this.props;
-    return <div><Tooltip style={style}>{tickers ? odd : even}</Tooltip></div>;
+    return (
+      <div>
+        <Tooltip style={style}>{tickers ? odd : even}</Tooltip>
+      </div>
+    );
   }
 }
 export default TestTooltip;

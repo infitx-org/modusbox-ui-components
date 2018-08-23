@@ -1,0 +1,22 @@
+.element-datalist__row {
+  border-bottom: 1px solid #e0e0e0;
+}
+.element-datalist__row:nth-child(odd) {
+  background: #fbfbfb;
+}
+.element-datalist__row:nth-child(even) {
+  background: #fff;
+}
+
+.element-datalist__item-cell__wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  min-height: 40px;
+  overflow: hidden;
+  padding: 5px;
+}
+.element-datalist__item-cell__content {
+  width: 100%;
+}

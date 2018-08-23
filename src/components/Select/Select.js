@@ -11,6 +11,8 @@ import { Loader, Placeholder, Validation } from '../Common';
 import Options from './Options';
 import Indicator from './Indicator';
 
+import '../../icons/mule/search-small.svg';
+
 class Select extends PureComponent {
   constructor(props) {
     super(props);
