@@ -1,12 +1,16 @@
 @import '../../assets/styles/vars/colors.scss';
 
 .element-tooltip {
-  position: relative;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  position: relative;
+}
+.element-tooltip--inactive {
+  max-width: none;
+  overflow: visible;
+  text-overflow: none;
+  white-space: none;
 }
 .element-tooltip__content {
 }

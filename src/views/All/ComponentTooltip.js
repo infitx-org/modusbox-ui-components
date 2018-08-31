@@ -17,8 +17,7 @@ const TestTooltip = () => (
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style} delay={2000}>
-          {' '}
-          Delay prop - applying style(100px width){' '}
+          Delay prop - applying style(100px width)
         </Tooltip>
       </Column>
     </Row>
@@ -40,6 +39,22 @@ const TestTooltip = () => (
     </Row>
 
     <Row>
+      <Column style={columnStyle} align="center space-between">
+        <Tooltip style={style} position="left">
+          {`${Array(10)
+            .fill('super')
+            .join(' ')} long content with style(100px width)`}
+        </Tooltip>
+      </Column>
+
+      <Column style={columnStyle} align="center space-between">
+        <Tooltip style={style} position="left">
+          {`${Array(10)
+            .fill('super')
+            .join(' ')} long content with style(100px width)`}
+        </Tooltip>
+      </Column>
+
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style} position="left">
           {`${Array(10)
@@ -100,12 +115,12 @@ class Ticker extends Component {
   componetWillUnmount() {
     this.stopTicker();
   }
-  startTickering() {
+  startTicker() {
     this._interval = setInterval(() => {
       this.setState({ tickers: (this.state.tickers + 1) % 2 });
     }, 3000);
   }
-  stopTickering() {
+  stopTicker() {
     clearInterval(this._interval);
   }
   render() {
