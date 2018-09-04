@@ -10,10 +10,26 @@ import ScrollBox from '../ScrollBox';
 class Rows extends PureComponent {
   constructor(props) {
     super(props);
+    this.onItemClick = this.onItemClick.bind(this);
+  }
+  onItemClick(__index) {
+    this.props.onItemClick(__index);
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.items[0], this.props.items[0]);
   }
   render() {
+    console.log('render');
     const { items, columns } = this.props;
-    const rows = items.map(item => <RowItem item={item} key={item.__index} columns={columns} />);
+    const rows = items.map(item => (
+      <RowItem
+        item={item}
+        key={item.__index}
+        columns={columns}
+        selected={item.__selected}
+        onClick={this.onItemClick}
+      />
+    ));
 
     return (
       <ScrollBox>
@@ -29,12 +45,23 @@ class RowItem extends PureComponent {
   }
   constructor(props) {
     super(props);
+    this.onClick = this.onClick.bind(this);
   }
-
+  onClick() {
+    this.props.onClick(this.props.item.__index);
+  }
   render() {
-    const { item, columns } = this.props;
+    const { item, columns, selected } = this.props;
     const rowCells = columns.map(RowItem.getCells(item));
-    return <Row className="element-datalist__row">{rowCells}</Row>;
+    const rowClassName = utils.composeClassNames([
+      'element-datalist__row',
+      selected && 'element-datalist__row--selected',
+    ]);
+    return (
+      <div className={rowClassName} onClick={this.onClick}>
+        {rowCells}
+      </div>
+    );
   }
 }
 

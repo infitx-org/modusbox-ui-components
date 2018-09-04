@@ -1,11 +1,25 @@
 .element-datalist__row {
   border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
+  align-items: center;
+  justify-content: space-between;
 }
 .element-datalist__row:nth-child(odd) {
   background: #fbfbfb;
 }
 .element-datalist__row:nth-child(even) {
   background: #fff;
+}
+
+.element-datalist__row--selected {
+  &:nth-child(odd),
+  &:nth-child(even) {
+    border-bottom: 1px solid #23c2ef;
+    background: linear-gradient(0deg, #23c2ef 1px, #f4faff 1px);
+  }
 }
 
 .element-datalist__item-cell__wrapper {

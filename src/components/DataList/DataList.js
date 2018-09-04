@@ -17,7 +17,7 @@ class DataList extends PureComponent {
     });
     return columns.map(mapColumns);
   }
-  static convertItems(items, columns) {
+  static convertItems(items, columns, selected) {
     // applies the column configuration to the items
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
@@ -38,6 +38,8 @@ class DataList extends PureComponent {
 
     const mapItems = (item, rowIndex) => ({
       __index: uuid(),
+      __source: item,
+      __selected: selected(item),
       ...columns.reduce(reduceColumns(item, rowIndex), {}),
     });
 
@@ -96,6 +98,7 @@ class DataList extends PureComponent {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onFilterBlur = this.onFilterBlur.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
+    this.onItemClick = this.onItemClick.bind(this);
 
     const { columns, sortAsc, sortColumn } = this.props;
 
@@ -168,9 +171,19 @@ class DataList extends PureComponent {
     }
   }
 
+  onItemClick(__index) {
+    const { items } = this.state;
+    const { onSelect, onUnselect } = this.props;
+    const item = find(items, { __index });
+    const eventHandler = item.__selected ? onUnselect : onSelect;
+    if (typeof eventHandler === 'function') {
+      eventHandler(item.__source);
+    }
+  }
+
   transformList(cfg) {
     if (cfg.applyColumns === true) {
-      this._list = DataList.convertItems(this._list, this._columns);
+      this._list = DataList.convertItems(this._list, this._columns, this.props.selected);
     }
     if (cfg.sort === true) {
       const { sortAsc, sortKey } = this.state;
@@ -209,7 +222,7 @@ class DataList extends PureComponent {
           onFilterBlur={this.onFilterBlur}
           onFilterClick={this.onFilterClick}
         />,
-        <Rows key="datalist-rows" items={items} columns={columns} />,
+        <Rows key="datalist-rows" items={items} columns={columns} onItemClick={this.onItemClick} />,
       ];
     }
 
