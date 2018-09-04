@@ -163,7 +163,8 @@ class Select extends PureComponent {
       item.label
         .toString()
         .toLowerCase()
-        .includes(lowerCaseFilter));
+        .includes(lowerCaseFilter)
+    );
   }
   closeSelect() {
     this.setState({ isOpen: false, filter: undefined });
@@ -185,7 +186,7 @@ class Select extends PureComponent {
     const { maxLowerHeight, maxUpperHeight } = utils.getSpaceAvailability(
       maxOptionsHeight,
       this.optionsPosition,
-      wrapper,
+      wrapper
     );
     this.reverse = maxLowerHeight > maxOptionsHeight ? false : maxLowerHeight < maxUpperHeight;
     this.maxHeight = Math.min(240, Math.max(maxLowerHeight, maxUpperHeight));
@@ -264,9 +265,7 @@ class Select extends PureComponent {
       required,
       invalidMessages,
     } = this.props;
-    const {
-      isOpen, selectedLabel, selected, filter, highlightedOption,
-    } = this.state;
+    const { isOpen, selectedLabel, selected, filter, highlightedOption } = this.state;
     const options = this.getOptions();
     const inputValue = filter === undefined ? selectedLabel || '' : filter;
 
@@ -317,7 +316,7 @@ class Select extends PureComponent {
         <div
           className={componentClassName}
           onClick={this.onClickSelect}
-          ref={(area) => {
+          ref={area => {
             this.area = area;
           }}
           role="presentation"
@@ -327,7 +326,7 @@ class Select extends PureComponent {
             <input
               className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
               type="text"
-              ref={(inputFilter) => {
+              ref={inputFilter => {
                 this.inputFilter = inputFilter;
               }}
               onKeyDown={this.testKey}
@@ -349,13 +348,13 @@ class Select extends PureComponent {
 
         <div
           className="input-select__options"
-          ref={(position) => {
+          ref={position => {
             this.optionsPosition = position;
           }}
         >
           <Options
             open={isOpen}
-            ref={(wrapper) => {
+            ref={wrapper => {
               this.options = wrapper;
             }}
             options={options}
@@ -382,19 +381,23 @@ Select.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+    })
+  ),
   selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   pending: PropTypes.bool,
   required: PropTypes.bool,
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf(PropTypes.shape({
-    active: PropTypes.bool,
-    text: PropTypes.string,
-  })),
+  invalidMessages: PropTypes.arrayOf(
+    PropTypes.shape({
+      active: PropTypes.bool,
+      text: PropTypes.string,
+    })
+  ),
 };
 
 Select.defaultProps = {

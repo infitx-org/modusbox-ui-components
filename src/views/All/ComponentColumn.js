@@ -51,7 +51,7 @@ const Items = jcs.reduce(
       </Column>
     )),
   ],
-  [],
+  []
 );
 
 const TestColumn = () => (

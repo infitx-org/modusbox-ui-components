@@ -60,7 +60,7 @@
 .element-tooltip__viewer--info {
   color: #fff;
   fill: #fff;
-  background: #39f;
+  background: $color__main-primary;
 }
 .element-tooltip__viewer--warning {
   color: #fff;
@@ -108,7 +108,7 @@
   background: $color__main-danger;
 }
 .element-tooltip__handle--info {
-  background: #39f;
+  background: $color__main-primary;
 }
 .element-tooltip__handle--warning {
   background: $color__main-warning;

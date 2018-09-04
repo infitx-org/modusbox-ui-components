@@ -63,9 +63,7 @@ class ScrollBox extends PureComponent {
     this.content.style.width = exactWidth;
   }
   render() {
-    const {
-      showTrack, handleStyle, trackStyle, style, children, flex, className,
-    } = this.props;
+    const { showTrack, handleStyle, trackStyle, style, children, flex, className } = this.props;
 
     const wrapperClassName = utils.composeClassNames([
       'element',
@@ -83,7 +81,7 @@ class ScrollBox extends PureComponent {
 
     return (
       <div
-        ref={(wrapper) => {
+        ref={wrapper => {
           this.wrapper = wrapper;
         }}
         className={wrapperClassName}
@@ -91,13 +89,13 @@ class ScrollBox extends PureComponent {
       >
         <ReactResizeDetector handleWidth onResize={this.handleResize} />
         <div
-          ref={(contentBox) => {
+          ref={contentBox => {
             this.contentBox = contentBox;
           }}
           className={contentBoxClassName}
         >
           <div
-            ref={(content) => {
+            ref={content => {
               this.content = content;
             }}
             className={contentClassName}
@@ -107,7 +105,7 @@ class ScrollBox extends PureComponent {
         </div>
 
         <ScrollBar
-          ref={(scrollbar) => {
+          ref={scrollbar => {
             this.scrollbar = scrollbar;
           }}
           trackStyle={trackStyle}

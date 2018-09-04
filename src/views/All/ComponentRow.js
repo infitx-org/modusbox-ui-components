@@ -45,7 +45,7 @@ const ComposedItems = jcs.reduce(
       </div>
     )),
   ],
-  [],
+  []
 );
 
 const SimpleItems = [

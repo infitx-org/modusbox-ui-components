@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const mapFlexToProperty = (property) => {
+const mapFlexToProperty = property => {
   const flexMappers = {
     top: 'flex-start',
     bottom: 'flex-end',
@@ -12,9 +12,7 @@ const mapFlexToProperty = (property) => {
 };
 class Row extends PureComponent {
   render() {
-    const {
-      align, wrap, grow, shrink, basis, className, style, children,
-    } = this.props;
+    const { align, wrap, grow, shrink, basis, className, style, children } = this.props;
     const [justifyContent, alignItems] = align.split(' ');
     const styles = {
       width: '100%',
