@@ -102,19 +102,27 @@ class ListManager extends React.Component {
 }
 
 const labels = ['a', 'b', 'c', 'd', 'e'];
-const list = new Array(100).fill(0).map((row, rowIdx) =>
-  labels.reduce((prev, curr, colIdx) => {
-    // eslint-disable-next-line max-len
-    const value = colIdx + rowIdx * labels.length;
-    return {
+const generate = {
+  a: value => value,
+  b: value => value,
+  c: value => ({ test: { value } }),
+  d: value => value,
+  e: value => value,
+};
+let idx = 0;
+const buildRow = () =>
+  labels.reduce(
+    (prev, key) => ({
       ...prev,
-      [`${curr}`]: value,
-    };
-  }, {}));
+      // eslint-disable-next-line
+      [key]: generate[key](idx++),
+    }),
+    {}
+  );
 
-const List = ({
-  counter, noDataLabel, pending, error,
-}) => {
+const list = new Array(100).fill(0).map(buildRow);
+
+const List = ({ counter, noDataLabel, pending, error }) => {
   const columns = [
     {
       label: 'Double',
@@ -129,8 +137,7 @@ const List = ({
     },
     {
       label: 'c',
-      key: 'c',
-      func: x => <span>{x}</span>,
+      key: 'c.test.value',
     },
     {
       label: 'd',
