@@ -8,9 +8,9 @@
   flex-basis: auto;
   align-items: center;
   justify-content: space-between;
-  
+
   &:nth-child(odd) {
-    background: $color__gray-1
+    background: $color__gray-1;
   }
   &:nth-child(even) {
     background: #fff;
@@ -18,9 +18,9 @@
   &:hover {
     background-color: #f8fcff;
   }
-  &.element-datalist__row--selected {    
+  &.element-datalist__row--selected {
     border-bottom: 1px solid $color__blue-3;
-    background: linear-gradient(0deg, $color__blue-3 1px, #f4fcff 1px);    
+    background: linear-gradient(0deg, $color__blue-3 1px, #f4fcff 1px);
   }
 }
 

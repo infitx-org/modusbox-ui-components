@@ -117,12 +117,14 @@ const buildRow = () =>
       // eslint-disable-next-line
       [key]: generate[key](idx++),
     }),
-    {}
+    {},
   );
 
 const list = new Array(100).fill(0).map(buildRow);
 
-const List = ({ counter, noDataLabel, pending, error }) => {
+const List = ({
+  counter, noDataLabel, pending, error,
+}) => {
   const columns = [
     {
       label: 'Double',
