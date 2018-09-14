@@ -1,0 +1,10 @@
+.col-40px {
+  color: #999;
+  max-width: 40px;
+  min-width: 40px;
+}
+.col-100px {
+  color: #f30;
+  max-width: 100px;
+  min-width: 100px;
+}

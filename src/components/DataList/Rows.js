@@ -1,6 +1,7 @@
 /* eslint-disable */
-import React, { PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
 import * as utils from '../../utils/common';
+import isEqual from 'lodash/isEqual';
 
 import Row from '../Row';
 import Icon from '../Icon';
@@ -10,10 +11,22 @@ import ScrollBox from '../ScrollBox';
 class Rows extends PureComponent {
   constructor(props) {
     super(props);
+    this.onItemClick = this.onItemClick.bind(this);
+  }
+  onItemClick(index) {
+    this.props.onItemClick(index);
   }
   render() {
     const { items, columns } = this.props;
-    const rows = items.map(item => <RowItem item={item} key={item.__index} columns={columns} />);
+    const rows = items.map((item, index) => (
+      <RowItem
+        item={item}
+        key={index}
+        columns={columns}
+        selected={item._selected}
+        onClick={this.onItemClick}
+      />
+    ));
 
     return (
       <ScrollBox>
@@ -25,16 +38,34 @@ class Rows extends PureComponent {
 
 class RowItem extends PureComponent {
   static getCells(item) {
-    return (column, index) => <ItemCell key={index.toString()}>{item[column.key]}</ItemCell>;
+    return (column, index) => (
+      <ItemCell
+        key={index.toString()}
+        className={column.className}
+      >
+        {item.data[column.key]}
+      </ItemCell>
+    );
   }
   constructor(props) {
     super(props);
+    this.onClick = this.onClick.bind(this);
   }
-
+  onClick() {
+    this.props.onClick(this.props.item._index);
+  }
   render() {
-    const { item, columns } = this.props;
+    const { item, columns, selected } = this.props;
     const rowCells = columns.map(RowItem.getCells(item));
-    return <Row className="element-datalist__row">{rowCells}</Row>;
+    const rowClassName = utils.composeClassNames([
+      'element-datalist__row',
+      selected && 'element-datalist__row--selected',
+    ]);
+    return (
+      <div className={rowClassName} onClick={this.onClick}>
+        {rowCells}
+      </div>
+    );
   }
 }
 
@@ -49,12 +80,20 @@ const ArrowCell = ({ isSelected }) => (
   </div>
 );
 
-const ItemCell = ({ children }) => (
-  <div className="element-datalist__item-cell__wrapper">
-    <div className="element-datalist__item-cell__content">
-      <Tooltip>{children}</Tooltip>
-    </div>
-  </div>
-);
-
+class ItemCell extends PureComponent {
+  render() {
+    const { children, className } = this.props;
+    const itemCellClassName = utils.composeClassNames([
+      'element-datalist__item-cell',
+      className
+    ]);
+    return (
+      <div className={itemCellClassName}>
+        <div className="element-datalist__item-cell__content">
+          <Tooltip>{children}</Tooltip>
+        </div>
+      </div>
+    );
+  }
+}
 export default Rows;

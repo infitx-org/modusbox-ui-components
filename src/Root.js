@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Views from './views';
 import './assets/main.css';
+import './assets/views.css';
 import './assets/styles/vars/fonts.scss';
 
 if (window.location.pathname.indexOf('mulesoft') > -1) {

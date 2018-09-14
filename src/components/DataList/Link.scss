@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars/colors.scss';
+
 .element-datalist__link {
   position: relative;
   display: flex;
@@ -7,7 +9,7 @@
   align-items: center;
 }
 .element-datalist__link__content {
-  color: #00a3e0;
+  color: $color__blue-4;
   flex: 1 1 auto;
 }
 .element-datalist__link__icon {

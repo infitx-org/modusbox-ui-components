@@ -120,6 +120,7 @@ const List = ({
       label: 'Double',
       key: 'a',
       func: x => x * 2,
+      className: 'col-100px',
     },
     {
       label: 'Square',
@@ -139,9 +140,10 @@ const List = ({
       link: console.log,
     },
     {
-      label: 'e',
+      label: '',
       key: 'e',
       func: () => <Icon name="close-small" size={20} />,
+      className: 'col-40px',
     },
   ];
 
@@ -154,6 +156,9 @@ const List = ({
       noData={noDataLabel}
       isPending={pending}
       hasError={error}
+      onSelect={console.log}
+      onUnselect={console.log}
+      selected={o => o.a === 90}
     />
   );
 };

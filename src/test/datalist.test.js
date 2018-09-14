@@ -106,6 +106,46 @@ it('renders the link correctly', () => {
   expect(link.exists()).toBeTruthy();
 });
 
+it('renders the selected prop', () => {
+  const wrapper = mount(<DataList list={list} columns={columns} selected={item => item.column1 === 1}/>);
+
+  const hasSelectedClass = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .hasClass('element-datalist__row--selected')
+
+  expect(hasSelectedClass).toBeTruthy();
+});
+
+it('triggers the onSelect even when clicking on a row',() => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<DataList list={list} columns={columns} onSelect={mockEvent}/>);
+
+  wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .simulate('click');
+
+  const firstItem = list[0];
+
+  expect(mockEvent).toHaveBeenCalledWith(firstItem);
+});
+
+it('triggers the onUnselect even when clicking on a selected row',() => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<DataList list={list} columns={columns} selected={item => item.column1 === 1} onUnselect={mockEvent}/>);
+
+  wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .simulate('click');
+
+  const firstItem = list[0];
+
+  expect(mockEvent).toHaveBeenCalledWith(firstItem);
+});
+
+
 it('sorts by the specified column label', () => {
   const wrapper = mount(<DataList list={list} columns={columns} sortColumn="Column3" />);
   expect(wrapper.find('.element-datalist__header-cell--sorting').text()).toBe('Column3');

@@ -264,15 +264,14 @@ class RightNav extends PureComponent {
       !companyOnly && !isCompanyModalVisible && !activeEnvironmentId;
 
     // Filtered items
-    const lowerCaseOrganizationFilter = organizationFilter.toLowerCase();
-    const lowerCaseEnvironmentFilter = environmentFilter.toLowerCase();
-    const lowerCaseCompanyFilter = companyFilter.toLowerCase();
-
     const lowerCaseNameIncludes = tester => item => item.name.toLowerCase().includes(tester);
+
+    const companyFilterFunc = lowerCaseNameIncludes(companyFilter.toLowerCase());
+    const organizationFilterFunc = lowerCaseNameIncludes(organizationFilter.toLowerCase());
+    const environtmentFilterFunc = lowerCaseNameIncludes(environmentFilter.toLowerCase());
+
     const filterEnvironments = (prev, organization) => {
-      const matchingEnvironments = organization
-        .environments
-        .filter(lowerCaseNameIncludes(lowerCaseOrganizationFilter));
+      const matchingEnvironments = organization.environments.filter(environtmentFilterFunc);
 
       if (matchingEnvironments.length) {
         const currentItem = matchingEnvironments.map(environment => ({
@@ -288,7 +287,7 @@ class RightNav extends PureComponent {
     const filteredEnvironmentsInOrganizations = organizations.reduce(filterEnvironments, []);
 
     const filteredOrganizationsInOrganizations = organizations
-      .filter(lowerCaseNameIncludes(lowerCaseOrganizationFilter))
+      .filter(organizationFilterFunc)
       .map(organization => ({ match: 'organization', organization }));
 
     const filteredOrganizations = [
@@ -296,14 +295,12 @@ class RightNav extends PureComponent {
       ...filteredOrganizationsInOrganizations,
     ];
 
-    const filteredCompanies = companies.filter(lowerCaseNameIncludes(lowerCaseCompanyFilter));
+    const filteredCompanies = companies.filter(companyFilterFunc);
 
     let filteredEnvironments = [];
     if (activeOrganization) {
       // environments are available only on an active organization
-      filteredEnvironments = activeOrganization
-        .environments
-        .filter(lowerCaseNameIncludes(lowerCaseEnvironmentFilter));
+      filteredEnvironments = activeOrganization.environments.filter(environtmentFilterFunc);
     }
 
     const organizationStructureProps = {

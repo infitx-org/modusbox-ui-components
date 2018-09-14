@@ -12,12 +12,12 @@ import { NoData, Pending, ErrorMessage } from './Boxes';
 class DataList extends PureComponent {
   static convertColumns(columns) {
     const mapColumns = column => ({
-      __index: uuid(),
+      _index: uuid(),
       ...column,
     });
     return columns.map(mapColumns);
   }
-  static convertItems(items, columns) {
+  static convertItems(items, columns, selected) {
     // applies the column configuration to the items
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
@@ -37,8 +37,10 @@ class DataList extends PureComponent {
     };
 
     const mapItems = (item, rowIndex) => ({
-      __index: uuid(),
-      ...columns.reduce(reduceColumns(item, rowIndex), {}),
+      _index: uuid(),
+      _source: item,
+      _selected: selected ? selected(item) : false,
+      data: columns.reduce(reduceColumns(item, rowIndex), {}),
     });
 
     return items.map(mapItems);
@@ -96,6 +98,7 @@ class DataList extends PureComponent {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onFilterBlur = this.onFilterBlur.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
+    this.onItemClick = this.onItemClick.bind(this);
 
     const { columns, sortAsc, sortColumn } = this.props;
 
@@ -168,9 +171,19 @@ class DataList extends PureComponent {
     }
   }
 
+  onItemClick(id) {
+    const { items } = this.state;
+    const { onSelect, onUnselect } = this.props;
+    const item = find(items, { _index: id });
+    const eventHandler = item._selected ? onUnselect : onSelect;
+    if (typeof eventHandler === 'function') {
+      eventHandler(item._source);
+    }
+  }
+
   transformList(cfg) {
     if (cfg.applyColumns === true) {
-      this._list = DataList.convertItems(this._list, this._columns);
+      this._list = DataList.convertItems(this._list, this._columns, this.props.selected);
     }
     if (cfg.sort === true) {
       const { sortAsc, sortKey } = this.state;
@@ -209,7 +222,7 @@ class DataList extends PureComponent {
           onFilterBlur={this.onFilterBlur}
           onFilterClick={this.onFilterClick}
         />,
-        <Rows key="datalist-rows" items={items} columns={columns} />,
+        <Rows key="datalist-rows" items={items} columns={columns} onItemClick={this.onItemClick} />,
       ];
     }
 

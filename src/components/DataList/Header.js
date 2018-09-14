@@ -22,7 +22,8 @@ const Header = ({
     const filter = find(filters, { label: column.label });
     return (
       <HeaderCell
-        key={column.__index}
+        className={column.className}
+        key={column._index}
         label={column.label}
         isSortable={column.sortable !== false}
         isSorting={sortKey === column.key}
@@ -67,6 +68,7 @@ class HeaderCell extends PureComponent {
   }
   render() {
     const {
+      className,
       label,
       isSortable,
       isSorting,
@@ -82,24 +84,36 @@ class HeaderCell extends PureComponent {
       isSortable && 'element-datalist__header-cell--sortable',
       isSorting && 'element-datalist__header-cell--sorting',
       isFiltering && 'element-datalist__header-cell--filtering',
+      className,
     ]);
 
+    const labelContent = [];
+    if (label !== '') {
+      labelContent.push(<FilterIcon
+        key="filter-icon"
+        isFiltering={isFiltering}
+        onClick={this.onFilterClick}
+      />);
+
+      if (!isFiltering) {
+        labelContent.push(<HeaderLabel key="header-label" label={label} />);
+      } else {
+        labelContent.push(<HeaderFilter
+          key="header-filter"
+          isFiltering={isFiltering}
+          filter={filter}
+          onFilterClick={this.onFilterClick}
+          onFilterChange={onFilterChange}
+          onFilterBlur={onFilterBlur}
+          assignRef={(input) => {
+            this._filter = input;
+          }}
+        />);
+      }
+    }
     return (
       <div className={headerCellClassName} onClick={this.onClick} role="presentation">
-        <FilterIcon isFiltering={isFiltering} onClick={this.onFilterClick} />
-        {!isFiltering && <HeaderLabel label={label} />}
-        {isFiltering && (
-          <HeaderFilter
-            isFiltering={isFiltering}
-            filter={filter}
-            onFilterClick={this.onFilterClick}
-            onFilterChange={onFilterChange}
-            onFilterBlur={onFilterBlur}
-            assignRef={(input) => {
-              this._filter = input;
-            }}
-          />
-        )}
+        {labelContent}
         <SortIcon isSorting={isSorting} isSortingAsc={isSortingAsc} />
       </div>
     );
