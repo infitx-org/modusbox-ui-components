@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import orderBy from 'lodash/orderBy';
 import find from 'lodash/find';
+import get from 'lodash/get';
 import uuid from '../../utils/uuid';
 
 import Header from './Header';
@@ -22,7 +23,7 @@ class DataList extends PureComponent {
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
       const { func, key, link } = column;
-      let value = item[key];
+      let value = get(item, key);
       if (typeof func === 'function') {
         value = func(value, item, rowIndex);
       }

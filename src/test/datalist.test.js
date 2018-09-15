@@ -92,6 +92,22 @@ it('renders the correct transformed value described in the column configuration'
   expect(cellContent).toBe(columnContent);
 });
 
+it('renders the nested object property as described in the column configuration', () => {
+  const list = [{ field: { nested: { value: 'nested-value' } } }];
+  const columns = [{ label: 'nested', key: 'field.nested.value' }];
+  const wrapper = mount(<DataList list={list} columns={columns} />);
+
+  const cellContent = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .find('.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+
+  const columnContent = list[0].field.nested.value;
+  expect(cellContent).toBe(columnContent);
+});
+
 it('renders the link correctly', () => {
   const wrapper = mount(<DataList list={list} columns={columns} />);
 
@@ -107,19 +123,21 @@ it('renders the link correctly', () => {
 });
 
 it('renders the selected prop', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} selected={item => item.column1 === 1}/>);
+  const wrapper = mount(
+    <DataList list={list} columns={columns} selected={item => item.column1 === 1} />
+  );
 
   const hasSelectedClass = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .hasClass('element-datalist__row--selected')
+    .hasClass('element-datalist__row--selected');
 
   expect(hasSelectedClass).toBeTruthy();
 });
 
-it('triggers the onSelect even when clicking on a row',() => {
+it('triggers the onSelect even when clicking on a row', () => {
   const mockEvent = jest.fn();
-  const wrapper = mount(<DataList list={list} columns={columns} onSelect={mockEvent}/>);
+  const wrapper = mount(<DataList list={list} columns={columns} onSelect={mockEvent} />);
 
   wrapper
     .find('div.element-datalist__row')
@@ -131,9 +149,16 @@ it('triggers the onSelect even when clicking on a row',() => {
   expect(mockEvent).toHaveBeenCalledWith(firstItem);
 });
 
-it('triggers the onUnselect even when clicking on a selected row',() => {
+it('triggers the onUnselect even when clicking on a selected row', () => {
   const mockEvent = jest.fn();
-  const wrapper = mount(<DataList list={list} columns={columns} selected={item => item.column1 === 1} onUnselect={mockEvent}/>);
+  const wrapper = mount(
+    <DataList
+      list={list}
+      columns={columns}
+      selected={item => item.column1 === 1}
+      onUnselect={mockEvent}
+    />
+  );
 
   wrapper
     .find('div.element-datalist__row')
@@ -144,7 +169,6 @@ it('triggers the onUnselect even when clicking on a selected row',() => {
 
   expect(mockEvent).toHaveBeenCalledWith(firstItem);
 });
-
 
 it('sorts by the specified column label', () => {
   const wrapper = mount(<DataList list={list} columns={columns} sortColumn="Column3" />);
