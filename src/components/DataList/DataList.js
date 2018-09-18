@@ -48,18 +48,9 @@ class DataList extends PureComponent {
 
     return items.map(mapItems);
   }
-  static getColumnIndex(columns, _index) {
-    const column = find(columns, { _index });
-    return get(column, '_index');
-  }
 
   static filterItems(items, columns, filters) {
-    const filtersByKey = filters
-      .map(filter => ({
-        value: filter.value,
-        _index: DataList.getColumnIndex(columns, filter._index),
-      }))
-      .filter(filter => filter.value !== '');
+    const filtersByKey = filters.filter(item => item.value !== '');
 
     const matchingRows = item =>
       filtersByKey.every((filter) => {
