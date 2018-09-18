@@ -22,7 +22,9 @@ class DataList extends PureComponent {
     // applies the column configuration to the items
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
-      const { func, key, link } = column;
+      const {
+        func, key, link, _index,
+      } = column;
       let value = get(item, key);
       if (typeof func === 'function') {
         value = func(value, item, rowIndex);
@@ -33,7 +35,7 @@ class DataList extends PureComponent {
       }
       return {
         ...prev,
-        [key]: value,
+        [_index]: value,
       };
     };
 
@@ -46,26 +48,23 @@ class DataList extends PureComponent {
 
     return items.map(mapItems);
   }
-  static getLabelKey(columns, label) {
-    const column = find(columns, { label });
-    if (column) {
-      return column.key;
-    }
-    return undefined;
+  static getColumnIndex(columns, _index) {
+    const column = find(columns, { _index });
+    return get(column, '_index');
   }
 
   static filterItems(items, columns, filters) {
     const filtersByKey = filters
       .map(filter => ({
         value: filter.value,
-        key: DataList.getLabelKey(columns, filter.label),
+        _index: DataList.getColumnIndex(columns, filter._index),
       }))
       .filter(filter => filter.value !== '');
 
     const matchingRows = item =>
       filtersByKey.every((filter) => {
-        const { key, value } = filter;
-        let cell = item[key];
+        const { _index, value } = filter;
+        let cell = item.data[_index];
         if (typeof cell === 'number') {
           cell = cell.toString();
         }
@@ -79,16 +78,16 @@ class DataList extends PureComponent {
   }
   static sortItems(items, asc, key) {
     // sorts the items by the column key and the direction
-    return orderBy(items, key, asc ? 'asc' : 'desc');
+    return orderBy(items, item => item.data[key], asc ? 'asc' : 'desc');
   }
-  static getSortKey(label, columns) {
-    let sortKey = columns[0].key;
+  static getSortColumn(label, columns) {
+    let sortColumn = columns[0]._index;
     // gets the key of the sorting column
     if (label !== undefined) {
       const column = find(columns, { label });
-      sortKey = column && column.key;
+      sortColumn = get(column, '_index');
     }
-    return sortKey;
+    return sortColumn;
   }
 
   constructor(props) {
@@ -103,18 +102,17 @@ class DataList extends PureComponent {
 
     const { columns, sortAsc, sortColumn } = this.props;
 
-    const sortKey = DataList.getSortKey(sortColumn, columns);
+    this._columns = DataList.convertColumns(columns);
 
     this.state = {
       sortAsc: sortAsc === true,
-      sortKey,
+      sortColumn: DataList.getSortColumn(sortColumn, this._columns),
       items: [],
       filters: [],
     };
   }
   componentWillMount() {
     this._list = this.props.list;
-    this._columns = DataList.convertColumns(this.props.columns);
     this.transformList({ applyColumns: true, sort: true });
   }
   componentWillReceiveProps(nextProps) {
@@ -128,21 +126,21 @@ class DataList extends PureComponent {
   onSortClick(key) {
     this.setState(
       {
-        sortAsc: this.state.sortKey === key ? !this.state.sortAsc : true,
-        sortKey: key,
+        sortAsc: this.state.sortColumn === key ? !this.state.sortAsc : true,
+        sortColumn: key,
       },
       () => {
         this.transformList({ sort: true });
       },
     );
   }
-  onFilterChange(label, value) {
+  onFilterChange(_index, value) {
     const filters = [...this.state.filters];
-    const filter = find(filters, { label });
+    const filter = find(filters, { _index });
     if (filter) {
       filter.value = value;
     } else {
-      filters.push({ label, value });
+      filters.push({ _index, value });
     }
 
     const items = DataList.filterItems(this._list, this._columns, filters);
@@ -152,9 +150,9 @@ class DataList extends PureComponent {
       filters,
     });
   }
-  onFilterBlur(label) {
+  onFilterBlur(_index) {
     const { filters } = this.state;
-    const filter = find(filters, { label });
+    const filter = find(filters, { _index });
     if (filter.value === '') {
       const index = filters.indexOf(filter);
       this.setState({
@@ -162,12 +160,12 @@ class DataList extends PureComponent {
       });
     }
   }
-  onFilterClick(label) {
+  onFilterClick(_index) {
     const { filters } = this.state;
-    const filter = find(filters, { label });
+    const filter = find(filters, { _index });
     if (!filter) {
       this.setState({
-        filters: [...this.state.filters, { label, value: '' }],
+        filters: [...this.state.filters, { _index, value: '' }],
       });
     }
   }
@@ -187,8 +185,8 @@ class DataList extends PureComponent {
       this._list = DataList.convertItems(this._list, this._columns, this.props.selected);
     }
     if (cfg.sort === true) {
-      const { sortAsc, sortKey } = this.state;
-      this._list = DataList.sortItems(this._list, sortAsc, sortKey);
+      const { sortAsc, sortColumn } = this.state;
+      this._list = DataList.sortItems(this._list, sortAsc, sortColumn);
     }
     this.setState({
       items: this._list,
@@ -197,10 +195,10 @@ class DataList extends PureComponent {
 
   render() {
     const {
-      columns, isPending, noData, hasError,
+      isPending, noData, hasError,
     } = this.props;
     const {
-      items, sortAsc, sortKey, filters,
+      items, sortAsc, sortColumn, filters,
     } = this.state;
 
     let content = null;
@@ -215,7 +213,7 @@ class DataList extends PureComponent {
         <Header
           key="datalist-header"
           columns={this._columns}
-          sortKey={sortKey}
+          sortColumn={sortColumn}
           sortAsc={sortAsc}
           onSortClick={this.onSortClick}
           filters={filters}
@@ -223,7 +221,12 @@ class DataList extends PureComponent {
           onFilterBlur={this.onFilterBlur}
           onFilterClick={this.onFilterClick}
         />,
-        <Rows key="datalist-rows" items={items} columns={columns} onItemClick={this.onItemClick} />,
+        <Rows
+          key="datalist-rows"
+          items={items}
+          columns={this._columns}
+          onItemClick={this.onItemClick}
+        />,
       ];
     }
 

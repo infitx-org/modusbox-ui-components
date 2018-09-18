@@ -133,6 +133,12 @@ const List = ({
       className: 'col-100px',
     },
     {
+      label: 'Triple',
+      key: 'a',
+      func: x => x * 3,
+      className: 'col-100px',
+    },
+    {
       label: 'Square',
       key: 'b',
       func: x => x * counter,

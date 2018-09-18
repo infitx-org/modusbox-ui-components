@@ -60,6 +60,8 @@
   border: none;
   outline: none;
   height: 100%;
+  appearance: none;
+  min-width: 0;
 }
 .element-datalist__header-cell__label {
   flex: 1;

@@ -10,7 +10,7 @@ import '../../icons/modusbox/arrow.svg';
 
 const Header = ({
   columns,
-  sortKey,
+  sortColumn,
   sortAsc,
   onSortClick,
   filters,
@@ -19,21 +19,21 @@ const Header = ({
   onFilterClick,
 }) => {
   const headerCells = columns.map((column) => {
-    const filter = find(filters, { label: column.label });
+    const filter = find(filters, { _index: column._index });
     return (
       <HeaderCell
         className={column.className}
         key={column._index}
         label={column.label}
         isSortable={column.sortable !== false}
-        isSorting={sortKey === column.key}
+        isSorting={sortColumn === column._index}
         isSortingAsc={sortAsc}
         isFiltering={filter !== undefined}
         filter={filter}
-        onClick={() => onSortClick(column.key)}
-        onFilterChange={value => onFilterChange(column.label, value)}
-        onFilterBlur={() => onFilterBlur(column.label)}
-        onFilterClick={() => onFilterClick(column.label)}
+        onClick={() => onSortClick(column._index)}
+        onFilterChange={value => onFilterChange(column._index, value)}
+        onFilterBlur={() => onFilterBlur(column._index)}
+        onFilterClick={() => onFilterClick(column._index)}
       />
     );
   });
