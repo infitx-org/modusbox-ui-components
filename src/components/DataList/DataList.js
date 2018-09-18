@@ -76,9 +76,10 @@ class DataList extends PureComponent {
 
     return items.filter(matchingRows);
   }
-  static sortItems(items, asc, key) {
+  static sortItems(items, asc, _index) {
     // sorts the items by the column key and the direction
-    return orderBy(items, item => item.data[key], asc ? 'asc' : 'desc');
+    const getContentAtIndex = key => item => item.data[key];
+    return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
   static getSortColumn(label, columns) {
     let sortColumn = columns[0]._index;
@@ -112,15 +113,12 @@ class DataList extends PureComponent {
     };
   }
   componentWillMount() {
-    this._list = this.props.list;
-    this.transformList({ applyColumns: true, sort: true });
+    this.transformList(this.props.list, { applyColumns: true, sort: true });
   }
   componentWillReceiveProps(nextProps) {
-    const { list, columns } = nextProps;
-    this._list = list;
-    this._columns = DataList.convertColumns(columns);
-    if (this.props.list !== list || this.props.columns !== columns) {
-      this.transformList({ applyColumns: true, sort: true });
+    const { list } = nextProps;
+    if (this.props.list !== list) {
+      this.transformList(list, { applyColumns: true, sort: true });
     }
   }
   onSortClick(key) {
@@ -130,7 +128,7 @@ class DataList extends PureComponent {
         sortColumn: key,
       },
       () => {
-        this.transformList({ sort: true });
+        this.transformList(this._list, { sort: true });
       },
     );
   }
@@ -180,7 +178,8 @@ class DataList extends PureComponent {
     }
   }
 
-  transformList(cfg) {
+  transformList(list, cfg) {
+    this._list = list;
     if (cfg.applyColumns === true) {
       this._list = DataList.convertItems(this._list, this._columns, this.props.selected);
     }
@@ -194,9 +193,7 @@ class DataList extends PureComponent {
   }
 
   render() {
-    const {
-      isPending, noData, hasError,
-    } = this.props;
+    const { isPending, noData, hasError } = this.props;
     const {
       items, sortAsc, sortColumn, filters,
     } = this.state;
