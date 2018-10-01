@@ -39,7 +39,7 @@ const fromColumns = columns => (item, index) =>
 const testList1 = new Array(100).fill(null).map(fromColumns(testColumns1));
 
 const testList2 = [4, 5, 3, 1, 2].map(value => ({
-    col: value
+    col: value,
   }));
 const testColumns2 = [{
   label: 'Sortable Column',
@@ -262,7 +262,22 @@ it('automatically sorts on the first sortable column if not specified otherwise'
   expect(cellContent).toBe(expectedOutputValue);
 });
 
-it('triggers the sorting on the clicked column', () => {
+it('cannot sort on a column when configured as non sortable', () => {
+  const columns = [{
+    label: '',
+    key: 'col',
+    sortable: false
+  }];
+  const wrapper = mount(<DataList list={testList2} columns={columns}/>);
+
+  const headerCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0);
+
+    expect(headerCell.hasClass('element-datalist__header-cell--sortable')).toBeFalsy();
+})
+
+it('sorts the list by the column of the clicked header cell', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2}/>);  
   
   const prevSortingCell = wrapper
@@ -296,12 +311,12 @@ it('triggers the sorting on the clicked column', () => {
 
 });
 
-it('cannot find the filter on a column without label', () => {
+it('cannot search on a column without label', () => {
   const columns = [{
     label: '',
     key: 'col',    
   }];
-  const wrapper = mount(<DataList list={[]} columns={columns}/>);
+  const wrapper = mount(<DataList list={testList2} columns={columns}/>);
 
   const searchIcon = wrapper
     .find('.element-datalist__header-cell')
@@ -309,6 +324,25 @@ it('cannot find the filter on a column without label', () => {
     .find('.element-datalist__header-cell__search-icon');
 
   expect(searchIcon.exists()).toBeFalsy();    
+});
+
+it('cannot search on a column when configued as non searchable', () => {
+  const columns = [{
+    label: 'Non searchable column',
+    key: 'col',
+    searchable: false
+  }];
+
+  const wrapper = mount(<DataList list={testList2} columns={columns}/>);
+
+  const searchIcon = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon');
+
+    expect(searchIcon.exists()).toBeFalsy();
+
+  
 });
 
 it('finds the filter input when clicking on a filterable column', () => {
@@ -361,6 +395,74 @@ it('filters the list when setting a filter', () => {
   const updatedRowsCount = updatedRows.length;    
   
   expect(firstCellContent.includes(filterValue));
+  expect(initialRowsCount).not.toEqual(updatedRowsCount);
+  expect(updatedRowsCount).toEqual(1);
+});
+
+it('filters the list on muliple columns when multiple filters are set a filter', () => {
+
+  const valueColumn1 = 'foo';
+  const valueColumn2 = 'bar';
+
+  const list = [
+    {
+      col1: valueColumn1,
+      col2: valueColumn2,
+    },
+    {
+      col1: 'xyz',
+      col2: 'xyz'
+    }
+  ];
+  const columns = [
+    {
+      label:'col1',
+      key: 'col1',
+    },
+    {
+      label:'col2',
+      key: 'col2',
+    }
+  ];
+  
+  const wrapper = mount(<DataList list={list} columns={columns}/>);
+
+  const initialRowsCount = wrapper.find('div.element-datalist__row').length;  
+  
+  const headerCellColumn1 = wrapper.find('.element-datalist__header-cell').at(0);
+  const headerCellColumn2 = wrapper.find('.element-datalist__header-cell').at(1);
+  
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('input[type="text"]')
+    .simulate('change', {target: {value: valueColumn1}});
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(1)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(1)
+    .find('input[type="text"]')
+    .simulate('change', {target: {value: valueColumn2}});
+
+  const updatedRows = wrapper.find('div.element-datalist__row');
+  
+
+  const updatedRowsCount = updatedRows.length;    
+  
   expect(initialRowsCount).not.toEqual(updatedRowsCount);
   expect(updatedRowsCount).toEqual(1);
 });
