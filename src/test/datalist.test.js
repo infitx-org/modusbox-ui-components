@@ -143,6 +143,29 @@ it('renders the selected prop', () => {
   expect(hasSelectedClass).toBeTruthy();
 });
 
+it('updates the cell content on list changing', () => {
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
+  
+  const oldCellValue = wrapper
+    .find('div.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+
+  const updatedList = testList1.map(item => ({
+    ...item,
+    column1: item.column1 * 2,
+  }));
+  wrapper.setProps({ list: updatedList });
+
+  const newCellValue = wrapper
+    .find('div.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+  expect(oldCellValue).not.toBe(newCellValue);
+  expect(newCellValue).not.toBe('4');
+});
+
+
 it('triggers the onSelect even when clicking on a row', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} onSelect={mockEvent} />);
@@ -217,7 +240,7 @@ it('renders and sorts desc by the prop sortAsc', () => {
   expect(cellContent).toBe(expectedCellContent);
 });
 
-it('Automatically sorts on the first sortable column if not specified otherwise', () => {
+it('automatically sorts on the first sortable column if not specified otherwise', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2}/>);
   
   const previousSortingCell = wrapper
@@ -239,7 +262,7 @@ it('Automatically sorts on the first sortable column if not specified otherwise'
   expect(cellContent).toBe(expectedOutputValue);
 });
 
-it('Triggers the sorting on the clicked column', () => {
+it('triggers the sorting on the clicked column', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2}/>);  
   
   const prevSortingCell = wrapper
@@ -273,24 +296,71 @@ it('Triggers the sorting on the clicked column', () => {
 
 });
 
-it('updates the cell content on list changing', () => {
-  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
+it('cannot find the filter on a column without label', () => {
+  const columns = [{
+    label: '',
+    key: 'col',    
+  }];
+  const wrapper = mount(<DataList list={[]} columns={columns}/>);
+
+  const searchIcon = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon');
+
+  expect(searchIcon.exists()).toBeFalsy();    
+});
+
+it('finds the filter input when clicking on a filterable column', () => {
+
+  const wrapper = mount(<DataList list={testList2} columns={testColumns2}/>);
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
   
-  const oldCellValue = wrapper
+  const updatedHeaderCell = wrapper.find('.element-datalist__header-cell').at(0);
+  const hasFilterClass = updatedHeaderCell.hasClass('element-datalist__header-cell--filtering');
+
+  const textInput = updatedHeaderCell.find('input[type="text"]');
+
+  expect(hasFilterClass).toBeTruthy();  
+  expect(textInput.exists()).toBeTruthy();
+});
+
+it('filters the list when setting a filter', () => {
+
+  const wrapper = mount(<DataList list={testList2} columns={testColumns2}/>);
+
+  const filterValue = '1';
+  const initialRowsCount = wrapper.find('div.element-datalist__row').length;
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');  
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('input[type="text"]')
+    .simulate('change', {target: {value: filterValue}});
+
+  const updatedRows = wrapper.find('div.element-datalist__row');
+  const firstCellContent = updatedRows
+    .at(0)
     .find('div.element-datalist__item-cell__content')
     .at(0)
     .text();
 
-  const updatedList = testList1.map(item => ({
-    ...item,
-    column1: item.column1 * 2,
-  }));
-  wrapper.setProps({ list: updatedList });
-
-  const newCellValue = wrapper
-    .find('div.element-datalist__item-cell__content')
-    .at(0)
-    .text();
-  expect(oldCellValue).not.toBe(newCellValue);
-  expect(newCellValue).not.toBe('4');
+  const updatedRowsCount = updatedRows.length;    
+  
+  expect(firstCellContent.includes(filterValue));
+  expect(initialRowsCount).not.toEqual(updatedRowsCount);
+  expect(updatedRowsCount).toEqual(1);
 });
