@@ -18,7 +18,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:jest/recommended",
-    "airbnb"
+    "airbnb",
+    "prettier"
   ],
   "rules": {
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
