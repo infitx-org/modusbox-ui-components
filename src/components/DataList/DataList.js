@@ -62,6 +62,7 @@ class DataList extends PureComponent {
         if (typeof cell === 'string') {
           return cell.includes(value);
         }
+
         return false;
       });
 
@@ -233,8 +234,8 @@ DataList.defaultProps = {
   onSelect: undefined,
   onUnselect: undefined,
   selected: undefined,
-
 };
+
 DataList.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
@@ -243,6 +244,7 @@ DataList.propTypes = {
     className: PropTypes.string,
     link: PropTypes.fund,
     sortable: PropTypes.bool,
+    searchable: PropTypes.bool,
   })),
   list: PropTypes.arrayOf(PropTypes.shape()),
   sortAsc: PropTypes.bool,

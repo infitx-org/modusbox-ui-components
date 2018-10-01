@@ -152,6 +152,7 @@ const List = ({
       key: 'd',
       func: x => new Array(20).fill(x).join(''),
       sortable: false,
+      searchable: false,
       link: console.log,
     },
     {
