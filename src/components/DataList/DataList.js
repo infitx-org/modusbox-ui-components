@@ -223,10 +223,36 @@ class DataList extends PureComponent {
 }
 
 DataList.defaultProps = {
+  columns: [],
+  list: [],
   sortAsc: true,
+  sortColumn: undefined,
+  noData: '',
+  isPending: false,
+  hasError: false,
+  onSelect: undefined,
+  onUnselect: undefined,
+  selected: undefined,
+
 };
 DataList.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    key: PropTypes.string,
+    func: PropTypes.fund,
+    className: PropTypes.string,
+    link: PropTypes.fund,
+    sortable: PropTypes.bool,
+  })),
+  list: PropTypes.arrayOf(PropTypes.shape()),
   sortAsc: PropTypes.bool,
+  sortColumn: PropTypes.string,
+  noData: PropTypes.string,
+  isPending: PropTypes.bool,
+  hasError: PropTypes.bool,
+  onSelect: PropTypes.func,
+  onUnselect: PropTypes.func,
+  selected: PropTypes.func,
 };
 
 export default DataList;
