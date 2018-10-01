@@ -86,9 +86,7 @@ class RadioGroup extends PureComponent {
   }
   render() {
     const { value, focused } = this.state;
-    const {
-      id, label, disabled, options,
-    } = this.props;
+    const { id, label, disabled, options } = this.props;
 
     const classNames = utils.composeClassNames(['input', 'input-radio', disabled && 'disabled']);
     return (
@@ -107,7 +105,7 @@ class RadioGroup extends PureComponent {
           />
         ))}
         <input
-          ref={(button) => {
+          ref={button => {
             this.button = button;
           }}
           type="button"
@@ -139,9 +137,7 @@ RadioGroup.defaultProps = {
   onChange: undefined,
 };
 
-const Radio = ({
-  id, onClick, checked, label, focused, value, disabled,
-}) => {
+const Radio = ({ id, onClick, checked, label, focused, value, disabled }) => {
   const optionClassName = utils.composeClassNames(['input-radio__option', checked && 'checked']);
   const inputClassName = utils.composeClassNames([
     'input-radio__input',

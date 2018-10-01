@@ -22,9 +22,7 @@ class DataList extends PureComponent {
     // applies the column configuration to the items
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
-      const {
-        func, key, link, _index,
-      } = column;
+      const { func, key, link, _index } = column;
       let value = get(item, key);
       if (typeof func === 'function') {
         value = func(value, item, rowIndex);
@@ -53,7 +51,7 @@ class DataList extends PureComponent {
     const filtersByKey = filters.filter(item => item.value !== '');
 
     const matchingRows = item =>
-      filtersByKey.every((filter) => {
+      filtersByKey.every(filter => {
         const { _index, value } = filter;
         let cell = item.data[_index];
         if (typeof cell === 'number') {
@@ -121,7 +119,7 @@ class DataList extends PureComponent {
       },
       () => {
         this.transformList(this._list, { sort: true });
-      },
+      }
     );
   }
   onFilterChange(_index, value) {
@@ -186,9 +184,7 @@ class DataList extends PureComponent {
 
   render() {
     const { isPending, noData, hasError } = this.props;
-    const {
-      items, sortAsc, sortColumn, filters,
-    } = this.state;
+    const { items, sortAsc, sortColumn, filters } = this.state;
 
     let content = null;
     if (isPending) {
@@ -237,15 +233,17 @@ DataList.defaultProps = {
 };
 
 DataList.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    key: PropTypes.string,
-    func: PropTypes.fund,
-    className: PropTypes.string,
-    link: PropTypes.fund,
-    sortable: PropTypes.bool,
-    searchable: PropTypes.bool,
-  })),
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      key: PropTypes.string,
+      func: PropTypes.fund,
+      className: PropTypes.string,
+      link: PropTypes.fund,
+      sortable: PropTypes.bool,
+      searchable: PropTypes.bool,
+    })
+  ),
   list: PropTypes.arrayOf(PropTypes.shape()),
   sortAsc: PropTypes.bool,
   sortColumn: PropTypes.string,

@@ -255,7 +255,7 @@ class TextField extends PureComponent {
         <div
           className={componentClassName}
           onClick={this.onTextFieldClick}
-          ref={(area) => {
+          ref={area => {
             this.area = area;
           }}
           role="presentation"
@@ -264,7 +264,7 @@ class TextField extends PureComponent {
             {customPlaceholder}
             <input
               id={id}
-              ref={(input) => {
+              ref={input => {
                 this.input = input;
               }}
               autoFocus={autofocus === true}
@@ -313,10 +313,12 @@ TextField.propTypes = {
   pending: PropTypes.bool,
   required: PropTypes.bool,
   invalid: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf(PropTypes.shape({
-    active: PropTypes.bool,
-    text: PropTypes.string,
-  })),
+  invalidMessages: PropTypes.arrayOf(
+    PropTypes.shape({
+      active: PropTypes.bool,
+      text: PropTypes.string,
+    })
+  ),
   disabled: PropTypes.bool,
 };
 

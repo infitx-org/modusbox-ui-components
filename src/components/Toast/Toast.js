@@ -11,9 +11,9 @@ Notification.newInstance(
   {
     style: { bottom: 0, right: '20px' },
   },
-  (n) => {
+  n => {
     notification = n;
-  },
+  }
 );
 
 let toastCount = 0;

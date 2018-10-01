@@ -98,9 +98,7 @@ class DatePicker extends PureComponent {
     window.addEventListener('mouseup', this.handlePageClick, false);
   }
   componentWillReceiveProps(props) {
-    const {
-      value, defaultHour, defaultMinute, defaultSecond,
-    } = props;
+    const { value, defaultHour, defaultMinute, defaultSecond } = props;
     const defaultTime = {
       hour: defaultHour,
       minute: defaultMinute,
@@ -188,7 +186,7 @@ class DatePicker extends PureComponent {
       this.state.selectedDay,
       hour,
       this.state.minute,
-      this.state.second,
+      this.state.second
     );
     if (hour > 23) return;
     this.setState({ hour, timestamp });
@@ -198,9 +196,9 @@ class DatePicker extends PureComponent {
           this.state.selectedDay,
           hour,
           this.state.minute,
-          this.state.second,
+          this.state.second
         ),
-      500,
+      500
     );
   }
   handleMinuteClick(minute) {
@@ -209,7 +207,7 @@ class DatePicker extends PureComponent {
       this.state.selectedDay,
       this.state.hour,
       minute,
-      this.state.second,
+      this.state.second
     );
     if (minute > 59) return;
     this.setState({ minute, timestamp });
@@ -219,9 +217,9 @@ class DatePicker extends PureComponent {
           this.state.selectedDay,
           this.state.hour,
           minute,
-          this.state.second,
+          this.state.second
         ),
-      500,
+      500
     );
   }
   handlePageClick(e) {
@@ -235,7 +233,7 @@ class DatePicker extends PureComponent {
     const { maxLowerHeight, maxUpperHeight } = utils.getSpaceAvailability(
       calendarHeight,
       this.calendarPosition,
-      wrapper,
+      wrapper
     );
     this.reverse = maxLowerHeight > calendarHeight ? false : maxLowerHeight < maxUpperHeight;
 
@@ -248,7 +246,7 @@ class DatePicker extends PureComponent {
       this.state.selectedDay,
       this.state.hour,
       this.state.minute,
-      second,
+      second
     );
     if (second > 59) return;
     this.setState({ second, timestamp });
@@ -258,9 +256,9 @@ class DatePicker extends PureComponent {
           this.state.selectedDay,
           this.state.hour,
           this.state.minute,
-          second,
+          second
         ),
-      500,
+      500
     );
   }
   leaveDatePicker(e, next) {
@@ -355,7 +353,7 @@ class DatePicker extends PureComponent {
 
             <input
               onFocus={this.onFocus}
-              ref={(input) => {
+              ref={input => {
                 this.input = input;
               }}
               className="mb-input__input input-datepicker__value"
@@ -372,7 +370,7 @@ class DatePicker extends PureComponent {
 
         <div
           className="input-datepicker--position"
-          ref={(calendarPosition) => {
+          ref={calendarPosition => {
             this.calendarPosition = calendarPosition;
           }}
         >

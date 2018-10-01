@@ -53,7 +53,7 @@ class FileUploader extends PureComponent {
     window.removeEventListener('mouseup', this.onPageClick, false);
   }
   async onChangeFile(e) {
-    const readAsText = (file) => {
+    const readAsText = file => {
       const reader = new FileReader();
       return new Promise((resolve, reject) => {
         reader.onload = event => resolve(event.target.result);
@@ -61,7 +61,7 @@ class FileUploader extends PureComponent {
         reader.readAsText(file);
       });
     };
-    const readAsBase64 = (file) => {
+    const readAsBase64 = file => {
       const reader = new FileReader();
       return new Promise((resolve, reject) => {
         reader.readAsDataURL(file);
@@ -248,7 +248,7 @@ class FileUploader extends PureComponent {
           className={componentClassName}
           onClick={this.onClickFileUploader}
           onKeyDown={this.onClickFileUploader}
-          ref={(area) => {
+          ref={area => {
             this.area = area;
           }}
           role="presentation"
@@ -263,7 +263,7 @@ class FileUploader extends PureComponent {
                 onFocus={this.onEnterFileUploader}
                 onChange={this.onChangeFile}
                 disabled={disabled}
-                ref={(fileuploader) => {
+                ref={fileuploader => {
                   this.fileuploader = fileuploader;
                 }}
                 onKeyDown={this.onKeyDown}

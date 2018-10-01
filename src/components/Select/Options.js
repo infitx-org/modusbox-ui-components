@@ -33,9 +33,7 @@ class Options extends PureComponent {
   }
   render() {
     const { options, selected, highlighted } = this.state;
-    const {
-      maxHeight, reverse, open, onClear,
-    } = this.props;
+    const { maxHeight, reverse, open, onClear } = this.props;
     if (!open) {
       return null;
     }
@@ -93,7 +91,7 @@ class Options extends PureComponent {
           showTrack={false}
         >
           <div
-            ref={(items) => {
+            ref={items => {
               this.items = items;
             }}
           >
@@ -106,10 +104,12 @@ class Options extends PureComponent {
   }
 }
 Options.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+    })
+  ),
   highlighted: PropTypes.number,
   selected: PropTypes.string,
   onSelect: PropTypes.func,
@@ -138,9 +138,7 @@ class Option extends PureComponent {
     this.props.onClick();
   }
   render() {
-    const {
-      value, label, icon, selected, disabled, highlighted,
-    } = this.props;
+    const { value, label, icon, selected, disabled, highlighted } = this.props;
     const optionsClassNames = utils.composeClassNames([
       'input-select__options-item',
       selected && 'input-select__options-item--selected',

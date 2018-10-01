@@ -26,7 +26,7 @@ const composeClassNames = items =>
     .filter(item => item !== true && item !== false && item !== undefined && item !== null)
     .join(' ');
 
-const getParentOverflow = (elem) => {
+const getParentOverflow = elem => {
   if (!elem.parentNode) {
     return document.body;
   }

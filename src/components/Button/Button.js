@@ -66,7 +66,7 @@ class Button extends PureComponent {
 
     const button = (
       <button
-        ref={(input) => {
+        ref={input => {
           this.input = input;
         }}
         id={id}

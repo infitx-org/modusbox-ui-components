@@ -44,7 +44,7 @@ class RowItem extends PureComponent {
           {item.data[column._index]}
         </ItemCell>
       );
-    }
+    };
   }
   constructor(props) {
     super(props);

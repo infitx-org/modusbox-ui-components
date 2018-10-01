@@ -17,7 +17,7 @@ const bindPathnameProp = pathname => element =>
     pathname,
   });
 
-const bindActiveProp = pathname => (element) => {
+const bindActiveProp = pathname => element => {
   const { path, back, active } = element.props;
   const matchesPath = path !== undefined && path === pathname && !back;
   if (matchesPath || active) {
@@ -45,7 +45,7 @@ const isMenuSection = element => element.type === MenuSection;
 const isMenuItem = element => element.type === MenuItem;
 /* eslint-enable */
 
-const wrapItemsInSections = (items) => {
+const wrapItemsInSections = items => {
   const groupedMenuItems = [];
   let currentGroup = [];
   const addCurrenntGroupToGroupedItems = () => {
@@ -55,7 +55,7 @@ const wrapItemsInSections = (items) => {
     }
   };
 
-  items.forEach((node) => {
+  items.forEach(node => {
     if (isMenuSection(node) || node.props.back) {
       addCurrenntGroupToGroupedItems();
       groupedMenuItems.push(node);
@@ -79,9 +79,7 @@ class MenuItem extends PureComponent {
     }
   }
   render() {
-    const {
-      label, disabled, hidden, active, back,
-    } = this.props;
+    const { label, disabled, hidden, active, back } = this.props;
     if (hidden) {
       return null;
     }
@@ -122,9 +120,7 @@ MenuItem.propTypes = {
   back: PropTypes.bool,
 };
 
-const MenuSection = ({
-  pathname, label, children, onClick, hidden, disabled,
-}) => {
+const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) => {
   if (hidden) {
     return null;
   }
@@ -167,7 +163,7 @@ class Menu extends PureComponent {
           ? Menu.flattenMenuSections(React.Children.toArray(currentItem.props.children))
           : [currentItem]),
       ],
-      [],
+      []
     );
   }
   constructor() {
@@ -189,12 +185,10 @@ class Menu extends PureComponent {
     // Flatten MenuSections in order not to have nested children when detecting active menu
     const items = Menu.flattenMenuSections(React.Children.toArray(parentNode.props.children));
 
-    items.some((node) => {
+    items.some(node => {
       // find the first matching menu item and return the parent or the item itself
       // depending if needs to be treated like a root
-      const {
-        path, asRoot, children, active,
-      } = node.props;
+      const { path, asRoot, children, active } = node.props;
       const hasChildren = children !== undefined;
       const pathMatches = path !== undefined && path === pathname;
       if (isMenuItem(node)) {
@@ -218,11 +212,13 @@ class Menu extends PureComponent {
     const activeRoot = this.getActiveRoot(this);
     if (activeRoot !== null) {
       menuComponents = React.Children.toArray(activeRoot.props.children);
-      menuComponents = wrapItemsInSections(menuComponents
-        .filter(element => isMenuItem(element) || isMenuSection(element))
-        .map(bindOnClickProp(onChange))
-        .map(bindPathnameProp(pathname))
-        .map(bindActiveProp(pathname)));
+      menuComponents = wrapItemsInSections(
+        menuComponents
+          .filter(element => isMenuItem(element) || isMenuSection(element))
+          .map(bindOnClickProp(onChange))
+          .map(bindPathnameProp(pathname))
+          .map(bindActiveProp(pathname))
+      );
     }
     return <div className="mb-element element-menu">{menuComponents}</div>;
   }

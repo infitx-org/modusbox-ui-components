@@ -18,7 +18,7 @@ const Header = ({
   onFilterBlur,
   onFilterClick,
 }) => {
-  const headerCells = columns.map((column) => {
+  const headerCells = columns.map(column => {
     const filter = find(filters, { _index: column._index });
     return (
       <HeaderCell
@@ -91,27 +91,27 @@ class HeaderCell extends PureComponent {
 
     const labelContent = [];
     if (label !== '' && isSearchable) {
-      labelContent.push(<FilterIcon
-        key="filter-icon"
-        isFiltering={isFiltering}
-        onClick={this.onFilterClick}
-      />);
+      labelContent.push(
+        <FilterIcon key="filter-icon" isFiltering={isFiltering} onClick={this.onFilterClick} />
+      );
     }
     if (label !== '' && !isFiltering) {
       labelContent.push(<HeaderLabel key="header-label" label={label} />);
     }
     if (label !== '' && isFiltering) {
-      labelContent.push(<HeaderFilter
-        key="header-filter"
-        isFiltering={isFiltering}
-        filter={filter}
-        onFilterClick={this.onFilterClick}
-        onFilterChange={onFilterChange}
-        onFilterBlur={onFilterBlur}
-        assignRef={(input) => {
-          this._filter = input;
-        }}
-      />);
+      labelContent.push(
+        <HeaderFilter
+          key="header-filter"
+          isFiltering={isFiltering}
+          filter={filter}
+          onFilterClick={this.onFilterClick}
+          onFilterChange={onFilterChange}
+          onFilterBlur={onFilterBlur}
+          assignRef={input => {
+            this._filter = input;
+          }}
+        />
+      );
     }
     return (
       <div className={headerCellClassName} onClick={this.onClick} role="presentation">
@@ -128,9 +128,7 @@ const HeaderLabel = ({ label }) => (
   </div>
 );
 
-const HeaderFilter = ({
-  filter, onFilterChange, onFilterBlur, assignRef,
-}) => (
+const HeaderFilter = ({ filter, onFilterChange, onFilterBlur, assignRef }) => (
   <input
     type="text"
     className="element-datalist__header-cell__filter"
