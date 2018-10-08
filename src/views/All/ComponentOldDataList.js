@@ -14,7 +14,7 @@ const list1 = new Array(150).fill(0).map(
         [`${c}`]: `${index} test test test test test test test test tests`,
       };
     }),
-  {}
+  {},
 );
 
 const icon = () => ({ name: 'close-small', color: '#39c', size: 16 });

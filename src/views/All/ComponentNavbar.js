@@ -18,7 +18,7 @@ const getCompanies = async () => new Promise(resolve => setTimeout(() => resolve
 const getOrganizations = async companyId =>
   new Promise(resolve => {
     const availableOrganizations = organizations.filter(
-      organization => organization.company === companyId
+      organization => organization.company === companyId,
     );
     setTimeout(() => resolve(availableOrganizations), 2500);
   });

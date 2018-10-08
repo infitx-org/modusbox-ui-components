@@ -82,7 +82,7 @@ it('renders the inner button', () => {
 it('renders the inner button disabled', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(
-    <TextField onButtonClick={mockEvent} buttonText="inner-button-text" buttonDisabled />
+    <TextField onButtonClick={mockEvent} buttonText="inner-button-text" buttonDisabled />,
   );
   expect(wrapper.find(Button).prop('disabled')).toBe(true);
 });
@@ -90,7 +90,7 @@ it('renders the inner button disabled', () => {
 it('renders the inner button with kind', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(
-    <TextField onButtonClick={mockEvent} buttonText="inner-button-text" buttonKind="secondary" />
+    <TextField onButtonClick={mockEvent} buttonText="inner-button-text" buttonKind="secondary" />,
   );
   expect(wrapper.find(Button).prop('kind')).toBe('secondary');
 });

@@ -26,13 +26,13 @@ const TestCheckbox = () => (
       <Checkbox
         id="x3"
         label="Events"
-        onChange={(value) => {
+        onChange={value => {
           console.log('onChange', value);
         }}
-        onFocus={(e) => {
+        onFocus={e => {
           console.log('onFocus', e);
         }}
-        onBlur={(e) => {
+        onBlur={e => {
           console.log('onBlur', e);
         }}
       />

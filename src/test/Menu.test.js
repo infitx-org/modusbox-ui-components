@@ -21,7 +21,7 @@ it('renders the menu items if parent root matches', () => {
     <Menu path="/" pathname="/" onChange={onChangeMockEvent}>
       <MenuItem path="/foo" label="foo" />
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   expect(wrapper.find('.element-menu__item')).toHaveLength(2);
 });
@@ -31,7 +31,7 @@ it('renders the menu items if child route matches', () => {
     <Menu path="/" pathname="/foo" onChange={onChangeMockEvent}>
       <MenuItem path="/foo" label="foo" />
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   expect(wrapper.find('.element-menu__item')).toHaveLength(2);
 });
@@ -41,7 +41,7 @@ it('does not render the menu items if no route matches', () => {
     <Menu path="/" pathname="/non-existing" onChange={onChangeMockEvent}>
       <MenuItem path="/foo" label="foo" />
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   expect(wrapper.find('.element-menu__item')).toHaveLength(0);
 });
@@ -53,7 +53,7 @@ it('renders the nested child when asRoot prop is set and route matches parent', 
         <MenuItem path="/foo/nested" label="nested" />
       </MenuItem>
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   const menuItem = wrapper.find('.element-menu__item');
   expect(menuItem).toHaveLength(1);
@@ -68,7 +68,7 @@ it('renders the parent child if asRoot prop is not set and route matches parent'
         <MenuItem path="/foo/nested" label="nested" />
       </MenuItem>
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   const menuItems = wrapper.find('.element-menu__item');
   expect(menuItems).toHaveLength(2);
@@ -87,7 +87,7 @@ it('renders the nested child if matching if asRoot prop is not set ', () => {
           </MenuItem>
         </MenuItem>
       </MenuItem>
-    </Menu>
+    </Menu>,
   );
 
   const menuItem = wrapper.find('.element-menu__item');
@@ -102,7 +102,7 @@ it('renders the menu section if parent root matches', () => {
         <MenuItem path="/foo" label="foo" />
         <MenuItem path="/bar" label="bar" />
       </MenuSection>
-    </Menu>
+    </Menu>,
   );
   const menuSection = wrapper.find('.element-menu__section');
   const menuSectionLabel = menuSection.find('.element-menu__section-label');
@@ -115,7 +115,7 @@ it('renders the Menu when no pathname is set', () => {
     <Menu onChange={onChangeMockEvent}>
       <MenuItem label="foo" />
       <MenuItem label="bar" />
-    </Menu>
+    </Menu>,
   );
   const menuItems = wrapper.find('.element-menu__item');
   expect(menuItems).toHaveLength(2);
@@ -126,7 +126,7 @@ it('renders the manually set active prop', () => {
     <Menu onChange={onChangeMockEvent}>
       <MenuItem label="foo" active />
       <MenuItem label="bar" />
-    </Menu>
+    </Menu>,
   );
   const activeMenuItem = wrapper.find('.element-menu__item--active');
   expect(activeMenuItem).toHaveLength(1);
@@ -138,7 +138,7 @@ it('renders the disabled prop on menu item', () => {
     <Menu onChange={onChangeMockEvent}>
       <MenuItem label="foo" disabled />
       <MenuItem label="bar" />
-    </Menu>
+    </Menu>,
   );
   const disabledMenuItem = wrapper.find('.element-menu__item--disabled');
   expect(disabledMenuItem).toHaveLength(1);
@@ -150,7 +150,7 @@ it('does not render a hidden menu item', () => {
     <Menu onChange={onChangeMockEvent}>
       <MenuItem label="foo" hidden />
       <MenuItem label="bar" />
-    </Menu>
+    </Menu>,
   );
   const menuItems = wrapper.find('.element-menu__item');
   expect(menuItems).toHaveLength(1);
@@ -163,7 +163,7 @@ it('does not render a hidden menu section', () => {
         <MenuItem label="foo" />
         <MenuItem label="bar" />
       </MenuSection>
-    </Menu>
+    </Menu>,
   );
   const menuSection = wrapper.find('.element-menu__section');
   expect(menuSection).toHaveLength(0);
@@ -175,7 +175,7 @@ it('trigger onChange when clicking a menu item', () => {
     <Menu path="/" pathname="/" onChange={mockEvent}>
       <MenuItem path="/foo" label="foo" />
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   const menuItems = wrapper.find('.element-menu__item');
   menuItems.at(0).simulate('click');
@@ -188,7 +188,7 @@ it('trigger onChange with correct value when clicking a menu item', () => {
     <Menu path="/" pathname="/" onChange={mockEvent}>
       <MenuItem path="/foo" label="foo" />
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   const menuItems = wrapper.find('.element-menu__item');
   menuItems.at(1).simulate('click');
@@ -203,7 +203,7 @@ it('renders the menu correctly when multiple props are set', () => {
         <MenuItem path="/foo/nested" label="nested" />
       </MenuItem>
       <MenuItem path="/bar" label="bar" />
-    </Menu>
+    </Menu>,
   );
   expect(shallowToJson(wrapper)).toMatchSnapshot();
 });

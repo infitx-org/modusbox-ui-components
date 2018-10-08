@@ -4,7 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import DataList from '../components/DataList';
 
-const columns = [
+const testColumns1 = [
   {
     label: 'Column1',
     key: 'column1',
@@ -27,35 +27,45 @@ const columns = [
   },
 ];
 let iterator = 0;
-const fromColumns = (item, index) =>
+const fromColumns = columns => (item, index) =>
   columns.reduce(
     (prev, column) => ({
       ...prev,
       [column.key]: (iterator += 1),
     }),
-    {}
+    {},
   );
 
-const list = new Array(100).fill(null).map(fromColumns);
+const testList1 = new Array(100).fill(null).map(fromColumns(testColumns1));
+
+const testList2 = [4, 5, 3, 1, 2].map(value => ({
+  col: value,
+}));
+const testColumns2 = [
+  {
+    label: 'Sortable Column',
+    key: 'col',
+  },
+];
 
 it('renders the list', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   expect(wrapper.find('.element-datalist').exists()).toBe(true);
   expect(wrapper.find('.element-datalist__rows').exists()).toBe(true);
-  expect(wrapper.find('div.element-datalist__row')).toHaveLength(list.length);
+  expect(wrapper.find('div.element-datalist__row')).toHaveLength(testList1.length);
 });
 
 it('renders the header', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   expect(wrapper.find('.element-datalist').exists()).toBe(true);
   expect(wrapper.find('.element-datalist__header').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__header-cell')).toHaveLength(columns.length);
+  expect(wrapper.find('.element-datalist__header-cell')).toHaveLength(testColumns1.length);
 });
 
 it('renders the pending spinner when prop isPending is set', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} isPending />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} isPending />);
 
   expect(wrapper.find('.element-datalist').exists()).toBe(true);
   expect(wrapper.find('.element-datalist__rows').exists()).toBe(false);
@@ -63,7 +73,7 @@ it('renders the pending spinner when prop isPending is set', () => {
 });
 
 it('renders the error message when prop hasError is set', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} hasError />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} hasError />);
 
   expect(wrapper.find('.element-datalist').exists()).toBe(true);
   expect(wrapper.find('.element-datalist__rows').exists()).toBe(false);
@@ -71,7 +81,7 @@ it('renders the error message when prop hasError is set', () => {
 });
 
 it('renders the no-data message when the list is empty', () => {
-  const wrapper = mount(<DataList list={[]} columns={columns} />);
+  const wrapper = mount(<DataList list={[]} columns={testColumns1} />);
 
   expect(wrapper.find('.element-datalist').exists()).toBe(true);
   expect(wrapper.find('.element-datalist__rows').exists()).toBe(false);
@@ -79,7 +89,7 @@ it('renders the no-data message when the list is empty', () => {
 });
 
 it('renders the correct transformed value described in the column configuration', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const cellContent = wrapper
     .find('div.element-datalist__row')
@@ -87,7 +97,7 @@ it('renders the correct transformed value described in the column configuration'
     .find('.element-datalist__item-cell__content')
     .at(1)
     .text();
-  const columnContent = columns[1].func(list[0].column2).toString();
+  const columnContent = testColumns1[1].func(testList1[0].column2).toString();
 
   expect(cellContent).toBe(columnContent);
 });
@@ -109,7 +119,7 @@ it('renders the nested object property as described in the column configuration'
 });
 
 it('renders the link correctly', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const link = wrapper
     .find('div.element-datalist__row')
@@ -117,14 +127,14 @@ it('renders the link correctly', () => {
     .find('.element-datalist__item-cell__content')
     .at(0)
     .find('.element-datalist__link');
-  const columnContent = columns[1].func(list[0].column2).toString();
+  const columnContent = testColumns1[1].func(testList1[0].column2).toString();
 
   expect(link.exists()).toBeTruthy();
 });
 
 it('renders the selected prop', () => {
   const wrapper = mount(
-    <DataList list={list} columns={columns} selected={item => item.column1 === 1} />
+    <DataList list={testList1} columns={testColumns1} selected={item => item.column1 === 1} />,
   );
 
   const hasSelectedClass = wrapper
@@ -135,54 +145,15 @@ it('renders the selected prop', () => {
   expect(hasSelectedClass).toBeTruthy();
 });
 
-it('triggers the onSelect even when clicking on a row', () => {
-  const mockEvent = jest.fn();
-  const wrapper = mount(<DataList list={list} columns={columns} onSelect={mockEvent} />);
-
-  wrapper
-    .find('div.element-datalist__row')
-    .at(0)
-    .simulate('click');
-
-  const firstItem = list[0];
-
-  expect(mockEvent).toHaveBeenCalledWith(firstItem);
-});
-
-it('triggers the onUnselect even when clicking on a selected row', () => {
-  const mockEvent = jest.fn();
-  const wrapper = mount(
-    <DataList
-      list={list}
-      columns={columns}
-      selected={item => item.column1 === 1}
-      onUnselect={mockEvent}
-    />
-  );
-
-  wrapper
-    .find('div.element-datalist__row')
-    .at(0)
-    .simulate('click');
-
-  const firstItem = list[0];
-
-  expect(mockEvent).toHaveBeenCalledWith(firstItem);
-});
-
-it('sorts by the specified column label', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} sortColumn="Column3" />);
-  expect(wrapper.find('.element-datalist__header-cell--sorting').text()).toBe('Column3');
-});
-
 it('updates the cell content on list changing', () => {
-  const wrapper = mount(<DataList list={list} columns={columns} />);
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
+
   const oldCellValue = wrapper
     .find('div.element-datalist__item-cell__content')
     .at(0)
     .text();
 
-  const updatedList = list.map(item => ({
+  const updatedList = testList1.map(item => ({
     ...item,
     column1: item.column1 * 2,
   }));
@@ -194,4 +165,299 @@ it('updates the cell content on list changing', () => {
     .text();
   expect(oldCellValue).not.toBe(newCellValue);
   expect(newCellValue).not.toBe('4');
+});
+
+it('triggers the onSelect even when clicking on a row', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} onSelect={mockEvent} />);
+
+  wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .simulate('click');
+
+  const firstItem = testList1[0];
+
+  expect(mockEvent).toHaveBeenCalledWith(firstItem);
+});
+
+it('triggers the onUnselect even when clicking on a selected row', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(
+    <DataList
+      list={testList1}
+      columns={testColumns1}
+      selected={item => item.column1 === 1}
+      onUnselect={mockEvent}
+    />,
+  );
+
+  wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .simulate('click');
+
+  const firstItem = testList1[0];
+
+  expect(mockEvent).toHaveBeenCalledWith(firstItem);
+});
+
+it('renders and sorts by the prop sortColumn', () => {
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} sortColumn="Column2" />);
+
+  const headerContent = wrapper.find('.element-datalist__header-cell--sorting').text();
+
+  const cellContent = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .find('.element-datalist__item-cell__content')
+    .at(1)
+    .text();
+
+  const inputValue = testList1[0].column2;
+  const columnFunc = testColumns1[1].func;
+  const expectedCellContent = columnFunc(inputValue).toString();
+
+  expect(headerContent).toBe('Column2');
+  expect(cellContent).toBe(expectedCellContent);
+});
+
+it('renders and sorts desc by the prop sortAsc', () => {
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} sortColumn="Column2" sortAsc={false} />,
+  );
+
+  const cellContent = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .find('.element-datalist__item-cell__content')
+    .at(1)
+    .text();
+
+  const inputValue = testList1[testList1.length - 1].column2;
+  const columnFunc = testColumns1[1].func;
+  const expectedCellContent = columnFunc(inputValue).toString();
+
+  expect(cellContent).toBe(expectedCellContent);
+});
+
+it('automatically sorts on the first sortable column if not specified otherwise', () => {
+  const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
+
+  const previousSortingCell = wrapper.find('.element-datalist__header-cell--sorting').text();
+
+  const cellContent = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .find('.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+
+  const unsortedInputValue = testList2[0].col.toString();
+  const numericvalues = testList2.map(item => item.col);
+  const expectedOutputValue = Math.min.apply(null, numericvalues).toString();
+
+  expect(previousSortingCell).toBe('Sortable Column');
+  expect(cellContent).not.toBe(unsortedInputValue);
+  expect(cellContent).toBe(expectedOutputValue);
+});
+
+it('cannot sort on a column when configured as non sortable', () => {
+  const columns = [
+    {
+      label: '',
+      key: 'col',
+      sortable: false,
+    },
+  ];
+  const wrapper = mount(<DataList list={testList2} columns={columns} />);
+
+  const headerCell = wrapper.find('.element-datalist__header-cell').at(0);
+
+  expect(headerCell.hasClass('element-datalist__header-cell--sortable')).toBeFalsy();
+});
+
+it('sorts the list by the column of the clicked header cell', () => {
+  const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
+
+  const prevSortingCell = wrapper.find('.element-datalist__header-cell--sorting').text();
+
+  const prevCellContent = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .find('.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .simulate('click');
+
+  const nextSortingCell = wrapper.find('.element-datalist__header-cell--sorting').text();
+
+  const nextCellContent = wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .find('.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+
+  expect(prevSortingCell).toBe('Sortable Column');
+  expect(prevSortingCell).toEqual(nextSortingCell);
+  expect(prevCellContent).not.toEqual(nextCellContent);
+});
+
+it('cannot search on a column without label', () => {
+  const columns = [
+    {
+      label: '',
+      key: 'col',
+    },
+  ];
+  const wrapper = mount(<DataList list={testList2} columns={columns} />);
+
+  const searchIcon = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon');
+
+  expect(searchIcon.exists()).toBeFalsy();
+});
+
+it('cannot search on a column when configued as non searchable', () => {
+  const columns = [
+    {
+      label: 'Non searchable column',
+      key: 'col',
+      searchable: false,
+    },
+  ];
+
+  const wrapper = mount(<DataList list={testList2} columns={columns} />);
+
+  const searchIcon = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon');
+
+  expect(searchIcon.exists()).toBeFalsy();
+});
+
+it('finds the filter input when clicking on a filterable column', () => {
+  const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
+
+  const updatedHeaderCell = wrapper.find('.element-datalist__header-cell').at(0);
+  const hasFilterClass = updatedHeaderCell.hasClass('element-datalist__header-cell--filtering');
+
+  const textInput = updatedHeaderCell.find('input[type="text"]');
+
+  expect(hasFilterClass).toBeTruthy();
+  expect(textInput.exists()).toBeTruthy();
+});
+
+it('filters the list when setting a filter', () => {
+  const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
+
+  const filterValue = '1';
+  const initialRowsCount = wrapper.find('div.element-datalist__row').length;
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('input[type="text"]')
+    .simulate('change', { target: { value: filterValue } });
+
+  const updatedRows = wrapper.find('div.element-datalist__row');
+  const firstCellContent = updatedRows
+    .at(0)
+    .find('div.element-datalist__item-cell__content')
+    .at(0)
+    .text();
+
+  const updatedRowsCount = updatedRows.length;
+
+  expect(firstCellContent.includes(filterValue));
+  expect(initialRowsCount).not.toEqual(updatedRowsCount);
+  expect(updatedRowsCount).toEqual(1);
+});
+
+it('filters the list on muliple columns when multiple filters are set a filter', () => {
+  const valueColumn1 = 'foo';
+  const valueColumn2 = 'bar';
+
+  const list = [
+    {
+      col1: valueColumn1,
+      col2: valueColumn2,
+    },
+    {
+      col1: 'xyz',
+      col2: 'xyz',
+    },
+  ];
+  const columns = [
+    {
+      label: 'col1',
+      key: 'col1',
+    },
+    {
+      label: 'col2',
+      key: 'col2',
+    },
+  ];
+
+  const wrapper = mount(<DataList list={list} columns={columns} />);
+
+  const initialRowsCount = wrapper.find('div.element-datalist__row').length;
+
+  const headerCellColumn1 = wrapper.find('.element-datalist__header-cell').at(0);
+  const headerCellColumn2 = wrapper.find('.element-datalist__header-cell').at(1);
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('input[type="text"]')
+    .simulate('change', { target: { value: valueColumn1 } });
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(1)
+    .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .simulate('click');
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(1)
+    .find('input[type="text"]')
+    .simulate('change', { target: { value: valueColumn2 } });
+
+  const updatedRows = wrapper.find('div.element-datalist__row');
+
+  const updatedRowsCount = updatedRows.length;
+
+  expect(initialRowsCount).not.toEqual(updatedRowsCount);
+  expect(updatedRowsCount).toEqual(1);
 });

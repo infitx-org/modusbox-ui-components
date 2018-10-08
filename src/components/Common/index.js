@@ -37,9 +37,7 @@ Placeholder.defaultProps = {
   active: false,
 };
 
-const InnerButton = ({
-  className, kind, active, onClick, label, disabled, noFill, icon,
-}) => {
+const InnerButton = ({ className, kind, active, onClick, label, disabled, noFill, icon }) => {
   // Internal button used by inputs
 
   const innerButtonClassName = utils.composeClassNames([

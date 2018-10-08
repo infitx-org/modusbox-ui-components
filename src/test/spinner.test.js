@@ -30,7 +30,7 @@ it('renders the spinner centered to the parent container', () => {
   const wrapper = mount(
     <div style={{ height: '100px', width: '100px' }}>
       <Spinner size={20} center />
-    </div>
+    </div>,
   );
   expect(wrapper.find('.center')).toHaveLength(1);
   const svg = wrapper.find('svg');

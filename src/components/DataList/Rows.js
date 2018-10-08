@@ -38,11 +38,13 @@ class Rows extends PureComponent {
 
 class RowItem extends PureComponent {
   static getCells(item) {
-    return (column, index) => (
-      <ItemCell key={index.toString()} className={column.className}>
-        {item.data[column.key]}
-      </ItemCell>
-    );
+    return (column, index) => {
+      return (
+        <ItemCell key={index.toString()} className={column.className}>
+          {item.data[column._index]}
+        </ItemCell>
+      );
+    };
   }
   constructor(props) {
     super(props);

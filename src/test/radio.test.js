@@ -60,7 +60,7 @@ it('renders the radio options labels', () => {
     wrapper
       .find('.input-radio__option label')
       .at(0)
-      .text()
+      .text(),
   ).toBe('label1');
 });
 

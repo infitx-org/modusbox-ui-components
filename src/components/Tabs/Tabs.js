@@ -15,9 +15,7 @@ class Tab extends PureComponent {
     }
   }
   render() {
-    const {
-      selected, focused, children, disabled, hidden, flex, style,
-    } = this.props;
+    const { selected, focused, children, disabled, hidden, flex, style } = this.props;
     if (hidden) {
       return null;
     }
@@ -246,7 +244,7 @@ class Tabs extends PureComponent {
     return (
       <div className={tabClassNames} id={id}>
         <input
-          ref={(input) => {
+          ref={input => {
             this.input = input;
           }}
           type="button"

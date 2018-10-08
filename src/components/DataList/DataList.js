@@ -22,7 +22,7 @@ class DataList extends PureComponent {
     // applies the column configuration to the items
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
-      const { func, key, link } = column;
+      const { func, key, link, _index } = column;
       let value = get(item, key);
       if (typeof func === 'function') {
         value = func(value, item, rowIndex);
@@ -33,7 +33,7 @@ class DataList extends PureComponent {
       }
       return {
         ...prev,
-        [key]: value,
+        [_index]: value,
       };
     };
 
@@ -46,49 +46,39 @@ class DataList extends PureComponent {
 
     return items.map(mapItems);
   }
-  static getLabelKey(columns, label) {
-    const column = find(columns, { label });
-    if (column) {
-      return column.key;
-    }
-    return undefined;
-  }
 
   static filterItems(items, columns, filters) {
-    const filtersByKey = filters
-      .map(filter => ({
-        value: filter.value,
-        key: DataList.getLabelKey(columns, filter.label),
-      }))
-      .filter(filter => filter.value !== '');
+    const filtersByKey = filters.filter(item => item.value !== '');
 
     const matchingRows = item =>
-      filtersByKey.every((filter) => {
-        const { key, value } = filter;
-        let cell = item[key];
+      filtersByKey.every(filter => {
+        const { _index, value } = filter;
+        let cell = item.data[_index];
         if (typeof cell === 'number') {
           cell = cell.toString();
         }
         if (typeof cell === 'string') {
           return cell.includes(value);
         }
+
         return false;
       });
 
     return items.filter(matchingRows);
   }
-  static sortItems(items, asc, key) {
+  static sortItems(items, asc, _index) {
     // sorts the items by the column key and the direction
-    return orderBy(items, key, asc ? 'asc' : 'desc');
+    const getContentAtIndex = key => item => item.data[key];
+    return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
-  static getSortKey(label, columns) {
-    let sortKey = columns[0].key;
+  static getSortColumn(label, columns) {
+    let sortColumn = columns[0]._index;
     // gets the key of the sorting column
     if (label !== undefined) {
       const column = find(columns, { label });
-      sortKey = column && column.key;
+      sortColumn = get(column, '_index');
     }
-    return sortKey;
+    return sortColumn;
   }
 
   constructor(props) {
@@ -103,46 +93,42 @@ class DataList extends PureComponent {
 
     const { columns, sortAsc, sortColumn } = this.props;
 
-    const sortKey = DataList.getSortKey(sortColumn, columns);
+    this._columns = DataList.convertColumns(columns);
 
     this.state = {
       sortAsc: sortAsc === true,
-      sortKey,
+      sortColumn: DataList.getSortColumn(sortColumn, this._columns),
       items: [],
       filters: [],
     };
   }
   componentWillMount() {
-    this._list = this.props.list;
-    this._columns = DataList.convertColumns(this.props.columns);
-    this.transformList({ applyColumns: true, sort: true });
+    this.transformList(this.props.list, { applyColumns: true, sort: true });
   }
   componentWillReceiveProps(nextProps) {
-    const { list, columns } = nextProps;
-    this._list = list;
-    this._columns = DataList.convertColumns(columns);
-    if (this.props.list !== list || this.props.columns !== columns) {
-      this.transformList({ applyColumns: true, sort: true });
+    const { list } = nextProps;
+    if (this.props.list !== list) {
+      this.transformList(list, { applyColumns: true, sort: true });
     }
   }
   onSortClick(key) {
     this.setState(
       {
-        sortAsc: this.state.sortKey === key ? !this.state.sortAsc : true,
-        sortKey: key,
+        sortAsc: this.state.sortColumn === key ? !this.state.sortAsc : true,
+        sortColumn: key,
       },
       () => {
-        this.transformList({ sort: true });
+        this.transformList(this._list, { sort: true });
       },
     );
   }
-  onFilterChange(label, value) {
+  onFilterChange(_index, value) {
     const filters = [...this.state.filters];
-    const filter = find(filters, { label });
+    const filter = find(filters, { _index });
     if (filter) {
       filter.value = value;
     } else {
-      filters.push({ label, value });
+      filters.push({ _index, value });
     }
 
     const items = DataList.filterItems(this._list, this._columns, filters);
@@ -152,9 +138,9 @@ class DataList extends PureComponent {
       filters,
     });
   }
-  onFilterBlur(label) {
+  onFilterBlur(_index) {
     const { filters } = this.state;
-    const filter = find(filters, { label });
+    const filter = find(filters, { _index });
     if (filter.value === '') {
       const index = filters.indexOf(filter);
       this.setState({
@@ -162,12 +148,12 @@ class DataList extends PureComponent {
       });
     }
   }
-  onFilterClick(label) {
+  onFilterClick(_index) {
     const { filters } = this.state;
-    const filter = find(filters, { label });
+    const filter = find(filters, { _index });
     if (!filter) {
       this.setState({
-        filters: [...this.state.filters, { label, value: '' }],
+        filters: [...this.state.filters, { _index, value: '' }],
       });
     }
   }
@@ -182,13 +168,14 @@ class DataList extends PureComponent {
     }
   }
 
-  transformList(cfg) {
+  transformList(list, cfg) {
+    this._list = list;
     if (cfg.applyColumns === true) {
       this._list = DataList.convertItems(this._list, this._columns, this.props.selected);
     }
     if (cfg.sort === true) {
-      const { sortAsc, sortKey } = this.state;
-      this._list = DataList.sortItems(this._list, sortAsc, sortKey);
+      const { sortAsc, sortColumn } = this.state;
+      this._list = DataList.sortItems(this._list, sortAsc, sortColumn);
     }
     this.setState({
       items: this._list,
@@ -196,12 +183,8 @@ class DataList extends PureComponent {
   }
 
   render() {
-    const {
-      columns, isPending, noData, hasError,
-    } = this.props;
-    const {
-      items, sortAsc, sortKey, filters,
-    } = this.state;
+    const { isPending, noData, hasError } = this.props;
+    const { items, sortAsc, sortColumn, filters } = this.state;
 
     let content = null;
     if (isPending) {
@@ -215,7 +198,7 @@ class DataList extends PureComponent {
         <Header
           key="datalist-header"
           columns={this._columns}
-          sortKey={sortKey}
+          sortColumn={sortColumn}
           sortAsc={sortAsc}
           onSortClick={this.onSortClick}
           filters={filters}
@@ -223,7 +206,12 @@ class DataList extends PureComponent {
           onFilterBlur={this.onFilterBlur}
           onFilterClick={this.onFilterClick}
         />,
-        <Rows key="datalist-rows" items={items} columns={columns} onItemClick={this.onItemClick} />,
+        <Rows
+          key="datalist-rows"
+          items={items}
+          columns={this._columns}
+          onItemClick={this.onItemClick}
+        />,
       ];
     }
 
@@ -232,10 +220,39 @@ class DataList extends PureComponent {
 }
 
 DataList.defaultProps = {
+  columns: [],
+  list: [],
   sortAsc: true,
+  sortColumn: undefined,
+  noData: '',
+  isPending: false,
+  hasError: false,
+  onSelect: undefined,
+  onUnselect: undefined,
+  selected: undefined,
 };
+
 DataList.propTypes = {
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      key: PropTypes.string,
+      func: PropTypes.fund,
+      className: PropTypes.string,
+      link: PropTypes.fund,
+      sortable: PropTypes.bool,
+      searchable: PropTypes.bool,
+    }),
+  ),
+  list: PropTypes.arrayOf(PropTypes.shape()),
   sortAsc: PropTypes.bool,
+  sortColumn: PropTypes.string,
+  noData: PropTypes.string,
+  isPending: PropTypes.bool,
+  hasError: PropTypes.bool,
+  onSelect: PropTypes.func,
+  onUnselect: PropTypes.func,
+  selected: PropTypes.func,
 };
 
 export default DataList;

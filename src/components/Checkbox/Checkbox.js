@@ -61,15 +61,13 @@ class Checkbox extends PureComponent {
   }
   render() {
     const { checked } = this.state;
-    const {
-      style, className, id, label, disabled, round, semi,
-    } = this.props;
+    const { style, className, id, label, disabled, round, semi } = this.props;
     const checkboxClassName = utils.composeClassNames(['mb-input', 'input-checkbox', className]);
 
     return (
       <div className={checkboxClassName} style={style}>
         <input
-          ref={(input) => {
+          ref={input => {
             this.input = input;
           }}
           type="checkbox"

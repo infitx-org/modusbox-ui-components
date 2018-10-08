@@ -51,7 +51,7 @@ class ListManager extends React.Component {
       this.setState({
         counter: this.state.counter + 1,
       });
-    }, 1000000);
+    }, 1000);
   }
   togglePending() {
     this.setState({
@@ -122,9 +122,7 @@ const buildRow = () =>
 
 const list = new Array(100).fill(0).map(buildRow);
 
-const List = ({
-  counter, noDataLabel, pending, error,
-}) => {
+const List = ({ noDataLabel, pending, error }) => {
   const columns = [
     {
       label: 'Double',
@@ -133,9 +131,15 @@ const List = ({
       className: 'col-100px',
     },
     {
+      label: 'Triple',
+      key: 'a',
+      func: x => x * 3,
+      className: 'col-100px',
+    },
+    {
       label: 'Square',
       key: 'b',
-      func: x => x * counter,
+      func: x => x * x,
     },
     {
       label: 'c',
@@ -146,6 +150,7 @@ const List = ({
       key: 'd',
       func: x => new Array(20).fill(x).join(''),
       sortable: false,
+      searchable: false,
       link: console.log,
     },
     {

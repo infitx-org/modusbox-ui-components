@@ -10,7 +10,7 @@ import '../../icons/modusbox/arrow.svg';
 
 const Header = ({
   columns,
-  sortKey,
+  sortColumn,
   sortAsc,
   onSortClick,
   filters,
@@ -18,22 +18,23 @@ const Header = ({
   onFilterBlur,
   onFilterClick,
 }) => {
-  const headerCells = columns.map((column) => {
-    const filter = find(filters, { label: column.label });
+  const headerCells = columns.map(column => {
+    const filter = find(filters, { _index: column._index });
     return (
       <HeaderCell
         className={column.className}
         key={column._index}
         label={column.label}
+        isSearchable={column.searchable !== false}
         isSortable={column.sortable !== false}
-        isSorting={sortKey === column.key}
+        isSorting={sortColumn === column._index}
         isSortingAsc={sortAsc}
         isFiltering={filter !== undefined}
         filter={filter}
-        onClick={() => onSortClick(column.key)}
-        onFilterChange={value => onFilterChange(column.label, value)}
-        onFilterBlur={() => onFilterBlur(column.label)}
-        onFilterClick={() => onFilterClick(column.label)}
+        onClick={() => onSortClick(column._index)}
+        onFilterChange={value => onFilterChange(column._index, value)}
+        onFilterBlur={() => onFilterBlur(column._index)}
+        onFilterClick={() => onFilterClick(column._index)}
       />
     );
   });
@@ -70,6 +71,7 @@ class HeaderCell extends PureComponent {
     const {
       className,
       label,
+      isSearchable,
       isSortable,
       isSorting,
       isSortingAsc,
@@ -88,28 +90,28 @@ class HeaderCell extends PureComponent {
     ]);
 
     const labelContent = [];
-    if (label !== '') {
-      labelContent.push(<FilterIcon
-        key="filter-icon"
-        isFiltering={isFiltering}
-        onClick={this.onFilterClick}
-      />);
-
-      if (!isFiltering) {
-        labelContent.push(<HeaderLabel key="header-label" label={label} />);
-      } else {
-        labelContent.push(<HeaderFilter
+    if (label !== '' && isSearchable) {
+      labelContent.push(
+        <FilterIcon key="filter-icon" isFiltering={isFiltering} onClick={this.onFilterClick} />,
+      );
+    }
+    if (label !== '' && !isFiltering) {
+      labelContent.push(<HeaderLabel key="header-label" label={label} />);
+    }
+    if (label !== '' && isFiltering) {
+      labelContent.push(
+        <HeaderFilter
           key="header-filter"
           isFiltering={isFiltering}
           filter={filter}
           onFilterClick={this.onFilterClick}
           onFilterChange={onFilterChange}
           onFilterBlur={onFilterBlur}
-          assignRef={(input) => {
+          assignRef={input => {
             this._filter = input;
           }}
-        />);
-      }
+        />,
+      );
     }
     return (
       <div className={headerCellClassName} onClick={this.onClick} role="presentation">
@@ -126,9 +128,7 @@ const HeaderLabel = ({ label }) => (
   </div>
 );
 
-const HeaderFilter = ({
-  filter, onFilterChange, onFilterBlur, assignRef,
-}) => (
+const HeaderFilter = ({ filter, onFilterChange, onFilterBlur, assignRef }) => (
   <input
     type="text"
     className="element-datalist__header-cell__filter"

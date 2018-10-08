@@ -419,13 +419,13 @@ class PopupMenu extends PureComponent {
     return (
       <div
         className="Navbar__popup-wrapper"
-        ref={(wrapper) => {
+        ref={wrapper => {
           this.wrapper = wrapper;
         }}
       >
         <div
           className="Navbar__popup"
-          ref={(popup) => {
+          ref={popup => {
             this.popup = popup;
           }}
         >
@@ -455,9 +455,7 @@ const PopupMenuScroller = ({ children }) => {
   );
 };
 
-const CompanyNav = ({
-  activeCompany, onClick, isCompanyBoxVisible, children,
-}) => {
+const CompanyNav = ({ activeCompany, onClick, isCompanyBoxVisible, children }) => {
   let name = '';
   let companyIcon = null;
 
@@ -532,9 +530,7 @@ const SearchBox = ({ value, onChange, dark }) => {
   );
 };
 
-const Companies = ({
-  companies, activeCompanyId, onClickCompany, dark,
-}) => (
+const Companies = ({ companies, activeCompanyId, onClickCompany, dark }) => (
   <div>
     {companies.map(company => (
       <CompanyItem
@@ -548,9 +544,7 @@ const Companies = ({
   </div>
 );
 
-const CompanyItem = ({
-  company, isActive, onClick, dark,
-}) => {
+const CompanyItem = ({ company, isActive, onClick, dark }) => {
   const { name } = company;
   const companyItemClassName = utils.composeClassNames([
     'Navbar__company-item',
@@ -571,9 +565,7 @@ const CompanyItem = ({
   );
 };
 
-const OrganizationNav = ({
-  onClick, activeOrganization, isOrganizationsBoxVisible, children,
-}) => {
+const OrganizationNav = ({ onClick, activeOrganization, isOrganizationsBoxVisible, children }) => {
   let organizationIcon = <Icon name="business-group" fill="#fff" size={16} />;
   if (!activeOrganization) {
     organizationIcon = <Spinner size={14} />;
@@ -636,11 +628,9 @@ const OrganizationStructure = ({
   );
 };
 
-const FilteredOrganizations = ({
-  items, onSelectEnvironment, activeEnvironment, dark,
-}) => (
+const FilteredOrganizations = ({ items, onSelectEnvironment, activeEnvironment, dark }) => (
   <div>
-    {items.map((item) => {
+    {items.map(item => {
       if (item.match === 'environment') {
         return (
           <EnvironmentSearchItem
@@ -667,9 +657,7 @@ const FilteredOrganizations = ({
   </div>
 );
 
-const EnvironmentSearchItem = ({
-  item, onSelectEnvironment, isActive, dark,
-}) => {
+const EnvironmentSearchItem = ({ item, onSelectEnvironment, isActive, dark }) => {
   const searchItemClassName = utils.composeClassNames([
     'Navbar__search-item',
     dark && 'Navbar__search-item--dark',
@@ -710,9 +698,7 @@ const EnvironmentSearchItem = ({
   );
 };
 
-const Organizations = ({
-  dark, activeEnvironment, organizations, onSelectEnvironment,
-}) => (
+const Organizations = ({ dark, activeEnvironment, organizations, onSelectEnvironment }) => (
   <div>
     {organizations.map(organization => (
       <NestedOrganization
@@ -746,14 +732,12 @@ class NestedOrganization extends PureComponent {
     });
   }
   render() {
-    const {
-      activeEnvironmentId, organization, onSelectEnvironment, dark,
-    } = this.props;
+    const { activeEnvironmentId, organization, onSelectEnvironment, dark } = this.props;
     let { indent } = this.props;
     if (!indent) {
       indent = 0;
     }
-    const sortByEnvironmentType = (curr) => {
+    const sortByEnvironmentType = curr => {
       // make pre-production to appear before production environments
       if (curr.type === PROD) {
         return 1;
@@ -816,9 +800,7 @@ class NestedOrganization extends PureComponent {
 
 class NestedItem extends PureComponent {
   render() {
-    const {
-      item, isActive, indent, isEnvironment, dark, isExpanded, onClick,
-    } = this.props;
+    const { item, isActive, indent, isEnvironment, dark, isExpanded, onClick } = this.props;
     const { name } = item;
     const indentation = Math.max(0, indent - 1) * 35;
     const type = isEnvironment ? 'environment' : 'organization';
@@ -933,9 +915,7 @@ const EnvironmentItem = ({ environment, isActive, onClick }) => {
   );
 };
 
-const User = ({
-  username, onClick, isUserBoxVisible, onSignout,
-}) => (
+const User = ({ username, onClick, isUserBoxVisible, onSignout }) => (
   <div className="Navbar__user" onClick={onClick} role="presentation">
     <div className="Navbar__user__image-box">
       <div className="Navbar__user__image">

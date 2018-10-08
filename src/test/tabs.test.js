@@ -82,7 +82,7 @@ it('triggers onSelect when clicking a different tab', () => {
         <Tab>Tab1</Tab>
         <Tab>Tab2</Tab>
       </TabList>
-    </Tabs>
+    </Tabs>,
   );
   wrapper
     .find(Tab)
@@ -99,7 +99,7 @@ it('does not trigger onSelect when clicking a disabled tab', () => {
         <Tab>Tab1</Tab>
         <Tab disabled>Tab2</Tab>
       </TabList>
-    </Tabs>
+    </Tabs>,
   );
   wrapper
     .find(Tab)
@@ -116,7 +116,7 @@ it('does not trigger onSelect when clicking the currently selected tab', () => {
         <Tab>Tab1</Tab>
         <Tab>Tab2</Tab>
       </TabList>
-    </Tabs>
+    </Tabs>,
   );
   wrapper
     .find(Tab)

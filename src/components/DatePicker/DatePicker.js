@@ -98,9 +98,7 @@ class DatePicker extends PureComponent {
     window.addEventListener('mouseup', this.handlePageClick, false);
   }
   componentWillReceiveProps(props) {
-    const {
-      value, defaultHour, defaultMinute, defaultSecond,
-    } = props;
+    const { value, defaultHour, defaultMinute, defaultSecond } = props;
     const defaultTime = {
       hour: defaultHour,
       minute: defaultMinute,
@@ -355,7 +353,7 @@ class DatePicker extends PureComponent {
 
             <input
               onFocus={this.onFocus}
-              ref={(input) => {
+              ref={input => {
                 this.input = input;
               }}
               className="mb-input__input input-datepicker__value"
@@ -372,7 +370,7 @@ class DatePicker extends PureComponent {
 
         <div
           className="input-datepicker--position"
-          ref={(calendarPosition) => {
+          ref={calendarPosition => {
             this.calendarPosition = calendarPosition;
           }}
         >
