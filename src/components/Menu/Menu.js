@@ -191,7 +191,7 @@ class Menu extends PureComponent {
     const { pathname } = this.props;
     let activeNode = null;
     // render Menu when pathname matches path
-    if (getPathMatches(pathname, parentNode.props.path, parentNode.props.subRoute)) {
+    if (getPathMatches(pathname, parentNode.props.path, parentNode.props.partial)) {
       return parentNode;
     }
     // Default to Menu when going manual - no route matching
