@@ -5,6 +5,18 @@ import Icon from '../Icon';
 import './Menu.scss';
 import '../../icons/mule/back-small.svg';
 
+const getPathMatches = (pathname, path, partial) => {
+  let  pathMatches = false;
+  if (path) {
+    if (partial) {
+      pathMatches = pathname.startsWith(path);
+    } else {
+      pathMatches = path === pathname;
+    }
+  }
+  return pathMatches;
+}
+
 const bindOnClickProp = onClick => element =>
   React.cloneElement(element, {
     ...element.props,
@@ -18,9 +30,9 @@ const bindPathnameProp = pathname => element =>
   });
 
 const bindActiveProp = pathname => element => {
-  const { path, back, active } = element.props;
-  const matchesPath = path !== undefined && path === pathname && !back;
-  if (matchesPath || active) {
+  const { path, partial, back, active } = element.props;
+  const pathMatches = getPathMatches(pathname, path, partial) && !back;
+  if (pathMatches || active) {
     return React.cloneElement(element, {
       ...element.props,
       active: true,
@@ -39,7 +51,6 @@ const bindDisabledProp = disabled => element =>
     ...element.props,
     disabled: element.props.disabled || disabled,
   });
-
 /* eslint-disable */
 const isMenuSection = element => element.type === MenuSection;
 const isMenuItem = element => element.type === MenuItem;
@@ -111,6 +122,8 @@ MenuItem.defaultProps = {
   disabled: false,
   hidden: false,
   back: false,
+  asRoot: false,
+  partial: false,
 };
 MenuItem.propTypes = {
   path: PropTypes.string,
@@ -118,6 +131,10 @@ MenuItem.propTypes = {
   disabled: PropTypes.bool,
   hidden: PropTypes.bool,
   back: PropTypes.bool,
+  /* eslint-disable */
+  asRoot: PropTypes.bool,
+  partial: PropTypes.bool,
+  /* eslint-enable */
 };
 
 const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) => {
@@ -168,18 +185,18 @@ class Menu extends PureComponent {
   }
   constructor() {
     super();
-    this.getActiveRoot = this.getActiveRoot.bind(this);
+    this.getActiveNode = this.getActiveNode.bind(this);
   }
-  getActiveRoot(parentNode) {
+  getActiveNode(parentNode) {
     const { pathname } = this.props;
-    let activeRoot = null;
+    let activeNode = null;
     // render Menu when pathname matches path
-    if (parentNode.props.path !== undefined && parentNode.props.path === pathname) {
+    if (getPathMatches(pathname, parentNode.props.path, parentNode.props.subRoute)) {
       return parentNode;
     }
     // Default to Menu when going manual - no route matching
     if (parentNode === this && parentNode.props.pathname === undefined) {
-      activeRoot = parentNode;
+      activeNode = parentNode;
     }
 
     // Flatten MenuSections in order not to have nested children when detecting active menu
@@ -188,30 +205,32 @@ class Menu extends PureComponent {
     items.some(node => {
       // find the first matching menu item and return the parent or the item itself
       // depending if needs to be treated like a root
-      const { path, asRoot, children, active } = node.props;
-      const hasChildren = children !== undefined;
-      const pathMatches = path !== undefined && path === pathname;
       if (isMenuItem(node)) {
+
+        const { path, asRoot, partial, children, active } = node.props;
+        const pathMatches = getPathMatches(pathname, path, partial);
+
         if (pathMatches || active) {
           // asRoot prop is meant to be used when menu has child elements
           // and we do not want to render the parent node but the child nodes
-          activeRoot = asRoot ? node : parentNode;
-        } else if (hasChildren) {
-          activeRoot = this.getActiveRoot(node);
+          activeNode = asRoot ? node : parentNode;
+        } else if (children !== undefined) {
+          activeNode = this.getActiveNode(node);
         }
       }
-      return activeRoot;
+      return activeNode;
     });
 
-    return activeRoot;
+    return activeNode;
   }
 
   render() {
     const { pathname, onChange } = this.props;
     let menuComponents = null;
-    const activeRoot = this.getActiveRoot(this);
-    if (activeRoot !== null) {
-      menuComponents = React.Children.toArray(activeRoot.props.children);
+    const activeNode = this.getActiveNode(this);
+
+    if (activeNode !== null) {
+      menuComponents = React.Children.toArray(activeNode.props.children);
       menuComponents = wrapItemsInSections(
         menuComponents
           .filter(element => isMenuItem(element) || isMenuSection(element))

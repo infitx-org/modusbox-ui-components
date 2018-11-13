@@ -36,7 +36,7 @@ const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
 
     <MenuItem path="/administration" label="administration" asRoot disabled={disabled}>
       <MenuItem to="/" label="Administration" back />
-      <MenuItem path="/administration/errorcodes" label="Error Codes">
+      <MenuItem path="/administration/errorcodes" label="Error Codes" subRoutes>
         <MenuItem
           path="/administration/errorcodes/errorCode"
           to="/administration/errorcodes"
@@ -55,6 +55,27 @@ const Menu2 = ({ pathname, onChange, disabled, hidden }) => (
     <MenuItem label="3" hidden={hidden} active />
     <MenuItem label="4" />
     <MenuItem label="5" hidden={hidden} />
+  </Menu>
+);
+
+const Menu3 = ({ pathname, onChange }) => (
+  <Menu path="/" pathname={pathname} onChange={onChange}>
+    <MenuItem
+      label="/route"
+      path="/route"
+    />
+    <MenuItem
+      label="/route/other"
+      path="/route/other"
+    />
+    <MenuItem
+      label="/route/other/subroute"
+      path="/route/other/subroute"
+      subRoutes
+    />
+    <MenuItem
+      label="/route/other/subroute/xyz/tre"
+      path="/route/other/subroute/xyz/tre" />
   </Menu>
 );
 
@@ -106,7 +127,7 @@ class MenuTester extends PureComponent {
           <TextField
             onChange={this.onChangePath}
             value={this.state.pathname}
-            style={{ ...style, width: '400px' }}
+            style={{ ...style, width: '300px' }}
           />
           <Button
             onClick={() => this.onChangePath('/partners/partner/contacts')}
@@ -143,6 +164,9 @@ const TestMenu = () => (
       </MenuTester>
       <MenuTester>
         <Menu2 />
+      </MenuTester>
+      <MenuTester>
+        <Menu3 />
       </MenuTester>
     </div>
   </div>
