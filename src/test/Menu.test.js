@@ -95,6 +95,19 @@ it('renders the nested child if matching if asRoot prop is not set ', () => {
   expect(menuItem.text()).toBe('4th level');
 });
 
+it('renders the menu items when partial match is allowed', () => {
+  const wrapper = mount(
+    <Menu path="/" pathname="/foo/partial/match" onChange={onChangeMockEvent}>
+      <MenuItem path="/foo" label="foo" partial />
+      <MenuItem path="/bar" label="bar" />
+    </Menu>,
+  );
+  const menuItem = wrapper.find('.element-menu__item');
+  const activeMenuItem = wrapper.find('.element-menu__item--active');
+  expect(menuItem).toHaveLength(2);  
+  expect(activeMenuItem.text()).toBe('foo');
+});
+
 it('renders the menu section if parent root matches', () => {
   const wrapper = mount(
     <Menu path="/" pathname="/" onChange={onChangeMockEvent}>
