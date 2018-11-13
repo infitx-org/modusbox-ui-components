@@ -36,7 +36,7 @@ const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
 
     <MenuItem path="/administration" label="administration" asRoot disabled={disabled}>
       <MenuItem to="/" label="Administration" back />
-      <MenuItem path="/administration/errorcodes" label="Error Codes" subRoutes>
+      <MenuItem path="/administration/errorcodes" label="Error Codes" partial>
         <MenuItem
           path="/administration/errorcodes/errorCode"
           to="/administration/errorcodes"
@@ -71,7 +71,7 @@ const Menu3 = ({ pathname, onChange }) => (
     <MenuItem
       label="/route/other/subroute"
       path="/route/other/subroute"
-      subRoutes
+      partial
     />
     <MenuItem
       label="/route/other/subroute/xyz/tre"
