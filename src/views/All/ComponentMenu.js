@@ -60,22 +60,10 @@ const Menu2 = ({ pathname, onChange, disabled, hidden }) => (
 
 const Menu3 = ({ pathname, onChange }) => (
   <Menu path="/" pathname={pathname} onChange={onChange}>
-    <MenuItem
-      label="/route"
-      path="/route"
-    />
-    <MenuItem
-      label="/route/other"
-      path="/route/other"
-    />
-    <MenuItem
-      label="/route/other/subroute"
-      path="/route/other/subroute"
-      partial
-    />
-    <MenuItem
-      label="/route/other/subroute/xyz/tre"
-      path="/route/other/subroute/xyz/tre" />
+    <MenuItem label="/route" path="/route" />
+    <MenuItem label="/route/other" path="/route/other" />
+    <MenuItem label="/route/other/subroute" path="/route/other/subroute" partial />
+    <MenuItem label="/route/other/subroute/xyz/tre" path="/route/other/subroute/xyz/tre" />
   </Menu>
 );
 

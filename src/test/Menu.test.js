@@ -104,7 +104,7 @@ it('renders the menu items when partial match is allowed', () => {
   );
   const menuItem = wrapper.find('.element-menu__item');
   const activeMenuItem = wrapper.find('.element-menu__item--active');
-  expect(menuItem).toHaveLength(2);  
+  expect(menuItem).toHaveLength(2);
   expect(activeMenuItem.text()).toBe('foo');
 });
 

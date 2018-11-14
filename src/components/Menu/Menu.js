@@ -6,7 +6,7 @@ import './Menu.scss';
 import '../../icons/mule/back-small.svg';
 
 const getPathMatches = (pathname, path, partial) => {
-  let  pathMatches = false;
+  let pathMatches = false;
   if (path) {
     if (partial) {
       pathMatches = pathname.startsWith(path);
@@ -15,7 +15,7 @@ const getPathMatches = (pathname, path, partial) => {
     }
   }
   return pathMatches;
-}
+};
 
 const bindOnClickProp = onClick => element =>
   React.cloneElement(element, {
@@ -208,7 +208,6 @@ class Menu extends PureComponent {
       // find the first matching menu item and return the parent or the item itself
       // depending if needs to be treated like a root
       if (isMenuItem(node)) {
-
         const { path, asRoot, partial, children, active } = node.props;
         const pathMatches = getPathMatches(pathname, path, partial);
 
