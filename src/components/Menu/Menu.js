@@ -131,10 +131,12 @@ MenuItem.propTypes = {
   disabled: PropTypes.bool,
   hidden: PropTypes.bool,
   back: PropTypes.bool,
-  /* eslint-disable */
+  // prop asRoot is not used directly by the MenuItem but it is used by the Menu component
+  // eslint-disable-next-line react/no-unused-prop-types
   asRoot: PropTypes.bool,
+  // prop partial is not used directly by the MenuItem but it is used by the Menu component
+  // eslint-disable-next-line react/no-unused-prop-types
   partial: PropTypes.bool,
-  /* eslint-enable */
 };
 
 const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) => {
@@ -248,6 +250,7 @@ Menu.defaultProps = {
   pathname: undefined,
 };
 Menu.propTypes = {
+  // prop path is not used directly but it is used in getActiveNode
   // eslint-disable-next-line react/no-unused-prop-types
   path: PropTypes.string,
   pathname: PropTypes.string,
