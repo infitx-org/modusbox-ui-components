@@ -4,6 +4,12 @@ import * as utils from '../../utils/common';
 
 import Tooltip from '../Tooltip';
 
+const iconSizes = {
+  s: 12,
+  m: 14,
+  l: 16,
+}
+
 class Icon extends PureComponent {
   constructor(props) {
     super(props);
@@ -80,3 +86,4 @@ Icon.defaultProps = {
 };
 
 export default Icon;
+export { iconSizes };
