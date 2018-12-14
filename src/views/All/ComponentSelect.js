@@ -1,6 +1,7 @@
 /* eslint no-console: "off" */
-
 import React from 'react';
+
+import Row from '../../components/Row';
 import Select from '../../components/Select';
 
 let options = [
@@ -71,6 +72,15 @@ const TestSelect = () => (
       <Select id="test-select-2" placeholder="placeholder" options={options} pending />
       <Select id="test-select-3" placeholder="placeholder" options={options} disabled />
     </div>
+
+    <Row style={{ padding: '10px', border: '1px solid #ccc', background: '#999'  }} align="space-between center">
+      <Select placeholder="small" size='s' options={options} />
+      <Select placeholder="medium" size='m' options={options} />
+      <Select placeholder="large" size='l' options={options} />
+      <Select placeholder="small" size='s' options={options} pending />
+      <Select placeholder="medium" size='m' options={options} pending />
+      <Select placeholder="large" size='l' options={options} pending />
+    </Row>
   </div>
 );
 
