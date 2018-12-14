@@ -1,6 +1,7 @@
 /* eslint no-console: "off" */
-
 import React from 'react';
+
+import Row from '../../components/Row';
 import TextField from '../../components/TextField';
 import Checkbox from '../../components/Checkbox';
 
@@ -64,11 +65,14 @@ const TestTextField = () => (
       <TextField placeholder="Required Disabled" required disabled />
       <TextField placeholder="Required Disabled Invalid" required disabled invalid />
     </div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <TextField id="test-textfield-1" />
-      <TextField id="test-textfield-2" pending />
-      <TextField id="test-textfield-3" disabled />
-    </div>
+    <Row style={{ padding: '10px', border: '1px solid #ccc', background: '#999'  }} align="space-between center">
+      <TextField placeholder="small" size='s' />
+      <TextField placeholder="medium" size='m' />
+      <TextField placeholder="large" size='l' />
+      <TextField placeholder="small" size='s' pending />
+      <TextField placeholder="medium" size='m' pending />
+      <TextField placeholder="large" size='l' pending />
+    </Row>
   </div>
 );
 

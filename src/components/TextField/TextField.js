@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
-import Icon from '../Icon';
+import Icon, { iconSizes } from '../Icon';
 import { Loader, Placeholder, InnerButton, Validation } from '../Common';
 
 import '../../icons/modusbox/toggle-invisible.svg';
@@ -159,10 +159,11 @@ class TextField extends PureComponent {
   render() {
     const {
       autofocus,
+      style,
+      type,
       id,
       className,
-      type,
-      style,
+      size,
       placeholder,
       onButtonClick,
       buttonText,
@@ -177,6 +178,7 @@ class TextField extends PureComponent {
     } = this.props;
     const { isOpen, value, isPasswordVisible } = this.state;
     const hasButton = typeof onButtonClick === 'function';
+    const iconSize = iconSizes[size];
 
     const componentClassName = utils.composeClassNames([
       className,
@@ -184,6 +186,9 @@ class TextField extends PureComponent {
       'mb-input',
       'mb-input__borders',
       'mb-input__background',
+      size === 's' && 'mb-input--small',
+      size === 'm' && 'mb-input--medium',
+      size === 'l' && 'mb-input--large',
       isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
@@ -203,7 +208,7 @@ class TextField extends PureComponent {
             style={{ cursor: 'pointer' }}
             onClick={this.onShowPasswordClick}
             name={isPasswordVisible ? 'toggle-invisible' : 'toggle-visible'}
-            size={16}
+            size={iconSize}
             fill={isPasswordVisible ? '#999' : '#39f'}
           />
         </div>
@@ -213,7 +218,7 @@ class TextField extends PureComponent {
     let customPlaceholder = null;
     if (placeholder) {
       const isPlaceholderActive = isOpen || value !== undefined;
-      customPlaceholder = <Placeholder label={placeholder} active={isPlaceholderActive} />;
+      customPlaceholder = <Placeholder size={size} label={placeholder} active={isPlaceholderActive} />;
     }
 
     let innerButton = null;
@@ -238,14 +243,14 @@ class TextField extends PureComponent {
 
     let loader = null;
     if (pending) {
-      loader = <Loader />;
+      loader = <Loader size={size} />;
     }
 
     let customIcon = null;
     if (icon) {
       customIcon = (
         <div className="mb-input__inner-icon input-textfield__icon">
-          <Icon size={16} name={icon} />
+          <Icon size={iconSize} name={icon} />
         </div>
       );
     }
@@ -298,6 +303,11 @@ TextField.propTypes = {
   type: PropTypes.oneOf(['text', 'password']),
   id: PropTypes.string,
   className: PropTypes.string,
+  size: PropTypes.oneOf([
+    's',
+    'm',
+    'l',
+  ]),
   placeholder: PropTypes.string,
   value: PropTypes.string,
   buttonText: PropTypes.string,
@@ -324,10 +334,11 @@ TextField.propTypes = {
 
 TextField.defaultProps = {
   autofocus: false,
+  style: {},
   type: 'text',
   id: undefined,
   className: undefined,
-  style: {},
+  size: 'l',
   placeholder: undefined,
   value: undefined,
   buttonText: undefined,

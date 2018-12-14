@@ -24,11 +24,29 @@
   cursor: auto;
 }
 
+.mb-input--small {
+  height: 31px;
+  padding-left: 10px;
+  padding-right: 6px;
+  font-size: 12px;
+}
+.mb-input--medium {
+  height: 38px;
+  padding-left: 13px;
+  padding-right: 8px;
+  font-size: 13px;
+}
+.mb-input--large {
+  height: 45px;
+  padding-left: 16px;
+  padding-right: 10px;
+  font-size: 14px;
+}
+
 /** COMPONENT **/
 
 .mb-input__box {
   width: 100%;
-  height: 45px;
   display: block;
   box-sizing: border-box;
   position: relative;
@@ -84,8 +102,6 @@
   height: 100%;
   width: 100%;
   align-items: center;
-  padding-left: 16px;
-  padding-right: 10px;
 }
 .mb-input__input {
   flex: 2 1 auto;
@@ -98,7 +114,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: inherit;
-  font-size: 14px;
+  font-size: inherit;
   height: 100%;
 }
 .mb-input__holder {
@@ -111,16 +127,29 @@
   -moz-appearance: none;
 }
 .mb-input__placeholder {
-  font-size: 14px;
   transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
   top: 50%;
   color: $placeholder-color;
   transform: translateY(-50%);
 }
-.mb-input__placeholder--active {
+.mb-input__placeholder--small {
+  font-size: 10px;
+}
+.mb-input__placeholder--medium {
+  font-size: 12px;
+}
+.mb-input__placeholder--large {
+  font-size: 14px;
+}
+.mb-input__placeholder--active-small {
+  top: 9px;
+}
+.mb-input__placeholder--active-medium {
+  top: 10px;
+}
+.mb-input__placeholder--active-large {
   top: 11px;
-  font-size: 11px;
 }
 
 /** COMPONENT INNER BLOCKS **/
