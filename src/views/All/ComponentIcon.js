@@ -262,7 +262,9 @@ const IconBox = ({ icons }) => (
       flexWrap: 'wrap',
     }}
   >
-    {icons.map(icon => <Block key={icon} icon={icon} />)}
+    {icons.map(icon => (
+      <Block key={icon} icon={icon} />
+    ))}
   </div>
 );
 

@@ -42,7 +42,9 @@ const ColorBlock = ({ color }) => (
 const ColorRow = ({ type, rowColors }) => (
   <Column align="center left">
     <span>{type}</span>
-    {rowColors.map(color => <ColorBlock key={color} color={color} />)}
+    {rowColors.map(color => (
+      <ColorBlock key={color} color={color} />
+    ))}
   </Column>
 );
 

@@ -1,6 +1,6 @@
 {
   "name": "modusbox-ui-components",
-  "version": "1.9.6",
+  "version": "1.9.7",
   "description": "ModusBox UI Components",
   "main": "dist/index.js",
   "files": [
@@ -20,33 +20,6 @@
     "prettier": "prettier --write webpack*.js 'src/**/*.{js,scss}'",
     "prepack": "yarn build",
     "printversion": "node -p \"require('./package.json').version\""
-  },
-  "jest": {
-    "setupFiles": [
-      "./test/jestsetup.js"
-    ],
-    "moduleNameMapper": {
-      "ansi-styles": "<rootDir>/node_modules/ansi-styles",
-      "jest-matcher-utils": "<rootDir>/node_modules/jest-matcher-utils",
-      "^react-(.+)": "<rootDir>/node_modules/react-$1",
-      "^react-dom": "<rootDir>/node_modules/react-dom",
-      "^react[/](.+)": "<rootDir>/node_modules/react/$1",
-      "^react": "<rootDir>/node_modules/react",
-      "^views": "<rootDir>/src/views",
-      "^icons": "<rootDir>/src/icons",
-      "^components": "<rootDir>/src/components",
-      "^utils[/](.+)$": "<rootDir>/src/utils/$1",
-      "^test[/](.+)": "<rootDir>/test/$1",
-      "^.+\\.(css|scss|svg)$": "<rootDir>/src/test/__mocks__/staticMocks.js"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "jsx"
-    ],
-    "roots": [
-      "src/test"
-    ]
   },
   "license": "UNLICENSED",
   "dependencies": {

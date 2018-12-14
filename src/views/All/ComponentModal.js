@@ -94,12 +94,10 @@ class TestModal extends React.Component {
             >
               <ModalTabsLayout items={[{ name: 'Tab1' }, { name: 'Tab2' }]} selected="Tab2">
                 <div style={{ height: '12000px', background: '#999' }}>
-                  TEST TAB 1
-                  <Select options={new Array(100).fill({ label: '1', value: '2' })} />
+                  TEST TAB 1<Select options={new Array(100).fill({ label: '1', value: '2' })} />
                 </div>
                 <div style={{ height: '120px', background: '#9f9' }}>
-                  TEST TAB 2
-                  <Select options={new Array(100).fill({ label: '1', value: '2' })} />
+                  TEST TAB 2<Select options={new Array(100).fill({ label: '1', value: '2' })} />
                 </div>
               </ModalTabsLayout>
             </Modal>
