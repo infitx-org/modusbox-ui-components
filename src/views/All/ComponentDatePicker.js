@@ -8,7 +8,8 @@ const TestDatePicker = () => (
   <div>
     <div className="p10 b1-ccc">
       <DatePicker className="m5" placeholder="Default" format="x" onSelect={console.log} />
-      <DatePicker className="m5"
+      <DatePicker
+        className="m5"
         value={1524002400000}
         placeholder="Default with time"
         format="x"
@@ -21,7 +22,8 @@ const TestDatePicker = () => (
         disabledDays={undefined}
       />
       <DatePicker className="m5" placeholder="Pending" format="x" onSelect={console.log} pending />
-      <DatePicker className="m5"
+      <DatePicker
+        className="m5"
         placeholder="Invalid"
         format="x"
         onSelect={console.log}
@@ -31,15 +33,28 @@ const TestDatePicker = () => (
           { text: 'This is invalid', active: false },
         ]}
       />
-      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} required />
+      <DatePicker
+        className="m5"
+        placeholder="Required"
+        format="x"
+        onSelect={console.log}
+        required
+      />
 
-      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} disabled />
+      <DatePicker
+        className="m5"
+        placeholder="Required"
+        format="x"
+        onSelect={console.log}
+        disabled
+      />
       <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
-      <DatePicker className="m5"
+      <DatePicker
+        className="m5"
         placeholder="Events"
         onSelect={value => console.log('onSelect', value)}
         onClick={() => console.log('onClick')}
@@ -48,12 +63,12 @@ const TestDatePicker = () => (
       />
     </div>
     <Row className="p10 b1-ccc" align="space-between center">
-      <DatePicker className="m5" placeholder="small" size='s' />
-      <DatePicker className="m5" placeholder="medium" size='m' />
-      <DatePicker className="m5" placeholder="large" size='l' />
-      <DatePicker className="m5" placeholder="small" size='s' pending />
-      <DatePicker className="m5" placeholder="medium" size='m' pending />
-      <DatePicker className="m5" placeholder="large" size='l' pending />
+      <DatePicker className="m5" placeholder="small" size="s" />
+      <DatePicker className="m5" placeholder="medium" size="m" />
+      <DatePicker className="m5" placeholder="large" size="l" />
+      <DatePicker className="m5" placeholder="small" size="s" pending />
+      <DatePicker className="m5" placeholder="medium" size="m" pending />
+      <DatePicker className="m5" placeholder="large" size="l" pending />
     </Row>
   </div>
 );

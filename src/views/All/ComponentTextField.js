@@ -72,12 +72,12 @@ const TestTextField = () => (
       <TextField className="m5" placeholder="Required Disabled Invalid" required disabled invalid />
     </div>
     <Row className="p10 b1-ccc" align="space-between center">
-      <TextField className="m5" placeholder="small" size='s' />
-      <TextField className="m5" placeholder="medium" size='m' />
-      <TextField className="m5" placeholder="large" size='l' />
-      <TextField className="m5" placeholder="small" size='s' pending />
-      <TextField className="m5" placeholder="medium" size='m' pending />
-      <TextField className="m5" placeholder="large" size='l' pending />
+      <TextField className="m5" placeholder="small" size="s" />
+      <TextField className="m5" placeholder="medium" size="m" />
+      <TextField className="m5" placeholder="large" size="l" />
+      <TextField className="m5" placeholder="small" size="s" pending />
+      <TextField className="m5" placeholder="medium" size="m" pending />
+      <TextField className="m5" placeholder="large" size="l" pending />
     </Row>
   </div>
 );

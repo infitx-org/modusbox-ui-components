@@ -8,7 +8,7 @@ const indicatorSizes = {
   s: 8,
   m: 9,
   l: 10,
-}
+};
 
 const Indicator = ({ isOpen, size }) => (
   <Icon
@@ -25,11 +25,7 @@ const Indicator = ({ isOpen, size }) => (
 
 Indicator.propTypes = {
   isOpen: PropTypes.bool,
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
 };
 Indicator.defaultProps = {
   isOpen: false,

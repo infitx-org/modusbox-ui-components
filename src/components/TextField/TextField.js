@@ -179,7 +179,7 @@ class TextField extends PureComponent {
     const { isOpen, value, isPasswordVisible } = this.state;
     const hasButton = typeof onButtonClick === 'function';
     const iconSize = iconSizes[size];
-    const hasValue = (value === undefined || value === '');
+    const hasValue = value === undefined || value === '';
 
     const componentClassName = utils.composeClassNames([
       className,
@@ -191,11 +191,13 @@ class TextField extends PureComponent {
       size === 's' && 'mb-input--small',
       size === 'm' && 'mb-input--medium',
       size === 'l' && 'mb-input--large',
+      /* eslint-disable max-len  */
       isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open mb-input__shadow--open',
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending mb-input__shadow--pending',
       invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid mb-input__shadow--invalid',
       required && hasValue && 'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
+      /* eslint-enabl  */
     ]);
 
     const inputType = (isPasswordVisible && 'text') || type;
@@ -218,7 +220,9 @@ class TextField extends PureComponent {
     let customPlaceholder = null;
     if (placeholder) {
       const isPlaceholderActive = isOpen || value !== undefined;
-      customPlaceholder = <Placeholder size={size} label={placeholder} active={isPlaceholderActive} />;
+      customPlaceholder = (
+        <Placeholder size={size} label={placeholder} active={isPlaceholderActive} />
+      );
     }
 
     let innerButton = null;
@@ -303,11 +307,7 @@ TextField.propTypes = {
   type: PropTypes.oneOf(['text', 'password']),
   id: PropTypes.string,
   className: PropTypes.string,
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   placeholder: PropTypes.string,
   value: PropTypes.string,
   buttonText: PropTypes.string,

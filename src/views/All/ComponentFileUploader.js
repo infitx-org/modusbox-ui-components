@@ -7,8 +7,14 @@ import FileUploader from '../../components/FileUploader';
 const TestFileUploader = () => (
   <div>
     <div className="p10 b1-ccc">
-      <FileUploader className="m5" placeholder="Default" parseFileAs="text" onChange={console.log} />
-      <FileUploader className="m5"
+      <FileUploader
+        className="m5"
+        placeholder="Default"
+        parseFileAs="text"
+        onChange={console.log}
+      />
+      <FileUploader
+        className="m5"
         placeholder="Only .txt file type"
         parseFileAs="base64"
         fileType=".txt"
@@ -20,13 +26,13 @@ const TestFileUploader = () => (
       <FileUploader className="m5" placeholder="Required" required onChange={console.log} />
       <FileUploader className="m5" placeholder="small" required onChange={console.log} />
     </div>
-    <Row  className="p10 b1-ccc" align="space-between center">
-      <FileUploader className="m5" className="m5" placeholder="small" size='s' />
-      <FileUploader className="m5" className="m5" placeholder="medium" size='m' />
-      <FileUploader className="m5" className="m5" placeholder="large" size='l' />
-      <FileUploader className="m5" className="m5" placeholder="small" size='s' pending />
-      <FileUploader className="m5" className="m5" placeholder="medium" size='m' pending />
-      <FileUploader className="m5" className="m5" placeholder="large" size='l' pending />
+    <Row className="p10 b1-ccc" align="space-between center">
+      <FileUploader className="m5" placeholder="small" size="s" />
+      <FileUploader className="m5" placeholder="medium" size="m" />
+      <FileUploader className="m5" placeholder="large" size="l" />
+      <FileUploader className="m5" placeholder="small" size="s" pending />
+      <FileUploader className="m5" placeholder="medium" size="m" pending />
+      <FileUploader className="m5" placeholder="large" size="l" pending />
     </Row>
   </div>
 );

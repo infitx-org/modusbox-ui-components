@@ -122,11 +122,7 @@ Button.propTypes = {
     'dark',
     'light',
   ]),
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   label: PropTypes.string,
   icon: PropTypes.string,
   noFill: PropTypes.bool,

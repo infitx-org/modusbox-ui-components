@@ -14,14 +14,10 @@ const Loader = ({ size }) => (
 );
 
 Loader.propTypes = {
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
 };
 Loader.defaultProps = {
-  size: 'l'
+  size: 'l',
 };
 
 const Placeholder = ({ label, size, active }) => {
@@ -43,17 +39,13 @@ const Placeholder = ({ label, size, active }) => {
 Placeholder.propTypes = {
   label: PropTypes.string,
   active: PropTypes.bool,
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
 };
 
 Placeholder.defaultProps = {
   label: undefined,
   active: false,
-  size: 'l'
+  size: 'l',
 };
 
 const InnerButton = ({ className, size, kind, active, onClick, label, disabled, noFill, icon }) => {
@@ -83,11 +75,7 @@ const InnerButton = ({ className, size, kind, active, onClick, label, disabled, 
 
 InnerButton.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   kind: PropTypes.string,
   icon: PropTypes.string,
   active: PropTypes.bool,

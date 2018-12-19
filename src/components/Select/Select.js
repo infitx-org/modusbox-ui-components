@@ -281,19 +281,21 @@ class Select extends PureComponent {
       size === 's' && 'mb-input--small',
       size === 'm' && 'mb-input--medium',
       size === 'l' && 'mb-input--large',
+      /* eslint-disable max-len  */
       isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open mb-input__shadow--open',
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
       pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending mb-input__shadow--pending',
       invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid mb-input__shadow--invalid',
-      required &&
-        selectedLabel === undefined &&
-        'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
+      required && selectedLabel === undefined && 'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
+      /* eslint-enable */
     ]);
 
     let customPlaceholder = null;
     if (placeholder) {
       const isPlaceholderActive = isOpen || selectedLabel !== undefined;
-      customPlaceholder = <Placeholder size={size} label={placeholder} active={isPlaceholderActive} />;
+      customPlaceholder = (
+        <Placeholder size={size} label={placeholder} active={isPlaceholderActive} />
+      );
     }
 
     let optionsFilter = null;
@@ -314,7 +316,7 @@ class Select extends PureComponent {
 
     let loader = null;
     if (pending) {
-      loader = <Loader size={size}/>;
+      loader = <Loader size={size} />;
     }
 
     return (
@@ -374,7 +376,6 @@ class Select extends PureComponent {
           </div>
         </div>
       </div>
-
     );
   }
 }
@@ -383,11 +384,7 @@ Select.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.shape(),
-  size: PropTypes.oneOf([
-    's',
-    'm',
-    'l',
-  ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   onChange: PropTypes.func,
   onClear: PropTypes.func,
   onFocus: PropTypes.func,

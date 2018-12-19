@@ -8,7 +8,7 @@ const iconSizes = {
   s: 12,
   m: 14,
   l: 16,
-}
+};
 
 class Icon extends PureComponent {
   constructor(props) {
