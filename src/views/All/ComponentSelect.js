@@ -29,14 +29,14 @@ function optionMaker(item, index) {
   };
 }
 
-const otherOptions = new Array(500).fill({}).map(optionMaker);
+const otherOptions = new Array(50).fill({}).map(optionMaker);
 options = [...options, ...otherOptions];
 
 const TestSelect = () => (
   <div>
-    <div style={{ padding: 10, border: '1px solid #ccc' }}>
-      <Select placeholder="Default" options={options} selected="value1" />
-      <Select placeholder="Pending" options={options} pending />
+    <div className="p10 b1-ccc">
+      <Select className="m5"placeholder="Default" options={options} selected="value1" />
+      <Select className="m5"placeholder="Pending" options={options} pending />
       <Select
         placeholder="Invalid"
         options={options}
@@ -46,9 +46,9 @@ const TestSelect = () => (
           { text: 'This is invalid', active: false },
         ]}
       />
-      <Select placeholder="Required" options={options} required />
-      <Select placeholder="Disabled" options={options} disabled />
-      <Select placeholder="Clearable" options={options} onClear={console.log} />
+      <Select className="m5"placeholder="Required" options={options} required />
+      <Select className="m5"placeholder="Disabled" options={options} disabled />
+      <Select className="m5"placeholder="Clearable" options={options} onClear={console.log} />
       <Select
         placeholder="Events (console)"
         options={options}
@@ -59,27 +59,27 @@ const TestSelect = () => (
         onClear={() => console.log('onClear')}
       />
     </div>
-    <div style={{ padding: 10, border: '1px solid #ccc' }}>
-      <Select id="x" placeholder="placeholder" options={options} pending />
-      <Select placeholder="Position 2 options" options={[options[0], options[1]]} />
-      <Select id="x" placeholder="placeholder" options={options} disabled />
-      <Select id="x" placeholder="placeholder" options={options} />
-      <Select id="x" placeholder="placeholder" options={options} />
-      <Select id="x" placeholder="placeholder" options={options} />
+    <div className="p10 b1-ccc">
+      <Select className="m5"id="x" placeholder="placeholder" options={options} pending />
+      <Select className="m5"placeholder="Position 2 options" options={[options[0], options[1]]} />
+      <Select className="m5"id="x" placeholder="placeholder" options={options} disabled />
+      <Select className="m5"id="x" placeholder="placeholder" options={options} />
+      <Select className="m5"id="x" placeholder="placeholder" options={options} />
+      <Select className="m5"id="x" placeholder="placeholder" options={options} />
     </div>
-    <div style={{ padding: 10, border: '1px solid #ccc' }}>
-      <Select id="test-select-1" placeholder="placeholder" options={options} />
-      <Select id="test-select-2" placeholder="placeholder" options={options} pending />
-      <Select id="test-select-3" placeholder="placeholder" options={options} disabled />
+    <div className="p10 b1-ccc">
+      <Select className="m5"id="test-select-1" placeholder="placeholder" options={options} />
+      <Select className="m5"id="test-select-2" placeholder="placeholder" options={options} pending />
+      <Select className="m5"id="test-select-3" placeholder="placeholder" options={options} disabled />
     </div>
 
-    <Row style={{ padding: '10px', border: '1px solid #ccc', background: '#999'  }} align="space-between center">
-      <Select placeholder="small" size='s' options={options} />
-      <Select placeholder="medium" size='m' options={options} />
-      <Select placeholder="large" size='l' options={options} />
-      <Select placeholder="small" size='s' options={options} pending />
-      <Select placeholder="medium" size='m' options={options} pending />
-      <Select placeholder="large" size='l' options={options} pending />
+    <Row  className="p10 b1-ccc" align="space-between center">
+      <Select className="m5"placeholder="small" size='s' options={options} />
+      <Select className="m5"placeholder="medium" size='m' options={options} />
+      <Select className="m5"placeholder="large" size='l' options={options} />
+      <Select className="m5"placeholder="small" size='s' options={options} pending />
+      <Select className="m5"placeholder="medium" size='m' options={options} pending />
+      <Select className="m5"placeholder="large" size='l' options={options} pending />
     </Row>
   </div>
 );

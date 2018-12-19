@@ -2,7 +2,7 @@
 
 exports[`renders the button correctly when multiple props are set 1`] = `
 <button
-  className="mb-input input-button__input input-button__mb-input--secondary mb-input--disabled input-button__mb-input--disabled mb-input--pending input-button__mb-input--pending"
+  className="mb-input input-button__input input-button__mb-input--large input-button__mb-input--secondary mb-input--disabled input-button__mb-input--disabled mb-input--pending input-button__mb-input--pending"
   disabled={true}
   kind="secondary"
   label="Snapshot button"

@@ -7,7 +7,7 @@ exports[`renders the Select correctly when multiple props are set 1`] = `
   style={Object {}}
 >
   <div
-    className="input-select__component mb-input mb-input__borders mb-input__background"
+    className="input-select__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
     onClick={[Function]}
     role="presentation"
   >
@@ -34,6 +34,7 @@ exports[`renders the Select correctly when multiple props are set 1`] = `
       >
         <Indicator
           isOpen={false}
+          size="l"
         />
       </div>
     </div>

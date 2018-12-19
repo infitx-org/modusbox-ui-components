@@ -1,21 +1,33 @@
 /* eslint no-console: "off" */
 
 import React from 'react';
+import Row from '../../components/Row';
 import FileUploader from '../../components/FileUploader';
 
 const TestFileUploader = () => (
-  <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-    <FileUploader placeholder="Default" parseFileAs="text" onChange={console.log} />
-    <FileUploader
-      placeholder="Only .txt file type"
-      parseFileAs="base64"
-      fileType=".txt"
-      onChange={console.log}
-    />
-    <FileUploader placeholder="Pending" pending />
-    <FileUploader placeholder="Disabled" disabled />
-    <FileUploader placeholder="Invalid" invalid />
-    <FileUploader placeholder="Required" required onChange={console.log} />
+  <div>
+    <div className="p10 b1-ccc">
+      <FileUploader className="m5" placeholder="Default" parseFileAs="text" onChange={console.log} />
+      <FileUploader className="m5"
+        placeholder="Only .txt file type"
+        parseFileAs="base64"
+        fileType=".txt"
+        onChange={console.log}
+      />
+      <FileUploader className="m5" placeholder="Pending" pending />
+      <FileUploader className="m5" placeholder="Disabled" disabled />
+      <FileUploader className="m5" placeholder="Invalid" invalid />
+      <FileUploader className="m5" placeholder="Required" required onChange={console.log} />
+      <FileUploader className="m5" placeholder="small" required onChange={console.log} />
+    </div>
+    <Row  className="p10 b1-ccc" align="space-between center">
+      <FileUploader className="m5" className="m5" placeholder="small" size='s' />
+      <FileUploader className="m5" className="m5" placeholder="medium" size='m' />
+      <FileUploader className="m5" className="m5" placeholder="large" size='l' />
+      <FileUploader className="m5" className="m5" placeholder="small" size='s' pending />
+      <FileUploader className="m5" className="m5" placeholder="medium" size='m' pending />
+      <FileUploader className="m5" className="m5" placeholder="large" size='l' pending />
+    </Row>
   </div>
 );
 

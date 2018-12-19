@@ -1,0 +1,4 @@
+$shadow-color--default: lighten($color__blue-3, 30%) !default;
+$shadow-color--pending: lighten($color__blue-4, 30%) !default;
+$shadow-color--invalid: lighten($color__main-danger, 30%) !default;
+$shadow-color--required: lighten($color__main-warning, 25%) !default;

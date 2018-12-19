@@ -277,16 +277,17 @@ class Select extends PureComponent {
       'mb-input',
       'mb-input__borders',
       'mb-input__background',
+      'mb-input__shadow',
       size === 's' && 'mb-input--small',
       size === 'm' && 'mb-input--medium',
       size === 'l' && 'mb-input--large',
-      isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
+      isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open mb-input__shadow--open',
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
-      pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
-      invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
+      pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending mb-input__shadow--pending',
+      invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid mb-input__shadow--invalid',
       required &&
         selectedLabel === undefined &&
-        'mb-input--required mb-input__borders--required mb-input__background--required',
+        'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
     ]);
 
     let customPlaceholder = null;
@@ -349,30 +350,31 @@ class Select extends PureComponent {
               <Indicator isOpen={isOpen} size={size} />
             </div>
           </div>
-        </div>
-
-        <div
-          className="input-select__options"
-          ref={position => {
-            this.optionsPosition = position;
-          }}
-        >
-          <Options
-            open={isOpen}
-            ref={wrapper => {
-              this.options = wrapper;
+          <div
+            className="input-select__options"
+            ref={position => {
+              this.optionsPosition = position;
             }}
-            options={options}
-            maxHeight={this.maxHeight || 0}
-            reverse={this.reverse}
-            selected={selected}
-            highlighted={highlightedOption}
-            onSelect={this.onSelectOption}
-            onClear={this.onClearOption}
-            clearable={this.props.onClear}
-          />
+          >
+            <Options
+              size={size}
+              open={isOpen}
+              ref={wrapper => {
+                this.options = wrapper;
+              }}
+              options={options}
+              maxHeight={this.maxHeight || 0}
+              reverse={this.reverse}
+              selected={selected}
+              highlighted={highlightedOption}
+              onSelect={this.onSelectOption}
+              onClear={this.onClearOption}
+              clearable={this.props.onClear}
+            />
+          </div>
         </div>
       </div>
+
     );
   }
 }

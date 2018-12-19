@@ -1,6 +1,7 @@
 @import '../vars/colors.scss';
 @import '../vars/border.scss';
 @import '../vars/background.scss';
+@import '../vars/shadow.scss';
 @import '../vars/general.scss';
 
 .mb-input * {
@@ -17,6 +18,7 @@
 }
 .mb-input--open {
   padding: 0px $component-open-size;
+  box-shadow: 0px 0px 0px 3px;
 }
 .mb-input--disabled {
   opacity: $component-opacity--disabled;
@@ -52,6 +54,20 @@
   position: relative;
 }
 
+/** COMPONENT SHADOW **/
+.mb-input__shadow {
+  color: $shadow-color--default;
+}
+.mb-input__shadow--required {
+  color: $shadow-color--required;
+}
+.mb-input__shadow--pending {
+  color: $shadow-color--pending;
+}
+.mb-input__shadow--invalid {
+  color: $shadow-color--invalid;
+}
+
 /** COMPONENT BACKGROUND **/
 
 .mb-input__background {
@@ -76,22 +92,22 @@
 .mb-input__borders {
   border-left: 2px solid;
   border-right: 2px solid;
-  border-color: $border-color--default;
+  border-bottom-color: $border-color--default;
 }
 .mb-input__borders--open {
-  margin-left: -$component-open-size;
-  margin-right: -$component-open-size;
-  border-color: $border-color--open;
+  // margin-left: -$component-open-size;
+  // margin-right: -$component-open-size;
+  // border-color: $border-color--open;
 }
 .mb-input__borders--pending {
-  border-color: $border-color--pending;
+  border-bottom-color: $border-color--pending;
 }
 .mb-input__borders--invalid,
 .mb-input__borders--required.mb-input__borders--invalid {
-  border-color: $border-color--invalid;
+  border-bottom-color: $border-color--invalid;
 }
 .mb-input__borders--required {
-  border-color: $border-color--required;
+  border-bottom-color: $border-color--required;
 }
 
 /** COMPONENT BLOCKS */
@@ -143,10 +159,10 @@
   font-size: 14px;
 }
 .mb-input__placeholder--active-small {
-  top: 9px;
+  top: 7px;
 }
 .mb-input__placeholder--active-medium {
-  top: 10px;
+  top: 9px;
 }
 .mb-input__placeholder--active-large {
   top: 11px;
@@ -157,18 +173,9 @@
 .mb-input__inner-button {
   outline: none;
   flex: 0 0 auto;
-  height: 24px;
-  margin-left: 5px;
-  font-size: 12px;
   justify-content: center;
   align-items: center;
   display: flex;
-  padding: 0px 5px;
-  font-size: 11px;
-  height: 30px;
-  padding: 0 9px;
-  font-size: 13px;
-  border-radius: 2px;
 
   .input-button__icon {
     display: flex;
@@ -178,6 +185,30 @@
   &.mb-input__inner-button--active {
   }
 }
+
+.mb-input__inner-button--small {
+  margin-left: 5px;
+  height: 22px;
+  padding: 0 5px;
+  font-size: 9px;
+  border-radius: 2px;
+}
+.mb-input__inner-button--medium {
+  margin-left: 5px;
+  height: 26px;
+  padding: 0 7px;
+  font-size: 11px;
+  border-radius: 2px;
+}
+
+.mb-input__inner-button--large {
+  margin-left: 5px;
+  height: 30px;
+  padding: 0 9px;
+  font-size: 13px;
+  border-radius: 2px;
+}
+
 .mb-input__inner-icon {
   animation: animateIconFadeIn 0.2s linear forwards;
   flex: 0 0 auto;

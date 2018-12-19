@@ -62,7 +62,7 @@ const TestButton = () => (
       <Button noFill label="Icon" icon="deploy-small" pending />
     </Row>
     Disabled
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
+    <Row className="p10 b1-ccc" align="space-between center">
       <Button label="Primary" kind="primary" disabled />
       <Button label="Secondary" kind="secondary" disabled />
       <Button label="Tertiary" kind="tertiary" disabled />
@@ -78,7 +78,7 @@ const TestButton = () => (
       <Button label="No Fill" icon="deploy-small" noFill kind="danger" disabled />
     </Row>
     Sizes
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
+    <Row className="p10 b1-ccc" align="space-between center">
       <Button label="Large size " size="l" />
       <Button label="Medium size " size="m" />
       <Button label="Small size " size="s" />
@@ -90,7 +90,7 @@ const TestButton = () => (
       <Button label="Small size pending " pending size="s" />
     </Row>
     Tooltip
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
+    <Row className="p10 b1-ccc" align="space-between center">
       <Button label="Test Button Tooltip" tooltip="Test!" />
     </Row>
   </Column>

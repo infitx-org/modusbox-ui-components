@@ -6,7 +6,7 @@ exports[`renders the fileuploader correctly when multiple props are set 1`] = `
   style={Object {}}
 >
   <div
-    className="input-fileuploader__component mb-input mb-input__borders mb-input__background"
+    className="input-fileuploader__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
     id="test-id"
     onClick={[Function]}
     onKeyDown={[Function]}
@@ -28,7 +28,7 @@ exports[`renders the fileuploader correctly when multiple props are set 1`] = `
           type="file"
         />
         <div
-          className="input-fileuploader__filename input-fileuploader__filename--no-file"
+          className="input-fileuploader__filename input-fileuploader__filename--no-file input-fileuploader__filename--large"
         >
           No File Choosen
         </div>
@@ -41,6 +41,7 @@ exports[`renders the fileuploader correctly when multiple props are set 1`] = `
           label="Choose File"
           noFill={true}
           onClick={[Function]}
+          size="l"
           tabIndex="-1"
         />
       </div>

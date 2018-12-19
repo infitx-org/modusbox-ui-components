@@ -8,3 +8,15 @@
   max-width: 100px;
   min-width: 100px;
 }
+
+.m5 {
+  margin: 5px;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+.b1-ccc {
+  border: 1px solid #ccc;
+}

@@ -56,13 +56,16 @@ Placeholder.defaultProps = {
   size: 'l'
 };
 
-const InnerButton = ({ className, kind, active, onClick, label, disabled, noFill, icon }) => {
+const InnerButton = ({ className, size, kind, active, onClick, label, disabled, noFill, icon }) => {
   // Internal button used by inputs
 
   const innerButtonClassName = utils.composeClassNames([
     className,
     'mb-input__inner-button',
     active && 'mb-input__inner-button--active',
+    size === 's' && 'mb-input__inner-button--small',
+    size === 'm' && 'mb-input__inner-button--medium',
+    size === 'l' && 'mb-input__inner-button--large',
   ]);
   return (
     <Button
@@ -80,6 +83,11 @@ const InnerButton = ({ className, kind, active, onClick, label, disabled, noFill
 
 InnerButton.propTypes = {
   className: PropTypes.string,
+  size: PropTypes.oneOf([
+    's',
+    'm',
+    'l',
+  ]),
   kind: PropTypes.string,
   icon: PropTypes.string,
   active: PropTypes.bool,
@@ -90,6 +98,7 @@ InnerButton.propTypes = {
 
 InnerButton.defaultProps = {
   className: undefined,
+  size: 'l',
   kind: 'primary',
   icon: undefined,
   active: false,

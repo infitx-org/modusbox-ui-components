@@ -179,6 +179,7 @@ class TextField extends PureComponent {
     const { isOpen, value, isPasswordVisible } = this.state;
     const hasButton = typeof onButtonClick === 'function';
     const iconSize = iconSizes[size];
+    const hasValue = (value === undefined || value === '');
 
     const componentClassName = utils.composeClassNames([
       className,
@@ -186,16 +187,15 @@ class TextField extends PureComponent {
       'mb-input',
       'mb-input__borders',
       'mb-input__background',
+      'mb-input__shadow',
       size === 's' && 'mb-input--small',
       size === 'm' && 'mb-input--medium',
       size === 'l' && 'mb-input--large',
-      isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
+      isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open mb-input__shadow--open',
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
-      pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
-      invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
-      required &&
-        (value === undefined || value === '') &&
-        'mb-input--required mb-input__borders--required mb-input__background--required',
+      pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending mb-input__shadow--pending',
+      invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid mb-input__shadow--invalid',
+      required && hasValue && 'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
     ]);
 
     const inputType = (isPasswordVisible && 'text') || type;

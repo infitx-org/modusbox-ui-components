@@ -13,11 +13,15 @@
   letter-spacing: 0.02rem;
 }
 .mb-input__borders {
-  border-right-width: 0px;
-  border-left-width: 0px;
-
+  border-right-width: 1px;
+  border-left-width: 1px;
+  border-top-width: 1px;
   border-bottom-width: 2px;
   border-bottom-style: solid;
+  border-top-style: solid;
+  border-right-color: #e5e5e5;
+  border-left-color: #e5e5e5;
+  border-top-color: #e5e5e5;
 }
 
 // Button custom style

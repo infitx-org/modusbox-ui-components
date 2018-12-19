@@ -5,7 +5,7 @@ exports[`renders the datepicker correctly when multiple props are set 1`] = `
   className="input-datepicker mb-input__box"
 >
   <div
-    className="input-datepicker__component mb-input mb-input__borders mb-input__background"
+    className="input-datepicker__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
   >
     <div
       className="mb-input__content input-datepicker__content"

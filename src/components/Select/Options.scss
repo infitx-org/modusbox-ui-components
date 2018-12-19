@@ -1,12 +1,14 @@
 @import '../../assets/styles/vars/colors.scss';
 
 .input-select__options {
-  position: relative;
+  position: absolute;
+  left: -1px;
+  width: calc(100% + 2px);
+  top: 44px;
 }
 .input-select__options-wrapper {
   position: absolute;
-  width: calc(100% + 4px);
-  margin: 0px -2px;
+  width: 100%;
   z-index: 1000;
   animation: fadeIn 0.15s ease-in-out;
 }
