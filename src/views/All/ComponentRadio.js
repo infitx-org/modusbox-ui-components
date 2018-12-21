@@ -26,7 +26,7 @@ const options = [
 ];
 const TestRadioGroup = () => (
   <div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+    <div className="p10 b1-ccc">
       <RadioGroup id="x1" label="my RadioGroup" options={options} />
       <RadioGroup id="x2" label="my RadioGroup" value="value1" options={options} />
       <RadioGroup id="x3" label="Click me" value="value4" options={options} />
@@ -40,7 +40,7 @@ const TestRadioGroup = () => (
       />
       <RadioGroup id="x5" label="Disabled" disabled value="value1" options={options} />
     </div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+    <div className="p10 b1-ccc">
       <RadioGroup id="test-radio-1" value="value1" options={options} />
       <RadioGroup id="test-radio-2" value="value2" options={options} />
       <RadioGroup id="test-radio-3" value="value2" options={options} disabled />

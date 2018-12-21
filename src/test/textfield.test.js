@@ -4,9 +4,8 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import TextField from '../components/TextField';
 import Button from '../components/Button';
-import Spinner from '../components/Spinner';
 import Icon from '../components/Icon';
-import { Loader, Placeholder, InnerButton, Validation } from '../components/Common';
+import { Loader, Placeholder, Validation } from '../components/Common';
 
 it('renders the textfield', () => {
   const wrapper = shallow(<TextField />);
@@ -60,8 +59,20 @@ it('renders the required state', () => {
   expect(wrapper.find('.mb-input--required')).toHaveLength(1);
 });
 
+it('renders the large, medium, small sizes', () => {
+  const sizes = {
+    large: 'l',
+    medium: 'm',
+    small: 's',
+  };
+  Object.entries(sizes).forEach(([name, size]) => {
+    const wrapper = shallow(<TextField size={size} />);
+    const className = `mb-input--${name}`;
+    expect(wrapper.find('.mb-input').hasClass(className)).toBeTruthy();
+  });
+});
+
 it('renders the password kind and clicks the toggle icon', () => {
-  const mockEvent = jest.fn();
   const wrapper = mount(<TextField type="password" />);
   expect(wrapper.find(Icon)).toHaveLength(1);
   expect(wrapper.find(Icon).prop('name')).toBe('toggle-visible');
@@ -70,8 +81,6 @@ it('renders the password kind and clicks the toggle icon', () => {
   expect(wrapper.find(Icon).prop('name')).toBe('toggle-invisible');
   expect(wrapper.find('input').prop('type')).toBe('text');
 });
-
-// Inner button
 
 it('renders the inner button', () => {
   const mockEvent = jest.fn();
@@ -102,8 +111,6 @@ it('renders and clicks the inner button', () => {
   wrapper.find(Button).simulate('click');
   expect(mockEvent).toHaveBeenCalled();
 });
-
-// Events
 
 it('triggers onfocus when focused', () => {
   const mockEvent = jest.fn();

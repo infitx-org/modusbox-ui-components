@@ -7,7 +7,7 @@ exports[`renders the Select correctly when multiple props are set 1`] = `
   style={Object {}}
 >
   <div
-    className="input-select__component mb-input mb-input__borders mb-input__background"
+    className="input-select__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
     onClick={[Function]}
     role="presentation"
   >
@@ -34,425 +34,427 @@ exports[`renders the Select correctly when multiple props are set 1`] = `
       >
         <Indicator
           isOpen={false}
+          size="l"
         />
       </div>
     </div>
-  </div>
-  <div
-    className="input-select__options"
-  >
-    <Options
-      highlighted={0}
-      maxHeight={0}
-      onClear={[Function]}
-      onSelect={[Function]}
-      open={false}
-      options={
-        Array [
-          Object {
-            "label": "label-0",
-            "value": "value-0",
-          },
-          Object {
-            "label": "label-1",
-            "value": "value-1",
-          },
-          Object {
-            "label": "label-2",
-            "value": "value-2",
-          },
-          Object {
-            "label": "label-3",
-            "value": "value-3",
-          },
-          Object {
-            "label": "label-4",
-            "value": "value-4",
-          },
-          Object {
-            "label": "label-5",
-            "value": "value-5",
-          },
-          Object {
-            "label": "label-6",
-            "value": "value-6",
-          },
-          Object {
-            "label": "label-7",
-            "value": "value-7",
-          },
-          Object {
-            "label": "label-8",
-            "value": "value-8",
-          },
-          Object {
-            "label": "label-9",
-            "value": "value-9",
-          },
-          Object {
-            "label": "label-10",
-            "value": "value-10",
-          },
-          Object {
-            "label": "label-11",
-            "value": "value-11",
-          },
-          Object {
-            "label": "label-12",
-            "value": "value-12",
-          },
-          Object {
-            "label": "label-13",
-            "value": "value-13",
-          },
-          Object {
-            "label": "label-14",
-            "value": "value-14",
-          },
-          Object {
-            "label": "label-15",
-            "value": "value-15",
-          },
-          Object {
-            "label": "label-16",
-            "value": "value-16",
-          },
-          Object {
-            "label": "label-17",
-            "value": "value-17",
-          },
-          Object {
-            "label": "label-18",
-            "value": "value-18",
-          },
-          Object {
-            "label": "label-19",
-            "value": "value-19",
-          },
-          Object {
-            "label": "label-20",
-            "value": "value-20",
-          },
-          Object {
-            "label": "label-21",
-            "value": "value-21",
-          },
-          Object {
-            "label": "label-22",
-            "value": "value-22",
-          },
-          Object {
-            "label": "label-23",
-            "value": "value-23",
-          },
-          Object {
-            "label": "label-24",
-            "value": "value-24",
-          },
-          Object {
-            "label": "label-25",
-            "value": "value-25",
-          },
-          Object {
-            "label": "label-26",
-            "value": "value-26",
-          },
-          Object {
-            "label": "label-27",
-            "value": "value-27",
-          },
-          Object {
-            "label": "label-28",
-            "value": "value-28",
-          },
-          Object {
-            "label": "label-29",
-            "value": "value-29",
-          },
-          Object {
-            "label": "label-30",
-            "value": "value-30",
-          },
-          Object {
-            "label": "label-31",
-            "value": "value-31",
-          },
-          Object {
-            "label": "label-32",
-            "value": "value-32",
-          },
-          Object {
-            "label": "label-33",
-            "value": "value-33",
-          },
-          Object {
-            "label": "label-34",
-            "value": "value-34",
-          },
-          Object {
-            "label": "label-35",
-            "value": "value-35",
-          },
-          Object {
-            "label": "label-36",
-            "value": "value-36",
-          },
-          Object {
-            "label": "label-37",
-            "value": "value-37",
-          },
-          Object {
-            "label": "label-38",
-            "value": "value-38",
-          },
-          Object {
-            "label": "label-39",
-            "value": "value-39",
-          },
-          Object {
-            "label": "label-40",
-            "value": "value-40",
-          },
-          Object {
-            "label": "label-41",
-            "value": "value-41",
-          },
-          Object {
-            "label": "label-42",
-            "value": "value-42",
-          },
-          Object {
-            "label": "label-43",
-            "value": "value-43",
-          },
-          Object {
-            "label": "label-44",
-            "value": "value-44",
-          },
-          Object {
-            "label": "label-45",
-            "value": "value-45",
-          },
-          Object {
-            "label": "label-46",
-            "value": "value-46",
-          },
-          Object {
-            "label": "label-47",
-            "value": "value-47",
-          },
-          Object {
-            "label": "label-48",
-            "value": "value-48",
-          },
-          Object {
-            "label": "label-49",
-            "value": "value-49",
-          },
-          Object {
-            "label": "label-50",
-            "value": "value-50",
-          },
-          Object {
-            "label": "label-51",
-            "value": "value-51",
-          },
-          Object {
-            "label": "label-52",
-            "value": "value-52",
-          },
-          Object {
-            "label": "label-53",
-            "value": "value-53",
-          },
-          Object {
-            "label": "label-54",
-            "value": "value-54",
-          },
-          Object {
-            "label": "label-55",
-            "value": "value-55",
-          },
-          Object {
-            "label": "label-56",
-            "value": "value-56",
-          },
-          Object {
-            "label": "label-57",
-            "value": "value-57",
-          },
-          Object {
-            "label": "label-58",
-            "value": "value-58",
-          },
-          Object {
-            "label": "label-59",
-            "value": "value-59",
-          },
-          Object {
-            "label": "label-60",
-            "value": "value-60",
-          },
-          Object {
-            "label": "label-61",
-            "value": "value-61",
-          },
-          Object {
-            "label": "label-62",
-            "value": "value-62",
-          },
-          Object {
-            "label": "label-63",
-            "value": "value-63",
-          },
-          Object {
-            "label": "label-64",
-            "value": "value-64",
-          },
-          Object {
-            "label": "label-65",
-            "value": "value-65",
-          },
-          Object {
-            "label": "label-66",
-            "value": "value-66",
-          },
-          Object {
-            "label": "label-67",
-            "value": "value-67",
-          },
-          Object {
-            "label": "label-68",
-            "value": "value-68",
-          },
-          Object {
-            "label": "label-69",
-            "value": "value-69",
-          },
-          Object {
-            "label": "label-70",
-            "value": "value-70",
-          },
-          Object {
-            "label": "label-71",
-            "value": "value-71",
-          },
-          Object {
-            "label": "label-72",
-            "value": "value-72",
-          },
-          Object {
-            "label": "label-73",
-            "value": "value-73",
-          },
-          Object {
-            "label": "label-74",
-            "value": "value-74",
-          },
-          Object {
-            "label": "label-75",
-            "value": "value-75",
-          },
-          Object {
-            "label": "label-76",
-            "value": "value-76",
-          },
-          Object {
-            "label": "label-77",
-            "value": "value-77",
-          },
-          Object {
-            "label": "label-78",
-            "value": "value-78",
-          },
-          Object {
-            "label": "label-79",
-            "value": "value-79",
-          },
-          Object {
-            "label": "label-80",
-            "value": "value-80",
-          },
-          Object {
-            "label": "label-81",
-            "value": "value-81",
-          },
-          Object {
-            "label": "label-82",
-            "value": "value-82",
-          },
-          Object {
-            "label": "label-83",
-            "value": "value-83",
-          },
-          Object {
-            "label": "label-84",
-            "value": "value-84",
-          },
-          Object {
-            "label": "label-85",
-            "value": "value-85",
-          },
-          Object {
-            "label": "label-86",
-            "value": "value-86",
-          },
-          Object {
-            "label": "label-87",
-            "value": "value-87",
-          },
-          Object {
-            "label": "label-88",
-            "value": "value-88",
-          },
-          Object {
-            "label": "label-89",
-            "value": "value-89",
-          },
-          Object {
-            "label": "label-90",
-            "value": "value-90",
-          },
-          Object {
-            "label": "label-91",
-            "value": "value-91",
-          },
-          Object {
-            "label": "label-92",
-            "value": "value-92",
-          },
-          Object {
-            "label": "label-93",
-            "value": "value-93",
-          },
-          Object {
-            "label": "label-94",
-            "value": "value-94",
-          },
-          Object {
-            "label": "label-95",
-            "value": "value-95",
-          },
-          Object {
-            "label": "label-96",
-            "value": "value-96",
-          },
-          Object {
-            "label": "label-97",
-            "value": "value-97",
-          },
-          Object {
-            "label": "label-98",
-            "value": "value-98",
-          },
-          Object {
-            "label": "label-99",
-            "value": "value-99",
-          },
-        ]
-      }
-      reverse={false}
-    />
+    <div
+      className="input-select__options"
+    >
+      <Options
+        highlighted={0}
+        maxHeight={0}
+        onClear={[Function]}
+        onSelect={[Function]}
+        open={false}
+        options={
+          Array [
+            Object {
+              "label": "label-0",
+              "value": "value-0",
+            },
+            Object {
+              "label": "label-1",
+              "value": "value-1",
+            },
+            Object {
+              "label": "label-2",
+              "value": "value-2",
+            },
+            Object {
+              "label": "label-3",
+              "value": "value-3",
+            },
+            Object {
+              "label": "label-4",
+              "value": "value-4",
+            },
+            Object {
+              "label": "label-5",
+              "value": "value-5",
+            },
+            Object {
+              "label": "label-6",
+              "value": "value-6",
+            },
+            Object {
+              "label": "label-7",
+              "value": "value-7",
+            },
+            Object {
+              "label": "label-8",
+              "value": "value-8",
+            },
+            Object {
+              "label": "label-9",
+              "value": "value-9",
+            },
+            Object {
+              "label": "label-10",
+              "value": "value-10",
+            },
+            Object {
+              "label": "label-11",
+              "value": "value-11",
+            },
+            Object {
+              "label": "label-12",
+              "value": "value-12",
+            },
+            Object {
+              "label": "label-13",
+              "value": "value-13",
+            },
+            Object {
+              "label": "label-14",
+              "value": "value-14",
+            },
+            Object {
+              "label": "label-15",
+              "value": "value-15",
+            },
+            Object {
+              "label": "label-16",
+              "value": "value-16",
+            },
+            Object {
+              "label": "label-17",
+              "value": "value-17",
+            },
+            Object {
+              "label": "label-18",
+              "value": "value-18",
+            },
+            Object {
+              "label": "label-19",
+              "value": "value-19",
+            },
+            Object {
+              "label": "label-20",
+              "value": "value-20",
+            },
+            Object {
+              "label": "label-21",
+              "value": "value-21",
+            },
+            Object {
+              "label": "label-22",
+              "value": "value-22",
+            },
+            Object {
+              "label": "label-23",
+              "value": "value-23",
+            },
+            Object {
+              "label": "label-24",
+              "value": "value-24",
+            },
+            Object {
+              "label": "label-25",
+              "value": "value-25",
+            },
+            Object {
+              "label": "label-26",
+              "value": "value-26",
+            },
+            Object {
+              "label": "label-27",
+              "value": "value-27",
+            },
+            Object {
+              "label": "label-28",
+              "value": "value-28",
+            },
+            Object {
+              "label": "label-29",
+              "value": "value-29",
+            },
+            Object {
+              "label": "label-30",
+              "value": "value-30",
+            },
+            Object {
+              "label": "label-31",
+              "value": "value-31",
+            },
+            Object {
+              "label": "label-32",
+              "value": "value-32",
+            },
+            Object {
+              "label": "label-33",
+              "value": "value-33",
+            },
+            Object {
+              "label": "label-34",
+              "value": "value-34",
+            },
+            Object {
+              "label": "label-35",
+              "value": "value-35",
+            },
+            Object {
+              "label": "label-36",
+              "value": "value-36",
+            },
+            Object {
+              "label": "label-37",
+              "value": "value-37",
+            },
+            Object {
+              "label": "label-38",
+              "value": "value-38",
+            },
+            Object {
+              "label": "label-39",
+              "value": "value-39",
+            },
+            Object {
+              "label": "label-40",
+              "value": "value-40",
+            },
+            Object {
+              "label": "label-41",
+              "value": "value-41",
+            },
+            Object {
+              "label": "label-42",
+              "value": "value-42",
+            },
+            Object {
+              "label": "label-43",
+              "value": "value-43",
+            },
+            Object {
+              "label": "label-44",
+              "value": "value-44",
+            },
+            Object {
+              "label": "label-45",
+              "value": "value-45",
+            },
+            Object {
+              "label": "label-46",
+              "value": "value-46",
+            },
+            Object {
+              "label": "label-47",
+              "value": "value-47",
+            },
+            Object {
+              "label": "label-48",
+              "value": "value-48",
+            },
+            Object {
+              "label": "label-49",
+              "value": "value-49",
+            },
+            Object {
+              "label": "label-50",
+              "value": "value-50",
+            },
+            Object {
+              "label": "label-51",
+              "value": "value-51",
+            },
+            Object {
+              "label": "label-52",
+              "value": "value-52",
+            },
+            Object {
+              "label": "label-53",
+              "value": "value-53",
+            },
+            Object {
+              "label": "label-54",
+              "value": "value-54",
+            },
+            Object {
+              "label": "label-55",
+              "value": "value-55",
+            },
+            Object {
+              "label": "label-56",
+              "value": "value-56",
+            },
+            Object {
+              "label": "label-57",
+              "value": "value-57",
+            },
+            Object {
+              "label": "label-58",
+              "value": "value-58",
+            },
+            Object {
+              "label": "label-59",
+              "value": "value-59",
+            },
+            Object {
+              "label": "label-60",
+              "value": "value-60",
+            },
+            Object {
+              "label": "label-61",
+              "value": "value-61",
+            },
+            Object {
+              "label": "label-62",
+              "value": "value-62",
+            },
+            Object {
+              "label": "label-63",
+              "value": "value-63",
+            },
+            Object {
+              "label": "label-64",
+              "value": "value-64",
+            },
+            Object {
+              "label": "label-65",
+              "value": "value-65",
+            },
+            Object {
+              "label": "label-66",
+              "value": "value-66",
+            },
+            Object {
+              "label": "label-67",
+              "value": "value-67",
+            },
+            Object {
+              "label": "label-68",
+              "value": "value-68",
+            },
+            Object {
+              "label": "label-69",
+              "value": "value-69",
+            },
+            Object {
+              "label": "label-70",
+              "value": "value-70",
+            },
+            Object {
+              "label": "label-71",
+              "value": "value-71",
+            },
+            Object {
+              "label": "label-72",
+              "value": "value-72",
+            },
+            Object {
+              "label": "label-73",
+              "value": "value-73",
+            },
+            Object {
+              "label": "label-74",
+              "value": "value-74",
+            },
+            Object {
+              "label": "label-75",
+              "value": "value-75",
+            },
+            Object {
+              "label": "label-76",
+              "value": "value-76",
+            },
+            Object {
+              "label": "label-77",
+              "value": "value-77",
+            },
+            Object {
+              "label": "label-78",
+              "value": "value-78",
+            },
+            Object {
+              "label": "label-79",
+              "value": "value-79",
+            },
+            Object {
+              "label": "label-80",
+              "value": "value-80",
+            },
+            Object {
+              "label": "label-81",
+              "value": "value-81",
+            },
+            Object {
+              "label": "label-82",
+              "value": "value-82",
+            },
+            Object {
+              "label": "label-83",
+              "value": "value-83",
+            },
+            Object {
+              "label": "label-84",
+              "value": "value-84",
+            },
+            Object {
+              "label": "label-85",
+              "value": "value-85",
+            },
+            Object {
+              "label": "label-86",
+              "value": "value-86",
+            },
+            Object {
+              "label": "label-87",
+              "value": "value-87",
+            },
+            Object {
+              "label": "label-88",
+              "value": "value-88",
+            },
+            Object {
+              "label": "label-89",
+              "value": "value-89",
+            },
+            Object {
+              "label": "label-90",
+              "value": "value-90",
+            },
+            Object {
+              "label": "label-91",
+              "value": "value-91",
+            },
+            Object {
+              "label": "label-92",
+              "value": "value-92",
+            },
+            Object {
+              "label": "label-93",
+              "value": "value-93",
+            },
+            Object {
+              "label": "label-94",
+              "value": "value-94",
+            },
+            Object {
+              "label": "label-95",
+              "value": "value-95",
+            },
+            Object {
+              "label": "label-96",
+              "value": "value-96",
+            },
+            Object {
+              "label": "label-97",
+              "value": "value-97",
+            },
+            Object {
+              "label": "label-98",
+              "value": "value-98",
+            },
+            Object {
+              "label": "label-99",
+              "value": "value-99",
+            },
+          ]
+        }
+        reverse={false}
+        size="l"
+      />
+    </div>
   </div>
 </div>
 `;

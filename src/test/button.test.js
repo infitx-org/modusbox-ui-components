@@ -69,6 +69,19 @@ it('renders all the "noFill" prop', () => {
   expect(wrapper.find('.noFill')).toHaveLength(1);
 });
 
+it('renders the large, medium, small sizes', () => {
+  const sizes = {
+    large: 'l',
+    medium: 'm',
+    small: 's',
+  };
+  Object.entries(sizes).forEach(([name, size]) => {
+    const wrapper = shallow(<Button size={size} />);
+    const className = `input-button__mb-input--${name}`;
+    expect(wrapper.find('.mb-input').hasClass(className)).toBeTruthy();
+  });
+});
+
 it('triggers the onClick prop', () => {
   const mockEvent = jest.fn();
   const wrapper = shallow(<Button onClick={mockEvent} />);

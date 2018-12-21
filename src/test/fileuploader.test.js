@@ -3,10 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
 import FileUploader from '../components/FileUploader';
-import Button from '../components/Button';
-import Spinner from '../components/Spinner';
-import Icon from '../components/Icon';
-import { Loader, Placeholder, InnerButton, Validation } from '../components/Common';
+import { Loader, Placeholder, Validation } from '../components/Common';
 
 it('renders the fileuploader', () => {
   const wrapper = shallow(<FileUploader />);
@@ -53,6 +50,19 @@ it('renders the invalid state', () => {
 it('renders the required state', () => {
   const wrapper = shallow(<FileUploader required />);
   expect(wrapper.find('.mb-input--required')).toHaveLength(1);
+});
+
+it('renders the large, medium, small sizes', () => {
+  const sizes = {
+    large: 'l',
+    medium: 'm',
+    small: 's',
+  };
+  Object.entries(sizes).forEach(([name, size]) => {
+    const wrapper = shallow(<FileUploader size={size} />);
+    const className = `mb-input--${name}`;
+    expect(wrapper.find('.mb-input').hasClass(className)).toBeTruthy();
+  });
 });
 
 // Events

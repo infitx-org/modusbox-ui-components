@@ -53,7 +53,7 @@ const TestButton = () => (
       <Button noFill label="Primary" kind="primary" pending />
       <Button noFill label="Secondary" kind="secondary" pending />
       <Button noFill label="Tertiary" kind="tertiary" pending />
-      <Button noFilllabel="Success" kind="success" pending />
+      <Button noFill label="Success" kind="success" pending />
       <Button noFill label="Danger" kind="danger" pending />
       <Button noFill label="Warning" kind="warning" pending />
       <Button noFill label="Dark" kind="dark" pending />
@@ -62,7 +62,7 @@ const TestButton = () => (
       <Button noFill label="Icon" icon="deploy-small" pending />
     </Row>
     Disabled
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
+    <Row className="p10 b1-ccc" align="space-between center">
       <Button label="Primary" kind="primary" disabled />
       <Button label="Secondary" kind="secondary" disabled />
       <Button label="Tertiary" kind="tertiary" disabled />
@@ -77,11 +77,20 @@ const TestButton = () => (
       <Button label="No Fill" icon="deploy-small" noFill kind="tertiary" disabled />
       <Button label="No Fill" icon="deploy-small" noFill kind="danger" disabled />
     </Row>
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between center">
-      <Button label="Test Button 1" />
-      <Button label="Test Button 2" disabled />
-      <Button label="Test Button 3" disabled />
-      <Button label="Test Button 4" pending />
+    Sizes
+    <Row className="p10 b1-ccc" align="space-between center">
+      <Button label="Large size " size="l" />
+      <Button label="Medium size " size="m" />
+      <Button label="Small size " size="s" />
+      <Button label="Large size and icon" icon="deploy-small" size="l" />
+      <Button label="Medium size and icon" icon="deploy-small" size="m" />
+      <Button label="Small size and icon" icon="deploy-small" size="s" />
+      <Button label="Large size pending " pending size="l" />
+      <Button label="Medium size pending " pending size="m" />
+      <Button label="Small size pending " pending size="s" />
+    </Row>
+    Tooltip
+    <Row className="p10 b1-ccc" align="space-between center">
       <Button label="Test Button Tooltip" tooltip="Test!" />
     </Row>
   </Column>

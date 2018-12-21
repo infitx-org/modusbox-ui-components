@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Loader renders the loader correctly when multiple props are set 1`] = `
+<div
+  className="mb-input__inner-icon mb-loader"
+>
+  <Spinner
+    center={false}
+    size={14}
+  />
+</div>
+`;
+
+exports[`The Placeholder renders the placeholder correctly when multiple props are set 1`] = `
+<label
+  className="mb-input__placeholder mb-input__placeholder--medium mb-input__placeholder--active-medium"
+>
+  foo
+</label>
+`;

@@ -56,6 +56,15 @@
     color: $color__gray-4;
   }
 }
+.input-fileuploader__filename--small {
+  font-size: 10px;
+}
+.input-fileuploader__filename--medium {
+  font-size: 12px;
+}
+.input-fileuploader__filename--large {
+  font-size: 14px;
+}
 
 .input-fileuploader__button {
 }

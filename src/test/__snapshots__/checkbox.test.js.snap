@@ -20,7 +20,7 @@ exports[`renders the checkbox correctly when multiple props are set 1`] = `
     className=""
     htmlFor="test-id"
     onClick={[Function]}
-    role="presentation"
+    role="button"
   />
 </div>
 `;

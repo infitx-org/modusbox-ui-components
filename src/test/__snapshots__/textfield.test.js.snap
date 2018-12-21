@@ -6,7 +6,7 @@ exports[`renders the textfield correctly when multiple props are set 1`] = `
   style={Object {}}
 >
   <div
-    className="input-textfield__component mb-input mb-input__borders mb-input__background"
+    className="input-textfield__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
     onClick={[Function]}
     role="presentation"
   >

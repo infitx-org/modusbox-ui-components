@@ -55,7 +55,7 @@ const TestColor = () => {
 
   return (
     <Column style={{ padding: '10px' }}>
-      <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="space-between top" wrap>
+      <Row className="p10 b1-ccc" align="space-between top" wrap>
         {colorRows}
       </Row>
     </Column>

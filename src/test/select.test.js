@@ -5,9 +5,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import Select from '../components/Select';
 import Options from '../components/Select/Options';
 
-import Spinner from '../components/Spinner';
-import Icon from '../components/Icon';
-import { Loader, Placeholder, InnerButton, Validation } from '../components/Common';
+import { Loader, Placeholder, Validation } from '../components/Common';
 
 const options = new Array(100).fill().map((item, index) => ({
   label: `label-${index}`,
@@ -63,6 +61,19 @@ it('renders the invalid state', () => {
 it('renders the required state', () => {
   const wrapper = shallow(<Select required />);
   expect(wrapper.find('.mb-input--required')).toHaveLength(1);
+});
+
+it('renders the large, medium, small sizes', () => {
+  const sizes = {
+    large: 'l',
+    medium: 'm',
+    small: 's',
+  };
+  Object.entries(sizes).forEach(([name, size]) => {
+    const wrapper = shallow(<Select size={size} />);
+    const className = `mb-input--${name}`;
+    expect(wrapper.find('.mb-input').hasClass(className)).toBeTruthy();
+  });
 });
 
 it('renders the options when focused', () => {

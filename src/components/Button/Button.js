@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 
-import Icon from '../Icon';
+import Icon, { iconSizes } from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
 
@@ -38,6 +38,7 @@ class Button extends PureComponent {
       id,
       className,
       style,
+      size,
       kind,
       label,
       icon,
@@ -47,10 +48,14 @@ class Button extends PureComponent {
       tooltip,
     } = this.props;
     const isDisabledOrPending = disabled === true || pending === true;
+    const iconSize = iconSizes[size];
     const classNames = utils.composeClassNames([
       className,
       'mb-input',
       'input-button__input',
+      size === 's' && 'input-button__mb-input--small',
+      size === 'm' && 'input-button__mb-input--medium',
+      size === 'l' && 'input-button__mb-input--large',
       kind === 'primary' && 'input-button__mb-input--primary',
       kind === 'secondary' && 'input-button__mb-input--secondary',
       kind === 'tertiary' && 'input-button__mb-input--tertiary',
@@ -82,9 +87,9 @@ class Button extends PureComponent {
           {(pending || icon) && (
             <div className="input-button__icon">
               {pending ? (
-                <Spinner color="inherit" size={16} />
+                <Spinner color="inherit" size={iconSize} />
               ) : (
-                <Icon name={icon} stroke="none" spin={pending} size={16} />
+                <Icon name={icon} stroke="none" spin={pending} size={iconSize} />
               )}
             </div>
           )}
@@ -117,6 +122,7 @@ Button.propTypes = {
     'dark',
     'light',
   ]),
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   label: PropTypes.string,
   icon: PropTypes.string,
   noFill: PropTypes.bool,
@@ -130,6 +136,7 @@ Button.defaultProps = {
   id: undefined,
   style: undefined,
   kind: 'primary',
+  size: 'l',
   label: undefined,
   icon: undefined,
   noFill: false,

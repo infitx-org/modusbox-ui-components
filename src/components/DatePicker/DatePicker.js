@@ -6,7 +6,7 @@ import DayPicker, { DateUtils } from 'react-day-picker';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
-import Icon from '../Icon';
+import Icon, { iconSizes } from '../Icon';
 import { Loader, Placeholder, Validation } from '../Common';
 
 import '../../icons/mule/calendar-small.svg';
@@ -278,6 +278,7 @@ class DatePicker extends PureComponent {
       placeholder,
       id,
       className,
+      size,
       style,
       disabled,
       pending,
@@ -291,6 +292,7 @@ class DatePicker extends PureComponent {
     const initialMonth = selectedDay || DatePicker.getDate(this.props.initialMonth);
     const hasDate = timestamp !== 0 && timestamp !== undefined;
     const isPlaceholderActive = isOpen || hasDate;
+    const iconSize = iconSizes[size];
     const valueFormat = dateFormat || 'MMM Do YYYY, HH:mm:ss';
     const value = hasDate ? moment(timestamp).format(valueFormat) : '';
     const showCalendar = hasDate ? hideIcon === false : true;
@@ -301,21 +303,33 @@ class DatePicker extends PureComponent {
       'mb-input',
       'mb-input__borders',
       'mb-input__background',
-      isOpen && 'mb-input--open mb-input__borders--open mb-input__background--open',
+      'mb-input__shadow',
+      size === 's' && 'mb-input--small',
+      size === 'm' && 'mb-input--medium',
+      size === 'l' && 'mb-input--large',
+      /* eslint-disable max-len  */
+      isOpen &&
+        'mb-input--open mb-input__borders--open mb-input__background--open mb-input__shadow--open',
       disabled && 'mb-input--disabled mb-input__borders--disabled mb-input__background--disabled',
-      pending && 'mb-input--pending mb-input__borders--pending mb-input__background--pending',
-      invalid && 'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid',
-      required && 'mb-input--required mb-input__borders--required mb-input__background--required',
+      pending &&
+        'mb-input--pending mb-input__borders--pending mb-input__background--pending mb-input__shadow--pending',
+      invalid &&
+        'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid mb-input__shadow--invalid',
+      required &&
+        'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
+      /* eslint-enable */
     ]);
 
     let customPlaceholder = null;
     if (placeholder) {
-      customPlaceholder = <Placeholder label={placeholder} active={isPlaceholderActive} />;
+      customPlaceholder = (
+        <Placeholder size={size} label={placeholder} active={isPlaceholderActive} />
+      );
     }
 
     let loader = null;
     if (pending) {
-      loader = <Loader />;
+      loader = <Loader size={size} />;
     }
 
     let validation = null;
@@ -329,7 +343,7 @@ class DatePicker extends PureComponent {
     if (showCalendar) {
       calendarIcon = (
         <div className="mb-input__inner-icon input-datepicker__icon">
-          <Icon size={16} name="calendar-small" fill="#999" />
+          <Icon size={iconSize} name="calendar-small" fill="#999" />
         </div>
       );
     }
@@ -407,6 +421,7 @@ DatePicker.propTypes = {
   style: PropTypes.shape(),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   onSelect: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
@@ -428,6 +443,7 @@ DatePicker.defaultProps = {
   id: undefined,
   className: undefined,
   style: undefined,
+  size: 'l',
   value: undefined,
   placeholder: undefined,
   onSelect: undefined,

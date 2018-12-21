@@ -1,6 +1,7 @@
 @import '../vars/colors.scss';
 @import '../vars/border.scss';
 @import '../vars/background.scss';
+@import '../vars/shadow.scss';
 @import '../vars/general.scss';
 
 .mb-input * {
@@ -17,6 +18,7 @@
 }
 .mb-input--open {
   padding: 0px $component-open-size;
+  box-shadow: $shadow-size;
 }
 .mb-input--disabled {
   opacity: $component-opacity--disabled;
@@ -24,14 +26,46 @@
   cursor: auto;
 }
 
+.mb-input--small {
+  height: 31px;
+  padding-left: 10px;
+  padding-right: 6px;
+  font-size: 12px;
+}
+.mb-input--medium {
+  height: 38px;
+  padding-left: 13px;
+  padding-right: 8px;
+  font-size: 13px;
+}
+.mb-input--large {
+  height: 45px;
+  padding-left: 16px;
+  padding-right: 10px;
+  font-size: 14px;
+}
+
 /** COMPONENT **/
 
 .mb-input__box {
   width: 100%;
-  height: 45px;
   display: block;
   box-sizing: border-box;
   position: relative;
+}
+
+/** COMPONENT SHADOW **/
+.mb-input__shadow {
+  color: $shadow-color--default;
+}
+.mb-input__shadow--required {
+  color: $shadow-color--required;
+}
+.mb-input__shadow--pending {
+  color: $shadow-color--pending;
+}
+.mb-input__shadow--invalid {
+  color: $shadow-color--invalid;
 }
 
 /** COMPONENT BACKGROUND **/
@@ -58,22 +92,19 @@
 .mb-input__borders {
   border-left: 2px solid;
   border-right: 2px solid;
-  border-color: $border-color--default;
+  border-bottom-color: $border-color--default;
 }
 .mb-input__borders--open {
-  margin-left: -$component-open-size;
-  margin-right: -$component-open-size;
-  border-color: $border-color--open;
 }
 .mb-input__borders--pending {
-  border-color: $border-color--pending;
+  border-bottom-color: $border-color--pending;
 }
 .mb-input__borders--invalid,
 .mb-input__borders--required.mb-input__borders--invalid {
-  border-color: $border-color--invalid;
+  border-bottom-color: $border-color--invalid;
 }
 .mb-input__borders--required {
-  border-color: $border-color--required;
+  border-bottom-color: $border-color--required;
 }
 
 /** COMPONENT BLOCKS */
@@ -84,8 +115,6 @@
   height: 100%;
   width: 100%;
   align-items: center;
-  padding-left: 16px;
-  padding-right: 10px;
 }
 .mb-input__input {
   flex: 2 1 auto;
@@ -98,7 +127,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: inherit;
-  font-size: 14px;
+  font-size: inherit;
   height: 100%;
 }
 .mb-input__holder {
@@ -111,14 +140,30 @@
   -moz-appearance: none;
 }
 .mb-input__placeholder {
-  font-size: 14px;
   transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
   top: 50%;
   color: $placeholder-color;
   transform: translateY(-50%);
 }
-.mb-input__placeholder--active {
+.mb-input__placeholder--small {
+  font-size: 12px;
+}
+.mb-input__placeholder--medium {
+  font-size: 13px;
+}
+.mb-input__placeholder--large {
+  font-size: 14px;
+}
+.mb-input__placeholder--active-small {
+  top: 7px;
+  font-size: 9px;
+}
+.mb-input__placeholder--active-medium {
+  top: 9px;
+  font-size: 10px;
+}
+.mb-input__placeholder--active-large {
   top: 11px;
   font-size: 11px;
 }
@@ -128,18 +173,9 @@
 .mb-input__inner-button {
   outline: none;
   flex: 0 0 auto;
-  height: 24px;
-  margin-left: 5px;
-  font-size: 12px;
   justify-content: center;
   align-items: center;
   display: flex;
-  padding: 0px 5px;
-  font-size: 11px;
-  height: 30px;
-  padding: 0 9px;
-  font-size: 13px;
-  border-radius: 2px;
 
   .input-button__icon {
     display: flex;
@@ -149,6 +185,30 @@
   &.mb-input__inner-button--active {
   }
 }
+
+.mb-input__inner-button--small {
+  margin-left: 5px;
+  height: 22px;
+  padding: 0 5px;
+  font-size: 9px;
+  border-radius: 2px;
+}
+.mb-input__inner-button--medium {
+  margin-left: 5px;
+  height: 26px;
+  padding: 0 7px;
+  font-size: 11px;
+  border-radius: 2px;
+}
+
+.mb-input__inner-button--large {
+  margin-left: 5px;
+  height: 30px;
+  padding: 0 9px;
+  font-size: 13px;
+  border-radius: 2px;
+}
+
 .mb-input__inner-icon {
   animation: animateIconFadeIn 0.2s linear forwards;
   flex: 0 0 auto;

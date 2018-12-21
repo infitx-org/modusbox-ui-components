@@ -21,7 +21,7 @@ const TestTooltip = () => (
         </Tooltip>
       </Column>
     </Row>
-    <Row style={{ padding: '10px', border: '1px solid #ccc' }} align="center space-between">
+    <Row className="p10 b1-ccc" align="center space-between">
       <Column style={columnStyle}>
         <Tooltip custom content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}>
           custom tooltip

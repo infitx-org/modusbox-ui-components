@@ -1,12 +1,15 @@
 /* eslint no-console: "off" */
 import React from 'react';
+
+import Row from '../../components/Row';
 import DatePicker from '../../components/DatePicker';
 
 const TestDatePicker = () => (
   <div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <DatePicker placeholder="Default" format="x" onSelect={console.log} />
+    <div className="p10 b1-ccc">
+      <DatePicker className="m5" placeholder="Default" format="x" onSelect={console.log} />
       <DatePicker
+        className="m5"
         value={1524002400000}
         placeholder="Default with time"
         format="x"
@@ -18,8 +21,9 @@ const TestDatePicker = () => (
         hideIcon
         disabledDays={undefined}
       />
-      <DatePicker placeholder="Pending" format="x" onSelect={console.log} pending />
+      <DatePicker className="m5" placeholder="Pending" format="x" onSelect={console.log} pending />
       <DatePicker
+        className="m5"
         placeholder="Invalid"
         format="x"
         onSelect={console.log}
@@ -29,15 +33,28 @@ const TestDatePicker = () => (
           { text: 'This is invalid', active: false },
         ]}
       />
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} required />
-
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} disabled />
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
-      <DatePicker placeholder="Required" format="x" onSelect={console.log} />
       <DatePicker
+        className="m5"
+        placeholder="Required"
+        format="x"
+        onSelect={console.log}
+        required
+      />
+
+      <DatePicker
+        className="m5"
+        placeholder="Required"
+        format="x"
+        onSelect={console.log}
+        disabled
+      />
+      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker className="m5" placeholder="Required" format="x" onSelect={console.log} />
+      <DatePicker
+        className="m5"
         placeholder="Events"
         onSelect={value => console.log('onSelect', value)}
         onClick={() => console.log('onClick')}
@@ -45,6 +62,14 @@ const TestDatePicker = () => (
         onFocus={e => console.log('onFocus', e.target)}
       />
     </div>
+    <Row className="p10 b1-ccc" align="space-between center">
+      <DatePicker className="m5" placeholder="small" size="s" />
+      <DatePicker className="m5" placeholder="medium" size="m" />
+      <DatePicker className="m5" placeholder="large" size="l" />
+      <DatePicker className="m5" placeholder="small" size="s" pending />
+      <DatePicker className="m5" placeholder="medium" size="m" pending />
+      <DatePicker className="m5" placeholder="large" size="l" pending />
+    </Row>
   </div>
 );
 

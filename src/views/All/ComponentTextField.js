@@ -1,16 +1,18 @@
 /* eslint no-console: "off" */
-
 import React from 'react';
+
+import Row from '../../components/Row';
 import TextField from '../../components/TextField';
 import Checkbox from '../../components/Checkbox';
 
 const TestTextField = () => (
   <div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <TextField type="text" placeholder="Default" />
-      <TextField type="password" placeholder="Password" />
-      <TextField placeholder="Pending" pending />
+    <div className="p10 b1-ccc">
+      <TextField className="m5" type="text" placeholder="Default" />
+      <TextField className="m5" type="password" placeholder="Password" />
+      <TextField className="m5" placeholder="Pending" pending />
       <TextField
+        className="m5"
         placeholder="Invalid"
         invalid
         invalidMessages={[
@@ -18,11 +20,12 @@ const TestTextField = () => (
           { text: 'This is invalid', active: false },
         ]}
       />
-      <TextField placeholder="Required" required />
-      <TextField placeholder="Disabled" disabled />
-      <TextField type="password" placeholder="4" value="text" />
-      <TextField placeholder="Icon" icon="close-small" />
+      <TextField className="m5" placeholder="Required" required />
+      <TextField className="m5" placeholder="Disabled" disabled />
+      <TextField className="m5" type="password" placeholder="4" value="text" />
+      <TextField className="m5" placeholder="Icon" icon="close-small" />
       <TextField
+        className="m5"
         placeholder="Events (console)"
         onChange={value => console.log('onChange', value)}
         onClick={() => console.log('onClick')}
@@ -32,43 +35,50 @@ const TestTextField = () => (
         onFocus={() => console.log('onFocus')}
       />
       <TextField
+        className="m5"
         placeholder="Button"
         onButtonClick={() => console.log('Clicked!')}
         buttonText="Press Me"
         buttonKind="primary"
       />
       <TextField
+        className="m5"
         placeholder="Button"
         onButtonClick={() => console.log('Clicked!')}
         buttonText="Press Me"
         buttonKind="secondary"
       />
       <TextField
+        className="m5"
         placeholder="Button"
         onButtonClick={() => console.log('Clicked!')}
         buttonText="Press Me"
         buttonKind="danger"
       />
       <TextField
+        className="m5"
         placeholder="Disabled"
         onButtonClick={() => console.log('Clicked!')}
         buttonText="Press Me"
         disabled
       />
     </div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+    <div className="p10 b1-ccc">
       <InvalidToggle />
     </div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <TextField type="password" placeholder="Password pending" pending />
-      <TextField placeholder="Required Disabled" required disabled />
-      <TextField placeholder="Required Disabled Invalid" required disabled invalid />
+    <div className="p10 b1-ccc">
+      <TextField className="m5" type="password" placeholder="Password pending" pending />
+      <TextField className="m5" placeholder="Required Disabled" required disabled />
+      <TextField className="m5" placeholder="Required Disabled Invalid" required disabled invalid />
     </div>
-    <div style={{ padding: '10px', border: '1px solid #ccc' }}>
-      <TextField id="test-textfield-1" />
-      <TextField id="test-textfield-2" pending />
-      <TextField id="test-textfield-3" disabled />
-    </div>
+    <Row className="p10 b1-ccc" align="space-between center">
+      <TextField className="m5" placeholder="small" size="s" />
+      <TextField className="m5" placeholder="medium" size="m" />
+      <TextField className="m5" placeholder="large" size="l" />
+      <TextField className="m5" placeholder="small" size="s" pending />
+      <TextField className="m5" placeholder="medium" size="m" pending />
+      <TextField className="m5" placeholder="large" size="l" pending />
+    </Row>
   </div>
 );
 

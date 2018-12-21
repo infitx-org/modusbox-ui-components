@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 
 import ScrollBox from '../ScrollBox';
-import Icon from '../Icon';
+import Icon, { iconSizes } from '../Icon';
 import Tooltip from '../Tooltip';
 
 class Options extends PureComponent {
@@ -33,16 +33,22 @@ class Options extends PureComponent {
   }
   render() {
     const { options, selected, highlighted } = this.state;
-    const { maxHeight, reverse, open, onClear } = this.props;
+    const { maxHeight, reverse, open, size, onClear } = this.props;
+
     if (!open) {
       return null;
     }
-    const top = reverse ? undefined : 0;
-    const bottom = reverse ? 45 : undefined;
+
     const className = utils.composeClassNames([
-      'input',
       'input-select__options-wrapper',
-      reverse ? 'input-select__options-wrapper--reverse' : 'input-select__options-wrapper--regular',
+      reverse && 'input-select__options-wrapper--reverse',
+      !reverse && 'input-select__options-wrapper--regular',
+      size === 's' && reverse && 'input-select__options-wrapper--reverse-small',
+      size === 's' && !reverse && 'input-select__options-wrapper--regular-small',
+      size === 'm' && reverse && 'input-select__options-wrapper--reverse-medium',
+      size === 'm' && !reverse && 'input-select__options-wrapper--regular-medium',
+      size === 'l' && reverse && 'input-select__options-wrapper--reverse-large',
+      size === 'l' && !reverse && 'input-select__options-wrapper--regular-large',
     ]);
 
     let clearOption = null;
@@ -56,6 +62,7 @@ class Options extends PureComponent {
         const isSelected = selected === item.value;
         return (
           <Option
+            size={size}
             highlighted={highlighted === index}
             label={item.label}
             value={item.value}
@@ -70,7 +77,7 @@ class Options extends PureComponent {
     } else {
       optionItems = (
         <div className="input-select__options-item--no-options__box">
-          <Icon name="info-small" size={20} />
+          <Icon name="info-small" size={iconSizes[size]} />
           <div className="input-select__options-item--no-options__message">
             No options available
           </div>
@@ -78,7 +85,7 @@ class Options extends PureComponent {
       );
     }
     return (
-      <div className={className} style={{ position: 'absolute', top, bottom }}>
+      <div className={className}>
         <ScrollBox
           style={{ maxHeight }}
           handleStyle={{ borderRadius: '3px' }}
@@ -138,9 +145,12 @@ class Option extends PureComponent {
     this.props.onClick();
   }
   render() {
-    const { value, label, icon, selected, disabled, highlighted } = this.props;
+    const { size, value, label, icon, selected, disabled, highlighted } = this.props;
     const optionsClassNames = utils.composeClassNames([
       'input-select__options-item',
+      size === 's' && 'input-select__options-item--small',
+      size === 'm' && 'input-select__options-item--medium',
+      size === 'l' && 'input-select__options-item--large',
       selected && 'input-select__options-item--selected',
       disabled && 'input-select__options-item--disabled',
       highlighted && 'input-select__options-item--highlighted',
@@ -154,7 +164,9 @@ class Option extends PureComponent {
         label={label}
         value={value}
       >
-        {icon && <Icon className="input-select__options-item__icon" name={icon} size={16} />}
+        {icon && (
+          <Icon className="input-select__options-item__icon" name={icon} size={iconSizes[size]} />
+        )}
         <div className="input-select__options-item__label">
           <Tooltip>{label}</Tooltip>
         </div>

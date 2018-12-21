@@ -1,12 +1,14 @@
 @import '../../assets/styles/vars/colors.scss';
 
 .input-select__options {
-  position: relative;
+  position: absolute;
+  left: -1px;
+  width: calc(100% + 2px);
+  top: 44px;
 }
 .input-select__options-wrapper {
   position: absolute;
-  width: calc(100% + 4px);
-  margin: 0px -2px;
+  width: 100%;
   z-index: 1000;
   animation: fadeIn 0.15s ease-in-out;
 }
@@ -16,6 +18,25 @@
 .input-select__options-wrapper--reverse {
   border-top: 2px solid $color__main-tertiary;
 }
+.input-select__options-wrapper--reverse-small {
+  bottom: 45px;
+}
+.input-select__options-wrapper--regular-small {
+  top: -14px;
+}
+.input-select__options-wrapper--reverse-medium {
+  bottom: 45px;
+}
+.input-select__options-wrapper--regular-medium {
+  top: -7px;
+}
+.input-select__options-wrapper--reverse-large {
+  bottom: 45px;
+}
+.input-select__options-wrapper--regular-large {
+  top: 0px;
+}
+
 .input-select__options-item {
   outline: none;
   display: flex;
@@ -33,6 +54,28 @@
   cursor: pointer;
   color: $color__dark-gray-1;
   fill: $color__dark-gray-1;
+}
+
+.input-select__options-item--small {
+  padding-left: 6px;
+  padding-right: 6px;
+  line-height: 30px;
+  font-size: 11px;
+  flex-basis: 30px;
+}
+.input-select__options-item--medium {
+  padding-left: 8px;
+  padding-right: 8px;
+  line-height: 35px;
+  font-size: 12px;
+  flex-basis: 35px;
+}
+.input-select__options-item--large {
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 40px;
+  font-size: 13px;
+  flex-basis: 40px;
 }
 
 .input-select__options-item--selected {
@@ -65,7 +108,7 @@
 }
 
 .input-select__options-item__icon {
-  margin-right: 2px;
+  margin-right: 5px;
 }
 .input-select__options-item__icon--clear {
   border-radius: 10px;

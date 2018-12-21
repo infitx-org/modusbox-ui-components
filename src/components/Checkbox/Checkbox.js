@@ -85,7 +85,7 @@ class Checkbox extends PureComponent {
           htmlFor={id}
           className={`${round ? 'input-checkbox__label--round' : ''}`}
           onClick={this.onChange}
-          role="presentation"
+          role="button"
         >
           {label}
         </label>
