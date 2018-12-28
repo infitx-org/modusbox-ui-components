@@ -63,7 +63,7 @@ class Options extends PureComponent {
         return (
           <Option
             size={size}
-            highlighted={highlighted === index}
+            highlighted={item.value === highlighted}
             label={item.label}
             value={item.value}
             icon={item.icon}
