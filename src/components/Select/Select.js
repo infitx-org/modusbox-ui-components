@@ -67,6 +67,12 @@ class Select extends PureComponent {
     }
     this.setSelectedLabel(selected, options);
   }
+  componentDidUpdate(_,prevState) {
+    const { isOpen, highlightedOption } = this.state;
+    if (isOpen === true && prevState.isOpen === false) {
+      this.scrollToOption(highlightedOption);
+    }
+  }
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('mouseup', this.onPageClick, false);
@@ -210,7 +216,8 @@ class Select extends PureComponent {
       e.preventDefault();
       if (this.state.isOpen) {
         const options = this.getOptions();
-        this.onSelectOption(options[this.state.highlightedOption]);
+        const selected = options[this.state.highlightedOption];
+        this.onSelectOption(selected);
       } else {
         this.openSelect();
       }
@@ -242,8 +249,8 @@ class Select extends PureComponent {
     while (nextHighlightedOption === -1) {
       nextHighlightedOption = getNextEnabledOption();
     }
+
     this.scrollToOption(nextHighlightedOption);
-    this.inputFilter.focus();
     this.setState({ highlightedOption: nextHighlightedOption });
   }
   scrollToOption(index) {
@@ -251,6 +258,7 @@ class Select extends PureComponent {
     if (nextOption) {
       nextOption.focus();
     }
+    this.inputFilter.focus();
   }
 
   render() {
