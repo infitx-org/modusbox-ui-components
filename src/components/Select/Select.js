@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
@@ -14,6 +15,9 @@ import Indicator from './Indicator';
 import '../../icons/mule/search-small.svg';
 
 class Select extends PureComponent {
+  static getOptionIndex(options, value) {
+    return findIndex(options, { value });
+  }
   constructor(props) {
     super(props);
 
@@ -44,7 +48,7 @@ class Select extends PureComponent {
 
     this.state = {
       isOpen: false,
-      highlightedOption: 0,
+      highlightedOption: selected,
       options: options || [],
       selectedLabel,
       selected,
@@ -61,11 +65,17 @@ class Select extends PureComponent {
     if (disabled !== this.props.disabled) {
       this.setState({
         isOpen: false,
-        highlightedOption: 0,
+        highlightedOption: selected,
         filter: undefined,
       });
     }
     this.setSelectedLabel(selected, options);
+  }
+  componentDidUpdate(_, prevState) {
+    const { isOpen, highlightedOption } = this.state;
+    if (isOpen === true && prevState.isOpen === false) {
+      this.scrollToOption(highlightedOption);
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
@@ -166,6 +176,7 @@ class Select extends PureComponent {
         .includes(lowerCaseFilter),
     );
   }
+
   closeSelect() {
     this.setState({ isOpen: false, filter: undefined });
     this.onBlur();
@@ -175,9 +186,10 @@ class Select extends PureComponent {
     utils.focusNextFocusableElement(this.inputFilter, next);
   }
   openSelect() {
-    const { options, selected } = this.state;
-    const highlightedOption = Math.max(options.map(option => option.value).indexOf(selected), 0);
-    this.setState({ isOpen: true, highlightedOption });
+    this.setState({
+      isOpen: true,
+      highlightedOption: this.state.selected,
+    });
     this.handleResize();
   }
   handleResize() {
@@ -195,7 +207,7 @@ class Select extends PureComponent {
     this._forceUpdateTimeout = setTimeout(() => this.forceUpdate(), 50);
   }
   testKey(e) {
-    const { keyCode, shiftKey } = e.nativeEvent;
+    const { keyCode, shiftKey } = e;
 
     if (keyCode === keyCodes.KEY_TAB) {
       e.preventDefault();
@@ -209,48 +221,53 @@ class Select extends PureComponent {
     if (keyCode === keyCodes.KEY_RETURN) {
       e.preventDefault();
       if (this.state.isOpen) {
-        const options = this.getOptions();
-        this.onSelectOption(options[this.state.highlightedOption]);
+        this.onSelectOption({ value: this.state.highlightedOption });
       } else {
         this.openSelect();
       }
     }
   }
-  applyFilter() {
-    const { value } = this.inputFilter;
-    this.setState({ filter: value, isOpen: true });
+  applyFilter(e) {
+    this.setState({ filter: e.target.value, isOpen: true });
   }
   highlightNextOption(next = true) {
-    const { highlightedOption, options } = this.state;
-    // const items = this.reverse ? [...options].reverse() : options
-    const items = options;
-    let currentHightlightedOption = highlightedOption;
-    let nextHighlightedOption = -1;
+    const { highlightedOption } = this.state;
+    const options = this.getOptions();
+
+    let currentIndex = Select.getOptionIndex(options, highlightedOption);
+    let nextHighlightedOption = null;
 
     const getNextEnabledOption = () => {
-      let option = (currentHightlightedOption + (next ? 1 : -1)) % items.length;
-      if (option < 0) {
-        option = items.length - 1;
+      let nextIndex = (currentIndex + (next ? 1 : -1)) % options.length;
+      if (nextIndex < 0) {
+        nextIndex = options.length - 1;
       }
-      currentHightlightedOption = option;
-      if (items[option].disabled) {
-        return -1;
+      currentIndex = nextIndex;
+      const nextOption = options[nextIndex];
+
+      if (nextOption.disabled) {
+        return null;
       }
-      return option;
+      return nextOption;
     };
 
-    while (nextHighlightedOption === -1) {
+    while (nextHighlightedOption === null) {
       nextHighlightedOption = getNextEnabledOption();
     }
-    this.scrollToOption(nextHighlightedOption);
-    this.inputFilter.focus();
-    this.setState({ highlightedOption: nextHighlightedOption });
+
+    this.scrollToOption(nextHighlightedOption.value);
+    this.setState({ highlightedOption: nextHighlightedOption.value });
   }
-  scrollToOption(index) {
+
+  scrollToOption(value) {
+    const options = this.getOptions();
+    const index = Select.getOptionIndex(options, value);
     const nextOption = this.options.items.children[index];
+
     if (nextOption) {
       nextOption.focus();
     }
+    this.inputFilter.focus();
   }
 
   render() {

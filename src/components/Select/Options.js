@@ -63,7 +63,7 @@ class Options extends PureComponent {
         return (
           <Option
             size={size}
-            highlighted={highlighted === index}
+            highlighted={item.value === highlighted}
             label={item.label}
             value={item.value}
             icon={item.icon}
@@ -110,14 +110,17 @@ class Options extends PureComponent {
     );
   }
 }
+
+const valuePropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]);
+
 Options.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+      value: valuePropType,
     }),
   ),
-  highlighted: PropTypes.number,
+  highlighted: valuePropType,
   selected: PropTypes.string,
   onSelect: PropTypes.func,
   maxHeight: PropTypes.number,

@@ -7,7 +7,6 @@ import Spinner from '../components/Spinner';
 import { iconSizes } from '../components/Icon';
 
 describe('The Loader', () => {
-
   it('renders the spinner', () => {
     const wrapper = shallow(<Loader />);
     expect(wrapper.find(Spinner).exists()).toBeTruthy();
@@ -28,21 +27,19 @@ describe('The Loader', () => {
   });
 
   it('renders the loader correctly when multiple props are set', () => {
-    const wrapper = shallow(<Loader size='m' />);
+    const wrapper = shallow(<Loader size="m" />);
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
-
 });
 
 describe('The Placeholder', () => {
-
   it('renders the placeholder', () => {
     const wrapper = shallow(<Placeholder />);
     expect(wrapper.is('label')).toEqual(true);
   });
 
   it('renders the label prop', () => {
-    const wrapper = shallow(<Placeholder label='foo' />);
+    const wrapper = shallow(<Placeholder label="foo" />);
     const label = wrapper.find('label');
     expect(label.text()).toEqual('foo');
   });
@@ -75,15 +72,14 @@ describe('The Placeholder', () => {
     });
   });
 
-  it('renders the default large size active status when size is not specified', () => {    
+  it('renders the default large size active status when size is not specified', () => {
     const wrapper = shallow(<Placeholder active />);
     const label = wrapper.find('label');
     expect(label.hasClass('mb-input__placeholder--active-large')).toEqual(true);
   });
 
   it('renders the placeholder correctly when multiple props are set', () => {
-  const wrapper = shallow(<Placeholder label='foo' active size='m' />);
-  expect(shallowToJson(wrapper)).toMatchSnapshot();
-});
-
+    const wrapper = shallow(<Placeholder label="foo" active size="m" />);
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
+  });
 });

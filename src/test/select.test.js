@@ -4,6 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import Select from '../components/Select';
 import Options from '../components/Select/Options';
+import keyCodes from '../utils/keyCodes';
 
 import { Loader, Placeholder, Validation } from '../components/Common';
 
@@ -164,6 +165,83 @@ it('triggers onChange when selecting value', () => {
     .at(50)
     .simulate('click');
   expect(mockEvent).toHaveBeenCalledWith('value-50');
+});
+
+it('Automatically highlights the selected option', () => {
+  const mockEvent = jest.fn();
+  const selected = options[2].value;
+  const wrapper = mount(<Select onChange={mockEvent} options={options} selected={selected} />);
+  expect(wrapper.state('highlightedOption')).toEqual(selected);
+});
+
+it('renders the highlighted option properly', () => {
+  const selectedOption = options[2];
+  const wrapper = mount(<Select options={options} selected={selectedOption.value} />);
+  wrapper.find('input[type="text"]').simulate('click');
+  const option = wrapper.find('.input-select__options-item--highlighted');
+  expect(option.text()).toEqual(selectedOption.label);
+});
+
+it('highlights the next option when pressing arrow down', () => {
+  const mockEvent = jest.fn();
+  const selected = options[2].value;
+  const next = options[3].value;
+  const wrapper = mount(<Select onChange={mockEvent} options={options} selected={selected} />);
+  wrapper.find('input[type="text"]').simulate('click');
+  wrapper.find('input[type="text"]').simulate('keydown', { keyCode: 40 });
+  expect(wrapper.state('highlightedOption')).toEqual(next);
+});
+
+it('highlights the previous option when pressing arrow up', () => {
+  const mockEvent = jest.fn();
+  const selected = options[2].value;
+  const prev = options[1].value;
+  const wrapper = mount(<Select onChange={mockEvent} options={options} selected={selected} />);
+  wrapper.find('input[type="text"]').simulate('click');
+  wrapper.find('input[type="text"]').simulate('keydown', { keyCode: 38 });
+  expect(wrapper.state('highlightedOption')).toEqual(prev);
+});
+
+describe('Tests highlighiting with filtering', () => {
+  let wrapper;
+  const testOptions = [11, 22, 23, 24, 25].map(v => ({
+    label: v.toString(),
+    value: v,
+    disabled: v % 2 === 0,
+  }));
+
+  beforeEach(() => {
+    const mockEvent = jest.fn();
+    wrapper = mount(<Select onChange={mockEvent} options={testOptions} />);
+    wrapper.find('input[type="text"]').simulate('click');
+  });
+
+  it('highlights the correct option when pressing arrow down once', () => {
+    wrapper.find('input[type="text"]').simulate('keydown', { keyCode: 40 });
+    expect(wrapper.state('highlightedOption')).toEqual(11);
+  });
+
+  it('highlights the last available option when pressing arrow up once on filtered items', () => {
+    wrapper.find('input[type="text"]').simulate('keydown', { keyCode: 38 });
+    expect(wrapper.state('highlightedOption')).toEqual(25);
+  });
+
+  it('highlights the next available option when pressing arrow down once on filtered items', () => {
+    wrapper
+      .find('input[type="text"]')
+      .simulate('change', { target: { value: '2' } })
+      .simulate('keydown', { keyCode: 40 });
+    expect(wrapper.state('highlightedOption')).toEqual(23);
+  });
+
+  it('highlights the previous available option when pressing arrow up twice on filtered items', () => {
+    wrapper
+      .find('input[type="text"]')
+      .simulate('change', { target: { value: '2' } })
+      .simulate('keydown', { keyCode: 38 })
+      .simulate('keydown', { keyCode: 38 });
+    expect(wrapper.state('highlightedOption')).toEqual(23);
+  });
 });
 
 it('renders the Select correctly when multiple props are set', () => {
