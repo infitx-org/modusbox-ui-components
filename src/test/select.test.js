@@ -77,6 +77,28 @@ it('renders the large, medium, small sizes', () => {
   });
 });
 
+it('renders the correct size for the clear option', () => {
+  const sizes = {
+    large: 'l',
+    medium: 'm',
+    small: 's',
+  };
+  Object.entries(sizes).forEach(([name, size]) => {
+    const mockEvent = jest.fn();
+    const wrapper = mount(
+      <Select
+        onClear={mockEvent}
+        size={size}
+        options={[{ label: 'l', value: 'x' }]}
+        selected="x"
+      />,
+    );
+    wrapper.find('input[type="text"]').simulate('click');
+    const className = `input-select__options-item--${name}`;
+    expect(wrapper.find('.input-select__options-item--clear').hasClass(className)).toBeTruthy();
+  });
+});
+
 it('renders the options when focused', () => {
   const wrapper = mount(<Select options={options} />);
   wrapper.find('input[type="text"]').simulate('click');

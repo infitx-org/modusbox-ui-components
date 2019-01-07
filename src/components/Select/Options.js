@@ -53,7 +53,7 @@ class Options extends PureComponent {
 
     let clearOption = null;
     if (this.props.clearable && selected !== undefined) {
-      clearOption = <ClearOption onClick={onClear} />;
+      clearOption = <ClearOption onClick={onClear} size={size} />;
     }
 
     let optionItems = null;
@@ -196,9 +196,12 @@ Option.propTypes = {
   icon: PropTypes.string,
 };
 
-const ClearOption = ({ onClick }) => {
+const ClearOption = ({ onClick, size }) => {
   const clearOptionClassName = utils.composeClassNames([
     'input-select__options-item',
+    size === 's' && 'input-select__options-item--small',
+    size === 'm' && 'input-select__options-item--medium',
+    size === 'l' && 'input-select__options-item--large',
     'input-select__options-item--clear',
   ]);
   const clearOptionIconClassName = utils.composeClassNames([
@@ -217,7 +220,7 @@ const ClearOption = ({ onClick }) => {
       role="presentation"
       label="Clear"
     >
-      <Icon className={clearOptionIconClassName} name="close-small" size={20} />
+      <Icon className={clearOptionIconClassName} name="close-small" size={iconSizes[size]} />
       <div className={clearOptionLabelClassName}>
         <Tooltip>Clear</Tooltip>
       </div>
