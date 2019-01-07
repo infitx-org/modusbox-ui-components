@@ -112,9 +112,9 @@ const TestSelect = () => (
       </div>
     </div>
     <Row className="p10 b1-ccc" align="space-between center">
-      <Select className="m5" placeholder="small" size="s" options={options} />
-      <Select className="m5" placeholder="medium" size="m" options={options} />
-      <Select className="m5" placeholder="large" size="l" options={options} />
+      <Select className="m5" placeholder="small" size="s" options={options} onClear={console.log} />
+      <Select className="m5" placeholder="medium" size="m" options={options} onClear={console.log} />
+      <Select className="m5" placeholder="large" size="l" options={options} onClear={console.log} />
       <Select className="m5" placeholder="small" size="s" options={options} pending />
       <Select className="m5" placeholder="medium" size="m" options={options} pending />
       <Select className="m5" placeholder="large" size="l" options={options} pending />
