@@ -25,6 +25,7 @@
 }
 
 // Button custom style
+.input-dropdown__input,
 .input-button__input {
   border-bottom-width: 2px;
   &:not(.noFill) {

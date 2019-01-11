@@ -5,6 +5,7 @@ import ComponentCheckbox from './ComponentCheckbox';
 import ComponentColumn from './ComponentColumn';
 import ComponentDataList from './ComponentDataList';
 import ComponentDatePicker from './ComponentDatePicker';
+import ComponentDropdown from './ComponentDropdown';
 import ComponentHeading from './ComponentHeading';
 import ComponentMenu from './ComponentMenu';
 import ComponentSelect from './ComponentSelect';
@@ -34,6 +35,7 @@ export {
   ComponentScrollBox,
   ComponentFileUploader,
   ComponentDatePicker,
+  ComponentDropdown,
   ComponentIcon,
   ComponentSpinner,
   ComponentModal,
