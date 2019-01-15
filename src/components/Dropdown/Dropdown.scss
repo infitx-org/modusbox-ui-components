@@ -1,0 +1,336 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/shadow.scss';
+
+.input-dropdown {
+  display: inline-block;
+  position: relative;
+}
+.input-dropdown__input {
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 0;
+  display: inline-block;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  transition: background 0.15s linear, margin 0.01s linear;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid;
+  align-items: center;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
+
+  &:active {
+    color: $color__alpha-3;
+    fill: $color__alpha-3;
+    stroke: $color__alpha-3;
+  }
+}
+
+.input-dropdown__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input-dropdown__icon {
+  display: flex;
+  animation: animateIconFadeIn 0.1s linear forwards;
+  margin-right: 5px;
+  margin-left: 0px;
+  fill: inherit;
+  stroke: inherit;
+}
+
+.input-dropdown__popup {
+  position: absolute;
+  margin-top: 5px;
+  padding: 4px;
+  z-index: 1;
+  background-color: #f9f9f9;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.input-dropdown__mb-input--small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.input-dropdown__mb-input--medium {
+  padding: 8px 13px;
+  font-size: 13px;
+}
+.input-dropdown__mb-input--large {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.input-dropdown__mb-input--primary {
+  background-color: $color__main-primary;
+  border-color: $color__main-primary;
+
+  &.noFill {
+    background-color: transparent;
+    color: $color__main-primary;
+    fill: $color__main-primary;
+    stroke: $color__main-primary;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--primary;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-primary--active;
+    border-color: $color__main-primary--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+.input-dropdown__mb-input--secondary {
+  background-color: $color__main-secondary;
+  border-color: $color__main-secondary;
+
+  &.noFill {
+    background: transparent;
+    color: $color__main-secondary;
+    fill: $color__main-secondary;
+    stroke: $color__main-secondary;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--secondary;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-secondary--active;
+    border-color: $color__main-secondary--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+
+.input-dropdown__mb-input--success {
+  background-color: $color__main-success;
+  border-color: $color__main-success;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
+
+  &.noFill {
+    background: transparent;
+    color: $color__main-success;
+    fill: $color__main-success;
+    stroke: $color__main-success;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--success;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-success--active;
+    border-color: $color__main-success--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+.input-dropdown__mb-input--danger {
+  background-color: $color__main-danger;
+  border-color: $color__main-danger;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
+
+  &.noFill {
+    background: transparent;
+    color: $color__main-danger;
+    fill: $color__main-danger;
+    stroke: $color__main-danger;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--danger;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-danger--active;
+    border-color: $color__main-danger--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+
+.input-dropdown__mb-input--warning {
+  background-color: $color__main-warning;
+  border-color: $color__main-warning;
+
+  &.noFill {
+    background-color: transparent;
+    color: $color__main-warning;
+    fill: $color__main-warning;
+    stroke: $color__main-warning;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--warning;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-warning--active;
+    border-color: $color__main-warning--active;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+
+.input-dropdown__mb-input--dark {
+  background-color: $color__alpha-5;
+  border-color: transparent;
+  color: $color__white;
+  fill: $color__white;
+  stroke: $color__white;
+
+  &.noFill {
+    background-color: transparent;
+    border-color: $color__alpha-5;
+    color: $color__alpha-4;
+    fill: $color__alpha-4;
+    stroke: $color__alpha-4;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--dark;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__alpha-4;
+    border-color: transparent;
+
+    &.noFill {
+      color: $color__white;
+      fill: $color__white;
+      stroke: $color__white;
+    }
+  }
+}
+
+.input-dropdown__mb-input--light {
+  background-color: $color__white;
+  border-color: transparent;
+  color: $color__gray-5;
+  fill: $color__gray-5;
+  stroke: $color__gray-5;
+
+  &.noFill {
+    background-color: transparent;
+    border-color: $color__white;
+    color: $color__white;
+    fill: $color__white;
+    stroke: $color__white;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--light;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__white;
+    border-color: transparent;
+    color: $color__gray-4;
+
+    &.noFill {
+      color: $color__gray-5;
+      fill: $color__gray-5;
+      stroke: $color__gray-5;
+    }
+  }
+}
+
+.input-dropdown__mb-input--disabled,
+.input-dropdown__mb-input--tertiary {
+  background-color: $color__main-tertiary;
+  border-color: $color__main-tertiary;
+  color: $color__dark-gray-1;
+  fill: $color__gray-5;
+  stroke: $color__gray-5;
+
+  &.noFill {
+    border-color: $color__main-tertiary;
+    background: transparent;
+    color: $color__gray-5;
+    fill: $color__gray-5;
+    stroke: $color__gray-5;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--tertiary;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__main-tertiary--active;
+    border-color: $color__main-tertiary--active;
+  }
+}
+
+.input-dropdown__mb-input--primary,
+.input-dropdown__mb-input--secondary,
+.input-dropdown__mb-input--tertiary,
+.input-dropdown__mb-input--danger,
+.input-dropdown__mb-input--warning,
+.input-dropdown__mb-input--dark,
+.input-dropdown__mb-input--light {
+  &:hover {
+    &.noFill {
+      &:active {
+        color: $color__alpha-3;
+        fill: $color__alpha-3;
+        stroke: $color__alpha-3;
+      }
+    }
+  }
+  &:active {
+    color: $color__alpha-3;
+    fill: $color__alpha-3;
+    stroke: $color__alpha-3;
+  }
+}

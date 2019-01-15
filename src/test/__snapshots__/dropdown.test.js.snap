@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the dropdown correctly when multiple props are set 1`] = `
+<div
+  className="input-dropdown"
+>
+  <button
+    className="mb-input input-dropdown__input input-dropdown__mb-input--large input-dropdown__mb-input--secondary mb-input--disabled input-dropdown__mb-input--disabled mb-input--pending input-dropdown__mb-input--pending"
+    disabled={true}
+    kind="secondary"
+    label="Snapshot dropdown"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+  >
+    <div
+      className="input-dropdown__content"
+    >
+      <div
+        className="input-dropdown__icon"
+      >
+        <Spinner
+          center={false}
+          color="inherit"
+          size={16}
+        />
+      </div>
+      <span>
+        Snapshot dropdown
+      </span>
+    </div>
+  </button>
+</div>
+`;
