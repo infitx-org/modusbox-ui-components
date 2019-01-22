@@ -4,6 +4,7 @@ import orderBy from 'lodash/orderBy';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import uuid from '../../utils/uuid';
+import * as utils from '../../utils/common';
 
 import Header from './Header';
 import Rows from './Rows';
@@ -183,8 +184,13 @@ class DataList extends PureComponent {
   }
 
   render() {
-    const { isPending, noData, hasError } = this.props;
+    const { flex, isPending, noData, hasError } = this.props;
     const { items, sortAsc, sortColumn, filters } = this.state;
+    const className = utils.composeClassNames([
+      'mb-element',
+      'element-datalist',
+      flex && 'element-datalist--flexible'
+    ]);
 
     let content = null;
     if (isPending) {
@@ -215,11 +221,12 @@ class DataList extends PureComponent {
       ];
     }
 
-    return <div className="mb-element element-datalist">{content}</div>;
+    return <div className={className}>{content}</div>;
   }
 }
 
 DataList.defaultProps = {
+  flex: true,
   columns: [],
   list: [],
   sortAsc: true,
@@ -233,6 +240,7 @@ DataList.defaultProps = {
 };
 
 DataList.propTypes = {
+  flex: PropTypes.bool,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

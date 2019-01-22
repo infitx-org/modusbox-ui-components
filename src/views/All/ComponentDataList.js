@@ -4,6 +4,7 @@ import React from 'react';
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
 import DataList from '../../components/DataList';
+import ScrollBox from '../../components/ScrollBox';
 import Icon from '../../components/Icon';
 
 const columnStyle = {
@@ -28,8 +29,7 @@ class ListManager extends React.Component {
   constructor(props) {
     super(props);
     this.start = this.start.bind(this);
-    this.togglePending = this.togglePending.bind(this);
-    this.toggleError = this.toggleError.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.changeNoDataLabel = this.changeNoDataLabel.bind(this);
     this.changeErrorMessage = this.changeErrorMessage.bind(this);
     this.state = {
@@ -38,6 +38,7 @@ class ListManager extends React.Component {
       errorMessage: 'my default error message',
       pending: false,
       error: false,
+      flex: false,
     };
   }
   componentDidMount() {
@@ -53,14 +54,9 @@ class ListManager extends React.Component {
       });
     }, 1000);
   }
-  togglePending() {
+  toggle(field, value) {
     this.setState({
-      pending: !this.state.pending,
-    });
-  }
-  toggleError() {
-    this.setState({
-      error: !this.state.error,
+      [field]: value
     });
   }
   changeNoDataLabel(value) {
@@ -74,6 +70,8 @@ class ListManager extends React.Component {
     });
   }
   render() {
+    const toggle = field => value => this.toggle(field, value);
+
     return (
       <div style={columnStyle}>
         <div style={rowStyle}>
@@ -87,14 +85,16 @@ class ListManager extends React.Component {
             value={this.state.errorMessage}
             onChange={this.changeErrorMessage}
           />
-          <Checkbox checked={this.state.pending} onChange={this.togglePending} label="Pending" />
-          <Checkbox checked={this.state.error} onChange={this.toggleError} label="Error" />
+          <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
+          <Checkbox checked={this.state.error} onChange={toggle('error')} label="Error" />
+          <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
         </div>
         <List
           counter={this.state.counter}
           noDataLabel={this.state.noDataLabel}
           pending={this.state.pending}
           error={this.state.error}
+          flex={this.state.flex}
         />
       </div>
     );
@@ -122,7 +122,7 @@ const buildRow = () =>
 
 const list = new Array(100).fill(0).map(buildRow);
 
-const List = ({ noDataLabel, pending, error }) => {
+const List = ({ noDataLabel, pending, error, flex }) => {
   const columns = [
     {
       label: 'Double',
@@ -161,8 +161,9 @@ const List = ({ noDataLabel, pending, error }) => {
     },
   ];
 
-  return (
+  const datalist = (
     <DataList
+      flex={flex}
       columns={columns}
       list={list}
       sortColumn="Square"
@@ -172,10 +173,15 @@ const List = ({ noDataLabel, pending, error }) => {
       hasError={error}
       onSelect={console.log}
       onUnselect={console.log}
-      selected={o => o.a === 90}
+      selected={o => o.a === 9}
     />
-  );
+  )
+  if (!flex) {
+    return <ScrollBox>{datalist}</ScrollBox>
+  }
+  return datalist
 };
+
 
 const TestDataList = () => <ListManager />;
 export default TestDataList;

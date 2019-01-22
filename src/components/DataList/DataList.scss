@@ -2,7 +2,10 @@
 @import '../../assets/styles/vars/transitions.scss';
 
 .element-datalist {
+  width: 100%;
+}
+
+.element-datalist--flexible {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
