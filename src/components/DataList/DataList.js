@@ -22,8 +22,8 @@ class DataList extends PureComponent {
     });
     return columns.map(mapIndexToColumns(prevColumns));
   }
-  static convertList(items, columns, selected) {
-    // applies the column configuration to the items
+  static toItems(list, columns, selected, prevItems) {
+    // applies the column configuration to the list
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
       const { func, key, link, _index } = column;
@@ -41,14 +41,16 @@ class DataList extends PureComponent {
       };
     };
 
-    const mapItems = (item, rowIndex) => ({
-      _index: item._index || uuid(),
-      _source: item,
-      _selected: selected ? selected(item) : false,
-      data: columns.reduce(reduceColumns(item, rowIndex), {}),
-    });
+    const mapListRowToItem = prev => (item, rowIndex) => {
+        return {
+          _index: get(prev, `[${rowIndex}]._index`) || uuid(),
+          _source: item,
+          _selected: selected ? selected(item) : false,
+          data: columns.reduce(reduceColumns(item, rowIndex), {}),
+        };
+    }
 
-    return items.map(mapItems);
+    return list.map(mapListRowToItem(prevItems));
   }
 
   static filterItems(items, columns, filters) {
@@ -98,7 +100,7 @@ class DataList extends PureComponent {
 
     this._columns = DataList.convertColumns(columns);
 
-    const items = DataList.convertList(list, this._columns, selected);
+    const items = DataList.toItems(list, this._columns, selected);
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
 
     this._items = items;
@@ -118,7 +120,7 @@ class DataList extends PureComponent {
     if (this.props.list !== list || this.props.columns !== columns) {
       const { selected, sortAsc, sortColumn } = this.props;
       
-      const items = DataList.convertList(list, this._columns, selected);
+      const items = DataList.toItems(list, this._columns, selected, this._items);
       const filteredItems = DataList.filterItems(items, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
       
@@ -130,9 +132,8 @@ class DataList extends PureComponent {
 
     const sortAsc = this.state.sortColumn === key ? !this.state.sortAsc : true;
     const sortColumn = key;
-    
+
     const items = DataList.sortItems(this.state.items, sortAsc, sortColumn);
-    this._items = items;
 
     this.setState({
       sortAsc,
