@@ -35,20 +35,19 @@ class DataList extends PureComponent {
         // eslint-disable-next-line
         value = <Link onClick={() => link(item[key], item)}>{value}</Link>;
       }
+
       return {
         ...prev,
         [_index]: value,
       };
     };
 
-    const mapListRowToItem = prev => (item, rowIndex) => {
-        return {
-          _index: get(prev, `[${rowIndex}]._index`) || uuid(),
-          _source: item,
-          _selected: selected ? selected(item) : false,
-          data: columns.reduce(reduceColumns(item, rowIndex), {}),
-        };
-    }
+    const mapListRowToItem = prev => (item, rowIndex) => ({
+      _index: get(prev, `[${rowIndex}]._index`) || uuid(),
+      _source: item,
+      _selected: selected ? selected(item) : false,
+      data: columns.reduce(reduceColumns(item, rowIndex), {}),
+    });
 
     return list.map(mapListRowToItem(prevItems));
   }

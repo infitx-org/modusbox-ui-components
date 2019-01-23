@@ -1,10 +1,6 @@
-/* eslint-disable */
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import * as utils from '../../utils/common';
-import isEqual from 'lodash/isEqual';
 
-import Row from '../Row';
-import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import ScrollBox from '../ScrollBox';
 
@@ -19,7 +15,7 @@ class Rows extends PureComponent {
   render() {
 
     const { items, columns } = this.props;
-    const rows = items.map((item, index) => (
+    const rows = items.map(item => (
       <RowItem
         item={item}
         key={item._index}
@@ -39,11 +35,13 @@ class Rows extends PureComponent {
 
 class RowItem extends PureComponent {
   static getCells(item) {
-    return (column, index) => {
-      return (
-        <ItemCell key={index.toString()} className={column.className} content={item.data[column._index]} />
-      );
-    };
+    return column => (
+      <ItemCell
+        key={column._index}
+        className={column.className}
+        content={item.data[column._index]}
+      />
+    );
   }
   constructor(props) {
     super(props);
@@ -60,23 +58,12 @@ class RowItem extends PureComponent {
       selected && 'element-datalist__row--selected',
     ]);
     return (
-      <div className={rowClassName} onClick={this.onClick}>
+      <div className={rowClassName} onClick={this.onClick} role="presentation">
         {rowCells}
       </div>
     );
   }
 }
-
-// the icon is throwing an error, but the code and the functionality isn't broken
-const ArrowCell = ({ isSelected }) => (
-  <div className="element-datalist__body-cell arrow-cell">
-    <Icon
-      size="xs"
-      name="arrow-down-small"
-      className={`element-datalist__body-arrowIcon ${!this.props.isSelected ? 'rotated' : ''}`}
-    />
-  </div>
-);
 
 class ItemCell extends PureComponent {
   render() {
