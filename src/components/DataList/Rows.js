@@ -17,11 +17,12 @@ class Rows extends PureComponent {
     this.props.onItemClick(index);
   }
   render() {
+
     const { items, columns } = this.props;
     const rows = items.map((item, index) => (
       <RowItem
         item={item}
-        key={index}
+        key={item._index}
         columns={columns}
         selected={item._selected}
         onClick={this.onItemClick}

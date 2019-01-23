@@ -12,12 +12,15 @@ import Link from './Link';
 import { NoData, Pending, ErrorMessage } from './Boxes';
 
 class DataList extends PureComponent {
-  static convertColumns(columns) {
-    const mapColumns = column => ({
-      _index: uuid(),
+  static convertColumns(columns, prevColumns) {
+    const mapIndexToColumns = prev => (column, i) => ({
+      // get the _index key from the already existing columns if available
+      // so that it does not change and worn't break sorting or filtering
+      // because they use the column _index key to identify the column
+      _index: get(prev,`[${i}]._index`) || uuid(),
       ...column,
     });
-    return columns.map(mapColumns);
+    return columns.map(mapIndexToColumns(prevColumns));
   }
   static convertItems(items, columns, selected) {
     // applies the column configuration to the items
@@ -109,7 +112,7 @@ class DataList extends PureComponent {
   componentWillReceiveProps(nextProps) {
     const { list, columns } = nextProps;
     if (this.props.columns !== columns) {
-      this._columns = DataList.convertColumns(columns);
+      this._columns = DataList.convertColumns(columns, this._columns);
     }
     if (this.props.list !== list || this.props.columns !== columns) {
       this.transformList(list, { applyColumns: true, sort: true });

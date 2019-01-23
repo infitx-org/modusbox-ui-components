@@ -131,6 +131,11 @@ const List = ({ counter, noDataLabel, pending, error, flex }) => {
       className: 'col-100px',
     },
     {
+      label: 'Zero',
+      key: 'a',
+      func: () => 0,
+    },
+    {
       label: 'Square',
       key: 'b',
       func: x => x * x,
