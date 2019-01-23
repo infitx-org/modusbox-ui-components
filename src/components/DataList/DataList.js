@@ -103,7 +103,7 @@ class DataList extends PureComponent {
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
 
     this._items = items;
-    
+
     this.state = {
       items: sortedItems,
       sortAsc: sortAsc === true,
@@ -113,22 +113,22 @@ class DataList extends PureComponent {
   }
   componentWillReceiveProps(nextProps) {
     const { list, columns } = nextProps;
+
     if (this.props.columns !== columns) {
       this._columns = DataList.convertColumns(columns, this._columns);
     }
     if (this.props.list !== list || this.props.columns !== columns) {
       const { selected, sortAsc, sortColumn } = this.props;
-      
+
       const items = DataList.toItems(list, this._columns, selected, this._items);
       const filteredItems = DataList.filterItems(items, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
-      
+
       this._items = items;
       this.setState({ items: sortedItems });
     }
   }
   onSortClick(key) {
-
     const sortAsc = this.state.sortColumn === key ? !this.state.sortAsc : true;
     const sortColumn = key;
 
@@ -143,6 +143,7 @@ class DataList extends PureComponent {
   onFilterChange(_index, value) {
     const filters = [...this.state.filters];
     const filter = find(filters, { _index });
+
     if (filter) {
       filter.value = value;
     } else {
@@ -159,6 +160,7 @@ class DataList extends PureComponent {
   onFilterBlur(_index) {
     const { filters } = this.state;
     const filter = find(filters, { _index });
+
     if (filter.value === '') {
       const index = filters.indexOf(filter);
       this.setState({
@@ -169,6 +171,7 @@ class DataList extends PureComponent {
   onFilterClick(_index) {
     const { filters } = this.state;
     const filter = find(filters, { _index });
+
     if (!filter) {
       this.setState({
         filters: [...this.state.filters, { _index, value: '' }],
