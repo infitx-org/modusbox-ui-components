@@ -11,8 +11,9 @@
   transition: color 0.2s linear, border-bottom-color 0.2s linear;
   overflow-x: hidden;
   padding: 0px;
-  color: #333;
+  color: #666;
   position: relative;
+  font-weight: bold;
 }
 
 .element-datalist__header-cell--sortable {
@@ -24,7 +25,6 @@
 .element-datalist__header-cell--sorting {
   color: $color__blue-4;
   border-bottom-color: $color__blue-3;
-  font-weight: bold;
 }
 .element-datalist__header-cell--filtering {
   border-bottom-color: #f63;
