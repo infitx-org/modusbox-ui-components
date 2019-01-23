@@ -41,9 +41,7 @@ class RowItem extends PureComponent {
   static getCells(item) {
     return (column, index) => {
       return (
-        <ItemCell key={index.toString()} className={column.className}>
-          {item.data[column._index]}
-        </ItemCell>
+        <ItemCell key={index.toString()} className={column.className} content={item.data[column._index]} />
       );
     };
   }
@@ -82,12 +80,12 @@ const ArrowCell = ({ isSelected }) => (
 
 class ItemCell extends PureComponent {
   render() {
-    const { children, className } = this.props;
+    const { content, className } = this.props;
     const itemCellClassName = utils.composeClassNames(['element-datalist__item-cell', className]);
     return (
       <div className={itemCellClassName}>
         <div className="element-datalist__item-cell__content">
-          <Tooltip>{children}</Tooltip>
+          <Tooltip>{content}</Tooltip>
         </div>
       </div>
     );

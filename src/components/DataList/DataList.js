@@ -22,7 +22,7 @@ class DataList extends PureComponent {
     });
     return columns.map(mapIndexToColumns(prevColumns));
   }
-  static convertItems(items, columns, selected) {
+  static convertList(items, columns, selected) {
     // applies the column configuration to the items
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
@@ -42,7 +42,7 @@ class DataList extends PureComponent {
     };
 
     const mapItems = (item, rowIndex) => ({
-      _index: uuid(),
+      _index: item._index || uuid(),
       _source: item,
       _selected: selected ? selected(item) : false,
       data: columns.reduce(reduceColumns(item, rowIndex), {}),
@@ -88,26 +88,27 @@ class DataList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.transformList = this.transformList.bind(this);
     this.onSortClick = this.onSortClick.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onFilterBlur = this.onFilterBlur.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
 
-    const { columns, sortAsc, sortColumn } = this.props;
+    const { list, columns, sortAsc, sortColumn, selected } = this.props;
 
     this._columns = DataList.convertColumns(columns);
 
+    const items = DataList.convertList(list, this._columns, selected);
+    const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
+
+    this._items = items;
+    
     this.state = {
+      items: sortedItems,
       sortAsc: sortAsc === true,
       sortColumn: DataList.getSortColumn(sortColumn, this._columns),
-      items: [],
       filters: [],
     };
-  }
-  componentWillMount() {
-    this.transformList(this.props.list, { applyColumns: true, sort: true });
   }
   componentWillReceiveProps(nextProps) {
     const { list, columns } = nextProps;
@@ -115,19 +116,29 @@ class DataList extends PureComponent {
       this._columns = DataList.convertColumns(columns, this._columns);
     }
     if (this.props.list !== list || this.props.columns !== columns) {
-      this.transformList(list, { applyColumns: true, sort: true });
+      const { selected, sortAsc, sortColumn } = this.props;
+      
+      const items = DataList.convertList(list, this._columns, selected);
+      const filteredItems = DataList.filterItems(items, this._columns, this.state.filters);
+      const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
+      
+      this._items = items;
+      this.setState({ items: sortedItems });
     }
   }
   onSortClick(key) {
-    this.setState(
-      {
-        sortAsc: this.state.sortColumn === key ? !this.state.sortAsc : true,
-        sortColumn: key,
-      },
-      () => {
-        this.transformList(this._list, { sort: true });
-      },
-    );
+
+    const sortAsc = this.state.sortColumn === key ? !this.state.sortAsc : true;
+    const sortColumn = key;
+    
+    const items = DataList.sortItems(this.state.items, sortAsc, sortColumn);
+    this._items = items;
+
+    this.setState({
+      sortAsc,
+      sortColumn,
+      items,
+    });
   }
   onFilterChange(_index, value) {
     const filters = [...this.state.filters];
@@ -138,7 +149,7 @@ class DataList extends PureComponent {
       filters.push({ _index, value });
     }
 
-    const items = DataList.filterItems(this._list, this._columns, filters);
+    const items = DataList.filterItems(this._items, this._columns, filters);
 
     this.setState({
       items,
@@ -173,20 +184,6 @@ class DataList extends PureComponent {
     if (typeof eventHandler === 'function') {
       eventHandler(item._source);
     }
-  }
-
-  transformList(list, cfg) {
-    this._list = list;
-    if (cfg.applyColumns === true) {
-      this._list = DataList.convertItems(this._list, this._columns, this.props.selected);
-    }
-    if (cfg.sort === true) {
-      const { sortAsc, sortColumn } = this.state;
-      this._list = DataList.sortItems(this._list, sortAsc, sortColumn);
-    }
-    this.setState({
-      items: this._list,
-    });
   }
 
   render() {
