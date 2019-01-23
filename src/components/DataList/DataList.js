@@ -190,7 +190,7 @@ class DataList extends PureComponent {
   }
 
   render() {
-    const { flex, isPending, noData, hasError } = this.props;
+    const { flex, isPending, noData, errorMsg, hasError } = this.props;
     const { items, sortAsc, sortColumn, filters } = this.state;
     const className = utils.composeClassNames([
       'mb-element',
@@ -202,9 +202,9 @@ class DataList extends PureComponent {
     if (isPending) {
       content = <Pending />;
     } else if (hasError) {
-      content = <ErrorMessage />;
+      content = <ErrorMessage message={errorMsg} />;
     } else if (items.length === 0 && filters.length === 0) {
-      content = <NoData label={noData} />;
+      content = <NoData message={noData} />;
     } else {
       content = [
         <Header
@@ -237,12 +237,13 @@ DataList.defaultProps = {
   list: [],
   sortAsc: true,
   sortColumn: undefined,
-  noData: '',
   isPending: false,
   hasError: false,
   onSelect: undefined,
   onUnselect: undefined,
   selected: undefined,
+  noData: 'No items',
+  errorMsg: 'There was an error',
 };
 
 DataList.propTypes = {
@@ -261,12 +262,13 @@ DataList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape()),
   sortAsc: PropTypes.bool,
   sortColumn: PropTypes.string,
-  noData: PropTypes.string,
   isPending: PropTypes.bool,
   hasError: PropTypes.bool,
   onSelect: PropTypes.func,
   onUnselect: PropTypes.func,
   selected: PropTypes.func,
+  noData: PropTypes.string,
+  errorMsg: PropTypes.string,
 };
 
 export default DataList;

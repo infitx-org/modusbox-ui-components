@@ -36,7 +36,7 @@ class ListManager extends React.Component {
     this.state = {
       counter: 0,
       noDataLabel: 'MyStupidList',
-      errorMessage: 'my default error message',
+      errorMsg: 'my default error message',
       pending: false,
       error: false,
       flex: false,
@@ -59,7 +59,7 @@ class ListManager extends React.Component {
   }
   changeErrorMessage(value) {
     this.setState({
-      errorMessage: value,
+      errorMsg: value,
     });
   }
   render() {
@@ -75,7 +75,7 @@ class ListManager extends React.Component {
           />
           <TextField
             placeholder="error message"
-            value={this.state.errorMessage}
+            value={this.state.errorMsg}
             onChange={this.changeErrorMessage}
           />
           <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
@@ -86,6 +86,7 @@ class ListManager extends React.Component {
         <List
           counter={this.state.counter}
           noDataLabel={this.state.noDataLabel}
+          errorMsg={this.state.errorMsg}
           pending={this.state.pending}
           error={this.state.error}
           flex={this.state.flex}
@@ -116,7 +117,7 @@ const buildRow = () =>
 
 const list = new Array(100).fill(0).map(buildRow);
 
-const List = ({ counter, noDataLabel, pending, error, flex }) => {
+const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
   const columns = [
     {
       label: 'Double',
@@ -173,12 +174,13 @@ const List = ({ counter, noDataLabel, pending, error, flex }) => {
       list={list}
       sortColumn="Square"
       sortAsc={false}
-      noData={noDataLabel}
       isPending={pending}
       hasError={error}
       onSelect={console.log}
       onUnselect={console.log}
       selected={o => o.a === 10}
+      noData={noDataLabel}
+      errorMsg={errorMsg}
     />
   )
   if (!flex) {
