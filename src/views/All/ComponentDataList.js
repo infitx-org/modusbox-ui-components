@@ -132,7 +132,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       className: 'col-100px',
     },
     {
-      label: 'Zero',
+      label: 'Zero Zero Zero Zero',
       key: 'a',
       func: () => 0,
     },
