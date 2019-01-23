@@ -4,6 +4,7 @@ import React from 'react';
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
 import DataList from '../../components/DataList';
+import Button from '../../components/Button';
 import ScrollBox from '../../components/ScrollBox';
 import Icon from '../../components/Icon';
 
@@ -28,8 +29,8 @@ const rowStyle = {
 class ListManager extends React.Component {
   constructor(props) {
     super(props);
-    this.start = this.start.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.increment = this.increment.bind(this);
     this.changeNoDataLabel = this.changeNoDataLabel.bind(this);
     this.changeErrorMessage = this.changeErrorMessage.bind(this);
     this.state = {
@@ -41,18 +42,10 @@ class ListManager extends React.Component {
       flex: false,
     };
   }
-  componentDidMount() {
-    this.start();
-  }
-  componentWillUnmount() {
-    clearInterval(this._interval);
-  }
-  start() {
-    this._interval = setInterval(() => {
-      this.setState({
-        counter: this.state.counter + 1,
-      });
-    }, 1000);
+  increment() {
+    this.setState({
+      counter: this.state.counter + 1,
+    });
   }
   toggle(field, value) {
     this.setState({
@@ -88,6 +81,7 @@ class ListManager extends React.Component {
           <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
           <Checkbox checked={this.state.error} onChange={toggle('error')} label="Error" />
           <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
+          <Button label="increment" onClick={this.increment} />
         </div>
         <List
           counter={this.state.counter}
@@ -122,7 +116,7 @@ const buildRow = () =>
 
 const list = new Array(100).fill(0).map(buildRow);
 
-const List = ({ noDataLabel, pending, error, flex }) => {
+const List = ({ counter, noDataLabel, pending, error, flex }) => {
   const columns = [
     {
       label: 'Double',
@@ -156,7 +150,13 @@ const List = ({ noDataLabel, pending, error, flex }) => {
     {
       label: '',
       key: 'e',
-      func: () => <Icon name="close-small" size={20} />,
+      func: () => <Icon name="close-small" size={16} fill="#999" />,
+      className: 'col-40px',
+    },
+    {
+      label: 'Counter',
+      key: 'e',
+      func: () => counter,
       className: 'col-40px',
     },
   ];
@@ -173,13 +173,13 @@ const List = ({ noDataLabel, pending, error, flex }) => {
       hasError={error}
       onSelect={console.log}
       onUnselect={console.log}
-      selected={o => o.a === 9}
+      selected={o => o.a === 10}
     />
   )
   if (!flex) {
-    return <ScrollBox>{datalist}</ScrollBox>
+    return <ScrollBox>{datalist}</ScrollBox>;
   }
-  return datalist
+  return datalist;
 };
 
 
