@@ -66,6 +66,7 @@ class HeaderCell extends PureComponent {
   onFilterClick(e) {
     this.props.onFilterClick();
     e.stopPropagation();
+    e.preventDefault();
   }
   render() {
     const {
@@ -128,11 +129,12 @@ const HeaderLabel = ({ label }) => (
   </div>
 );
 
-const HeaderFilter = ({ filter, onFilterChange, onFilterBlur, assignRef }) => (
+const HeaderFilter = ({ filter, onFilterClick, onFilterChange, onFilterBlur, assignRef }) => (
   <input
     type="text"
     className="element-datalist__header-cell__filter"
     value={filter.value || ''}
+    onClick={onFilterClick}
     onChange={e => onFilterChange(e.target.value)}
     onBlur={onFilterBlur}
     ref={assignRef}
