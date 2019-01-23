@@ -107,8 +107,11 @@ class DataList extends PureComponent {
     this.transformList(this.props.list, { applyColumns: true, sort: true });
   }
   componentWillReceiveProps(nextProps) {
-    const { list } = nextProps;
-    if (this.props.list !== list) {
+    const { list, columns } = nextProps;
+    if (this.props.columns !== columns) {
+      this._columns = DataList.convertColumns(columns);
+    }
+    if (this.props.list !== list || this.props.columns !== columns) {
       this.transformList(list, { applyColumns: true, sort: true });
     }
   }
