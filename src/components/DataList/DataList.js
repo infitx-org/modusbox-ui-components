@@ -62,7 +62,7 @@ class DataList extends PureComponent {
           cell = cell.toString();
         }
         if (typeof cell === 'string') {
-          return cell.includes(value);
+          return cell.toLowerCase().includes(value.toLowerCase());
         }
 
         return false;
