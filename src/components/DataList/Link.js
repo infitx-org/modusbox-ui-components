@@ -8,7 +8,7 @@ const Link = ({ value, children, onClick }) => {
   const content = value !== undefined ? value.toString() : children;
   return (
     <div className="element-datalist__link" onClick={onClick} role="presentation">
-      <Tooltip label={content} kind="info">
+      <Tooltip label={content} kind="info" style={{ flex: '1 0 0 ' }}>
         <span className="element-datalist__link__content">{content}</span>
       </Tooltip>
       <div className="element-datalist__link__icon">

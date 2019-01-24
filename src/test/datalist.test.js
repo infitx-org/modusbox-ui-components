@@ -88,6 +88,20 @@ it('renders the no-data message when the list is empty', () => {
   expect(wrapper.find('.element-datalist__nodata-box').exists()).toBe(true);
 });
 
+it('renders as flex when specified', () => {
+  const wrapper = mount(<DataList flex list={[]} columns={testColumns1} />);
+
+  expect(wrapper.find('.element-datalist').exists()).toBe(true);
+  expect(wrapper.find('.element-datalist--flexible').exists()).toBe(true);
+});
+
+it('does not render as flex when specified', () => {
+  const wrapper = mount(<DataList flex={false} list={[]} columns={testColumns1} />);
+
+  expect(wrapper.find('.element-datalist').exists()).toBe(true);
+  expect(wrapper.find('.element-datalist--flexible').exists()).toBe(false);
+});
+
 it('renders the correct transformed value described in the column configuration', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 

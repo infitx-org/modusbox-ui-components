@@ -4,6 +4,8 @@ import React from 'react';
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
 import DataList from '../../components/DataList';
+import Button from '../../components/Button';
+import ScrollBox from '../../components/ScrollBox';
 import Icon from '../../components/Icon';
 
 const columnStyle = {
@@ -27,40 +29,27 @@ const rowStyle = {
 class ListManager extends React.Component {
   constructor(props) {
     super(props);
-    this.start = this.start.bind(this);
-    this.togglePending = this.togglePending.bind(this);
-    this.toggleError = this.toggleError.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.increment = this.increment.bind(this);
     this.changeNoDataLabel = this.changeNoDataLabel.bind(this);
     this.changeErrorMessage = this.changeErrorMessage.bind(this);
     this.state = {
       counter: 0,
       noDataLabel: 'MyStupidList',
-      errorMessage: 'my default error message',
+      errorMsg: 'my default error message',
       pending: false,
       error: false,
+      flex: false,
     };
   }
-  componentDidMount() {
-    this.start();
-  }
-  componentWillUnmount() {
-    clearInterval(this._interval);
-  }
-  start() {
-    this._interval = setInterval(() => {
-      this.setState({
-        counter: this.state.counter + 1,
-      });
-    }, 1000);
-  }
-  togglePending() {
+  increment() {
     this.setState({
-      pending: !this.state.pending,
+      counter: this.state.counter + 1,
     });
   }
-  toggleError() {
+  toggle(field, value) {
     this.setState({
-      error: !this.state.error,
+      [field]: value,
     });
   }
   changeNoDataLabel(value) {
@@ -70,10 +59,12 @@ class ListManager extends React.Component {
   }
   changeErrorMessage(value) {
     this.setState({
-      errorMessage: value,
+      errorMsg: value,
     });
   }
   render() {
+    const toggle = field => value => this.toggle(field, value);
+
     return (
       <div style={columnStyle}>
         <div style={rowStyle}>
@@ -84,17 +75,21 @@ class ListManager extends React.Component {
           />
           <TextField
             placeholder="error message"
-            value={this.state.errorMessage}
+            value={this.state.errorMsg}
             onChange={this.changeErrorMessage}
           />
-          <Checkbox checked={this.state.pending} onChange={this.togglePending} label="Pending" />
-          <Checkbox checked={this.state.error} onChange={this.toggleError} label="Error" />
+          <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
+          <Checkbox checked={this.state.error} onChange={toggle('error')} label="Error" />
+          <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
+          <Button label="increment" onClick={this.increment} />
         </div>
         <List
           counter={this.state.counter}
           noDataLabel={this.state.noDataLabel}
+          errorMsg={this.state.errorMsg}
           pending={this.state.pending}
           error={this.state.error}
+          flex={this.state.flex}
         />
       </div>
     );
@@ -122,7 +117,7 @@ const buildRow = () =>
 
 const list = new Array(100).fill(0).map(buildRow);
 
-const List = ({ noDataLabel, pending, error }) => {
+const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
   const columns = [
     {
       label: 'Double',
@@ -137,6 +132,11 @@ const List = ({ noDataLabel, pending, error }) => {
       className: 'col-100px',
     },
     {
+      label: 'Zero Zero Zero Zero',
+      key: 'a',
+      func: () => 0,
+    },
+    {
       label: 'Square',
       key: 'b',
       func: x => x * x,
@@ -148,7 +148,7 @@ const List = ({ noDataLabel, pending, error }) => {
     {
       label: 'd',
       key: 'd',
-      func: x => new Array(20).fill(x).join(''),
+      func: x => new Array(15).fill(x).join(''),
       sortable: false,
       searchable: false,
       link: console.log,
@@ -156,25 +156,37 @@ const List = ({ noDataLabel, pending, error }) => {
     {
       label: '',
       key: 'e',
-      func: () => <Icon name="close-small" size={20} />,
+      func: () => <Icon name="close-small" size={16} fill="#999" />,
+      className: 'col-40px',
+    },
+    {
+      label: 'Counter',
+      key: 'e',
+      func: () => counter,
       className: 'col-40px',
     },
   ];
 
-  return (
+  const datalist = (
     <DataList
+      flex={flex}
       columns={columns}
       list={list}
       sortColumn="Square"
       sortAsc={false}
-      noData={noDataLabel}
       isPending={pending}
       hasError={error}
       onSelect={console.log}
       onUnselect={console.log}
-      selected={o => o.a === 90}
+      selected={o => o.a === 10}
+      noData={noDataLabel}
+      errorMsg={errorMsg}
     />
   );
+  if (!flex) {
+    return <ScrollBox>{datalist}</ScrollBox>;
+  }
+  return datalist;
 };
 
 const TestDataList = () => <ListManager />;

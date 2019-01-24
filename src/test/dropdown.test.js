@@ -83,7 +83,9 @@ it('renders the large, medium, small sizes', () => {
 });
 
 it('renders multiple props', () => {
-  const wrapper = shallow(<Dropdown label="Test" icon="x" kind="primary" disabled pending noFill />);
+  const wrapper = shallow(
+    <Dropdown label="Test" icon="x" kind="primary" disabled pending noFill />,
+  );
   expect(wrapper.find('span').text()).toBe('Test');
   expect(wrapper.find('button').prop('kind')).toBe('primary');
   expect(wrapper.find('button').prop('disabled')).toBe(true);
@@ -110,18 +112,30 @@ it('renders the spinner component and overrides the icon prop', () => {
 });
 
 it('does not render the popup when not clicked', () => {
-  const wrapper = mount(<Dropdown><span>Content!</span></Dropdown>);
+  const wrapper = mount(
+    <Dropdown>
+      <span>Content!</span>
+    </Dropdown>,
+  );
   expect(wrapper.find('.input-dropdown__popup').exists()).toBe(false);
 });
 
 it('renders the popup when clicked', () => {
-  const wrapper = mount(<Dropdown><span>Content!</span></Dropdown>);
+  const wrapper = mount(
+    <Dropdown>
+      <span>Content!</span>
+    </Dropdown>,
+  );
   wrapper.find('button').simulate('click');
   expect(wrapper.find('.input-dropdown__popup').exists()).toBe(true);
 });
 
 it('closes the popup when clicking again the button', () => {
-  const wrapper = mount(<Dropdown><span>Content!</span></Dropdown>);
+  const wrapper = mount(
+    <Dropdown>
+      <span>Content!</span>
+    </Dropdown>,
+  );
   wrapper.find('button').simulate('click');
   expect(wrapper.find('.input-dropdown__popup').exists()).toBe(true);
   wrapper.find('button').simulate('click');

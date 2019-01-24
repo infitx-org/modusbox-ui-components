@@ -9,17 +9,17 @@ const Pending = () => (
   </div>
 );
 
-const ErrorMessage = () => (
+const ErrorMessage = ({ message }) => (
   <div className="element-datalist__error-box">
     <Icon size={50} name="settings" fill="#ccc" />
-    <span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>Service Unavailable</span>
+    <span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>{message}</span>
   </div>
 );
 
-const NoData = ({ label }) => (
+const NoData = ({ message }) => (
   <div className="element-datalist__nodata-box">
     <Icon name="dashboard" size={40} fill="#ccc" />
-    <span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>No {label}s were found</span>
+    <span style={{ color: '#ccc', fontSize: 20, marginLeft: 10 }}>{message}</span>
   </div>
 );
 

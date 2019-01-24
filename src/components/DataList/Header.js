@@ -54,7 +54,7 @@ class HeaderCell extends PureComponent {
     this.onFilterClick = this.onFilterClick.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (this.props.isFiltering && this.props.isFiltering !== prevProps.isFiltering) {
+    if (this.props.isFiltering && !prevProps.isFiltering) {
       this._filter.focus();
     }
   }
@@ -66,6 +66,7 @@ class HeaderCell extends PureComponent {
   onFilterClick(e) {
     this.props.onFilterClick();
     e.stopPropagation();
+    e.preventDefault();
   }
   render() {
     const {
@@ -124,15 +125,16 @@ class HeaderCell extends PureComponent {
 
 const HeaderLabel = ({ label }) => (
   <div className="element-datalist__header-cell__label">
-    <Tooltip>{label}</Tooltip>
+    <Tooltip style={{ flex: ' 1 0 0 ' }}>{label}</Tooltip>
   </div>
 );
 
-const HeaderFilter = ({ filter, onFilterChange, onFilterBlur, assignRef }) => (
+const HeaderFilter = ({ filter, onFilterClick, onFilterChange, onFilterBlur, assignRef }) => (
   <input
     type="text"
     className="element-datalist__header-cell__filter"
     value={filter.value || ''}
+    onClick={onFilterClick}
     onChange={e => onFilterChange(e.target.value)}
     onBlur={onFilterBlur}
     ref={assignRef}
