@@ -49,7 +49,7 @@ class ListManager extends React.Component {
   }
   toggle(field, value) {
     this.setState({
-      [field]: value
+      [field]: value,
     });
   }
   changeNoDataLabel(value) {
@@ -182,13 +182,12 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       noData={noDataLabel}
       errorMsg={errorMsg}
     />
-  )
+  );
   if (!flex) {
     return <ScrollBox>{datalist}</ScrollBox>;
   }
   return datalist;
 };
-
 
 const TestDataList = () => <ListManager />;
 export default TestDataList;

@@ -125,7 +125,7 @@ class HeaderCell extends PureComponent {
 
 const HeaderLabel = ({ label }) => (
   <div className="element-datalist__header-cell__label">
-    <Tooltip style={{flex:' 1 0 0 '}}>{label}</Tooltip>
+    <Tooltip style={{ flex: ' 1 0 0 ' }}>{label}</Tooltip>
   </div>
 );
 

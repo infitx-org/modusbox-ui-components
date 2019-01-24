@@ -13,7 +13,6 @@ class Rows extends PureComponent {
     this.props.onItemClick(index);
   }
   render() {
-
     const { items, columns } = this.props;
     const rows = items.map(item => (
       <RowItem

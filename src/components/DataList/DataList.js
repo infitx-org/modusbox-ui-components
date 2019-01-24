@@ -17,7 +17,7 @@ class DataList extends PureComponent {
       // get the _index key from the already existing columns if available
       // so that it does not change and worn't break sorting or filtering
       // because they use the column _index key to identify the column
-      _index: get(prev,`[${i}]._index`) || uuid(),
+      _index: get(prev, `[${i}]._index`) || uuid(),
       ...column,
     });
     return columns.map(mapIndexToColumns(prevColumns));
@@ -195,7 +195,7 @@ class DataList extends PureComponent {
     const className = utils.composeClassNames([
       'mb-element',
       'element-datalist',
-      flex && 'element-datalist--flexible'
+      flex && 'element-datalist--flexible',
     ]);
 
     let content = null;

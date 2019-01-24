@@ -14,7 +14,7 @@ class Dropdown extends PureComponent {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.state = {
       isOpen: false,
-    }
+    };
   }
 
   componentDidMount() {
@@ -28,11 +28,10 @@ class Dropdown extends PureComponent {
     if (this.props.disabled) {
       return;
     }
-    
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
 
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
   }
   handlePageClick(e) {
     if (!this.container.contains(e.target)) {
@@ -88,7 +87,12 @@ class Dropdown extends PureComponent {
     ]);
 
     const button = (
-      <div className="input-dropdown" ref={container => { this.container = container; }}>
+      <div
+        className="input-dropdown"
+        ref={container => {
+          this.container = container;
+        }}
+      >
         <button
           ref={input => {
             this.input = input;
@@ -115,13 +119,7 @@ class Dropdown extends PureComponent {
             {label && <span>{label}</span>}
           </div>
         </button>
-        {this.state.isOpen && (
-          <div
-            className="input-dropdown__popup"
-          >
-            {this.props.children}
-          </div>
-        )}
+        {this.state.isOpen && <div className="input-dropdown__popup">{this.props.children}</div>}
       </div>
     );
 
