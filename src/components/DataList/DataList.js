@@ -92,7 +92,7 @@ class DataList extends PureComponent {
       // add the filter if does not exist
       return [...filters, { _index, value: value || '' }];
     }
-    if (value) {
+    if (value !== undefined) {
       // change the value for an existing filter
       const index = filters.indexOf(filter);
       return [
