@@ -18,10 +18,10 @@
   &:hover {
     background-color: #f8fcff;
   }
-}
-.element-datalist__row--selected {
-  border-bottom: 1px solid $color__blue-3;
-  background: linear-gradient(0deg, $color__blue-3 1px, #f4fcff 1px);
+  &.element-datalist__row--selected {
+    border-bottom: 1px solid $color__blue-3;
+    background: linear-gradient(0deg, $color__blue-3 1px, #f4fcff 1px);
+  }
 }
 .element-datalist__row--filtered {
   display: none;
