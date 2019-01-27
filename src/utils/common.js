@@ -46,6 +46,17 @@ const getParentOverflow = elem => {
   return getParentOverflow(elem.parentNode);
 };
 
+const getScrollParent = (node) => {
+  if (node == null) {
+    return null;
+  }
+
+  if (node.scrollHeight > node.clientHeight) {
+    return node;
+  }
+  return getScrollParent(node.parentNode);
+}
+
 const getSpaceAvailability = (defaultHeight, handle, wrapper) => {
   const wrapperRect = wrapper.getBoundingClientRect();
   const { top, bottom } = handle.getBoundingClientRect();
@@ -62,4 +73,10 @@ const getSpaceAvailability = (defaultHeight, handle, wrapper) => {
   };
 };
 
-export { focusNextFocusableElement, composeClassNames, getParentOverflow, getSpaceAvailability };
+export {
+  focusNextFocusableElement,
+  composeClassNames,
+  getParentOverflow,
+  getScrollParent,
+  getSpaceAvailability,
+};

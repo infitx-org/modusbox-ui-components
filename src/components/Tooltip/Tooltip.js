@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import uuid from '../../utils/uuid';
 
 import * as utils from '../../utils/common';
 
@@ -157,6 +158,7 @@ class TooltipViewer extends PureComponent {
 class Tooltip extends PureComponent {
   constructor(props) {
     super(props);
+    this._scrollNode = null;
     this.mountTooltip = this.mountTooltip.bind(this);
     this.unmountTooltip = this.unmountTooltip.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
@@ -166,7 +168,7 @@ class Tooltip extends PureComponent {
     this.state = { show: this.props.forceVisibility };
   }
   componentWillMount() {
-    this._id = Math.random().toString();
+    this._id = uuid();
   }
   componentDidMount() {
     this.detectTooltipRequired();
@@ -236,11 +238,17 @@ class Tooltip extends PureComponent {
       return;
     }
 
+    this._scrollNode = utils.getScrollParent(this.box);
+    this._scrollNode.addEventListener('scroll', this.hideTooltip);
     this.setState({ show: true });
   }
   hideTooltip(force = false) {
     if (this._isHoveringTooltip === true && force === false) {
       return;
+    }
+    if (this._scrollNode) {
+      this._scrollNode.removeEventListener('scroll', this.hideTooltip);
+      this._scrollNode = null;
     }
     this.setState({ show: false });
   }
