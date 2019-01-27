@@ -48,7 +48,7 @@ const getParentOverflow = elem => {
 
 const getScrollParent = (node) => {
   if (node == null) {
-    return null;
+    return document.body;
   }
 
   if (node.scrollHeight > node.clientHeight) {
