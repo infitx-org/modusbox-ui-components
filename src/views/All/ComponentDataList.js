@@ -189,7 +189,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
     />
   );
   if (!flex) {
-    return <ScrollBox debug>{datalist}</ScrollBox>;
+    return <ScrollBox>{datalist}</ScrollBox>;
   }
   return datalist;
 };
