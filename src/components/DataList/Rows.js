@@ -21,6 +21,7 @@ class Rows extends PureComponent {
         columns={columns}
         selected={item._selected}
         onClick={this.onItemClick}
+        visible={item._visible}
       />
     ));
 
@@ -38,7 +39,8 @@ class RowItem extends PureComponent {
       <ItemCell
         key={column._index}
         className={column.className}
-        content={item.data[column._index]}
+        content={item.data[column._index].component}
+        value={item.data[column._index].value}
       />
     );
   }
@@ -50,12 +52,14 @@ class RowItem extends PureComponent {
     this.props.onClick(this.props.item._index);
   }
   render() {
-    const { item, columns, selected } = this.props;
+    const { item, columns, selected, visible } = this.props;
     const rowCells = columns.map(RowItem.getCells(item));
     const rowClassName = utils.composeClassNames([
       'element-datalist__row',
       selected && 'element-datalist__row--selected',
+      !visible && 'element-datalist__row--filtered',
     ]);
+
     return (
       <div className={rowClassName} onClick={this.onClick} role="presentation">
         {rowCells}
@@ -66,13 +70,17 @@ class RowItem extends PureComponent {
 
 class ItemCell extends PureComponent {
   render() {
-    const { content, className } = this.props;
+    const { content, value, className } = this.props;
     const itemCellClassName = utils.composeClassNames(['element-datalist__item-cell', className]);
+    let cell = null;
+    if (content) {
+      cell = content;
+    } else {
+      cell = <Tooltip>{value}</Tooltip>
+    }
     return (
       <div className={itemCellClassName}>
-        <div className="element-datalist__item-cell__content">
-          <Tooltip>{content}</Tooltip>
-        </div>
+        {cell}
       </div>
     );
   }

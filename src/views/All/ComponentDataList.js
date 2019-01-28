@@ -34,7 +34,7 @@ class ListManager extends React.Component {
     this.changeNoDataLabel = this.changeNoDataLabel.bind(this);
     this.changeErrorMessage = this.changeErrorMessage.bind(this);
     this.state = {
-      counter: 0,
+      counter: 1,
       noDataLabel: 'MyStupidList',
       errorMsg: 'my default error message',
       pending: false,
@@ -115,31 +115,31 @@ const buildRow = () =>
     {},
   );
 
-const list = new Array(100).fill(0).map(buildRow);
+const list = new Array(20).fill(0).map(buildRow);
 
 const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
   const columns = [
     {
       label: 'Double',
       key: 'a',
-      func: x => x * 2,
+      func: x => x * 2 * counter,
       className: 'col-100px',
     },
     {
       label: 'Triple',
       key: 'a',
-      func: x => x * 3,
+      func: x => x * 3 * counter,
       className: 'col-100px',
     },
     {
       label: 'Zero Zero Zero Zero',
       key: 'a',
-      func: () => 0,
+      func: () => new Array(25).fill(counter).join('-'),
     },
     {
       label: 'Square',
       key: 'b',
-      func: x => x * x,
+      func: x => x * x * counter,
     },
     {
       label: 'c',
@@ -149,8 +149,6 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       label: 'd',
       key: 'd',
       func: x => new Array(15).fill(x).join(''),
-      sortable: false,
-      searchable: false,
       link: console.log,
     },
     {
@@ -159,6 +157,13 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       func: () => <Icon name="close-small" size={16} fill="#999" />,
       className: 'col-40px',
     },
+    {
+      label: '',
+      key: 'e',
+      func: () => <Checkbox checked={counter % 2} />,
+      className: 'col-40px',
+    },
+    
     {
       label: 'Counter',
       key: 'e',

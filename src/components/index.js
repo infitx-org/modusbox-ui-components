@@ -1,7 +1,7 @@
 import Button from './Button';
 import Column from './Column';
 import Checkbox from './Checkbox';
-import DataList from './DataList';
+import DataList, { Link } from './DataList';
 import DatePicker from './DatePicker';
 import Dropdown from './Dropdown';
 import FileUploader from './FileUploader';
@@ -30,6 +30,7 @@ export {
   FileUploader,
   Heading,
   Icon,
+  Link,
   Menu,
   MenuSection,
   MenuItem,

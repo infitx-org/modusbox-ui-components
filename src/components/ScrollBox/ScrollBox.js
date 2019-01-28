@@ -40,7 +40,7 @@ class ScrollBox extends PureComponent {
   updateScrollbar() {
     const { scrollTop } = this.contentBox;
     const { height } = this.contentBox.getBoundingClientRect();
-    const contentHeight = this.content.childNodes[0].getBoundingClientRect().height;
+    const contentHeight = this.content.childNodes[1].getBoundingClientRect().height;
     const offset = 0;
     if (this.scrollbar) {
       this.scrollbar.setPosition({
@@ -100,6 +100,7 @@ class ScrollBox extends PureComponent {
             }}
             className={contentClassName}
           >
+            <ReactResizeDetector handleHeight onResize={this.updateScrollbar} />
             {children}
           </div>
         </div>

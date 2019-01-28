@@ -108,7 +108,7 @@ it('renders the correct transformed value described in the column configuration'
   const cellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(1)
     .text();
   const columnContent = testColumns1[1].func(testList1[0].column2).toString();
@@ -124,7 +124,7 @@ it('renders the nested object property as described in the column configuration'
   const cellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(0)
     .text();
 
@@ -138,7 +138,7 @@ it('renders the link correctly', () => {
   const link = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(0)
     .find('.element-datalist__link');
   const columnContent = testColumns1[1].func(testList1[0].column2).toString();
@@ -163,7 +163,7 @@ it('updates the cell content on list changing', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const oldCellValue = wrapper
-    .find('div.element-datalist__item-cell__content')
+    .find('div.element-datalist__item-cell')
     .at(0)
     .text();
 
@@ -174,7 +174,7 @@ it('updates the cell content on list changing', () => {
   wrapper.setProps({ list: updatedList });
 
   const newCellValue = wrapper
-    .find('div.element-datalist__item-cell__content')
+    .find('div.element-datalist__item-cell')
     .at(0)
     .text();
   expect(oldCellValue).not.toBe(newCellValue);
@@ -224,7 +224,7 @@ it('renders and sorts by the prop sortColumn', () => {
   const cellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(1)
     .text();
 
@@ -244,7 +244,7 @@ it('renders and sorts desc by the prop sortAsc', () => {
   const cellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(1)
     .text();
 
@@ -263,7 +263,7 @@ it('automatically sorts on the first sortable column if not specified otherwise'
   const cellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(0)
     .text();
 
@@ -299,7 +299,7 @@ it('sorts the list by the column of the clicked header cell', () => {
   const prevCellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(0)
     .text();
 
@@ -313,7 +313,7 @@ it('sorts the list by the column of the clicked header cell', () => {
   const nextCellContent = wrapper
     .find('div.element-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell__content')
+    .find('.element-datalist__item-cell')
     .at(0)
     .text();
 
@@ -381,7 +381,7 @@ it('filters the list when setting a filter', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
 
   const filterValue = '1';
-  const initialRowsCount = wrapper.find('div.element-datalist__row').length;
+  const initialRowsCount = wrapper.find('div.element-datalist__row:not(.element-datalist__row--filtered)').length;
 
   wrapper
     .find('.element-datalist__header-cell')
@@ -396,16 +396,16 @@ it('filters the list when setting a filter', () => {
     .find('input[type="text"]')
     .simulate('change', { target: { value: filterValue } });
 
-  const updatedRows = wrapper.find('div.element-datalist__row');
+  const updatedRows = wrapper.find('div.element-datalist__row:not(.element-datalist__row--filtered)');
   const firstCellContent = updatedRows
     .at(0)
-    .find('div.element-datalist__item-cell__content')
+    .find('div.element-datalist__item-cell')
     .at(0)
     .text();
 
   const updatedRowsCount = updatedRows.length;
 
-  expect(firstCellContent.includes(filterValue));
+  expect(firstCellContent.includes(filterValue)).toBeTruthy();
   expect(initialRowsCount).not.toEqual(updatedRowsCount);
   expect(updatedRowsCount).toEqual(1);
 });
@@ -437,10 +437,7 @@ it('filters the list on muliple columns when multiple filters are set a filter',
 
   const wrapper = mount(<DataList list={list} columns={columns} />);
 
-  const initialRowsCount = wrapper.find('div.element-datalist__row').length;
-
-  const headerCellColumn1 = wrapper.find('.element-datalist__header-cell').at(0);
-  const headerCellColumn2 = wrapper.find('.element-datalist__header-cell').at(1);
+  const initialRowsCount = wrapper.find('div.element-datalist__row:not(.element-datalist__row--filtered)').length;
 
   wrapper
     .find('.element-datalist__header-cell')
@@ -468,7 +465,7 @@ it('filters the list on muliple columns when multiple filters are set a filter',
     .find('input[type="text"]')
     .simulate('change', { target: { value: valueColumn2 } });
 
-  const updatedRows = wrapper.find('div.element-datalist__row');
+  const updatedRows = wrapper.find('div.element-datalist__row:not(.element-datalist__row--filtered)');
 
   const updatedRowsCount = updatedRows.length;
 

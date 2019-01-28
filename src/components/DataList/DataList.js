@@ -28,17 +28,28 @@ class DataList extends PureComponent {
     const reduceColumns = (item, rowIndex) => (prev, column) => {
       const { func, key, link, _index } = column;
       let value = get(item, key);
+      let component = null;
+
       if (typeof func === 'function') {
         value = func(value, item, rowIndex);
       }
       if (typeof link === 'function') {
         // eslint-disable-next-line
-        value = <Link onClick={() => link(item[key], item)}>{value}</Link>;
+        component = <Link onClick={() => link(item[key], item)}>{value}</Link>;
+      }
+
+      const isTextContent = typeof value === 'string' || typeof value === 'number';
+
+      if (React.isValidElement(value)) {
+        component = value;
       }
 
       return {
         ...prev,
-        [_index]: value,
+        [_index]: {
+          value: isTextContent ? value : null,
+          component,
+        },
       };
     };
 
@@ -46,6 +57,7 @@ class DataList extends PureComponent {
       _index: get(prev, `[${rowIndex}]._index`) || uuid(),
       _source: item,
       _selected: selected ? selected(item) : false,
+      _visible: true,
       data: columns.reduce(reduceColumns(item, rowIndex), {}),
     });
 
@@ -55,10 +67,11 @@ class DataList extends PureComponent {
   static filterItems(items, columns, filters) {
     const filtersByKey = filters.filter(item => item.value !== '');
 
-    const matchingRows = item =>
-      filtersByKey.every(filter => {
+    const matchingRows = item => ({
+      ...item,
+      _visible: filtersByKey.every(filter => {
         const { _index, value } = filter;
-        let cell = item.data[_index];
+        let cell = item.data[_index].value;
         if (typeof cell === 'number') {
           cell = cell.toString();
         }
@@ -67,13 +80,14 @@ class DataList extends PureComponent {
         }
 
         return false;
-      });
+      })
+    });
 
-    return items.filter(matchingRows);
+    return items.map(matchingRows);
   }
   static sortItems(items, asc, _index) {
     // sorts the items by the column key and the direction
-    const getContentAtIndex = key => item => item.data[key];
+    const getContentAtIndex = key => item => item.data[key].value;
     return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
   static getSortColumn(label, columns) {
@@ -128,8 +142,7 @@ class DataList extends PureComponent {
     const items = DataList.toItems(this.props.list, this._columns, this.props.selected);
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
 
-    this._items = items;
-
+    
     this.state = {
       items: sortedItems,
       sortAsc,
@@ -144,13 +157,13 @@ class DataList extends PureComponent {
       this._columns = DataList.convertColumns(columns, this._columns);
     }
     if (this.props.list !== list || this.props.columns !== columns) {
-      const { selected, sortAsc, sortColumn } = this.props;
+      const { selected } = this.props;
+      const { sortAsc, sortColumn } = this.state;
 
-      const items = DataList.toItems(list, this._columns, selected, this._items);
+      const items = DataList.toItems(list, this._columns, selected, this.state.items);
       const filteredItems = DataList.filterItems(items, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
-      this._items = items;
       this.setState({ items: sortedItems });
     }
   }
@@ -168,8 +181,8 @@ class DataList extends PureComponent {
   }
   onFilterChange(_index, value) {
     const filters = DataList.getFilters(this.state.filters, _index, value);
-    const items = DataList.filterItems(this._items, this._columns, filters);
-    
+    const items = DataList.filterItems(this.state.items, this._columns, filters);
+
     this.setState({
       items,
       filters,
@@ -257,9 +270,9 @@ DataList.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       key: PropTypes.string,
-      func: PropTypes.fund,
+      func: PropTypes.func,
       className: PropTypes.string,
-      link: PropTypes.fund,
+      link: PropTypes.func,
       sortable: PropTypes.bool,
       searchable: PropTypes.bool,
     }),
