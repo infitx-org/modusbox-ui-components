@@ -71,7 +71,7 @@ class DataList extends PureComponent {
       ...item,
       _visible: filtersByKey.every(filter => {
         const { _index, value } = filter;
-        let cell = item.data[_index].value;
+        let cell = get(item.data[_index], 'value');
         if (typeof cell === 'number') {
           cell = cell.toString();
         }
@@ -87,7 +87,7 @@ class DataList extends PureComponent {
   }
   static sortItems(items, asc, _index) {
     // sorts the items by the column key and the direction
-    const getContentAtIndex = key => item => item.data[key].value;
+    const getContentAtIndex = key => item => get(item.data[key], 'value');
     return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
   static getSortColumn(label, columns) {
@@ -142,7 +142,6 @@ class DataList extends PureComponent {
     const items = DataList.toItems(this.props.list, this._columns, this.props.selected);
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
 
-    
     this.state = {
       items: sortedItems,
       sortAsc,
