@@ -214,12 +214,14 @@ class Tabs extends PureComponent {
     const { selected, focused } = this.state;
     const { id, children, flex } = this.props;
     const [tabList] = this.getTabListAndTabPanels();
+    let shouldRenderAsFlex = flex;
 
     const panels = this.getPanels();
     let panel = null;
     if (panels.length >= selected + 1) {
       panel = panels[selected];
-      panel = React.cloneElement(panel, { ...panel.props, flex });
+      shouldRenderAsFlex = flex || panel.props.flex;
+      panel = React.cloneElement(panel, { ...panel.props, flex: shouldRenderAsFlex });
     }
     const { width } = tabList.props.style || {};
     const growTab = width !== undefined;
@@ -238,7 +240,7 @@ class Tabs extends PureComponent {
     const tabClassNames = utils.composeClassNames([
       'element',
       'element-tabs',
-      flex === true && 'element-tabs--flexible',
+      shouldRenderAsFlex === true && 'element-tabs--flexible',
     ]);
 
     return (
