@@ -243,14 +243,14 @@ class Tabs extends PureComponent {
       return React.cloneElement(child, props);
     });
 
-    const tabClassNames = utils.composeClassNames([
+    const tabsClassNames = utils.composeClassNames([
       'element',
       'element-tabs',
       shouldRenderAsFlex === true && 'element-tabs--flexible',
     ]);
 
     return (
-      <div className={tabClassNames} id={id}>
+      <div className={tabsClassNames} id={id}>
         <input
           ref={input => {
             this.input = input;
