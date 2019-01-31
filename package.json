@@ -1,6 +1,6 @@
 {
   "name": "modusbox-ui-components",
-  "version": "1.10.10",
+  "version": "1.11.0",
   "description": "ModusBox UI Components",
   "main": "dist/index.js",
   "files": [
@@ -32,6 +32,7 @@
     "react": "16.4.0",
     "react-day-picker": "7.1.9",
     "react-dom": "16.4.0",
+    "react-hot-loader": "^4.6.5",
     "react-motion": "^0.2.7",
     "react-resize-detector": "2.3.0"
   },

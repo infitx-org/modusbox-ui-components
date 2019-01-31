@@ -163,7 +163,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       func: () => <Checkbox checked={counter % 2} />,
       className: 'col-40px',
     },
-    
+
     {
       label: 'Counter',
       key: 'e',

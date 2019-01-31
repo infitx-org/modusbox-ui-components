@@ -3,6 +3,7 @@
   "plugins": [
     "transform-object-rest-spread",
     "syntax-async-functions",
-    "transform-regenerator"
+    "transform-regenerator",
+    "react-hot-loader/babel",
   ]
 }

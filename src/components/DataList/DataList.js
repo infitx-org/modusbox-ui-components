@@ -80,7 +80,7 @@ class DataList extends PureComponent {
         }
 
         return false;
-      })
+      }),
     });
 
     return items.map(matchingRows);
@@ -109,17 +109,12 @@ class DataList extends PureComponent {
     if (value !== undefined) {
       // change the value for an existing filter
       const index = filters.indexOf(filter);
-      return [
-        ...filters.slice(0, index),
-        { _index, value },
-        ...filters.slice(index + 1)
-      ];
-      
+      return [...filters.slice(0, index), { _index, value }, ...filters.slice(index + 1)];
     }
     if (filter.value === '') {
       // if the filter has 0 len string, remove it
       const index = filters.indexOf(filter);
-      return [...filters.slice(0, index), ...filters.slice(index + 1)]
+      return [...filters.slice(0, index), ...filters.slice(index + 1)];
     }
     // there was no value but the filter exists, do not change anything
     return filters;

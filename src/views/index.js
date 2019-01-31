@@ -1,4 +1,5 @@
 import React from 'react';
+import { hot } from 'react-hot-loader/root';
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs';
 import Select from '../components/Select';
 import ScrollBox from '../components/ScrollBox';
@@ -96,4 +97,4 @@ class Views extends React.Component {
   }
 }
 
-export default Views;
+export default hot(Views);

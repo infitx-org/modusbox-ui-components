@@ -51,33 +51,6 @@ const bindDisabledProp = disabled => element =>
     ...element.props,
     disabled: element.props.disabled || disabled,
   });
-/* eslint-disable */
-const isMenuSection = element => element.type === MenuSection;
-const isMenuItem = element => element.type === MenuItem;
-/* eslint-enable */
-
-const wrapItemsInSections = items => {
-  const groupedMenuItems = [];
-  let currentGroup = [];
-  const addCurrenntGroupToGroupedItems = () => {
-    if (currentGroup.length) {
-      groupedMenuItems.push(<MenuItemsGroup>{currentGroup}</MenuItemsGroup>);
-      currentGroup = [];
-    }
-  };
-
-  items.forEach(node => {
-    if (isMenuSection(node) || node.props.back) {
-      addCurrenntGroupToGroupedItems();
-      groupedMenuItems.push(node);
-    } else {
-      currentGroup.push(node);
-    }
-  });
-
-  addCurrenntGroupToGroupedItems();
-  return groupedMenuItems.map(bindKey);
-};
 
 class MenuItem extends PureComponent {
   constructor(props) {
@@ -139,6 +112,10 @@ MenuItem.propTypes = {
   partial: PropTypes.bool,
 };
 
+const MENU_ITEM_TYPE = <MenuItem />.type;
+
+const isMenuItem = node => node.type === MENU_ITEM_TYPE;
+
 const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) => {
   if (hidden) {
     return null;
@@ -168,9 +145,36 @@ MenuSection.propTypes = {
   label: PropTypes.string,
 };
 
+const MENU_SECTION_TYPE = <MenuSection />.type;
+
+const isMenuSection = node => node.type === MENU_SECTION_TYPE;
+
 const MenuItemsGroup = ({ children }) => (
   <div className="element-menu__section-items">{children}</div>
 );
+
+const wrapItemsInSections = items => {
+  const groupedMenuItems = [];
+  let currentGroup = [];
+  const addCurrenntGroupToGroupedItems = () => {
+    if (currentGroup.length) {
+      groupedMenuItems.push(<MenuItemsGroup>{currentGroup}</MenuItemsGroup>);
+      currentGroup = [];
+    }
+  };
+
+  items.forEach(node => {
+    if (isMenuSection(node) || node.props.back) {
+      addCurrenntGroupToGroupedItems();
+      groupedMenuItems.push(node);
+    } else {
+      currentGroup.push(node);
+    }
+  });
+
+  addCurrenntGroupToGroupedItems();
+  return groupedMenuItems.map(bindKey);
+};
 
 class Menu extends PureComponent {
   static flattenMenuSections(items) {
