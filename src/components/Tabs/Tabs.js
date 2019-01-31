@@ -97,6 +97,13 @@ TabPanels.defaultProps = {
   children: undefined,
 };
 
+const TAB_TYPE = <Tab />.type;
+const TAB_PANEL_TYPE = <TabPanel />.type;
+
+const isTab = node => node.type === TAB_TYPE;
+const isTabPanel = node => node.type === TAB_PANEL_TYPE;
+
+
 class Tabs extends PureComponent {
   constructor(props) {
     super(props);
@@ -169,12 +176,12 @@ class Tabs extends PureComponent {
   }
   getTabs() {
     const [tabList] = this.getTabListAndTabPanels();
-    return tabList.props.children.filter(child => child.type === Tab);
+    return tabList.props.children.filter(isTab);
   }
   getPanels() {
     const tabPanels = this.getTabListAndTabPanels()[1];
     const panels = tabPanels ? tabPanels.props.children || [] : [];
-    return panels.filter(child => child.type === TabPanel);
+    return panels.filter(isTabPanel);
   }
   testKey(e) {
     const { keyCode, shiftKey } = e.nativeEvent;
