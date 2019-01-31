@@ -103,7 +103,6 @@ const TAB_PANEL_TYPE = <TabPanel />.type;
 const isTab = node => node.type === TAB_TYPE;
 const isTabPanel = node => node.type === TAB_PANEL_TYPE;
 
-
 class Tabs extends PureComponent {
   constructor(props) {
     super(props);

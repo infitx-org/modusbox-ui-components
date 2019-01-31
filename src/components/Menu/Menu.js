@@ -52,7 +52,6 @@ const bindDisabledProp = disabled => element =>
     disabled: element.props.disabled || disabled,
   });
 
-
 class MenuItem extends PureComponent {
   constructor(props) {
     super(props);

@@ -76,13 +76,9 @@ class ItemCell extends PureComponent {
     if (content) {
       cell = content;
     } else {
-      cell = <Tooltip>{value}</Tooltip>
+      cell = <Tooltip>{value}</Tooltip>;
     }
-    return (
-      <div className={itemCellClassName}>
-        {cell}
-      </div>
-    );
+    return <div className={itemCellClassName}>{cell}</div>;
   }
 }
 export default Rows;
