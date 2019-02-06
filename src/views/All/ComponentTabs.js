@@ -17,7 +17,7 @@ const TestTabs = () => (
         <TabPanels>
           <TabPanel> Tab Content 1 </TabPanel>
           <TabPanel> Tab Content 2 </TabPanel>
-          <TabPanel> Tab Content 3 </TabPanel>
+          <TabPanel flex> Tab Content 3 </TabPanel>
           <TabPanel> Tab Content 4 </TabPanel>
         </TabPanels>
       </Tabs>
