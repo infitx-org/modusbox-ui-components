@@ -62,6 +62,7 @@
   &:disabled {
     + label {
       color: #999;
+      cursor: default;
       &:before {
         background: #eee;
         box-shadow: none;
