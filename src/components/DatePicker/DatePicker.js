@@ -97,28 +97,31 @@ class DatePicker extends PureComponent {
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('mouseup', this.handlePageClick, false);
   }
-  componentWillReceiveProps(props) {
-    const { value, defaultHour, defaultMinute, defaultSecond } = props;
+  componentDidUpdate(prevProps) {
+    const { value, defaultHour, defaultMinute, defaultSecond } = this.props;
     const defaultTime = {
       hour: defaultHour,
       minute: defaultMinute,
       second: defaultSecond,
     };
 
-    let timeValue = value;
-    if (typeof value === 'string') {
-      timeValue = parseInt(value, 10);
-    }
-    const { selectedDay, timestamp } = DatePicker.getSelectedDayAndTimestamp(timeValue);
-    const { hour, minute, second } = value ? DatePicker.getTimeObject(timeValue) : defaultTime;
+    if (prevProps.value !== value) {
 
-    this.setState({
-      selectedDay,
-      timestamp,
-      hour,
-      minute,
-      second,
-    });
+      let timeValue = value;
+      if (typeof value === 'string') {
+        timeValue = parseInt(value, 10);
+      }
+      const { selectedDay, timestamp } = DatePicker.getSelectedDayAndTimestamp(timeValue);
+      const { hour, minute, second } = value ? DatePicker.getTimeObject(timeValue) : defaultTime;
+
+      this.setState({
+        selectedDay,
+        timestamp,
+        hour,
+        minute,
+        second,
+      });
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
@@ -516,8 +519,6 @@ TimePicker.defaultProps = {
   disabled: false,
 };
 
-// //////////////////////////////////////////////
-
 class TimeInput extends PureComponent {
   static getDoubleDigitTime(value) {
     const intValue = parseInt(value, 10);
@@ -533,12 +534,15 @@ class TimeInput extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (parseInt(nextProps.selected, 10) === this.state.value) return;
-    this.setState({
-      value: parseInt(nextProps.selected, 10),
-      shown: TimeInput.getDoubleDigitTime(nextProps.selected),
-    });
+  componentDidUpdate(prevProps) {
+    const { selected } = this.props;
+    if (prevProps.selected !== this.props.selected) {
+      if (parseInt(selected, 10) === this.state.value) return;
+      this.setState({
+        value: parseInt(selected, 10),
+        shown: TimeInput.getDoubleDigitTime(selected),
+      });
+    }
   }
 
   onChangeValue(e) {

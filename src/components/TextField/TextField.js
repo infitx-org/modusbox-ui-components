@@ -44,14 +44,14 @@ class TextField extends PureComponent {
   componentDidMount() {
     window.addEventListener('mouseup', this.onPageClick, false);
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const changes = {};
-    const { value, disabled } = nextProps;
+    const { value, disabled } = this.props;
 
-    if (value !== this.props.value) {
+    if (value !== prevProps.value) {
       changes.value = value;
     }
-    if (disabled !== this.props.disabled) {
+    if (disabled !== prevProps.disabled) {
       changes.isOpen = false;
     }
 

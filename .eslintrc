@@ -32,6 +32,7 @@
     "react/jsx-indent-props": [2, 2],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-multi-comp": 0,
+    react/no-did-update-set-state: 0,
     "jsx-a11y/label-has-for": 0,
     "jsx-a11y/no-noninteractive-tabindex": 0,
     "jsx-a11y/tabindex-no-positive": 0,

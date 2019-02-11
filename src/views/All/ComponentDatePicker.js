@@ -4,9 +4,37 @@ import React from 'react';
 import Row from '../../components/Row';
 import DatePicker from '../../components/DatePicker';
 
+class DatePickerWithDelay extends React.Component {
+  constructor() {
+    super();
+    this.state = { value: '' };
+  }
+  componentDidMount() {
+    setInterval(() => this.setState({ value: 1524000000000 + Math.random() * 102400000 }), 1000);
+  }
+  render() {
+    return (
+      <DatePicker
+        className="m5"
+        value={this.state.value}
+        placeholder="Default with time"
+        format="x"
+        onSelect={console.log}
+        defaultHour={0}
+        defaultMinute={0}
+        defaultSecond={0}
+        withTime
+        hideIcon
+        disabledDays={undefined}
+      />
+    );
+  }
+}
+
 const TestDatePicker = () => (
   <div>
     <div className="p10 b1-ccc">
+      <DatePickerWithDelay /> 
       <DatePicker className="m5" placeholder="Default" format="x" onSelect={console.log} />
       <DatePicker
         className="m5"

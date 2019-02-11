@@ -31,7 +31,6 @@ class Select extends PureComponent {
 
     // Internal lifecycle methods
     this.setInputValue = this.setInputValue.bind(this);
-    this.setSelectedLabel = this.setSelectedLabel.bind(this);
     this.closeSelect = this.closeSelect.bind(this);
     this.leaveSelect = this.leaveSelect.bind(this);
     this.openSelect = this.openSelect.bind(this);
@@ -59,23 +58,38 @@ class Select extends PureComponent {
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('mouseup', this.onPageClick, false);
   }
-  componentWillReceiveProps(nextProps) {
-    const { options, selected, disabled } = nextProps;
+  componentDidUpdate(prevProps, prevState) {
+    const { options, disabled } = this.props;
+    let { isOpen, highlightedOption, filter } = this.state;
 
-    if (disabled !== this.props.disabled) {
-      this.setState({
-        isOpen: false,
-        highlightedOption: selected,
-        filter: undefined,
-      });
+    let selected;
+    if (this.props.selected !== prevProps.selected) {
+      ({ selected } = this.props);
+    } else {
+      ({ selected } = this.state);
     }
-    this.setSelectedLabel(selected, options);
-  }
-  componentDidUpdate(_, prevState) {
-    const { isOpen, highlightedOption } = this.state;
-    if (isOpen === true && prevState.isOpen === false) {
-      this.scrollToOption(highlightedOption);
+    
+    if (disabled !== prevProps.disabled) {
+      isOpen =  false;
+      highlightedOption =  selected;
+      filter =  undefined;
     }
+    const selectedItem = find(options, { value: selected });
+    const selectedLabel = selectedItem ? selectedItem.label : undefined;
+
+    this.setState({
+      options,
+      selected,
+      selectedLabel,
+      isOpen,
+      highlightedOption,
+      filter,
+    }, () => {
+      if (isOpen === true && prevState.isOpen === false) {
+        this.scrollToOption(highlightedOption);
+      }
+    });
+
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
@@ -152,16 +166,6 @@ class Select extends PureComponent {
   }
   setInputValue(value) {
     this.inputFilter.value = value;
-  }
-  setSelectedLabel(selected, options) {
-    const selectedItem = find(options, { value: selected });
-    const selectedLabel = selectedItem ? selectedItem.label : undefined;
-
-    this.setState({
-      options,
-      selected,
-      selectedLabel,
-    });
   }
   getOptions() {
     const { options, filter } = this.state;

@@ -144,18 +144,17 @@ class DataList extends PureComponent {
       filters: [],
     };
   }
-  componentWillReceiveProps(nextProps) {
-    const { list, columns } = nextProps;
+  componentDidUpdate(prevProps) {
+    const { list, columns, selected } = this.props;
 
-    if (this.props.columns !== columns) {
+    if (prevProps.columns !== columns) {
       this._columns = DataList.convertColumns(columns, this._columns);
     }
-    if (this.props.list !== list || this.props.columns !== columns) {
-      const { selected } = this.props;
-      const { sortAsc, sortColumn } = this.state;
+    if (prevProps.list !== list || prevProps.columns !== columns) {
+      const { sortAsc, sortColumn, items } = this.state;
 
-      const items = DataList.toItems(list, this._columns, selected, this.state.items);
-      const filteredItems = DataList.filterItems(items, this._columns, this.state.filters);
+      const listItems = DataList.toItems(list, this._columns, selected, items);
+      const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
       this.setState({ items: sortedItems });

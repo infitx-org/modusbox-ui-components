@@ -159,6 +159,7 @@ class Tooltip extends PureComponent {
   constructor(props) {
     super(props);
     this._scrollNode = null;
+    this._id = uuid();
     this.mountTooltip = this.mountTooltip.bind(this);
     this.unmountTooltip = this.unmountTooltip.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
@@ -167,24 +168,16 @@ class Tooltip extends PureComponent {
     this.delayHideTooltip = this.delayHideTooltip.bind(this);
     this.state = { show: this.props.forceVisibility };
   }
-  componentWillMount() {
-    this._id = uuid();
-  }
   componentDidMount() {
     this.detectTooltipRequired();
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.forceVisibility === true) {
+  componentDidUpdate() {
+    if (this.props.forceVisibility === true) {
       this.showTooltip(true);
     }
-    if (nextProps.forceVisibility === false) {
+    if (this.props.forceVisibility === false) {
       this.hideTooltip(true);
     }
-    if (nextProps.children !== this.props.children) {
-      this.detectTooltipRequired();
-    }
-  }
-  componentDidUpdate() {
     this.detectTooltipRequired();
   }
   componentWillUnmount() {
@@ -294,7 +287,7 @@ Tooltip.propTypes = {
 };
 Tooltip.defaultProps = {
   delay: 200,
-  forceVisibility: false,
+  forceVisibility: undefined,
   content: undefined,
   children: null,
   style: {},

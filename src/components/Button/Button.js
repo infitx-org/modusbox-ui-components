@@ -13,8 +13,6 @@ class Button extends PureComponent {
     this.testKey = this.testKey.bind(this);
   }
 
-  componentWillReceiveProps() {}
-
   onClick(e) {
     if (this.props.disabled) return;
     if (this.props.onClick) {

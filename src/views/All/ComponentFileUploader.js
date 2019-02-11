@@ -22,7 +22,15 @@ const TestFileUploader = () => (
       />
       <FileUploader className="m5" placeholder="Pending" pending />
       <FileUploader className="m5" placeholder="Disabled" disabled />
-      <FileUploader className="m5" placeholder="Invalid" invalid />
+      <FileUploader
+        className="m5"
+        placeholder="Invalid"
+        invalid
+        invalidMessages={[
+          { text: 'This is a test', active: true },
+          { text: 'This is invalid', active: false },
+        ]}
+      />
       <FileUploader className="m5" placeholder="Required" required onChange={console.log} />
       <FileUploader className="m5" placeholder="small" required onChange={console.log} />
     </div>

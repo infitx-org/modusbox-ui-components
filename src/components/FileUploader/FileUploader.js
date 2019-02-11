@@ -32,22 +32,16 @@ class FileUploader extends PureComponent {
   componentDidMount() {
     window.addEventListener('mouseup', this.onPageClick, false);
   }
-  componentWillReceiveProps(nextProps) {
-    const changes = {};
-    const { file, pending, disabled } = nextProps;
+  componentDidUpdate(prevProps) {
+    const { file, disabled } = this.props;
 
     if (file !== this.fileContent) {
       this.fileContent = file;
     }
-    if (pending !== this.props.pending) {
-      changes.pending = pending;
-    }
-    if (disabled !== this.props.disabled) {
-      changes.disabled = disabled;
-      changes.isOpen = false;
+    if (disabled !== prevProps.disabled) {
+      this.setState({ isOpen: false });
     }
 
-    this.setState(changes);
   }
   componentWillUnmount() {
     window.removeEventListener('mouseup', this.onPageClick, false);
@@ -308,7 +302,13 @@ FileUploader.propTypes = {
   pending: PropTypes.bool,
   disabled: PropTypes.bool,
   invalid: PropTypes.bool,
-  invalidMessages: PropTypes.arrayOf(PropTypes.string),
+  invalidMessages: PropTypes.arrayOf(
+    PropTypes.shape({
+      active: PropTypes.bool,
+      text: PropTypes.string,
+    }),
+  ),
+  
   required: PropTypes.bool,
 };
 

@@ -137,18 +137,23 @@ class RightNav extends PureComponent {
       activeEnvironmentId,
     };
   }
-  componentWillReceiveProps(nextProps) {
-    const { organizations, activeCompanyId, activeEnvironmentId } = nextProps;
-    if (organizations !== this.props.organizations) {
-      this.setState({ nestedOrganizations: RightNav.nestOrganizations(organizations) });
+  componentDidUpdate(prevProps) {
+    const { organizations, activeCompanyId, activeEnvironmentId } = this.props;
+    const changes = {};
+    if (organizations !== prevProps.organizations) {
+      changes.nestedOrganizations = RightNav.nestOrganizations(organizations);
     }
 
-    if (activeCompanyId !== this.state.activeCompanyId) {
-      this.setState({ activeCompanyId });
+    if (prevProps.activeCompanyId !== activeCompanyId) {
+      changes.activeCompanyId = activeCompanyId;
     }
 
-    if (activeEnvironmentId !== this.state.activeEnvironmentId) {
-      this.setState({ activeEnvironmentId });
+    if (prevProps.activeEnvironmentId !== activeEnvironmentId) {
+      changes.activeEnvironmentId = activeEnvironmentId;
+    }
+
+    if (Object.keys(changes).length) {
+      this.setState(changes);
     }
   }
   onCompanyFilterChange(evt) {

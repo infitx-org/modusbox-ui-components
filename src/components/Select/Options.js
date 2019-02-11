@@ -12,28 +12,14 @@ class Options extends PureComponent {
     super(props);
 
     this.onClickOption = this.onClickOption.bind(this);
-    this.state = {
-      highlighted: this.props.highlighted,
-      options: this.props.options,
-      selected: this.props.selected,
-    };
     this.items = [];
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { options, selected, highlighted } = nextProps;
-    this.setState({
-      options,
-      selected,
-      highlighted,
-    });
-  }
   onClickOption(item) {
     this.props.onSelect(item);
   }
   render() {
-    const { options, selected, highlighted } = this.state;
-    const { maxHeight, reverse, open, size, onClear } = this.props;
+    const { options, selected, highlighted, maxHeight, reverse, open, size, onClear } = this.props;
 
     if (!open) {
       return null;

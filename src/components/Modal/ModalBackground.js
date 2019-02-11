@@ -31,24 +31,9 @@ export default class ModalBackground extends PureComponent {
     this.onUndo = this.onUndo.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-    this.state = {
-      isSubmitPending: this.props.isSubmitPending,
-    };
   }
   componentDidMount() {
     this._isMounted = true;
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isSubmitPending !== this.state.isSubmitPending) {
-      if (nextProps.isSubmitPending === false) {
-        if (this._isMounted) {
-          this.setState({ isSubmitPending: false });
-        }
-      } else {
-        this.setState({ isSubmitPending: true });
-      }
-    }
   }
   componentWillUnmount() {
     this._isMounted = false;
@@ -74,7 +59,7 @@ export default class ModalBackground extends PureComponent {
     }
   }
   onClickOverlay() {
-    if (this.props.allowClose && this.props.isCloseEnabled && !this.state.isSubmitPending) {
+    if (this.props.allowClose && this.props.isCloseEnabled && !this.props.isSubmitPending) {
       this.onClose();
     }
   }
@@ -115,8 +100,8 @@ export default class ModalBackground extends PureComponent {
       background: modalIndex > 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.7)',
     };
 
-    const isSubmitDisabled = !isSubmitEnabled || this.state.isSubmitPending;
-    const isCloseDisabled = !isCloseEnabled || this.state.isSubmitPending;
+    const isSubmitDisabled = !isSubmitEnabled || this.props.isSubmitPending;
+    const isCloseDisabled = !isCloseEnabled || this.props.isSubmitPending;
 
     const bodyClassName = utils.composeClassNames([
       'element-modal__body',
@@ -169,7 +154,7 @@ export default class ModalBackground extends PureComponent {
                 {allowUndo && (
                   <Button
                     onClick={this.onUndo}
-                    disabled={!isUndoEnabled || this.state.isSubmitPending}
+                    disabled={!isUndoEnabled || this.props.isSubmitPending}
                     label="Undo"
                     icon="trash-small"
                     kind="secondary"
@@ -178,7 +163,7 @@ export default class ModalBackground extends PureComponent {
                 {allowSubmit && (
                   <Button
                     id={submitButtonId}
-                    pending={this.state.isSubmitPending}
+                    pending={this.props.isSubmitPending}
                     icon="check-small"
                     disabled={isSubmitDisabled}
                     onClick={this.onSubmit}

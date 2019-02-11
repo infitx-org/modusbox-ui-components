@@ -5,9 +5,23 @@ import Row from '../../components/Row';
 import TextField from '../../components/TextField';
 import Checkbox from '../../components/Checkbox';
 
+class TextFieldWithDelay extends React.Component {
+  constructor() {
+    super();
+    this.state = { t: '' };
+  }
+  componentDidMount() {
+    setInterval(() => this.setState({ t: Math.random().toString() }), 1000);
+  }
+  render() {
+    return <TextField className="m5" type="text" placeholder="Default" value={this.state.t} />
+  }
+}
+
 const TestTextField = () => (
   <div>
     <div className="p10 b1-ccc">
+      <TextFieldWithDelay />
       <TextField className="m5" type="text" placeholder="Default" />
       <TextField className="m5" type="password" placeholder="Password" />
       <TextField className="m5" placeholder="Pending" pending />

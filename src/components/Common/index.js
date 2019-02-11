@@ -122,7 +122,7 @@ const ValidationMessages = ({ messages }) => {
 };
 
 ValidationMessages.propTypes = {
-  messages: PropTypes.oneOfType([PropTypes.arrayOf(ValidationMessage.defaultProps)]),
+  messages: PropTypes.arrayOf(PropTypes.shape(ValidationMessage.propTypes)),
 };
 
 ValidationMessages.defaultProps = {

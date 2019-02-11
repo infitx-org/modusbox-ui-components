@@ -15,15 +15,17 @@ class Checkbox extends PureComponent {
     this.onBlur = this.onBlur.bind(this);
     this.testKey = this.testKey.bind(this);
   }
-
-  componentWillReceiveProps(nextProps) {
-    const { checked } = nextProps;
-    if (checked !== this.state.checked) {
-      this.setState({ checked });
+  componentDidUpdate(prevProps) {
+    if (this.props.checked !== prevProps.checked) {
+      // eslint-disable-next-line
+      this.setState({ checked: this.props.checked });
     }
   }
+
   onChange() {
-    if (this.props.disabled) return;
+    if (this.props.disabled) {
+      return;
+    }
 
     const checked = !this.state.checked;
     this.setState({ checked });
@@ -63,7 +65,6 @@ class Checkbox extends PureComponent {
     const { checked } = this.state;
     const { style, className, id, label, disabled, round, semi } = this.props;
     const checkboxClassName = utils.composeClassNames(['mb-input', 'input-checkbox', className]);
-
     return (
       <div className={checkboxClassName} style={style}>
         <input

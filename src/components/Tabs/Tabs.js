@@ -132,10 +132,10 @@ class Tabs extends PureComponent {
     this.testKey = this.testKey.bind(this);
     this.selectSiblingTab = this.selectSiblingTab.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     let currentSelected = this.state.selected;
-    if (nextProps.selected !== this.props.selected) {
-      currentSelected = nextProps.selected;
+    if (prevProps.selected !== this.props.selected) {
+      currentSelected = this.props.selected;
     }
 
     const tabs = this.getTabs();

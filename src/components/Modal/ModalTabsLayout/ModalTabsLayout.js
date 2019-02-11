@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
 
 import * as utils from '../../../utils/common';
 import ScrollBox from '../../ScrollBox';
@@ -21,20 +20,11 @@ class ModalTabsLayout extends PureComponent {
     }
 
     this.state = {
-      items,
       selected: Math.max(0, itemIndex),
     };
 
     this.onSelect = this.onSelect.bind(this);
   }
-  componentDidMount() {}
-  componentWillReceiveProps(nextProps) {
-    const { items } = nextProps;
-    if (!isEqual(this.props.items, items)) {
-      this.setState({ items });
-    }
-  }
-  componentWillUnmount() {}
   onSelect(index, disabled = false) {
     if (disabled) {
       return;
@@ -43,8 +33,8 @@ class ModalTabsLayout extends PureComponent {
   }
 
   render() {
-    const { items, selected } = this.state;
-    const { children } = this.props;
+    const { selected } = this.state;
+    const { children, items } = this.props;
     const child = children[selected];
     const content = React.cloneElement(child, {
       ...child.props,

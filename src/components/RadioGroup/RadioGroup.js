@@ -9,6 +9,7 @@ class RadioGroup extends PureComponent {
     super(props);
     this.state = {
       value: this.props.value,
+      focused: undefined,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -17,14 +18,12 @@ class RadioGroup extends PureComponent {
 
     this.selectSiblingRadio = this.selectSiblingRadio.bind(this);
   }
-
-  componentWillReceiveProps(nextProps) {
-    const { value } = nextProps;
-    if (value !== this.state.value) {
+  componentDidUpdate(prevProps) {
+    const { value } = this.props;
+    if (value !== prevProps.value) {
       this.setState({ value });
     }
   }
-
   onChange(value, disabled) {
     if (this.props.disabled || disabled) return;
 
