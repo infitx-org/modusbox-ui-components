@@ -13,8 +13,6 @@ import '../../icons/modusbox/cloud.svg';
 import '../../icons/modusbox/business-group.svg';
 import '../../icons/mule/user-small.svg';
 
-import './Navbar.scss';
-
 export default class ModusBoxNav extends PureComponent {
   render() {
     const { props } = this;
