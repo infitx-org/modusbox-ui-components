@@ -4,6 +4,8 @@ import * as utils from '../../utils/common';
 
 import Tooltip from '../Tooltip';
 
+import './Icon.scss';
+
 const iconSizes = {
   s: 12,
   m: 14,

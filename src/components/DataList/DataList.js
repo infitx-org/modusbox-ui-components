@@ -11,6 +11,8 @@ import Rows from './Rows';
 import Link from './Link';
 import { NoData, Pending, ErrorMessage } from './Boxes';
 
+import './DataList.scss';
+
 class DataList extends PureComponent {
   static convertColumns(columns, prevColumns) {
     const mapIndexToColumns = prev => (column, i) => ({

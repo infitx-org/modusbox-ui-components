@@ -6,6 +6,8 @@ import Icon, { iconSizes } from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
 
+import './Dropdown.scss';
+
 class Dropdown extends PureComponent {
   constructor(props) {
     super(props);

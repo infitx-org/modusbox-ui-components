@@ -20,6 +20,8 @@ import TextField from './TextField';
 import Toast from './Toast';
 import Tooltip from './Tooltip';
 
+import '../assets/styles/index.scss';
+
 export {
   Button,
   Column,

@@ -5,6 +5,8 @@ import ScrollBox from '../components/ScrollBox';
 import * as ComponentViews from './All';
 import WrappedNavbar from './All/ComponentNavbar';
 
+import '../assets/styles/index.scss';
+
 const componentMappings = Object.keys(ComponentViews).map(view => ({
   name: view.substring(9), // 'Remove the prefix "component"
   view,

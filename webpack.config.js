@@ -7,7 +7,6 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     index: './src/components/index.js',
-    modusbox: './src/assets/styles/themes/modusbox.scss',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

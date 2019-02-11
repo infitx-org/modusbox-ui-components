@@ -12,6 +12,8 @@ import { Loader, Placeholder, Validation } from '../Common';
 import Options from './Options';
 import Indicator from './Indicator';
 
+import './Select.scss';
+
 import '../../icons/mule/search-small.svg';
 
 class Select extends PureComponent {

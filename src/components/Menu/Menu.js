@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import * as utils from '../../utils/common';
 import Icon from '../Icon';
+import './Menu.scss';
 import '../../icons/mule/back-small.svg';
 
 const getPathMatches = (pathname, path, partial) => {

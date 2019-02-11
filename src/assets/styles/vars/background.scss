@@ -1,5 +1,6 @@
-$background--default: #f4f5f6 !default;
-$background--open: #f9fafb !default;
-$background--pending: #def !default;
-$background--invalid: #fdd !default;
-$background--required: #ffc !default;
+@import './colors.scss';
+$background--default: $color__gray-1;
+$background--open: $color__gray-1;
+$background--pending: $color__gray-1;
+$background--invalid: $color__gray-1;
+$background--required: $color__gray-1;
