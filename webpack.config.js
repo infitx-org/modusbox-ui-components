@@ -7,7 +7,6 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     index: './src/components/index.js',
-    mulesoft: './src/assets/styles/themes/mulesoft.scss',
     modusbox: './src/assets/styles/themes/modusbox.scss',
   },
   output: {

@@ -1,9 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Tab, Tabs, TabList, TabPanels, TabPanel } from '../components/Tabs';
-import Select from '../components/Select';
 import ScrollBox from '../components/ScrollBox';
-import Row from '../components/Row';
 import * as ComponentViews from './All';
 import WrappedNavbar from './All/ComponentNavbar';
 
@@ -32,10 +30,6 @@ const AllItemPanels = componentMappings.map(({ view, name }) => {
 });
 
 class Views extends React.Component {
-  static onChangeStyle(style) {
-    window.location.href = `http://localhost:9090/${style}.html`;
-  }
-
   constructor(props) {
     super(props);
     this.onSelectTab = this.onSelectTab.bind(this);
@@ -52,7 +46,6 @@ class Views extends React.Component {
   }
 
   render() {
-    const options = ['mulesoft', 'modusbox'].map(value => ({ label: value, value }));
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
         <WrappedNavbar />
@@ -64,22 +57,10 @@ class Views extends React.Component {
             bottom: '0px',
           }}
         >
-          <div style={{ margin: '10px' }}>
-            <Row>
-              <Row>
-                <Select
-                  selected={this.state.style}
-                  placeholder="Select StyleSheet"
-                  onChange={Views.onChangeStyle}
-                  options={options}
-                />
-              </Row>
-            </Row>
-          </div>
           <div
             style={{
               position: 'absolute',
-              top: 60,
+              top: 0,
               bottom: 0,
               width: '100%',
               display: 'flex',

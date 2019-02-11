@@ -5,14 +5,7 @@ import Views from './views';
 import './assets/main.css';
 import './assets/views.css';
 import './assets/styles/vars/fonts.scss';
-
-if (window.location.pathname.indexOf('mulesoft') > -1) {
-  // eslint-disable-next-line
-  require('./assets/styles/themes/mulesoft.scss');
-} else {
-  // eslint-disable-next-line
-  require('./assets/styles/themes/modusbox.scss');
-}
+import './assets/styles/themes/modusbox.scss';
 
 const Root = () => (
   <div
