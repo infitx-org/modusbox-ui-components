@@ -8,6 +8,7 @@ import Tooltip from '../../components/Tooltip';
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
+const longText = `${Array(40).fill('super').join(' ')} long content with style(100px width)`;
 
 const TestTooltip = () => (
   <Column style={{ padding: '10px' }}>
@@ -18,6 +19,14 @@ const TestTooltip = () => (
       <Column style={columnStyle}>
         <Tooltip style={style} delay={2000}>
           Delay prop - applying style(100px width)
+        </Tooltip>
+      </Column>
+      <Column style={columnStyle}>
+        <Tooltip
+          style={style}
+          label="test with multiline"
+        >
+          Forced
         </Tooltip>
       </Column>
     </Row>
@@ -41,25 +50,19 @@ const TestTooltip = () => (
     <Row>
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style} position="left">
-          {`${Array(10)
-            .fill('super')
-            .join(' ')} long content with style(100px width)`}
+          {longText}
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style} position="left">
-          {`${Array(10)
-            .fill('super')
-            .join(' ')} long content with style(100px width)`}
+          {longText}
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style} position="left">
-          {`${Array(10)
-            .fill('super')
-            .join(' ')} long content with style(100px width)`}
+          {longText}
         </Tooltip>
       </Column>
 
