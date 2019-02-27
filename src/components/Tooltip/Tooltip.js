@@ -73,20 +73,12 @@ class TooltipViewer extends PureComponent {
 
     const testPositions = (coordinates) => {
       if (!coordinates) {
-        return { fits: false, exceeds: 0 }
+        return 0;
       }
       const rect = target.getBoundingClientRect();
       // This is an arbitrary minimum margin space between tooltip rect positions and window size
 
       const add = (prev, curr) => prev + curr;
-
-      const positionTesters = {
-        // test for every position if the tooltip size exceeds the limits
-        outOfTop: ({ top }) => top < _MINIMUM_MARGIN,
-        outOfLeft: ({ left }) => left < _MINIMUM_MARGIN,
-        outOfRight: ({ left }) => left + rect.width > innerWidth - _MINIMUM_MARGIN,
-        outOfBottom: ({ top }) => top + rect.height > innerHeight - _MINIMUM_MARGIN,
-      };
 
       const positionResults = {
         // test for every position if the tooltip size exceeds the limits
@@ -97,26 +89,17 @@ class TooltipViewer extends PureComponent {
       };
 
       // make sure it not exceeds any of the limits
-      const fits = [
-        positionTesters.outOfTop(coordinates),
-        positionTesters.outOfLeft(coordinates),
-        positionTesters.outOfRight(coordinates),
-        positionTesters.outOfBottom(coordinates),
-      ].every(result => result === false);
-
-      const exceeds = [
+      return [
         positionResults.exceedTop(coordinates),
         positionResults.exceedLeft(coordinates),
         positionResults.exceedRight(coordinates),
         positionResults.exceedBottom(coordinates),
       ].reduce(add);
-
-      return { fits, exceeds };
     };
 
     let iteration = 0;
     let coordinates;
-    let test = testPositions();
+    let exceeds = testPositions();
     let bestGuess = Infinity;
     let finalCoordinates;
     let finalMaxWidth;
@@ -128,10 +111,10 @@ class TooltipViewer extends PureComponent {
       // eslint-disable-next-line
       target.style.maxWidth = maxWidth;
       coordinates = getPosition(currentPosition);
-      test = testPositions(coordinates);
+      exceeds = testPositions(coordinates);
 
-      if (bestGuess > test.exceeds) {
-        bestGuess = test.exceeds;
+      if (bestGuess > exceeds) {
+        bestGuess = exceeds;
         finalCoordinates = coordinates;
         finalMaxWidth = maxWidth;
       }
