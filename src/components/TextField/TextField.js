@@ -10,6 +10,8 @@ import { Loader, Placeholder, InnerButton, Validation } from '../Common';
 import '../../icons/modusbox/toggle-invisible.svg';
 import '../../icons/modusbox/toggle-visible.svg';
 
+import './TextField.scss';
+
 class TextField extends PureComponent {
   constructor(props) {
     super(props);

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import * as utils from '../../../utils/common';
 import ScrollBox from '../../ScrollBox';
 
+import './ModalTabsLayout.scss';
+
 class ModalTabsLayout extends PureComponent {
   constructor(props) {
     super(props);

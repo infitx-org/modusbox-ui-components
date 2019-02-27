@@ -5,6 +5,8 @@ import uuid from '../../utils/uuid';
 
 import * as utils from '../../utils/common';
 
+import './Tooltip.scss';
+
 class TooltipViewer extends PureComponent {
   static getCoordinates(parentId, target, position) {
     const parent = document.getElementById(parentId);

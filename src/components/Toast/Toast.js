@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import * as utils from '../../utils/common';
 
+import './Toast.scss';
+
 /* initialized Toast Lib */
 let notification;
 Notification.newInstance(

@@ -6,6 +6,8 @@ import * as utils from '../../utils/common';
 
 import ScrollBar from './ScrollBar';
 
+import './ScrollBox.scss';
+
 class ScrollBox extends PureComponent {
   constructor(props) {
     super(props);

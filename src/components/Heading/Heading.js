@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import './Heading.scss';
+
 function headerTag(size) {
   if (size >= 1 && size <= 6) {
     return `h${size}`;

@@ -11,6 +11,8 @@ import { Loader, Placeholder, Validation } from '../Common';
 
 import '../../icons/mule/calendar-small.svg';
 
+import './DatePicker.scss';
+
 function asDate(day) {
   if (day) {
     return moment(day)

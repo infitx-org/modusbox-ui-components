@@ -20,6 +20,18 @@
   color: $color__white;
   fill: $color__white;
   stroke: $color__white;
+  border-bottom-width: 2px;
+  &:not(.noFill) {
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+  }
+  &:hover,
+  &:focus {
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    &:active {
+      border-bottom-color: transparent;
+    }
+  }
 
   &:active {
     color: $color__alpha-3;

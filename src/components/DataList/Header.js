@@ -8,6 +8,8 @@ import Tooltip from '../Tooltip';
 
 import '../../icons/modusbox/arrow.svg';
 
+import './Header.scss';
+
 const Header = ({
   columns,
   sortColumn,

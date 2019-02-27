@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import ModalPortal from './ModalPortal';
 import ModalBackground from './ModalBackground';
 
+import './Modal.scss';
+
 class ModalContainer extends PureComponent {
   render() {
     const {

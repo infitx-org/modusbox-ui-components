@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import './ScrollBar.scss';
+
 class ScrollBar extends PureComponent {
   constructor(props) {
     super(props);

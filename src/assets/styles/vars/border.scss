@@ -1,12 +1,14 @@
-$border-radius: 0px !default;
+@import './colors.scss';
 
-$border-left-size: 2px solid !default;
-$border-right-size: 2px solid !default;
-$border-top-size: 2px solid !default;
-$border-bottom-size: 2px solid !default;
+$border-radius: 0px;
 
-$border-color--default: $color__main-tertiary !default;
-$border-color--open: $color__dark-gray-2 !default;
-$border-color--pending: $color__blue-4 !default;
-$border-color--invalid: $color__main-danger !default;
-$border-color--required: $color__main-warning !default;
+$border-left-size: 2px solid;
+$border-right-size: 2px solid;
+$border-top-size: 2px solid;
+$border-bottom-size: 2px solid;
+
+$border-color--default: $color__main-primary;
+$border-color--open: $color__dark-gray-2;
+$border-color--pending: $color__blue-4;
+$border-color--invalid: $color__main-danger;
+$border-color--required: $color__main-warning;

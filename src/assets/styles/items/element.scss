@@ -3,7 +3,10 @@
 @import '../vars/background.scss';
 @import '../vars/general.scss';
 
-/** ELEMENT  */
+.element {
+  font-family: Fira Sans, sans-serif;
+  letter-spacing: 0.02rem;
+}
 .modus-element__holder {
   width: 0px;
   height: 0px;

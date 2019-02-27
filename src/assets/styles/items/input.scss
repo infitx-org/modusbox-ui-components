@@ -14,6 +14,8 @@
 /** COMPONENT */
 
 .mb-input {
+  font-family: Fira Sans, sans-serif;
+  letter-spacing: 0.02rem;
   border-radius: $border-radius;
 }
 .mb-input--open {
@@ -93,6 +95,15 @@
   border-left: 2px solid;
   border-right: 2px solid;
   border-bottom-color: $border-color--default;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-right-color: #e5e5e5;
+  border-left-color: #e5e5e5;
+  border-top-color: #e5e5e5;
 }
 .mb-input__borders--open {
 }

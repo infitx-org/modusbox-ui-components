@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
+import './RadioGroup.scss';
+
 class RadioGroup extends PureComponent {
   constructor(props) {
     super(props);
