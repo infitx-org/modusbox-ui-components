@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -122,20 +121,19 @@ class TooltipViewer extends PureComponent {
     let finalCoordinates;
     let finalMaxWidth;
 
-    while (/*!test.fits && */iteration < 4) {
+    while (iteration < 4) {
       const currentPosition = getNextPosition(position, iteration);
       const maxWidth = getMaxTargetWidth(parent, currentPosition);
 
+      // eslint-disable-next-line
       target.style.maxWidth = maxWidth;
       coordinates = getPosition(currentPosition);
       test = testPositions(coordinates);
-      console.log(bestGuess)
 
       if (bestGuess > test.exceeds) {
         bestGuess = test.exceeds;
         finalCoordinates = coordinates;
         finalMaxWidth = maxWidth;
-        //console.log(currentPosition, finalMaxWidth, coordinates)
       }
       iteration += 1;
     }

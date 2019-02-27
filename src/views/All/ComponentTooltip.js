@@ -55,13 +55,13 @@ const TestTooltip = () => (
       </Column>
 
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="left">
+        <Tooltip style={style}>
           {longText}
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="left">
+        <Tooltip style={style}>
           {longText}
         </Tooltip>
       </Column>
