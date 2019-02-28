@@ -18,17 +18,13 @@
 
 .element-tooltip__child {
   position: relative;
-  border-radius: 3px;
-  word-wrap: normal;
-  word-break: break-all;
-  overflow: hidden;
 }
 
 .element-tooltip__child--custom {
   overflow: visible;
   background: $color__gray-1;
   color: #333;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .element-tooltip__viewer {
