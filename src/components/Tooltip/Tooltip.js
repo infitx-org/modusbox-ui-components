@@ -59,7 +59,7 @@ class TooltipViewer extends PureComponent {
       return byPosition[pos];
     }
 
-    const getNextPosition = (originalPosition, iteration) => {
+    const getNextPosition = (originalPosition = 'top', iteration) => {
       // returns the next position based on a clockwise directiom
       const positions = ['top', 'right', 'bottom', 'left'];
       const positionIndex = positions.indexOf(originalPosition);
@@ -90,6 +90,7 @@ class TooltipViewer extends PureComponent {
     };
 
     const parentRect = parent.getBoundingClientRect();
+    const knowsPosition = position !== undefined;
     let iteration = 0;
     let coordinates;
     let previousExceeds = Infinity;
@@ -115,6 +116,10 @@ class TooltipViewer extends PureComponent {
         previousHeight = targetRect.height;
         finalCoordinates = coordinates;
         finalMaxWidth = maxWidth;
+      }
+
+      if (knowsPosition) {
+        break;
       }
       iteration += 1;
     }
@@ -197,8 +202,8 @@ class TooltipViewer extends PureComponent {
     ]);
 
     const rendering = [
-      <div key="handle"className={handleClassName} />,
-      <div key="content"className={childClassName}>{tooltipInnerComponent}</div>
+      <div key="handle" className={handleClassName} />,
+      <div key="content" className={childClassName}>{tooltipInnerComponent}</div>
     ];
     return ReactDOM.createPortal(rendering, this._location);
   }
@@ -341,7 +346,7 @@ Tooltip.defaultProps = {
   children: null,
   style: {},
   label: undefined,
-  position: 'top',
+  position: undefined,
   kind: 'regular',
   custom: false,
 };

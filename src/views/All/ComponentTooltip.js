@@ -8,7 +8,7 @@ import Tooltip from '../../components/Tooltip';
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
-const longText = `Automatic positioning with ${Array(40).fill('super').join(' ')} long content`;
+const longText = `Automatic positioning with ${Array(70).fill('super').join(' ')} long content`;
 const testLabels = [`Hey you!`, `Hey what's up?`,`I don't know man!`];
 
 const TestTooltip = () => (
@@ -23,10 +23,7 @@ const TestTooltip = () => (
         </Tooltip>
       </Column>
       <Column style={columnStyle}>
-        <Tooltip
-          style={style}
-          label="test with multiline"
-        >
+        <Tooltip label="I am force here" forceVisibility>
           Forced
         </Tooltip>
       </Column>
@@ -79,7 +76,9 @@ const TestTooltip = () => (
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style}>
           <Row align="left">
-            <Icon name="close-small" size={16} /> with icons <Icon name="close-small" size={16} />
+            <Icon name="close-small" size={16} />
+            with multiple icons
+            <Icon name="close-small" size={16} />
           </Row>
         </Tooltip>
       </Column>
