@@ -7,7 +7,6 @@ import * as utils from '../../utils/common';
 
 import './Tooltip.scss';
 
-// .element-tooltip__viewer
 class TooltipViewer extends PureComponent {
   static getCoordinates(parentId, target, position) {
     const parent = document.getElementById(parentId);
