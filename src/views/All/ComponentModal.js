@@ -129,6 +129,7 @@ class TestModal extends React.Component {
             >
               <div>I am the submodal!</div>
               <div>I am the submodal!</div>
+              {this.state.counter}
             </Modal>
           )}
           {opened.includes(6) && (

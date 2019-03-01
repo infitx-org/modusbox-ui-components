@@ -31,6 +31,7 @@
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  animation: fadeInModalBox 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) 1;
 
   &.regular {
   }

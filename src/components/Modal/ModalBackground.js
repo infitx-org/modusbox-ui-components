@@ -22,6 +22,92 @@ const ModalContent = ({ tabbed, flex, children }) => {
   return <ScrollBox flex>{wrappedContent}</ScrollBox>;
 };
 
+const ModalHeader = ({ title, allowClose, onClose, isCloseDisabled }) => (
+  <div className="element-modal__header">
+    <div className="element-modal__header-title">{title}</div>
+    {allowClose && (
+      <div className="element-modal__header-close">
+        <Icon
+          onClick={onClose}
+          name="close-small"
+          size={20}
+          disabled={isCloseDisabled}
+          tooltip="Close"
+          tooltipPosition="left"
+        />
+      </div>
+    )}
+  </div>
+)
+
+const ModalFooter = ({ 
+  allowCancel,
+  onCancel,
+  isCancelDisabled,
+  
+  allowUndo,
+  onUndo,
+  isUndoDisabled,
+  
+  allowSubmit,
+  submitId,
+  isSubmitPending,
+  isSubmitDisabled,
+  onSubmit,
+  submitLabel,
+  submitKind,
+
+  allowClose,
+  onClose,
+  isCloseDisabled,
+}) => (
+  <div className="element-modal__footer">
+    <div className="element-modal__footer-left" />
+    <div className="element-modal__footer-right">
+      {allowCancel && (
+        <Button
+          onClick={onCancel}
+          disabled={isCancelDisabled}
+          label="Cancel"
+          icon="close-small"
+          kind="secondary"
+        />
+      )}
+      {allowUndo && (
+        <Button
+          onClick={onUndo}
+          disabled={isUndoDisabled}
+          label="Undo"
+          icon="trash-small"
+          kind="secondary"
+        />
+      )}
+      {allowSubmit && (
+        <Button
+          id={submitId}
+          pending={isSubmitPending}
+          icon="check-small"
+          disabled={isSubmitDisabled}
+          onClick={onSubmit}
+          label={submitLabel}
+          kind={submitKind}
+          className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
+        />
+      )}
+      {allowClose && (
+        <Button
+          noFill
+          disabled={isCloseDisabled}
+          onClick={onClose}
+          label="Close"
+          kind="secondary"
+          className={`element-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
+        />
+      )}
+    </div>
+  </div>
+)
+
 export default class ModalBackground extends PureComponent {
   constructor(props) {
     super(props);
@@ -116,21 +202,12 @@ export default class ModalBackground extends PureComponent {
           role="presentation"
         />
         <div className={`element-modal__container ${kind}`} style={modalStyle}>
-          <div className="element-modal__header">
-            <div className="element-modal__header-title">{title}</div>
-            {allowClose && (
-              <div className="element-modal__header-close">
-                <Icon
-                  onClick={this.onClose}
-                  name="close-small"
-                  size={20}
-                  disabled={isCloseDisabled}
-                  tooltip="Close"
-                  tooltipPosition="left"
-                />
-              </div>
-            )}
-          </div>
+          <ModalHeader
+            title={title}
+            allowClose={allowClose}
+            onClose={this.onClose}
+            isCloseDisabled={isCloseDisabled} 
+          />
 
           <div className={bodyClassName}>
             <ModalContent tabbed={tabbed} flex={flex}>
@@ -139,51 +216,27 @@ export default class ModalBackground extends PureComponent {
           </div>
 
           {!noFooter && (
-            <div className="element-modal__footer">
-              <div className="element-modal__footer-left" />
-              <div className="element-modal__footer-right">
-                {allowCancel && (
-                  <Button
-                    onClick={this.onCancel}
-                    disabled={!isCancelEnabled}
-                    label="Cancel"
-                    icon="close-small"
-                    kind="secondary"
-                  />
-                )}
-                {allowUndo && (
-                  <Button
-                    onClick={this.onUndo}
-                    disabled={!isUndoEnabled || this.props.isSubmitPending}
-                    label="Undo"
-                    icon="trash-small"
-                    kind="secondary"
-                  />
-                )}
-                {allowSubmit && (
-                  <Button
-                    id={submitButtonId}
-                    pending={this.props.isSubmitPending}
-                    icon="check-small"
-                    disabled={isSubmitDisabled}
-                    onClick={this.onSubmit}
-                    label={primaryAction}
-                    kind={kind}
-                    className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
-                  />
-                )}
-                {this.props.allowClose && (
-                  <Button
-                    noFill
-                    disabled={isCloseDisabled}
-                    onClick={this.onClose}
-                    label="Close"
-                    kind="secondary"
-                    className={`element-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
-                  />
-                )}
-              </div>
-            </div>
+            <ModalFooter
+              allowCancel={allowCancel}
+              onCancel={this.onCancel}
+              isCancelDisabled={!isCancelEnabled}
+              
+              allowUndo={allowUndo}
+              onUndo={this.onUndo}
+              isUndoDisabled={!isUndoEnabled || this.props.isSubmitPending}
+              
+              allowSubmit={allowSubmit}
+              submitId={submitButtonId}
+              isSubmitPending={this.props.isSubmitPending}
+              isSubmitDisabled={isSubmitDisabled}
+              onSubmit={this.onSubmit}
+              submitLabel={primaryAction}
+              submitKind={kind}
+
+              allowClose={this.props.allowClose}
+              onClose={this.onClose}
+              isCloseDisabled={isCloseDisabled}
+            />
           )}
         </div>
       </div>
