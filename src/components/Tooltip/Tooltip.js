@@ -10,37 +10,56 @@ import './Tooltip.scss';
 class TooltipViewer extends PureComponent {
   static getCoordinates(parentId, target, position) {
     const parent = document.getElementById(parentId);
+    const _MINIMUM_MARGIN = 10;
+    const { innerWidth, innerHeight } = window;
 
-    const parentRect = parent.getBoundingClientRect();
-    const viewerRect = target.getBoundingClientRect();
+    const sum = (prev, curr) => prev + curr;
 
-    const leftCenteredByY = parentRect.left + (parentRect.width - viewerRect.width) / 2;
-    const topCenteredByX = parentRect.top + (parentRect.height - viewerRect.height) / 2;
+    const getCoordinatesByPosition = (pos, parentRect, targetRect) => {
+      const leftCenteredByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
+      const topCenteredByX = parentRect.top + (parentRect.height - targetRect.height) / 2;
+      const byPosition = {
+        top: () => ({
+          top: parentRect.top - targetRect.height - 10,
+          left: leftCenteredByY,
+          direction: 'top',
+        }),
+        bottom: () => ({
+          top: parentRect.top + parentRect.height + 10,
+          left: leftCenteredByY,
+          direction: 'bottom',
+        }),
+        left: () => ({
+          top: topCenteredByX,
+          left: parentRect.left - targetRect.width - 10,
+          direction: 'left',
+        }),
+        right: () => ({
+          top: topCenteredByX,
+          left: parentRect.left + parentRect.width + 10,
+          direction: 'right',
+        }),
+      };
+      const byPositionGetter = byPosition[pos];
+      return byPositionGetter();
+    }
 
-    const positionGetters = {
-      top: () => ({
-        top: parentRect.top - viewerRect.height - 10,
-        left: leftCenteredByY,
-        direction: 'top',
-      }),
-      bottom: () => ({
-        top: parentRect.top + parentRect.height + 10,
-        left: leftCenteredByY,
-        direction: 'bottom',
-      }),
-      left: () => ({
-        top: topCenteredByX,
-        left: parentRect.left - viewerRect.width - 10,
-        direction: 'left',
-      }),
-      right: () => ({
-        top: topCenteredByX,
-        left: parentRect.left + parentRect.width + 10,
-        direction: 'right',
-      }),
-    };
+    const getMaxTargetWidth = (rect, pos) => {
+      const center = rect.left + rect.width / 2;
+      const byLeft = 2 * center - 2 * _MINIMUM_MARGIN;
+      const byRight = 2 * innerWidth - center * 2 - _MINIMUM_MARGIN;
+      const min = Math.min(byLeft, byRight);
 
-    const getNextPosition = (originalPosition, iteration) => {
+      const byPosition = {
+        top: min,
+        left: rect.left - 2 * _MINIMUM_MARGIN,
+        right: innerWidth - rect.left - rect.width - 2 * _MINIMUM_MARGIN,
+        bottom: min,
+      }
+      return byPosition[pos];
+    }
+
+    const getNextPosition = (originalPosition = 'top', iteration) => {
       // returns the next position based on a clockwise directiom
       const positions = ['top', 'right', 'bottom', 'left'];
       const positionIndex = positions.indexOf(originalPosition);
@@ -48,40 +67,63 @@ class TooltipViewer extends PureComponent {
       return positions[nextPositionIndex];
     };
 
-    const testPositions = (coordinates, rect) => {
+    const testCoordinates = (coordinates, rect) => {
       if (!coordinates) {
-        return false;
+        return 0;
       }
-      const { innerWidth, innerHeight } = window;
-      // This is an arbitrary minimum margin space between tooltip rect positions and window size
-      const _MINIMUM_MARGIN = 10;
-      const positionTesters = {
+
+      const exceedings = {
         // test for every position if the tooltip size exceeds the limits
-        top: () => coordinates.top < _MINIMUM_MARGIN,
-        left: () => coordinates.left < _MINIMUM_MARGIN,
-        right: () => coordinates.left + rect.width > innerWidth - _MINIMUM_MARGIN,
-        bottom: () => coordinates.top + rect.height > innerHeight - _MINIMUM_MARGIN,
+        top: ({ top }) => Math.abs(Math.min(0, top)),
+        left: ({ left }) => Math.abs(Math.min(0, left)),
+        right: ({ left }) => Math.abs(Math.max(0, - innerWidth + left + rect.width)),
+        bottom: ({ top }) => Math.abs(Math.max(0, - innerHeight + top + rect.height)),
       };
 
       // make sure it not exceeds any of the limits
       return [
-        positionTesters.top(),
-        positionTesters.left(),
-        positionTesters.right(),
-        positionTesters.bottom(),
-      ].every(result => result === false);
+        exceedings.top(coordinates),
+        exceedings.left(coordinates),
+        exceedings.right(coordinates),
+        exceedings.bottom(coordinates),
+      ].reduce(sum);
     };
 
+    const parentRect = parent.getBoundingClientRect();
+    const knowsPosition = position !== undefined;
     let iteration = 0;
     let coordinates;
+    let previousExceeds = Infinity;
+    let previousHeight = Infinity;
+    let finalCoordinates;
+    let finalMaxWidth;
 
-    while (!testPositions(coordinates, viewerRect) && iteration < 4) {
+    while (iteration < 4) {
       const currentPosition = getNextPosition(position, iteration);
-      const getPosition = positionGetters[currentPosition];
-      coordinates = getPosition();
+      const maxWidth = getMaxTargetWidth(parentRect, currentPosition);
+
+      // eslint-disable-next-line
+      target.style.maxWidth = maxWidth;
+      const targetRect = target.getBoundingClientRect();
+      coordinates = getCoordinatesByPosition(currentPosition, parentRect, targetRect);
+      const exceeds = testCoordinates(coordinates, targetRect);
+
+      const isNotExceeding = previousExceeds > exceeds;
+      const hasLowerHeight = previousExceeds === exceeds && targetRect.height < previousHeight;
+
+      if (isNotExceeding || hasLowerHeight) {
+        previousExceeds = exceeds;
+        previousHeight = targetRect.height;
+        finalCoordinates = coordinates;
+        finalMaxWidth = maxWidth;
+      }
+
+      if (knowsPosition) {
+        break;
+      }
       iteration += 1;
     }
-    return coordinates;
+    return { ...finalCoordinates, maxWidth: finalMaxWidth };
   }
   constructor(props) {
     super(props);
@@ -98,7 +140,7 @@ class TooltipViewer extends PureComponent {
   }
   componentDidMount() {
     const { parentId, position } = this.props;
-    const { top, left, direction } = TooltipViewer.getCoordinates(
+    const { top, left, direction, maxWidth } = TooltipViewer.getCoordinates(
       parentId,
       this._location,
       position,
@@ -107,6 +149,7 @@ class TooltipViewer extends PureComponent {
     // Apply final updates to the tooltip itself
     this._location.style.top = `${top}px`;
     this._location.style.left = `${left}px`;
+    this._location.style.maxWidth = `${maxWidth}px`;
 
     const viewerFadeInClassName = utils.composeClassNames([
       'element-tooltip__viewer--fade-in',
@@ -123,17 +166,28 @@ class TooltipViewer extends PureComponent {
   render() {
     const { direction } = this.state;
     const { content, label, position, children, kind, custom } = this.props;
-    let tooltipInnerComponent = <span>{children}</span>;
+    let tooltipInnerComponent = null;
+    const addNewLine = (prev, current, index, array) => ([
+      ...prev,
+      current,
+      index < array.length - 1 ? <br /> : null
+    ])
 
     if (content) {
-      // We need to provide the content with the position it will be render
       if (custom) {
+        // We need to provide the content with the position it will be render
         tooltipInnerComponent = React.cloneElement(content, { ...content.props, position });
       } else {
         tooltipInnerComponent = content;
       }
     } else if (label) {
-      tooltipInnerComponent = <span>{label}</span>;
+      if (Array.isArray(label)) {
+        tooltipInnerComponent = label.map(single => <span>{single}</span>).reduce(addNewLine, []);
+      } else {
+        tooltipInnerComponent = <span>{label}</span>;
+      }
+    } else {
+      tooltipInnerComponent = <span>{children}</span>;
     }
 
     const childClassName = utils.composeClassNames([
@@ -147,12 +201,10 @@ class TooltipViewer extends PureComponent {
       direction && `element-tooltip__handle--${direction}`,
     ]);
 
-    const rendering = (
-      <div>
-        <div className={handleClassName} />
-        <div className={childClassName}>{tooltipInnerComponent}</div>
-      </div>
-    );
+    const rendering = [
+      <div key="handle" className={handleClassName} />,
+      <div key="content" className={childClassName}>{tooltipInnerComponent}</div>
+    ];
     return ReactDOM.createPortal(rendering, this._location);
   }
 }
@@ -282,7 +334,7 @@ Tooltip.propTypes = {
   content: PropTypes.node,
   children: PropTypes.node,
   style: PropTypes.shape(),
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
   kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning']),
   custom: PropTypes.bool,
@@ -294,7 +346,7 @@ Tooltip.defaultProps = {
   children: null,
   style: {},
   label: undefined,
-  position: 'top',
+  position: undefined,
   kind: 'regular',
   custom: false,
 };

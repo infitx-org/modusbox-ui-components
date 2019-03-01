@@ -18,29 +18,27 @@
 
 .element-tooltip__child {
   position: relative;
-  border-radius: 3px;
-  word-wrap: normal;
-  word-break: break-all;
-  overflow: hidden;
 }
 
 .element-tooltip__child--custom {
   overflow: visible;
   background: $color__gray-1;
   color: #333;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .element-tooltip__viewer {
   display: block;
   position: absolute;
   z-index: 1000000;
-  white-space: nowrap;
   opacity: 0;
-  transition: all 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
   max-width: calc(100% - 20px);
 }
 
+.element-tooltip__viewer--break {
+
+}
 .element-tooltip__viewer--default {
   padding: 7px;
   border-radius: 4px;

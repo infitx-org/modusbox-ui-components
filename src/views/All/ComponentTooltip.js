@@ -8,6 +8,8 @@ import Tooltip from '../../components/Tooltip';
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
+const longText = `Automatic positioning with ${Array(70).fill('super').join(' ')} long content`;
+const testLabels = [`Hey you!`, `Hey what's up?`,`I don't know man!`];
 
 const TestTooltip = () => (
   <Column style={{ padding: '10px' }}>
@@ -20,6 +22,11 @@ const TestTooltip = () => (
           Delay prop - applying style(100px width)
         </Tooltip>
       </Column>
+      <Column style={columnStyle}>
+        <Tooltip label="I am force here" forceVisibility>
+          Forced
+        </Tooltip>
+      </Column>
     </Row>
     <Row className="p10 b1-ccc" align="center space-between">
       <Column style={columnStyle}>
@@ -28,7 +35,10 @@ const TestTooltip = () => (
         </Tooltip>
       </Column>
       <Column style={columnStyle}>
-        <Tooltip label="boh..."> label prop </Tooltip>
+        <Tooltip label="I am the label"> label prop </Tooltip>
+      </Column>
+      <Column style={columnStyle}>
+        <Tooltip label={testLabels}> multi-line label prop </Tooltip>
       </Column>
       <Column style={columnStyle}>
         <Ticker odd="LongLongLongLongLong" even="short" />
@@ -40,33 +50,35 @@ const TestTooltip = () => (
 
     <Row>
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="left">
-          {`${Array(10)
-            .fill('super')
-            .join(' ')} long content with style(100px width)`}
-        </Tooltip>
-      </Column>
-
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="left">
-          {`${Array(10)
-            .fill('super')
-            .join(' ')} long content with style(100px width)`}
-        </Tooltip>
-      </Column>
-
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="left">
-          {`${Array(10)
-            .fill('super')
-            .join(' ')} long content with style(100px width)`}
+        <Tooltip style={style} position="top">
+          {longText}
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style}>
+          {longText}
+        </Tooltip>
+      </Column>
+
+      <Column style={columnStyle} align="center space-between">
+        <Tooltip style={style}>
+          {longText}
+        </Tooltip>
+      </Column>
+      <Column style={columnStyle} align="center space-between">
+        <Tooltip style={style}>
+          {longText}
+        </Tooltip>
+      </Column>
+    </Row>
+    <Row>
+      <Column style={columnStyle} align="center space-between">
+        <Tooltip style={style}>
           <Row align="left">
-            <Icon name="close-small" size={16} /> Icon to be rendered
+            <Icon name="close-small" size={16} />
+            with multiple icons
+            <Icon name="close-small" size={16} />
           </Row>
         </Tooltip>
       </Column>
