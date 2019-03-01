@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
+import orderBy from 'lodash/orderBy';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
@@ -17,6 +18,12 @@ import './Select.scss';
 import '../../icons/mule/search-small.svg';
 
 class Select extends PureComponent {
+  static sortOptions(options = [], key, asc = true) {
+    if (key) {
+      return orderBy(options, key, asc ? 'asc' : 'desc');
+    }
+    return options;
+  }
   static getOptionIndex(options, value) {
     return findIndex(options, { value });
   }
@@ -43,14 +50,15 @@ class Select extends PureComponent {
     this.highlightNextOption = this.highlightNextOption.bind(this);
     this.scrollToOption = this.scrollToOption.bind(this);
 
-    const { options, selected } = this.props;
-    const selectedItem = find(options, { value: selected });
+    const { options, sortBy, sortAsc, selected } = this.props;
+    const sortedOptions = Select.sortOptions(options, sortBy, sortAsc);
+    const selectedItem = find(sortedOptions, { value: selected });
     const selectedLabel = selectedItem ? selectedItem.label : undefined;
 
     this.state = {
       isOpen: false,
       highlightedOption: selected,
-      options: options || [],
+      options: sortedOptions,
       selectedLabel,
       selected,
       filter: undefined,
@@ -61,7 +69,7 @@ class Select extends PureComponent {
     window.addEventListener('mouseup', this.onPageClick, false);
   }
   componentDidUpdate(prevProps, prevState) {
-    const { options, disabled } = this.props;
+    const { options, sortBy, sortAsc, disabled } = this.props;
     let { isOpen, highlightedOption, filter } = this.state;
 
     let selected;
@@ -76,11 +84,15 @@ class Select extends PureComponent {
       highlightedOption =  selected;
       filter =  undefined;
     }
-    const selectedItem = find(options, { value: selected });
+    let sortedOptions = this.state.options;
+    if (options !== prevProps.options) {
+      sortedOptions = Select.sortOptions(options, sortBy, sortAsc);
+    }
+    const selectedItem = find(sortedOptions, { value: selected });
     const selectedLabel = selectedItem ? selectedItem.label : undefined;
 
     this.setState({
-      options,
+      options: sortedOptions,
       selected,
       selectedLabel,
       isOpen,
@@ -428,13 +440,15 @@ Select.propTypes = {
   pending: PropTypes.bool,
   required: PropTypes.bool,
   invalid: PropTypes.bool,
-  disabled: PropTypes.bool,
   invalidMessages: PropTypes.arrayOf(
     PropTypes.shape({
       active: PropTypes.bool,
       text: PropTypes.string,
     }),
   ),
+  disabled: PropTypes.bool,
+  sortBy: PropTypes.oneOf(['label', 'value', 'disabled']),
+  sortAsc: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -454,6 +468,8 @@ Select.defaultProps = {
   invalid: false,
   invalidMessages: [],
   disabled: false,
+  sortBy: undefined,
+  sortAsc: undefined,
 };
 
 export default Select;
