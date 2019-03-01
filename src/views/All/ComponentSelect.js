@@ -11,6 +11,10 @@ let options = [
     icon: 'close-small',
   },
   {
+    label: 'z',
+    value: 'z'
+  },
+  {
     label: 'disabled',
     value: 'disabled',
     disabled: true,
@@ -51,6 +55,7 @@ const TestSelect = () => (
       <Select className="m5" placeholder="Disabled" options={options} disabled />
       <Select className="m5" placeholder="Clearable" options={options} onClear={console.log} />
       <Select
+        className="m5"
         placeholder="Events (console)"
         options={options}
         onChange={value => console.log('onChange', value)}
@@ -58,6 +63,13 @@ const TestSelect = () => (
         onBlur={() => console.log('onBlur')}
         onFocus={() => console.log('onFocus')}
         onClear={() => console.log('onClear')}
+      />
+      <Select
+        className="m5"
+        placeholder="Sorted"
+        options={options}
+        sortBy="value"
+        sortAsc={false}
       />
     </div>
     <div className="p10 b1-ccc">

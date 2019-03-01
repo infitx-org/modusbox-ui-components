@@ -4,7 +4,6 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import Select from '../components/Select';
 import Options from '../components/Select/Options';
-import keyCodes from '../utils/keyCodes';
 
 import { Loader, Placeholder, Validation } from '../components/Common';
 
@@ -12,6 +11,8 @@ const options = new Array(100).fill().map((item, index) => ({
   label: `label-${index}`,
   value: `value-${index}`,
 }));
+
+const toSelectOptions = items => items.map(item => ({ value: `${item}`, label: `${item}`}));
 
 it('renders the Select', () => {
   const wrapper = shallow(<Select />);
@@ -97,6 +98,33 @@ it('renders the correct size for the clear option', () => {
     const className = `input-select__options-item--${name}`;
     expect(wrapper.find('.input-select__options-item--clear').hasClass(className)).toBeTruthy();
   });
+});
+
+it('sorts the options by value ascending', () => {
+  const reverseOptions = [...options].reverse();
+  const wrapper = mount(<Select selected="value-1" options={reverseOptions} sortBy="value" />);
+  expect(wrapper.state().options[0]).toBe(options[0]);
+});
+
+it('sorts the options by value descending', () => {
+  const wrapper = mount(<Select selected="value-1" options={options} sortBy="value" sortAsc={false} />);
+  const lastOption = options[ options.length - 1];
+  expect(wrapper.state().options[0]).toBe(lastOption);
+});
+
+it('sorts the options by label', () => {
+  const unsortedOptions = toSelectOptions([1,9,2,8,5]);
+  const wrapper = mount(<Select selected="value-1" options={unsortedOptions} sortBy="label" />);
+  expect(wrapper.state().options[0].label).toBe('1');
+});
+
+it('sorts the options by disabled', () => {
+  const unsortedOptions = toSelectOptions([1,9,2,8,5]);
+  unsortedOptions[2].disabled = true;
+  unsortedOptions[4].disabled = true;
+  const wrapper = mount(<Select selected="value-1" options={unsortedOptions} sortBy="disabled" />);
+  expect(wrapper.state().options[0].disabled).toBe(true);
+  expect(wrapper.state().options[1].disabled).toBe(true);
 });
 
 it('renders the options when focused', () => {
@@ -189,7 +217,7 @@ it('triggers onChange when selecting value', () => {
   expect(mockEvent).toHaveBeenCalledWith('value-50');
 });
 
-it('Automatically highlights the selected option', () => {
+it('automatically highlights the selected option', () => {
   const mockEvent = jest.fn();
   const selected = options[2].value;
   const wrapper = mount(<Select onChange={mockEvent} options={options} selected={selected} />);
@@ -264,6 +292,7 @@ describe('Tests highlighiting with filtering', () => {
       .simulate('keydown', { keyCode: 38 });
     expect(wrapper.state('highlightedOption')).toEqual(23);
   });
+
 });
 
 it('renders the Select correctly when multiple props are set', () => {
