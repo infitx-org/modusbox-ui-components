@@ -15,6 +15,7 @@ class Button extends PureComponent {
   }
 
   onClick(e) {
+    e.preventDefault();
     if (this.props.disabled) return;
     if (this.props.onClick) {
       this.props.onClick(e);
