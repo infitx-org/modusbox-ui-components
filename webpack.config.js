@@ -1,7 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'colors.scss');
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -21,6 +24,12 @@ module.exports = {
       disable: false,
       allChunks: true,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: colorsSass,
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]),
   ],
   module: {
     rules: [
