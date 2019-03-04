@@ -84,7 +84,7 @@ it('renders the large, medium, small sizes', () => {
 
 it('triggers the onClick prop', () => {
   const mockEvent = jest.fn();
-  const wrapper = shallow(<Button onClick={mockEvent} />);
+  const wrapper = mount(<Button onClick={mockEvent} />);
   expect(mockEvent).not.toHaveBeenCalled();
   wrapper.simulate('click');
   expect(mockEvent).toHaveBeenCalled();
