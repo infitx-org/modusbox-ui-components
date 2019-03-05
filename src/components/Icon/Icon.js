@@ -43,7 +43,11 @@ class Icon extends PureComponent {
       stroke,
       ...style,
     };
-    const componentClassName = utils.composeClassNames(['element-icon', spin && 'spin', className]);
+    const componentClassName = utils.composeClassNames([
+      'element-icon',
+      spin && 'element-icon--spin',
+      className
+    ]);
     const svg = (
       <svg id={id} style={svgStyle} onClick={this.onClick} className={componentClassName}>
         <use xlinkHref={`#${name}`} />
