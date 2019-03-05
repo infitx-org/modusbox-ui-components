@@ -1,12 +1,12 @@
 {
   "name": "modusbox-ui-components",
-  "version": "1.13.2",
+  "version": "1.13.3",
   "description": "ModusBox UI Components",
   "main": "dist/index.js",
   "files": [
     "dist/index.js",
-    "dist/modusbox.css",
-    "dist/mulesoft.css"
+    "dist/index.css",
+    "dist/colors.scss"
   ],
   "author": {
     "name": "Ivan Annovazzi",
