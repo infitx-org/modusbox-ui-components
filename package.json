@@ -6,7 +6,8 @@
   "files": [
     "dist/index.js",
     "dist/index.css",
-    "dist/colors.scss"
+    "dist/colors.scss",
+    "dist/reduxFetch.js"
   ],
   "author": {
     "name": "Ivan Annovazzi",
