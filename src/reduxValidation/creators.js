@@ -17,7 +17,6 @@ const createValidator = (message, fn, skipWarnings = false) => {
   return { ...base, optional };
 };
 
-
 // create a function that will test against all validators
 // and returns an array of messages or a boolean TRUE
 const createValidation = validators => validators.map(validator => {

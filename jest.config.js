@@ -24,6 +24,7 @@ module.exports = {
   ],
   'roots': [
     'src/test',
-    'src/reduxFetch'
+    'src/reduxFetch',
+    'src/reduxValidation'
   ]
 }
