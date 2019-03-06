@@ -31,11 +31,13 @@ const runValidation = (value, validatorFields) => {
 
 // test every properties for its own validation
 const toValidationResult = (valueFields = {}, validatorFields = {}) => {
+
+  const fields = Object.keys(validatorFields);
   const results = [];
   let warnings = 0;
 
-  // eslint-disable-next-line
-  for (const field in validatorFields) {
+  fields.forEach(field => {
+
     let hasWarnings;
     let isValid;
     let count;
@@ -62,7 +64,6 @@ const toValidationResult = (valueFields = {}, validatorFields = {}) => {
 
       } else {
         // regular value, validate
-
         ({ hasWarnings, isValid } = runValidation(value, valueValidators));
 
         if (hasWarnings) {
@@ -72,7 +73,7 @@ const toValidationResult = (valueFields = {}, validatorFields = {}) => {
     }
 
     results.push(isValid);
-  }
+  });
 
   const isValid = results.every(isTrue);
   return [warnings, isValid];
