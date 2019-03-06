@@ -10,6 +10,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     index: './src/components/index.js',
+    'redux-fetch': './src/reduxFetch/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

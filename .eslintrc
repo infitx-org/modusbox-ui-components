@@ -23,7 +23,7 @@
   ],
   "rules": {
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "indent": [2, 2],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "no-underscore-dangle": 0,
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["webpack*.js", "**/*.test.js"]}],
     "react/prefer-stateless-function": [1, { "ignorePureComponents": true }],
@@ -32,7 +32,7 @@
     "react/jsx-indent-props": [2, 2],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-multi-comp": 0,
-    react/no-did-update-set-state: 0,
+    "react/no-did-update-set-state": 0,
     "jsx-a11y/label-has-for": 0,
     "jsx-a11y/no-noninteractive-tabindex": 0,
     "jsx-a11y/tabindex-no-positive": 0,
