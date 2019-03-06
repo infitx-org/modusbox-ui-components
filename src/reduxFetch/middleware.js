@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { FETCH, setFetchStatus, unsetFetchStatus } from './actions';
+import uuid from '../utils/uuid';
 import {
-  uuid,
   buildServiceConfig,
   buildEndpointConfig,
   buildConfig,
