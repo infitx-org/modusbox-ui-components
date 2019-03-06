@@ -1,5 +1,6 @@
 import fetchMiddleware from './middleware';
 import { fetch, buildFetchActions } from './actions';
+import reducers from './reducers';
 import {
   createPendingSelector,
   createPendingCollectionSelector,
@@ -8,6 +9,7 @@ import {
 
 export default fetchMiddleware;
 export {
+  reducers,
   fetch,
   buildFetchActions,
   createPendingSelector,
