@@ -62,7 +62,7 @@ const buildActionPerMethod = (method, config, name) => (actionConfig = {}) => {
     ...actionConfig,
     ...config,
     headers,
-    name: name,
+    name,
   });
 };
 

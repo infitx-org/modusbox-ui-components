@@ -12,14 +12,12 @@ const createPendingSelector = path => state => {
 
 const createPendingCollectionSelector = path => state => {
   // get all the requests in the collection of a given endpoint / method
-  return getPendingRequestsByPath(state, path) || [];
+  const pendingRequestsByPath = getPendingRequestsByPath(state, path);
+  return pendingRequestsByPath || [];
 };
 
 const getPendingByParameter = (...keys) => (collection, ...params) => {
-  const hasKeyValue = payload => (key, index) => {
-    return payload[key] === params[index];
-  };
-
+  const hasKeyValue = payload => (key, index) => payload[key] === params[index];
   return collection.some(name => keys.every(hasKeyValue(name.payload)));
 };
 

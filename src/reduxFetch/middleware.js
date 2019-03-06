@@ -10,6 +10,38 @@ import {
   getEndpointVariables,
 } from './funcs';
 
+const parseResponse = async (response, parseAsJson, parseAsText) => {
+  const { status } = response;
+  const contentType = response.headers.get('content-type') || '';
+  const isJson = contentType.includes('application/json');
+  let data = response.body;
+
+  if (data) {
+    if (isJson && parseAsJson) {
+      data = await response.json();
+    } else if (parseAsText) {
+      data = await response.text();
+    }
+  }
+
+  return { data, status };
+};
+
+const buildFailedResponse = async (error, status, handleError, state) => ({
+  data: handleError ? handleError(error, status, state) : error,
+  status,
+});
+
+const buildSuccessResponse = async (data, status, handleData, state) => ({
+  data: handleData ? handleData(data, status, state) : data,
+  status,
+});
+
+const buildErrorResponse = message => ({
+  data: message,
+  status: undefined,
+});
+
 const fetchMiddleware = () => store => next => async action => {
   // this is a custom middleware that allows to isolate
   // fetching logic and redux api state tracking
@@ -60,52 +92,6 @@ const fetchMiddleware = () => store => next => async action => {
   store.dispatch(unsetFetchStatus(config.name, config.crud, requestConfig, requestId));
 
   return response;
-};
-
-const parseResponse = async (response, parseAsJson, parseAsText) => {
-  const { status } = response;
-  const contentType = response.headers.get('content-type') || '';
-  const isJson = contentType.includes('application/json');
-  let data = response.body;
-
-  if (data) {
-    if (isJson && parseAsJson) {
-      data = await response.json();
-    } else if (parseAsText) {
-      data = await response.text();
-    }
-  }
-
-  return { data, status };
-};
-
-const buildFailedResponse = async (error, status, handleError, state) => {
-  if (handleError) {
-    error = handleError(error, status, state);
-  }
-
-  return {
-    data: error,
-    status,
-  };
-};
-
-const buildSuccessResponse = async (data, status, handleData, state) => {
-  if (handleData) {
-    data = handleData(data, status, state);
-  }
-
-  return {
-    data,
-    status,
-  };
-};
-
-const buildErrorResponse = message => {
-  return {
-    data: message,
-    status: undefined,
-  };
 };
 
 export default fetchMiddleware;

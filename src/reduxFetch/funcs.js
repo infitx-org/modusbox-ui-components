@@ -80,7 +80,7 @@ const buildRequestUrl = (url, queryParams = {}) => {
   }
 
   if (Object.keys(queryParams).length > 0) {
-    url = `${url}?${buildQueryString(queryParams)}`;
+    return `${url}?${buildQueryString(queryParams)}`;
   }
   return url;
 };
