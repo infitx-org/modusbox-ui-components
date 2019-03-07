@@ -11,6 +11,7 @@ module.exports = {
   entry: {
     index: './src/components/index.js',
     'redux-fetch': './src/reduxFetch/index.js',
+    'redux-validation': './src/reduxValidation/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
