@@ -1,4 +1,4 @@
-import { createValidation, createValidator } from '../creators';
+import createValidation, { createValidator } from '../creators';
 
 const message = 'Test message';
 const fn = value => value % 2 === 0;
@@ -16,12 +16,10 @@ describe('tests the validator creator', () => {
     expect(validator.fn).toBe(fn);
     expect(validator.skipWarnings).toBe(skipWarnings);
     expect(validator.required).toBe(true);
-    expect(validator.isOptional).toBe(false);
     expect(validator.optional.message).toBe(message);
     expect(validator.optional.skipWarnings).toBe(skipWarnings);
     expect(validator.optional.fn).not.toBe(fn);
     expect(validator.optional.required).toBe(false);
-    expect(validator.optional.isOptional).toBe(true);
   });
 
   it('should default to not skip the warnings', () => {
@@ -65,19 +63,16 @@ describe('tests the validatation creator', () => {
 
     expect(validation).toHaveLength(3);
     
-    expect(firstValidation.isOptional).toBe(false);
     expect(firstValidation.skipWarnings).toBe(testValidator.skipWarnings);
     expect(firstValidation.fn).toBe(testValidator.fn);
     expect(firstValidation.message).toBe(testValidator.message);
     expect(firstValidation.required).toBe(testValidator.required);
 
-    expect(secondValidation.isOptional).toBe(false);
     expect(secondValidation.skipWarnings).toBe(otherValidator.skipWarnings);
     expect(secondValidation.fn).toBe(otherValidator.fn);
     expect(secondValidation.message).toBe(otherValidator.message);
     expect(secondValidation.required).toBe(otherValidator.required);
 
-    expect(thirdValidation.isOptional).toBe(true);
     expect(thirdValidation.skipWarnings).toBe(optionalValidator.skipWarnings);
     expect(thirdValidation.fn).not.toBe(optionalValidator.fn);
     expect(thirdValidation.message).toBe(optionalValidator.message);

@@ -40,11 +40,18 @@ describe('tests validating a value', () => {
     expect(result.isValid).toBe(false);
   });
 
-  it('should skip the warnings when the the value is not defined and skipWarning is set', () => {
+  it('should not produce warnings when the skipWarning is set', () => {
     const evenValidation = createValidation([evenValidatorSkipWarnings])
-    const result = validate(undefined, evenValidation);
+    const result = validate(4, evenValidation);
     expect(result.warnings).toHaveLength(0);
     expect(result.isValid).toBe(false);
+  });
+
+  it('should not try to validate an undefined value', () => {
+    const evenValidation = createValidation([evenValidator])
+    const result = validate(undefined, evenValidation);
+    expect(result.warnings).toHaveLength(0);
+    expect(result.isValid).toBe(true);
   });
 
 });
@@ -137,7 +144,7 @@ describe('tests validating a value set', () => {
   it('should produce the correct warnings', () => {
     const validators = {
       odd: createValidation([oddValidator]),
-      even: createValidation([evenValidator]),
+      even: createValidation([evenValidatorSkipWarnings]),
       gt10: createValidation([gt10Validator]),
     };
     const values = {
@@ -149,14 +156,13 @@ describe('tests validating a value set', () => {
     const result = toValidationResult(values, validators);
     expect(result).toBeInstanceOf(Object);
     expect(result.isValid).toBe(false);
-    expect(result.warnings).toHaveLength(3);
+    expect(result.warnings).toHaveLength(2);
     expect(result.warnings[0]).toBe(oddValidator.message);
-    expect(result.warnings[1]).toBe(evenValidator.message);
-    expect(result.warnings[2]).toBe(gt10Validator.message);
+    expect(result.warnings[1]).toBe(gt10Validator.message);
     expect(result.fields.odd.isValid).toBe(false);
     expect(result.fields.odd.warnings).toHaveLength(1);
     expect(result.fields.even.isValid).toBe(false);
-    expect(result.fields.even.warnings).toHaveLength(1);
+    expect(result.fields.even.warnings).toHaveLength(0);
     expect(result.fields.gt10.isValid).toBe(false);
     expect(result.fields.gt10.warnings).toHaveLength(1);
   });

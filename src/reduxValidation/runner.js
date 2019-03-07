@@ -1,6 +1,4 @@
 
-const isFalse = item => item === false;
-const isTrue = item => item === true;
 const isNull = item => item === null;
 const isUndefined = item => item === undefined;
 const isObject = item => typeof item === 'object';
@@ -13,7 +11,7 @@ const validate = (value, validatorFields) => {
   let isValid = true;
 
   // Validators are not available
-  if (!isUndefined(validatorFields)) {
+  if (!isUndefined(validatorFields) && !isUndefined(value)) {
 
     const shouldSkipWarnings = validatorFields.some(validator => validator.skipWarnings);
     const validationResults = validatorFields.map(validator => validator.fn(value));
@@ -25,7 +23,7 @@ const validate = (value, validatorFields) => {
       }
     })
 
-    if (isUndefined(value) && isTrue(shouldSkipWarnings)) {
+    if (shouldSkipWarnings) {
       warnings.length = 0;
     }
   }

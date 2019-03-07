@@ -5,12 +5,10 @@ const createValidator = (message, fn, skipWarnings = false) => {
     fn,
     skipWarnings,
     required: true,
-    isOptional: false,
   };
   const optional = {
     ...base,
     required: false,
-    isOptional: true,
     fn: value => (value !== undefined ? fn(value) : true),
   };
 
