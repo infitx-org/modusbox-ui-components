@@ -65,11 +65,7 @@ const vd = {
     value => !/^[a-zA-Z0-9 ]*$/.test(value)
   ),
   noSpace: createValidator('Must not contain any space', value => !/\s/g.test(value)),
-  custom: (message, func) => {
-    return createValidator(message, func);
-  },
-  customMessage: (message, valid) => createValidator(message, () => valid),
-
+  
   // configurable validators
   isPositive: createValidator('Must be positive', value => {
     if (value === undefined) {

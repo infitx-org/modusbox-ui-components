@@ -7,7 +7,7 @@ const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 const validate = (value, validatorFields) => {
   // if value and validator are available
   // test all validator functions against the value
-  const warnings = validatorFields.map(validator => ({ active: false, message: validator.message }));
+  const warnings = validatorFields.map(({ message }) => ({ active: false, message }));
   let isValid = true;
 
   // Validators are not available
