@@ -6,7 +6,7 @@ const isUndefined = item => item === undefined;
 const isObject = item => typeof item === 'object';
 const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 
-const runValidation = (value, validatorFields) => {
+const validate = (value, validatorFields) => {
   // if value and validator are available
   // test all validator functions against the value
   let hasWarnings = false;
@@ -40,12 +40,13 @@ const toValidationResult = (valueFields = {}, validatorFields = {}) => {
 
     let hasWarnings;
     let isValid;
-    let count;
     const valueValidators = validatorFields[field];
 
     if (isNull(valueFields)) {
+
       isValid = true;
       hasWarnings = false;
+
     } else {
 
       const value = valueFields[field];
@@ -59,12 +60,14 @@ const toValidationResult = (valueFields = {}, validatorFields = {}) => {
       } else if (isObject(value) || isPrimitiveObject(valueValidators)) {
         // the value is an object, needs to be recursively tested
 
-        [count, isValid] = toValidationResult(value, valueValidators);
-        warnings += count;
+        const validationResult = toValidationResult(value, valueValidators);
+
+        warnings += validationResult.warnings.length;
+        ({ isValid } = validationResult);
 
       } else {
         // regular value, validate
-        ({ hasWarnings, isValid } = runValidation(value, valueValidators));
+        ({ hasWarnings, isValid } = validate(value, valueValidators));
 
         if (hasWarnings) {
           warnings += 1;
@@ -73,10 +76,12 @@ const toValidationResult = (valueFields = {}, validatorFields = {}) => {
     }
 
     results.push(isValid);
+
   });
 
   const isValid = results.every(isTrue);
-  return [warnings, isValid];
+  return { isValid, warnings };
 };
 
+export { validate }
 export default toValidationResult;

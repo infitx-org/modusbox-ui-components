@@ -1,15 +1,15 @@
-import buildUIValidation from './ui';
 import { getWarnings, computeIsValid } from './getters';
-import { toValidationResult } from './runner';
+import toValidationResult, { validate } from './runner';
+
 import vd from './validators';
-import { createValidation, createValidator } from './creators';
+import createValidation, { createValidator } from './creators';
 
 export {
   vd,
-  createValidation,
   createValidator,
-  buildUIValidation,
+  createValidation,
   toValidationResult,
+  validate,
   getWarnings,
   computeIsValid,
 }

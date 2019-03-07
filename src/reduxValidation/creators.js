@@ -20,18 +20,15 @@ const createValidator = (message, fn, skipWarnings = false) => {
 // create a function that will test against all validators
 // and returns an array of messages or a boolean TRUE
 const createValidation = validators => validators.map(validator => {
-  const { fn, message, required, skipWarnings } = validator;
-
+  const { fn, message, required, skipWarnings, isOptional } = validator;
   return {
-    internal: value => (fn(value) ? true : message),
+    message,
+    fn,
     skipWarnings,
-    ui: {
-      fn,
-      message,
-      required,
-    },
+    required,
+    isOptional,
   };
 });
 
-
-export { createValidation, createValidator }
+export default createValidation; 
+export { createValidator }

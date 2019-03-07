@@ -65,23 +65,23 @@ describe('tests the validatation creator', () => {
 
     expect(validation).toHaveLength(3);
     
-    expect(firstValidation.internal).toBeInstanceOf(Function);
+    expect(firstValidation.isOptional).toBe(false);
     expect(firstValidation.skipWarnings).toBe(testValidator.skipWarnings);
-    expect(firstValidation.ui.fn).toBe(testValidator.fn);
-    expect(firstValidation.ui.message).toBe(testValidator.message);
-    expect(firstValidation.ui.required).toBe(testValidator.required);
+    expect(firstValidation.fn).toBe(testValidator.fn);
+    expect(firstValidation.message).toBe(testValidator.message);
+    expect(firstValidation.required).toBe(testValidator.required);
 
-    expect(secondValidation.internal).toBeInstanceOf(Function);
+    expect(secondValidation.isOptional).toBe(false);
     expect(secondValidation.skipWarnings).toBe(otherValidator.skipWarnings);
-    expect(secondValidation.ui.fn).toBe(otherValidator.fn);
-    expect(secondValidation.ui.message).toBe(otherValidator.message);
-    expect(secondValidation.ui.required).toBe(otherValidator.required);
+    expect(secondValidation.fn).toBe(otherValidator.fn);
+    expect(secondValidation.message).toBe(otherValidator.message);
+    expect(secondValidation.required).toBe(otherValidator.required);
 
-    expect(thirdValidation.internal).toBeInstanceOf(Function);
+    expect(thirdValidation.isOptional).toBe(true);
     expect(thirdValidation.skipWarnings).toBe(optionalValidator.skipWarnings);
-    expect(thirdValidation.ui.fn).not.toBe(optionalValidator.fn);
-    expect(thirdValidation.ui.message).toBe(optionalValidator.message);
-    expect(thirdValidation.ui.required).not.toBe(optionalValidator.required);
+    expect(thirdValidation.fn).not.toBe(optionalValidator.fn);
+    expect(thirdValidation.message).toBe(optionalValidator.message);
+    expect(thirdValidation.required).not.toBe(optionalValidator.required);
   });
 
 });
