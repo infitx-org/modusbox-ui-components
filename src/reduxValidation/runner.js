@@ -7,7 +7,7 @@ const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 const validate = (value, validatorFields) => {
   // if value and validator are available
   // test all validator functions against the value
-  const warnings = [];
+  const warnings = validatorFields.map(validator => ({ active: false, message: validator.message }));
   let isValid = true;
 
   // Validators are not available
@@ -19,12 +19,15 @@ const validate = (value, validatorFields) => {
     validationResults.forEach((result, index) => {
       if (result === false) {
         isValid = false;
-        warnings.push(validatorFields[index].message);
       }
+      warnings[index].active = !result;
     })
 
     if (shouldSkipWarnings) {
-      warnings.length = 0;
+      warnings.forEach(warning => {
+        /* eslint-disable-next-line no-param-reassign */ // Workaround
+        warning.active = undefined;
+      });
     }
   }
   return { warnings, isValid };
@@ -45,6 +48,7 @@ const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
       const fieldValue = fieldValues[field];
       const fieldValidator = fieldValidators[field];
       let fieldResult = { isValid: true, warnings: [] };
+
 
       if (isObject(fieldValue) || isPrimitiveObject(fieldValidator)) {
         // the value is an object, needs to be recursively tested
