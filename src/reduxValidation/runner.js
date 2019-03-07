@@ -9,7 +9,7 @@ const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 const validate = (value, validatorFields) => {
   // if value and validator are available
   // test all validator functions against the value
-  let hasWarnings = false;
+  const warnings = [];
   let isValid = true;
 
   // Validators are not available
@@ -18,69 +18,57 @@ const validate = (value, validatorFields) => {
     const shouldSkipWarnings = validatorFields.some(validator => validator.skipWarnings);
     const validationResults = validatorFields.map(validator => validator.fn(value));
 
-    isValid = validationResults.every(isTrue);
+    validationResults.forEach((result, index) => {
+      if (result === false) {
+        isValid = false;
+        warnings.push(validatorFields[index].message);
+      }
+    })
 
-    if (!isUndefined(value) || isFalse(shouldSkipWarnings)) {
-
-      hasWarnings = !isValid;
-
+    if (isUndefined(value) && isTrue(shouldSkipWarnings)) {
+      warnings.length = 0;
     }
   }
-  return { hasWarnings, isValid };
+  return { warnings, isValid };
 };
 
 // test every properties for its own validation
-const toValidationResult = (valueFields = {}, validatorFields = {}) => {
+const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
 
-  const fields = Object.keys(validatorFields);
-  const results = [];
-  let warnings = 0;
+  const fields = Object.keys(fieldValidators);
+  const warnings = [];
+  const fieldResults = {};
+  let isValid = true;
 
   fields.forEach(field => {
 
-    let hasWarnings;
-    let isValid;
-    const valueValidators = validatorFields[field];
+    if (!isNull(fieldValues)) {
 
-    if (isNull(valueFields)) {
+      const fieldValue = fieldValues[field];
+      const fieldValidator = fieldValidators[field];
+      let fieldResult = { isValid: true, warnings: [] };
 
-      isValid = true;
-      hasWarnings = false;
-
-    } else {
-
-      const value = valueFields[field];
-
-      if (isUndefined(valueValidators)) {
-        // no validators for the field, validation is successful
-
-        isValid = true;
-        hasWarnings = false;
-
-      } else if (isObject(value) || isPrimitiveObject(valueValidators)) {
+      if (isObject(fieldValue) || isPrimitiveObject(fieldValidator)) {
         // the value is an object, needs to be recursively tested
+        fieldResult = toValidationResult(fieldValue, fieldValidator);
 
-        const validationResult = toValidationResult(value, valueValidators);
+      } else if (!isUndefined(fieldValidator)) {
+        // no validators for the field, validation is successful
+        fieldResult = validate(fieldValue, fieldValidator);
 
-        warnings += validationResult.warnings.length;
-        ({ isValid } = validationResult);
-
-      } else {
-        // regular value, validate
-        ({ hasWarnings, isValid } = validate(value, valueValidators));
-
-        if (hasWarnings) {
-          warnings += 1;
-        }
       }
-    }
 
-    results.push(isValid);
+      if (!fieldResult.isValid) {
+        isValid = false;
+      }
+      warnings.push(...fieldResult.warnings);
+      fieldResults[field] = fieldResult;
+    }
+    
 
   });
 
-  const isValid = results.every(isTrue);
-  return { isValid, warnings };
+  return { isValid, warnings, fields: fieldResults };
 };
 
 export { validate }
