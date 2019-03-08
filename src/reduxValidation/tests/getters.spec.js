@@ -1,5 +1,5 @@
 import createValidation, { createValidator } from '../creators';
-import { getMessages, getIsValid, getFieldWarnings, getFieldIsValid, } from '../getters';
+import { getMessages, getIsValid, getFieldMessages, getFieldIsValid, } from '../getters';
 import toValidationResult from '../runner';
 
 const oddMessage = 'is odd number';
@@ -49,13 +49,13 @@ describe('tests validation result getters', () => {
   });
 
   it('should get the field messages', () => {
-    const getOddFieldWarnings = getFieldWarnings('odd');
+    const getOddFieldWarnings = getFieldMessages('odd');
     const messages = getOddFieldWarnings(result);
     expect(messages).toBe(result.fields.odd.messages);
   });
 
   it('should get the nested field messages', () => {
-    const getGt10FieldWarnings = getFieldWarnings('foo.bar.gt10');
+    const getGt10FieldWarnings = getFieldMessages('foo.bar.gt10');
     const messages = getGt10FieldWarnings(result);
     expect(messages).toBe(result.fields.foo.fields.bar.fields.gt10.messages);
   });

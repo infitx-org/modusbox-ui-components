@@ -57,8 +57,8 @@ const TestDatePicker = () => (
         onSelect={console.log}
         invalid
         invalidMessages={[
-          { text: 'This is a test', active: true },
-          { text: 'This is invalid', active: false },
+          { message: 'This is a test', active: true },
+          { message: 'This is invalid', active: false },
         ]}
       />
       <DatePicker

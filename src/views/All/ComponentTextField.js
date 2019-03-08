@@ -30,9 +30,9 @@ const TestTextField = () => (
         placeholder="Invalid"
         invalid
         invalidMessages={[
-          { text: 'This is a test', active: true },
-          { text: 'This is undefined', active: undefined },
-          { text: 'This is invalid', active: false },
+          { message: 'This is a test', active: true },
+          { message: 'This is undefined', active: undefined },
+          { message: 'This is invalid', active: false },
         ]}
       />
       <TextField className="m5" placeholder="Required" required />
@@ -119,8 +119,8 @@ class InvalidToggle extends React.Component {
           placeholder="Invalid"
           invalid={this.state.isToggled}
           invalidMessages={[
-            { text: 'This is a test', active: true },
-            { text: 'This is invalid', active: false },
+            { message: 'This is a test', active: true },
+            { message: 'This is invalid', active: false },
           ]}
         />
       </div>

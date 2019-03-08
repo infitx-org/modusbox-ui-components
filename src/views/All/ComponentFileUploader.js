@@ -27,8 +27,8 @@ const TestFileUploader = () => (
         placeholder="Invalid"
         invalid
         invalidMessages={[
-          { text: 'This is a test', active: true },
-          { text: 'This is invalid', active: false },
+          { message: 'This is a test', active: true },
+          { message: 'This is invalid', active: false },
         ]}
       />
       <FileUploader className="m5" placeholder="Required" required onChange={console.log} />

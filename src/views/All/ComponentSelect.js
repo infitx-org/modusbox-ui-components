@@ -47,8 +47,8 @@ const TestSelect = () => (
         options={options}
         invalid
         invalidMessages={[
-          { text: 'This is a test', active: true },
-          { text: 'This is invalid', active: false },
+          { message: 'This is a test', active: true },
+          { message: 'This is invalid', active: false },
         ]}
       />
       <Select className="m5" placeholder="Required" options={options} required />

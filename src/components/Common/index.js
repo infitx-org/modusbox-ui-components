@@ -112,29 +112,33 @@ const validationActiveIcon = active => {
   }
   return validationIcons.undefined;
 } 
-const ValidationMessage = ({ text, active }) => (
+const ValidationMessage = ({ message, active }) => (
   <Row>
     <li className={`validation__message ${active === true ? 'validation__message--active' : ''}`}>
       <div className="validation__message-icon">{validationActiveIcon(active)}</div>
-      <span className="validation__message-text">{text}</span>
+      <span className="validation__message-text">{message}</span>
     </li>
   </Row>
 );
 
 ValidationMessage.propTypes = {
-  text: PropTypes.string,
+  message: PropTypes.string,
   active: PropTypes.bool,
 };
 ValidationMessage.defaultProps = {
-  text: undefined,
+  message: undefined,
   active: undefined,
 };
 
 const ValidationMessages = ({ messages }) => {
   let validationMessageList = null;
   if (messages.length) {
-    validationMessageList = messages.map((message, i) => (
-      <ValidationMessage key={i.toString()} text={message.text} active={message.active} />
+    validationMessageList = messages.map(({ message, active }, i) => (
+      <ValidationMessage
+        key={i.toStrng()}
+        message={message}
+        active={active}
+      />
     ));
   }
   return <ul className="validation__messages">{validationMessageList}</ul>;
