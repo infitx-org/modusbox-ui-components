@@ -135,7 +135,7 @@ const ValidationMessages = ({ messages }) => {
   if (messages.length) {
     validationMessageList = messages.map(({ message, active }, i) => (
       <ValidationMessage
-        key={i.toStrng()}
+        key={i.toString()}
         message={message}
         active={active}
       />
