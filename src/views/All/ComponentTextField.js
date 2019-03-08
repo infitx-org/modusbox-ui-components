@@ -31,6 +31,7 @@ const TestTextField = () => (
         invalid
         invalidMessages={[
           { text: 'This is a test', active: true },
+          { text: 'This is undefined', active: undefined },
           { text: 'This is invalid', active: false },
         ]}
       />

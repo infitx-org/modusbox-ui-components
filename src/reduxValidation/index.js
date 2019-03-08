@@ -1,4 +1,4 @@
-import { getWarnings, getIsValid, getFieldWarnings, getFieldIsValid } from './getters';
+import { getMessages, getIsValid, getFieldWarnings, getFieldIsValid } from './getters';
 import toValidationResult, { validate } from './runner';
 
 import vd from './validators';
@@ -10,7 +10,7 @@ export {
   createValidation,
   toValidationResult,
   validate,
-  getWarnings,
+  getMessages,
   getIsValid,
   getFieldWarnings,
   getFieldIsValid,

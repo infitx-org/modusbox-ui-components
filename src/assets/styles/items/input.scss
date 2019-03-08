@@ -60,11 +60,11 @@
 .mb-input__shadow {
   color: $shadow-color--default;
 }
-.mb-input__shadow--required {
-  color: $shadow-color--required;
-}
 .mb-input__shadow--pending {
   color: $shadow-color--pending;
+}
+.mb-input__shadow--required {
+  color: $shadow-color--required;
 }
 .mb-input__shadow--invalid {
   color: $shadow-color--invalid;
@@ -81,12 +81,11 @@
 .mb-input__background--pending {
   background: $background--pending;
 }
-.mb-input__background--invalid,
-.mb-input__background--required.mb-input__background--invalid {
-  background: $background--invalid;
-}
 .mb-input__background--required {
   background: $background--required;
+}
+.mb-input__background--invalid {
+  background: $background--invalid;
 }
 
 /** COMPONENT BORDERS **/
@@ -110,12 +109,11 @@
 .mb-input__borders--pending {
   border-bottom-color: $border-color--pending;
 }
-.mb-input__borders--invalid,
-.mb-input__borders--required.mb-input__borders--invalid {
-  border-bottom-color: $border-color--invalid;
-}
 .mb-input__borders--required {
   border-bottom-color: $border-color--required;
+}
+.mb-input__borders--invalid {
+  border-bottom-color: $border-color--invalid;
 }
 
 /** COMPONENT BLOCKS */

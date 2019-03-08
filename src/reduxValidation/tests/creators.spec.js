@@ -7,24 +7,16 @@ const testValidator = createValidator(message, fn);
 describe('tests the validator creator', () => {
 
   it('should build the validator object correctly', () => {
-    const skipWarnings = false;
-    const validator = createValidator(message, fn, skipWarnings);
+    const validator = createValidator(message, fn);
 
     expect(validator).toBeInstanceOf(Object);
     expect(validator.optional).toBeInstanceOf(Object);
     expect(validator.message).toBe(message);
     expect(validator.fn).toBe(fn);
-    expect(validator.skipWarnings).toBe(skipWarnings);
     expect(validator.required).toBe(true);
     expect(validator.optional.message).toBe(message);
-    expect(validator.optional.skipWarnings).toBe(skipWarnings);
-    expect(validator.optional.fn).not.toBe(fn);
+    expect(validator.optional.fn).toBe(fn);
     expect(validator.optional.required).toBe(false);
-  });
-
-  it('should default to not skip the warnings', () => {
-    expect(testValidator.skipWarnings).toBe(false);
-    expect(testValidator.optional.skipWarnings).toBe(false);
   });
 
   it('should run the optional validation function when value is defined', () => {
@@ -34,11 +26,11 @@ describe('tests the validator creator', () => {
     expect(testValidator.optional.fn(value)).toBe(true);
   });
 
-  it('should return "true" for the optional validation function when value is not defined', () => {
+  it('should return the same result for both optional and non optional validators', () => {
     const value = undefined;
 
     expect(testValidator.fn(value)).toBe(false);
-    expect(testValidator.optional.fn(value)).toBe(true);
+    expect(testValidator.optional.fn(value)).toBe(false);
   });
 
 });
@@ -74,7 +66,7 @@ describe('tests the validatation creator', () => {
     expect(secondValidation.required).toBe(otherValidator.required);
 
     expect(thirdValidation.skipWarnings).toBe(optionalValidator.skipWarnings);
-    expect(thirdValidation.fn).not.toBe(optionalValidator.fn);
+    expect(thirdValidation.fn).toBe(optionalValidator.fn);
     expect(thirdValidation.message).toBe(optionalValidator.message);
     expect(thirdValidation.required).not.toBe(optionalValidator.required);
   });
