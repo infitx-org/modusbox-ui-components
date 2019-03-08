@@ -4,7 +4,7 @@ const getMessages = result => result.messages;
 const getIsValid = result => result.isValid;
 
 const getFieldPath = field => `${field.split('.').join('.fields.')}`;
-const getFieldWarnings = field => result => {
+const getFieldMessages = field => result => {
   const path = getFieldPath(field);
   return get(result, `fields.${path}.messages`);
 }
@@ -17,6 +17,6 @@ const getFieldIsValid = field => result => {
 export {
   getMessages,
   getIsValid,
-  getFieldWarnings,
+  getFieldMessages,
   getFieldIsValid,
 }
