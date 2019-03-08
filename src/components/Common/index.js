@@ -100,8 +100,8 @@ InnerButton.defaultProps = {
 
 
 const validationIcons = {
-  'active' : <Icon name='check-small' size={14} />,
-  'inactive': <Icon name='close-small' size={12} />,
+  'active': <Icon name='close-small' size={12} />,
+  'inactive': <Icon name='check-small' size={14} />,
   'undefined': <div className="validation__undefined-icon" />,
 }
 const validationActiveIcon = active => {
