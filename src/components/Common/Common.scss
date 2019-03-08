@@ -4,23 +4,40 @@
   margin: 0;
   padding: 10px;
   box-shadow: 0px 1px 2px $color__alpha-2;
+  min-width: 60px;
 }
 .validation__message {
   display: flex;
   align-items: center;
-  white-space: normal;
-  word-break: break-all;
   font-size: 12px;
   color: $color__dark-gray-1;
   fill: $color__main-danger;
+  stroke: $color__main-danger;
+  min-width: 60px;
 }
 .validation__message--active {
   text-decoration: line-through;
   color: $color__gray-5;
   fill: $color__main-success;
+  stroke: none;
 }
 .validation__message-icon {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
 }
 .validation__message-text {
   margin-left: 3px;
 }
+
+.validation__undefined-icon {
+  height: 6px;
+  width: 6px;
+  margin: 3px;
+  border-radius: 3px;
+  display: flex;
+  background: #ccc;
+}
+

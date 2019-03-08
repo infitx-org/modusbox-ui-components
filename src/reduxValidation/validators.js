@@ -54,7 +54,7 @@ const vd = {
     'Must have a value',
     value => value !== undefined && value.replace(/ /g, '').length > 0
   ),
-  isRequired: createValidator('Required field', value => typeof value !== 'undefined', true),
+  isRequired: createValidator('Required field', value => typeof value !== 'undefined'),
   isNotEmptyString: createValidator(
     'Must not be an empty string',
     value => value !== undefined && value.replace(/ /g, '').length > 0

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import Button from '../Button';
 import Icon, { iconSizes } from '../Icon';
+import Row from '../Row';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
 
@@ -97,11 +98,27 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
+
+const validationIcons = {
+  'active' : <Icon name='check-small' size={14} />,
+  'inactive': <Icon name='close-small' size={12} />,
+  'undefined': <div className="validation__undefined-icon" />,
+}
+const validationActiveIcon = active => {
+  if (active === true) {
+    return validationIcons.active;
+  } else if (active === false) {
+    return validationIcons.inactive;
+  }
+  return validationIcons.undefined;
+} 
 const ValidationMessage = ({ text, active }) => (
-  <li className={`validation__message ${active ? 'validation__message--active' : ''}`}>
-    <Icon name={active ? 'check-small' : 'close-small'} size={12} />
-    <span className="validation__message-text">{text}</span>
-  </li>
+  <Row>
+    <li className={`validation__message ${active === true ? 'validation__message--active' : ''}`}>
+      <div className="validation__message-icon">{validationActiveIcon(active)}</div>
+      <span className="validation__message-text">{text}</span>
+    </li>
+  </Row>
 );
 
 ValidationMessage.propTypes = {
@@ -110,7 +127,7 @@ ValidationMessage.propTypes = {
 };
 ValidationMessage.defaultProps = {
   text: undefined,
-  active: false,
+  active: undefined,
 };
 
 const ValidationMessages = ({ messages }) => {

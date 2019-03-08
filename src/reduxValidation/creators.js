@@ -1,30 +1,26 @@
 // create an object with properties message and function to test against
-const createValidator = (message, fn, skipWarnings = false) => {
-  const base = {
+const createValidator = (message, fn) => {
+  const validator = {
     message,
     fn,
-    skipWarnings,
     required: true,
   };
   const optional = {
-    ...base,
+    ...validator,
     required: false,
-    fn: value => (value !== undefined ? fn(value) : true),
   };
 
-  return { ...base, optional };
+  return { ...validator, optional };
 };
 
 // create a function that will test against all validators
 // and returns an array of messages or a boolean TRUE
 const createValidation = validators => validators.map(validator => {
-  const { fn, message, required, skipWarnings, isOptional } = validator;
+  const { fn, message, required } = validator;
   return {
     message,
     fn,
-    skipWarnings,
     required,
-    isOptional,
   };
 });
 

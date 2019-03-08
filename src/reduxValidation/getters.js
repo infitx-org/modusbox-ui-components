@@ -1,12 +1,12 @@
 import get from 'lodash/get';
 
-const getWarnings = result => result.warnings;
+const getMessages = result => result.messages;
 const getIsValid = result => result.isValid;
 
 const getFieldPath = field => `${field.split('.').join('.fields.')}`;
 const getFieldWarnings = field => result => {
   const path = getFieldPath(field);
-  return get(result, `fields.${path}.warnings`);
+  return get(result, `fields.${path}.messages`);
 }
 const getFieldIsValid = field => result => {
   const path = getFieldPath(field);
@@ -15,7 +15,7 @@ const getFieldIsValid = field => result => {
 
 
 export {
-  getWarnings,
+  getMessages,
   getIsValid,
   getFieldWarnings,
   getFieldIsValid,

@@ -7,37 +7,42 @@ const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 const validate = (value, validatorFields) => {
   // if value and validator are available
   // test all validator functions against the value
-  const warnings = validatorFields.map(({ message }) => ({ active: false, message }));
+  const messages = validatorFields.map(({ message }) => ({ active: false, message }));
   let isValid = true;
 
   // Validators are not available
-  if (!isUndefined(validatorFields) && !isUndefined(value)) {
+  if (!isUndefined(validatorFields)) {
 
-    const shouldSkipWarnings = validatorFields.some(validator => validator.skipWarnings);
-    const validationResults = validatorFields.map(validator => validator.fn(value));
-
-    validationResults.forEach((result, index) => {
-      if (result === false) {
+    validatorFields.forEach((validator, index) => {
+      const { fn, required } = validator;
+      const result = fn(value);
+      if (result === true) {
+        messages[index].active = false;
+      } else if(isUndefined(value) && !required){
+        isValid = true;
+        messages[index].active = undefined;
+      } else {
         isValid = false;
+        messages[index].active = true;
       }
-      warnings[index].active = !result;
-    })
-
-    if (shouldSkipWarnings) {
-      warnings.forEach(warning => {
-        /* eslint-disable-next-line no-param-reassign */ // Workaround
-        warning.active = undefined;
-      });
-    }
+    });
   }
-  return { warnings, isValid };
+  /** Not sure if this is needed anymore
+    if (isUndefined(value)) {
+    messages.forEach(warning => {
+       eslint-disable-next-line no-param-reassign  // Workaround
+      warning.active = undefined;
+    });
+  }
+  */
+  return { messages, isValid };
 };
 
 // test every properties for its own validation
 const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
 
   const fields = Object.keys(fieldValidators);
-  const warnings = [];
+  const messages = [];
   const fieldResults = {};
   let isValid = true;
 
@@ -47,7 +52,7 @@ const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
 
       const fieldValue = fieldValues[field];
       const fieldValidator = fieldValidators[field];
-      let fieldResult = { isValid: true, warnings: [] };
+      let fieldResult = { isValid: true, messages: [] };
 
 
       if (isObject(fieldValue) || isPrimitiveObject(fieldValidator)) {
@@ -63,14 +68,14 @@ const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
       if (!fieldResult.isValid) {
         isValid = false;
       }
-      warnings.push(...fieldResult.warnings);
+      messages.push(...fieldResult.messages);
       fieldResults[field] = fieldResult;
     }
     
 
   });
 
-  return { isValid, warnings, fields: fieldResults };
+  return { isValid, messages, fields: fieldResults };
 };
 
 export { validate }

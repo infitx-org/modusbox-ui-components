@@ -1,5 +1,5 @@
 import createValidation, { createValidator } from '../creators';
-import { getWarnings, getIsValid, getFieldWarnings, getFieldIsValid, } from '../getters';
+import { getMessages, getIsValid, getFieldWarnings, getFieldIsValid, } from '../getters';
 import toValidationResult from '../runner';
 
 const oddMessage = 'is odd number';
@@ -38,9 +38,9 @@ const result = toValidationResult(values, validators);
 
 describe('tests validation result getters', () => {
 
-  it('should get the warnings', () => {
-    const warnings = getWarnings(result);
-    expect(warnings).toBe(result.warnings);
+  it('should get the messages', () => {
+    const messages = getMessages(result);
+    expect(messages).toBe(result.messages);
   });
 
   it('should get the valid boolean', () => {
@@ -48,16 +48,16 @@ describe('tests validation result getters', () => {
     expect(isValid).toBe(result.isValid);
   });
 
-  it('should get the field warnings', () => {
+  it('should get the field messages', () => {
     const getOddFieldWarnings = getFieldWarnings('odd');
-    const warnings = getOddFieldWarnings(result);
-    expect(warnings).toBe(result.fields.odd.warnings);
+    const messages = getOddFieldWarnings(result);
+    expect(messages).toBe(result.fields.odd.messages);
   });
 
-  it('should get the nested field warnings', () => {
+  it('should get the nested field messages', () => {
     const getGt10FieldWarnings = getFieldWarnings('foo.bar.gt10');
-    const warnings = getGt10FieldWarnings(result);
-    expect(warnings).toBe(result.fields.foo.fields.bar.fields.gt10.warnings);
+    const messages = getGt10FieldWarnings(result);
+    expect(messages).toBe(result.fields.foo.fields.bar.fields.gt10.messages);
   });
 
   it('should get the field is valid', () => {
