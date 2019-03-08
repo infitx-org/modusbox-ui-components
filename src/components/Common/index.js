@@ -114,7 +114,9 @@ const validationActiveIcon = active => {
 } 
 const ValidationMessage = ({ message, active }) => (
   <Row>
-    <li className={`validation__message ${active === true ? 'validation__message--active' : ''}`}>
+    <li
+      className={`validation__message ${active === false ? 'validation__message--inactive' : ''}`}
+    >
       <div className="validation__message-icon">{validationActiveIcon(active)}</div>
       <span className="validation__message-text">{message}</span>
     </li>

@@ -15,7 +15,7 @@
   stroke: $color__main-danger;
   min-width: 60px;
 }
-.validation__message--active {
+.validation__message--inactive {
   text-decoration: line-through;
   color: $color__gray-5;
   fill: $color__main-success;
