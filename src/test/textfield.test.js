@@ -9,7 +9,7 @@ import { Loader, Placeholder, Validation } from '../components/Common';
 
 it('renders the textfield', () => {
   const wrapper = shallow(<TextField />);
-  expect(wrapper.find('div.input-textfield')).toHaveLength(1);
+  expect(wrapper.find('div.input-textfield__component')).toHaveLength(1);
 });
 
 it('renders the textfield value', () => {

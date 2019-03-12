@@ -58,6 +58,7 @@ const TestDatePicker = () => (
         invalid
         invalidMessages={[
           { message: 'This is a test', active: true },
+          { message: 'This is undefined', active: undefined },
           { message: 'This is invalid', active: false },
         ]}
       />

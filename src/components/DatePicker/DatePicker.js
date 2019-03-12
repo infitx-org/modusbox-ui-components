@@ -337,13 +337,6 @@ class DatePicker extends PureComponent {
       loader = <Loader size={size} />;
     }
 
-    let validation = null;
-    if (invalid) {
-      validation = (
-        <Validation className="input-datepicker__icon" active={isOpen} messages={invalidMessages} />
-      );
-    }
-
     let calendarIcon = null;
     if (showCalendar) {
       calendarIcon = (
@@ -358,65 +351,66 @@ class DatePicker extends PureComponent {
       this.reverse && 'input-datepicker__calendar-box--reverse',
     ]);
 
-    return (
-      <div className="input-datepicker mb-input__box" style={style}>
-        <div className={componentClassName}>
-          <div
-            id={id}
-            className="mb-input__content input-datepicker__content"
-            onClick={this.onClick}
-            onKeyDown={this.onFocus}
-            role="presentation"
-          >
-            {customPlaceholder}
-
-            <input
-              onFocus={this.onFocus}
-              ref={input => {
-                this.input = input;
-              }}
-              className="mb-input__input input-datepicker__value"
-              value={value}
-              onKeyDown={this.testKey}
-              disabled={disabled}
-              readOnly
-            />
-            {loader}
-            {validation}
-            {calendarIcon}
-          </div>
-        </div>
-
+    return [
+      <div id={id} className={componentClassName} style={style} key="datepicker">
         <div
-          className="input-datepicker--position"
-          ref={calendarPosition => {
-            this.calendarPosition = calendarPosition;
-          }}
+          className="mb-input__content input-datepicker__content"
+          onClick={this.onClick}
+          onKeyDown={this.onFocus}
+          role="presentation"
         >
-          {this.state.isOpen && (
-            <div className={calendarBoxClassName}>
-              <DayPicker
-                initialMonth={initialMonth}
-                selectedDays={day => DateUtils.isSameDay(selectedDay, day)}
-                onDayClick={this.handleDayClick}
-                disabledDays={this.props.disabledDays}
-              />
-              {this.props.withTime && (
-                <TimePicker
-                  hour={this.state.hour}
-                  minute={this.state.minute}
-                  second={this.state.second}
-                  onHourChange={this.handleHourClick}
-                  onMinuteChange={this.handleMinuteClick}
-                  onSecondChange={this.handleSecondClick}
-                  disabled={selectedDay === undefined || selectedDay == null}
-                />
-              )}
-            </div>
-          )}
+          {customPlaceholder}
+          <input
+            onFocus={this.onFocus}
+            ref={input => {
+              this.input = input;
+            }}
+            className="mb-input__input input-datepicker__value"
+            value={value}
+            onKeyDown={this.testKey}
+            disabled={disabled}
+            readOnly
+          />
+          {loader}
+          <Validation
+            className="input-datepicker__icon"
+            active={isOpen}
+            messages={invalidMessages}
+            invalid={invalid}
+          />
+          {calendarIcon}
         </div>
+      </div>,
+      <div
+        key="calendar"
+        className="input-datepicker--position"
+        ref={calendarPosition => {
+          this.calendarPosition = calendarPosition;
+        }}
+      >
+        {this.state.isOpen && (
+          <div className={calendarBoxClassName}>
+            <DayPicker
+              initialMonth={initialMonth}
+              selectedDays={day => DateUtils.isSameDay(selectedDay, day)}
+              onDayClick={this.handleDayClick}
+              disabledDays={this.props.disabledDays}
+            />
+            {this.props.withTime && (
+              <TimePicker
+                hour={this.state.hour}
+                minute={this.state.minute}
+                second={this.state.second}
+                onHourChange={this.handleHourClick}
+                onMinuteChange={this.handleMinuteClick}
+                onSecondChange={this.handleSecondClick}
+                disabled={selectedDay === undefined || selectedDay == null}
+              />
+            )}
+          </div>
+        )}
       </div>
-    );
+    ];
   }
 }
 

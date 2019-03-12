@@ -7,7 +7,7 @@ import { Loader, Placeholder, Validation } from '../components/Common';
 
 it('renders the fileuploader', () => {
   const wrapper = shallow(<FileUploader />);
-  expect(wrapper.find('div.input-fileuploader')).toHaveLength(1);
+  expect(wrapper.find('div.input-fileuploader__component')).toHaveLength(1);
 });
 
 it('renders the filuploader value', () => {

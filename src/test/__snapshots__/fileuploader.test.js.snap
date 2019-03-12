@@ -2,49 +2,51 @@
 
 exports[`renders the fileuploader correctly when multiple props are set 1`] = `
 <div
-  className="input-fileuploader mb-input__box"
+  className="input-fileuploader__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
+  id="test-id"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  role="presentation"
   style={Object {}}
 >
   <div
-    className="input-fileuploader__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
-    id="test-id"
-    onClick={[Function]}
-    onKeyDown={[Function]}
-    role="presentation"
+    className="input-fileuploader-box"
   >
     <div
-      className="input-fileuploader-box"
+      className="mb-input__content input-fileuploader__content"
     >
+      <input
+        className="input-fileuploader__input"
+        disabled={false}
+        id="test-id-file"
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="file"
+      />
       <div
-        className="mb-input__content input-fileuploader__content"
+        className="input-fileuploader__filename input-fileuploader__filename--no-file input-fileuploader__filename--large"
       >
-        <input
-          className="input-fileuploader__input"
-          disabled={false}
-          id="test-id-file"
-          onChange={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          type="file"
-        />
-        <div
-          className="input-fileuploader__filename input-fileuploader__filename--no-file input-fileuploader__filename--large"
-        >
-          No File Choosen
-        </div>
-        <InnerButton
-          active={false}
-          className="input-fileuploader__button-add"
-          disabled={false}
-          icon="upload-small"
-          kind="dark"
-          label="Choose File"
-          noFill={true}
-          onClick={[Function]}
-          size="l"
-          tabIndex="-1"
-        />
+        No File Choosen
       </div>
+      <InnerButton
+        active={false}
+        className="input-fileuploader__button-add"
+        disabled={false}
+        icon="upload-small"
+        kind="dark"
+        label="Choose File"
+        noFill={true}
+        onClick={[Function]}
+        size="l"
+        tabIndex="-1"
+      />
+      <Validation
+        active={false}
+        className="input-fileuploader__icon"
+        invalid={false}
+        messages={Array []}
+      />
     </div>
   </div>
 </div>

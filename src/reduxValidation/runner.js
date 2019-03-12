@@ -27,14 +27,6 @@ const validate = (value, validatorFields) => {
       }
     });
   }
-  /** Not sure if this is needed anymore
-    if (isUndefined(value)) {
-    messages.forEach(warning => {
-       eslint-disable-next-line no-param-reassign  // Workaround
-      warning.active = undefined;
-    });
-  }
-  */
   return { messages, isValid };
 };
 

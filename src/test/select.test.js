@@ -16,7 +16,7 @@ const toSelectOptions = items => items.map(item => ({ value: `${item}`, label: `
 
 it('renders the Select', () => {
   const wrapper = shallow(<Select />);
-  expect(wrapper.find('div.input-select')).toHaveLength(1);
+  expect(wrapper.find('div.input-select__component')).toHaveLength(1);
 });
 
 it('renders the Select label for given value when option exists', () => {

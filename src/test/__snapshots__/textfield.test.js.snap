@@ -2,33 +2,35 @@
 
 exports[`renders the textfield correctly when multiple props are set 1`] = `
 <div
-  className="input-textfield mb-input__box"
+  className="input-textfield__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
+  onClick={[Function]}
+  role="presentation"
   style={Object {}}
 >
   <div
-    className="input-textfield__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large"
-    onClick={[Function]}
-    role="presentation"
+    className="mb-input__content input-textfield__content"
   >
-    <div
-      className="mb-input__content input-textfield__content"
-    >
-      <input
-        autoComplete="off"
-        autoFocus={false}
-        className="mb-input__input input-textfield__value"
-        disabled={false}
-        id="test-id"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="test-value"
-      />
-    </div>
+    <input
+      autoComplete="off"
+      autoFocus={false}
+      className="mb-input__input input-textfield__value"
+      disabled={false}
+      id="test-id"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      type="text"
+      value="test-value"
+    />
+    <Validation
+      active={false}
+      className="input-textfield__icon"
+      invalid={false}
+      messages={Array []}
+    />
   </div>
 </div>
 `;
