@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -212,7 +213,6 @@ class TooltipViewer extends PureComponent {
 
 class Tooltip extends PureComponent {
   static visibleAfterScroll (element){
-    /* eslint-disable */
     const percentX = 100;
     const percentY = 100;
     const tolerance = 0.01;
@@ -223,7 +223,6 @@ class Tooltip extends PureComponent {
     const visiblePercentageX = visiblePixelX / elementRect.width * 100;
     const visiblePercentageY = visiblePixelY / elementRect.height * 100;
     return visiblePercentageX + tolerance > percentX && visiblePercentageY + tolerance > percentY;
-    /* eslint-enable */
   };
   constructor(props) {
     super(props);
@@ -241,10 +240,13 @@ class Tooltip extends PureComponent {
     this.throttleScroll = throttle(this.hideTooltipBeforeScroll, 500, { leading: true });
     this.throttleScrollEnd = throttle(this.showForcedTooltipAfterScroll, 500);
 
-    this.state = { show: this.props.forceVisibility };
+    this.state = { show: false };
   }
   componentDidMount() {
     this.detectTooltipRequired();
+    if (this.props.forceVisibility) {
+      this.showTooltip(true);
+    }
   }
   componentDidUpdate() {
     if (this._scrolling) {
@@ -326,6 +328,7 @@ class Tooltip extends PureComponent {
     this.setState({ show: false });
   }
   hideTooltipBeforeScroll() {
+    console.log('s')
     this._scrolling = true;
     this.hideTooltip(true);
     delay(this.throttleScrollEnd, 500)

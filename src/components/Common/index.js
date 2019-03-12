@@ -154,17 +154,30 @@ ValidationMessages.defaultProps = {
   messages: [],
 };
 
-const InvalidIcon = ({ messages, forceTooltipVisibility, invalid }) => (
-  <Tooltip
-    position="right"
-    kind="error"
-    custom
-    content={<ValidationMessages messages={messages} />}
-    forceVisibility={forceTooltipVisibility}
-  >
-    {invalid && <Icon size={16} name="warning-sign" />}
-  </Tooltip>
-);
+const InvalidIcon = ({ messages, invalid, active }) => {
+  const icon = (
+    <Icon
+      size={16}
+      name="warning-sign"
+      className={`validation__icon ${invalid ? 'validation__icon--invalid' : ''}`}
+    />
+  );
+  if (active && messages.length > 0) {
+    return (
+      <Tooltip
+        position="right"
+        kind="error"
+        custom
+        content={<ValidationMessages messages={messages} />}
+        forceVisibility={active}
+      >
+        {icon}
+      </Tooltip>
+    )
+  }
+  return icon;
+};
+
 const Validation = ({ active, className, messages, invalid }) => {
   // Validation Icon with custom tooltip
   const invalidIconClassName = utils.composeClassNames([
@@ -174,7 +187,7 @@ const Validation = ({ active, className, messages, invalid }) => {
   ]);
   return (
     <div className={invalidIconClassName}>
-      <InvalidIcon messages={messages} forceTooltipVisibility={active} invalid={invalid} />
+      <InvalidIcon messages={messages} invalid={invalid} active={active} />
     </div>
   );
 };
