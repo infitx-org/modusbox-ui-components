@@ -16,14 +16,17 @@ const validate = (value, validatorFields) => {
     validatorFields.forEach((validator, index) => {
       const { fn, required } = validator;
       const result = fn(value);
-      if (result === true) {
-        messages[index].active = false;
-      } else if(isUndefined(value) && !required){
+      if(isUndefined(value) && !required){
         isValid = true;
         messages[index].active = undefined;
-      } else {
+      } else if (isUndefined(value) && required) {
         isValid = false;
         messages[index].active = true;
+      } else {
+        if (!result) {
+          isValid = false;
+        }
+        messages[index].active = !result;
       }
     });
   }

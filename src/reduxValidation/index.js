@@ -2,12 +2,13 @@ import { getMessages, getIsValid, getFieldMessages, getFieldIsValid } from './ge
 import toValidationResult, { validate } from './runner';
 
 import vd from './validators';
-import createValidation, { createValidator } from './creators';
+import createValidation, { createOptionalValidation, createValidator } from './creators';
 
 export {
   vd,
   createValidator,
   createValidation,
+  createOptionalValidation,
   toValidationResult,
   validate,
   getMessages,
