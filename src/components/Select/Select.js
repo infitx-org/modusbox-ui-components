@@ -360,60 +360,60 @@ class Select extends PureComponent {
     }
 
     return (
-      <div id={id} className="input-select mb-input__box" style={style}>
-        <div
-          className={componentClassName}
-          onClick={this.onClickSelect}
-          ref={area => {
-            this.area = area;
-          }}
-          role="presentation"
-        >
-          <div className="mb-input__content input-select__content">
-            {customPlaceholder}
-            <input
-              className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
-              type="text"
-              ref={inputFilter => {
-                this.inputFilter = inputFilter;
-              }}
-              onKeyDown={this.testKey}
-              onChange={this.applyFilter}
-              onFocus={this.onFocus}
-              onClick={this.openSelect}
-              value={inputValue}
-              disabled={disabled}
-            />
-            <input type="hidden" disabled value={JSON.stringify(options)} />
-            {optionsFilter}
-            {validation}
-            {loader}
-            <div className="mb-input__inner-icon input-select__icon">
-              <Indicator isOpen={isOpen} size={size} />
-            </div>
-          </div>
-          <div
-            className="input-select__options"
-            ref={position => {
-              this.optionsPosition = position;
+      <div
+        id={id}
+        style={style}
+        className={componentClassName}
+        onClick={this.onClickSelect}
+        ref={area => {
+          this.area = area;
+        }}
+        role="presentation"
+      >
+        <div className="mb-input__content input-select__content">
+          {customPlaceholder}
+          <input
+            className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
+            type="text"
+            ref={inputFilter => {
+              this.inputFilter = inputFilter;
             }}
-          >
-            <Options
-              size={size}
-              open={isOpen}
-              ref={wrapper => {
-                this.options = wrapper;
-              }}
-              options={options}
-              maxHeight={this.maxHeight || 0}
-              reverse={this.reverse}
-              selected={selected}
-              highlighted={highlightedOption}
-              onSelect={this.onSelectOption}
-              onClear={this.onClearOption}
-              clearable={this.props.onClear}
-            />
+            onKeyDown={this.testKey}
+            onChange={this.applyFilter}
+            onFocus={this.onFocus}
+            onClick={this.openSelect}
+            value={inputValue}
+            disabled={disabled}
+          />
+          <input type="hidden" disabled value={JSON.stringify(options)} />
+          {optionsFilter}
+          {validation}
+          {loader}
+          <div className="mb-input__inner-icon input-select__icon">
+            <Indicator isOpen={isOpen} size={size} />
           </div>
+        </div>
+        <div
+          className="input-select__options"
+          ref={position => {
+            this.optionsPosition = position;
+          }}
+        >
+          <Options
+            size={size}
+            open={isOpen}
+            ref={wrapper => {
+              this.options = wrapper;
+            }}
+            options={options}
+            maxHeight={this.maxHeight || 0}
+            reverse={this.reverse}
+            selected={selected}
+            highlighted={highlightedOption}
+            onSelect={this.onSelectOption}
+            onClear={this.onClearOption}
+            clearable={this.props.onClear}
+          />
         </div>
       </div>
     );

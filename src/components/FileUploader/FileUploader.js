@@ -252,38 +252,37 @@ class FileUploader extends PureComponent {
       );
     }
     return (
-      <div className="input-fileuploader mb-input__box" style={style}>
-        <div
-          id={id}
-          className={componentClassName}
-          onClick={this.onClickFileUploader}
-          onKeyDown={this.onClickFileUploader}
-          ref={area => {
-            this.area = area;
-          }}
-          role="presentation"
-        >
-          <div className="input-fileuploader-box">
-            <div className="mb-input__content input-fileuploader__content">
-              {customPlaceholder}
-              <input
-                className="input-fileuploader__input"
-                type="file"
-                accept={fileType}
-                onFocus={this.onEnterFileUploader}
-                onChange={this.onChangeFile}
-                disabled={disabled}
-                ref={fileuploader => {
-                  this.fileuploader = fileuploader;
-                }}
-                onKeyDown={this.onKeyDown}
-                id={`${id}-file`}
-              />
-              <div className={fileNameClassName}>{fileNameLabel}</div>
-              {loader}
-              {fileButton}
-              {validation}
-            </div>
+      <div
+        style={style}
+        id={id}
+        className={componentClassName}
+        onClick={this.onClickFileUploader}
+        onKeyDown={this.onClickFileUploader}
+        ref={area => {
+          this.area = area;
+        }}
+        role="presentation"
+      >
+        <div className="input-fileuploader-box">
+          <div className="mb-input__content input-fileuploader__content">
+            {customPlaceholder}
+            <input
+              className="input-fileuploader__input"
+              type="file"
+              accept={fileType}
+              onFocus={this.onEnterFileUploader}
+              onChange={this.onChangeFile}
+              disabled={disabled}
+              ref={fileuploader => {
+                this.fileuploader = fileuploader;
+              }}
+              onKeyDown={this.onKeyDown}
+              id={`${id}-file`}
+            />
+            <div className={fileNameClassName}>{fileNameLabel}</div>
+            {loader}
+            {fileButton}
+            {validation}
           </div>
         </div>
       </div>

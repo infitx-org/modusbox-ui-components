@@ -246,11 +246,15 @@ class TextField extends PureComponent {
       );
     }
     let validation = null;
-    if (invalid) {
-      validation = (
-        <Validation className="input-textfield__icon" active={isOpen} messages={invalidMessages} />
-      );
-    }
+    
+    validation = (
+      <Validation
+        className="input-textfield__icon"
+        active={isOpen}
+        messages={invalidMessages}
+        invalid={invalid}
+      />
+    );
 
     let loader = null;
     if (pending) {
@@ -267,44 +271,43 @@ class TextField extends PureComponent {
     }
 
     return (
-      <div className="input-textfield mb-input__box" style={style}>
-        <div
-          className={componentClassName}
-          onClick={this.onTextFieldClick}
-          ref={area => {
-            this.area = area;
-          }}
-          role="presentation"
-        >
-          <div className="mb-input__content input-textfield__content">
-            {customPlaceholder}
-            <input
-              id={id}
-              ref={input => {
-                this.input = input;
-              }}
-              autoFocus={autofocus === true}
-              autoComplete="off"
-              type={inputType}
-              onClick={this.onClick}
-              onChange={this.onChange}
-              onKeyDown={this.testKey}
-              onKeyPress={this.onKeyPress}
-              onBlur={this.onBlur}
-              onFocus={this.onFocus}
-              value={value || ''}
-              disabled={disabled}
-              className="mb-input__input input-textfield__value"
-            />
-            {innerButton}
-            {loader}
-            {validation}
-            {passwordToggle}
-            {customIcon}
-          </div>
+      <div
+        style={style}
+        className={componentClassName}
+        onClick={this.onTextFieldClick}
+        ref={area => {
+          this.area = area;
+        }}
+        role="presentation"
+      >
+        <div className="mb-input__content input-textfield__content">
+          {customPlaceholder}
+          <input
+            id={id}
+            ref={input => {
+              this.input = input;
+            }}
+            autoFocus={autofocus === true}
+            autoComplete="off"
+            type={inputType}
+            onClick={this.onClick}
+            onChange={this.onChange}
+            onKeyDown={this.testKey}
+            onKeyPress={this.onKeyPress}
+            onBlur={this.onBlur}
+            onFocus={this.onFocus}
+            value={value || ''}
+            disabled={disabled}
+            className="mb-input__input input-textfield__value"
+          />
+          {innerButton}
+          {loader}
+          {validation}
+          {passwordToggle}
+          {customIcon}
         </div>
       </div>
-    );
+    ); 
   }
 }
 
