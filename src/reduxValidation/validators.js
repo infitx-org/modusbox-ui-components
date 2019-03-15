@@ -31,7 +31,7 @@ const vd = {
   isEmail: createValidator('Must be a valid Email address', value =>
     value ? EMAIL_REGEX.test(value) : false
   ),
-  isNum: createValidator('Must be a number', value => !Number.isNaN(value)),
+  isNum: createValidator('Must be a number', value => !Number.isNaN(Number(value))),
   isPhoneNum: createValidator('Must be a phone number', value => /^(\+?)[0-9.]*$/.test(value)),
   isText: createValidator('Must be text content', value => /^[a-zA-Z '.]*$/.test(value)),
   isAlpha: createValidator('Must be alphanumeric', value => /^[a-zA-Z]*$/.test(value)),
@@ -78,7 +78,7 @@ const vd = {
   maxLength: length =>
     createValidator(
       `Max length is ${length} character`,
-      value => (value === undefined ? true : value.length <= length)
+      value => (value ? value.length <= length : false)
     ),
   isLong: length =>
     createValidator(`Must be ${length} characters`, value => value && value.length === length),

@@ -5,7 +5,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import TextField from '../components/TextField';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
-import { Loader, Placeholder, Validation } from '../components/Common';
+import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
 
 it('renders the textfield', () => {
   const wrapper = shallow(<TextField />);
@@ -21,6 +21,11 @@ it('renders the placeholder', () => {
   const wrapper = shallow(<TextField placeholder="test-textfield" />);
   expect(wrapper.find(Placeholder)).toHaveLength(1);
   expect(wrapper.find(Placeholder).prop('label')).toBe('test-textfield');
+});
+
+it('renders the validation wrapper', () => {
+  const wrapper = shallow(<TextField placeholder="test-Select" />);
+  expect(wrapper.find(ValidationWrapper)).toHaveLength(1);
 });
 
 it('applies the prop className', () => {
@@ -51,7 +56,7 @@ it('renders the pending state', () => {
 
 it('renders the invalid state', () => {
   const wrapper = shallow(<TextField invalid />);
-  expect(wrapper.find(Validation)).toHaveLength(1);
+  expect(wrapper.find(InvalidIcon)).toHaveLength(1);
 });
 
 it('renders the required state', () => {

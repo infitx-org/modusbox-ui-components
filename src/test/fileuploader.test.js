@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
 import FileUploader from '../components/FileUploader';
-import { Loader, Placeholder, Validation } from '../components/Common';
+import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
 
 it('renders the fileuploader', () => {
   const wrapper = shallow(<FileUploader />);
@@ -19,6 +19,11 @@ it('renders the placeholder', () => {
   const wrapper = shallow(<FileUploader placeholder="test-fileuploader" />);
   expect(wrapper.find(Placeholder)).toHaveLength(1);
   expect(wrapper.find(Placeholder).prop('label')).toBe('test-fileuploader');
+});
+
+it('renders the validation wrapper', () => {
+  const wrapper = shallow(<FileUploader placeholder="test-Select" />);
+  expect(wrapper.find(ValidationWrapper)).toHaveLength(1);
 });
 
 it('applies the prop className', () => {
@@ -44,7 +49,7 @@ it('renders the pending state', () => {
 
 it('renders the invalid state', () => {
   const wrapper = shallow(<FileUploader invalid />);
-  expect(wrapper.find(Validation)).toHaveLength(1);
+  expect(wrapper.find(InvalidIcon)).toHaveLength(1);
 });
 
 it('renders the required state', () => {

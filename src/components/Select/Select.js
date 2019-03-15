@@ -8,7 +8,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon, { iconSizes } from '../Icon';
-import { Loader, Placeholder, Validation } from '../Common';
+import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../Common';
 
 import Options from './Options';
 import Indicator from './Indicator';
@@ -347,73 +347,75 @@ class Select extends PureComponent {
       );
     }
 
+    let invalidIcon = null;
+    if (invalid) {
+      invalidIcon = <InvalidIcon size={size} />;
+    }
+
     let loader = null;
     if (pending) {
       loader = <Loader size={size} />;
     }
 
     return (
-      <div
-        id={id}
-        style={style}
-        className={componentClassName}
-        onClick={this.onClickSelect}
-        ref={area => {
-          this.area = area;
-        }}
-        role="presentation"
-      >
-        <div className="mb-input__content input-select__content">
-          {customPlaceholder}
-          <input
-            className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
-            type="text"
-            ref={inputFilter => {
-              this.inputFilter = inputFilter;
+      <ValidationWrapper messages={invalidMessages} active={isOpen}>
+        <div
+          id={id}
+          style={style}
+          className={componentClassName}
+          onClick={this.onClickSelect}
+          ref={area => {
+            this.area = area;
+          }}
+          role="presentation"
+        >
+          <div className="mb-input__content input-select__content">
+            {customPlaceholder}
+            <input
+              className={`mb-input__input input-select__value ${filter ? 'has-filter' : ''}`}
+              type="text"
+              ref={inputFilter => {
+                this.inputFilter = inputFilter;
+              }}
+              onKeyDown={this.testKey}
+              onChange={this.applyFilter}
+              onFocus={this.onFocus}
+              onClick={this.openSelect}
+              value={inputValue}
+              disabled={disabled}
+            />
+            <input type="hidden" disabled value={JSON.stringify(options)} />
+            {optionsFilter}
+            {invalidIcon}
+            {loader}
+            <div className="mb-input__inner-icon input-select__icon">
+              <Indicator isOpen={isOpen} size={size} />
+            </div>
+          </div>
+          <div
+            className="input-select__options"
+            ref={position => {
+              this.optionsPosition = position;
             }}
-            onKeyDown={this.testKey}
-            onChange={this.applyFilter}
-            onFocus={this.onFocus}
-            onClick={this.openSelect}
-            value={inputValue}
-            disabled={disabled}
-          />
-          <input type="hidden" disabled value={JSON.stringify(options)} />
-          {optionsFilter}
-          <Validation 
-            className="input-select__icon"
-            active={isOpen}
-            messages={invalidMessages}
-            invalid={invalid}
-          />
-          {loader}
-          <div className="mb-input__inner-icon input-select__icon">
-            <Indicator isOpen={isOpen} size={size} />
+          >
+            <Options
+              size={size}
+              open={isOpen}
+              ref={wrapper => {
+                this.options = wrapper;
+              }}
+              options={options}
+              maxHeight={this.maxHeight || 0}
+              reverse={this.reverse}
+              selected={selected}
+              highlighted={highlightedOption}
+              onSelect={this.onSelectOption}
+              onClear={this.onClearOption}
+              clearable={this.props.onClear}
+            />
           </div>
         </div>
-        <div
-          className="input-select__options"
-          ref={position => {
-            this.optionsPosition = position;
-          }}
-        >
-          <Options
-            size={size}
-            open={isOpen}
-            ref={wrapper => {
-              this.options = wrapper;
-            }}
-            options={options}
-            maxHeight={this.maxHeight || 0}
-            reverse={this.reverse}
-            selected={selected}
-            highlighted={highlightedOption}
-            onSelect={this.onSelectOption}
-            onClear={this.onClearOption}
-            clearable={this.props.onClear}
-          />
-        </div>
-      </div>
+      </ValidationWrapper>
     );
   }
 }

@@ -4,10 +4,10 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import DatePicker from '../components/DatePicker';
 import Icon from '../components/Icon';
-import { Loader, Placeholder, Validation } from '../components/Common';
+import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
 
 it('renders the datepicker', () => {
-  const wrapper = shallow(<DatePicker />);
+  const wrapper = mount(<DatePicker />);
   expect(wrapper.find('div.input-datepicker__component')).toHaveLength(1);
 });
 
@@ -22,14 +22,19 @@ it('renders the placeholder', () => {
   expect(wrapper.find(Placeholder).prop('label')).toBe('test-datepicker');
 });
 
+it('renders the validation wrapper', () => {
+  const wrapper = shallow(<DatePicker placeholder="test-Select" />);
+  expect(wrapper.find(ValidationWrapper)).toHaveLength(1);
+});
+
 it('applies the prop className', () => {
-  const wrapper = shallow(<DatePicker className="test" />);
-  expect(wrapper.find('.test')).toHaveLength(1);
+  const wrapper = mount(<DatePicker className="test" />);
+  expect(wrapper.find('div.input-datepicker__component').hasClass('test')).toBeTruthy();
 });
 
 it('renders the prop id', () => {
-  const wrapper = shallow(<DatePicker id="testDatePickerId" />);
-  expect(wrapper.find('#testDatePickerId')).toHaveLength(1);
+  const wrapper = mount(<DatePicker id="testDatePickerId" />);
+  expect(wrapper.find('div.input-datepicker__component').find('#testDatePickerId')).toHaveLength(1);
 });
 
 it('renders the disabled state', () => {
@@ -50,7 +55,7 @@ it('renders the pending state', () => {
 
 it('renders the invalid state', () => {
   const wrapper = mount(<DatePicker invalid />);
-  expect(wrapper.find(Validation)).toHaveLength(1);
+  expect(wrapper.find(InvalidIcon)).toHaveLength(1);
 });
 
 it('renders the required state', () => {
@@ -101,8 +106,7 @@ it('triggers onFocus when focused', () => {
 
 // Snapshot
 
-/*it('renders the datepicker correctly when multiple props are set', () => {
+it('renders the datepicker correctly when multiple props are set', () => {
   const wrapper = shallow(<DatePicker value="test-value" id="test-id" />);
   expect(shallowToJson(wrapper)).toMatchSnapshot();
 });
-*/

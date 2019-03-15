@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
-import { Loader, Placeholder, InnerButton, Validation } from '../Common';
+import { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon } from '../Common';
 
 import '../../icons/mule/upload-small.svg';
 import '../../icons/mule/close-small.svg';
@@ -237,51 +237,53 @@ class FileUploader extends PureComponent {
       );
     }
 
+    let invalidIcon = null;
+    if (invalid) {
+      invalidIcon = <InvalidIcon size={size} />;
+    }
+
     let loader = null;
     if (pending) {
       loader = <Loader size={size} />;
     }
 
     return (
-      <div
-        style={style}
-        id={id}
-        className={componentClassName}
-        onClick={this.onClickFileUploader}
-        onKeyDown={this.onClickFileUploader}
-        ref={area => {
-          this.area = area;
-        }}
-        role="presentation"
-      >
-        <div className="input-fileuploader-box">
-          <div className="mb-input__content input-fileuploader__content">
-            {customPlaceholder}
-            <input
-              className="input-fileuploader__input"
-              type="file"
-              accept={fileType}
-              onFocus={this.onEnterFileUploader}
-              onChange={this.onChangeFile}
-              disabled={disabled}
-              ref={fileuploader => {
-                this.fileuploader = fileuploader;
-              }}
-              onKeyDown={this.onKeyDown}
-              id={`${id}-file`}
-            />
-            <div className={fileNameClassName}>{fileNameLabel}</div>
-            {loader}
-            {fileButton}
-            <Validation
-              className="input-fileuploader__icon"
-              active={isOpen}
-              messages={invalidMessages}
-              invalid={invalid}
-            />
+      <ValidationWrapper messages={invalidMessages} active={isOpen}>
+        <div
+          style={style}
+          id={id}
+          className={componentClassName}
+          onClick={this.onClickFileUploader}
+          onKeyDown={this.onClickFileUploader}
+          ref={area => {
+            this.area = area;
+          }}
+          role="presentation"
+        >
+          <div className="input-fileuploader-box">
+            <div className="mb-input__content input-fileuploader__content">
+              {customPlaceholder}
+              <input
+                className="input-fileuploader__input"
+                type="file"
+                accept={fileType}
+                onFocus={this.onEnterFileUploader}
+                onChange={this.onChangeFile}
+                disabled={disabled}
+                ref={fileuploader => {
+                  this.fileuploader = fileuploader;
+                }}
+                onKeyDown={this.onKeyDown}
+                id={`${id}-file`}
+              />
+              <div className={fileNameClassName}>{fileNameLabel}</div>
+              {loader}
+              {invalidIcon}
+              {fileButton}
+            </div>
           </div>
         </div>
-      </div>
+      </ValidationWrapper>
     );
   }
 }

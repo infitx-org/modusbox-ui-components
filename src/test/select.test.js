@@ -5,7 +5,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import Select from '../components/Select';
 import Options from '../components/Select/Options';
 
-import { Loader, Placeholder, Validation } from '../components/Common';
+import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
 
 const options = new Array(100).fill().map((item, index) => ({
   label: `label-${index}`,
@@ -35,6 +35,11 @@ it('renders the placeholder', () => {
   expect(wrapper.find(Placeholder).prop('label')).toBe('test-Select');
 });
 
+it('renders the validation wrapper', () => {
+  const wrapper = shallow(<Select placeholder="test-Select" />);
+  expect(wrapper.find(ValidationWrapper)).toHaveLength(1);
+});
+
 it('applies the prop className', () => {
   const wrapper = shallow(<Select className="test" />);
   expect(wrapper.find('.test')).toHaveLength(1);
@@ -57,7 +62,7 @@ it('renders the pending state', () => {
 
 it('renders the invalid state', () => {
   const wrapper = shallow(<Select invalid />);
-  expect(wrapper.find(Validation)).toHaveLength(1);
+  expect(wrapper.find(InvalidIcon)).toHaveLength(1);
 });
 
 it('renders the required state', () => {

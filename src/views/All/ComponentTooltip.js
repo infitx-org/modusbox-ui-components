@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import Icon from '../../components/Icon';
 import Row from '../../components/Row';
 import Column from '../../components/Column';
+import ScrollBox from '../../components/ScrollBox';
 import Tooltip from '../../components/Tooltip';
+import { ValidationWrapper } from '../../components/Common';
 
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
@@ -13,6 +15,22 @@ const testLabels = [`Hey you!`, `Hey what's up?`,`I don't know man!`];
 
 const TestTooltip = () => (
   <Column style={{ padding: '10px' }}>
+    <Row>
+      <ScrollBox style={{ height: '200px', marginBottom: '10px' }}>
+        <div style={{height: '300px', background: '#eee', padding: '20px'}} >
+          <ScrollBox style={{ height: '100px', marginBottom: '10px' }}>
+            <div style={{height: '300px', background: '#ccc', display: 'flex'}} >
+              <Column style={columnStyle}>
+                <div style={{height: '50px'}}/>
+                <Tooltip label="I am force here" forceVisibility position="left">
+                  <span>Forced Left</span>
+                </Tooltip>
+              </Column>
+            </div>
+          </ScrollBox>
+        </div>
+      </ScrollBox>
+    </Row>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
         <Tooltip style={style}> Default usage - applying style(100px width) </Tooltip>
@@ -23,16 +41,44 @@ const TestTooltip = () => (
         </Tooltip>
       </Column>
       <Column style={columnStyle}>
-        <Tooltip label="I am force here" forceVisibility>
-          Forced
+        <Tooltip label="I am force here" forceVisibility position="left">
+          Forced Left
         </Tooltip>
       </Column>
+      <Column style={columnStyle}>
+        <Tooltip label="I am force here" forceVisibility position="top">
+          Forced Top
+        </Tooltip>
+      </Column>
+      <Column style={columnStyle}>
+        <Tooltip label="I am force here" forceVisibility position="right">
+          Forced right
+        </Tooltip>
+      </Column>
+      <Column style={columnStyle}>
+        <Tooltip label="I am force here" forceVisibility position="bottom">
+          Forced bottom
+        </Tooltip>
+      </Column>
+      
     </Row>
     <Row className="p10 b1-ccc" align="center space-between">
       <Column style={columnStyle}>
         <Tooltip custom content={<div style={{ background: '#9c3', padding: '30px' }}>ciao</div>}>
           custom tooltip
         </Tooltip>
+      </Column>
+      <Column style={columnStyle}>
+        <ValidationWrapper
+          messages={[
+            { message: 'This is a test', active: true },
+            { message: 'This is undefined', active: undefined },
+            { message: 'This is invalid', active: false },
+          ]}
+          active
+        >
+          validation
+        </ValidationWrapper>
       </Column>
       <Column style={columnStyle}>
         <Tooltip label="I am the label"> label prop </Tooltip>

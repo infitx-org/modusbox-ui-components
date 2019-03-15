@@ -1,22 +1,11 @@
 // create an object with properties message and function to test against
-const createValidator = (message, fn) => {
-  const validator = {
-    message,
-    fn,
-    required: true,
-  };
-  const optional = {
-    ...validator,
-    required: false,
-  };
+const createValidator = (message, fn) => ({
+  message,
+  fn,
+});
 
-  return { ...validator, optional };
-};
-
-// create a function that will test against all validators
-// and returns an array of messages or a boolean TRUE
-const createValidation = validators => validators.map(validator => {
-  const { fn, message, required } = validator;
+const buildValidationCreator = required => validators => validators.map(validator => {
+  const { fn, message } = validator;
   return {
     message,
     fn,
@@ -24,5 +13,9 @@ const createValidation = validators => validators.map(validator => {
   };
 });
 
+// create functions that will test against all validators
+const createValidation = buildValidationCreator(true);
+const createOptionalValidation = buildValidationCreator(false);
+
 export default createValidation; 
-export { createValidator }
+export { createOptionalValidation, createValidator }

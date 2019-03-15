@@ -1,6 +1,5 @@
-import createValidation, { createValidator } from '../creators';
+import createValidation, { createOptionalValidation, createValidator } from '../creators';
 import toValidationResult, { validate } from '../runner';
-import vd from '../validators';
 
 const oddMessage = 'is odd number';
 const oddFn = value => typeof value === 'number' && value % 2 === 1;
@@ -38,7 +37,7 @@ describe('tests validating a value', () => {
   });
 
   it('should result in a successfull validation and produce non-active messages when the skipWarning is set', () => {
-    const evenValidation = createValidation([evenValidator.optional])
+    const evenValidation = createOptionalValidation([evenValidator])
     const result = validate(undefined, evenValidation);
     expect(result.messages).toHaveLength(1);
     expect(result.messages[0].message).toBe(evenMessage);
@@ -58,7 +57,7 @@ describe('tests validating a value', () => {
   });
 
   it('should result in a failed validation and produce active messages when the skipWarning and value is set', () => {
-    const evenValidation = createValidation([evenValidator.optional])
+    const evenValidation = createOptionalValidation([evenValidator])
     const result = validate(5, evenValidation);
     expect(result.messages).toHaveLength(1);
     expect(result.messages[0].message).toBe(evenMessage);
@@ -163,7 +162,7 @@ describe('tests validating a value set', () => {
   it('should produce the correct messages', () => {
     const validators = {
       odd: createValidation([oddValidator]),
-      even: createValidation([evenValidator.optional]),
+      even: createOptionalValidation([evenValidator]),
       gt10: createValidation([gt10Validator]),
     };
     const values = {

@@ -154,29 +154,26 @@ ValidationMessages.defaultProps = {
   messages: [],
 };
 
-const InvalidIcon = ({ messages, forceTooltipVisibility, invalid }) => (
+const InvalidIcon = ({ size }) => (
+  <Icon
+    size={iconSizes[size]}
+    name="warning-sign"
+    className="validation__icon validation__icon--invalid"
+  />
+);
+
+const ValidationWrapper = ({ messages, active, children }) => (
   <Tooltip
     position="right"
-    kind="error"
+    kind="neutral"
     custom
+    delay={500}
     content={<ValidationMessages messages={messages} />}
-    forceVisibility={forceTooltipVisibility}
+    forceVisibility={active && messages && messages.length > 0}
+    showOnHover={false}
   >
-    {invalid && <Icon size={16} name="warning-sign" />}
+    {children}
   </Tooltip>
 );
-const Validation = ({ active, className, messages, invalid }) => {
-  // Validation Icon with custom tooltip
-  const invalidIconClassName = utils.composeClassNames([
-    'mb-input__inner-icon',
-    'mb-input__inner-icon--invalid',
-    className,
-  ]);
-  return (
-    <div className={invalidIconClassName}>
-      <InvalidIcon messages={messages} forceTooltipVisibility={active} invalid={invalid} />
-    </div>
-  );
-};
 
-export { Loader, Placeholder, InnerButton, Validation };
+export { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon };

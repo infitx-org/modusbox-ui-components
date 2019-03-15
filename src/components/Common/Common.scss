@@ -1,4 +1,13 @@
 @import '../../assets/styles/vars/colors.scss';
+.validation__icon {
+  fill: transparent;
+}
+.validation__icon--invalid {
+  height: auto;
+  width: auto;
+  fill: $color__main-danger;
+}
+
 .validation__messages {
   list-style-type: none;
   margin: 0;

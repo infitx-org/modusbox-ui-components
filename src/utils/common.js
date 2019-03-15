@@ -51,11 +51,23 @@ const getScrollParent = node => {
     return document.body;
   }
 
-  if (node.scrollHeight > node.clientHeight) {
+  const { overflowY } = window.getComputedStyle(node);
+  const isScrollable = overflowY === 'scroll' || overflowY === 'auto';
+  if (isScrollable && node.scrollHeight > node.clientHeight) {
     return node;
   }
   return getScrollParent(node.parentNode);
 };
+
+const getScrollParents = node => {
+  const parentNodes = [];
+  let currentNode = node;
+  while (getScrollParent(currentNode.parentNode) !== document.body) {
+    currentNode = getScrollParent(currentNode.parentNode);
+    parentNodes.push(currentNode);
+  }
+  return parentNodes;
+}
 
 const getSpaceAvailability = (defaultHeight, handle, wrapper) => {
   const wrapperRect = wrapper.getBoundingClientRect();
@@ -78,5 +90,6 @@ export {
   composeClassNames,
   getParentOverflow,
   getScrollParent,
+  getScrollParents,
   getSpaceAvailability,
 };

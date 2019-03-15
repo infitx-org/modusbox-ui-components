@@ -4,6 +4,7 @@ import React from 'react';
 import Row from '../../components/Row';
 import TextField from '../../components/TextField';
 import Checkbox from '../../components/Checkbox';
+import { vd, createOptionalValidation, validate } from '../../reduxValidation';
 
 class TextFieldWithDelay extends React.Component {
   constructor() {
@@ -17,11 +18,43 @@ class TextFieldWithDelay extends React.Component {
     return <TextField className="m5" type="text" placeholder="Default" value={this.state.t} />
   }
 }
+class TextFieldWithValidation extends React.Component {
+  constructor() {
+    super();
+    this.state = { value: undefined };
+    this.validators = createOptionalValidation([
+      vd.isEmail,
+      vd.maxLength(10),
+      vd.isNum,
+      vd.isText
+    ]);
+    this.onChange = this.onChange.bind(this);
+  }
+  onChange(value) {
+    this.setState({ value: value !== '' ? value : undefined })
+  }
+  render() {
+    const validationResult = validate(this.state.value, this.validators);
+    return (
+      <TextField
+        className="m5"
+        type="text"
+        placeholder="Validation"
+        value={this.state.value}
+        onChange={this.onChange}
+        required
+        invalid={!validationResult.isValid}
+        invalidMessages={validationResult.messages}
+      />
+    );
+  }
+}
 
 const TestTextField = () => (
   <div>
-    <div className="p10 b1-ccc">
+    <div className="p10 b1-ccc w500">
       <TextFieldWithDelay />
+      <TextFieldWithValidation />
       <TextField className="m5" type="text" placeholder="Default" />
       <TextField className="m5" type="password" placeholder="Password" />
       <TextField className="m5" placeholder="Pending" pending />

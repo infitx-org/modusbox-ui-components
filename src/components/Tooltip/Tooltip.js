@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -203,32 +204,51 @@ class TooltipViewer extends PureComponent {
     ]);
 
     const rendering = [
-      <div key="handle" className={handleClassName} />,
-      <div key="content" className={childClassName}>{tooltipInnerComponent}</div>
+      <div key="content" className={childClassName}>{tooltipInnerComponent}</div>,
+      <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle"/>
     ];
     return ReactDOM.createPortal(rendering, this._location);
   }
 }
 
+const TooltipHandle = ({ custom, direction, kind }) => {
+  const handleWrapperClassName = utils.composeClassNames([
+    'element-tooltip__handle-wrapper',
+    direction && `element-tooltip__handle-wrapper--${direction}`,
+  ]);
+  const handleClassName = utils.composeClassNames([
+    'element-tooltip__handle',
+    `element-tooltip__handle--${kind}`,
+    !custom && 'element-tooltip__handle--default',
+  ]);
+
+  return (
+    <div className={handleWrapperClassName}>
+      <div key="handle" className={handleClassName} />
+    </div>
+  );
+}
+
 class Tooltip extends PureComponent {
-  static visibleAfterScroll (element){
-    /* eslint-disable */
+  static visibleAfterScroll (element, parents){
     const percentX = 100;
     const percentY = 100;
     const tolerance = 0.01;
     const elementRect = element.getBoundingClientRect();
-    const size = utils.getScrollParent(element).getBoundingClientRect();
-    const visiblePixelX = Math.min(elementRect.right, size.right) - Math.max(elementRect.left, size.left);
-    const visiblePixelY = Math.min(elementRect.bottom, size.bottom) - Math.max(elementRect.top, size.top);
-    const visiblePercentageX = visiblePixelX / elementRect.width * 100;
-    const visiblePercentageY = visiblePixelY / elementRect.height * 100;
-    return visiblePercentageX + tolerance > percentX && visiblePercentageY + tolerance > percentY;
-    /* eslint-enable */
+    return parents.every(parent => {
+      const parentRect = parent.getBoundingClientRect();
+      const visiblePixelX = Math.min(elementRect.right, parentRect.right) - Math.max(elementRect.left, parentRect.left);
+      const visiblePixelY = Math.min(elementRect.bottom, parentRect.bottom) - Math.max(elementRect.top, parentRect.top);
+      const visiblePercentageX = visiblePixelX / elementRect.width * 100;
+      const visiblePercentageY = visiblePixelY / elementRect.height * 100;
+      return visiblePercentageX + tolerance > percentX && visiblePercentageY + tolerance > percentY;
+    });
   };
   constructor(props) {
     super(props);
-    this._scrollNode = null;
+    this._scrollNodes = [];
     this._id = uuid();
+    this.viewerId = null;
     this.mountTooltip = this.mountTooltip.bind(this);
     this.unmountTooltip = this.unmountTooltip.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
@@ -241,18 +261,25 @@ class Tooltip extends PureComponent {
     this.throttleScroll = throttle(this.hideTooltipBeforeScroll, 500, { leading: true });
     this.throttleScrollEnd = throttle(this.showForcedTooltipAfterScroll, 500);
 
-    this.state = { show: this.props.forceVisibility };
+    this.state = { show: false };
   }
   componentDidMount() {
-    this.detectTooltipRequired();
+    if (this.props.forceVisibility === true) {
+      this.delayShowTooltip(true);
+    } else {
+      this.detectTooltipRequired();
+    }
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this._scrolling) {
       return;
     }
-    if (typeof this.props.forceVisibility !== 'undefined') {
+    if (prevState.show === false && this.state.show === true) {
+      return;
+    }
+    if (this.props.forceVisibility !== undefined) {
       if (this.props.forceVisibility === true) {
-        this.showTooltip(true);
+        this.delayShowTooltip(true);
       }
       if (this.props.forceVisibility === false) {
         this.hideTooltip(true);
@@ -264,9 +291,10 @@ class Tooltip extends PureComponent {
   componentWillUnmount() {
     this.unmountTooltip();
   }
-  delayShowTooltip() {
+  delayShowTooltip(force = false) {
     this._isHoveringTooltip = true;
-    delay(this.showTooltip, this.props.delay);
+    const showing = () => this.showTooltip(force);
+    delay(() => this.showTooltip(force), this.props.delay);
   }
   delayHideTooltip() {
     this._isHoveringTooltip = false;
@@ -289,28 +317,37 @@ class Tooltip extends PureComponent {
     }
   }
   mountTooltip() {
-    this.box.addEventListener('mouseenter', this.delayShowTooltip);
-    this.box.addEventListener('mouseleave', this.delayHideTooltip);
+    if (this.props.showOnHover !== false) {
+      this.box.addEventListener('mouseenter', this.delayShowTooltip);
+      this.box.addEventListener('mouseleave', this.delayHideTooltip);
+    }
     this.box.classList.remove('element-tooltip--inactive');
   }
   unmountTooltip() {
     this.hideTooltip(true);
-    this.box.removeEventListener('mouseenter', this.delayShowTooltip);
-    this.box.removeEventListener('mouseleave', this.delayHideTooltip);
+    if (this.props.showOnHover !== false) {
+      this.box.removeEventListener('mouseenter', this.delayShowTooltip);
+      this.box.removeEventListener('mouseleave', this.delayHideTooltip);
+    }
     this.box.classList.add('element-tooltip--inactive');
   }
   showTooltip(force) {
-    if (this._isHoveringTooltip === false && force === false) {
+    if (this._isHoveringTooltip === false && force !== true) {
+      // do show tooltip afterDealy if not still hovered and not forced
       return;
     }
     if (this.box === undefined) {
+      // don't show if there is not box
       return;
     }
-    if (!this._scrollNode) {
-      this._scrollNode = utils.getScrollParent(this.box);
-      this._scrollNode.addEventListener('scroll', this.throttleScroll);
+    if (!this._scrollNodes.length) {
+      // listen for scroll in containers
+      this._scrollNodes = utils.getScrollParents(this.box);
+      this._scrollNodes.forEach(node => {
+        node.addEventListener('scroll', this.throttleScroll);
+      });
     }
-    if(!Tooltip.visibleAfterScroll(this.box)) {
+    if(!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
       return;
     }
     this.setState({ show: true });
@@ -319,9 +356,11 @@ class Tooltip extends PureComponent {
     if (this._isHoveringTooltip === true && force === false) {
       return;
     }
-    if (this._scrollNode) {
-      this._scrollNode.removeEventListener('scroll', this.throttleScroll);
-      this._scrollNode = null;
+    if (this._scrollNodes.length) {
+      this._scrollNodes.forEach(node => {
+        node.removeEventListener('scroll', this.throttleScroll);
+      });
+      this._scrollNodes = [];
     }
     this.setState({ show: false });
   }
@@ -339,6 +378,10 @@ class Tooltip extends PureComponent {
 
   render() {
     const { style, children, content, label, position, kind, custom } = this.props;
+    const className = utils.composeClassNames([
+      'element-tooltip',
+      custom && 'element-tooltip--custom'
+    ]);
 
     const viewerProps = {
       content,
@@ -348,10 +391,9 @@ class Tooltip extends PureComponent {
       kind,
       custom,
     };
-
     return (
       <div
-        className="element-tooltip"
+        className={className}
         style={style}
         ref={box => {
           this.box = box;
@@ -359,7 +401,18 @@ class Tooltip extends PureComponent {
         id={this._id}
       >
         {children}
-        {this.state.show && <TooltipViewer parentId={this._id} {...viewerProps} />}
+        {this.state.show && (
+          <TooltipViewer
+            ref={viewer => this.viewer = viewer}
+            parentId={this._id}
+            content={content}
+            label={label}
+            position={position}
+            children={children}
+            kind={kind}
+            custom={custom}
+          />
+        )}
       </div>
     );
   }
@@ -368,6 +421,7 @@ class Tooltip extends PureComponent {
 Tooltip.propTypes = {
   delay: PropTypes.number,
   forceVisibility: PropTypes.bool,
+  showOnHover: PropTypes.bool,
   content: PropTypes.node,
   children: PropTypes.node,
   style: PropTypes.shape(),
@@ -377,12 +431,13 @@ Tooltip.propTypes = {
     PropTypes.node
   ]),
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
-  kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning']),
+  kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning', 'neutral']),
   custom: PropTypes.bool,
 };
 Tooltip.defaultProps = {
   delay: 200,
   forceVisibility: undefined,
+  showOnHover: undefined,
   content: undefined,
   children: null,
   style: {},

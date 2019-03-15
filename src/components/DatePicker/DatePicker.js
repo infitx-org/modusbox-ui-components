@@ -7,7 +7,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon, { iconSizes } from '../Icon';
-import { Loader, Placeholder, Validation } from '../Common';
+import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../Common';
 
 import '../../icons/mule/calendar-small.svg';
 
@@ -337,6 +337,11 @@ class DatePicker extends PureComponent {
       loader = <Loader size={size} />;
     }
 
+    let invalidIcon = null;
+    if (invalid) {
+      invalidIcon = <InvalidIcon size={size} />;
+    }
+
     let calendarIcon = null;
     if (showCalendar) {
       calendarIcon = (
@@ -351,66 +356,63 @@ class DatePicker extends PureComponent {
       this.reverse && 'input-datepicker__calendar-box--reverse',
     ]);
 
-    return [
-      <div id={id} className={componentClassName} style={style} key="datepicker">
-        <div
-          className="mb-input__content input-datepicker__content"
-          onClick={this.onClick}
-          onKeyDown={this.onFocus}
-          role="presentation"
-        >
-          {customPlaceholder}
-          <input
-            onFocus={this.onFocus}
-            ref={input => {
-              this.input = input;
-            }}
-            className="mb-input__input input-datepicker__value"
-            value={value}
-            onKeyDown={this.testKey}
-            disabled={disabled}
-            readOnly
-          />
-          {loader}
-          <Validation
-            className="input-datepicker__icon"
-            active={isOpen}
-            messages={invalidMessages}
-            invalid={invalid}
-          />
-          {calendarIcon}
-        </div>
-      </div>,
-      <div
-        key="calendar"
-        className="input-datepicker--position"
-        ref={calendarPosition => {
-          this.calendarPosition = calendarPosition;
-        }}
-      >
-        {this.state.isOpen && (
-          <div className={calendarBoxClassName}>
-            <DayPicker
-              initialMonth={initialMonth}
-              selectedDays={day => DateUtils.isSameDay(selectedDay, day)}
-              onDayClick={this.handleDayClick}
-              disabledDays={this.props.disabledDays}
+    return (
+      <ValidationWrapper messages={invalidMessages} active={isOpen} key="datepicker">
+        <div id={id} className={componentClassName} style={style}>
+          <div
+            className="mb-input__content input-datepicker__content"
+            onClick={this.onClick}
+            onKeyDown={this.onFocus}
+            role="presentation"
+          >
+            {customPlaceholder}
+            <input
+              onFocus={this.onFocus}
+              ref={input => {
+                this.input = input;
+              }}
+              className="mb-input__input input-datepicker__value"
+              value={value}
+              onKeyDown={this.testKey}
+              disabled={disabled}
+              readOnly
             />
-            {this.props.withTime && (
-              <TimePicker
-                hour={this.state.hour}
-                minute={this.state.minute}
-                second={this.state.second}
-                onHourChange={this.handleHourClick}
-                onMinuteChange={this.handleMinuteClick}
-                onSecondChange={this.handleSecondClick}
-                disabled={selectedDay === undefined || selectedDay == null}
-              />
-            )}
+            {loader}
+            {invalidIcon}
+            {calendarIcon}
           </div>
-        )}
-      </div>
-    ];
+        </div>
+        <div
+          key="calendar"
+          className="input-datepicker--position"
+          ref={calendarPosition => {
+            this.calendarPosition = calendarPosition;
+          }}
+        >
+          {this.state.isOpen && (
+            <div className={calendarBoxClassName}>
+              <DayPicker
+                initialMonth={initialMonth}
+                selectedDays={day => DateUtils.isSameDay(selectedDay, day)}
+                onDayClick={this.handleDayClick}
+                disabledDays={this.props.disabledDays}
+              />
+              {this.props.withTime && (
+                <TimePicker
+                  hour={this.state.hour}
+                  minute={this.state.minute}
+                  second={this.state.second}
+                  onHourChange={this.handleHourClick}
+                  onMinuteChange={this.handleMinuteClick}
+                  onSecondChange={this.handleSecondClick}
+                  disabled={selectedDay === undefined || selectedDay == null}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      </ValidationWrapper>
+    );
   }
 }
 

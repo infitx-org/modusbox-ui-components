@@ -8,6 +8,7 @@ const validate = (value, validatorFields) => {
   // if value and validator are available
   // test all validator functions against the value
   const messages = validatorFields.map(({ message }) => ({ active: false, message }));
+  const isRequired = validatorFields.some(({ required }) => required === true);
   let isValid = true;
 
   // Validators are not available
@@ -16,18 +17,21 @@ const validate = (value, validatorFields) => {
     validatorFields.forEach((validator, index) => {
       const { fn, required } = validator;
       const result = fn(value);
-      if (result === true) {
-        messages[index].active = false;
-      } else if(isUndefined(value) && !required){
+      if(isUndefined(value) && !required){
         isValid = true;
         messages[index].active = undefined;
-      } else {
+      } else if (isUndefined(value) && required) {
         isValid = false;
-        messages[index].active = true;
+        messages[index].active = undefined;
+      } else {
+        if (!result) {
+          isValid = false;
+        }
+        messages[index].active = !result;
       }
     });
   }
-  return { messages, isValid };
+  return { messages, isValid, isRequired };
 };
 
 // test every properties for its own validation
@@ -45,7 +49,6 @@ const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
       const fieldValue = fieldValues[field];
       const fieldValidator = fieldValidators[field];
       let fieldResult = { isValid: true, messages: [] };
-
 
       if (isObject(fieldValue) || isPrimitiveObject(fieldValidator)) {
         // the value is an object, needs to be recursively tested
