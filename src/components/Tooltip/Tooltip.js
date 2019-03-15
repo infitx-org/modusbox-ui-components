@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
 import delay from 'lodash/delay';
 import uuid from '../../utils/uuid';
 
@@ -196,16 +194,9 @@ class TooltipViewer extends PureComponent {
       'element-tooltip__child',
       custom && 'element-tooltip__child--custom',
     ]);
-    const handleClassName = utils.composeClassNames([
-      'element-tooltip__handle',
-      `element-tooltip__handle--${kind}`,
-      !custom && 'element-tooltip__handle--default',
-      direction && `element-tooltip__handle--${direction}`,
-    ]);
-
     const rendering = [
       <div key="content" className={childClassName}>{tooltipInnerComponent}</div>,
-      <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle"/>
+      <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle" />
     ];
     return ReactDOM.createPortal(rendering, this._location);
   }
@@ -234,13 +225,15 @@ class Tooltip extends PureComponent {
     const percentX = 100;
     const percentY = 100;
     const tolerance = 0.01;
-    const elementRect = element.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
     return parents.every(parent => {
-      const parentRect = parent.getBoundingClientRect();
-      const visiblePixelX = Math.min(elementRect.right, parentRect.right) - Math.max(elementRect.left, parentRect.left);
-      const visiblePixelY = Math.min(elementRect.bottom, parentRect.bottom) - Math.max(elementRect.top, parentRect.top);
-      const visiblePercentageX = visiblePixelX / elementRect.width * 100;
-      const visiblePercentageY = visiblePixelY / elementRect.height * 100;
+      const prect = parent.getBoundingClientRect();
+      const visiblePixelX = Math.min(rect.right, prect.right) - Math.max(rect.left, prect.left);
+      const visiblePixelY = Math.min(rect.bottom, prect.bottom) - Math.max(rect.top, prect.top);
+      /* eslint-disable no-mixed-operators */
+      const visiblePercentageX = visiblePixelX / rect.width * 100;
+      const visiblePercentageY = visiblePixelY / rect.height * 100;
+      /* eslint-enable no-mixed-operators */
       return visiblePercentageX + tolerance > percentX && visiblePercentageY + tolerance > percentY;
     });
   };
@@ -257,15 +250,15 @@ class Tooltip extends PureComponent {
     this.delayHideTooltip = this.delayHideTooltip.bind(this);
     this.hideTooltipBeforeScroll = this.hideTooltipBeforeScroll.bind(this);
     this.showForcedTooltipAfterScroll = this.showForcedTooltipAfterScroll.bind(this);
-
-    this.throttleScroll = throttle(this.hideTooltipBeforeScroll, 500, { leading: true });
-    this.throttleScrollEnd = throttle(this.showForcedTooltipAfterScroll, 500);
-
     this.state = { show: false };
   }
   componentDidMount() {
-    if (this.props.forceVisibility === true) {
-      this.delayShowTooltip(true);
+    if (this.props.forceVisibility !== undefined) {
+      if (this.props.forceVisibility === true) {
+        this.delayShowTooltip();
+      } else {
+        this.delayHideTooltip();
+      }
     } else {
       this.detectTooltipRequired();
     }
@@ -274,34 +267,33 @@ class Tooltip extends PureComponent {
     if (this._scrolling) {
       return;
     }
-    if (prevState.show === false && this.state.show === true) {
-      return;
-    }
     if (this.props.forceVisibility !== undefined) {
       if (this.props.forceVisibility === true) {
-        this.delayShowTooltip(true);
-      }
-      if (this.props.forceVisibility === false) {
-        this.hideTooltip(true);
+        this.delayShowTooltip();
+      } else {
+        this.delayHideTooltip(0);
       }
     } else {
+      
+      if (prevState.show === false && this.state.show === true) {
+        return;
+      }
       this.detectTooltipRequired();
     }
   }
   componentWillUnmount() {
     this.unmountTooltip();
   }
-  delayShowTooltip(force = false) {
+  delayShowTooltip() {
     this._isHoveringTooltip = true;
-    const showing = () => this.showTooltip(force);
-    delay(() => this.showTooltip(force), this.props.delay);
+    delay(() => this.showTooltip(), this.props.delay);
   }
-  delayHideTooltip() {
+  delayHideTooltip(delayTime = this.props.delay) {
     this._isHoveringTooltip = false;
     if (this.props.forceVisibility === true) {
       return;
     }
-    delay(this.hideTooltip, this.props.delay);
+    delay(this.hideTooltip, delayTime);
   }
   detectTooltipRequired() {
     const { content, label } = this.props;
@@ -324,14 +316,15 @@ class Tooltip extends PureComponent {
     this.box.classList.remove('element-tooltip--inactive');
   }
   unmountTooltip() {
-    this.hideTooltip(true);
+    this.hideTooltip();
     if (this.props.showOnHover !== false) {
       this.box.removeEventListener('mouseenter', this.delayShowTooltip);
       this.box.removeEventListener('mouseleave', this.delayHideTooltip);
     }
     this.box.classList.add('element-tooltip--inactive');
   }
-  showTooltip(force) {
+  showTooltip() {
+    const force = this.props.forceVisibility;
     if (this._isHoveringTooltip === false && force !== true) {
       // do show tooltip afterDealy if not still hovered and not forced
       return;
@@ -344,7 +337,7 @@ class Tooltip extends PureComponent {
       // listen for scroll in containers
       this._scrollNodes = utils.getScrollParents(this.box);
       this._scrollNodes.forEach(node => {
-        node.addEventListener('scroll', this.throttleScroll);
+        node.addEventListener('scroll', this.hideTooltipBeforeScroll);
       });
     }
     if(!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
@@ -352,27 +345,30 @@ class Tooltip extends PureComponent {
     }
     this.setState({ show: true });
   }
-  hideTooltip(force = false) {
+  hideTooltip() {
+    const force = this.props.forceVisibility;
     if (this._isHoveringTooltip === true && force === false) {
       return;
     }
     if (this._scrollNodes.length) {
       this._scrollNodes.forEach(node => {
-        node.removeEventListener('scroll', this.throttleScroll);
+        node.removeEventListener('scroll', this.hideTooltipBeforeScroll);
       });
       this._scrollNodes = [];
     }
     this.setState({ show: false });
   }
   hideTooltipBeforeScroll() {
-    this._scrolling = true;
-    this.hideTooltip(true);
-    delay(this.throttleScrollEnd, 500)
+    if (!this._scrolling) {
+      this._scrolling = true;
+      this.hideTooltip();
+      setTimeout(this.showForcedTooltipAfterScroll, 500)
+    }
   }
   showForcedTooltipAfterScroll() {
     this._scrolling = false;
     if (this.props.forceVisibility) {
-      this.showTooltip(true);
+      this.showTooltip();
     }
   }
 
@@ -383,14 +379,6 @@ class Tooltip extends PureComponent {
       custom && 'element-tooltip--custom'
     ]);
 
-    const viewerProps = {
-      content,
-      label,
-      position,
-      children,
-      kind,
-      custom,
-    };
     return (
       <div
         className={className}
@@ -403,15 +391,16 @@ class Tooltip extends PureComponent {
         {children}
         {this.state.show && (
           <TooltipViewer
-            ref={viewer => this.viewer = viewer}
+            ref={viewer => { this.viewer = viewer; }}
             parentId={this._id}
             content={content}
             label={label}
             position={position}
-            children={children}
             kind={kind}
             custom={custom}
-          />
+          >
+            {children}
+          </TooltipViewer>
         )}
       </div>
     );
