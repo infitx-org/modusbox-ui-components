@@ -350,6 +350,9 @@ class Tooltip extends PureComponent {
     if (this._isHoveringTooltip === true && force === false) {
       return;
     }
+    if (!this.state.show) {
+      return;
+    }
     if (this._scrollNodes.length) {
       this._scrollNodes.forEach(node => {
         node.removeEventListener('scroll', this.hideTooltipBeforeScroll);
@@ -359,17 +362,14 @@ class Tooltip extends PureComponent {
     this.setState({ show: false });
   }
   hideTooltipBeforeScroll() {
-    if (!this._scrolling) {
-      this._scrolling = true;
-      this.hideTooltip();
-      setTimeout(this.showForcedTooltipAfterScroll, 500)
-    }
+    this._scrolling = true;
+    this.hideTooltip();
+    clearTimeout(this.tooltiptimeout);
+    this.tooltiptimeout = setTimeout(this.showForcedTooltipAfterScroll, 500);
   }
   showForcedTooltipAfterScroll() {
     this._scrolling = false;
-    if (this.props.forceVisibility) {
-      this.showTooltip();
-    }
+    this.showTooltip();
   }
 
   render() {
