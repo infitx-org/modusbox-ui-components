@@ -316,6 +316,8 @@ class Tooltip extends PureComponent {
     this.box.classList.remove('element-tooltip--inactive');
   }
   unmountTooltip() {
+    this._id = null;
+    clearTimeout(this.tooltipTimeout);
     this.hideTooltip();
     if (this.props.showOnHover !== false) {
       this.box.removeEventListener('mouseenter', this.delayShowTooltip);
@@ -324,6 +326,9 @@ class Tooltip extends PureComponent {
     this.box.classList.add('element-tooltip--inactive');
   }
   showTooltip() {
+    if (!this._id) {
+      return;
+    }
     const force = this.props.forceVisibility;
     if (this._isHoveringTooltip === false && force !== true) {
       // do show tooltip afterDealy if not still hovered and not forced
@@ -364,8 +369,8 @@ class Tooltip extends PureComponent {
   hideTooltipBeforeScroll() {
     this._scrolling = true;
     this.hideTooltip();
-    clearTimeout(this.tooltiptimeout);
-    this.tooltiptimeout = setTimeout(this.showForcedTooltipAfterScroll, 500);
+    clearTimeout(this.tooltipTimeout);
+    this.tooltipTimeout = setTimeout(this.showForcedTooltipAfterScroll, 500);
   }
   showForcedTooltipAfterScroll() {
     this._scrolling = false;

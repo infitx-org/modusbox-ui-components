@@ -61,6 +61,9 @@ const getScrollParent = node => {
 
 const getScrollParents = node => {
   const parentNodes = [];
+  if (!node) {
+    return [];
+  }
   let currentNode = node;
   while (getScrollParent(currentNode.parentNode) !== document.body) {
     currentNode = getScrollParent(currentNode.parentNode);
