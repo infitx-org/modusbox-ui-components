@@ -316,6 +316,7 @@ class Tooltip extends PureComponent {
     this.box.classList.remove('element-tooltip--inactive');
   }
   unmountTooltip() {
+    clearTimeout(this.tooltiptimeout);
     this.hideTooltip();
     if (this.props.showOnHover !== false) {
       this.box.removeEventListener('mouseenter', this.delayShowTooltip);
