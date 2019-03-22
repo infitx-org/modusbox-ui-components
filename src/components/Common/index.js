@@ -99,26 +99,30 @@ InnerButton.defaultProps = {
 };
 
 
-const validationIcons = {
-  'active': <Icon name='close-small' size={12} />,
-  'inactive': <Icon name='check-small' size={14} />,
-  'undefined': <div className="validation__undefined-icon" />,
-}
-const validationActiveIcon = active => {
+const ActiveValidationIcon = () => <Icon name='close-small' size={12} />;
+const InactiveValidationIcon = () => <Icon name='check-small' size={14} />;
+const UndefinedValidationIcon = () => <div className="validation__undefined-icon" />;
+
+const ValidationIcon = ({ active }) => {
   if (active === true) {
-    return validationIcons.active;
+    return <ActiveValidationIcon />;
   } else if (active === false) {
-    return validationIcons.inactive;
+    return <InactiveValidationIcon />;
   }
-  return validationIcons.undefined;
+  return <UndefinedValidationIcon />;
 } 
+
 const ValidationMessage = ({ message, active }) => (
   <Row>
     <li
       className={`validation__message ${active === false ? 'validation__message--inactive' : ''}`}
     >
-      <div className="validation__message-icon">{validationActiveIcon(active)}</div>
-      <span className="validation__message-text">{message}</span>
+      <div className="validation__message-icon">
+        <ValidationIcon active={active} />
+      </div>
+      <span className="validation__message-text">
+        {message}
+      </span>
     </li>
   </Row>
 );
