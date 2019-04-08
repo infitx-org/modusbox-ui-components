@@ -12,6 +12,8 @@ const TestFileUploader = () => (
         placeholder="Default"
         parseFileAs="text"
         onChange={console.log}
+        fileName="test"
+        file="zzz"
       />
       <FileUploader
         className="m5"
