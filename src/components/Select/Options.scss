@@ -10,7 +10,7 @@
   position: absolute;
   width: 100%;
   z-index: 1000;
-  animation: fadeIn 0.15s ease-in-out;
+  animation: fadeInOptions 0.15s ease-in-out;
 }
 .input-select__options-wrapper--regular {
   border-bottom: 2px solid $color__main-tertiary;
@@ -137,7 +137,7 @@
 .input-select__options-item--no-options__message {
   margin-left: 10px;
 }
-@keyframes fadeIn {
+@keyframes fadeInOptions {
   0% {
     opacity: 0;
   }
