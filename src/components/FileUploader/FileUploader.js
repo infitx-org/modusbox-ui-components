@@ -25,9 +25,11 @@ class FileUploader extends PureComponent {
     this.onChangeFile = this.onChangeFile.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
 
+    this.fileContent = this.props.file;
+
     this.state = {
       isOpen: false,
-      fileName: undefined,
+      fileName: this.props.fileName,
     };
   }
 
@@ -294,6 +296,7 @@ FileUploader.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(['s', 'm', 'l']),
   file: PropTypes.string,
+  fileName: PropTypes.string,
   fileType: PropTypes.string,
   parseFileAs: PropTypes.oneOf(['text', 'base64']),
   onChange: PropTypes.func,
@@ -317,6 +320,7 @@ FileUploader.defaultProps = {
   className: undefined,
   size: 'l',
   file: undefined,
+  fileName: undefined,
   fileType: undefined,
   parseFileAs: undefined,
   onChange: undefined,
