@@ -38,9 +38,13 @@ class FileUploader extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     const { file, disabled } = this.props;
-
     if (file && file !== this.fileContent) {
       this.fileContent = file;
+    } else if (!file && file !== prevProps.file) {
+      this.fileContent = undefined;
+      this.setState({
+        fileName: undefined,
+      })
     }
     if (disabled !== prevProps.disabled) {
       this.setState({ isOpen: false });
