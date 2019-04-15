@@ -33,8 +33,19 @@ const TestFileUploader = () => (
           { message: 'This is invalid', active: false },
         ]}
       />
-      <FileUploader className="m5" placeholder="Required" required onChange={console.log} />
-      <FileUploader className="m5" placeholder="small" required onChange={console.log} />
+      <FileUploader
+        className="m5"
+        placeholder="Required"
+        required
+        fileName='test'
+        onChange={console.log}
+      />
+      <FileUploader
+        className="m5"
+        placeholder="small"
+        required
+        onChange={console.log}
+      />
     </div>
     <Row className="p10 b1-ccc" align="space-between center">
       <FileUploader className="m5" placeholder="small" size="s" />
