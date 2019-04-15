@@ -17,7 +17,6 @@ const gt10Validator = createValidator(gt10Message, gt10fn);
 const testValidation = createValidation([oddValidator, gt10Validator]);
 
 describe('tests validating a value', () => {
-
   it('should return hasWarnings and isValid object keys', () => {
     const result = validate(10, testValidation);
     expect(result).toBeInstanceOf(Object);
@@ -37,7 +36,7 @@ describe('tests validating a value', () => {
   });
 
   it('should result in a successfull validation and produce non-active messages when the skipWarning is set', () => {
-    const evenValidation = createOptionalValidation([evenValidator])
+    const evenValidation = createOptionalValidation([evenValidator]);
     const result = validate(undefined, evenValidation);
     expect(result.messages).toHaveLength(1);
     expect(result.messages[0].message).toBe(evenMessage);
@@ -57,7 +56,7 @@ describe('tests validating a value', () => {
   });
 
   it('should result in a failed validation and produce active messages when the skipWarning and value is set', () => {
-    const evenValidation = createOptionalValidation([evenValidator])
+    const evenValidation = createOptionalValidation([evenValidator]);
     const result = validate(5, evenValidation);
     expect(result.messages).toHaveLength(1);
     expect(result.messages[0].message).toBe(evenMessage);
@@ -66,16 +65,14 @@ describe('tests validating a value', () => {
   });
 
   it('should not try to validate an undefined value', () => {
-    const evenValidation = createValidation([evenValidator])
+    const evenValidation = createValidation([evenValidator]);
     const result = validate(undefined, evenValidation);
     expect(result.messages).toHaveLength(1);
     expect(result.isValid).toBe(false);
   });
-
 });
 
 describe('tests validating a value set', () => {
-
   it('should return messages and isValid object keys', () => {
     const validators = {
       odd: createValidation([oddValidator]),
@@ -134,8 +131,8 @@ describe('tests validating a value set', () => {
         even: createValidation([evenValidator]),
         bar: {
           gt10: createValidation([gt10Validator]),
-        }
-      }
+        },
+      },
     };
     const values = {
       odd: 3,
@@ -143,8 +140,8 @@ describe('tests validating a value set', () => {
         even: 8,
         bar: {
           gt10: 25,
-        }
-      }
+        },
+      },
     };
 
     const result = toValidationResult(values, validators);
@@ -194,5 +191,4 @@ describe('tests validating a value set', () => {
     expect(result.fields.gt10.messages).toHaveLength(1);
     expect(result.fields.gt10.messages[0].active).toBe(false);
   });
-
 });

@@ -38,17 +38,17 @@ const ModalHeader = ({ title, allowClose, onClose, isCloseDisabled }) => (
       </div>
     )}
   </div>
-)
+);
 
-const ModalFooter = ({ 
+const ModalFooter = ({
   allowCancel,
   onCancel,
   isCancelDisabled,
-  
+
   allowUndo,
   onUndo,
   isUndoDisabled,
-  
+
   allowSubmit,
   submitId,
   isSubmitPending,
@@ -106,7 +106,7 @@ const ModalFooter = ({
       )}
     </div>
   </div>
-)
+);
 
 export default class ModalBackground extends PureComponent {
   constructor(props) {
@@ -206,7 +206,7 @@ export default class ModalBackground extends PureComponent {
             title={title}
             allowClose={allowClose}
             onClose={this.onClose}
-            isCloseDisabled={isCloseDisabled} 
+            isCloseDisabled={isCloseDisabled}
           />
 
           <div className={bodyClassName}>
@@ -220,11 +220,9 @@ export default class ModalBackground extends PureComponent {
               allowCancel={allowCancel}
               onCancel={this.onCancel}
               isCancelDisabled={!isCancelEnabled}
-              
               allowUndo={allowUndo}
               onUndo={this.onUndo}
               isUndoDisabled={!isUndoEnabled || this.props.isSubmitPending}
-              
               allowSubmit={allowSubmit}
               submitId={submitButtonId}
               isSubmitPending={this.props.isSubmitPending}
@@ -232,7 +230,6 @@ export default class ModalBackground extends PureComponent {
               onSubmit={this.onSubmit}
               submitLabel={primaryAction}
               submitKind={kind}
-
               allowClose={this.props.allowClose}
               onClose={this.onClose}
               isCloseDisabled={isCloseDisabled}

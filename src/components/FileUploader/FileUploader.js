@@ -44,12 +44,11 @@ class FileUploader extends PureComponent {
       this.fileContent = undefined;
       this.setState({
         fileName: undefined,
-      })
+      });
     }
     if (disabled !== prevProps.disabled) {
       this.setState({ isOpen: false });
     }
-
   }
   componentWillUnmount() {
     window.removeEventListener('mouseup', this.onPageClick, false);
@@ -191,7 +190,7 @@ class FileUploader extends PureComponent {
       invalid &&
         'mb-input--invalid mb-input__borders--invalid mb-input__background--invalid mb-input__shadow--invalid',
       required &&
-        fileName === undefined &&
+        !hasFile &&
         'mb-input--required mb-input__borders--required mb-input__background--required mb-input__shadow--required',
       /* eslint-enable */
     ]);
@@ -314,7 +313,7 @@ FileUploader.propTypes = {
       text: PropTypes.string,
     }),
   ),
-  
+
   required: PropTypes.bool,
 };
 

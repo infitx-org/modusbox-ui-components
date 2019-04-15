@@ -14,4 +14,4 @@ export {
   getIsValid,
   getFieldMessages,
   getFieldIsValid,
-}
+};

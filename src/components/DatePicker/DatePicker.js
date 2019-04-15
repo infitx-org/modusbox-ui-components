@@ -108,7 +108,6 @@ class DatePicker extends PureComponent {
     };
 
     if (prevProps.value !== value) {
-
       let timeValue = value;
       if (typeof value === 'string') {
         timeValue = parseInt(value, 10);

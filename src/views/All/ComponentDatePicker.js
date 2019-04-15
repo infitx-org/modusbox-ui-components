@@ -34,7 +34,7 @@ class DatePickerWithDelay extends React.Component {
 const TestDatePicker = () => (
   <div>
     <div className="p10 b1-ccc">
-      <DatePickerWithDelay /> 
+      <DatePickerWithDelay />
       <DatePicker className="m5" placeholder="Default" format="x" onSelect={console.log} />
       <DatePicker
         className="m5"

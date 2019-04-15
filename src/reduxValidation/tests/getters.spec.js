@@ -1,5 +1,5 @@
 import createValidation, { createValidator } from '../creators';
-import { getMessages, getIsValid, getFieldMessages, getFieldIsValid, } from '../getters';
+import { getMessages, getIsValid, getFieldMessages, getFieldIsValid } from '../getters';
 import toValidationResult from '../runner';
 
 const oddMessage = 'is odd number';
@@ -21,8 +21,8 @@ const validators = {
     even: createValidation([evenValidator]),
     bar: {
       gt10: createValidation([gt10Validator]),
-    }
-  }
+    },
+  },
 };
 const values = {
   odd: 4,
@@ -30,14 +30,13 @@ const values = {
     even: 8,
     bar: {
       gt10: 25,
-    }
-  }
+    },
+  },
 };
 
 const result = toValidationResult(values, validators);
 
 describe('tests validation result getters', () => {
-
   it('should get the messages', () => {
     const messages = getMessages(result);
     expect(messages).toBe(result.messages);
@@ -71,5 +70,4 @@ describe('tests validation result getters', () => {
     const isValid = getGt10FieldIsValid(result);
     expect(isValid).toBe(result.fields.foo.fields.bar.fields.gt10.isValid);
   });
-
 });

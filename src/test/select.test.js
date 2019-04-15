@@ -12,7 +12,7 @@ const options = new Array(100).fill().map((item, index) => ({
   value: `value-${index}`,
 }));
 
-const toSelectOptions = items => items.map(item => ({ value: `${item}`, label: `${item}`}));
+const toSelectOptions = items => items.map(item => ({ value: `${item}`, label: `${item}` }));
 
 it('renders the Select', () => {
   const wrapper = shallow(<Select />);
@@ -112,19 +112,21 @@ it('sorts the options by value ascending', () => {
 });
 
 it('sorts the options by value descending', () => {
-  const wrapper = mount(<Select selected="value-1" options={options} sortBy="value" sortAsc={false} />);
-  const lastOption = options[ options.length - 1];
+  const wrapper = mount(
+    <Select selected="value-1" options={options} sortBy="value" sortAsc={false} />,
+  );
+  const lastOption = options[options.length - 1];
   expect(wrapper.state().options[0]).toBe(lastOption);
 });
 
 it('sorts the options by label', () => {
-  const unsortedOptions = toSelectOptions([1,9,2,8,5]);
+  const unsortedOptions = toSelectOptions([1, 9, 2, 8, 5]);
   const wrapper = mount(<Select selected="value-1" options={unsortedOptions} sortBy="label" />);
   expect(wrapper.state().options[0].label).toBe('1');
 });
 
 it('sorts the options by disabled', () => {
-  const unsortedOptions = toSelectOptions([1,9,2,8,5]);
+  const unsortedOptions = toSelectOptions([1, 9, 2, 8, 5]);
   unsortedOptions[2].disabled = true;
   unsortedOptions[4].disabled = true;
   const wrapper = mount(<Select selected="value-1" options={unsortedOptions} sortBy="disabled" />);
@@ -297,7 +299,6 @@ describe('Tests highlighiting with filtering', () => {
       .simulate('keydown', { keyCode: 38 });
     expect(wrapper.state('highlightedOption')).toEqual(23);
   });
-
 });
 
 it('renders the Select correctly when multiple props are set', () => {

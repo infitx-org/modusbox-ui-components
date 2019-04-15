@@ -245,7 +245,7 @@ class TextField extends PureComponent {
         />
       );
     }
-    
+
     let loader = null;
     if (pending) {
       loader = <Loader size={size} />;
@@ -304,7 +304,7 @@ class TextField extends PureComponent {
           </div>
         </div>
       </ValidationWrapper>
-    ); 
+    );
   }
 }
 

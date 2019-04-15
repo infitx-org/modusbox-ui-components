@@ -9,7 +9,7 @@ const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))
 const vd = {
   isURL: createValidator(
     'Must be a valid URL https://url.com/path, http://url.com:8080, http://localhost:8080',
-    value => /^(ftp|http|https):\/\/[^ "]+$/.test(value)
+    value => /^(ftp|http|https):\/\/[^ "]+$/.test(value),
   ),
   isHost: createValidator('Must be a valid host (IP or hostname)', value => {
     // eslint-disable-next-line
@@ -23,13 +23,13 @@ const vd = {
   isPort: createValidator(
     'Must be a valid port',
     // eslint-disable-next-line
-    value => !Number.isNaN(value) || value === '${http.port}' || value === '${https.port}'
+    value => !Number.isNaN(value) || value === '${http.port}' || value === '${https.port}',
   ),
   isPassword: createValidator('Must be a valid password', value =>
-    /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/.test(value)
+    /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/.test(value),
   ),
   isEmail: createValidator('Must be a valid Email address', value =>
-    value ? EMAIL_REGEX.test(value) : false
+    value ? EMAIL_REGEX.test(value) : false,
   ),
   isNum: createValidator('Must be a number', value => !Number.isNaN(Number(value))),
   isPhoneNum: createValidator('Must be a phone number', value => /^(\+?)[0-9.]*$/.test(value)),
@@ -37,35 +37,35 @@ const vd = {
   isAlpha: createValidator('Must be alphanumeric', value => /^[a-zA-Z]*$/.test(value)),
   isAlphaNum: createValidator('Must be alphanumeric', value => /^[a-zA-Z0-9]*$/.test(value)),
   isAlphaNumExtended: createValidator('Must be alphanumeric with extended characters', value =>
-    /^[a-zA-Z0-9:_-]*$/.test(value)
+    /^[a-zA-Z0-9:_-]*$/.test(value),
   ),
   isAlphaNumExtendedWithDots: createValidator(
     'Must be alphanumeric with extended characters and dots',
-    value => /^[a-zA-Z0-9.:_-]*$/.test(value)
+    value => /^[a-zA-Z0-9.:_-]*$/.test(value),
   ),
   isAlphaNumExtendedWithBrackets: createValidator(
     'Must be alphanumeric with extended characters and brackets',
-    value => /^[a-zA-Z0-9():_-]*$/.test(value)
+    value => /^[a-zA-Z0-9():_-]*$/.test(value),
   ),
   isFilename: createValidator('Must have a valid filename', value =>
-    /^[a-zA-Z0-9.:_-]*$/.test(value)
+    /^[a-zA-Z0-9.:_-]*$/.test(value),
   ),
   hasValue: createValidator(
     'Must have a value',
-    value => value !== undefined && value.replace(/ /g, '').length > 0
+    value => value !== undefined && value.replace(/ /g, '').length > 0,
   ),
   isRequired: createValidator('Required field', value => typeof value !== 'undefined'),
   isNotEmptyString: createValidator(
     'Must not be an empty string',
-    value => value !== undefined && value.replace(/ /g, '').length > 0
+    value => value !== undefined && value.replace(/ /g, '').length > 0,
   ),
   // eslint-disable-next-line
   isCharacter: createValidator(
     'Cannot be an alphanumeric character',
-    value => !/^[a-zA-Z0-9 ]*$/.test(value)
+    value => !/^[a-zA-Z0-9 ]*$/.test(value),
   ),
   noSpace: createValidator('Must not contain any space', value => !/\s/g.test(value)),
-  
+
   // configurable validators
   isPositive: createValidator('Must be positive', value => {
     if (value === undefined) {
@@ -76,16 +76,15 @@ const vd = {
     return false;
   }),
   maxLength: length =>
-    createValidator(
-      `Max length is ${length} character`,
-      value => (value ? value.length <= length : false)
+    createValidator(`Max length is ${length} character`, value =>
+      value ? value.length <= length : false,
     ),
   isLong: length =>
     createValidator(`Must be ${length} characters`, value => value && value.length === length),
   isLongBetween: (start, stop) =>
     createValidator(
       `Must have from ${start} to ${stop} characters`,
-      value => value && value.length >= start && value.length <= stop
+      value => value && value.length >= start && value.length <= stop,
     ),
 
   forcedResult: (isValid, message) => createValidator(message, () => isValid),

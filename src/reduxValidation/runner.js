@@ -1,4 +1,3 @@
-
 const isNull = item => item === null;
 const isUndefined = item => item === undefined;
 const isObject = item => typeof item === 'object';
@@ -13,11 +12,10 @@ const validate = (value, validatorFields) => {
 
   // Validators are not available
   if (!isUndefined(validatorFields)) {
-
     validatorFields.forEach((validator, index) => {
       const { fn, required } = validator;
       const result = fn(value);
-      if(isUndefined(value) && !required){
+      if (isUndefined(value) && !required) {
         isValid = true;
         messages[index].active = undefined;
       } else if (isUndefined(value) && required) {
@@ -36,16 +34,13 @@ const validate = (value, validatorFields) => {
 
 // test every properties for its own validation
 const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
-
   const fields = Object.keys(fieldValidators);
   const messages = [];
   const fieldResults = {};
   let isValid = true;
 
   fields.forEach(field => {
-
     if (!isNull(fieldValues)) {
-
       const fieldValue = fieldValues[field];
       const fieldValidator = fieldValidators[field];
       let fieldResult = { isValid: true, messages: [] };
@@ -53,11 +48,9 @@ const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
       if (isObject(fieldValue) || isPrimitiveObject(fieldValidator)) {
         // the value is an object, needs to be recursively tested
         fieldResult = toValidationResult(fieldValue, fieldValidator);
-
       } else if (!isUndefined(fieldValidator)) {
         // no validators for the field, validation is successful
         fieldResult = validate(fieldValue, fieldValidator);
-
       }
 
       if (!fieldResult.isValid) {
@@ -66,12 +59,10 @@ const toValidationResult = (fieldValues = {}, fieldValidators = {}) => {
       messages.push(...fieldResult.messages);
       fieldResults[field] = fieldResult;
     }
-    
-
   });
 
   return { isValid, messages, fields: fieldResults };
 };
 
-export { validate }
+export { validate };
 export default toValidationResult;

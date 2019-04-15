@@ -12,7 +12,7 @@ let options = [
   },
   {
     label: 'z',
-    value: 'z'
+    value: 'z',
   },
   {
     label: 'disabled',

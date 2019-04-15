@@ -78,11 +78,11 @@ class Select extends PureComponent {
     } else {
       ({ selected } = this.state);
     }
-    
+
     if (disabled !== prevProps.disabled) {
-      isOpen =  false;
-      highlightedOption =  selected;
-      filter =  undefined;
+      isOpen = false;
+      highlightedOption = selected;
+      filter = undefined;
     }
     let sortedOptions = this.state.options;
     if (options !== prevProps.options) {
@@ -91,19 +91,21 @@ class Select extends PureComponent {
     const selectedItem = find(sortedOptions, { value: selected });
     const selectedLabel = selectedItem ? selectedItem.label : undefined;
 
-    this.setState({
-      options: sortedOptions,
-      selected,
-      selectedLabel,
-      isOpen,
-      highlightedOption,
-      filter,
-    }, () => {
-      if (isOpen === true && prevState.isOpen === false) {
-        this.scrollToOption(highlightedOption);
-      }
-    });
-
+    this.setState(
+      {
+        options: sortedOptions,
+        selected,
+        selectedLabel,
+        isOpen,
+        highlightedOption,
+        filter,
+      },
+      () => {
+        if (isOpen === true && prevState.isOpen === false) {
+          this.scrollToOption(highlightedOption);
+        }
+      },
+    );
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);

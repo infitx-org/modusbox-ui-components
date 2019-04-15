@@ -5,7 +5,6 @@ const fn = value => value % 2 === 0;
 const testValidator = createValidator(message, fn);
 
 describe('tests the validator creator', () => {
-
   it('should build the validator object correctly', () => {
     const validator = createValidator(message, fn);
 
@@ -18,11 +17,9 @@ describe('tests the validator creator', () => {
     const value = 4;
     expect(testValidator.fn(value)).toBe(true);
   });
-
 });
 
 describe('tests the validation creators', () => {
-
   it('should build the validation as array', () => {
     const validation = createValidation([testValidator]);
     expect(validation).toBeInstanceOf(Array);
@@ -35,11 +32,7 @@ describe('tests the validation creators', () => {
   it('should build the validation array items correctly', () => {
     const otherValidator = createValidator('other message', value => value > 0);
     const customValidator = createValidator('custom message', value => value < 0);
-    const validation = createValidation([
-      testValidator,
-      otherValidator,
-      customValidator,
-    ]);
+    const validation = createValidation([testValidator, otherValidator, customValidator]);
     const [firstValidation, secondValidation, thirdValidation] = validation;
 
     expect(validation).toHaveLength(3);
@@ -69,11 +62,7 @@ describe('tests the validation creators', () => {
   it('should build the optional validation array items correctly', () => {
     const otherValidator = createValidator('other message', value => value > 0);
     const customValidator = createValidator('optional message', value => value < 0);
-    const validation = createOptionalValidation([
-      testValidator,
-      otherValidator,
-      customValidator,
-    ]);
+    const validation = createOptionalValidation([testValidator, otherValidator, customValidator]);
     const [firstValidation, secondValidation, thirdValidation] = validation;
 
     expect(validation).toHaveLength(3);
@@ -90,5 +79,4 @@ describe('tests the validation creators', () => {
     expect(thirdValidation.message).toBe(customValidator.message);
     expect(thirdValidation.required).toBe(false);
   });
-
 });

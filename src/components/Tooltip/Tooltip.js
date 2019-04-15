@@ -43,7 +43,7 @@ class TooltipViewer extends PureComponent {
       };
       const byPositionGetter = byPosition[pos];
       return byPositionGetter();
-    }
+    };
 
     const getMaxTargetWidth = (rect, pos) => {
       const center = rect.left + rect.width / 2;
@@ -56,9 +56,9 @@ class TooltipViewer extends PureComponent {
         left: rect.left - 2 * _MINIMUM_MARGIN,
         right: innerWidth - rect.left - rect.width - 2 * _MINIMUM_MARGIN,
         bottom: min,
-      }
+      };
       return byPosition[pos];
-    }
+    };
 
     const getNextPosition = (originalPosition = 'top', iteration) => {
       // returns the next position based on a clockwise directiom
@@ -77,8 +77,8 @@ class TooltipViewer extends PureComponent {
         // test for every position if the tooltip size exceeds the limits
         top: ({ top }) => Math.abs(Math.min(0, top)),
         left: ({ left }) => Math.abs(Math.min(0, left)),
-        right: ({ left }) => Math.abs(Math.max(0, - innerWidth + left + rect.width)),
-        bottom: ({ top }) => Math.abs(Math.max(0, - innerHeight + top + rect.height)),
+        right: ({ left }) => Math.abs(Math.max(0, -innerWidth + left + rect.width)),
+        bottom: ({ top }) => Math.abs(Math.max(0, -innerHeight + top + rect.height)),
       };
 
       // make sure it not exceeds any of the limits
@@ -167,11 +167,11 @@ class TooltipViewer extends PureComponent {
     const { direction } = this.state;
     const { content, label, position, children, kind, custom } = this.props;
     let tooltipInnerComponent = null;
-    const addNewLine = (prev, current, index, array) => ([
+    const addNewLine = (prev, current, index, array) => [
       ...prev,
       current,
-      index < array.length - 1 ? <br /> : null
-    ])
+      index < array.length - 1 ? <br /> : null,
+    ];
 
     if (content) {
       if (custom) {
@@ -195,8 +195,10 @@ class TooltipViewer extends PureComponent {
       custom && 'element-tooltip__child--custom',
     ]);
     const rendering = [
-      <div key="content" className={childClassName}>{tooltipInnerComponent}</div>,
-      <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle" />
+      <div key="content" className={childClassName}>
+        {tooltipInnerComponent}
+      </div>,
+      <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle" />,
     ];
     return ReactDOM.createPortal(rendering, this._location);
   }
@@ -218,10 +220,10 @@ const TooltipHandle = ({ custom, direction, kind }) => {
       <div key="handle" className={handleClassName} />
     </div>
   );
-}
+};
 
 class Tooltip extends PureComponent {
-  static visibleAfterScroll (element, parents){
+  static visibleAfterScroll(element, parents) {
     const percentX = 100;
     const percentY = 100;
     const tolerance = 0.01;
@@ -231,12 +233,12 @@ class Tooltip extends PureComponent {
       const visiblePixelX = Math.min(rect.right, prect.right) - Math.max(rect.left, prect.left);
       const visiblePixelY = Math.min(rect.bottom, prect.bottom) - Math.max(rect.top, prect.top);
       /* eslint-disable no-mixed-operators */
-      const visiblePercentageX = visiblePixelX / rect.width * 100;
-      const visiblePercentageY = visiblePixelY / rect.height * 100;
+      const visiblePercentageX = (visiblePixelX / rect.width) * 100;
+      const visiblePercentageY = (visiblePixelY / rect.height) * 100;
       /* eslint-enable no-mixed-operators */
       return visiblePercentageX + tolerance > percentX && visiblePercentageY + tolerance > percentY;
     });
-  };
+  }
   constructor(props) {
     super(props);
     this._scrollNodes = [];
@@ -274,7 +276,6 @@ class Tooltip extends PureComponent {
         this.delayHideTooltip(0);
       }
     } else {
-      
       if (prevState.show === false && this.state.show === true) {
         return;
       }
@@ -345,7 +346,7 @@ class Tooltip extends PureComponent {
         node.addEventListener('scroll', this.hideTooltipBeforeScroll);
       });
     }
-    if(!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
+    if (!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
       return;
     }
     this.setState({ show: true });
@@ -381,7 +382,7 @@ class Tooltip extends PureComponent {
     const { style, children, content, label, position, kind, custom } = this.props;
     const className = utils.composeClassNames([
       'element-tooltip',
-      custom && 'element-tooltip--custom'
+      custom && 'element-tooltip--custom',
     ]);
 
     return (
@@ -396,7 +397,9 @@ class Tooltip extends PureComponent {
         {children}
         {this.state.show && (
           <TooltipViewer
-            ref={viewer => { this.viewer = viewer; }}
+            ref={viewer => {
+              this.viewer = viewer;
+            }}
             parentId={this._id}
             content={content}
             label={label}
@@ -422,7 +425,7 @@ Tooltip.propTypes = {
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
-    PropTypes.node
+    PropTypes.node,
   ]),
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'auto']),
   kind: PropTypes.oneOf(['regular', 'error', 'info', 'warning', 'neutral']),

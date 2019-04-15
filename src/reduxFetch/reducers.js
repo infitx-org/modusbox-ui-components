@@ -28,7 +28,7 @@ const buildPendingRequestsPathByNameAndMethod = (pendingRequests, name, crud) =>
   const pendingRequestByName = getPendingRequestByName(pendingRequests, name);
   const pendingRequestsByNameAndMethod = getPendingRequestCollectionByMethod(
     pendingRequestByName,
-    crud
+    crud,
   );
 
   return {
@@ -45,7 +45,7 @@ const Api = (state = initialState, action) => {
   const pendingRequests = buildPendingRequestsPathByNameAndMethod(
     state.pendingRequests,
     name,
-    crud
+    crud,
   );
   switch (type) {
     case SET_FETCH_STATUS: {
@@ -57,7 +57,6 @@ const Api = (state = initialState, action) => {
       };
     }
     case UNSET_FETCH_STATUS: {
-
       const requestIndex = pendingRequests[name][crud].map(req => req.id).indexOf(id);
 
       pendingRequests[name][crud].splice(requestIndex, 1);
@@ -78,7 +77,7 @@ const Api = (state = initialState, action) => {
       return state;
     }
   }
-}
+};
 
 export default Api;
 export { initialState };

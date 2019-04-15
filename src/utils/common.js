@@ -70,7 +70,7 @@ const getScrollParents = node => {
     parentNodes.push(currentNode);
   }
   return parentNodes;
-}
+};
 
 const getSpaceAvailability = (defaultHeight, handle, wrapper) => {
   const wrapperRect = wrapper.getBoundingClientRect();

@@ -10,18 +10,20 @@ import { ValidationWrapper } from '../../components/Common';
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
-const longText = `Automatic positioning with ${Array(70).fill('super').join(' ')} long content`;
-const testLabels = [`Hey you!`, `Hey what's up?`,`I don't know man!`];
+const longText = `Automatic positioning with ${Array(70)
+  .fill('super')
+  .join(' ')} long content`;
+const testLabels = [`Hey you!`, `Hey what's up?`, `I don't know man!`];
 
 const TestTooltip = () => (
   <Column style={{ padding: '10px' }}>
     <Row>
       <ScrollBox style={{ height: '200px', marginBottom: '10px' }}>
-        <div style={{height: '300px', background: '#eee', padding: '20px'}} >
+        <div style={{ height: '300px', background: '#eee', padding: '20px' }}>
           <ScrollBox style={{ height: '100px', marginBottom: '10px' }}>
-            <div style={{height: '300px', background: '#ccc', display: 'flex'}} >
+            <div style={{ height: '300px', background: '#ccc', display: 'flex' }}>
               <Column style={columnStyle}>
-                <div style={{height: '50px'}}/>
+                <div style={{ height: '50px' }} />
                 <Tooltip label="I am force here" forceVisibility position="left">
                   <span>Forced Left</span>
                 </Tooltip>
@@ -60,7 +62,6 @@ const TestTooltip = () => (
           Forced bottom
         </Tooltip>
       </Column>
-      
     </Row>
     <Row className="p10 b1-ccc" align="center space-between">
       <Column style={columnStyle}>
@@ -102,20 +103,14 @@ const TestTooltip = () => (
       </Column>
 
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>
-          {longText}
-        </Tooltip>
+        <Tooltip style={style}>{longText}</Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>
-          {longText}
-        </Tooltip>
+        <Tooltip style={style}>{longText}</Tooltip>
       </Column>
       <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>
-          {longText}
-        </Tooltip>
+        <Tooltip style={style}>{longText}</Tooltip>
       </Column>
     </Row>
     <Row>

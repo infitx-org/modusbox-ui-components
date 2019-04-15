@@ -101,9 +101,8 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
-
-const ActiveValidationIcon = () => <Icon name='close-small' size={12} />;
-const InactiveValidationIcon = () => <Icon name='check-small' size={14} />;
+const ActiveValidationIcon = () => <Icon name="close-small" size={12} />;
+const InactiveValidationIcon = () => <Icon name="check-small" size={14} />;
 const UndefinedValidationIcon = () => <div className="validation__undefined-icon" />;
 
 const ValidationIcon = ({ active }) => {
@@ -113,7 +112,7 @@ const ValidationIcon = ({ active }) => {
     return <InactiveValidationIcon />;
   }
   return <UndefinedValidationIcon />;
-} 
+};
 
 const ValidationMessage = ({ message, active }) => (
   <Row>
@@ -123,9 +122,7 @@ const ValidationMessage = ({ message, active }) => (
       <div className="validation__message-icon">
         <ValidationIcon active={active} />
       </div>
-      <span className="validation__message-text">
-        {message}
-      </span>
+      <span className="validation__message-text">{message}</span>
     </li>
   </Row>
 );
@@ -143,11 +140,7 @@ const ValidationMessages = ({ messages }) => {
   let validationMessageList = null;
   if (messages.length) {
     validationMessageList = messages.map(({ message, active }, i) => (
-      <ValidationMessage
-        key={i.toString()}
-        message={message}
-        active={active}
-      />
+      <ValidationMessage key={i.toString()} message={message} active={active} />
     ));
   }
   return <ul className="validation__messages">{validationMessageList}</ul>;

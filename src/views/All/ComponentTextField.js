@@ -15,23 +15,18 @@ class TextFieldWithDelay extends React.Component {
     setInterval(() => this.setState({ t: Math.random().toString() }), 1000);
   }
   render() {
-    return <TextField className="m5" type="text" placeholder="Default" value={this.state.t} />
+    return <TextField className="m5" type="text" placeholder="Default" value={this.state.t} />;
   }
 }
 class TextFieldWithValidation extends React.Component {
   constructor() {
     super();
     this.state = { value: undefined };
-    this.validators = createOptionalValidation([
-      vd.isEmail,
-      vd.maxLength(10),
-      vd.isNum,
-      vd.isText
-    ]);
+    this.validators = createOptionalValidation([vd.isEmail, vd.maxLength(10), vd.isNum, vd.isText]);
     this.onChange = this.onChange.bind(this);
   }
   onChange(value) {
-    this.setState({ value: value !== '' ? value : undefined })
+    this.setState({ value: value !== '' ? value : undefined });
   }
   render() {
     const validationResult = validate(this.state.value, this.validators);
