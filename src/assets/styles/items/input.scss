@@ -200,26 +200,14 @@
 .mb-input__inner-button--large {
   padding: 6px 10px;
   font-size: 12px;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .mb-input__inner-icon {
-  animation: animateIconFadeIn 0.2s linear forwards;
   flex: 0 0 auto;
   fill: #999;
   margin-left: 5px;
 }
 .mb-input__inner-icon--invalid {
   fill: $color__main-danger;
-}
-
-@keyframes animateIconFadeIn {
-  0% {
-    transform: scale(0.8, 0.8);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1, 1);
-    opacity: 1;
-  }
 }

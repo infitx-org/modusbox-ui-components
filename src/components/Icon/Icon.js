@@ -34,6 +34,8 @@ class Icon extends PureComponent {
       stroke,
       spin,
       tooltip,
+      tooltipKind,
+      tooltipDelay,
       tooltipPosition,
     } = this.props;
     const svgStyle = {
@@ -55,7 +57,7 @@ class Icon extends PureComponent {
     );
     if (tooltip) {
       return (
-        <Tooltip label={tooltip} position={tooltipPosition}>
+        <Tooltip label={tooltip} position={tooltipPosition} delay={tooltipDelay} kind={tooltipKind}>
           {svg}
         </Tooltip>
       );
@@ -74,6 +76,8 @@ Icon.propTypes = {
   stroke: PropTypes.string,
   spin: PropTypes.bool,
   onClick: PropTypes.func,
+  tooltipKind: PropTypes.oneOf(['regular', 'error', 'info', 'warning', 'neutral']),
+  tooltipDelay: PropTypes.number,
   tooltip: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   tooltipPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
 };
@@ -87,6 +91,8 @@ Icon.defaultProps = {
   stroke: undefined,
   spin: false,
   onClick: undefined,
+  tooltipKind: undefined,
+  tooltipDelay: undefined,
   tooltip: undefined,
   tooltipPosition: undefined,
 };

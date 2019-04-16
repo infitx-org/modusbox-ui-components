@@ -156,6 +156,9 @@ const InvalidIcon = ({ size }) => (
     size={iconSizes[size]}
     name="warning-sign"
     className="validation__icon validation__icon--invalid"
+    tooltip="Invalid"
+    tooltipDelay={500}
+    tooltipKind="error"
   />
 );
 
