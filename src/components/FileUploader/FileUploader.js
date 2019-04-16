@@ -145,7 +145,11 @@ class FileUploader extends PureComponent {
 
     if (keyCode === keyCodes.KEY_RETURN) {
       e.preventDefault();
-      this.onButtonClick();
+      if (this.fileContent === undefined) {
+        this.onButtonClick();
+      } else {
+        this.onRemoveButtonClick();
+      }
     }
   }
   onPageClick(e) {
