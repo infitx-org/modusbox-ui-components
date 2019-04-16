@@ -215,7 +215,7 @@ class FileUploader extends PureComponent {
       let onClick = this.onButtonClick;
       let label = 'Choose File';
       let icon = 'upload-small';
-      let kind = isOpen ? 'primary' : 'dark';
+      let kind = isOpen ? 'primary' : 'tertiary';
 
       if (hasFile) {
         buttonClassName = 'input-fileuploader__button-remove';
