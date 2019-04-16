@@ -283,8 +283,9 @@
   }
 }
 
-.input-button__mb-input--disabled,
-.input-button__mb-input--tertiary {
+
+
+.input-button__mb-input--disabled {
   background-color: $color__main-tertiary;
   border-color: $color__main-tertiary;
   color: $color__dark-gray-1;
@@ -308,6 +309,35 @@
   &:focus {
     background-color: $color__main-tertiary--active;
     border-color: $color__main-tertiary--active;
+  }
+}
+.input-button__mb-input--tertiary {
+  background-color: $color__gray-4;
+  border-color: $color__gray-4;
+  color: $color__dark-gray-2;
+  fill: $color__dark-gray-2;
+  stroke: $color__dark-gray-2;
+
+  &.noFill {
+    border-color: $color__gray-4;
+    background: transparent;
+    color: $color__gray-5;
+    fill: $color__gray-5;
+    stroke: $color__gray-5;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--tertiary;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color__dark-gray-2;
+    fill: $color__dark-gray-2;
+    stroke: $color__dark-gray-2;
+    background-color: $color__gray-3;
+    border-color: $color__gray-3;
   }
 }
 
