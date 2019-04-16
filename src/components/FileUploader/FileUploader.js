@@ -104,10 +104,11 @@ class FileUploader extends PureComponent {
   }
   onClickFileUploader() {
     const isOpen = !this.state.isOpen;
-    this.setState({ isOpen });
-    if (isOpen === true) {
-      this.fileuploader.focus();
-    }
+    this.setState({ isOpen }, () => {
+      if (isOpen === true) {
+        this.fileuploader.focus();
+      }
+    });
   }
   onButtonClick() {
     this.fileuploader.click();
@@ -125,6 +126,13 @@ class FileUploader extends PureComponent {
 
   onKeyDown(e) {
     if (!this.state.isOpen) {
+      return;
+    }
+
+    if (e.nativeEvent.keyCode === keyCodes.KEY_SHIFT) {
+      // Handle an issue where fileupload loses focus when pressing the Shift Key
+      e.preventDefault();
+      e.stopPropagation();
       return;
     }
     const { keyCode, shiftKey } = e.nativeEvent;
@@ -215,7 +223,7 @@ class FileUploader extends PureComponent {
       let onClick = this.onButtonClick;
       let label = 'Choose File';
       let icon = 'upload-small';
-      let kind = isOpen ? 'primary' : 'dark';
+      let kind = isOpen ? 'primary' : 'tertiary';
 
       if (hasFile) {
         buttonClassName = 'input-fileuploader__button-remove';

@@ -69,18 +69,6 @@
 .input-fileuploader__button {
 }
 
-.input-fileuploader__button-add {
-  &:hover,
-  &.mb-input__inner-button--active {
-    //background: rgba(0,162,233,0.8);
-  }
-}
-.input-fileuploader .input-fileuploader__button-remove {
-  &:hover,
-  &.mb-input__inner-button--active {
-    //background: rgba(255,50,50,0.8);
-  }
-}
 .input-fileuploader__icon {
   flex: 0 0 auto;
 }

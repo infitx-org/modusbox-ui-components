@@ -70,22 +70,6 @@ it('renders the large, medium, small sizes', () => {
   });
 });
 
-// Events
-
-it('renders the add button as "active" when focused', () => {
-  const wrapper = mount(<FileUploader />);
-  expect(
-    wrapper
-      .find('button.input-fileuploader__button-add')
-      .hasClass('mb-input__inner-button--active'),
-  ).toBe(false);
-  wrapper.find('input').simulate('focus');
-  expect(
-    wrapper
-      .find('button.input-fileuploader__button-add')
-      .hasClass('mb-input__inner-button--active'),
-  ).toBe(true);
-});
 
 // Snapshot
 

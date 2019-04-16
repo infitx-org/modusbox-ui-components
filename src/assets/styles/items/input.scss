@@ -187,26 +187,20 @@
 }
 
 .mb-input__inner-button--small {
+  padding: 2px 4px;
+  font-size: 10px;
   margin-left: 5px;
-  height: 22px;
-  padding: 0 5px;
-  font-size: 9px;
-  border-radius: 2px;
 }
 .mb-input__inner-button--medium {
-  margin-left: 5px;
-  height: 26px;
-  padding: 0 7px;
+  padding: 4px 7px;
   font-size: 11px;
-  border-radius: 2px;
+  margin-left: 5px;
 }
 
 .mb-input__inner-button--large {
+  padding: 6px 10px;
+  font-size: 12px;
   margin-left: 5px;
-  height: 30px;
-  padding: 0 9px;
-  font-size: 13px;
-  border-radius: 2px;
 }
 
 .mb-input__inner-icon {
