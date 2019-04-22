@@ -93,7 +93,7 @@ class Button extends PureComponent {
               )}
             </div>
           )}
-          {label && <span>{label}</span>}
+          {label && <span className="input-button__label">{label}</span>}
         </div>
       </button>
     );

@@ -21,7 +21,9 @@ exports[`renders the button correctly when multiple props are set 1`] = `
         size={16}
       />
     </div>
-    <span>
+    <span
+      className="input-button__label"
+    >
       Snapshot button
     </span>
   </div>
