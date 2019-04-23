@@ -53,14 +53,19 @@
   stroke: inherit;
 }
 
+.input-button__mb-input--extra-small {
+  padding: 2px 4px;
+  font-size: 10px;
+  height: 21px;
+}
 .input-button__mb-input--small {
   padding: 6px 10px;
-  font-size: 12px;
+  font-size: 11px;
   height: 27px;
 }
 .input-button__mb-input--medium {
   padding: 8px 13px;
-  font-size: 13px;
+  font-size: 12px;
   height: 33px;
 }
 .input-button__mb-input--large {

@@ -7,6 +7,7 @@ import Tooltip from '../Tooltip';
 import './Icon.scss';
 
 const iconSizes = {
+  xs: 10,
   s: 12,
   m: 14,
   l: 16,
