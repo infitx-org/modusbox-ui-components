@@ -57,6 +57,15 @@ Placeholder.defaultProps = {
 const InnerButton = ({ className, size, kind, onClick, label, disabled, noFill, icon }) => {
   // Internal button used by inputs
 
+  let innerButtonSize;
+  if (size === 'l') {
+    innerButtonSize = 'm';
+  } else if (size ==='m') {
+    innerButtonSize = 's';
+  } else {
+    innerButtonSize = 'xs';
+  }
+
   const innerButtonClassName = utils.composeClassNames([
     className,
     'mb-input__inner-button',
@@ -67,6 +76,7 @@ const InnerButton = ({ className, size, kind, onClick, label, disabled, noFill, 
   return (
     <Button
       kind={kind}
+      size={innerButtonSize}
       className={innerButtonClassName}
       icon={icon}
       noFill={noFill}

@@ -53,6 +53,8 @@ class Button extends PureComponent {
       className,
       'mb-input',
       'input-button__input',
+      // for the inner buttons
+      size === 'xs' && 'input-button__mb-input--extra-small',
       size === 's' && 'input-button__mb-input--small',
       size === 'm' && 'input-button__mb-input--medium',
       size === 'l' && 'input-button__mb-input--large',
