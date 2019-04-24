@@ -55,17 +55,25 @@
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+.input-dropdown__mb-input--extra-small {
+  padding: 2px 4px;
+  font-size: 10px;
+  height: 21px;
+}
 .input-dropdown__mb-input--small {
   padding: 6px 10px;
-  font-size: 12px;
+  font-size: 11px;
+  height: 27px;
 }
 .input-dropdown__mb-input--medium {
   padding: 8px 13px;
-  font-size: 13px;
+  font-size: 12px;
+  height: 33px;
 }
 .input-dropdown__mb-input--large {
   padding: 10px 16px;
   font-size: 14px;
+  height: 39px;
 }
 
 .input-dropdown__mb-input--primary {
@@ -284,8 +292,7 @@
   }
 }
 
-.input-dropdown__mb-input--disabled,
-.input-dropdown__mb-input--tertiary {
+.input-dropdown__mb-input--disabled {
   background-color: $color__main-tertiary;
   border-color: $color__main-tertiary;
   color: $color__dark-gray-1;
@@ -309,6 +316,35 @@
   &:focus {
     background-color: $color__main-tertiary--active;
     border-color: $color__main-tertiary--active;
+  }
+}
+.input-dropdown__mb-input--tertiary {
+  background-color: $color__gray-4;
+  border-color: $color__gray-4;
+  color: $color__dark-gray-2;
+  fill: $color__dark-gray-2;
+  stroke: $color__dark-gray-2;
+
+  &.noFill {
+    border-color: $color__gray-4;
+    background: transparent;
+    color: $color__gray-5;
+    fill: $color__gray-5;
+    stroke: $color__gray-5;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: $shadow-size $shadow-color--tertiary;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color__dark-gray-2;
+    fill: $color__dark-gray-2;
+    stroke: $color__dark-gray-2;
+    background-color: $color__gray-3;
+    border-color: $color__gray-3;
   }
 }
 
