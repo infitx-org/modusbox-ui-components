@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import isNil from 'lodash/isNil';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
@@ -145,7 +146,7 @@ class FileUploader extends PureComponent {
 
     if (keyCode === keyCodes.KEY_RETURN) {
       e.preventDefault();
-      if (this.fileContent === undefined) {
+      if (isNil(this.fileContent)) {
         this.onButtonClick();
       } else {
         this.onRemoveButtonClick();
@@ -181,7 +182,7 @@ class FileUploader extends PureComponent {
       disabled,
     } = this.props;
     const { isOpen, fileName } = this.state;
-    const hasFile = this.fileContent !== undefined && fileName;
+    const hasFile = !isNil(this.fileContent) && fileName;
 
     const componentClassName = utils.composeClassNames([
       className,
