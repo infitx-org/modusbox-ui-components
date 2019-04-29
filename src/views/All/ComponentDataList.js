@@ -134,7 +134,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
     {
       label: 'Zero Zero Zero Zero',
       key: 'a',
-      func: () => new Array(25).fill(counter).join('-'),
+      func: () => new Array(25).fill(counter).join(' -  '),
     },
     {
       label: 'Square',
