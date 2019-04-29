@@ -10,11 +10,11 @@ import Icon from '../../components/Icon';
 
 const columnStyle = {
   padding: '10px',
-  margin: '5px 0px',
   border: '1px solid #ccc',
   display: 'flex',
   flex: '2 1 auto',
   flexDirection: 'column',
+  minHeight: '0',
 };
 
 const rowStyle = {

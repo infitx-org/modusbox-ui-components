@@ -1,11 +1,12 @@
 @import '../../assets/styles/vars/colors.scss';
 
 .element-tabs {
-  &.element-tabs--flexible {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
+}
+.element-tabs--flexible {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
 }
 
 .element-tabs__tab-items {
@@ -59,6 +60,7 @@
     display: flex;
     flex-grow: 1;
     flex-direction: column;
+    min-height: 0;
   }
 }
 .element-tabs__tab__panel {
