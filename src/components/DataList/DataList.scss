@@ -8,4 +8,5 @@
 .element-datalist--flexible {
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
