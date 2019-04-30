@@ -298,11 +298,17 @@ class Tooltip extends PureComponent {
   }
   detectTooltipRequired() {
     const { content, label } = this.props;
-    const { scrollWidth, offsetWidth } = this.box;
-    const hasChildrenOverflow = scrollWidth > offsetWidth;
+    const { scrollWidth, offsetWidth, scrollHeight, offsetHeight } = this.box;
+    const hasChildrenWidthOverflow = scrollWidth > offsetWidth;
+    const hasChildrenHeightOverflow = scrollHeight > offsetHeight;
     const isLabelDefined = label !== undefined;
     const isContentDefined = content !== undefined;
-    const shouldShowTooltip = hasChildrenOverflow || isLabelDefined || isContentDefined;
+    const shouldShowTooltip = 
+      hasChildrenWidthOverflow ||
+      hasChildrenHeightOverflow ||
+      isLabelDefined ||
+      isContentDefined;
+    
     if (shouldShowTooltip) {
       this.mountTooltip();
     } else {
