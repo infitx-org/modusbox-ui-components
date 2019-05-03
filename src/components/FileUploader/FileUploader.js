@@ -245,7 +245,7 @@ class FileUploader extends PureComponent {
           tabIndex="-1"
           className={buttonClassName}
           onClick={onClick}
-          kind={kind}
+          kind={isOpen && required && !hasFile ? 'warning' : kind}
           noFill={!isOpen}
           icon={icon}
           label={label}
