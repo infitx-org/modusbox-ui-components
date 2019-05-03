@@ -123,3 +123,11 @@ Toast.propsTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
 };
+
+Toast.defaultProps = {
+  closeable: undefined,
+  kind: undefined,
+  title: undefined,
+  children: undefined,
+  className: undefined,
+};
