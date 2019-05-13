@@ -23,7 +23,6 @@ const defaultOtherEndpoint = {
   url: '/other-url',
 };
 
-const svcCfg = {};
 const endpointsCfgs = {};
 let store = null;
 const initialState = {};
@@ -189,6 +188,23 @@ describe('Builds the responses correctly', () => {
 
     const response = await store.dispatch(action);
     expect(response.data).toBe('test');
+
+  });
+
+  it('Should send the body as url encoded if set', async () => {
+    fetchMock.get('*', 200);
+    const action = fetch({
+      url: '/test',
+      sendAsFormUrlEncoded: true,
+      body: { test:'key', value: 'x' }
+    });
+
+    await store.dispatch(action);
+
+    const [call] = fetchMock.calls();
+    const [, config] = call;
+    expect(config.body).toBe('test=key&value=x');
+    expect(config.headers['content-type']).toBe('application/x-www-form-urlencoded');
   });
 
   it('Should parse the body as json by default', async () => {

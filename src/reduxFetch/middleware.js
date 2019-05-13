@@ -51,7 +51,7 @@ const fetchMiddleware = () => store => next => async action => {
     // just pass to next middleware if not a "FETCH" action
     return next(action);
   }
-  const { method, params, body, service } = config;
+  const { method, params, service } = config;
 
   // Get configs for both endpoint and service
   const serviceConfig = buildServiceConfig(service, store.getState());
@@ -61,6 +61,7 @@ const fetchMiddleware = () => store => next => async action => {
   const {
     url,
     headers,
+    body,
     credentials,
     parseAsText,
     parseAsJson,
