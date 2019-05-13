@@ -1,4 +1,5 @@
 const esc = encodeURIComponent;
+const urlEncode = body => Object.keys(body).map(key => `${esc(key)}=${esc(body[key])}`).join('&')
 
 const buildServiceConfig = (initialConfig = {}, state) => {
   const config = { ...initialConfig };
@@ -36,6 +37,7 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
   const defaultConfig = {
     url: undefined,
     headers: {},
+    body: undefined,
     credentials: undefined,
     handleData: undefined,
     handleError: undefined,
@@ -63,6 +65,11 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
 
   if (config.sendAsJson) {
     config.headers['content-type'] = 'application/json';
+  }
+
+  if (config.sendAsFormUrlEncoded) {
+    config.headers['content-type'] = 'application/x-www-form-urlencoded';
+    config.body = urlEncode(config.body);
   }
   return config;
 };
@@ -115,6 +122,7 @@ const knownRequestKeys = [
   'handleData',
   'handleError',
   'sendAsJson',
+  'sendAsFormUrlEncoded',
   'parseAsJson',
   'parseAsText',
 ];
