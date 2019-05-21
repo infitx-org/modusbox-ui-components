@@ -63,14 +63,20 @@ class MenuItem extends PureComponent {
     }
   }
   render() {
-    const { label, disabled, hidden, active, back } = this.props;
+    const { label, icon, fill, disabled, hidden, active, back } = this.props;
     if (hidden) {
       return null;
     }
-    let BackIcon = null;
+    let backIcon = null;
     if (back) {
-      BackIcon = (
+      backIcon = (
         <Icon className="element-menu__item__back-icon" name="arrow" size={10} fill="#999" />
+      );
+    }
+    let itemIcon = null;
+    if (icon) {
+      itemIcon = (
+        <Icon className="element-menu__item__item-icon" name={icon} size={10} fill={fill} />
       );
     }
     const classNames = utils.composeClassNames([
@@ -78,11 +84,13 @@ class MenuItem extends PureComponent {
       active && 'element-menu__item--active',
       disabled && 'element-menu__item--disabled',
       back && 'element-menu__item--back',
+      icon && 'element-menu__item--with-icon',
     ]);
 
     return (
       <div className={classNames} onClick={this.onClick} role="presentation">
-        {BackIcon}
+        {backIcon}
+        {itemIcon}
         {label}
       </div>
     );
@@ -95,6 +103,8 @@ MenuItem.defaultProps = {
   disabled: false,
   hidden: false,
   back: false,
+  icon: undefined,
+  fill: undefined,
   asRoot: false,
   partial: false,
 };
@@ -104,6 +114,8 @@ MenuItem.propTypes = {
   disabled: PropTypes.bool,
   hidden: PropTypes.bool,
   back: PropTypes.bool,
+  icon: PropTypes.string,
+  fill: PropTypes.string,
   // prop asRoot is not used directly by the MenuItem but it is used by the Menu component
   // eslint-disable-next-line react/no-unused-prop-types
   asRoot: PropTypes.bool,

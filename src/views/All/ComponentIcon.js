@@ -3,7 +3,9 @@ import Icon from '../../components/Icon';
 
 import '../../icons/index';
 
+
 const modusboxIcons = [
+  'circle',
   'business-processes',
   'transmissions',
   'transactions',

@@ -3,6 +3,7 @@
 
 import './modusbox/business-group.svg';
 import './modusbox/cloud.svg';
+import './modusbox/circle.svg';
 import './modusbox/business-processes.svg';
 import './modusbox/transmissions.svg';
 import './modusbox/transactions.svg';
