@@ -56,9 +56,17 @@
   background: $color__white;
   margin-top: 1px;
 }
+.element-menu__item--with-icon {
+  padding-left: 0px;
+}
 
 .element-menu__item__back-icon {
   transform: rotateZ(180deg);
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.element-menu__item__item-icon {
   margin-left: 3px;
   margin-right: 3px;
 }
