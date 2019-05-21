@@ -44,3 +44,4 @@ Renders a menu item
 | back     | `bool`   | describes if it renders as a _back_ button  |          |        | `false`     |
 | icon     | `string` | describes the icon name to render           |          |        | `undefined` |
 | fill     | `string` | describes the icon fill color               |          |        | `undefined` |
+| size     | `number` | describes the icon size                     |          |        | `undefined` |
