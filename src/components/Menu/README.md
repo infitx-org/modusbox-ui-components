@@ -42,5 +42,5 @@ Renders a menu item
 | disabled | `bool`   | describes if the item is disabled           |          |        | `false`     |
 | hidden   | `bool`   | describes if should be hidden               |          |        | `false`     |
 | back     | `bool`   | describes if it renders as a _back_ button  |          |        | `false`     |
-| icon     | `string` | describes the icon name to render |          |        | `undefined` |
-| fill     | `string` | describes the icon fill color |          |        | `undefined` |
+| icon     | `string` | describes the icon name to render           |          |        | `undefined` |
+| fill     | `string` | describes the icon fill color               |          |        | `undefined` |
