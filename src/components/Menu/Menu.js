@@ -63,7 +63,7 @@ class MenuItem extends PureComponent {
     }
   }
   render() {
-    const { label, icon, fill, disabled, hidden, active, back } = this.props;
+    const { label, icon, fill, size, disabled, hidden, active, back } = this.props;
     if (hidden) {
       return null;
     }
@@ -76,7 +76,9 @@ class MenuItem extends PureComponent {
     let itemIcon = null;
     if (icon) {
       itemIcon = (
-        <Icon className="element-menu__item__item-icon" name={icon} size={10} fill={fill} />
+        <div className="element-menu__item__item-icon">
+          <Icon name={icon} size={size} fill={fill} />
+        </div>
       );
     }
     const classNames = utils.composeClassNames([
@@ -105,6 +107,7 @@ MenuItem.defaultProps = {
   back: false,
   icon: undefined,
   fill: undefined,
+  size: 10,
   asRoot: false,
   partial: false,
 };
@@ -116,6 +119,7 @@ MenuItem.propTypes = {
   back: PropTypes.bool,
   icon: PropTypes.string,
   fill: PropTypes.string,
+  size: PropTypes.number,
   // prop asRoot is not used directly by the MenuItem but it is used by the Menu component
   // eslint-disable-next-line react/no-unused-prop-types
   asRoot: PropTypes.bool,

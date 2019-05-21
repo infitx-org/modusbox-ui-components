@@ -12,7 +12,7 @@ const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
     <MenuItem path="/tracking" label="Tracking" hidden={hidden} />
     <MenuItem path="/partners" label="Partners" disabled={disabled} asRoot>
       <MenuSection label="User Info">
-        <MenuItem path="/partners/partner/contacts" label="Contacts" icon="circle" fill="#c33"/>
+        <MenuItem path="/partners/partner/contacts" label="Contacts" icon="circle" fill="#c33" size={6}/>
         <MenuItem path="/partners/partner/identifiers" label="Identifiers" disabled={disabled} />
       </MenuSection>
 

@@ -26,6 +26,7 @@ exports[`renders the menu correctly when multiple props are set 1`] = `
           partial={false}
           path="/foo/nested"
           pathname="/foo"
+          size={10}
         >
           <div
             className="element-menu__item"
