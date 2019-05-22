@@ -60,7 +60,7 @@ const InnerButton = ({ className, size, kind, onClick, label, disabled, noFill, 
   let innerButtonSize;
   if (size === 'l') {
     innerButtonSize = 'm';
-  } else if (size ==='m') {
+  } else if (size === 'm') {
     innerButtonSize = 's';
   } else {
     innerButtonSize = 'xs';

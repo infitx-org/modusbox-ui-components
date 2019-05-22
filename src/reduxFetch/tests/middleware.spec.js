@@ -142,6 +142,34 @@ describe('Build the requests correctly', () => {
 
     expect(headers['my-header']).toBe('overidden-header-value');
   });
+
+  it('Should transform the credentials dynamically', async () => {
+    fetchMock.get('*', {});
+
+    defaultTestSvc.credentials = state => (state ? 'same-site' : 'include');
+    endpointsCfgs.testEndpoint.credentials = undefined;
+
+    const actions = buildFetchActions(endpointsCfgs);
+    const action = actions.testEndpoint.read();
+
+    await store.dispatch(action);
+    const [[, config]] = fetchMock.calls();
+    expect(config.credentials).toBe('same-site');
+  });
+
+  it('Should override the credentials dynamically', async () => {
+    fetchMock.get('*', {});
+
+    defaultTestSvc.credentials = state => (state ? 'same-site' : 'include');
+    endpointsCfgs.testEndpoint.credentials = null;
+
+    const actions = buildFetchActions(endpointsCfgs);
+    const action = actions.testEndpoint.read();
+
+    await store.dispatch(action);
+    const [[, config]] = fetchMock.calls();
+    expect(config.credentials).toBe(null);
+  });
 });
 
 describe('Builds the responses correctly', () => {
@@ -188,7 +216,6 @@ describe('Builds the responses correctly', () => {
 
     const response = await store.dispatch(action);
     expect(response.data).toBe('test');
-
   });
 
   it('Should send the body as url encoded if set', async () => {
@@ -196,7 +223,7 @@ describe('Builds the responses correctly', () => {
     const action = fetch({
       url: '/test',
       sendAsFormUrlEncoded: true,
-      body: { test:'key', value: 'x' }
+      body: { test: 'key', value: 'x' },
     });
 
     await store.dispatch(action);

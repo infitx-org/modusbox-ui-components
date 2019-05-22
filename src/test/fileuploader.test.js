@@ -70,7 +70,6 @@ it('renders the large, medium, small sizes', () => {
   });
 });
 
-
 // Snapshot
 
 it('renders the fileuploader correctly when multiple props are set', () => {

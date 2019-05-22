@@ -303,12 +303,9 @@ class Tooltip extends PureComponent {
     const hasChildrenHeightOverflow = scrollHeight > offsetHeight;
     const isLabelDefined = label !== undefined;
     const isContentDefined = content !== undefined;
-    const shouldShowTooltip = 
-      hasChildrenWidthOverflow ||
-      hasChildrenHeightOverflow ||
-      isLabelDefined ||
-      isContentDefined;
-    
+    const shouldShowTooltip =
+      hasChildrenWidthOverflow || hasChildrenHeightOverflow || isLabelDefined || isContentDefined;
+
     if (shouldShowTooltip) {
       this.mountTooltip();
     } else {

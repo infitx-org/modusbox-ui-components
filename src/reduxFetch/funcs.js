@@ -1,5 +1,19 @@
+const firstNotUndefined = (...args) => {
+  let current;
+  let final;
+  while (args.length > 0) {
+    current = args.shift();
+    if (current !== undefined) {
+      final = current;
+    }
+  }
+  return final;
+};
 const esc = encodeURIComponent;
-const urlEncode = body => Object.keys(body).map(key => `${esc(key)}=${esc(body[key])}`).join('&')
+const urlEncode = body =>
+  Object.keys(body)
+    .map(key => `${esc(key)}=${esc(body[key])}`)
+    .join('&');
 
 const buildServiceConfig = (initialConfig = {}, state) => {
   const config = { ...initialConfig };
@@ -13,6 +27,11 @@ const buildServiceConfig = (initialConfig = {}, state) => {
     config.getApplicationHeaders = () => ({});
   }
 
+  if (typeof config.credentials === 'function') {
+    // transform credentials dynamically
+    config.credentials = config.credentials(state);
+  }
+
   return {
     ...config,
     url: config.getApplicationUrl(state),
@@ -20,15 +39,26 @@ const buildServiceConfig = (initialConfig = {}, state) => {
   };
 };
 
-const buildEndpointConfig = (config = {}) => {
+const buildEndpointConfig = (config = {}, state) => {
   let endpointUrl = config.url;
+  let endpointCredentials = config.credentials;
 
   if (typeof config.url === 'function') {
     endpointUrl = config.url(config);
   }
 
+  if (typeof config.url === 'function') {
+    endpointUrl = config.url(config);
+  }
+
+  if (typeof config.credentials === 'function') {
+    // transform credentials dynamically
+    endpointCredentials = config.credentials(state);
+  }
+
   return {
     ...config,
+    credentials: endpointCredentials,
     url: endpointUrl,
   };
 };
@@ -54,11 +84,18 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
     ...endpointConfig.headers,
   };
 
+  const credentials = firstNotUndefined(
+    defaultConfig.credentials,
+    serviceConfig.credentials,
+    endpointConfig.credentials,
+  );
+
   const config = {
     ...defaultConfig,
     ...serviceConfig,
     ...endpointConfig,
     headers,
+    credentials,
   };
 
   config.url = `${serviceConfig.url}${endpointConfig.url}`;
