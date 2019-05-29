@@ -31,7 +31,7 @@ exports[`renders the fileuploader correctly when multiple props are set 1`] = `
         <div
           className="input-fileuploader__filename input-fileuploader__filename--no-file input-fileuploader__filename--large"
         >
-          No File Choosen
+          No File Chosen
         </div>
         <InnerButton
           active={false}
