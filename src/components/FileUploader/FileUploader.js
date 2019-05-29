@@ -220,7 +220,7 @@ class FileUploader extends PureComponent {
       size === 'm' && 'input-fileuploader__filename--medium',
       size === 'l' && 'input-fileuploader__filename--large',
     ]);
-    const fileNameLabel = hasFile ? fileName : 'No File Choosen';
+    const fileNameLabel = hasFile ? fileName : 'No File Chosen';
 
     let fileButton = null;
     if (!pending) {

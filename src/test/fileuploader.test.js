@@ -12,7 +12,7 @@ it('renders the fileuploader', () => {
 
 it('renders the filuploader value', () => {
   const wrapper = shallow(<FileUploader />);
-  expect(wrapper.find('.input-fileuploader__filename').text()).toBe('No File Choosen');
+  expect(wrapper.find('.input-fileuploader__filename').text()).toBe('No File Chosen');
 });
 
 it('renders the placeholder', () => {
