@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -269,6 +270,7 @@ class Tooltip extends PureComponent {
     if (this._scrolling) {
       return;
     }
+
     if (this.props.forceVisibility !== undefined) {
       if (this.props.forceVisibility === true) {
         this.delayShowTooltip();
@@ -320,7 +322,6 @@ class Tooltip extends PureComponent {
     this.box.classList.remove('element-tooltip--inactive');
   }
   unmountTooltip() {
-    this._id = null;
     clearTimeout(this.tooltipTimeout);
     this.hideTooltip();
     if (this.props.showOnHover !== false) {
