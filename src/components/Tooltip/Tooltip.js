@@ -383,15 +383,16 @@ class Tooltip extends PureComponent {
   }
 
   render() {
-    const { style, children, content, label, position, kind, custom } = this.props;
-    const className = utils.composeClassNames([
+    const { className, style, children, content, label, position, kind, custom } = this.props;
+    const tooltipClassName = utils.composeClassNames([
       'element-tooltip',
       custom && 'element-tooltip--custom',
+      className,
     ]);
 
     return (
       <div
-        className={className}
+        className={tooltipClassName}
         style={style}
         ref={box => {
           this.box = box;
@@ -425,6 +426,7 @@ Tooltip.propTypes = {
   showOnHover: PropTypes.bool,
   content: PropTypes.node,
   children: PropTypes.node,
+  className: PropTypes.string,
   style: PropTypes.shape(),
   label: PropTypes.oneOfType([
     PropTypes.string,
@@ -441,6 +443,7 @@ Tooltip.defaultProps = {
   showOnHover: undefined,
   content: undefined,
   children: null,
+  className: undefined,
   style: {},
   label: undefined,
   position: undefined,
