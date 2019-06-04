@@ -174,7 +174,6 @@ const InvalidIcon = ({ size }) => (
 
 const ValidationWrapper = ({ messages, active, children }) => (
   <Tooltip
-    debug
     position="right"
     kind="neutral"
     custom
