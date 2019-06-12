@@ -932,7 +932,7 @@ const User = ({ username, onClick, isUserBoxVisible, onSignout }) => (
     {isUserBoxVisible && (
       <PopupMenu title={username} size={200}>
         <PopupMenuScroller>
-          <UserItem label="Profile" onClick={onSignout} dark />
+          {/* <UserItem label="Profile" onClick={onSignout} dark /> */}
           <UserItem label="Sign out" onClick={onSignout} dark />
         </PopupMenuScroller>
       </PopupMenu>

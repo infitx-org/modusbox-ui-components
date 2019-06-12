@@ -15,7 +15,7 @@ module.exports = {
     '^components': '<rootDir>/src/components',
     '^utils[/](.+)$': '<rootDir>/src/utils/$1',
     '^test[/](.+)': '<rootDir>/test/$1',
-    '^.+\\.(css|scss|svg)$': '<rootDir>/src/test/__mocks__/staticMocks.js'
+    '^.+\\.(css|png|scss|svg)$': '<rootDir>/src/test/__mocks__/staticMocks.js'
   },
   'moduleFileExtensions': [
     'js',
