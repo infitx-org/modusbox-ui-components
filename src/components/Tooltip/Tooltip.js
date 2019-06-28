@@ -243,7 +243,6 @@ class Tooltip extends PureComponent {
     super(props);
     this._scrollNodes = [];
     this._id = uuid();
-    this.viewerId = null;
     this.mountTooltip = this.mountTooltip.bind(this);
     this.unmountTooltip = this.unmountTooltip.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
@@ -255,6 +254,7 @@ class Tooltip extends PureComponent {
     this.state = { show: false };
   }
   componentDidMount() {
+    this._mounted = true;
     if (this.props.forceVisibility !== undefined) {
       if (this.props.forceVisibility === true) {
         this.delayShowTooltip();
@@ -274,7 +274,7 @@ class Tooltip extends PureComponent {
       if (this.props.forceVisibility === true) {
         this.delayShowTooltip();
       } else {
-        this.delayHideTooltip(0);
+        this.hideTooltip();
       }
     } else {
       if (prevState.show === false && this.state.show === true) {
@@ -284,6 +284,7 @@ class Tooltip extends PureComponent {
     }
   }
   componentWillUnmount() {
+    this._mounted = false;
     this.unmountTooltip();
   }
   delayShowTooltip() {
@@ -355,6 +356,9 @@ class Tooltip extends PureComponent {
     this.setState({ show: true });
   }
   hideTooltip() {
+    if (this._mounted === false) {
+      return;
+    }
     const force = this.props.forceVisibility;
     if (this._isHoveringTooltip === true && force === false) {
       return;
