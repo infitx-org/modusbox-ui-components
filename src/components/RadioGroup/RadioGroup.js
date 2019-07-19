@@ -22,7 +22,7 @@ class RadioGroup extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     const { value } = this.props;
-    if (value !== prevProps.value) {
+    if (value !== prevProps.value || value !== this.state.value) {
       this.setState({ value });
     }
   }
