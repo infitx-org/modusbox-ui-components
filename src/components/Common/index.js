@@ -179,7 +179,7 @@ const ValidationWrapper = ({ messages, active, children }) => (
     custom
     delay={500}
     content={<ValidationMessages messages={messages} />}
-    forceVisibility={active && messages && messages.length > 0}
+    forceVisibility={active === true && messages && messages.length > 0}
     showOnHover={false}
   >
     {children}
