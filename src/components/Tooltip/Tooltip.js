@@ -269,7 +269,6 @@ class Tooltip extends PureComponent {
     if (this._scrolling) {
       return;
     }
-
     if (this.props.forceVisibility !== undefined) {
       if (this.props.forceVisibility === true) {
         this.delayShowTooltip();
@@ -288,7 +287,7 @@ class Tooltip extends PureComponent {
     this.unmountTooltip();
   }
   delayShowTooltip() {
-    this._isHoveringTooltip = true;
+    this._isHoveringTooltip = this.props.forceVisibility !== true;
     delay(() => this.showTooltip(), this.props.delay);
   }
   delayHideTooltip(delayTime = this.props.delay) {
