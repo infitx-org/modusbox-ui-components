@@ -41,7 +41,7 @@
   transform: rotateZ(90deg) rotateY(180deg);
 }
 .element-datalist__header-cell__search-icon {
-  flex: 0;
+  flex: 0 0 auto;
   fill: #ccc;
   transition: all 0.2s ease-out;
   margin: 3px;
