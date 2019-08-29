@@ -24,31 +24,34 @@ class DataList extends PureComponent {
       ...column,
     });
     const tpmColumns = columns.map(mapIndexToColumns(prevColumns));
+    
     if (typeof onCheck === 'function') {
-      tpmColumns.unshift({ _onChange: onCheck });
+      tpmColumns.unshift({ 
+        _index: '_checkbox_column' || uuid(),
+        _onChange: onCheck });
     }
     return tpmColumns;
   }
   static toItems(list, columns, selected, checked, prevItems) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
-    const reduceColumns = (item, rowIndex) => (prev, column) => {
+    const reduceColumns = (row, rowIndex) => (prev, column) => {
       const { func, key, link, _index, _onChange} = column;
-      let value = get(item, key);
+      let value = get(row._source, key);
       let component = null;
 
       if (typeof func === 'function') {
-        value = func(value, item, rowIndex);
+        value = func(value, row._source, rowIndex);
       }
       if (typeof link === 'function') {
         // eslint-disable-next-line
-        component = <Link onClick={() => link(item[key], item)}>{value}</Link>;
+        component = <Link onClick={() => link(row._source[key], row._source)}>{value}</Link>;
       }
       if (_onChange) {
         component = (
           <Checkbox
-            checked={checked(item)}
-            onChange={() => _onChange(item, rowIndex)}
+            checked={row._checked}
+            onChange={() => _onChange(rowIndex)}
             round
           />
         );
@@ -74,9 +77,10 @@ class DataList extends PureComponent {
         _index: get(prev, `[${rowIndex}]._index`) || uuid(),
         _source: item,
         _selected: selected ? selected(item) : false,
+        _checked: checked ? checked.includes(item) : undefined,
         _visible: true,
       };
-      row.data = columns.reduce(reduceColumns(item, row._index), {});
+      row.data = columns.reduce(reduceColumns(row, row._index), {});
       return row;
     };
 
@@ -147,6 +151,8 @@ class DataList extends PureComponent {
     this.onFilterBlur = this.onFilterBlur.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
+    this.onHeaderCheckboxChange = this.onHeaderCheckboxChange.bind(this);
+    this.onChange = this.onChange.bind(this);
     
     if (this.props.onCheck) {
       this.onItemCheck = this.onItemCheck.bind(this);
@@ -154,6 +160,7 @@ class DataList extends PureComponent {
 
     this._columns = DataList.convertColumns(this.props.columns, undefined, this.onItemCheck);
 
+    const initialChecked = this.props.list.filter(item => this.props.checked(item));
 
     const sortAsc = this.props.sortAsc === true;
     const sortColumn = DataList.getSortColumn(this.props.sortColumn, this._columns);
@@ -161,17 +168,16 @@ class DataList extends PureComponent {
       this.props.list,
       this._columns,
       this.props.selected,
-      this.props.checked
+      initialChecked,
     );
+
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
-    const checked = items.filter(item => this.props.checked(item._source)).map(item => item._index);
 
     this.state = {
       items: sortedItems,
       sortAsc,
       sortColumn,
       filters: [],
-      checked,
     };
   }
   componentDidUpdate(prevProps) {
@@ -230,17 +236,39 @@ class DataList extends PureComponent {
     }
   }
 
-  onItemCheck(item, rowIndex) {
-    const newChecked = [...this.state.checked];
-    const idx = newChecked.indexOf(rowIndex);
-    if (idx === -1) {
-      newChecked.push(rowIndex);
-    } else {
-      newChecked.splice(idx, 1);
-    }
+  onItemCheck(id) {
+    const idx = this.state.items.findIndex(c => c._index === id);
     this.setState({
-      checked: newChecked
-    }, () => this.props.onCheck(newChecked))
+      items: [
+        ...this.state.items.slice(0, idx),
+        {
+          ...this.state.items[idx],
+          _checked: !this.state.items[idx]._checked,
+        },
+        ...this.state.items.slice(idx + 1),
+      ]
+    }, this.onChange);
+  }
+
+  onHeaderCheckboxChange(value) {
+    const items = DataList.toItems(
+      this.props.list,
+      this._columns,
+      this.props.selected,
+      this.state.items.map(item => item._source),
+      this.state.items
+    );
+    this.setState({
+      items: items.map(item => ({...item, _checked: value }))
+    }, this.onChange);
+  }
+
+  onChange() {
+    const sourceCheckedItems = this.state.items
+      .filter(item => item._checked === true)
+      .map(item => item._source);
+    
+    this.props.onCheck(sourceCheckedItems);
   }
 
   render() {
@@ -268,6 +296,7 @@ class DataList extends PureComponent {
           sortAsc={sortAsc}
           onSortClick={this.onSortClick}
           filters={filters}
+          onCheckboxChange={this.onHeaderCheckboxChange}
           onFilterChange={this.onFilterChange}
           onFilterBlur={this.onFilterBlur}
           onFilterClick={this.onFilterClick}

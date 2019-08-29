@@ -16,6 +16,9 @@
   font-weight: bold;
 }
 
+.element-datalist__header-cell--checkbox {
+  flex: 0 0 40px;
+}
 .element-datalist__header-cell--sortable {
   cursor: pointer;
   &:not(.element-datalist__header-cell--sorting):not(.element-datalist__header-cell--filtering):hover {

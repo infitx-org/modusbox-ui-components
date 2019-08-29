@@ -24,7 +24,9 @@ class Checkbox extends PureComponent {
     }
   }
 
-  onChange() {
+  onChange(e) {
+    e.preventDefault();
+    e.stopPropagation();
     if (this.props.disabled) {
       return;
     }
@@ -41,6 +43,8 @@ class Checkbox extends PureComponent {
     }
   }
   onClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
     if (this.props.onClick) {
       this.props.onClick(e);
     }
@@ -80,7 +84,10 @@ class Checkbox extends PureComponent {
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.testKey}
-          onChange={e => e.preventDefault()}
+          onChange={e => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           checked={checked && semi !== true}
           disabled={disabled}
         />

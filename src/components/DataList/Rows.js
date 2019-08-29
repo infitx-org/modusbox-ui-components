@@ -75,6 +75,7 @@ class ItemCell extends PureComponent {
     const { content, value, className } = this.props;
     const itemCellClassName = utils.composeClassNames(['element-datalist__item-cell', className]);
     let cell = null;
+    console.log(content)
     if (content) {
       cell = content;
     } else {
