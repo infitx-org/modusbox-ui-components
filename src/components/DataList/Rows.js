@@ -43,6 +43,8 @@ class RowItem extends PureComponent {
         className={column.className}
         content={item.data[column._index].component}
         value={item.data[column._index].value}
+        isCheckbox={column._onChange !== undefined}
+        checked={item._checked}
       />
     );
   }
@@ -72,11 +74,16 @@ class RowItem extends PureComponent {
 
 class ItemCell extends PureComponent {
   render() {
-    const { content, value, className } = this.props;
-    const itemCellClassName = utils.composeClassNames(['element-datalist__item-cell', className]);
+    const { isCheckbox, checked, content, value, className } = this.props;
+    const itemCellClassName = utils.composeClassNames([
+      'element-datalist__item-cell',
+      isCheckbox && 'element-datalist__item-cell--checkbox',
+      className
+    ]);
     let cell = null;
-    console.log(content)
-    if (content) {
+    if (isCheckbox) {
+      cell = React.cloneElement(content, { ...content.props, checked });
+    } else if (content) {
       cell = content;
     } else {
       cell = <Tooltip>{value}</Tooltip>;

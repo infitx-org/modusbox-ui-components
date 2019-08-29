@@ -77,7 +77,7 @@ class DataList extends PureComponent {
         _index: get(prev, `[${rowIndex}]._index`) || uuid(),
         _source: item,
         _selected: selected ? selected(item) : false,
-        _checked: checked ? checked.includes(item) : undefined,
+        _checked: checked ? checked.includes(item) : null,
         _visible: true,
       };
       row.data = columns.reduce(reduceColumns(row, row._index), {});
@@ -251,15 +251,8 @@ class DataList extends PureComponent {
   }
 
   onHeaderCheckboxChange(value) {
-    const items = DataList.toItems(
-      this.props.list,
-      this._columns,
-      this.props.selected,
-      this.state.items.map(item => item._source),
-      this.state.items
-    );
     this.setState({
-      items: items.map(item => ({...item, _checked: value }))
+      items: this.state.items.map(item => ({...item, _checked: value }))
     }, this.onChange);
   }
 
