@@ -159,9 +159,16 @@ class DataList extends PureComponent {
       this.onItemCheck = this.onItemCheck.bind(this);
     }
 
-    this._columns = DataList.convertColumns(this.props.columns, undefined, this.onItemCheck);
+    this._columns = DataList.convertColumns(
+      this.props.columns,
+      undefined,
+      this.props.onCheck ? this.onItemCheck : undefined
+    );
 
-    const initialChecked = this.props.list.filter(item => this.props.checked(item));
+    let initialChecked = [];
+    if (this.props.checked) {
+      initialChecked = this.props.list.filter(item => this.props.checked(item));
+    }
 
     const sortAsc = this.props.sortAsc === true;
     const sortColumn = DataList.getSortColumn(this.props.sortColumn, this._columns);
@@ -322,12 +329,12 @@ DataList.defaultProps = {
   isPending: false,
   hasError: false,
   selected: undefined,
-  checked: PropTypes.func,
+  checked: undefined,
   noData: 'No items',
   errorMsg: 'There was an error',
   onSelect: undefined,
   onUnselect: undefined,
-  onCheck: PropTypes.func,
+  onCheck: undefined,
 };
 
 DataList.propTypes = {

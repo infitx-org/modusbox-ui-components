@@ -17,7 +17,7 @@ exports[`renders the checkbox correctly when multiple props are set 1`] = `
     type="checkbox"
   />
   <label
-    className=""
+    className="input-checkbox__label--no-margin"
     htmlFor="test-id"
     onClick={[Function]}
     role="button"
