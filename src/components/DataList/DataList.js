@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import uuid from '../../utils/uuid';
 import * as utils from '../../utils/common';
 
+import Checkbox from '../Checkbox';
 import Header from './Header';
 import Rows from './Rows';
 import Link from './Link';
@@ -14,7 +15,7 @@ import { NoData, Pending, ErrorMessage } from './Boxes';
 import './DataList.scss';
 
 class DataList extends PureComponent {
-  static convertColumns(columns, prevColumns) {
+  static convertColumns(columns, prevColumns, onCheck) {
     const mapIndexToColumns = prev => (column, i) => ({
       // get the _index key from the already existing columns if available
       // so that it does not change and worn't break sorting or filtering
@@ -22,13 +23,17 @@ class DataList extends PureComponent {
       _index: get(prev, `[${i}]._index`) || uuid(),
       ...column,
     });
-    return columns.map(mapIndexToColumns(prevColumns));
+    const tpmColumns = columns.map(mapIndexToColumns(prevColumns));
+    if (typeof onCheck === 'function') {
+      tpmColumns.unshift({ _onChange: onCheck });
+    }
+    return tpmColumns;
   }
-  static toItems(list, columns, selected, prevItems) {
+  static toItems(list, columns, selected, checked, prevItems) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
     const reduceColumns = (item, rowIndex) => (prev, column) => {
-      const { func, key, link, _index } = column;
+      const { func, key, link, _index, _onChange} = column;
       let value = get(item, key);
       let component = null;
 
@@ -38,6 +43,15 @@ class DataList extends PureComponent {
       if (typeof link === 'function') {
         // eslint-disable-next-line
         component = <Link onClick={() => link(item[key], item)}>{value}</Link>;
+      }
+      if (_onChange) {
+        component = (
+          <Checkbox
+            checked={checked(item)}
+            onChange={() => _onChange(item, rowIndex)}
+            round
+          />
+        );
       }
 
       const isTextContent = typeof value === 'string' || typeof value === 'number';
@@ -55,13 +69,16 @@ class DataList extends PureComponent {
       };
     };
 
-    const mapListRowToItem = prev => (item, rowIndex) => ({
-      _index: get(prev, `[${rowIndex}]._index`) || uuid(),
-      _source: item,
-      _selected: selected ? selected(item) : false,
-      _visible: true,
-      data: columns.reduce(reduceColumns(item, rowIndex), {}),
-    });
+    const mapListRowToItem = prev => (item, rowIndex) => {
+      const row = {
+        _index: get(prev, `[${rowIndex}]._index`) || uuid(),
+        _source: item,
+        _selected: selected ? selected(item) : false,
+        _visible: true,
+      };
+      row.data = columns.reduce(reduceColumns(item, row._index), {});
+      return row;
+    };
 
     return list.map(mapListRowToItem(prevItems));
   }
@@ -130,32 +147,43 @@ class DataList extends PureComponent {
     this.onFilterBlur = this.onFilterBlur.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
+    
+    if (this.props.onCheck) {
+      this.onItemCheck = this.onItemCheck.bind(this);
+    }
 
-    this._columns = DataList.convertColumns(this.props.columns);
+    this._columns = DataList.convertColumns(this.props.columns, undefined, this.onItemCheck);
+
 
     const sortAsc = this.props.sortAsc === true;
     const sortColumn = DataList.getSortColumn(this.props.sortColumn, this._columns);
-
-    const items = DataList.toItems(this.props.list, this._columns, this.props.selected);
+    const items = DataList.toItems(
+      this.props.list,
+      this._columns,
+      this.props.selected,
+      this.props.checked
+    );
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
+    const checked = items.filter(item => this.props.checked(item._source)).map(item => item._index);
 
     this.state = {
       items: sortedItems,
       sortAsc,
       sortColumn,
       filters: [],
+      checked,
     };
   }
   componentDidUpdate(prevProps) {
-    const { list, columns, selected } = this.props;
+    const { list, columns, selected, checked, onCheck } = this.props;
 
     if (prevProps.columns !== columns) {
-      this._columns = DataList.convertColumns(columns, this._columns);
+      this._columns = DataList.convertColumns(columns, this._columns, onCheck);
     }
     if (prevProps.list !== list || prevProps.columns !== columns) {
       const { sortAsc, sortColumn, items } = this.state;
 
-      const listItems = DataList.toItems(list, this._columns, selected, items);
+      const listItems = DataList.toItems(list, this._columns, selected, checked, items);
       const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
@@ -200,6 +228,19 @@ class DataList extends PureComponent {
     if (typeof eventHandler === 'function') {
       eventHandler(item._source);
     }
+  }
+
+  onItemCheck(item, rowIndex) {
+    const newChecked = [...this.state.checked];
+    const idx = newChecked.indexOf(rowIndex);
+    if (idx === -1) {
+      newChecked.push(rowIndex);
+    } else {
+      newChecked.splice(idx, 1);
+    }
+    this.setState({
+      checked: newChecked
+    }, () => this.props.onCheck(newChecked))
   }
 
   render() {
@@ -252,11 +293,13 @@ DataList.defaultProps = {
   sortColumn: undefined,
   isPending: false,
   hasError: false,
-  onSelect: undefined,
-  onUnselect: undefined,
   selected: undefined,
+  checked: PropTypes.func,
   noData: 'No items',
   errorMsg: 'There was an error',
+  onSelect: undefined,
+  onUnselect: undefined,
+  onCheck: PropTypes.func,
 };
 
 DataList.propTypes = {
@@ -277,11 +320,13 @@ DataList.propTypes = {
   sortColumn: PropTypes.string,
   isPending: PropTypes.bool,
   hasError: PropTypes.bool,
-  onSelect: PropTypes.func,
-  onUnselect: PropTypes.func,
   selected: PropTypes.func,
+  checked: PropTypes.func,
   noData: PropTypes.string,
   errorMsg: PropTypes.string,
+  onSelect: PropTypes.func,
+  onUnselect: PropTypes.func,
+  onCheck: PropTypes.func,
 };
 
 export default DataList;

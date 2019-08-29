@@ -183,7 +183,9 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       hasError={error}
       onSelect={console.log}
       onUnselect={console.log}
+      onCheck={console.log}
       selected={o => o.a === 10}
+      checked={o => o.c.test.value % 3  === 0}
       noData={noDataLabel}
       errorMsg={errorMsg}
     />
