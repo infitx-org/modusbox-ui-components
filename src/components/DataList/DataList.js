@@ -15,6 +15,9 @@ import { NoData, Pending, ErrorMessage } from './Boxes';
 import './DataList.scss';
 
 class DataList extends PureComponent {
+  static isItemChecked(item) {
+    return item._checked === true;
+  }
   static convertColumns(columns, prevColumns, onCheck) {
     const mapIndexToColumns = prev => (column, i) => ({
       // get the _index key from the already existing columns if available
@@ -46,11 +49,9 @@ class DataList extends PureComponent {
       if (typeof link === 'function') {
         // eslint-disable-next-line
         component = <Link onClick={() => link(row._source[key], row._source)}>{value}</Link>;
-      }
-      if (_onChange) {
+      } else if (_onChange) {
         component = (
           <Checkbox
-            checked={row._checked}
             onChange={() => _onChange(rowIndex)}
             round
           />
@@ -273,6 +274,9 @@ class DataList extends PureComponent {
       flex && 'element-datalist--flexible',
     ]);
 
+    const isAllChecked = items.every(DataList.isItemChecked);
+    const isSomeChecked = items.some(DataList.isItemChecked);
+
     let content = null;
     if (isPending) {
       content = <Pending />;
@@ -289,6 +293,8 @@ class DataList extends PureComponent {
           sortAsc={sortAsc}
           onSortClick={this.onSortClick}
           filters={filters}
+          checked={isAllChecked}
+          semiChecked={isSomeChecked}
           onCheckboxChange={this.onHeaderCheckboxChange}
           onFilterChange={this.onFilterChange}
           onFilterBlur={this.onFilterBlur}

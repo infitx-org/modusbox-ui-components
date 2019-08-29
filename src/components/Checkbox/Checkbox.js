@@ -71,6 +71,10 @@ class Checkbox extends PureComponent {
     const { checked } = this.state;
     const { style, className, id, label, disabled, round, semi } = this.props;
     const checkboxClassName = utils.composeClassNames(['mb-input', 'input-checkbox', className]);
+    const labelClassName = utils.composeClassNames([
+      round && 'input-checkbox__label--round',
+      !label && 'input-checkbox__label--no-margin',
+    ]);
     return (
       <div className={checkboxClassName} style={style}>
         <input
@@ -93,7 +97,7 @@ class Checkbox extends PureComponent {
         />
         <label
           htmlFor={id}
-          className={`${round ? 'input-checkbox__label--round' : ''}`}
+          className={labelClassName}
           onClick={this.onChange}
           role="button"
         >
