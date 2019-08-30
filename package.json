@@ -1,6 +1,6 @@
 {
   "name": "modusbox-ui-components",
-  "version": "1.15.37",
+  "version": "1.15.38",
   "description": "ModusBox UI Components",
   "main": "dist/index.js",
   "files": [
