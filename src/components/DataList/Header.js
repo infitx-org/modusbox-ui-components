@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import find from 'lodash/find';
 import * as utils from '../../utils/common';
 
+import Checkbox from '../Checkbox';
 import Row from '../Row';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
@@ -16,6 +17,9 @@ const Header = ({
   sortAsc,
   onSortClick,
   filters,
+  checked,
+  semiChecked,
+  onCheckboxChange,
   onFilterChange,
   onFilterBlur,
   onFilterClick,
@@ -27,6 +31,7 @@ const Header = ({
         className={column.className}
         key={column._index}
         label={column.label}
+        isCheckbox={column._onChange}
         isSearchable={column.searchable !== false}
         isSortable={column.sortable !== false}
         isSorting={sortColumn === column._index}
@@ -34,6 +39,9 @@ const Header = ({
         isFiltering={filter !== undefined}
         filter={filter}
         onClick={() => onSortClick(column._index)}
+        checked={checked}
+        semiChecked={semiChecked}
+        onCheckboxChange={onCheckboxChange}
         onFilterChange={value => onFilterChange(column._index, value)}
         onFilterBlur={() => onFilterBlur(column._index)}
         onFilterClick={() => onFilterClick(column._index)}
@@ -74,51 +82,70 @@ class HeaderCell extends PureComponent {
     const {
       className,
       label,
+      isCheckbox,
       isSearchable,
       isSortable,
       isSorting,
       isSortingAsc,
       isFiltering,
       filter,
+      checked,
+      semiChecked,
+      onCheckboxChange,
       onFilterChange,
       onFilterBlur,
     } = this.props;
 
     const headerCellClassName = utils.composeClassNames([
       'element-datalist__header-cell',
+      isCheckbox && 'element-datalist__header-cell--checkbox',
       isSortable && 'element-datalist__header-cell--sortable',
       isSorting && 'element-datalist__header-cell--sorting',
       isFiltering && 'element-datalist__header-cell--filtering',
       className,
     ]);
 
-    const labelContent = [];
-    if (label !== '' && isSearchable) {
-      labelContent.push(
-        <FilterIcon key="filter-icon" isFiltering={isFiltering} onClick={this.onFilterClick} />,
+    let headerCellContent = null;
+
+    if (isCheckbox) {
+      headerCellContent = (
+        <Checkbox
+          semi={!checked && semiChecked}
+          checked={checked}
+          onChange={onCheckboxChange}
+          round
+        />
       );
-    }
-    if (label !== '' && !isFiltering) {
-      labelContent.push(<HeaderLabel key="header-label" label={label} />);
-    }
-    if (label !== '' && isFiltering) {
-      labelContent.push(
-        <HeaderFilter
-          key="header-filter"
-          isFiltering={isFiltering}
-          filter={filter}
-          onFilterClick={this.onFilterClick}
-          onFilterChange={onFilterChange}
-          onFilterBlur={onFilterBlur}
-          assignRef={input => {
-            this._filter = input;
-          }}
-        />,
-      );
+    } else {
+      headerCellContent = [];
+
+      if (label !== '' && isSearchable) {
+        headerCellContent.push(
+          <FilterIcon key="filter-icon" isFiltering={isFiltering} onClick={this.onFilterClick} />,
+        );
+      }
+      if (label !== '' && !isFiltering) {
+        headerCellContent.push(<HeaderLabel key="header-label" label={label} />);
+      }
+      if (label !== '' && isFiltering) {
+        headerCellContent.push(
+          <HeaderFilter
+            key="header-filter"
+            isFiltering={isFiltering}
+            filter={filter}
+            onFilterClick={this.onFilterClick}
+            onFilterChange={onFilterChange}
+            onFilterBlur={onFilterBlur}
+            assignRef={input => {
+              this._filter = input;
+            }}
+          />,
+        );
+      }
     }
     return (
       <div className={headerCellClassName} onClick={this.onClick} role="presentation">
-        {labelContent}
+        {headerCellContent}
         <SortIcon isSorting={isSorting} isSortingAsc={isSortingAsc} />
       </div>
     );

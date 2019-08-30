@@ -102,7 +102,7 @@ class ScrollBox extends PureComponent {
             }}
             className={contentClassName}
           >
-            <ReactResizeDetector handleHeight onResize={this.updateScrollbar} />
+            <ReactResizeDetector handleHeight onResize={this.handleResize} />
             {children}
           </div>
         </div>

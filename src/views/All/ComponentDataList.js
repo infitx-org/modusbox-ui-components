@@ -160,7 +160,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
     {
       label: '',
       key: 'e',
-      func: () => <Checkbox checked={counter % 2} />,
+      func: () => <Checkbox checked={counter % 2 !== 0} />,
       className: 'col-40px',
     },
 
@@ -183,7 +183,9 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       hasError={error}
       onSelect={console.log}
       onUnselect={console.log}
+      onCheck={data => console.log(JSON.stringify(data))}
       selected={o => o.a === 10}
+      checked={o => o.c.test.value % 3 === 0}
       noData={noDataLabel}
       errorMsg={errorMsg}
     />

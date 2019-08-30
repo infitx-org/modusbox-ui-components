@@ -27,8 +27,9 @@ const testColumns1 = [
   },
 ];
 let iterator = 0;
-const fromColumns = columns => (item, index) =>
+const fromColumns = columns => () =>
   columns.reduce(
+    /* eslint-disable no-return-assign */
     (prev, column) => ({
       ...prev,
       [column.key]: (iterator += 1),
@@ -141,7 +142,6 @@ it('renders the link correctly', () => {
     .find('.element-datalist__item-cell')
     .at(0)
     .find('.element-datalist__link');
-  const columnContent = testColumns1[1].func(testList1[0].column2).toString();
 
   expect(link.exists()).toBeTruthy();
 });
@@ -480,3 +480,119 @@ it('filters the list on muliple columns when multiple filters are set a filter',
   expect(initialRowsCount).not.toEqual(updatedRowsCount);
   expect(updatedRowsCount).toEqual(1);
 });
+
+it('renders the checkboxes when onCheck prop is passed', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} onCheck={mockEvent} />);
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  wrapper.find('.element-datalist__row').forEach(row => {
+    const rowCheckbox = row
+      .find('div.element-datalist__item-cell')
+      .at(0)
+      .find('Checkbox');
+    expect(rowCheckbox.exists()).toBe(true);
+  });
+
+  expect(checkboxHeaderCell.exists()).toBe(true);
+});
+
+it('renders the checkboxes checked when onCheck prop is passed', () => {
+  const mockEvent = jest.fn();
+  const checked = () => true;
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  wrapper.find('.element-datalist__row').forEach(row => {
+    const rowCheckbox = row
+      .find('div.element-datalist__item-cell')
+      .at(0)
+      .find('Checkbox');
+    expect(rowCheckbox.prop('checked')).toBe(true);
+  });
+
+  expect(checkboxHeaderCell.prop('checked')).toBe(true);
+});
+
+it('triggers the onCheck function when clicking a checkbox', () => {
+  const mockEvent = jest.fn();
+  const checked = () => false;
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+
+  wrapper
+    .find('.element-datalist__row')
+    .at(0)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox')
+    .find('label')
+    .simulate('click');
+
+  expect(mockEvent).toHaveBeenCalledWith([testList1[0]]);
+});
+
+it('triggers the onCheck function with all items when clicking the header checkbox', () => {
+  const mockEvent = jest.fn();
+  const checked = () => false;
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox')
+    .find('label')
+    .simulate('click');
+
+  expect(mockEvent).toHaveBeenCalledWith(testList1);
+});
+
+it('triggers the onCheck function with no items when clicking the header checkbox twice', () => {
+  const mockEvent = jest.fn();
+  const checked = () => false;
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+
+  wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox')
+    .find('label')
+    .simulate('click')
+    .simulate('click');
+
+  expect(mockEvent).toHaveBeenCalledWith([]);
+});
+
+/*it('renders the list correctly when multiple props are set', () => {
+  const mockEvent = () => false;
+  const checked = () => false;
+  const wrapper = shallow(
+    <DataList
+      list={testList1}
+      columns={testColumns1}
+      onCheck={mockEvent}
+      checked={checked}
+      sortColumn="Column2"
+      sortAsc={false}
+      selected={item => item.column1 === 1}
+      onUnselect={mockEvent}
+    />,
+  );
+  expect(shallowToJson(wrapper)).toMatchSnapshot();
+});
+*/

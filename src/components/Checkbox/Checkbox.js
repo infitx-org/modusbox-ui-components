@@ -24,7 +24,9 @@ class Checkbox extends PureComponent {
     }
   }
 
-  onChange() {
+  onChange(e) {
+    e.preventDefault();
+    e.stopPropagation();
     if (this.props.disabled) {
       return;
     }
@@ -41,6 +43,8 @@ class Checkbox extends PureComponent {
     }
   }
   onClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
     if (this.props.onClick) {
       this.props.onClick(e);
     }
@@ -67,6 +71,10 @@ class Checkbox extends PureComponent {
     const { checked } = this.state;
     const { style, className, id, label, disabled, round, semi } = this.props;
     const checkboxClassName = utils.composeClassNames(['mb-input', 'input-checkbox', className]);
+    const labelClassName = utils.composeClassNames([
+      round && 'input-checkbox__label--round',
+      !label && 'input-checkbox__label--no-margin',
+    ]);
     return (
       <div className={checkboxClassName} style={style}>
         <input
@@ -80,16 +88,14 @@ class Checkbox extends PureComponent {
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.testKey}
-          onChange={e => e.preventDefault()}
+          onChange={e => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           checked={checked && semi !== true}
           disabled={disabled}
         />
-        <label
-          htmlFor={id}
-          className={`${round ? 'input-checkbox__label--round' : ''}`}
-          onClick={this.onChange}
-          role="button"
-        >
+        <label htmlFor={id} className={labelClassName} onClick={this.onChange} role="button">
           {label}
         </label>
       </div>
