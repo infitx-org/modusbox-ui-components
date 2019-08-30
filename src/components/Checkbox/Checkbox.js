@@ -95,12 +95,7 @@ class Checkbox extends PureComponent {
           checked={checked && semi !== true}
           disabled={disabled}
         />
-        <label
-          htmlFor={id}
-          className={labelClassName}
-          onClick={this.onChange}
-          role="button"
-        >
+        <label htmlFor={id} className={labelClassName} onClick={this.onChange} role="button">
           {label}
         </label>
       </div>

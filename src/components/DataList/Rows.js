@@ -78,7 +78,7 @@ class ItemCell extends PureComponent {
     const itemCellClassName = utils.composeClassNames([
       'element-datalist__item-cell',
       isCheckbox && 'element-datalist__item-cell--checkbox',
-      className
+      className,
     ]);
     let cell = null;
     if (isCheckbox) {
