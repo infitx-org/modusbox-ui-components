@@ -15,25 +15,38 @@ import { NoData, Pending, ErrorMessage } from './Boxes';
 import './DataList.scss';
 
 class DataList extends PureComponent {
+  static getCheckedItems(list, fn) {
+    return list.filter(fn);
+  }
   static isItemChecked(item) {
     return item._checked === true;
   }
-  static convertColumns(columns, prevColumns, onCheck) {
-    const mapIndexToColumns = prev => (column, i) => ({
-      // get the _index key from the already existing columns if available
-      // so that it does not change and worn't break sorting or filtering
-      // because they use the column _index key to identify the column
-      _index: get(prev, `[${i}]._index`) || uuid(),
-      ...column,
-    });
-    const tpmColumns = columns.map(mapIndexToColumns(prevColumns));
+  static convertColumns(columns, prevColumns = [], onCheck) {
+    const tpmColumns = [];
+    let translateIndex = 0;
 
+    if (!prevColumns.some(col => col._onChange)) {
+      translateIndex = 1;
+    }
     if (typeof onCheck === 'function') {
-      tpmColumns.unshift({
-        _index: '_checkbox_column' || uuid(),
+      translateIndex = 1;
+      tpmColumns.push({
+        _index: '_checkbox_column',
         _onChange: onCheck,
       });
     }
+
+    const mapIndexToColumns = prev => (column, i) => {
+      tpmColumns.push({
+        // get the _index key from the already existing columns if available
+        // so that it does not change and worn't break sorting or filtering
+        // because they use the column _index key to identify the column
+        _index: get(prev, `[${i + translateIndex}]._index`) || uuid(),
+        ...column,
+      });
+    };
+
+    columns.forEach(mapIndexToColumns(prevColumns));
     return tpmColumns;
   }
   static toItems(list, columns, selected, checked, prevItems) {
@@ -161,9 +174,9 @@ class DataList extends PureComponent {
       this.props.onCheck ? this.onItemCheck : undefined,
     );
 
-    let initialChecked = [];
+    let checkedItems = [];
     if (this.props.checked) {
-      initialChecked = this.props.list.filter(item => this.props.checked(item));
+      checkedItems = DataList.getCheckedItems(this.props.list, this.props.checked);
     }
 
     const sortAsc = this.props.sortAsc === true;
@@ -172,7 +185,7 @@ class DataList extends PureComponent {
       this.props.list,
       this._columns,
       this.props.selected,
-      initialChecked,
+      checkedItems,
     );
 
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
@@ -193,7 +206,11 @@ class DataList extends PureComponent {
     if (prevProps.list !== list || prevProps.columns !== columns) {
       const { sortAsc, sortColumn, items } = this.state;
 
-      const listItems = DataList.toItems(list, this._columns, selected, checked, items);
+      let checkedItems = [];
+      if (this.props.checked !== prevProps.checked) {
+        checkedItems = DataList.getCheckedItems(list, checked);
+      }
+      const listItems = DataList.toItems(list, this._columns, selected, checkedItems, items);
       const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
