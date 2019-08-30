@@ -582,3 +582,12 @@ it('triggers the onCheck function with no items when clicking the header checkbo
 
 });
 
+
+
+it('renders the list correctly when multiple props are set', () => {
+  const mockEvent = jest.fn();
+  const checked = () => false;
+  const wrapper = shallow(<DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} sortColumn="Column2" sortAsc={false} selected={item => item.column1 === 1}
+      onUnselect={mockEvent}/>);
+  expect(shallowToJson(wrapper)).toMatchSnapshot();
+});
