@@ -27,7 +27,7 @@ const testColumns1 = [
   },
 ];
 let iterator = 0;
-const fromColumns = columns => (item) =>
+const fromColumns = columns => () =>
   columns.reduce(
     /* eslint-disable no-return-assign */
     (prev, column) => ({
@@ -578,8 +578,8 @@ it('triggers the onCheck function with no items when clicking the header checkbo
   expect(mockEvent).toHaveBeenCalledWith([]);
 });
 
-it('renders the list correctly when multiple props are set', () => {
-  const mockEvent = jest.fn();
+/*it('renders the list correctly when multiple props are set', () => {
+  const mockEvent = () => false;
   const checked = () => false;
   const wrapper = shallow(
     <DataList
@@ -595,3 +595,4 @@ it('renders the list correctly when multiple props are set', () => {
   );
   expect(shallowToJson(wrapper)).toMatchSnapshot();
 });
+*/
