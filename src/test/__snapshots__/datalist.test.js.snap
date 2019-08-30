@@ -13,26 +13,26 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           "_onChange": [Function],
         },
         Object {
-          "_index": "ea307f1d-f130-4876-ab2c-a8964bb2722f",
+          "_index": "c11be31b-b48f-48f8-ae33-09ce4fae380b",
           "key": "column1",
           "label": "Column1",
           "link": [Function],
           "sortable": false,
         },
         Object {
-          "_index": "b7ec1471-8257-4bc2-9032-37ab54d8c517",
+          "_index": "9cd9b0ad-0958-45ed-aef9-7472a0998f83",
           "func": [Function],
           "key": "column2",
           "label": "Column2",
         },
         Object {
-          "_index": "a70a217a-be33-4751-92c8-470277857e23",
+          "_index": "7c06aeef-763f-4bac-b9f7-d80daea7e9c6",
           "func": [Function],
           "key": "column3",
           "label": "Column3",
         },
         Object {
-          "_index": "8d07aa51-b39d-4740-8c1b-e7d55e701004",
+          "_index": "a3f50ad2-045f-4f5c-be32-814c57f2af59",
           "key": "column4",
           "label": "Column4",
         },
@@ -47,7 +47,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
     onSortClick={[Function]}
     semiChecked={false}
     sortAsc={false}
-    sortColumn="b7ec1471-8257-4bc2-9032-37ab54d8c517"
+    sortColumn="9cd9b0ad-0958-45ed-aef9-7472a0998f83"
   />
   <Rows
     columns={
@@ -57,26 +57,26 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           "_onChange": [Function],
         },
         Object {
-          "_index": "ea307f1d-f130-4876-ab2c-a8964bb2722f",
+          "_index": "c11be31b-b48f-48f8-ae33-09ce4fae380b",
           "key": "column1",
           "label": "Column1",
           "link": [Function],
           "sortable": false,
         },
         Object {
-          "_index": "b7ec1471-8257-4bc2-9032-37ab54d8c517",
+          "_index": "9cd9b0ad-0958-45ed-aef9-7472a0998f83",
           "func": [Function],
           "key": "column2",
           "label": "Column2",
         },
         Object {
-          "_index": "a70a217a-be33-4751-92c8-470277857e23",
+          "_index": "7c06aeef-763f-4bac-b9f7-d80daea7e9c6",
           "func": [Function],
           "key": "column3",
           "label": "Column3",
         },
         Object {
-          "_index": "8d07aa51-b39d-4740-8c1b-e7d55e701004",
+          "_index": "a3f50ad2-045f-4f5c-be32-814c57f2af59",
           "key": "column4",
           "label": "Column4",
         },
@@ -86,7 +86,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
       Array [
         Object {
           "_checked": false,
-          "_index": "eb5dd000-38f3-49fe-a4da-95d527795e85",
+          "_index": "eb79c094-5615-4492-b9d3-e448ddab46d0",
           "_selected": false,
           "_source": Object {
             "column1": 397,
@@ -96,9 +96,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                399
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 400,
+              "value": 796,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -117,17 +123,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                399
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 796,
+              "value": 400,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -140,7 +140,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "a03a2170-cd6b-47df-ae55-7b805b8d0a8c",
+          "_index": "200ef4ce-45cd-47f6-81c6-730f9e99a7fd",
           "_selected": false,
           "_source": Object {
             "column1": 393,
@@ -150,9 +150,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                395
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 396,
+              "value": 788,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -171,17 +177,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                395
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 788,
+              "value": 396,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -194,7 +194,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "5b8b8d17-bd2f-46eb-a547-5bfc7732bae6",
+          "_index": "06002749-ba39-474d-b649-ea622848fccd",
           "_selected": false,
           "_source": Object {
             "column1": 389,
@@ -204,9 +204,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                391
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 392,
+              "value": 780,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -225,17 +231,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                391
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 780,
+              "value": 392,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -248,7 +248,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "a67f0731-4572-43b0-b06c-4e5832bedd1c",
+          "_index": "8c9e8fa9-fe89-445b-a462-55ab81e9b617",
           "_selected": false,
           "_source": Object {
             "column1": 385,
@@ -258,9 +258,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                387
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 388,
+              "value": 772,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -279,17 +285,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                387
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 772,
+              "value": 388,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -302,7 +302,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "34894221-a325-4be6-91c4-abc83a25689a",
+          "_index": "a67da600-e8f9-4971-9178-9947b660e1a1",
           "_selected": false,
           "_source": Object {
             "column1": 381,
@@ -312,9 +312,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                383
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 384,
+              "value": 764,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -333,17 +339,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                383
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 764,
+              "value": 384,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -356,7 +356,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "e7f7a495-dbf8-484f-8862-0af24acae0d2",
+          "_index": "aaa7629a-de10-4684-99f6-9bf869031a9e",
           "_selected": false,
           "_source": Object {
             "column1": 377,
@@ -366,9 +366,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                379
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 380,
+              "value": 756,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -387,17 +393,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                379
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 756,
+              "value": 380,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -410,7 +410,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "abb04c73-68cd-484b-9a47-492f7a5b90d1",
+          "_index": "1e2c46fd-4d04-44d1-9fa2-dcc22b35575e",
           "_selected": false,
           "_source": Object {
             "column1": 373,
@@ -420,9 +420,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                375
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 376,
+              "value": 748,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -441,17 +447,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                375
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 748,
+              "value": 376,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -464,7 +464,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "7367153f-c0ac-404d-bea3-63b0160ea8cc",
+          "_index": "395ca668-3b85-4b23-9301-5cac9d9fef10",
           "_selected": false,
           "_source": Object {
             "column1": 369,
@@ -474,9 +474,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                371
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 372,
+              "value": 740,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -495,17 +501,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                371
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 740,
+              "value": 372,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -518,7 +518,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "450e73e4-2d25-4e8b-80b0-66c4aeaba392",
+          "_index": "0cb363fd-1ff9-490d-bc22-1d71ca8875c7",
           "_selected": false,
           "_source": Object {
             "column1": 365,
@@ -528,9 +528,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                367
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 368,
+              "value": 732,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -549,17 +555,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                367
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 732,
+              "value": 368,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -572,7 +572,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "be7d4b97-0a99-4725-94eb-bdf98830d55f",
+          "_index": "dac8c07b-1df7-475c-a481-0b791d9059f5",
           "_selected": false,
           "_source": Object {
             "column1": 361,
@@ -582,9 +582,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                363
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 364,
+              "value": 724,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -603,17 +609,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                363
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 724,
+              "value": 364,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -626,7 +626,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "9b474b27-0265-4d2a-8f40-8b4017b0fea6",
+          "_index": "d21e92c4-4c8f-44a4-ac1a-97b94a0c932f",
           "_selected": false,
           "_source": Object {
             "column1": 357,
@@ -636,9 +636,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                359
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 360,
+              "value": 716,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -657,17 +663,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                359
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 716,
+              "value": 360,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -680,7 +680,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "622c5e60-27b5-4d60-a1b3-b65071d0c7a4",
+          "_index": "b3d5c4e1-f29a-4e4b-a3b1-8ed265b4edd9",
           "_selected": false,
           "_source": Object {
             "column1": 353,
@@ -690,9 +690,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                355
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 356,
+              "value": 708,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -711,17 +717,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                355
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 708,
+              "value": 356,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -734,7 +734,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "7a7898b6-2bbd-43d8-aacc-411c8396fbf6",
+          "_index": "2fc93633-a5cf-4b74-ac76-1d82f4d833d4",
           "_selected": false,
           "_source": Object {
             "column1": 349,
@@ -744,9 +744,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                351
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 352,
+              "value": 700,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -765,17 +771,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                351
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 700,
+              "value": 352,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -788,7 +788,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "c9d11bad-d2f0-4510-8c44-2b91271e79e2",
+          "_index": "0c6d7f08-0ecd-439f-8097-f9abb30d2be3",
           "_selected": false,
           "_source": Object {
             "column1": 345,
@@ -798,9 +798,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                347
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 348,
+              "value": 692,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -819,17 +825,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                347
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 692,
+              "value": 348,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -842,7 +842,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "dd45de84-f404-40de-9618-0206de1aaddb",
+          "_index": "c8cc9fb5-3f84-4fc7-9c90-8b833fcca5e2",
           "_selected": false,
           "_source": Object {
             "column1": 341,
@@ -852,9 +852,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                343
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 344,
+              "value": 684,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -873,17 +879,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                343
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 684,
+              "value": 344,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -896,7 +896,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "7ad9b79c-cc39-4f10-bdb5-a69ca94c1ca2",
+          "_index": "7d37b6b3-b894-4680-9060-3582f6caa8d1",
           "_selected": false,
           "_source": Object {
             "column1": 337,
@@ -906,9 +906,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                339
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 340,
+              "value": 676,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -927,17 +933,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                339
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 676,
+              "value": 340,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -950,7 +950,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "ba43877a-cd61-4f29-9404-2fc3478809b4",
+          "_index": "8e5898f3-83be-4e9f-b197-92d5719af465",
           "_selected": false,
           "_source": Object {
             "column1": 333,
@@ -960,9 +960,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                335
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 336,
+              "value": 668,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -981,17 +987,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                335
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 668,
+              "value": 336,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1004,7 +1004,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "9b97b3c3-e514-4293-bf5b-17637d623d5c",
+          "_index": "31870576-57ad-4149-bf13-29418fd0aee1",
           "_selected": false,
           "_source": Object {
             "column1": 329,
@@ -1014,9 +1014,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                331
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 332,
+              "value": 660,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1035,17 +1041,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                331
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 660,
+              "value": 332,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1058,7 +1058,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "4c77a950-d311-4fec-86d8-9b5522f65799",
+          "_index": "e63dae53-635a-48b1-b032-abe3693a7612",
           "_selected": false,
           "_source": Object {
             "column1": 325,
@@ -1068,9 +1068,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                327
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 328,
+              "value": 652,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1089,17 +1095,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                327
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 652,
+              "value": 328,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1112,7 +1112,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "9aeb2c42-99c0-48b8-bfbc-0d4aa420742f",
+          "_index": "fe71c1ea-2772-4e58-bf53-bf71ab6d74d7",
           "_selected": false,
           "_source": Object {
             "column1": 321,
@@ -1122,9 +1122,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                323
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 324,
+              "value": 644,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1143,17 +1149,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                323
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 644,
+              "value": 324,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1166,7 +1166,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "a1ee9cf0-41b6-46da-9207-4e99a25688d6",
+          "_index": "f4864f9d-c8c1-4ac4-8ee6-233033ab259d",
           "_selected": false,
           "_source": Object {
             "column1": 317,
@@ -1176,9 +1176,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                319
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 320,
+              "value": 636,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1197,17 +1203,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                319
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 636,
+              "value": 320,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1220,7 +1220,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "4e50426a-fe9c-4a48-9c5d-e4bafe183cd2",
+          "_index": "a9f1c737-58c5-4209-9084-db2bf96f298b",
           "_selected": false,
           "_source": Object {
             "column1": 313,
@@ -1230,9 +1230,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                315
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 316,
+              "value": 628,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1251,17 +1257,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                315
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 628,
+              "value": 316,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1274,7 +1274,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "e852e2c6-2289-492b-87b1-062e4f22ecf6",
+          "_index": "ecac8a7f-a458-4b14-bd49-885474299d05",
           "_selected": false,
           "_source": Object {
             "column1": 309,
@@ -1284,9 +1284,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                311
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 312,
+              "value": 620,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1305,17 +1311,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                311
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 620,
+              "value": 312,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1328,7 +1328,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "448e8832-ced1-4d58-a7ae-03566db2ccc3",
+          "_index": "004c3a90-9d8c-4ac1-9773-70a21191b7fb",
           "_selected": false,
           "_source": Object {
             "column1": 305,
@@ -1338,9 +1338,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                307
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 308,
+              "value": 612,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1359,17 +1365,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                307
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 612,
+              "value": 308,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1382,7 +1382,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "aee5082b-a82f-4892-b3db-90eca6fe4c19",
+          "_index": "bee5fe80-80c9-4c4c-b2fa-f8e1c80abf51",
           "_selected": false,
           "_source": Object {
             "column1": 301,
@@ -1392,9 +1392,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                303
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 304,
+              "value": 604,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1413,17 +1419,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                303
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 604,
+              "value": 304,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1436,7 +1436,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "861ab9ed-22eb-4e15-833e-d4c6ec12ac86",
+          "_index": "5ec2e086-2f9d-437f-b699-e2299c32c99e",
           "_selected": false,
           "_source": Object {
             "column1": 297,
@@ -1446,9 +1446,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                299
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 300,
+              "value": 596,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1467,17 +1473,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                299
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 596,
+              "value": 300,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1490,7 +1490,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "c0ac1dd2-2018-4693-a24b-d75a805d594d",
+          "_index": "90738fb5-493d-4501-9672-8e358378fd2b",
           "_selected": false,
           "_source": Object {
             "column1": 293,
@@ -1500,9 +1500,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                295
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 296,
+              "value": 588,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1521,17 +1527,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                295
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 588,
+              "value": 296,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1544,7 +1544,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "8f3011f0-80c2-4b4f-8fcb-d93f121985de",
+          "_index": "011bbd21-86a5-400c-9df1-a1020c1c4fa4",
           "_selected": false,
           "_source": Object {
             "column1": 289,
@@ -1554,9 +1554,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                291
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 292,
+              "value": 580,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1575,17 +1581,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                291
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 580,
+              "value": 292,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1598,7 +1598,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "ac8d1e12-a48c-4ef1-bc5b-c3bdcda91344",
+          "_index": "82659c53-6bcb-4ad8-93ee-72a5871fc318",
           "_selected": false,
           "_source": Object {
             "column1": 285,
@@ -1608,9 +1608,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                287
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 288,
+              "value": 572,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1629,17 +1635,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                287
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 572,
+              "value": 288,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1652,7 +1652,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "614d57ad-925f-477b-8d4a-3f1316803a9f",
+          "_index": "9ed3c2ca-16b3-440b-9705-1ba9fd1909bd",
           "_selected": false,
           "_source": Object {
             "column1": 281,
@@ -1662,9 +1662,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                283
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 284,
+              "value": 564,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1683,17 +1689,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                283
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 564,
+              "value": 284,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1706,7 +1706,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "82b4b795-c60a-413b-9012-588ecd5dfcc9",
+          "_index": "e457fc37-bbd4-4d1b-aca2-8f53f7966a48",
           "_selected": false,
           "_source": Object {
             "column1": 277,
@@ -1716,9 +1716,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                279
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 280,
+              "value": 556,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1737,17 +1743,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                279
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 556,
+              "value": 280,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1760,7 +1760,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "57fa817c-783f-4529-945d-0f4b76eb7853",
+          "_index": "074641ef-cfcc-402f-9389-103abc5d98d8",
           "_selected": false,
           "_source": Object {
             "column1": 273,
@@ -1770,9 +1770,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                275
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 276,
+              "value": 548,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1791,17 +1797,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                275
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 548,
+              "value": 276,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1814,7 +1814,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "f523e80a-04d8-45d1-afd4-ed3b74d5483d",
+          "_index": "4ea82554-0bcb-42f2-a428-9069a83303da",
           "_selected": false,
           "_source": Object {
             "column1": 269,
@@ -1824,9 +1824,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                271
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 272,
+              "value": 540,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1845,17 +1851,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                271
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 540,
+              "value": 272,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1868,7 +1868,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "2abafaff-b52e-4a66-9c7e-22c07b4b6c6b",
+          "_index": "f6e404c5-5671-449b-ae29-383529ff711e",
           "_selected": false,
           "_source": Object {
             "column1": 265,
@@ -1878,9 +1878,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                267
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 268,
+              "value": 532,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1899,17 +1905,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                267
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 532,
+              "value": 268,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1922,7 +1922,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "ad2647d6-49d8-41f7-9d64-be8cec76e1ac",
+          "_index": "2a804ad7-436f-484f-8ff4-fda28ae89673",
           "_selected": false,
           "_source": Object {
             "column1": 261,
@@ -1932,9 +1932,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                263
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 264,
+              "value": 524,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -1953,17 +1959,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                263
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 524,
+              "value": 264,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -1976,7 +1976,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "64b3259b-c35c-4ff8-8f89-91e492faf5dc",
+          "_index": "124ebd40-a831-4f1c-9e62-dd1ceca1365b",
           "_selected": false,
           "_source": Object {
             "column1": 257,
@@ -1986,9 +1986,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                259
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 260,
+              "value": 516,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2007,17 +2013,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                259
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 516,
+              "value": 260,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2030,7 +2030,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "02921971-eec2-4fbd-8d48-2a0817bda1d8",
+          "_index": "55a53167-9a69-482c-83d7-26b17a16468d",
           "_selected": false,
           "_source": Object {
             "column1": 253,
@@ -2040,9 +2040,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                255
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 256,
+              "value": 508,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2061,17 +2067,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                255
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 508,
+              "value": 256,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2084,7 +2084,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "4a4c7376-c582-49ce-86ae-c16851b19bbb",
+          "_index": "16b1bd99-76af-4d33-b96a-690f5426c36f",
           "_selected": false,
           "_source": Object {
             "column1": 249,
@@ -2094,9 +2094,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                251
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 252,
+              "value": 500,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2115,17 +2121,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                251
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 500,
+              "value": 252,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2138,7 +2138,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "51da1f01-2b97-4007-bb69-128722776527",
+          "_index": "2981fc84-e95b-4aad-ab1b-9105c4b3752a",
           "_selected": false,
           "_source": Object {
             "column1": 245,
@@ -2148,9 +2148,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                247
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 248,
+              "value": 492,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2169,17 +2175,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                247
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 492,
+              "value": 248,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2192,7 +2192,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "8200cf6d-76b0-40a2-b552-86f283130f27",
+          "_index": "4266fc5e-8ae8-419e-a102-76069bf7c3df",
           "_selected": false,
           "_source": Object {
             "column1": 241,
@@ -2202,9 +2202,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                243
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 244,
+              "value": 484,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2223,17 +2229,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                243
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 484,
+              "value": 244,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2246,7 +2246,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "0ed2a813-b8a5-4e66-b51f-f1a1d31762da",
+          "_index": "d7ec0337-25e9-46db-a6aa-a3faa96c559d",
           "_selected": false,
           "_source": Object {
             "column1": 237,
@@ -2256,9 +2256,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                239
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 240,
+              "value": 476,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2277,17 +2283,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                239
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 476,
+              "value": 240,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2300,7 +2300,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "6d3b9212-7dcc-410a-b9eb-962836533701",
+          "_index": "1d6e8d78-bdb6-4498-a3db-976976b00c00",
           "_selected": false,
           "_source": Object {
             "column1": 233,
@@ -2310,9 +2310,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                235
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 236,
+              "value": 468,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2331,17 +2337,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                235
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 468,
+              "value": 236,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2354,7 +2354,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "3f1d6d5d-e979-49e4-bf03-486c7588a9ca",
+          "_index": "2231679a-17a6-4b0d-8765-aad84b42aac3",
           "_selected": false,
           "_source": Object {
             "column1": 229,
@@ -2364,9 +2364,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                231
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 232,
+              "value": 460,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2385,17 +2391,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                231
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 460,
+              "value": 232,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2408,7 +2408,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "13015fa5-f9db-4736-b633-d89b99ea7fd9",
+          "_index": "22b6efe1-3917-45af-a585-72ca9965363e",
           "_selected": false,
           "_source": Object {
             "column1": 225,
@@ -2418,9 +2418,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                227
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 228,
+              "value": 452,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2439,17 +2445,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                227
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 452,
+              "value": 228,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2462,7 +2462,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "c1d78f3a-3b27-4818-9e3b-c4399fa7a202",
+          "_index": "79b546c0-9c24-4fe8-a5b3-07e894a0fe6a",
           "_selected": false,
           "_source": Object {
             "column1": 221,
@@ -2472,9 +2472,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                223
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 224,
+              "value": 444,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2493,17 +2499,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                223
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 444,
+              "value": 224,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2516,7 +2516,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "812b98a6-62a4-46c7-af29-0dbc0c80c8ea",
+          "_index": "62dd66bc-1e08-43c6-943e-a67c340c2b32",
           "_selected": false,
           "_source": Object {
             "column1": 217,
@@ -2526,9 +2526,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                219
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 220,
+              "value": 436,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2547,17 +2553,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                219
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 436,
+              "value": 220,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2570,7 +2570,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "4063605a-e7de-4b5f-8498-55e06a6f3fcd",
+          "_index": "d915c5f4-dab4-43a9-a88d-9a58cf2949ff",
           "_selected": false,
           "_source": Object {
             "column1": 213,
@@ -2580,9 +2580,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                215
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 216,
+              "value": 428,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2601,17 +2607,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                215
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 428,
+              "value": 216,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2624,7 +2624,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "28d18cc1-f6bd-41c4-8097-47f7f5df4fbf",
+          "_index": "a2c62c16-1096-4145-a39b-2b82fde71e2d",
           "_selected": false,
           "_source": Object {
             "column1": 209,
@@ -2634,9 +2634,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                211
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 212,
+              "value": 420,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2655,17 +2661,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                211
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 420,
+              "value": 212,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2678,7 +2678,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "5514ebab-e994-414a-8a71-a084c626fd07",
+          "_index": "121a92bf-1d09-4b5d-afdc-25811aaa1509",
           "_selected": false,
           "_source": Object {
             "column1": 205,
@@ -2688,9 +2688,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                207
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 208,
+              "value": 412,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2709,17 +2715,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                207
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 412,
+              "value": 208,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2732,7 +2732,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "60a69a29-0509-4473-93c5-935dd2b168ac",
+          "_index": "c6fb143e-8f53-4266-a9f5-b13aeedf67e5",
           "_selected": false,
           "_source": Object {
             "column1": 201,
@@ -2742,9 +2742,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                203
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 204,
+              "value": 404,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2763,17 +2769,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                203
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 404,
+              "value": 204,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2786,7 +2786,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "af9eb20b-912a-4bea-9a7c-0867b8a7f5fa",
+          "_index": "09708b68-af37-485e-abaf-21faba91cfb5",
           "_selected": false,
           "_source": Object {
             "column1": 197,
@@ -2796,9 +2796,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                199
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 200,
+              "value": 396,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2817,17 +2823,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                199
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 396,
+              "value": 200,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2840,7 +2840,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "aaf15b95-d599-427b-b664-c30ac17feeb4",
+          "_index": "7b3be1e8-4b29-47e4-944a-830b1e3107f0",
           "_selected": false,
           "_source": Object {
             "column1": 193,
@@ -2850,9 +2850,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                195
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 196,
+              "value": 388,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2871,17 +2877,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                195
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 388,
+              "value": 196,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2894,7 +2894,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "a5d32f34-72a9-45f4-850b-c11deaa91cc0",
+          "_index": "a1c65d66-1b4b-41a1-9bca-e505c197d894",
           "_selected": false,
           "_source": Object {
             "column1": 189,
@@ -2904,9 +2904,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                191
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 192,
+              "value": 380,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2925,17 +2931,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                191
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 380,
+              "value": 192,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -2948,7 +2948,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "1e3e1c6f-9700-4342-ae60-d0c7bbe6dc3f",
+          "_index": "23c2d3d6-5c0e-496d-8d9d-c0eab597869a",
           "_selected": false,
           "_source": Object {
             "column1": 185,
@@ -2958,9 +2958,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                187
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 188,
+              "value": 372,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -2979,17 +2985,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                187
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 372,
+              "value": 188,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3002,7 +3002,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "83d402d9-e834-450d-8e27-600c8a82d92f",
+          "_index": "bafebf3d-b11c-4dc0-8bfb-cd4c139c0df8",
           "_selected": false,
           "_source": Object {
             "column1": 181,
@@ -3012,9 +3012,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                183
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 184,
+              "value": 364,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3033,17 +3039,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                183
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 364,
+              "value": 184,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3056,7 +3056,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "c6d0b462-a8a5-41f2-b612-b03139979b66",
+          "_index": "891e9dfa-54f2-413b-9b64-900b10cc61be",
           "_selected": false,
           "_source": Object {
             "column1": 177,
@@ -3066,9 +3066,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                179
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 180,
+              "value": 356,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3087,17 +3093,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                179
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 356,
+              "value": 180,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3110,7 +3110,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "8d521d8f-09d3-4cc4-9c65-ec523a7d9965",
+          "_index": "c7f79419-b089-4a56-9f7c-9a221c421a27",
           "_selected": false,
           "_source": Object {
             "column1": 173,
@@ -3120,9 +3120,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                175
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 176,
+              "value": 348,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3141,17 +3147,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                175
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 348,
+              "value": 176,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3164,7 +3164,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "d9ef0b0b-c198-43a6-a68a-81394a5b9296",
+          "_index": "a972b052-610f-4723-8995-7a6f58462ddb",
           "_selected": false,
           "_source": Object {
             "column1": 169,
@@ -3174,9 +3174,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                171
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 172,
+              "value": 340,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3195,17 +3201,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                171
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 340,
+              "value": 172,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3218,7 +3218,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "50b1f5ae-9036-414f-a8d3-23b1fa7887b1",
+          "_index": "aacece52-968d-4e0a-a588-2445b0a9ad2b",
           "_selected": false,
           "_source": Object {
             "column1": 165,
@@ -3228,9 +3228,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                167
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 168,
+              "value": 332,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3249,17 +3255,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                167
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 332,
+              "value": 168,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3272,7 +3272,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "8389a8d3-197f-4f9e-89e4-f1fd697c0658",
+          "_index": "37991b79-7c91-414c-904f-a96fe5d82f45",
           "_selected": false,
           "_source": Object {
             "column1": 161,
@@ -3282,9 +3282,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                163
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 164,
+              "value": 324,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3303,17 +3309,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                163
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 324,
+              "value": 164,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3326,7 +3326,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "3abffba9-aa0d-4991-a7f3-5a04bffc909e",
+          "_index": "7ce3efb3-8dfd-438b-85e1-e2cadf43c525",
           "_selected": false,
           "_source": Object {
             "column1": 157,
@@ -3336,9 +3336,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                159
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 160,
+              "value": 316,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3357,17 +3363,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                159
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 316,
+              "value": 160,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3380,7 +3380,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "003a6c42-5437-46b3-8f9a-8a3f7133f1e8",
+          "_index": "a44b647b-0174-472c-9d0b-2091e133b342",
           "_selected": false,
           "_source": Object {
             "column1": 153,
@@ -3390,9 +3390,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                155
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 156,
+              "value": 308,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3411,17 +3417,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                155
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 308,
+              "value": 156,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3434,7 +3434,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "6c02d1d5-2302-41b7-8333-6fb7a18fdf28",
+          "_index": "e5eb0737-596c-469e-9f8a-f4f9c39276a6",
           "_selected": false,
           "_source": Object {
             "column1": 149,
@@ -3444,9 +3444,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                151
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 152,
+              "value": 300,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3465,17 +3471,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                151
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 300,
+              "value": 152,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3488,7 +3488,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "f9420753-c8fa-4e5f-972a-5e61b6292340",
+          "_index": "234d94eb-3baa-4580-8c5b-4e7be64dc203",
           "_selected": false,
           "_source": Object {
             "column1": 145,
@@ -3498,9 +3498,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                147
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 148,
+              "value": 292,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3519,17 +3525,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                147
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 292,
+              "value": 148,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3542,7 +3542,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "9c65ca0d-5c87-438d-b417-79a96aea345f",
+          "_index": "6ade3032-c7fd-446f-bc3c-9b3419b3f62f",
           "_selected": false,
           "_source": Object {
             "column1": 141,
@@ -3552,9 +3552,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                143
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 144,
+              "value": 284,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3573,17 +3579,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                143
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 284,
+              "value": 144,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3596,7 +3596,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "434ac3c5-2e8a-4ef8-9dc9-1a8f118bddf2",
+          "_index": "6aa79abc-e625-4354-a1a5-178168efbb7b",
           "_selected": false,
           "_source": Object {
             "column1": 137,
@@ -3606,9 +3606,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                139
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 140,
+              "value": 276,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3627,17 +3633,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                139
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 276,
+              "value": 140,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3650,7 +3650,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "5e919fd2-eeaf-4287-8f40-219ea4fc464a",
+          "_index": "36d56e37-a471-4efd-9ddf-d5af55efda1e",
           "_selected": false,
           "_source": Object {
             "column1": 133,
@@ -3660,9 +3660,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                135
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 136,
+              "value": 268,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3681,17 +3687,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                135
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 268,
+              "value": 136,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3704,7 +3704,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "e53fb813-f068-43fa-bfd9-30d57b1931a9",
+          "_index": "e40f1fe3-595a-4f48-80dc-657da9219b72",
           "_selected": false,
           "_source": Object {
             "column1": 129,
@@ -3714,9 +3714,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                131
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 132,
+              "value": 260,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3735,17 +3741,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                131
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 260,
+              "value": 132,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3758,7 +3758,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "7e6f4a3e-3404-4fd3-bee1-59ec5bc19642",
+          "_index": "9010bb04-f537-41c0-832a-079067590440",
           "_selected": false,
           "_source": Object {
             "column1": 125,
@@ -3768,9 +3768,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                127
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 128,
+              "value": 252,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3789,17 +3795,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                127
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 252,
+              "value": 128,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3812,7 +3812,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "d78bc94f-8236-4883-966b-cd270d042042",
+          "_index": "dac8f4e8-08fa-401b-8799-f668b87e5000",
           "_selected": false,
           "_source": Object {
             "column1": 121,
@@ -3822,9 +3822,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                123
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 124,
+              "value": 244,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3843,17 +3849,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                123
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 244,
+              "value": 124,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3866,7 +3866,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "02b763ff-e018-494b-a988-afb9bfb1b2a2",
+          "_index": "4e720a5a-0a3d-4a0d-bdca-5915380e0fa0",
           "_selected": false,
           "_source": Object {
             "column1": 117,
@@ -3876,9 +3876,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                119
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 120,
+              "value": 236,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3897,17 +3903,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                119
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 236,
+              "value": 120,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3920,7 +3920,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "0e99222c-3bf7-426d-ae7e-fca8f2c67a10",
+          "_index": "56bcca0b-1013-4d5f-bab7-c3ae7234b875",
           "_selected": false,
           "_source": Object {
             "column1": 113,
@@ -3930,9 +3930,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                115
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 116,
+              "value": 228,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -3951,17 +3957,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                115
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 228,
+              "value": 116,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -3974,7 +3974,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "977b2bd4-bd52-4b15-b62e-3d58f59028d2",
+          "_index": "b224fa24-30f0-4d3d-b7a6-1d60330a2b12",
           "_selected": false,
           "_source": Object {
             "column1": 109,
@@ -3984,9 +3984,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                111
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 112,
+              "value": 220,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4005,17 +4011,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                111
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 220,
+              "value": 112,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4028,7 +4028,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "7db999e2-d9d1-49c8-b155-f7977dff447c",
+          "_index": "a06ce482-1f3d-4136-9ec7-071990a0e60a",
           "_selected": false,
           "_source": Object {
             "column1": 105,
@@ -4038,9 +4038,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                107
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 108,
+              "value": 212,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4059,17 +4065,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                107
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 212,
+              "value": 108,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4082,7 +4082,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "b5cfb808-8868-4853-80d8-04996fde027f",
+          "_index": "cc49cdc5-cf54-4138-b0ad-77f3795bf6ab",
           "_selected": false,
           "_source": Object {
             "column1": 101,
@@ -4092,9 +4092,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                103
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 104,
+              "value": 204,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4113,17 +4119,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                103
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 204,
+              "value": 104,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4136,7 +4136,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "5ac1094a-f283-44f3-9513-27778ffa65f4",
+          "_index": "7dd5f4c4-862d-4608-becf-05f73fd9708b",
           "_selected": false,
           "_source": Object {
             "column1": 97,
@@ -4146,9 +4146,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                99
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 100,
+              "value": 196,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4167,17 +4173,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                99
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 196,
+              "value": 100,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4190,7 +4190,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "00671b1d-3c61-459d-9280-f4e221f4247c",
+          "_index": "196b191a-0c04-438d-8fa8-f68f86021c4d",
           "_selected": false,
           "_source": Object {
             "column1": 93,
@@ -4200,9 +4200,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                95
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 96,
+              "value": 188,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4221,17 +4227,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                95
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 188,
+              "value": 96,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4244,7 +4244,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "bf2d65ca-a12d-4cfd-9115-252e4c638aaf",
+          "_index": "1ff2bacf-bffb-44cd-bb3f-bfd795734903",
           "_selected": false,
           "_source": Object {
             "column1": 89,
@@ -4254,9 +4254,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                91
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 92,
+              "value": 180,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4275,17 +4281,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                91
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 180,
+              "value": 92,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4298,7 +4298,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "fef673d5-2bc5-4338-b159-ba49a024cb04",
+          "_index": "7aaa9963-b114-4396-adea-5a7045ca4e37",
           "_selected": false,
           "_source": Object {
             "column1": 85,
@@ -4308,9 +4308,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                87
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 88,
+              "value": 172,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4329,17 +4335,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                87
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 172,
+              "value": 88,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4352,7 +4352,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "55b72922-b79a-498d-86a6-b82c60bc0576",
+          "_index": "73033cec-4fd0-405f-a624-ad926564431f",
           "_selected": false,
           "_source": Object {
             "column1": 81,
@@ -4362,9 +4362,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                83
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 84,
+              "value": 164,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4383,17 +4389,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                83
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 164,
+              "value": 84,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4406,7 +4406,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "8b3e3a98-2765-4b6a-bf64-6c217f809756",
+          "_index": "661ab225-bcf6-4478-bb4f-9d2c8ca11d48",
           "_selected": false,
           "_source": Object {
             "column1": 77,
@@ -4416,9 +4416,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                79
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 80,
+              "value": 156,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4437,17 +4443,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                79
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 156,
+              "value": 80,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4460,7 +4460,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "51586a07-9de7-4538-8667-11f987ac6b90",
+          "_index": "5ff2f03d-fc3e-4b49-a65f-239c1418dfb8",
           "_selected": false,
           "_source": Object {
             "column1": 73,
@@ -4470,9 +4470,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                75
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 76,
+              "value": 148,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4491,17 +4497,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                75
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 148,
+              "value": 76,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4514,7 +4514,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "f2586786-f994-4165-a882-49afb20e4ed6",
+          "_index": "7ae21849-a0a1-417c-8542-e7051050d288",
           "_selected": false,
           "_source": Object {
             "column1": 69,
@@ -4524,9 +4524,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                71
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 72,
+              "value": 140,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4545,17 +4551,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                71
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 140,
+              "value": 72,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4568,7 +4568,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "a180b9a7-f04b-4471-9d60-a7a1183438c2",
+          "_index": "e68ec8ed-2213-4e1c-a6c2-6e11e25de1d2",
           "_selected": false,
           "_source": Object {
             "column1": 65,
@@ -4578,9 +4578,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                67
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 68,
+              "value": 132,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4599,17 +4605,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                67
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 132,
+              "value": 68,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4622,7 +4622,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "1403a437-bde7-4102-b613-51be428d8536",
+          "_index": "0dabc16a-d778-4d48-88e4-027c814d7527",
           "_selected": false,
           "_source": Object {
             "column1": 61,
@@ -4632,9 +4632,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                63
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 64,
+              "value": 124,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4653,17 +4659,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                63
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 124,
+              "value": 64,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4676,7 +4676,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "09c9ab86-d09c-4d4a-a79d-dbcf06eaea63",
+          "_index": "19fb2714-3e81-433d-abaa-f1ad675e860f",
           "_selected": false,
           "_source": Object {
             "column1": 57,
@@ -4686,9 +4686,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                59
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 60,
+              "value": 116,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4707,17 +4713,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                59
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 116,
+              "value": 60,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4730,7 +4730,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "21693756-d9d6-402d-be52-98d68dbc81fc",
+          "_index": "53c3c390-cb59-4f6d-90fa-1550934b9034",
           "_selected": false,
           "_source": Object {
             "column1": 53,
@@ -4740,9 +4740,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                55
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 56,
+              "value": 108,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4761,17 +4767,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                55
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 108,
+              "value": 56,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4784,7 +4784,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "3b0abf7b-72b4-48e6-b1cb-0422e4ed029c",
+          "_index": "8d488de4-52dd-4253-9117-705a1ec1a6b7",
           "_selected": false,
           "_source": Object {
             "column1": 49,
@@ -4794,9 +4794,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                51
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 52,
+              "value": 100,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4815,17 +4821,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                51
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 100,
+              "value": 52,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4838,7 +4838,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "6ee5f220-d1a0-462b-be30-0570ccbe255b",
+          "_index": "44d70ea9-8ecb-4c32-b167-34dd5eb951ee",
           "_selected": false,
           "_source": Object {
             "column1": 45,
@@ -4848,9 +4848,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                47
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 48,
+              "value": 92,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4869,17 +4875,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                47
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 92,
+              "value": 48,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4892,7 +4892,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "19399aa6-41e2-4890-8856-d7b41c1929a5",
+          "_index": "abde99f9-57f1-447d-80fc-f93262a56ae1",
           "_selected": false,
           "_source": Object {
             "column1": 41,
@@ -4902,9 +4902,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                43
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 44,
+              "value": 84,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4923,17 +4929,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                43
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 84,
+              "value": 44,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -4946,7 +4946,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "48f7153a-9aa2-44b1-9e81-2a4183dec049",
+          "_index": "6e3320f2-3ac9-4cd3-bfd2-f4e67cf1a690",
           "_selected": false,
           "_source": Object {
             "column1": 37,
@@ -4956,9 +4956,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                39
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 40,
+              "value": 76,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -4977,17 +4983,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                39
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 76,
+              "value": 40,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5000,7 +5000,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "b807fa01-55cf-4341-bfd1-ee87906d1da2",
+          "_index": "2a0e4fe1-b0d4-41ac-bab7-f364e30f81f2",
           "_selected": false,
           "_source": Object {
             "column1": 33,
@@ -5010,9 +5010,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                35
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 36,
+              "value": 68,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5031,17 +5037,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                35
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 68,
+              "value": 36,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5054,7 +5054,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "ad55ccda-5f07-4575-b845-cb51a7e06d68",
+          "_index": "641055a6-f75b-45df-bcc7-4f37d8829f7c",
           "_selected": false,
           "_source": Object {
             "column1": 29,
@@ -5064,9 +5064,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                31
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 32,
+              "value": 60,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5085,17 +5091,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                31
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 60,
+              "value": 32,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5108,7 +5108,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "5d39ceda-e982-41b6-8ff4-20128b6289c4",
+          "_index": "9b9f5c80-5c7b-43af-8ae1-9f8e4beb3024",
           "_selected": false,
           "_source": Object {
             "column1": 25,
@@ -5118,9 +5118,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                27
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 28,
+              "value": 52,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5139,17 +5145,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                27
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 52,
+              "value": 28,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5162,7 +5162,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "075fc37c-ee79-41ff-8b78-dc6edd8f829a",
+          "_index": "a8d6b947-95f1-4eff-8e0c-96e0627c2db6",
           "_selected": false,
           "_source": Object {
             "column1": 21,
@@ -5172,9 +5172,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                23
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 24,
+              "value": 44,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5193,17 +5199,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                23
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 44,
+              "value": 24,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5216,7 +5216,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "c3c2dff2-6474-4f00-b750-8b0495ffbafd",
+          "_index": "9df1155f-a9a1-4719-ab76-c744014632ad",
           "_selected": false,
           "_source": Object {
             "column1": 17,
@@ -5226,9 +5226,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                19
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 20,
+              "value": 36,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5247,17 +5253,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                19
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 36,
+              "value": 20,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5270,7 +5270,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "f5366f68-24a4-4482-9c32-cfcfba326920",
+          "_index": "ba0939c2-f947-4bad-bc49-b5669f8589f6",
           "_selected": false,
           "_source": Object {
             "column1": 13,
@@ -5280,9 +5280,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                15
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 16,
+              "value": 28,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5301,17 +5307,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                15
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 28,
+              "value": 16,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5324,7 +5324,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "1c64f34c-82a4-4587-8940-78eb47a0300f",
+          "_index": "a13b0556-4fb0-4413-9cfd-e6184cc6a9c6",
           "_selected": false,
           "_source": Object {
             "column1": 9,
@@ -5334,9 +5334,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                11
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 12,
+              "value": 20,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5355,17 +5361,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                11
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 20,
+              "value": 12,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5378,7 +5378,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "62378ee8-29b7-488c-8b0f-226418994357",
+          "_index": "9fea7230-b794-4610-8b06-ecb7b26504b6",
           "_selected": false,
           "_source": Object {
             "column1": 5,
@@ -5388,9 +5388,15 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                7
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
-              "value": 8,
+              "value": 12,
             },
             "_checkbox_column": Object {
               "component": <Checkbox
@@ -5409,17 +5415,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                7
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
-              "value": 12,
+              "value": 8,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
@@ -5432,7 +5432,7 @@ exports[`renders the list correctly when multiple props are set 1`] = `
         },
         Object {
           "_checked": false,
-          "_index": "669c4377-7021-40f0-8bf3-983a978690c1",
+          "_index": "15b9580b-93af-49a3-922f-afa245292b77",
           "_selected": true,
           "_source": Object {
             "column1": 1,
@@ -5442,7 +5442,13 @@ exports[`renders the list correctly when multiple props are set 1`] = `
           },
           "_visible": true,
           "data": Object {
-            "8d07aa51-b39d-4740-8c1b-e7d55e701004": Object {
+            "7c06aeef-763f-4bac-b9f7-d80daea7e9c6": Object {
+              "component": <div>
+                3
+              </div>,
+              "value": null,
+            },
+            "9cd9b0ad-0958-45ed-aef9-7472a0998f83": Object {
               "component": null,
               "value": 4,
             },
@@ -5463,17 +5469,11 @@ exports[`renders the list correctly when multiple props are set 1`] = `
               />,
               "value": null,
             },
-            "a70a217a-be33-4751-92c8-470277857e23": Object {
-              "component": <div>
-                3
-              </div>,
-              "value": null,
-            },
-            "b7ec1471-8257-4bc2-9032-37ab54d8c517": Object {
+            "a3f50ad2-045f-4f5c-be32-814c57f2af59": Object {
               "component": null,
               "value": 4,
             },
-            "ea307f1d-f130-4876-ab2c-a8964bb2722f": Object {
+            "c11be31b-b48f-48f8-ae33-09ce4fae380b": Object {
               "component": <Link
                 onClick={[Function]}
                 value={undefined}
