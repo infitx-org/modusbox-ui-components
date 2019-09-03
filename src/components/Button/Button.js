@@ -42,18 +42,19 @@ class Button extends PureComponent {
       kind,
       label,
       icon,
+      iconPosition,
       noFill,
       disabled,
       pending,
       tooltip,
     } = this.props;
+
     const isDisabledOrPending = disabled === true || pending === true;
     const iconSize = iconSizes[size];
     const classNames = utils.composeClassNames([
       className,
       'mb-input',
       'input-button__input',
-      // for the inner buttons
       size === 'xs' && 'input-button__mb-input--extra-small',
       size === 's' && 'input-button__mb-input--small',
       size === 'm' && 'input-button__mb-input--medium',
@@ -71,6 +72,26 @@ class Button extends PureComponent {
       noFill && 'noFill',
     ]);
 
+    let iconComponent = null;
+    if (pending || icon) {
+      iconComponent = (
+        <div
+          className={`input-button__icon input-button__icon${
+            iconPosition === 'left' ? '--left' : '--right'
+          }`}
+        >
+          {pending ? (
+            <Spinner color="inherit" size={iconSize} />
+          ) : (
+            <Icon name={icon} stroke="none" size={iconSize} />
+          )}
+        </div>
+      );
+    }
+
+    const leftIcon = iconPosition === 'left' ? iconComponent : null;
+    const rightIcon = iconPosition === 'right' ? iconComponent : null;
+
     const button = (
       <button
         ref={input => {
@@ -86,16 +107,9 @@ class Button extends PureComponent {
         kind={kind}
       >
         <div className="input-button__content">
-          {(pending || icon) && (
-            <div className="input-button__icon">
-              {pending ? (
-                <Spinner color="inherit" size={iconSize} />
-              ) : (
-                <Icon name={icon} stroke="none" spin={pending} size={iconSize} />
-              )}
-            </div>
-          )}
+          {leftIcon}
           {label && <span className="input-button__label">{label}</span>}
+          {rightIcon}
         </div>
       </button>
     );
@@ -127,6 +141,7 @@ Button.propTypes = {
   size: PropTypes.oneOf(['s', 'm', 'l']),
   label: PropTypes.string,
   icon: PropTypes.string,
+  iconPosition: PropTypes.oneOf(['left', 'right']),
   noFill: PropTypes.bool,
   disabled: PropTypes.bool,
   pending: PropTypes.bool,
@@ -141,6 +156,7 @@ Button.defaultProps = {
   size: 'l',
   label: undefined,
   icon: undefined,
+  iconPosition: 'left',
   noFill: false,
   disabled: false,
   pending: false,
