@@ -177,15 +177,14 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       flex={flex}
       columns={columns}
       list={list}
-      sortColumn="Square"
+      sortColumn="Double"
       sortAsc={false}
       isPending={pending}
       hasError={error}
-      onSelect={console.log}
-      onUnselect={console.log}
+      onSelect={undefined}
+      onUnselect={undefined}
       onCheck={data => console.log(JSON.stringify(data))}
       selected={o => o.a === 10}
-      checked={o => o.a === 10}
       noData={noDataLabel}
       errorMsg={errorMsg}
     />

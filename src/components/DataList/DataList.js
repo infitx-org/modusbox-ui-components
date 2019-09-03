@@ -87,7 +87,7 @@ class DataList extends PureComponent {
         _index: get(prev, `[${rowIndex}]._index`) || uuid(),
         _source: item,
         _selected: selected ? selected(item) : false,
-        _checked: checked ? checked.includes(item) : null,
+        _checked: checked ? checked.includes(item) : get(prev, `[${rowIndex}]._checked`),
         _visible: true,
       };
       row.data = columns.reduce(reduceColumns(row, row._index), {});
@@ -96,7 +96,6 @@ class DataList extends PureComponent {
 
     return list.map(mapListRowToItem(prevItems));
   }
-
   static filterItems(items, columns, filters) {
     const filtersByKey = filters.filter(item => item.value !== '');
 
@@ -174,7 +173,7 @@ class DataList extends PureComponent {
       this.props.onCheck ? this.onItemCheck : undefined,
     );
 
-    let checkedItems = [];
+    let checkedItems;
     if (this.props.checked) {
       checkedItems = DataList.getCheckedItems(this.props.list, this.props.checked);
     }
@@ -206,7 +205,7 @@ class DataList extends PureComponent {
     if (prevProps.list !== list || prevProps.columns !== columns) {
       const { sortAsc, sortColumn, items } = this.state;
 
-      let checkedItems = [];
+      let checkedItems;
       if (this.props.checked !== prevProps.checked) {
         checkedItems = DataList.getCheckedItems(list, checked);
       }
