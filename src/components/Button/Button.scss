@@ -47,10 +47,16 @@
 }
 .input-button__icon {
   display: flex;
-  margin-right: 5px;
-  margin-left: 0px;
   fill: inherit;
   stroke: inherit;
+}
+.input-button__icon--left {
+  margin-right: 5px;
+  margin-left: 0px;
+}
+.input-button__icon--right {
+  margin-right: 0px;
+  margin-left: 5px;
 }
 
 .input-button__mb-input--extra-small {

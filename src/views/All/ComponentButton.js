@@ -21,6 +21,7 @@ const TestButton = () => (
       <Button label="Light" kind="light" />
       <Button label="Events" onClick={console.log} />
       <Button label="Icon" icon="deploy-small" />
+      <Button label="Icon" icon="deploy-small" iconPosition="right" />
     </Row>
     All kinds noFill
     <Row style={{ ...rowStyle, background: '#333' }} align="space-between center">
