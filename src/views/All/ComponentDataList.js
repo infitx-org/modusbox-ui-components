@@ -72,7 +72,7 @@ class ListManager extends React.Component {
         <div style={rowStyle}>
           <div className="m5">
             <TextField
-              size='s'
+              size="s"
               placeholder="no data"
               value={this.state.noDataLabel}
               onChange={this.changeNoDataLabel}
@@ -80,7 +80,7 @@ class ListManager extends React.Component {
           </div>
           <div className="m5">
             <TextField
-              size='s'
+              size="s"
               placeholder="error message"
               value={this.state.errorMsg}
               onChange={this.changeErrorMessage}
@@ -96,7 +96,7 @@ class ListManager extends React.Component {
             <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
           </div>
           <div className="m5">
-            <Button size='s' label="increment" onClick={this.increment} />
+            <Button size="s" label="increment" onClick={this.increment} />
           </div>
         </div>
         <List
@@ -133,64 +133,61 @@ const buildRow = () =>
 
 const list = new Array(20).fill(0).map(buildRow);
 
-const getColumns = (counter = 1) => (
-  [
-    {
-      label: 'Double',
-      key: 'a',
-      func: x => x * 2 * counter,
-      className: 'col-100px',
-    },
-    {
-      label: 'Triple',
-      key: 'a',
-      func: x => x * 3 * counter,
-      className: 'col-100px',
-    },
-    {
-      label: 'Zero Zero Zero Zero',
-      key: 'a',
-      func: () => new Array(25).fill(counter).join(' -  '),
-    },
-    {
-      label: 'Square',
-      key: 'b',
-      func: x => x * x * counter,
-    },
-    {
-      label: 'c',
-      key: 'c.test.value',
-    },
-    {
-      label: 'd',
-      key: 'd',
-      func: x => new Array(15).fill(x).join(''),
-      link: console.log,
-    },
-    {
-      label: '',
-      key: 'e',
-      func: () => <Icon name="close-small" size={16} fill="#999" />,
-      className: 'col-40px',
-    },
-    {
-      label: '',
-      key: 'e',
-      func: () => <Checkbox checked={counter % 2 !== 0} />,
-      className: 'col-40px',
-    },
+const getColumns = (counter = 1) => [
+  {
+    label: 'Double',
+    key: 'a',
+    func: x => x * 2 * counter,
+    className: 'col-100px',
+  },
+  {
+    label: 'Triple',
+    key: 'a',
+    func: x => x * 3 * counter,
+    className: 'col-100px',
+  },
+  {
+    label: 'Zero Zero Zero Zero',
+    key: 'a',
+    func: () => new Array(25).fill(counter).join(' -  '),
+  },
+  {
+    label: 'Square',
+    key: 'b',
+    func: x => x * x * counter,
+  },
+  {
+    label: 'c',
+    key: 'c.test.value',
+  },
+  {
+    label: 'd',
+    key: 'd',
+    func: x => new Array(15).fill(x).join(''),
+    link: console.log,
+  },
+  {
+    label: '',
+    key: 'e',
+    func: () => <Icon name="close-small" size={16} fill="#999" />,
+    className: 'col-40px',
+  },
+  {
+    label: '',
+    key: 'e',
+    func: () => <Checkbox checked={counter % 2 !== 0} />,
+    className: 'col-40px',
+  },
 
-    {
-      label: 'Counter',
-      key: 'e',
-      func: () => counter,
-      className: 'col-40px',
-    },
-  ]
-);
+  {
+    label: 'Counter',
+    key: 'e',
+    func: () => counter,
+    className: 'col-40px',
+  },
+];
 
 const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
-  
   const columns = getColumns(counter);
   const datalist = (
     <DataList
@@ -225,22 +222,22 @@ class ModalList extends PureComponent {
     this.timer = setInterval(this.increment, 3000);
   }
   componentWillUnmount() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
   }
   increment() {
     this.setState({
-      counter: this.state.counter + 1
+      counter: this.state.counter + 1,
     });
   }
   rnd() {
     this.setState({
-      rnd: this.state.rnd + 1
+      rnd: this.state.rnd + 1,
     });
   }
-  toggle(){
+  toggle() {
     this.setState({
-      visible: !this.state.visible
-    })
+      visible: !this.state.visible,
+    });
   }
   render() {
     return (
@@ -249,11 +246,7 @@ class ModalList extends PureComponent {
         {this.state.visible && (
           <Modal allowClose onClose={this.toggle}>
             <Button label={this.state.rnd} onClick={this.rnd} />
-            <DataList
-              columns={getColumns(this.state.counter)}
-              list={list}
-              onCheck={console.log}
-            />
+            <DataList columns={getColumns(this.state.counter)} list={list} onCheck={console.log} />
           </Modal>
         )}
       </div>
@@ -274,12 +267,7 @@ const TestDataList = () => (
       </TabPanel>
       <TabPanel>
         <div style={containerStyle}>
-          <DataList
-            columns={getColumns(0)}
-            list={list}
-            sortColumn="Double"
-            sortAsc={false}
-          />
+          <DataList columns={getColumns(0)} list={list} sortColumn="Double" sortAsc={false} />
         </div>
       </TabPanel>
       <TabPanel>
@@ -287,6 +275,5 @@ const TestDataList = () => (
       </TabPanel>
     </TabPanels>
   </Tabs>
-  
 );
 export default TestDataList;

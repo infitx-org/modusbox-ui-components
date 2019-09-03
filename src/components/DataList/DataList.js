@@ -86,7 +86,7 @@ class DataList extends PureComponent {
     const mapListRowToItem = (oldItems, oldList) => (item, _listIndex) => {
       let row;
       if (isEqual(item, oldList[_listIndex])) {
-        // use last item if available so that the internal index does 
+        // use last item if available so that the internal index does
         // not change, keeping eveything working faster
         row = find(oldItems, { _position: _listIndex });
       } else {
@@ -219,7 +219,7 @@ class DataList extends PureComponent {
       this._columns = DataList.convertColumns(
         columns,
         this._columns,
-        onCheck ? this.onItemCheck : undefined
+        onCheck ? this.onItemCheck : undefined,
       );
     }
     if (prevProps.list !== list || prevProps.columns !== columns) {
@@ -235,7 +235,7 @@ class DataList extends PureComponent {
         selected,
         checkedItems,
         items,
-        prevProps.list
+        prevProps.list,
       );
       const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
