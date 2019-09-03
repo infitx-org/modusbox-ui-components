@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import React from 'react';
+import React, { PureComponent } from 'react';
 
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
@@ -7,10 +7,11 @@ import DataList from '../../components/DataList';
 import Button from '../../components/Button';
 import ScrollBox from '../../components/ScrollBox';
 import Icon from '../../components/Icon';
+import Modal from '../../components/Modal';
+import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs';
 
-const columnStyle = {
-  padding: '10px',
-  border: '1px solid #ccc',
+const containerStyle = {
+  padding: '5px',
   display: 'flex',
   flex: '2 1 auto',
   flexDirection: 'column',
@@ -18,12 +19,13 @@ const columnStyle = {
 };
 
 const rowStyle = {
-  padding: '10px',
+  padding: '2px',
   margin: '5px 0px',
-  border: '1px solid #ccc',
   display: 'flex',
   flex: '0 0 auto',
   flexDirection: 'row',
+  alignItems: 'center',
+  background: '#F0F9F9',
 };
 
 class ListManager extends React.Component {
@@ -66,22 +68,36 @@ class ListManager extends React.Component {
     const toggle = field => value => this.toggle(field, value);
 
     return (
-      <div style={columnStyle}>
+      <div style={containerStyle}>
         <div style={rowStyle}>
-          <TextField
-            placeholder="no data"
-            value={this.state.noDataLabel}
-            onChange={this.changeNoDataLabel}
-          />
-          <TextField
-            placeholder="error message"
-            value={this.state.errorMsg}
-            onChange={this.changeErrorMessage}
-          />
-          <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
-          <Checkbox checked={this.state.error} onChange={toggle('error')} label="Error" />
-          <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
-          <Button label="increment" onClick={this.increment} />
+          <div className="m5">
+            <TextField
+              size='s'
+              placeholder="no data"
+              value={this.state.noDataLabel}
+              onChange={this.changeNoDataLabel}
+            />
+          </div>
+          <div className="m5">
+            <TextField
+              size='s'
+              placeholder="error message"
+              value={this.state.errorMsg}
+              onChange={this.changeErrorMessage}
+            />
+          </div>
+          <div className="m5">
+            <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
+          </div>
+          <div className="m5">
+            <Checkbox checked={this.state.error} onChange={toggle('error')} label="Error" />
+          </div>
+          <div className="m5">
+            <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
+          </div>
+          <div className="m5">
+            <Button size='s' label="increment" onClick={this.increment} />
+          </div>
         </div>
         <List
           counter={this.state.counter}
@@ -117,8 +133,8 @@ const buildRow = () =>
 
 const list = new Array(20).fill(0).map(buildRow);
 
-const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
-  const columns = [
+const getColumns = (counter = 1) => (
+  [
     {
       label: 'Double',
       key: 'a',
@@ -170,8 +186,12 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       func: () => counter,
       className: 'col-40px',
     },
-  ];
+  ]
+);
 
+const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
+  
+  const columns = getColumns(counter);
   const datalist = (
     <DataList
       flex={flex}
@@ -181,8 +201,8 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       sortAsc={false}
       isPending={pending}
       hasError={error}
-      onSelect={undefined}
-      onUnselect={undefined}
+      onSelect={console.log}
+      onUnselect={console.log}
       onCheck={data => console.log(JSON.stringify(data))}
       selected={o => o.a === 10}
       noData={noDataLabel}
@@ -195,5 +215,71 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
   return datalist;
 };
 
-const TestDataList = () => <ListManager />;
+class ModalList extends PureComponent {
+  constructor() {
+    super();
+    this.toggle = this.toggle.bind(this);
+    this.increment = this.increment.bind(this);
+    this.state = { visible: false, counter: 0 };
+    this.timer = setInterval(this.increment, 3000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+  increment() {
+    this.setState({
+      counter: this.state.counter + 1
+    });
+  }
+  toggle(){
+    this.setState({
+      visible: !this.state.visible
+    })
+  }
+  render() {
+    return (
+      <div>
+        <Button label="open" onClick={this.toggle} />
+        {this.state.visible && (
+          <Modal allowClose onClose={this.toggle}>
+            <DataList
+              columns={getColumns(this.state.counter)}
+              list={list}
+              onCheck={console.log}
+            />
+          </Modal>
+        )}
+      </div>
+    );
+  }
+}
+
+const TestDataList = () => (
+  <Tabs flex>
+    <TabList style={{ width: '500px' }}>
+      <Tab>Multi</Tab>
+      <Tab>Simple</Tab>
+      <Tab>Modal</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        <ListManager />
+      </TabPanel>
+      <TabPanel>
+        <div style={containerStyle}>
+          <DataList
+            columns={getColumns(0)}
+            list={list}
+            sortColumn="Double"
+            sortAsc={false}
+          />
+        </div>
+      </TabPanel>
+      <TabPanel>
+        <ModalList />
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+  
+);
 export default TestDataList;
