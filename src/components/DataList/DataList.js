@@ -52,19 +52,19 @@ class DataList extends PureComponent {
   static toItems(list, columns, selected, checked, prevItems) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
-    const reduceColumns = (row, rowIndex) => (prev, column) => {
+    const reduceColumns = (row, _rowIndex) => (prev, column) => {
       const { func, key, link, _index, _onChange } = column;
       let value = get(row._source, key);
       let component = null;
 
       if (typeof func === 'function') {
-        value = func(value, row._source, rowIndex);
+        value = func(value, row._source, _rowIndex);
       }
       if (typeof link === 'function') {
         // eslint-disable-next-line
         component = <Link onClick={() => link(row._source[key], row._source)}>{value}</Link>;
       } else if (_onChange) {
-        component = <Checkbox onChange={() => _onChange(rowIndex)} round />;
+        component = <Checkbox onChange={() => _onChange(_rowIndex)} round />;
       }
 
       const isTextContent = typeof value === 'string' || typeof value === 'number';
@@ -200,7 +200,11 @@ class DataList extends PureComponent {
     const { list, columns, selected, checked, onCheck } = this.props;
 
     if (prevProps.columns !== columns) {
-      this._columns = DataList.convertColumns(columns, this._columns, onCheck);
+      this._columns = DataList.convertColumns(
+        columns,
+        this._columns,
+        onCheck ? this.onItemCheck : undefined
+      );
     }
     if (prevProps.list !== list || prevProps.columns !== columns) {
       const { sortAsc, sortColumn, items } = this.state;
