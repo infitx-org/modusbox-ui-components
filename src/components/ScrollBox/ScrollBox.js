@@ -89,7 +89,7 @@ class ScrollBox extends PureComponent {
         className={wrapperClassName}
         style={style}
       >
-        <ReactResizeDetector handleWidth onResize={this.handleResize} />
+        <ReactResizeDetector handleWidth handleHeight onResize={this.handleResize} />
         <div
           ref={contentBox => {
             this.contentBox = contentBox;
