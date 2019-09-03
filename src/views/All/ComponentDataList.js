@@ -220,7 +220,8 @@ class ModalList extends PureComponent {
     super();
     this.toggle = this.toggle.bind(this);
     this.increment = this.increment.bind(this);
-    this.state = { visible: false, counter: 0 };
+    this.rnd = this.rnd.bind(this);
+    this.state = { visible: false, counter: 0, rnd: 5 };
     this.timer = setInterval(this.increment, 3000);
   }
   componentWillUnmount() {
@@ -229,6 +230,11 @@ class ModalList extends PureComponent {
   increment() {
     this.setState({
       counter: this.state.counter + 1
+    });
+  }
+  rnd() {
+    this.setState({
+      rnd: this.state.rnd + 1
     });
   }
   toggle(){
@@ -242,6 +248,7 @@ class ModalList extends PureComponent {
         <Button label="open" onClick={this.toggle} />
         {this.state.visible && (
           <Modal allowClose onClose={this.toggle}>
+            <Button label={this.state.rnd} onClick={this.rnd} />
             <DataList
               columns={getColumns(this.state.counter)}
               list={list}
