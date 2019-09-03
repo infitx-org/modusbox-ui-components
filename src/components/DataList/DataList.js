@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
 import find from 'lodash/find';
 import get from 'lodash/get';
@@ -123,7 +124,13 @@ class DataList extends PureComponent {
     return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
   static getSortColumn(label, columns) {
-    let sortColumn = columns[0]._index;
+    let sortColumn;
+    columns.some(column => {
+      if (!column._onChange) {
+        sortColumn = column._index;
+        return true;
+      }
+    });
     // gets the key of the sorting column
     if (label !== undefined) {
       const column = find(columns, { label });

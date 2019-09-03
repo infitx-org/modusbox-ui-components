@@ -33,7 +33,7 @@ const Header = ({
         label={column.label}
         isCheckbox={column._onChange}
         isSearchable={column.searchable !== false}
-        isSortable={column.sortable !== false}
+        isSortable={column.sortable !== false && !column._onChange}
         isSorting={sortColumn === column._index}
         isSortingAsc={sortAsc}
         isFiltering={filter !== undefined}
