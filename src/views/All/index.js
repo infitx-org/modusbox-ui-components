@@ -3,6 +3,7 @@ import ComponentButton from './ComponentButton';
 import ComponentTooltip from './ComponentTooltip';
 import ComponentCheckbox from './ComponentCheckbox';
 import ComponentColumn from './ComponentColumn';
+import ComponentContentReader from './ComponentContentReader';
 import ComponentDataList from './ComponentDataList';
 import ComponentDatePicker from './ComponentDatePicker';
 import ComponentDropdown from './ComponentDropdown';
@@ -25,6 +26,8 @@ export {
   ComponentTooltip,
   ComponentButton,
   ComponentCheckbox,
+  ComponentColumn,
+  ComponentContentReader,
   ComponentHeading,
   ComponentMenu,
   ComponentSelect,
@@ -40,6 +43,5 @@ export {
   ComponentSpinner,
   ComponentModal,
   ComponentRow,
-  ComponentColumn,
   ComponentToast,
 };

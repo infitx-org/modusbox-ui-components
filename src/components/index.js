@@ -1,5 +1,6 @@
 import Button from './Button';
 import Column from './Column';
+import ContentReader from './ContentReader';
 import Checkbox from './Checkbox';
 import DataList, { Link } from './DataList';
 import DatePicker from './DatePicker';
@@ -25,6 +26,7 @@ import '../assets/styles/index.scss';
 export {
   Button,
   Column,
+  ContentReader,
   Checkbox,
   DataList,
   DatePicker,
