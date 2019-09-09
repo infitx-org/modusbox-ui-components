@@ -255,7 +255,7 @@ class ModalList extends PureComponent {
 }
 
 class TestList extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.onCheck = this.onCheck.bind(this);
     this.onClear = this.onClear.bind(this);
@@ -266,21 +266,18 @@ class TestList extends React.Component {
     };
   }
   onCheck(items) {
-    this.setState({ 
+    this.setState({
       checked: items,
     });
   }
   onClear() {
-    this.setState({ 
+    this.setState({
       checked: [],
     });
   }
-  onAddNewItem(){
-    this.setState({ 
-      items: [
-        ...this.state.items,
-        buildRow(),
-      ],
+  onAddNewItem() {
+    this.setState({
+      items: [...this.state.items, buildRow()],
     });
   }
   render() {

@@ -106,7 +106,7 @@ class DataList extends PureComponent {
       row._selected = selected ? selected(item) : false;
       row._checked = checked ? checked.includes(item) : get(oldItems, `[${_listIndex}]._checked`);
       row.data = columns.reduce(reduceColumns(row, row._index), {});
-      
+
       return row;
     };
 
