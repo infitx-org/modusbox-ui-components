@@ -22,7 +22,7 @@ class DataList extends PureComponent {
     } else if (Array.isArray(checked)) {
       return checked;
     }
-    return [];
+    return undefined;
   }
   static isItemChecked(item) {
     return item._checked === true;
