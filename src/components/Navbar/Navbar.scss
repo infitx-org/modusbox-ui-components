@@ -134,6 +134,7 @@
 .Navbar__environment__menu {
   display: flex;
   flex-direction: column;
+  min-height: 0px;
 }
 
 .Navbar__company-item,

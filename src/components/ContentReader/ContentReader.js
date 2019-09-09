@@ -13,7 +13,6 @@ hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('shell', shell);
 
-
 class ContentReader extends PureComponent {
   static parse(source = '') {
     let content = source;
@@ -33,9 +32,7 @@ class ContentReader extends PureComponent {
     if (!error) {
       const lines = content.split(/(?:\r\n|\r|\n)/);
       lineNumbers = lines.map((_, index) => (
-        <div className="content-reader__lines__line-n">
-          {index + 1}
-        </div>
+        <div className="content-reader__lines__line-n">{index + 1}</div>
       ));
     }
 

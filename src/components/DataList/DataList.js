@@ -16,8 +16,13 @@ import { NoData, Pending, ErrorMessage } from './Boxes';
 import './DataList.scss';
 
 class DataList extends PureComponent {
-  static getCheckedItems(list, fn) {
-    return list.filter(fn);
+  static getCheckedItems(list, checked) {
+    if (typeof checked === 'function') {
+      return list.filter(checked);
+    } else if (Array.isArray(checked)) {
+      return checked;
+    }
+    return undefined;
   }
   static isItemChecked(item) {
     return item._checked === true;
@@ -94,12 +99,14 @@ class DataList extends PureComponent {
           _position: _listIndex,
           _index: get(oldItems, `[${_listIndex}]._index`) || uuid(),
           _source: item,
-          _selected: selected ? selected(item) : false,
-          _checked: checked ? checked.includes(item) : get(oldItems, `[${_listIndex}]._checked`),
           _visible: true,
         };
       }
+
+      row._selected = selected ? selected(item) : false;
+      row._checked = checked ? checked.includes(item) : get(oldItems, `[${_listIndex}]._checked`);
       row.data = columns.reduce(reduceColumns(row, row._index), {});
+
       return row;
     };
 
@@ -401,7 +408,7 @@ DataList.propTypes = {
   isPending: PropTypes.bool,
   hasError: PropTypes.bool,
   selected: PropTypes.func,
-  checked: PropTypes.func,
+  checked: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.shape())]),
   noData: PropTypes.string,
   errorMsg: PropTypes.string,
   onSelect: PropTypes.func,
