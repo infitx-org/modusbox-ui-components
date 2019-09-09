@@ -106,23 +106,6 @@ const TestSelect = () => (
       <Select className="m5" placeholder="medium" size="m" options={options} pending />
       <Select className="m5" placeholder="large" size="l" options={options} pending />
     </Row>
-    <div className="p10 b1-ccc">
-      <div className="p10 b1-ccc">
-        <div className="p10 b1-ccc">
-          <div className="p10 b1-ccc">
-            <div className="p10 b1-ccc">
-              <div className="p10 b1-ccc">
-                <div className="p10 b1-ccc">
-                  <div className="p10 b1-ccc">
-                    <div className="p10 b1-ccc" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <Row className="p10 b1-ccc" align="space-between center">
       <Select className="m5" placeholder="small" size="s" options={options} onClear={console.log} />
       <Select
