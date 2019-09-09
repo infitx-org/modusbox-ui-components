@@ -254,12 +254,60 @@ class ModalList extends PureComponent {
   }
 }
 
+class TestList extends React.Component {
+  constructor(props){
+    super(props);
+    this.onCheck = this.onCheck.bind(this);
+    this.onClear = this.onClear.bind(this);
+    this.onAddNewItem = this.onAddNewItem.bind(this);
+    this.state = {
+      items: list,
+      checked: [],
+    };
+  }
+  onCheck(items) {
+    this.setState({ 
+      checked: items,
+    });
+  }
+  onClear() {
+    this.setState({ 
+      checked: [],
+    });
+  }
+  onAddNewItem(){
+    this.setState({ 
+      items: [
+        ...this.state.items,
+        buildRow(),
+      ],
+    });
+  }
+  render() {
+    return (
+      <div style={containerStyle}>
+        <div style={rowStyle}>
+          <Button size="m" label="clear checked" onClick={this.onClear} />
+          <Button size="m" label="add new items" onClick={this.onAddNewItem} />
+        </div>
+        <DataList
+          columns={getColumns(0)}
+          list={this.state.items}
+          onCheck={this.onCheck}
+          checked={this.state.checked}
+        />
+      </div>
+    );
+  }
+}
+
 const TestDataList = () => (
   <Tabs flex>
     <TabList style={{ width: '500px' }}>
       <Tab>Multi</Tab>
       <Tab>Simple</Tab>
       <Tab>Modal</Tab>
+      <Tab>Test</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>
@@ -272,6 +320,9 @@ const TestDataList = () => (
       </TabPanel>
       <TabPanel>
         <ModalList />
+      </TabPanel>
+      <TabPanel>
+        <TestList />
       </TabPanel>
     </TabPanels>
   </Tabs>
