@@ -247,7 +247,7 @@ class ModalList extends PureComponent {
         {this.state.visible && (
           <Modal allowClose onClose={this.toggle}>
             <Button label={this.state.rnd} onClick={this.rnd} />
-            <DataList columns={getColumns(this.state.counter)} list={list} onCheck={console.log} />
+            <DataList columns={getColumns(this.state.counter)} list={list} sortColumn="Double" />
           </Modal>
         )}
       </div>

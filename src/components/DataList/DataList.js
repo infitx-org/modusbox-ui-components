@@ -31,7 +31,9 @@ class DataList extends PureComponent {
     const tpmColumns = [];
     let translateIndex = 0;
 
-    if (!prevColumns.some(col => col._onChange)) {
+    if (prevColumns.some(col => col._onChange)) {
+      // detect if any of the previous columns was the checkbox
+      // and set and a translation index to properly get the right column
       translateIndex = 1;
     }
     if (typeof onCheck === 'function') {
@@ -246,6 +248,7 @@ class DataList extends PureComponent {
         items,
         prevProps.list,
       );
+
       const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
