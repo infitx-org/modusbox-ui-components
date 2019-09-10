@@ -1,5 +1,6 @@
 /* eslint no-console: "off" */
 import React, { PureComponent } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
@@ -246,7 +247,7 @@ class ModalList extends PureComponent {
         {this.state.visible && (
           <Modal allowClose onClose={this.toggle}>
             <Button label={this.state.rnd} onClick={this.rnd} />
-            <DataList columns={getColumns(this.state.counter)} list={list} onCheck={console.log} />
+            <DataList columns={getColumns(this.state.counter)} list={list} sortColumn="Double" />
           </Modal>
         )}
       </div>
@@ -298,30 +299,61 @@ class TestList extends React.Component {
   }
 }
 
-const TestDataList = () => (
-  <Tabs flex>
-    <TabList style={{ width: '500px' }}>
-      <Tab>Multi</Tab>
-      <Tab>Simple</Tab>
-      <Tab>Modal</Tab>
-      <Tab>Test</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>
-        <ListManager />
-      </TabPanel>
-      <TabPanel>
-        <div style={containerStyle}>
-          <DataList columns={getColumns(0)} list={list} sortColumn="Double" sortAsc={false} />
-        </div>
-      </TabPanel>
-      <TabPanel>
-        <ModalList />
-      </TabPanel>
-      <TabPanel>
-        <TestList />
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+class TestDataList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onCheck = this.onCheck.bind(this);
+    this.onClear = this.onClear.bind(this);
+    this.state = {
+      items: cloneDeep(list),
+      checked: [],
+    };
+  }
+  onCheck(items) {
+    this.setState({
+      checked: items,
+      items: cloneDeep(list),
+    });
+  }
+  onClear() {
+    this.setState({
+      checked: [],
+    });
+  }
+  render() {
+    return (
+      <Tabs flex>
+        <TabList style={{ width: '500px' }}>
+          <Tab>Multi</Tab>
+          <Tab>Simple</Tab>
+          <Tab>Modal</Tab>
+          <Tab>Test</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <ListManager />
+          </TabPanel>
+          <TabPanel>
+            <div style={containerStyle}>
+              <DataList
+                columns={getColumns(0)}
+                list={this.state.items}
+                sortColumn="Double"
+                sortAsc={false}
+                checked={this.state.checked}
+                onCheck={this.onCheck}
+              />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <ModalList />
+          </TabPanel>
+          <TabPanel>
+            <TestList />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+  }
+}
 export default TestDataList;
