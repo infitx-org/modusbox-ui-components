@@ -235,11 +235,8 @@ class DataList extends PureComponent {
     }
     if (prevProps.list !== list || prevProps.columns !== columns) {
       const { sortAsc, sortColumn, items } = this.state;
+      const checkedItems = DataList.getCheckedItems(list, checked);
 
-      let checkedItems;
-      if (this.props.checked !== prevProps.checked) {
-        checkedItems = DataList.getCheckedItems(list, checked);
-      }
       const listItems = DataList.toItems(
         list,
         this._columns,
