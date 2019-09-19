@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'colors.scss');
 
@@ -66,6 +67,18 @@ module.exports = {
         test: /\.(eot|ttf|woff|woff2)$/,
         loader: 'file-loader',
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false, // Must be set to true if using source-maps in production
+        terserOptions: {
+          keep_fnames: true // IMPORTANT - https://github.com/facebook/create-react-app/issues/7236
+        }
+      }),
     ],
   },
   externals: {
