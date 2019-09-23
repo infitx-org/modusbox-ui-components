@@ -13,14 +13,14 @@ const TestControlIcon = () => (
     All kinds regular
     <Row style={rowStyle} align="space-between center">
       <ControlIcon onClick={log} label="no" icon="deploy-small"/>
-      <ControlIcon onClick={log} kind="primary" label="Primary" icon="deploy-small"/>
-      <ControlIcon onClick={log} kind="secondary" label="Secondary" icon="deploy-small" />
-      <ControlIcon onClick={log} kind="tertiary" label="Tertiary" icon="deploy-small" />
-      <ControlIcon onClick={log} kind="success" label="Success" icon="deploy-small" />
-      <ControlIcon onClick={log} kind="danger" label="Danger" icon="deploy-small" />
-      <ControlIcon onClick={log} kind="warning" label="Warning" icon="deploy-small" />
-      <ControlIcon onClick={log} kind="dark" label="Dark" icon="deploy-small" />
-      <ControlIcon onClick={log} kind="light" label="Light" icon="deploy-small" />
+      <ControlIcon onClick={log} kind="primary" label="Primary" icon="plus-small"/>
+      <ControlIcon onClick={log} kind="secondary" label="Secondary" icon="plus-small" />
+      <ControlIcon onClick={log} kind="tertiary" label="Tertiary" icon="plus-small" />
+      <ControlIcon onClick={log} kind="success" label="Success" icon="plus-small" />
+      <ControlIcon onClick={log} kind="danger" label="Danger" icon="plus-small" />
+      <ControlIcon onClick={log} kind="warning" label="Warning" icon="plus-small" />
+      <ControlIcon onClick={log} kind="dark" label="Dark" icon="plus-small" />
+      <ControlIcon onClick={log} kind="light" label="Light" icon="plus-small" />
     </Row>
     Manual colors
     <Row style={rowStyle} align="space-between center">
