@@ -1,6 +1,7 @@
 import Button from './Button';
 import Column from './Column';
 import ContentReader from './ContentReader';
+import ControlIcon from './ControlIcon';
 import Checkbox from './Checkbox';
 import DataList, { Link } from './DataList';
 import DatePicker from './DatePicker';
@@ -27,6 +28,7 @@ export {
   Button,
   Column,
   ContentReader,
+  ControlIcon,
   Checkbox,
   DataList,
   DatePicker,

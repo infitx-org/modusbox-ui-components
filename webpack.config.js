@@ -76,8 +76,8 @@ module.exports = {
         parallel: true,
         sourceMap: false, // Must be set to true if using source-maps in production
         terserOptions: {
-          keep_fnames: true // IMPORTANT - https://github.com/facebook/create-react-app/issues/7236
-        }
+          keep_fnames: true, // IMPORTANT - https://github.com/facebook/create-react-app/issues/7236
+        },
       }),
     ],
   },

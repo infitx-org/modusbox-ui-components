@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the button correctly when multiple props are set 1`] = `
+<div
+  className="control__icon control__icon--disabled control__icon--secondary"
+  role="presentation"
+>
+  <Icon
+    name="deploy-small"
+    size={20}
+    spin={false}
+  />
+</div>
+`;

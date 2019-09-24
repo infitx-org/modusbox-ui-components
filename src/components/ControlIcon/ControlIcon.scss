@@ -1,0 +1,98 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/shadow.scss';
+
+.control__icon {
+  fill: #333;
+}
+.control__icon--button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.control__icon--disabled {
+  fill: #ccc;
+}
+.control__icon--button {
+  cursor: pointer;
+  padding: 3px;
+  opacity: 0.7;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    transform: scale(0.3, 0.3);
+    opacity: 0;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: -1;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    &::before {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+  }
+}
+
+.control__icon--default {
+  fill: #333;
+  &::before {
+    background-color: rgba(0, 0, 0, 0.1)
+  }
+}
+.control__icon--primary {
+  fill: $color__main-primary;
+  &::before {
+    background-color: $shadow-color--primary;
+  }
+}
+.control__icon--secondary {
+  fill: $color__main-secondary;
+  &::before {
+    background-color: $shadow-color--secondary;
+  }
+}
+.control__icon--tertiary {
+  fill: $color__main-tertiary;
+  &::before {
+    background-color: $shadow-color--tertiary;
+  }
+}
+.control__icon--success {
+  fill: $color__main-success;
+  &::before {
+    background-color: $shadow-color--success;
+  }
+}
+.control__icon--danger {
+  fill: $color__main-danger;
+  &::before {
+    background-color: $shadow-color--danger;
+  }
+}
+.control__icon--warning {
+  fill: $color__main-warning;
+  &::before {
+    background-color: $shadow-color--warning;
+  }
+}
+.control__icon--dark {
+  fill: #000;
+  &::before {
+    background-color: $shadow-color--dark;
+  }
+}
+.control__icon--light {
+  fill: $color__white;
+  &::before {
+    background-color: shadow-color-0light;
+  }
+}
