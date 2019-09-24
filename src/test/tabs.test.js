@@ -51,11 +51,6 @@ it('renders the first tabpanel content', () => {
   expect(wrapper.find(TabPanel).text()).toBe('TabPanel1');
 });
 
-it('renders the first tabpanel content', () => {
-  const wrapper = mount(TabComponents);
-  expect(wrapper.find(TabPanel).text()).toBe('TabPanel1');
-});
-
 it('renders the second tabpanel content when second tab is clicked', () => {
   const wrapper = mount(TabComponents);
   wrapper
