@@ -129,3 +129,19 @@ it('renders the Navbar environment popup when clicking on the environment name',
   expect(wrapper.find('.Navbar__environment-box').find('.Navbar__popup').exists()).toBe(true)
 });
 
+it('renders the Navbar user popup when clicking on the user name', () => {
+  const wrapper = mount(
+    <Navbar
+      user={user}
+      companies={companies}
+      organizations={organizations}
+      isLoadingOrganizations={false}
+      activeCompanyId={activeCompanyId}
+      activeOrganizationId={activeOrganizationId}
+      activeEnvironmentId={activeEnvironmentId}
+    />
+  );
+  wrapper.find('.Navbar__user__username').simulate('click');
+  expect(wrapper.find('.Navbar__user').find('.Navbar__popup').exists()).toBe(true)
+});
+
