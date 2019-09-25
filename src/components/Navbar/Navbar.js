@@ -276,7 +276,7 @@ class RightNav extends PureComponent {
     const environtmentFilterFunc = lowerCaseNameIncludes(environmentFilter.toLowerCase());
 
     const filterEnvironments = (prev, organization) => {
-      const matchingEnvironments = organization.environments.filter(environtmentFilterFunc);
+      const matchingEnvironments = organization.environments.filter(organizationFilterFunc);
 
       if (matchingEnvironments.length) {
         const currentItem = matchingEnvironments.map(environment => ({
