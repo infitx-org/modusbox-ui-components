@@ -705,7 +705,7 @@ const EnvironmentSearchItem = ({ item, onSelectEnvironment, isActive, dark }) =>
 
 const Organizations = ({ dark, activeEnvironment, organizations, onSelectEnvironment }) => (
   <div>
-    {organizations.map(organization => (
+    {organizations.map((organization) => (
       <NestedOrganization
         key={organization.id}
         activeEnvironmentId={activeEnvironment.id}
@@ -753,9 +753,10 @@ class NestedOrganization extends PureComponent {
     let subOrganizations = null;
     let environments = null;
     if (organization.subOrganizations) {
-      subOrganizations = organization.subOrganizations.map(subOrganization => (
+      subOrganizations = organization.subOrganizations.map((subOrganization, index) => (
         <NestedOrganization
-          key={subOrganization.id}
+          /* eslint-disable-next-line */
+          key={`${subOrganization.id}-${index}`}
           activeEnvironmentId={activeEnvironmentId}
           organization={subOrganization}
           onSelectEnvironment={onSelectEnvironment}
