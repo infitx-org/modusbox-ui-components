@@ -33,8 +33,7 @@ it('applies the correct json className', async () => {
     .find('.content-reader__content')
     .find('code')
     .getDOMNode()
-    .className
-    .split(' ');
+    .className.split(' ');
 
   expect(classNames.includes('hljs')).toBe(true);
   expect(classNames.includes('json')).toBe(true);
@@ -46,8 +45,7 @@ it('applies the correct xml className', async () => {
     .find('.content-reader__content')
     .find('code')
     .getDOMNode()
-    .className
-    .split(' ');
+    .className.split(' ');
 
   expect(classNames.includes('hljs')).toBe(true);
   expect(classNames.includes('xml')).toBe(true);
@@ -59,13 +57,11 @@ it('applies the correct shell className', async () => {
     .find('.content-reader__content')
     .find('code')
     .getDOMNode()
-    .className
-    .split(' ');
+    .className.split(' ');
 
   expect(classNames.includes('hljs')).toBe(true);
   expect(classNames.includes('shell')).toBe(true);
 });
-
 
 it('renders the ContentReader correctly when multiple props are set', () => {
   const wrapper = mount(<ContentReader data={shellString} />);

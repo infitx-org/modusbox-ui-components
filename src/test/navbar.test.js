@@ -77,7 +77,6 @@ const activeCompanyId = companies[0].id;
 const activeOrganizationId = organizations[0].id;
 const activeEnvironmentId = organizations[0].environments[0].id;
 
-
 it('renders Navbar', () => {
   const wrapper = mount(<Navbar />);
   expect(wrapper.find('.Navbar')).toHaveLength(1);
@@ -95,10 +94,15 @@ it('renders the Navbar company popup when clicking on the company name', () => {
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__company__name').simulate('click');
-  expect(wrapper.find('.Navbar__company-box').find('.Navbar__popup').exists()).toBe(true)
+  expect(
+    wrapper
+      .find('.Navbar__company-box')
+      .find('.Navbar__popup')
+      .exists(),
+  ).toBe(true);
 });
 
 it('renders the Navbar organization popup when clicking on the organization name', () => {
@@ -111,10 +115,15 @@ it('renders the Navbar organization popup when clicking on the organization name
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__organization__name').simulate('click');
-  expect(wrapper.find('.Navbar__organization-box').find('.Navbar__popup').exists()).toBe(true)
+  expect(
+    wrapper
+      .find('.Navbar__organization-box')
+      .find('.Navbar__popup')
+      .exists(),
+  ).toBe(true);
 });
 
 it('renders the Navbar environment popup when clicking on the environment name', () => {
@@ -127,10 +136,15 @@ it('renders the Navbar environment popup when clicking on the environment name',
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__environment__name').simulate('click');
-  expect(wrapper.find('.Navbar__environment-box').find('.Navbar__popup').exists()).toBe(true)
+  expect(
+    wrapper
+      .find('.Navbar__environment-box')
+      .find('.Navbar__popup')
+      .exists(),
+  ).toBe(true);
 });
 
 it('renders the Navbar user popup when clicking on the user name', () => {
@@ -143,10 +157,15 @@ it('renders the Navbar user popup when clicking on the user name', () => {
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__user__username').simulate('click');
-  expect(wrapper.find('.Navbar__user').find('.Navbar__popup').exists()).toBe(true)
+  expect(
+    wrapper
+      .find('.Navbar__user')
+      .find('.Navbar__popup')
+      .exists(),
+  ).toBe(true);
 });
 
 it('filters the companies in the popup when setting the company filter', () => {
@@ -159,13 +178,18 @@ it('filters the companies in the popup when setting the company filter', () => {
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__company__name').simulate('click');
   wrapper.find('.Navbar__search-box__input').simulate('change', { target: { value: '2' } });
 
   expect(wrapper.find('.Navbar__company-item')).toHaveLength(1);
-  expect(wrapper.find('.Navbar__company-item__name').at(0).text()).toBe('company2');
+  expect(
+    wrapper
+      .find('.Navbar__company-item__name')
+      .at(0)
+      .text(),
+  ).toBe('company2');
 });
 
 it('filters the organizations in the popup when setting the organization filter', () => {
@@ -178,13 +202,18 @@ it('filters the organizations in the popup when setting the organization filter'
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__organization__name').simulate('click');
   wrapper.find('.Navbar__search-box__input').simulate('change', { target: { value: '2' } });
 
   expect(wrapper.find('.Navbar__organization-item')).toHaveLength(1);
-  expect(wrapper.find('.Navbar__organization-item__name').at(0).text()).toBe('organization2');
+  expect(
+    wrapper
+      .find('.Navbar__organization-item__name')
+      .at(0)
+      .text(),
+  ).toBe('organization2');
 });
 
 it('filters the environments in the popup when setting the organization filter', () => {
@@ -197,13 +226,18 @@ it('filters the environments in the popup when setting the organization filter',
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__organization__name').simulate('click');
   wrapper.find('.Navbar__search-box__input').simulate('change', { target: { value: '2' } });
 
   expect(wrapper.find('.Navbar__search-item')).toHaveLength(1);
-  expect(wrapper.find('.Navbar__search-item').at(0).text()).toBe('organization1:environment2');
+  expect(
+    wrapper
+      .find('.Navbar__search-item')
+      .at(0)
+      .text(),
+  ).toBe('organization1:environment2');
 });
 
 it('filters the environments in the popup when setting the environment filter', () => {
@@ -216,12 +250,16 @@ it('filters the environments in the popup when setting the environment filter', 
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__environment__name').simulate('click');
   wrapper.find('.Navbar__search-box__input').simulate('change', { target: { value: '2' } });
 
   expect(wrapper.find('.Navbar__environment-item')).toHaveLength(1);
-  expect(wrapper.find('.Navbar__environment-item__name').at(0).text()).toBe('environment2');
+  expect(
+    wrapper
+      .find('.Navbar__environment-item__name')
+      .at(0)
+      .text(),
+  ).toBe('environment2');
 });
-

@@ -535,29 +535,31 @@ it('renders the checkboxes checked when passing the checked prop as an array', (
     .at(0)
     .find('Checkbox');
 
-  const rowCheckbox1 = wrapper.find('.element-datalist__row')
+  const rowCheckbox1 = wrapper
+    .find('.element-datalist__row')
     .at(0)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
-  
-  const rowCheckbox2 = wrapper.find('.element-datalist__row')
+
+  const rowCheckbox2 = wrapper
+    .find('.element-datalist__row')
     .at(1)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
-  const rowCheckbox3 = wrapper.find('.element-datalist__row')
+  const rowCheckbox3 = wrapper
+    .find('.element-datalist__row')
     .at(2)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
-  
+
   expect(checkboxHeaderCell.prop('checked')).toBe(false);
   expect(rowCheckbox1.prop('checked')).toBe(true);
   expect(rowCheckbox2.prop('checked')).toBe(true);
   expect(rowCheckbox3.prop('checked')).toBe(false);
-
 });
 
 it('renders the checkboxes checked after a list change', () => {
@@ -566,10 +568,7 @@ it('renders the checkboxes checked after a list change', () => {
   const wrapper = mount(
     <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
   );
-  const newList = [
-    ...testList1,
-    buildRow(testColumns1)()
-  ];
+  const newList = [...testList1, buildRow(testColumns1)()];
   wrapper.setProps({ list: newList });
 
   const checkboxHeaderCell = wrapper
@@ -577,29 +576,31 @@ it('renders the checkboxes checked after a list change', () => {
     .at(0)
     .find('Checkbox');
 
-  const rowCheckbox1 = wrapper.find('.element-datalist__row')
+  const rowCheckbox1 = wrapper
+    .find('.element-datalist__row')
     .at(0)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
-  
-  const rowCheckbox2 = wrapper.find('.element-datalist__row')
+
+  const rowCheckbox2 = wrapper
+    .find('.element-datalist__row')
     .at(1)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
-  const rowCheckbox3 = wrapper.find('.element-datalist__row')
+  const rowCheckbox3 = wrapper
+    .find('.element-datalist__row')
     .at(2)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
-  
+
   expect(checkboxHeaderCell.prop('checked')).toBe(false);
   expect(rowCheckbox1.prop('checked')).toBe(true);
   expect(rowCheckbox2.prop('checked')).toBe(true);
   expect(rowCheckbox3.prop('checked')).toBe(false);
-
 });
 
 it('renders the checkboxes checked after columns change', () => {
@@ -622,29 +623,31 @@ it('renders the checkboxes checked after columns change', () => {
     .at(0)
     .find('Checkbox');
 
-  const rowCheckbox1 = wrapper.find('.element-datalist__row')
+  const rowCheckbox1 = wrapper
+    .find('.element-datalist__row')
     .at(0)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
-  
-  const rowCheckbox2 = wrapper.find('.element-datalist__row')
+
+  const rowCheckbox2 = wrapper
+    .find('.element-datalist__row')
     .at(1)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
-  const rowCheckbox3 = wrapper.find('.element-datalist__row')
+  const rowCheckbox3 = wrapper
+    .find('.element-datalist__row')
     .at(2)
     .find('div.element-datalist__item-cell')
     .at(0)
     .find('Checkbox');
-  
+
   expect(checkboxHeaderCell.prop('checked')).toBe(false);
   expect(rowCheckbox1.prop('checked')).toBe(true);
   expect(rowCheckbox2.prop('checked')).toBe(true);
   expect(rowCheckbox3.prop('checked')).toBe(false);
-
 });
 
 it('triggers the onCheck function when clicking a checkbox', () => {
@@ -700,7 +703,6 @@ it('triggers the onCheck function with no items when clicking the header checkbo
 
   expect(mockEvent).toHaveBeenCalledWith([]);
 });
-
 
 /*it('renders the list correctly when multiple props are set', () => {
   const mockEvent = () => false;
