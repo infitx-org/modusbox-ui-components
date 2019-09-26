@@ -8,8 +8,16 @@
   width: 100%;
   align-items: center;
 }
+.element-datalist__link__container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  display: block;
+}
 .element-datalist__link__content {
   color: $color__blue-4;
+  fill: $color__blue-4;
   flex: 1 1 auto;
 }
 .element-datalist__link__icon {

@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
-import DataList from '../../components/DataList';
+import DataList, { Link } from '../../components/DataList';
 import Button from '../../components/Button';
 import ScrollBox from '../../components/ScrollBox';
 import Icon from '../../components/Icon';
@@ -135,6 +135,13 @@ const buildRow = () =>
 const list = new Array(20).fill(0).map(buildRow);
 
 const getColumns = (counter = 1) => [
+  {
+    label: 'Double',
+    key: 'a',
+    /* eslint-disable-next-line */
+    func: x => <Link>{x}{x}{x}{x}{x}{x}{x}{x}{x}{x}</Link>,
+    className: 'col-100px',
+  },
   {
     label: 'Double',
     key: 'a',
