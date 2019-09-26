@@ -4,7 +4,7 @@ import * as utils from '../../utils/common';
 import { Icon, Tooltip } from '../index';
 import './ControlIcon.scss';
 
-const tooltipKind = (kind) => {
+const tooltipKind = kind => {
   if (kind === 'danger') {
     return 'error';
   } else if (kind === 'warning') {
@@ -13,9 +13,9 @@ const tooltipKind = (kind) => {
     return 'info';
   }
   return undefined;
-}
+};
 const ControlIcon = ({
-  color,
+  fill,
   icon,
   size,
   id,
@@ -50,7 +50,7 @@ const ControlIcon = ({
       onClick={disabled ? undefined : onClick}
       id={id}
     >
-      <Icon size={size} name={icon} fill={color} />
+      <Icon size={size - 6} name={icon} fill={fill} />
     </div>
   );
 
@@ -62,13 +62,12 @@ const ControlIcon = ({
     );
   }
 
-  return iconComponent;
+  return <div style={{ height: size, width: size }}>{iconComponent}</div>;
 };
 
 ControlIcon.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
-  style: PropTypes.shape(),
   kind: PropTypes.oneOf([
     'default',
     'primary',
@@ -91,7 +90,6 @@ ControlIcon.propTypes = {
 ControlIcon.defaultProps = {
   className: undefined,
   id: undefined,
-  style: undefined,
   kind: 'default',
   size: 20,
   icon: undefined,
