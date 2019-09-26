@@ -139,7 +139,14 @@ class DataList extends PureComponent {
   }
   static sortItems(items, asc, _index) {
     // sorts the items by the column key and the direction
-    const getContentAtIndex = key => item => get(item.data[key], 'value');
+    const getContentAtIndex = key => item => {
+      const value = get(item.data[key], 'value');
+      if (value === null) {
+        // get the original value before transformation
+        return get(item._source, key);
+      }
+      return value;
+    }
     return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
   static getSortColumn(label, columns) {
@@ -153,7 +160,9 @@ class DataList extends PureComponent {
     });
     // gets the key of the sorting column
     if (label !== undefined) {
-      const columnByLabel = find(columns, column => column.label === label && column.sortable !== false);
+      const columnByLabel = find(columns, column => {
+        return column.label === label && column.sortable !== false
+      });
       sortColumn = get(columnByLabel, '_index');
     }
     return sortColumn;
@@ -207,7 +216,6 @@ class DataList extends PureComponent {
 
     const sortAsc = this.props.sortAsc === true;
     const sortColumn = DataList.getSortColumn(this.props.sortColumn, this._columns);
-    console.log(sortColumn)
     const items = DataList.toItems(
       this.props.list,
       this._columns,
