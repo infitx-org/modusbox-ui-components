@@ -1,6 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
+import { mount } from 'enzyme';
 
 import DataList from '../components/DataList';
 
@@ -27,7 +26,7 @@ const testColumns1 = [
   },
 ];
 let iterator = 0;
-const fromColumns = columns => () =>
+const buildRow = columns => () =>
   columns.reduce(
     /* eslint-disable no-return-assign */
     (prev, column) => ({
@@ -37,7 +36,7 @@ const fromColumns = columns => () =>
     {},
   );
 
-const testList1 = new Array(100).fill(null).map(fromColumns(testColumns1));
+const testList1 = new Array(100).fill(null).map(buildRow(testColumns1));
 
 const testList2 = [4, 5, 3, 1, 2].map(value => ({
   col: value,
@@ -524,6 +523,130 @@ it('renders the checkboxes checked when onCheck prop is passed', () => {
   expect(checkboxHeaderCell.prop('checked')).toBe(true);
 });
 
+it('renders the checkboxes checked when passing the checked prop as an array', () => {
+  const mockEvent = jest.fn();
+  const checked = [testList1[0], testList1[1]];
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox1 = wrapper.find('.element-datalist__row')
+    .at(0)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+  
+  const rowCheckbox2 = wrapper.find('.element-datalist__row')
+    .at(1)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox3 = wrapper.find('.element-datalist__row')
+    .at(2)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+  
+  expect(checkboxHeaderCell.prop('checked')).toBe(false);
+  expect(rowCheckbox1.prop('checked')).toBe(true);
+  expect(rowCheckbox2.prop('checked')).toBe(true);
+  expect(rowCheckbox3.prop('checked')).toBe(false);
+
+});
+
+it('renders the checkboxes checked after a list change', () => {
+  const mockEvent = jest.fn();
+  const checked = [testList1[0], testList1[1]];
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+  const newList = [
+    ...testList1,
+    buildRow(testColumns1)()
+  ];
+  wrapper.setProps({ list: newList });
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox1 = wrapper.find('.element-datalist__row')
+    .at(0)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+  
+  const rowCheckbox2 = wrapper.find('.element-datalist__row')
+    .at(1)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox3 = wrapper.find('.element-datalist__row')
+    .at(2)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+  
+  expect(checkboxHeaderCell.prop('checked')).toBe(false);
+  expect(rowCheckbox1.prop('checked')).toBe(true);
+  expect(rowCheckbox2.prop('checked')).toBe(true);
+  expect(rowCheckbox3.prop('checked')).toBe(false);
+
+});
+
+it('renders the checkboxes checked after columns change', () => {
+  const mockEvent = jest.fn();
+  const checked = [testList1[0], testList1[1]];
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
+  );
+  const newColumns = [
+    ...testColumns1,
+    {
+      label: 'Column5',
+      key: 'column5',
+    },
+  ];
+  wrapper.setProps({ columns: newColumns });
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox1 = wrapper.find('.element-datalist__row')
+    .at(0)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+  
+  const rowCheckbox2 = wrapper.find('.element-datalist__row')
+    .at(1)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox3 = wrapper.find('.element-datalist__row')
+    .at(2)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+  
+  expect(checkboxHeaderCell.prop('checked')).toBe(false);
+  expect(rowCheckbox1.prop('checked')).toBe(true);
+  expect(rowCheckbox2.prop('checked')).toBe(true);
+  expect(rowCheckbox3.prop('checked')).toBe(false);
+
+});
+
 it('triggers the onCheck function when clicking a checkbox', () => {
   const mockEvent = jest.fn();
   const checked = () => false;
@@ -577,6 +700,7 @@ it('triggers the onCheck function with no items when clicking the header checkbo
 
   expect(mockEvent).toHaveBeenCalledWith([]);
 });
+
 
 /*it('renders the list correctly when multiple props are set', () => {
   const mockEvent = () => false;

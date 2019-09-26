@@ -67,10 +67,6 @@ it('renders the radio options labels', () => {
 it('renders the selected radio option', () => {
   const wrapper = mount(<RadioGroup options={options} value="value4" />);
   expect(wrapper.find('.input-radio__input.checked')).toHaveLength(1);
-});
-
-it('renders the selected radio option', () => {
-  const wrapper = mount(<RadioGroup options={options} value="value4" />);
   expect(wrapper.find('.input-radio__option.checked label').text()).toBe('label4');
 });
 
