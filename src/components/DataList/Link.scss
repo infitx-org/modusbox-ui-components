@@ -16,9 +16,11 @@
   display: block;
 }
 .element-datalist__link__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
   color: $color__blue-4;
   fill: $color__blue-4;
-  flex: 1 1 auto;
 }
 .element-datalist__link__icon {
   display: none;
