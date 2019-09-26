@@ -60,13 +60,13 @@ class DataList extends PureComponent {
   static toItems(list, columns, selected, checked, prevItems, prevList = []) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
-    const reduceColumns = (row, _rowIndex) => (prev, column) => {
+    const reduceColumns = (row, _rowIndex, _listIndex) => (prev, column) => {
       const { func, key, link, _index, _onChange } = column;
       let value = get(row._source, key);
       let component = null;
 
       if (typeof func === 'function') {
-        value = func(value, row._source, _rowIndex);
+        value = func(value, row._source, _listIndex);
       }
       if (typeof link === 'function') {
         // eslint-disable-next-line
@@ -109,7 +109,7 @@ class DataList extends PureComponent {
       row._checked = checked
         ? checked.some(check => isEqual(check, item))
         : get(oldItems, `[${_listIndex}]._checked`);
-      row.data = columns.reduce(reduceColumns(row, row._index), {});
+      row.data = columns.reduce(reduceColumns(row, row._index, _listIndex), {});
 
       return row;
     };
