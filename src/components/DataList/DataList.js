@@ -145,7 +145,7 @@ class DataList extends PureComponent {
   static getSortColumn(label, columns) {
     let sortColumn;
     columns.some(column => {
-      if (!column._onChange) {
+      if (!column._onChange && !column.sortable === false) {
         sortColumn = column._index;
         return true;
       }
@@ -153,8 +153,8 @@ class DataList extends PureComponent {
     });
     // gets the key of the sorting column
     if (label !== undefined) {
-      const column = find(columns, { label });
-      sortColumn = get(column, '_index');
+      const columnByLabel = find(columns, column => column.label === label && column.sortable !== false);
+      sortColumn = get(columnByLabel, '_index');
     }
     return sortColumn;
   }
@@ -207,6 +207,7 @@ class DataList extends PureComponent {
 
     const sortAsc = this.props.sortAsc === true;
     const sortColumn = DataList.getSortColumn(this.props.sortColumn, this._columns);
+    console.log(sortColumn)
     const items = DataList.toItems(
       this.props.list,
       this._columns,
