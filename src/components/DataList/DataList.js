@@ -123,7 +123,7 @@ class DataList extends PureComponent {
       }
 
       row._selected = selected
-        ? selected.some(select => isEqual(select, item)) 
+        ? selected.some(select => isEqual(select, item))
         : get(oldItems, `[${_listIndex}]._selected`);
 
       row._checked = checked
@@ -166,7 +166,7 @@ class DataList extends PureComponent {
         return get(item.data[key], 'originalValue');
       }
       return value;
-    }
+    };
     return orderBy(items, getContentAtIndex(_index), asc ? 'asc' : 'desc');
   }
   static getSortColumn(label, columns) {
@@ -181,7 +181,7 @@ class DataList extends PureComponent {
     // gets the key of the sorting column
     if (label !== undefined) {
       const columnByLabel = find(columns, column => {
-        return column.label === label && column.sortable !== false
+        return column.label === label && column.sortable !== false;
       });
       sortColumn = get(columnByLabel, '_index');
     }
@@ -283,7 +283,6 @@ class DataList extends PureComponent {
         checkable,
         items,
         prevProps.list,
-
       );
 
       const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
@@ -352,7 +351,7 @@ class DataList extends PureComponent {
   onHeaderCheckboxChange(value) {
     const setCheckIfCheckable = _checked => item => ({
       ...item,
-      _checked: DataList.isCheckable(this.props.checkable, item) ? _checked : false
+      _checked: DataList.isCheckable(this.props.checkable, item) ? _checked : false,
     });
 
     this.setState(

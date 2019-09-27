@@ -61,7 +61,7 @@ const ControlIcon = ({
         kind={tooltipKind(kind)}
         position={tooltipPosition}
         delay={delay}
-        style={{overflow:'visible'}}
+        style={{ overflow: 'visible' }}
       >
         {iconComponent}
       </Tooltip>

@@ -138,8 +138,21 @@ const getColumns = (counter = 1) => [
   {
     label: 'Double',
     key: 'a',
-    /* eslint-disable-next-line */
-    func: x => <Link>{x}{x}{x}{x}{x}{x}{x}{x}{x}{x}</Link>,
+    func: x => (
+      /* eslint-disable-next-line */
+      <Link>
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+      </Link>
+    ),
     className: 'col-100px',
   },
   {
