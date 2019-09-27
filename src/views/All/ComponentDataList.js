@@ -151,10 +151,9 @@ const getColumns = (counter = 1) => [
     className: 'col-100px',
   },
   {
-    sortable: false,
-    label: 'Triple',
+    label: 'Test',
     key: 'a',
-    func: x => x * 3 * counter,
+    func: x => <span>{x * Math.random()}</span>,
     className: 'col-100px',
   },
   {

@@ -62,7 +62,8 @@ class DataList extends PureComponent {
     // so that child components will not need any transformation logic
     const reduceColumns = (row, _rowIndex, _listIndex) => (prev, column) => {
       const { func, key, link, _index, _onChange } = column;
-      let value = get(row._source, key);
+      const originalValue = get(row._source, key);
+      let value = originalValue;
       let component = null;
 
       if (typeof func === 'function') {
@@ -84,6 +85,7 @@ class DataList extends PureComponent {
       return {
         ...prev,
         [_index]: {
+          originalValue,
           value: isTextContent ? value : null,
           component,
         },
@@ -143,7 +145,7 @@ class DataList extends PureComponent {
       const value = get(item.data[key], 'value');
       if (value === null) {
         // get the original value before transformation
-        return get(item._source, key);
+        return get(item.data[key], 'originalValue');
       }
       return value;
     }
