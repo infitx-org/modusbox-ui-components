@@ -136,7 +136,6 @@ const list = new Array(20).fill(0).map(buildRow);
 
 const getColumns = (counter = 1) => [
   {
-    sortable: false,
     label: 'Double',
     key: 'a',
     /* eslint-disable-next-line */
@@ -144,7 +143,6 @@ const getColumns = (counter = 1) => [
     className: 'col-100px',
   },
   {
-    sortable: false,
     label: 'Double',
     key: 'a',
     func: x => x * 2 * counter,
@@ -157,24 +155,20 @@ const getColumns = (counter = 1) => [
     className: 'col-100px',
   },
   {
-    sortable: false,
     label: 'Zero Zero Zero Zero',
     key: 'a',
     func: () => new Array(25).fill(counter).join(' -  '),
   },
   {
-    sortable: false,
     label: 'Square',
     key: 'b',
     func: x => x * x * counter,
   },
   {
-    sortable: false,
     label: 'c',
     key: 'c.test.value',
   },
   {
-    sortable: false,
     label: 'd',
     key: 'd',
     func: x => new Array(15).fill(x).join(''),
@@ -217,7 +211,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       onSelect={console.log}
       onUnselect={console.log}
       onCheck={data => console.log(JSON.stringify(data))}
-      selected={o => o.a === 10}
+      selected={list[0]}
       noData={noDataLabel}
       errorMsg={errorMsg}
     />

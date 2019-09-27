@@ -27,6 +27,16 @@ class DataList extends PureComponent {
   static isItemChecked(item) {
     return item._checked === true;
   }
+  static getSelectedItems(list, selected) {
+    if (typeof selected === 'function') {
+      return list.filter(selected);
+    } else if (Array.isArray(selected)) {
+      return selected;
+    } else if (typeof selected === 'object') {
+      return [selected];
+    }
+    return undefined;
+  }
   static convertColumns(columns, prevColumns = [], onCheck) {
     const tpmColumns = [];
     let translateIndex = 0;
@@ -107,7 +117,10 @@ class DataList extends PureComponent {
         };
       }
 
-      row._selected = selected ? selected(item) : false;
+      row._selected = selected
+        ? selected.some(select => isEqual(select, item)) 
+        : get(oldItems, `[${_listIndex}]._selected`);
+
       row._checked = checked
         ? checked.some(check => isEqual(check, item))
         : get(oldItems, `[${_listIndex}]._checked`);
@@ -216,12 +229,17 @@ class DataList extends PureComponent {
       checkedItems = DataList.getCheckedItems(this.props.list, this.props.checked);
     }
 
+    let selectedItems;
+    if (this.props.selected) {
+      selectedItems = DataList.getSelectedItems(this.props.list, this.props.selected);
+    }
+
     const sortAsc = this.props.sortAsc === true;
     const sortColumn = DataList.getSortColumn(this.props.sortColumn, this._columns);
     const items = DataList.toItems(
       this.props.list,
       this._columns,
-      this.props.selected,
+      selectedItems,
       checkedItems,
     );
 
@@ -247,11 +265,12 @@ class DataList extends PureComponent {
     if (prevProps.list !== list || prevProps.columns !== columns) {
       const { sortAsc, sortColumn, items } = this.state;
       const checkedItems = DataList.getCheckedItems(list, checked);
+      const selectedItems = DataList.getCheckedItems(list, selected);
 
       const listItems = DataList.toItems(
         list,
         this._columns,
-        selected,
+        selectedItems,
         checkedItems,
         items,
         prevProps.list,
@@ -420,7 +439,11 @@ DataList.propTypes = {
   sortColumn: PropTypes.string,
   isPending: PropTypes.bool,
   hasError: PropTypes.bool,
-  selected: PropTypes.func,
+  selected: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape(),
+    PropTypes.arrayOf(PropTypes.shape()),
+  ]),
   checked: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.shape())]),
   noData: PropTypes.string,
   errorMsg: PropTypes.string,
