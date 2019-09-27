@@ -50,13 +50,19 @@ const ControlIcon = ({
       onClick={disabled ? undefined : onClick}
       id={id}
     >
-      <Icon size={size - 6} name={icon} fill={fill} />
+      <Icon size={size} name={icon} fill={fill} className="control-icon__icon" />
     </div>
   );
 
   if (tooltip) {
     iconComponent = (
-      <Tooltip label={tooltip} kind={tooltipKind(kind)} position={tooltipPosition} delay={delay}>
+      <Tooltip
+        label={tooltip}
+        kind={tooltipKind(kind)}
+        position={tooltipPosition}
+        delay={delay}
+        style={{overflow:'visible'}}
+      >
         {iconComponent}
       </Tooltip>
     );
