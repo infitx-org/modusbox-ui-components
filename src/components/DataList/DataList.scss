@@ -3,10 +3,22 @@
 
 .element-datalist {
   width: 100%;
+  animation: fadeUp 0.3s ease-out 1 forwards;
 }
 
 .element-datalist--flexible {
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+@keyframes fadeUp {
+  0% {
+    transform: translate3d(0, 10px, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
