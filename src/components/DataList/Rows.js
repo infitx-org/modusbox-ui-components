@@ -81,7 +81,7 @@ class ItemCell extends PureComponent {
       isCheckbox && 'element-datalist__item-cell--checkbox',
     ]);
     let cell = null;
-    if (isCheckbox) {
+    if (isCheckbox && content) {
       cell = React.cloneElement(content, { ...content.props, checked });
     } else if (content) {
       cell = content;

@@ -27,6 +27,9 @@ class DataList extends PureComponent {
   static isItemChecked(item) {
     return item._checked === true;
   }
+  static isCheckable(checkable, item) {
+    return typeof checkable === 'function' && checkable(item._source);
+  }
   static getSelectedItems(list, selected) {
     if (typeof selected === 'function') {
       return list.filter(selected);
@@ -67,7 +70,7 @@ class DataList extends PureComponent {
     columns.forEach(mapIndexToColumns(prevColumns));
     return tpmColumns;
   }
-  static toItems(list, columns, selected, checked, prevItems, prevList = []) {
+  static toItems(list, columns, selected, checked, checkable, prevItems, prevList = []) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
     const reduceColumns = (row, _rowIndex, _listIndex) => (prev, column) => {
@@ -83,7 +86,9 @@ class DataList extends PureComponent {
         // eslint-disable-next-line
         component = <Link onClick={() => link(row._source[key], row._source)}>{value}</Link>;
       } else if (_onChange) {
-        component = <Checkbox onChange={() => _onChange(_rowIndex)} round />;
+        if (DataList.isCheckable(checkable, row)) {
+          component = <Checkbox onChange={() => _onChange(_rowIndex)} round />;
+        }
       }
 
       const isTextContent = typeof value === 'string' || typeof value === 'number';
@@ -241,6 +246,9 @@ class DataList extends PureComponent {
       this._columns,
       selectedItems,
       checkedItems,
+      this.props.checkable,
+      undefined,
+      undefined,
     );
 
     const sortedItems = DataList.sortItems(items, sortAsc, sortColumn);
@@ -253,7 +261,7 @@ class DataList extends PureComponent {
     };
   }
   componentDidUpdate(prevProps) {
-    const { list, columns, selected, checked, onCheck } = this.props;
+    const { list, columns, selected, checked, checkable, onCheck } = this.props;
 
     if (prevProps.columns !== columns) {
       this._columns = DataList.convertColumns(
@@ -272,8 +280,10 @@ class DataList extends PureComponent {
         this._columns,
         selectedItems,
         checkedItems,
+        checkable,
         items,
         prevProps.list,
+
       );
 
       const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
@@ -340,9 +350,14 @@ class DataList extends PureComponent {
   }
 
   onHeaderCheckboxChange(value) {
+    const setCheckIfCheckable = _checked => item => ({
+      ...item,
+      _checked: DataList.isCheckable(this.props.checkable, item) ? _checked : false
+    });
+
     this.setState(
       {
-        items: this.state.items.map(item => ({ ...item, _checked: value })),
+        items: this.state.items.map(setCheckIfCheckable(value)),
       },
       this.onChange,
     );
@@ -357,7 +372,7 @@ class DataList extends PureComponent {
   }
 
   render() {
-    const { flex, isPending, noData, errorMsg, hasError } = this.props;
+    const { flex, isPending, noData, errorMsg, hasError, checkable } = this.props;
     const { items, sortAsc, sortColumn, filters } = this.state;
     const className = utils.composeClassNames([
       'mb-element',
@@ -365,8 +380,13 @@ class DataList extends PureComponent {
       flex && 'element-datalist--flexible',
     ]);
 
-    const isAllChecked = items.every(DataList.isItemChecked);
-    const isSomeChecked = items.some(DataList.isItemChecked);
+    const isAllChecked = items
+      .filter(item => DataList.isCheckable(checkable, item))
+      .every(DataList.isItemChecked);
+
+    const isSomeChecked = items
+      .filter(item => DataList.isCheckable(checkable, item))
+      .some(DataList.isItemChecked);
 
     let content = null;
     if (isPending) {
@@ -414,6 +434,7 @@ DataList.defaultProps = {
   hasError: false,
   selected: undefined,
   checked: undefined,
+  checkable: undefined,
   noData: 'No items',
   errorMsg: 'There was an error',
   onSelect: undefined,
@@ -445,6 +466,7 @@ DataList.propTypes = {
     PropTypes.arrayOf(PropTypes.shape()),
   ]),
   checked: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.shape())]),
+  checkable: PropTypes.func,
   noData: PropTypes.string,
   errorMsg: PropTypes.string,
   onSelect: PropTypes.func,

@@ -211,6 +211,7 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       onSelect={console.log}
       onUnselect={console.log}
       onCheck={data => console.log(JSON.stringify(data))}
+      checkable={item => item.a !== 0}
       selected={list[0]}
       noData={noDataLabel}
       errorMsg={errorMsg}
