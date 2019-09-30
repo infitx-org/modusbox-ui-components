@@ -322,6 +322,51 @@ class TestList extends React.Component {
   }
 }
 
+class TestList2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onCheck = this.onCheck.bind(this);
+    this.onClear = this.onClear.bind(this);
+    this.onAddNewItem = this.onAddNewItem.bind(this);
+    this.state = {
+      items: list,
+      checked: [],
+    };
+  }
+  onCheck(items) {
+    this.setState({
+      checked: items,
+    });
+  }
+  onClear() {
+    this.setState({
+      checked: [],
+    });
+  }
+  onAddNewItem() {
+    this.setState({
+      items: [...this.state.items, buildRow()],
+    });
+  }
+  render() {
+    return (
+      <div style={containerStyle}>
+        <div style={rowStyle}>
+          <Button size="m" label="clear checked" onClick={this.onClear} />
+          <Button size="m" label="add new items" onClick={this.onAddNewItem} />
+        </div>
+        <DataList
+          columns={getColumns(0)}
+          checkable={() => false}
+          list={this.state.items}
+          onCheck={this.onCheck}
+          checked={this.state.checked}
+        />
+      </div>
+    );
+  }
+}
+
 class TestDataList extends React.Component {
   constructor(props) {
     super(props);
@@ -351,6 +396,7 @@ class TestDataList extends React.Component {
           <Tab>Simple</Tab>
           <Tab>Modal</Tab>
           <Tab>Test</Tab>
+          <Tab>NonCheckable</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -373,6 +419,9 @@ class TestDataList extends React.Component {
           </TabPanel>
           <TabPanel>
             <TestList />
+          </TabPanel>
+          <TabPanel>
+            <TestList2 />
           </TabPanel>
         </TabPanels>
       </Tabs>

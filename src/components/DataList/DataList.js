@@ -382,13 +382,9 @@ class DataList extends PureComponent {
       flex && 'element-datalist--flexible',
     ]);
 
-    const isAllChecked = items
-      .filter(item => DataList.isCheckable(checkable, item))
-      .every(DataList.isItemChecked);
-
-    const isSomeChecked = items
-      .filter(item => DataList.isCheckable(checkable, item))
-      .some(DataList.isItemChecked);
+    const checkableItems = items.filter(item => DataList.isCheckable(checkable, item));
+    const isAllChecked = checkableItems.length > 0 && checkableItems.every(DataList.isItemChecked);
+    const isSomeChecked = checkableItems.length > 0 && checkableItems.some(DataList.isItemChecked);
 
     let content = null;
     if (isPending) {
@@ -408,6 +404,7 @@ class DataList extends PureComponent {
           filters={filters}
           checked={isAllChecked}
           semiChecked={isSomeChecked}
+          disabledCheck={checkableItems.length === 0}
           onCheckboxChange={this.onHeaderCheckboxChange}
           onFilterChange={this.onFilterChange}
           onFilterBlur={this.onFilterBlur}

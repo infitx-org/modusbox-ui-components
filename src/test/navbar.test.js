@@ -178,7 +178,7 @@ it('filters the companies in the popup when setting the company filter', () => {
       activeCompanyId={activeCompanyId}
       activeOrganizationId={activeOrganizationId}
       activeEnvironmentId={activeEnvironmentId}
-    />
+    />,
   );
   wrapper.find('.Navbar__company__name').simulate('click');
   wrapper.find('.Navbar__search-box__input').simulate('change', { target: { value: '2' } });
