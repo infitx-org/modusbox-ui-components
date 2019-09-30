@@ -19,6 +19,7 @@ const Header = ({
   filters,
   checked,
   semiChecked,
+  disabledCheck,
   onCheckboxChange,
   onFilterChange,
   onFilterBlur,
@@ -41,6 +42,7 @@ const Header = ({
         onClick={() => onSortClick(column._index)}
         checked={checked}
         semiChecked={semiChecked}
+        disabledCheck={disabledCheck}
         onCheckboxChange={onCheckboxChange}
         onFilterChange={value => onFilterChange(column._index, value)}
         onFilterBlur={() => onFilterBlur(column._index)}
@@ -91,6 +93,7 @@ class HeaderCell extends PureComponent {
       filter,
       checked,
       semiChecked,
+      disabledCheck,
       onCheckboxChange,
       onFilterChange,
       onFilterBlur,
@@ -113,6 +116,7 @@ class HeaderCell extends PureComponent {
           semi={!checked && semiChecked}
           checked={checked}
           onChange={onCheckboxChange}
+          disabled={disabledCheck}
           round
         />
       );
