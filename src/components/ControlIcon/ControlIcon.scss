@@ -2,38 +2,10 @@
 @import '../../assets/styles/vars/shadow.scss';
 
 .control__icon {
-  fill: #333;
-}
-.control__icon--button {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.control__icon--disabled {
-  fill: #ccc;
-}
-.control__icon--button {
-  cursor: pointer;
-  padding: 3px;
-  opacity: 0.7;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-    transform: scale(0.3, 0.3);
-    opacity: 0;
-    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    z-index: -1;
-  }
-
   &:hover {
-    opacity: 1;
+    &:not(.control__icon--disabled) {
+      opacity: 1;
+    }
 
     &::before {
       opacity: 1;
@@ -42,10 +14,42 @@
   }
 }
 
-.control__icon--default {
-  fill: #333;
+.control-icon__icon {
+  z-index: 2;
+}
+.control__icon--button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.control__icon--disabled {
+  opacity: 0.7;
+  fill: #ccc;
+}
+.control__icon--button {
+  cursor: pointer;
+  opacity: 0.7;
+  position: relative;
+
   &::before {
-    background-color: rgba(0, 0, 0, 0.1)
+    content: '';
+    position: absolute;
+    height: calc(100% + 6px);
+    width: calc(100% + 6px);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    transform: scale(0.3, 0.3);
+    opacity: 0;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: 1;
+  }
+}
+
+.control__icon--default {
+  fill: #666;
+  &::before {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 .control__icon--primary {

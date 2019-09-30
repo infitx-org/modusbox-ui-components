@@ -4,7 +4,7 @@ import * as utils from '../../utils/common';
 import { Icon, Tooltip } from '../index';
 import './ControlIcon.scss';
 
-const tooltipKind = (kind) => {
+const tooltipKind = kind => {
   if (kind === 'danger') {
     return 'error';
   } else if (kind === 'warning') {
@@ -13,9 +13,9 @@ const tooltipKind = (kind) => {
     return 'info';
   }
   return undefined;
-}
+};
 const ControlIcon = ({
-  color,
+  fill,
   icon,
   size,
   id,
@@ -50,25 +50,30 @@ const ControlIcon = ({
       onClick={disabled ? undefined : onClick}
       id={id}
     >
-      <Icon size={size} name={icon} fill={color} />
+      <Icon size={size} name={icon} fill={fill} className="control-icon__icon" />
     </div>
   );
 
   if (tooltip) {
     iconComponent = (
-      <Tooltip label={tooltip} kind={tooltipKind(kind)} position={tooltipPosition} delay={delay}>
+      <Tooltip
+        label={tooltip}
+        kind={tooltipKind(kind)}
+        position={tooltipPosition}
+        delay={delay}
+        style={{ overflow: 'visible' }}
+      >
         {iconComponent}
       </Tooltip>
     );
   }
 
-  return iconComponent;
+  return <div style={{ height: size, width: size }}>{iconComponent}</div>;
 };
 
 ControlIcon.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
-  style: PropTypes.shape(),
   kind: PropTypes.oneOf([
     'default',
     'primary',
@@ -91,7 +96,6 @@ ControlIcon.propTypes = {
 ControlIcon.defaultProps = {
   className: undefined,
   id: undefined,
-  style: undefined,
   kind: 'default',
   size: 20,
   icon: undefined,

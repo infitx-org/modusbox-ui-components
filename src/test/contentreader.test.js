@@ -66,7 +66,6 @@ it('applies the correct shell className', async () => {
   expect(classNames.includes('shell')).toBe(true);
 });
 
-
 it('renders the ContentReader correctly when multiple props are set', () => {
   const wrapper = mount(<ContentReader data={shellString} />);
   expect(shallowToJson(wrapper)).toMatchSnapshot();

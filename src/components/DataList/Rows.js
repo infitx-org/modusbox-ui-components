@@ -76,12 +76,12 @@ class ItemCell extends PureComponent {
   render() {
     const { isCheckbox, checked, content, value, className } = this.props;
     const itemCellClassName = utils.composeClassNames([
+      className,
       'element-datalist__item-cell',
       isCheckbox && 'element-datalist__item-cell--checkbox',
-      className,
     ]);
     let cell = null;
-    if (isCheckbox) {
+    if (isCheckbox && content) {
       cell = React.cloneElement(content, { ...content.props, checked });
     } else if (content) {
       cell = content;

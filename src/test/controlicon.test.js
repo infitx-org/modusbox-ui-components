@@ -29,8 +29,8 @@ it('renders the button icon', () => {
   expect(wrapper.find(Icon)).toHaveLength(1);
 });
 
-it('applies the prop color', () => {
-  const wrapper = shallow(<ControlIcon icon="deploy" color="#fff" />);
+it('applies the prop fill', () => {
+  const wrapper = shallow(<ControlIcon icon="deploy" fill="#fff" />);
   expect(wrapper.find(Icon).prop('fill')).toBe('#fff');
 });
 
@@ -78,7 +78,7 @@ it('renders all the kinds', () => {
 
 it('renders the sizes', () => {
   const sizes = [10, 20, 30];
-  sizes.forEach((size) => {
+  sizes.forEach(size => {
     const wrapper = shallow(<ControlIcon size={size} icon="deploy" />);
     expect(wrapper.find(Icon).prop('size')).toBe(size);
   });
@@ -86,9 +86,9 @@ it('renders the sizes', () => {
 
 it('triggers the onClick prop', () => {
   const mockEvent = jest.fn();
-  const wrapper = mount(<ControlIcon onClick={mockEvent} />);
+  const wrapper = mount(<ControlIcon onClick={mockEvent} icon="deploy" size={20} />);
   expect(mockEvent).not.toHaveBeenCalled();
-  wrapper.simulate('click');
+  wrapper.find('.control__icon').simulate('click');
   expect(mockEvent).toHaveBeenCalled();
 });
 
@@ -102,6 +102,8 @@ it('renders the inner icon component', () => {
 // Snapshot testing
 
 it('renders the button correctly when multiple props are set', () => {
-  const wrapper = shallow(<ControlIcon icon="deploy-small" kind="secondary" disabled onClick={jest.fn}/>);
+  const wrapper = shallow(
+    <ControlIcon icon="deploy-small" kind="secondary" disabled onClick={jest.fn} />,
+  );
   expect(shallowToJson(wrapper)).toMatchSnapshot();
 });

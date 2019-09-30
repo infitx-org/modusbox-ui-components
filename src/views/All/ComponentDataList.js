@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import Checkbox from '../../components/Checkbox';
 import TextField from '../../components/TextField';
-import DataList from '../../components/DataList';
+import DataList, { Link } from '../../components/DataList';
 import Button from '../../components/Button';
 import ScrollBox from '../../components/ScrollBox';
 import Icon from '../../components/Icon';
@@ -138,13 +138,33 @@ const getColumns = (counter = 1) => [
   {
     label: 'Double',
     key: 'a',
+    func: x => (
+      /* eslint-disable-next-line */
+      <Link>
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+        {x}
+      </Link>
+    ),
+    className: 'col-100px',
+  },
+  {
+    label: 'Double',
+    key: 'a',
     func: x => x * 2 * counter,
     className: 'col-100px',
   },
   {
-    label: 'Triple',
+    label: 'Test',
     key: 'a',
-    func: x => x * 3 * counter,
+    func: x => <span>{x * Math.random()}</span>,
     className: 'col-100px',
   },
   {
@@ -168,19 +188,21 @@ const getColumns = (counter = 1) => [
     link: console.log,
   },
   {
+    sortable: false,
     label: '',
     key: 'e',
     func: () => <Icon name="close-small" size={16} fill="#999" />,
     className: 'col-40px',
   },
   {
+    sortable: false,
     label: '',
     key: 'e',
     func: () => <Checkbox checked={counter % 2 !== 0} />,
     className: 'col-40px',
   },
-
   {
+    sortable: false,
     label: 'Counter',
     key: 'e',
     func: () => counter,
@@ -202,7 +224,8 @@ const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
       onSelect={console.log}
       onUnselect={console.log}
       onCheck={data => console.log(JSON.stringify(data))}
-      selected={o => o.a === 10}
+      checkable={item => item.a !== 0}
+      selected={list[0]}
       noData={noDataLabel}
       errorMsg={errorMsg}
     />

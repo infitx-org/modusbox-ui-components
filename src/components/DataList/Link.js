@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
-import Tooltip from '../Tooltip';
 import './Link.scss';
 
 const Link = ({ value, children, onClick }) => {
   const content = value !== undefined ? value.toString() : children;
   return (
     <div className="element-datalist__link" onClick={onClick} role="presentation">
-      <Tooltip label={content} kind="info" style={{ flex: '1 0 0 ' }}>
+      <div className="element-datalist__link__container">
         <span className="element-datalist__link__content">{content}</span>
-      </Tooltip>
+      </div>
       <div className="element-datalist__link__icon">
         <Icon name="open" size={16} fill="#00A3E0" />
       </div>

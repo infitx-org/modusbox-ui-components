@@ -33,7 +33,9 @@ class ContentReader extends PureComponent {
       const lines = content.split(/(?:\r\n|\r|\n)/);
       lineNumbers = lines.map((_, index) => (
         /* eslint-disable-next-line react/no-array-index-key */
-        <div className="content-reader__lines__line-n" key={index} >{index + 1}</div>
+        <div className="content-reader__lines__line-n" key={index}>
+          {index + 1}
+        </div>
       ));
     }
 
