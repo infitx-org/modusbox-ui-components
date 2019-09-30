@@ -145,9 +145,10 @@ it('renders the link correctly', () => {
   expect(link.exists()).toBeTruthy();
 });
 
-it('renders the selected prop', () => {
+it('renders the selected prop when an a function is passed', () => {
+  const selectedFn = item => item.column1 === 1
   const wrapper = mount(
-    <DataList list={testList1} columns={testColumns1} selected={item => item.column1 === 1} />,
+    <DataList list={testList1} columns={testColumns1} selected={selectedFn} />,
   );
 
   const hasSelectedClass = wrapper
@@ -155,7 +156,56 @@ it('renders the selected prop', () => {
     .at(0)
     .hasClass('element-datalist__row--selected');
 
+  const allSelectedRows = wrapper
+    .find('div.element-datalist__row.element-datalist__row--selected');
+
   expect(hasSelectedClass).toBeTruthy();
+  expect(allSelectedRows).toHaveLength(1);
+});
+
+it('renders the selected prop when an array is passed', () => {
+  const selected = [
+    testList1[0],
+    testList1[1]
+  ];
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} selected={selected} />,
+  );
+
+  const row1 = wrapper
+    .find('div.element-datalist__row')
+    .at(0);
+
+  const row2 = wrapper
+    .find('div.element-datalist__row')
+    .at(1);
+
+  const row3 = wrapper
+    .find('div.element-datalist__row')
+    .at(2);
+    
+
+  expect(row1.hasClass('element-datalist__row--selected')).toBe(true);
+  expect(row2.hasClass('element-datalist__row--selected')).toBe(true);
+  expect(row3.hasClass('element-datalist__row--selected')).toBe(false);
+});
+
+it('renders the selected prop when a single item is passed', () => {
+  const selected = testList1[0];
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} selected={selected} />,
+  );
+
+  const row1 = wrapper
+    .find('div.element-datalist__row')
+    .at(0);
+
+  const row2 = wrapper
+    .find('div.element-datalist__row')
+    .at(1);
+
+  expect(row1.hasClass('element-datalist__row--selected')).toBe(true);
+  expect(row2.hasClass('element-datalist__row--selected')).toBe(false);
 });
 
 it('updates the cell content on list changing', () => {
@@ -178,41 +228,6 @@ it('updates the cell content on list changing', () => {
     .text();
   expect(oldCellValue).not.toBe(newCellValue);
   expect(newCellValue).not.toBe('4');
-});
-
-it('triggers the onSelect even when clicking on a row', () => {
-  const mockEvent = jest.fn();
-  const wrapper = mount(<DataList list={testList1} columns={testColumns1} onSelect={mockEvent} />);
-
-  wrapper
-    .find('div.element-datalist__row')
-    .at(0)
-    .simulate('click');
-
-  const firstItem = testList1[0];
-
-  expect(mockEvent).toHaveBeenCalledWith(firstItem);
-});
-
-it('triggers the onUnselect even when clicking on a selected row', () => {
-  const mockEvent = jest.fn();
-  const wrapper = mount(
-    <DataList
-      list={testList1}
-      columns={testColumns1}
-      selected={item => item.column1 === 1}
-      onUnselect={mockEvent}
-    />,
-  );
-
-  wrapper
-    .find('div.element-datalist__row')
-    .at(0)
-    .simulate('click');
-
-  const firstItem = testList1[0];
-
-  expect(mockEvent).toHaveBeenCalledWith(firstItem);
 });
 
 it('renders and sorts by the prop sortColumn', () => {
@@ -740,6 +755,41 @@ it('disables the header checkbox when no items can be checked', () => {
   expect(rowCheckbox1.exists()).toBe(false);
   expect(rowCheckbox2.exists()).toBe(false);
   expect(rowCheckbox3.exists()).toBe(false);
+});
+
+it('triggers the onSelect even when clicking on a row', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} onSelect={mockEvent} />);
+
+  wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .simulate('click');
+
+  const firstItem = testList1[0];
+
+  expect(mockEvent).toHaveBeenCalledWith(firstItem);
+});
+
+it('triggers the onUnselect even when clicking on a selected row', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(
+    <DataList
+      list={testList1}
+      columns={testColumns1}
+      selected={item => item.column1 === 1}
+      onUnselect={mockEvent}
+    />,
+  );
+
+  wrapper
+    .find('div.element-datalist__row')
+    .at(0)
+    .simulate('click');
+
+  const firstItem = testList1[0];
+
+  expect(mockEvent).toHaveBeenCalledWith(firstItem);
 });
 
 it('triggers the onCheck function when clicking a checkbox', () => {
