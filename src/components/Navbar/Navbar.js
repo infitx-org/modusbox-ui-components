@@ -705,7 +705,7 @@ const EnvironmentSearchItem = ({ item, onSelectEnvironment, isActive, dark }) =>
 
 const Organizations = ({ dark, activeEnvironment, organizations, onSelectEnvironment }) => (
   <div>
-    {organizations.map((organization) => (
+    {organizations.map(organization => (
       <NestedOrganization
         key={organization.id}
         activeEnvironmentId={activeEnvironment.id}
