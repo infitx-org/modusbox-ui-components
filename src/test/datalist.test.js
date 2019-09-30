@@ -568,10 +568,7 @@ it('renders the checkboxes checked after a list change', () => {
   const wrapper = mount(
     <DataList list={testList1} columns={testColumns1} onCheck={mockEvent} checked={checked} />,
   );
-  const newList = [
-    ...testList1,
-    buildRow(testColumns1)()
-  ];
+  const newList = [...testList1, buildRow(testColumns1)()];
 
   wrapper.setProps({ list: newList });
 
@@ -579,7 +576,6 @@ it('renders the checkboxes checked after a list change', () => {
     .find('.element-datalist__header-cell')
     .at(0)
     .find('Checkbox');
-
 
   const rowCheckbox1 = wrapper
     .find('.element-datalist__row')
@@ -655,6 +651,97 @@ it('renders the checkboxes checked after columns change', () => {
   expect(rowCheckbox3.prop('checked')).toBe(false);
 });
 
+it('disables the row checkbox bases on the function passed to the checkable prop', () => {
+  const checkableFn = item => item.column1 !== 1;
+  const mockEvent = jest.fn();
+  const wrapper = mount(
+    <DataList
+      list={testList1}
+      columns={testColumns1}
+      onCheck={mockEvent}
+      checked={[]}
+      checkable={checkableFn}
+    />,
+  );
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox1 = wrapper
+    .find('.element-datalist__row')
+    .at(0)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox2 = wrapper
+    .find('.element-datalist__row')
+    .at(1)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox3 = wrapper
+    .find('.element-datalist__row')
+    .at(2)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  expect(checkboxHeaderCell.exists()).toBe(true);
+  expect(rowCheckbox1.exists()).toBe(false);
+  expect(rowCheckbox2.exists()).toBe(true);
+  expect(rowCheckbox3.exists()).toBe(true);
+});
+
+it('disables the header checkbox when no items can be checked', () => {
+  const mockEvent = jest.fn();
+  const checked = [testList1[0], testList1[1]];
+  const wrapper = mount(
+    <DataList
+      list={testList1}
+      columns={testColumns1}
+      onCheck={mockEvent}
+      checked={checked}
+      checkable={() => false}
+    />,
+  );
+
+  const checkboxHeaderCell = wrapper
+    .find('.element-datalist__header-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox1 = wrapper
+    .find('.element-datalist__row')
+    .at(0)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox2 = wrapper
+    .find('.element-datalist__row')
+    .at(1)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  const rowCheckbox3 = wrapper
+    .find('.element-datalist__row')
+    .at(2)
+    .find('div.element-datalist__item-cell')
+    .at(0)
+    .find('Checkbox');
+
+  expect(checkboxHeaderCell.prop('checked')).toBe(false);
+  expect(checkboxHeaderCell.prop('disabled')).toBe(true);
+  expect(rowCheckbox1.exists()).toBe(false);
+  expect(rowCheckbox2.exists()).toBe(false);
+  expect(rowCheckbox3.exists()).toBe(false);
+});
+
 it('triggers the onCheck function when clicking a checkbox', () => {
   const mockEvent = jest.fn();
   const checked = () => false;
@@ -708,7 +795,6 @@ it('triggers the onCheck function with no items when clicking the header checkbo
 
   expect(mockEvent).toHaveBeenCalledWith([]);
 });
-
 
 /*it('renders the list correctly when multiple props are set', () => {
   const mockEvent = () => false;
