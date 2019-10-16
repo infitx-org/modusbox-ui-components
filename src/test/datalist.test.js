@@ -146,44 +146,29 @@ it('renders the link correctly', () => {
 });
 
 it('renders the selected prop when an a function is passed', () => {
-  const selectedFn = item => item.column1 === 1
-  const wrapper = mount(
-    <DataList list={testList1} columns={testColumns1} selected={selectedFn} />,
-  );
+  const selectedFn = item => item.column1 === 1;
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} selected={selectedFn} />);
 
   const hasSelectedClass = wrapper
     .find('div.element-datalist__row')
     .at(0)
     .hasClass('element-datalist__row--selected');
 
-  const allSelectedRows = wrapper
-    .find('div.element-datalist__row.element-datalist__row--selected');
+  const allSelectedRows = wrapper.find('div.element-datalist__row.element-datalist__row--selected');
 
   expect(hasSelectedClass).toBeTruthy();
   expect(allSelectedRows).toHaveLength(1);
 });
 
 it('renders the selected prop when an array is passed', () => {
-  const selected = [
-    testList1[0],
-    testList1[1]
-  ];
-  const wrapper = mount(
-    <DataList list={testList1} columns={testColumns1} selected={selected} />,
-  );
+  const selected = [testList1[0], testList1[1]];
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} selected={selected} />);
 
-  const row1 = wrapper
-    .find('div.element-datalist__row')
-    .at(0);
+  const row1 = wrapper.find('div.element-datalist__row').at(0);
 
-  const row2 = wrapper
-    .find('div.element-datalist__row')
-    .at(1);
+  const row2 = wrapper.find('div.element-datalist__row').at(1);
 
-  const row3 = wrapper
-    .find('div.element-datalist__row')
-    .at(2);
-    
+  const row3 = wrapper.find('div.element-datalist__row').at(2);
 
   expect(row1.hasClass('element-datalist__row--selected')).toBe(true);
   expect(row2.hasClass('element-datalist__row--selected')).toBe(true);
@@ -192,17 +177,11 @@ it('renders the selected prop when an array is passed', () => {
 
 it('renders the selected prop when a single item is passed', () => {
   const selected = testList1[0];
-  const wrapper = mount(
-    <DataList list={testList1} columns={testColumns1} selected={selected} />,
-  );
+  const wrapper = mount(<DataList list={testList1} columns={testColumns1} selected={selected} />);
 
-  const row1 = wrapper
-    .find('div.element-datalist__row')
-    .at(0);
+  const row1 = wrapper.find('div.element-datalist__row').at(0);
 
-  const row2 = wrapper
-    .find('div.element-datalist__row')
-    .at(1);
+  const row2 = wrapper.find('div.element-datalist__row').at(1);
 
   expect(row1.hasClass('element-datalist__row--selected')).toBe(true);
   expect(row2.hasClass('element-datalist__row--selected')).toBe(false);
@@ -380,6 +359,8 @@ it('finds the filter input when clicking on a filterable column', () => {
     .at(0)
     .find('.element-datalist__header-cell__search-icon')
     .at(0)
+    .find('[role="presentation"]')
+    .at(0)
     .simulate('click');
 
   const updatedHeaderCell = wrapper.find('.element-datalist__header-cell').at(0);
@@ -403,6 +384,8 @@ it('filters the list when setting a filter', () => {
     .find('.element-datalist__header-cell')
     .at(0)
     .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .find('[role="presentation"]')
     .at(0)
     .simulate('click');
 
@@ -464,6 +447,8 @@ it('filters the list on muliple columns when multiple filters are set a filter',
     .at(0)
     .find('.element-datalist__header-cell__search-icon')
     .at(0)
+    .find('[role="presentation"]')
+    .at(0)
     .simulate('click');
 
   wrapper
@@ -476,6 +461,8 @@ it('filters the list on muliple columns when multiple filters are set a filter',
     .find('.element-datalist__header-cell')
     .at(1)
     .find('.element-datalist__header-cell__search-icon')
+    .at(0)
+    .find('[role="presentation"]')
     .at(0)
     .simulate('click');
 
