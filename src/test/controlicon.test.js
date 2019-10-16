@@ -18,6 +18,11 @@ it('renders the disabled state', () => {
   expect(wrapper.find('div.control__icon').hasClass('control__icon--disabled')).toBe(true);
 });
 
+it('renders the active state', () => {
+  const wrapper = shallow(<ControlIcon icon="deploy-small" active />);
+  expect(wrapper.find('div.control__icon').hasClass('control__icon--active')).toBe(true);
+});
+
 it('renders the tooltip', () => {
   const wrapper = shallow(<ControlIcon icon="deploy-small" tooltip="I am the tooltip" />);
   expect(wrapper.find(Tooltip)).toHaveLength(1);
