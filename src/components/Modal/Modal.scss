@@ -74,17 +74,6 @@
   }
   .element-modal__header-close {
     margin-right: 18px;
-    cursor: pointer;
-    border-radius: 20px;
-    height: 24px;
-    width: 24px;
-    padding: 2px;
-
-    fill: $color__alpha-5;
-    background: transparent;
-    &:hover {
-      background: $color__alpha-1;
-    }
   }
 }
 .element-modal__body {

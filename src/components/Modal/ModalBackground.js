@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
-import Icon from '../Icon';
+import ControlIcon from '../ControlIcon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
@@ -27,11 +27,12 @@ const ModalHeader = ({ title, allowClose, onClose, isCloseDisabled }) => (
     <div className="element-modal__header-title">{title}</div>
     {allowClose && (
       <div className="element-modal__header-close">
-        <Icon
+        <ControlIcon
           onClick={onClose}
-          name="close-small"
+          icon="close-small"
           size={20}
           disabled={isCloseDisabled}
+          delay={500}
           tooltip="Close"
           tooltipPosition="left"
         />
