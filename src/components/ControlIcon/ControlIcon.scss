@@ -2,11 +2,14 @@
 @import '../../assets/styles/vars/shadow.scss';
 
 .control__icon {
-  &:hover {
+  &:hover,
+  &.control__icon--active {
     &:not(.control__icon--disabled) {
       opacity: 1;
     }
-
+  }
+  
+  &:hover {
     &::before {
       opacity: 1;
       transform: scale3d(1.2, 1.2, 1);

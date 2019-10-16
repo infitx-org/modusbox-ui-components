@@ -188,6 +188,7 @@ const FilterIcon = ({ isFiltering, onClick }) => {
         size={15}
         onClick={onClick}
         kind={!isFiltering ? 'default' : 'warning'}
+        active={isFiltering}
       />
     </div>
   );

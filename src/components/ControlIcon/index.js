@@ -15,6 +15,7 @@ const tooltipKind = kind => {
   return undefined;
 };
 const ControlIcon = ({
+  active,
   fill,
   icon,
   size,
@@ -31,6 +32,7 @@ const ControlIcon = ({
     'control__icon',
     !disabled && onClick && 'control__icon--button',
     disabled && 'control__icon--disabled',
+    active && 'control__icon--active',
     kind === 'default' && 'control__icon--default',
     kind === 'primary' && 'control__icon--primary',
     kind === 'secondary' && 'control__icon--secondary',
