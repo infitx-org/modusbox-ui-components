@@ -5,6 +5,7 @@ import * as utils from '../../utils/common';
 import Checkbox from '../Checkbox';
 import Row from '../Row';
 import Icon from '../Icon';
+import ControlIcon from '../ControlIcon';
 import Tooltip from '../Tooltip';
 
 import '../../icons/modusbox/arrow.svg';
@@ -180,7 +181,16 @@ const FilterIcon = ({ isFiltering, onClick }) => {
     isFiltering && 'element-datalist__header-cell__search-icon--active',
   ]);
 
-  return <Icon name="search-small" className={searchIconClassName} size={15} onClick={onClick} />;
+  return (
+    <div className={searchIconClassName}>
+      <ControlIcon
+        icon="search-small"
+        size={15}
+        onClick={onClick}
+        kind={!isFiltering ? 'default' : 'warning'}
+      />
+    </div>
+  );
 };
 
 const SortIcon = ({ isSorting, isSortingAsc }) => {
