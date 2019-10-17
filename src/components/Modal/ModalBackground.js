@@ -22,13 +22,14 @@ const ModalContent = ({ tabbed, flex, children }) => {
   return <ScrollBox flex>{wrappedContent}</ScrollBox>;
 };
 
-const ModalHeader = ({ title, allowClose, onClose, isCloseDisabled }) => (
+const ModalHeader = ({ kind, title, allowClose, onClose, isCloseDisabled }) => (
   <div className="element-modal__header">
     <div className="element-modal__header-title">{title}</div>
     {allowClose && (
       <div className="element-modal__header-close">
         <ControlIcon
           onClick={onClose}
+          kind={kind !== 'primary' ? 'light' : 'default'}
           icon="close-small"
           size={20}
           disabled={isCloseDisabled}
@@ -204,6 +205,7 @@ export default class ModalBackground extends PureComponent {
         />
         <div className={`element-modal__container ${kind}`} style={modalStyle}>
           <ModalHeader
+            kind={kind}
             title={title}
             allowClose={allowClose}
             onClose={this.onClose}
