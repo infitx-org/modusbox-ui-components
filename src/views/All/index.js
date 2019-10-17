@@ -8,6 +8,7 @@ import ComponentContentReader from './ComponentContentReader';
 import ComponentDataList from './ComponentDataList';
 import ComponentDatePicker from './ComponentDatePicker';
 import ComponentDropdown from './ComponentDropdown';
+import ComponentFormInputs from './ComponentFormInputs';
 import ComponentHeading from './ComponentHeading';
 import ComponentMenu from './ComponentMenu';
 import ComponentSelect from './ComponentSelect';
@@ -30,6 +31,7 @@ export {
   ComponentColumn,
   ComponentControlIcon,
   ComponentContentReader,
+  ComponentFormInputs,
   ComponentHeading,
   ComponentMenu,
   ComponentSelect,
