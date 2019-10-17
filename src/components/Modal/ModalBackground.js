@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as utils from '../../utils/common';
 
-import Icon from '../Icon';
+import ControlIcon from '../ControlIcon';
 import Button from '../Button';
 import ScrollBox from '../ScrollBox';
 
@@ -22,16 +22,18 @@ const ModalContent = ({ tabbed, flex, children }) => {
   return <ScrollBox flex>{wrappedContent}</ScrollBox>;
 };
 
-const ModalHeader = ({ title, allowClose, onClose, isCloseDisabled }) => (
+const ModalHeader = ({ kind, title, allowClose, onClose, isCloseDisabled }) => (
   <div className="element-modal__header">
     <div className="element-modal__header-title">{title}</div>
     {allowClose && (
       <div className="element-modal__header-close">
-        <Icon
+        <ControlIcon
           onClick={onClose}
-          name="close-small"
+          kind={kind !== 'primary' ? 'light' : 'default'}
+          icon="close-small"
           size={20}
           disabled={isCloseDisabled}
+          delay={500}
           tooltip="Close"
           tooltipPosition="left"
         />
@@ -203,6 +205,7 @@ export default class ModalBackground extends PureComponent {
         />
         <div className={`element-modal__container ${kind}`} style={modalStyle}>
           <ModalHeader
+            kind={kind}
             title={title}
             allowClose={allowClose}
             onClose={this.onClose}

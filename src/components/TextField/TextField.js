@@ -5,6 +5,7 @@ import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 
 import Icon, { iconSizes } from '../Icon';
+import ControlIcon from '../ControlIcon';
 import { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon } from '../Common';
 
 import '../../icons/modusbox/toggle-invisible.svg';
@@ -213,10 +214,9 @@ class TextField extends PureComponent {
     if (type === 'password') {
       passwordToggle = (
         <div className="mb-input__inner-icon input-textfield__icon">
-          <Icon
-            style={{ cursor: 'pointer' }}
+          <ControlIcon
             onClick={this.onShowPasswordClick}
-            name={isPasswordVisible ? 'toggle-invisible' : 'toggle-visible'}
+            icon={isPasswordVisible ? 'toggle-invisible' : 'toggle-visible'}
             size={iconSize}
             fill={isPasswordVisible ? '#999' : '#39f'}
           />

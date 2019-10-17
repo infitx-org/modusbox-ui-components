@@ -45,18 +45,14 @@
   transform: rotateZ(90deg) rotateY(180deg);
 }
 .element-datalist__header-cell__search-icon {
-  flex: 0 0 auto;
-  fill: #ccc;
-  transition: all 0.2s ease-out;
-  margin: 3px;
+  margin-right: 4px;
+  margin-left: 2px;
+  transition: transform 0.2s ease-out;
 }
-.element-datalist__header-cell__search-icon:hover {
-  fill: #999;
-}
-.element-datalist__header-cell__search-icon--active,
-.element-datalist__header-cell__search-icon--active:hover {
+.element-datalist__header-cell__search-icon--active {
+  margin-right: 6px;
   fill: #f63;
-  transform: scale(1.2, 1.2);
+  transform: scale(1.1, 1.1);
 }
 
 .element-datalist__header-cell__filter {
