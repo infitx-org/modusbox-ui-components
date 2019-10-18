@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import Heading from '../Heading';
 
 import FormInput from './FormInput';
@@ -10,128 +10,163 @@ const FORMINPUT_TYPE = <FormInput />.type;
 const INLINE_TYPE = <Inline />.type;
 
 // wrapper for data, onChange, validation, options
-export const FormInputs = ({
-  inline = false,
-  data,
-  onChange,
-  validation,
-  options,
-  disabledFields = [],
-  hiddenFields = [],
-  title,
-  subgroup,
-  disabled,
-  width,
-  style = {},
-  children,
-}) => {
-  let elementWidth = 400;
-  let rowWidth = '100%';
-
-  if (width === '100%') {
-    elementWidth = '100%';
-    rowWidth = '100%';
-  }
-
-  if (inline) {
-    rowWidth = (10 + 400) / children.length;
-    elementWidth = rowWidth - 10;
-  }
-
-  const wrapperStyle = {
-    marginBottom: 20,
-    display: inline ? 'flex' : 'block',
-    width,
-    ...style,
-  };
-
-  const forceDisabled = disabled === true;
-
-  // add the properties to the Form Component children.
-  // overwrite the ones give to the children directly
-  // combine 'disabled' between parent and child
-  const addPropsToFormInputOrInline = element => {
-    if (element == null) {
-      return element;
-    }
-    if (element.type !== FORMINPUT_TYPE && element.type !== INLINE_TYPE) {
-      return element;
-    }
-    let props;
-    if (element.type === FORMINPUT_TYPE) {
-      const { name } = element.props;
-      // select the current value and current validation for easier manipulation
-      // link data  and validation to original object or to the subgruop when specified
-      let componentValue = data[name];
-      let componentOptions = options[name];
-      let componentValidation = get(validation, `fields[${name}]`);
-      const componentonChange = onChange;
-
-      // when passing subgroup all the properties are nested under that `subgroup` object prop
-      // since it is a nested object, we firsst need to check the first level really exists
-      // in some case options are not available
-      if (subgroup) {
-        componentValue = data[subgroup] ? data[subgroup][name] : undefined;
-        componentOptions = options[subgroup] ? options[subgroup][name] : undefined;
-        componentValidation = validation[subgroup] ? validation[subgroup][name] : undefined;
-        componentValidation = get(validation, `fields[${subgroup}].fields[${name}]`);
+class FormInputs extends PureComponent {
+  static addPropsToFormInputOrInline(
+    data,
+    options,
+    disabled,
+    validation,
+    subgroup,
+    disabledFields,
+    hiddenFields,
+    _onChange,
+    rowWidth,
+    elementWidth,
+  ) {
+    return function addPropsToElement(element) {
+      if (element === null) {
+        return element;
       }
-      const matchedProps = {
-        value: element.props.value || componentValue,
-        options: element.props.options || componentOptions,
-        validation: element.props.validation || componentValidation,
-        onChange: element.props.onChange || componentonChange,
-        subgroup: element.props.subgroup || subgroup,
-      };
+      if (element.type !== FORMINPUT_TYPE && element.type !== INLINE_TYPE) {
+        return element;
+      }
 
-      // perform the presence test in a nested object
-      const includesNested = (subgroup, array, name) =>
-        array.includes(name) ||
-        (subgroup && array.some(item => item[subgroup] && item[subgroup].includes(name)));
+      let addProps;
 
-      const lockedByParent = includesNested(subgroup, disabledFields, name);
-      const hiddenByParent = includesNested(subgroup, hiddenFields, name);
-      const hidden = element.props.hidden || hiddenByParent;
-      const locked = element.props.locked || lockedByParent;
-      const disabled = forceDisabled || element.props.disabled || locked;
+      if (element.type === FORMINPUT_TYPE) {
+        const { name } = element.props;
 
-      props = {
-        rowWidth,
-        elementWidth,
-        ...element.props,
-        ...matchedProps,
-        disabled,
-        locked,
-        hidden,
-      };
-    } else {
-      props = {
-        rowWidth,
-        elementWidth,
-        data,
-        subgroup,
-        onChange,
-        validation,
-        options,
-        ...element.props,
-        disabled,
-      };
-    }
-    return React.cloneElement(element, props);
-  };
+        let componentValue = data[name];
+        let componentOptions = options[name];
+        let componentValidation = get(validation, `fields[${name}]`);
 
-  // Map the props to the children and remove the whole section if all the children should be hidden
-  const mappedChildren = React.Children.map(children, addPropsToFormInputOrInline);
-  if (mappedChildren.every(child => child.props.hidden)) {
-    return null;
+        if (subgroup) {
+          componentValue = get(data, `${subgroup}.${name}`);
+          componentOptions = get(options, `${subgroup}.${name}`);
+          componentValidation = get(validation, `fields[${subgroup}].fields[${name}]`);
+        }
+
+        const wrappedOnChange = value => _onChange(value, element);
+
+        const matchedProps = {
+          value: element.props.value || componentValue,
+          options: element.props.options || componentOptions,
+          validation: element.props.validation || componentValidation,
+          onChange: element.props.onChange || wrappedOnChange,
+          subgroup: element.props.subgroup || subgroup,
+        };
+
+        const lockedByParent = FormInputs.getIncludesNested(subgroup, disabledFields, name);
+        const hiddenByParent = FormInputs.getIncludesNested(subgroup, hiddenFields, name);
+        const hidden = element.props.hidden || hiddenByParent;
+        const locked = element.props.locked || lockedByParent;
+        const finalDisabled = disabled === true || element.props.disabled || locked;
+
+        addProps = {
+          rowWidth,
+          elementWidth,
+          ...element.props,
+          ...matchedProps,
+          disabled: finalDisabled,
+          locked,
+          hidden,
+        };
+      } else {
+        addProps = {
+          rowWidth,
+          elementWidth,
+          data,
+          subgroup,
+          onChange: _onChange,
+          validation,
+          options,
+          ...element.props,
+          disabled,
+        };
+      }
+      return React.cloneElement(element, addProps);
+    };
   }
-  return (
-    <div style={wrapperStyle}>
-      {title && <Heading size="4"> {title} </Heading>}
-      {mappedChildren}
-    </div>
-  );
-};
+  static getIncludesNested(subgroup, arr, name) {
+    return (
+      arr.includes(name) ||
+      (subgroup && arr.some(item => item[subgroup] && item[subgroup].includes(name)))
+    );
+  }
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+    this.getChildren = this.getChildren.bind(this);
+  }
+  onChange(value, element) {
+    this.props.onChange({
+      value,
+      prop: element.props.name,
+      changeBase: element.props.changeBase,
+      allowEmpty: element.props.allowEmpty,
+      subgroup: element.props.subgroup,
+    });
+  }
+  getChildren() {
+    const {
+      data,
+      options,
+      disabled,
+      validation,
+      subgroup,
+      disabledFields,
+      hiddenFields,
+      width,
+      inline,
+    } = this.props;
+
+    let elementWidth = 400;
+    let rowWidth = '100%';
+
+    if (width === '100%') {
+      elementWidth = '100%';
+      rowWidth = '100%';
+    }
+    if (inline) {
+      rowWidth = (10 + 400) / this.props.children.length;
+      elementWidth = rowWidth - 10;
+    }
+
+    return React.Children.map(
+      this.props.children,
+      FormInputs.addPropsToFormInputOrInline(
+        data,
+        options,
+        disabled,
+        validation,
+        subgroup,
+        disabledFields,
+        hiddenFields,
+        this.onChange,
+        rowWidth,
+        elementWidth,
+      ),
+    );
+  }
+
+  render() {
+    const { inline = false, title, width, style = {} } = this.props;
+
+    const wrapperStyle = {
+      marginBottom: 20,
+      display: inline ? 'flex' : 'block',
+      width,
+      ...style,
+    };
+
+    return (
+      <div style={wrapperStyle}>
+        {title && <Heading size="4">{title}</Heading>}
+        {this.getChildren()}
+      </div>
+    );
+  }
+}
 
 FormInputs.defaultProps = {
   data: {},

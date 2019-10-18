@@ -1,8 +1,5 @@
-import './FormInput.css';
-
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import DatePicker from '../DatePicker';
@@ -13,6 +10,8 @@ import Row from '../Row';
 import Select from '../Select';
 import TextField from '../TextField';
 import Tooltip from '../Tooltip';
+
+import './FormInput.css';
 
 const Label = ({ label, required, complete }) => {
   if (!label) {
@@ -268,18 +267,14 @@ class FormInput extends PureComponent {
     this.onPickerClick = this.onPickerClick.bind(this);
   }
   onChange(value) {
-    const { transformUpdate, onChange, name, changeBase, subgroup, allowEmpty } = this.props;
+    const { transformUpdate, onChange } = this.props;
     let updateValue = value;
     if (typeof transformUpdate === 'function') {
       updateValue = transformUpdate(value);
     }
-    onChange({
-      prop: name,
-      value: updateValue,
-      changeBase,
-      subgroup,
-      allowEmpty,
-    });
+    if (typeof onChange === 'function') {
+      onChange(updateValue);
+    }
   }
   onTextFieldChange(value) {
     let updateValue = value;
@@ -351,7 +346,7 @@ class FormInput extends PureComponent {
       value = transformValue(value);
     }
 
-    const hasValue = value !== undefined && value !== '';
+    const hasValue = value !== undefined && value !== null && value !== '';
     const hasValidationMessages =
       validation && validation.messages && validation.messages.length > 0;
     const isFieldInvalid = validation && validation.isValid === false && hasValue;
@@ -361,7 +356,6 @@ class FormInput extends PureComponent {
     const isInvalid = shouldShowValidation && errorVisibility !== false;
     const isPending = pending;
     const validationMessages = hasValidationMessages ? validation.messages : [];
-    // Validate the extra message that appears below input, external to value validation
     const messageVisibilities = Array.isArray(messageVisibility)
       ? messageVisibility
       : [messageVisibility];
