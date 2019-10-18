@@ -100,16 +100,17 @@ class Options extends PureComponent {
 }
 
 const valuePropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]);
+const labelPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
 Options.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string,
+      label: labelPropType,
       value: valuePropType,
     }),
   ),
   highlighted: valuePropType,
-  selected: PropTypes.string,
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onSelect: PropTypes.func,
   maxHeight: PropTypes.number,
   reverse: PropTypes.bool,
@@ -136,7 +137,7 @@ class Option extends PureComponent {
     this.props.onClick();
   }
   render() {
-    const { size, value, label, icon, selected, disabled, highlighted } = this.props;
+    const { size, label, icon, selected, disabled, highlighted } = this.props;
     const optionsClassNames = utils.composeClassNames([
       'input-select__options-item',
       size === 's' && 'input-select__options-item--small',
@@ -153,7 +154,6 @@ class Option extends PureComponent {
         tabIndex="1"
         role="presentation"
         label={label}
-        value={value}
       >
         {icon && (
           <Icon className="input-select__options-item__icon" name={icon} size={iconSizes[size]} />
@@ -180,7 +180,7 @@ Option.propTypes = {
   selected: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  label: PropTypes.string,
+  label: labelPropType,
   icon: PropTypes.string,
 };
 
