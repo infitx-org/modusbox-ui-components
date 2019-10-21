@@ -7,6 +7,7 @@ import DataList, { Link } from './DataList';
 import DatePicker from './DatePicker';
 import Dropdown from './Dropdown';
 import FileUploader from './FileUploader';
+import FormInput, { FormInputs, FormInputsGroup, Inline } from './FormInputs';
 import Heading from './Heading';
 import Icon from './Icon';
 import Modal, { ModalTabsLayout } from './Modal';
@@ -34,8 +35,12 @@ export {
   DatePicker,
   Dropdown,
   FileUploader,
+  FormInput,
+  FormInputs,
+  FormInputsGroup,
   Heading,
   Icon,
+  Inline,
   Link,
   Menu,
   MenuSection,
