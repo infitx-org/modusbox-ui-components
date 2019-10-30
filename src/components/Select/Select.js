@@ -434,8 +434,8 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   ),
   selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
