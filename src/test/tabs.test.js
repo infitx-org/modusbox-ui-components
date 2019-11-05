@@ -69,6 +69,33 @@ it('does not renders the tabpanel of a disabled tab when clicked', () => {
   expect(wrapper.find(TabPanel).text()).not.toBe('TabPanel4');
 });
 
+it('does not renders the tabpanel when disabled by default disabled', () => {
+  const wrapper = mount(
+    <Tabs id="test-tabs" flex>
+      <TabList>
+        <Tab disabled>Tab1</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>TabPanel1</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+  expect(wrapper.find(TabPanel).exists()).toBe(false);
+});
+
+it('does not renders the tab as selected when it is the only one and disabled', () => {
+  const wrapper = mount(
+    <Tabs id="test-tabs" flex>
+      <TabList>
+        <Tab disabled>Tab1</Tab>
+      </TabList>
+    </Tabs>
+  );
+  expect(wrapper.find(Tab).exists()).toBe(true);
+  expect(wrapper.find(Tab).prop('disabled')).toBe(true);
+  expect(wrapper.find(Tab).prop('selected')).toBe(false);
+});
+
 it('triggers onSelect when clicking a different tab', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(

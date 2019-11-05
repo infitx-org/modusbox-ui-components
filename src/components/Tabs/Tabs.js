@@ -177,11 +177,17 @@ class Tabs extends PureComponent {
   }
   getTabs() {
     const [tabList] = this.getTabListAndTabPanels();
-    return tabList.props.children.filter(isTab);
+    const { children } = tabList.props;
+    const tabs = Array.isArray(children) ? children : [children];
+    return tabs.filter(isTab);
   }
   getPanels() {
     const tabPanels = this.getTabListAndTabPanels()[1];
-    const panels = tabPanels ? tabPanels.props.children || [] : [];
+    let panels = [];
+    if (tabPanels) {
+      const { children } = tabPanels.props;
+      panels = Array.isArray(children) ? children : [children];
+    }
     return panels.filter(isTabPanel);
   }
   testKey(e) {
@@ -224,13 +230,6 @@ class Tabs extends PureComponent {
     const [tabList] = this.getTabListAndTabPanels();
     let shouldRenderAsFlex = flex;
 
-    const panels = this.getPanels();
-    let panel = null;
-    if (panels.length >= selected + 1) {
-      panel = panels[selected];
-      shouldRenderAsFlex = flex || panel.props.flex;
-      panel = React.cloneElement(panel, { ...panel.props, flex: shouldRenderAsFlex });
-    }
     const { width } = tabList.props.style || {};
     const growTab = width !== undefined;
     const tabs = this.getTabs(children).map((child, index) => {
@@ -238,12 +237,22 @@ class Tabs extends PureComponent {
         ...child.props,
         onSelect: evt => this.onSelect(evt, index),
         key: index,
-        selected: selected === index,
+        selected: selected === index && !child.props.disabled,
         focused: focused === index,
         flex: growTab,
       };
       return React.cloneElement(child, props);
     });
+
+    const panels = this.getPanels();
+    let panel = null;
+    if (panels.length >= selected + 1) {
+      if (tabs[selected].props.selected) {
+        panel = panels[selected];
+        shouldRenderAsFlex = flex || panel.props.flex;
+        panel = React.cloneElement(panel, { ...panel.props, flex: shouldRenderAsFlex });
+      }
+    }
 
     const tabsClassNames = utils.composeClassNames([
       'element',
