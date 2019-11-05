@@ -173,7 +173,7 @@ const composeDate = props => [
       className={props.className}
       withTime={props.type === 'datetime'}
       format={props.format || 'X'} // export as seconds timestamp
-      exportFormat={props.exportFormat || 'X'}
+      dateFormat={props.dateFormat || 'X'}
       onSelect={props.onChange}
       value={props.value}
       placeholder={props.placeholder}
@@ -334,7 +334,7 @@ class FormInput extends PureComponent {
       inlineButtonLabel,
       // Date Picker Props
       format,
-      exportFormat,
+      dateFormat,
       // FileUploader Props
       parseFileAsText,
       parseFileAsBase64,
@@ -421,7 +421,7 @@ class FormInput extends PureComponent {
         onClick: this.onPickerClick,
       });
     } else if (type === 'date' || type === 'datetime') {
-      input = composeDate({ ...cmnProps, ...btnProps, type, format, exportFormat });
+      input = composeDate({ ...cmnProps, ...btnProps, type, format, dateFormat });
     } else if (type === 'file') {
       input = composeFile({ ...cmnProps, parseFileAsText, parseFileAsBase64, fileType, fileName });
     } else if (type === 'text' || type === 'number' || type === 'email' || type === 'password') {
@@ -496,7 +496,7 @@ FormInput.propTypes = {
 
   //   custom for date picker
   format: PropTypes.string,
-  exportFormat: PropTypes.string,
+  dateFormat: PropTypes.string,
 
   // custom for fileuploader
   parseFileAsText: PropTypes.bool,
@@ -535,7 +535,7 @@ FormInput.defaultProps = {
   onInlineButtonClick: undefined,
   inlineButtonLabel: 'Custom',
   format: undefined,
-  exportFormat: undefined,
+  dateFormat: undefined,
   parseFileAsText: undefined,
   fileType: undefined,
   fileName: undefined,
