@@ -65,6 +65,16 @@ const TestTabs = () => (
         </TabList>
       </Tabs>
     </div>
+    <div style={{ padding: 10 }}>
+      <Tabs id="tab-row-4">
+        <TabList>
+          <Tab disabled>Tab 1</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel> Tab Content 1 </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </div>
   </div>
 );
 
