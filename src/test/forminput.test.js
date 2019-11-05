@@ -17,7 +17,7 @@ import FormInput from '../components/FormInputs';
 //   subgroup: undefined <<<<< ,
 //   autofocus: false,
 //   format: undefined,
-//   exportFormat: undefined,
+//   dateFormat: undefined,
 //   parseFileAsText: undefined,
 //   fileType: undefined,
 //   fileName: undefined,
