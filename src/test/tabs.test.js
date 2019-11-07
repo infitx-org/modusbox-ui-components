@@ -78,7 +78,7 @@ it('does not renders the tabpanel when disabled by default disabled', () => {
       <TabPanels>
         <TabPanel>TabPanel1</TabPanel>
       </TabPanels>
-    </Tabs>
+    </Tabs>,
   );
   expect(wrapper.find(TabPanel).exists()).toBe(false);
 });
@@ -89,7 +89,7 @@ it('does not renders the tab as selected when it is the only one and disabled', 
       <TabList>
         <Tab disabled>Tab1</Tab>
       </TabList>
-    </Tabs>
+    </Tabs>,
   );
   expect(wrapper.find(Tab).exists()).toBe(true);
   expect(wrapper.find(Tab).prop('disabled')).toBe(true);

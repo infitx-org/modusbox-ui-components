@@ -69,14 +69,15 @@ class Unwrapped extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
+    this.onChangeSize = this.onChangeSize.bind(this);
     this.state = {
+      size: 'l',
       model,
       validation,
     };
   }
   onChange(field) {
     return value => {
-      console.log(value);
       this.setState({
         model: {
           ...this.state.model,
@@ -85,11 +86,28 @@ class Unwrapped extends Component {
       });
     };
   }
+  onChangeSize(size) {
+    this.setState({
+      size,
+    });
+  }
   render() {
     return (
       <div>
         <Heading>Non Wrapped</Heading>
         <FormInput
+          onChange={this.onChangeSize}
+          value={this.state.size}
+          type="radio"
+          options={[
+            { label: 's', value: 's' },
+            { label: 'm', value: 'm' },
+            { label: 'l', value: 'l' },
+          ]}
+          label="size"
+        />
+        <FormInput
+          size={this.state.size}
           onChange={this.onChange('name')}
           value={this.state.model.name}
           type="text"
@@ -98,6 +116,7 @@ class Unwrapped extends Component {
           required
         />
         <FormInput
+          size={this.state.size}
           onChange={this.onChange('lastname')}
           value={this.state.model.lastname}
           type="text"
@@ -107,6 +126,7 @@ class Unwrapped extends Component {
           disabled
         />
         <FormInput
+          size={this.state.size}
           onChange={this.onChange('age')}
           value={this.state.model.age}
           type="select"
