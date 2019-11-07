@@ -117,7 +117,9 @@ class Header extends React.Component {
         </div>
         {this.state.open && (
           <div id="view__header__props">
-            <ScrollBox><div>{this.getComponentProps()}</div></ScrollBox>
+            <ScrollBox>
+              <div>{this.getComponentProps()}</div>
+            </ScrollBox>
           </div>
         )}
       </div>

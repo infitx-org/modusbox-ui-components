@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import * as utils from '../../utils/common';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import DatePicker from '../DatePicker';
@@ -11,17 +12,29 @@ import Select from '../Select';
 import TextField from '../TextField';
 import Tooltip from '../Tooltip';
 
-import './FormInput.css';
+import './FormInput.scss';
 
-const Label = ({ label, required, complete }) => {
+const Label = ({ size, label, required, complete }) => {
   if (!label) {
     return null;
   }
+
+  const className = utils.composeClassNames([
+    'forminput__label-box',
+    size === 's' && 'forminput__label-box--small',
+    size === 'm' && 'forminput__label-box--medium',
+    size === 'l' && 'forminput__label-box--large',
+  ]);
+  const iconSizes = {
+    s: 11,
+    m: 12,
+    l: 14,
+  };
   return (
-    <div className="forminput__label-box">
+    <div className={className}>
       {required && (
         <Icon
-          size={14}
+          size={iconSizes[size]}
           name="info-small"
           className="forminput__label-icon"
           fill={complete ? '#39f' : '#f93'}
@@ -74,7 +87,12 @@ const addKey = (element, index) => React.cloneElement(element, { key: index });
 
 const composeSelect = props => [
   <div className="forminput-input" style={props.wrapperStyle}>
-    <Label label={props.label} required={props.isRequired} complete={props.hasValue} />
+    <Label
+      size={props.size}
+      label={props.label}
+      required={props.isRequired}
+      complete={props.hasValue}
+    />
     <Select
       size={props.size}
       className={props.className}
@@ -105,7 +123,12 @@ const composeSelect = props => [
 
 const composePicker = props => [
   <div className="forminput-input picker" style={props.wrapperStyle}>
-    <Label label={props.label} required={props.isRequired} complete={props.hasValue} />
+    <Label
+      size={props.size}
+      label={props.label}
+      required={props.isRequired}
+      complete={props.hasValue}
+    />
     <TextField
       type="text"
       size={props.size}
@@ -135,7 +158,12 @@ const composePicker = props => [
 
 const composeText = props => [
   <div className="forminput-input" style={props.wrapperStyle}>
-    <Label label={props.label} required={props.isRequired} complete={props.hasValue} />
+    <Label
+      size={props.size}
+      label={props.label}
+      required={props.isRequired}
+      complete={props.hasValue}
+    />
     <TextField
       type={props.type}
       className={props.className}
@@ -167,7 +195,12 @@ const composeText = props => [
 
 const composeDate = props => [
   <div className="forminput-input" style={props.wrapperStyle}>
-    <Label label={props.label} required={props.isRequired} complete={props.hasValue} />
+    <Label
+      size={props.size}
+      label={props.label}
+      required={props.isRequired}
+      complete={props.hasValue}
+    />
     <DatePicker
       size={props.size}
       className={props.className}
@@ -209,7 +242,12 @@ const composeFile = props => {
   }
   return [
     <div className="forminput-input" style={props.wrapperStyle}>
-      <Label label={props.label} required={props.isRequired} complete={props.hasValue} />
+      <Label
+        size={props.size}
+        label={props.label}
+        required={props.isRequired}
+        complete={props.hasValue}
+      />
       <FileUploader
         size={props.size}
         className={props.className}
@@ -242,7 +280,12 @@ const composeFile = props => {
 
 const composeRadio = props => [
   <div className="forminput-checkbox" style={props.wrapperStyle}>
-    <Label label={props.label} required={props.isRequired} complete={props.hasValue} />
+    <Label
+      size={props.size}
+      label={props.label}
+      required={props.isRequired}
+      complete={props.hasValue}
+    />
     <RadioGroup
       id={props.componentId}
       onChange={props.onChange}
@@ -444,6 +487,7 @@ class FormInput extends PureComponent {
 }
 
 FormInput.propTypes = {
+  size: PropTypes.oneOf(['s', 'm', 'l']),
   type: PropTypes.oneOf([
     'select',
     'checkbox',
@@ -511,6 +555,7 @@ FormInput.propTypes = {
 };
 
 FormInput.defaultProps = {
+  size: 'l',
   name: undefined,
   label: undefined,
   onChange: undefined,
