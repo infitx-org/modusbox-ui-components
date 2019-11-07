@@ -330,16 +330,20 @@ class Tooltip extends PureComponent {
     this.box.classList.add('element-tooltip--inactive');
   }
   showTooltip() {
+    if (!this._mounted) {
+      // stop if not mounted
+      return;
+    }
     if (!this._id) {
+      // stop if not existing 
       return;
     }
-    const force = this.props.forceVisibility;
-    if (this._isHoveringTooltip === false && force !== true) {
+    if (!this.box) {
+      // stop if there is no box
+      return;
+    }
+    if (this._isHoveringTooltip === false && this.props.forceVisibility !== true) {
       // do show tooltip afterDealy if not still hovered and not forced
-      return;
-    }
-    if (this.box === undefined) {
-      // don't show if there is not box
       return;
     }
     if (!this._scrollNodes.length) {
@@ -349,6 +353,7 @@ class Tooltip extends PureComponent {
         node.addEventListener('scroll', this.hideTooltipBeforeScroll);
       });
     }
+    
     if (!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
       return;
     }
@@ -358,8 +363,7 @@ class Tooltip extends PureComponent {
     if (this._mounted === false) {
       return;
     }
-    const force = this.props.forceVisibility;
-    if (this._isHoveringTooltip === true && force === false) {
+    if (this._isHoveringTooltip === true && this.props.forceVisibility === false) {
       return;
     }
     if (!this.state.show) {
