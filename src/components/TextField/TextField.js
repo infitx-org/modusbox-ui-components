@@ -90,9 +90,17 @@ class TextField extends PureComponent {
     if (this.state.value !== value) {
       this.setState({ value });
 
+      let finalValue = value;
+
       if (this.props.onChange) {
-        this.props.onChange(value);
+        if (this.props.type === 'number') {
+          finalValue = parseFloat(finalValue);
+          if (Number.isNaN(finalValue)) {
+            finalValue = undefined;
+          }
+        }
       }
+      this.props.onChange(finalValue);
     }
   }
   onKeyPress(e) {
@@ -208,7 +216,7 @@ class TextField extends PureComponent {
       /* eslint-enabl  */
     ]);
 
-    const inputType = (isPasswordVisible && 'text') || type;
+    const inputType = isPasswordVisible ? 'text' : type;
 
     let passwordToggle = null;
     if (type === 'password') {
@@ -311,7 +319,7 @@ class TextField extends PureComponent {
 TextField.propTypes = {
   autofocus: PropTypes.bool,
   style: PropTypes.shape(),
-  type: PropTypes.oneOf(['text', 'password']),
+  type: PropTypes.oneOf(['text', 'number', 'password']),
   id: PropTypes.string,
   className: PropTypes.string,
   size: PropTypes.oneOf(['s', 'm', 'l']),

@@ -68,7 +68,7 @@ class Header extends React.Component {
     super(props);
     this.getComponentProps = this.getComponentProps.bind(this);
     this.state = {
-      open: true,
+      open: false,
     };
   }
   getComponentProps() {

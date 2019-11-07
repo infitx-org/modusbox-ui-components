@@ -335,7 +335,7 @@ class Tooltip extends PureComponent {
       return;
     }
     if (!this._id) {
-      // stop if not existing 
+      // stop if not existing
       return;
     }
     if (!this.box) {
@@ -353,7 +353,7 @@ class Tooltip extends PureComponent {
         node.addEventListener('scroll', this.hideTooltipBeforeScroll);
       });
     }
-    
+
     if (!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
       return;
     }
