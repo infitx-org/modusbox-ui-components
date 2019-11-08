@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader/root';
 import Menu, { MenuItem } from '../components/Menu';
 import ScrollBox from '../components/ScrollBox';
@@ -58,7 +59,18 @@ const Block = ({ title, children }) => (
 );
 
 class Header extends React.Component {
-  static getValueType(value) {
+  static getValueType(propType, value) {
+    if (propType === PropTypes.string) {
+      return 'String';
+    } else if (propType === PropTypes.number) {
+      return 'Number';
+    } else if (propType === PropTypes.bool) {
+      return 'Boolean';
+    } else if (propType.name === PropTypes.oneOf().name) {
+      return 'One Ot types';
+    } else if (propType.name === PropTypes.shape().name) {
+      return 'Shape / Object';
+    }
     return Object.prototype.toString
       .call(value)
       .split(' ')[1]
@@ -89,7 +101,7 @@ class Header extends React.Component {
         const props = Object.entries(component.defaultProps).map(([prop, value]) => {
           return {
             prop,
-            type: Header.getValueType(value),
+            type: Header.getValueType(component.propTypes[prop], value),
             value: JSON.stringify(value),
           };
         });
