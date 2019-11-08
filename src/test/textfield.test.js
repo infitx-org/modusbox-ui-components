@@ -87,6 +87,11 @@ it('renders the password kind and clicks the toggle icon', () => {
   expect(wrapper.find('input').prop('type')).toBe('text');
 });
 
+it('renders the number kind', () => {
+  const wrapper = mount(<TextField type="number" />);
+  expect(wrapper.find('input').prop('type')).toBe('number');
+});
+
 it('renders the inner button', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(<TextField onButtonClick={mockEvent} buttonText="inner-button-text" />);
@@ -139,6 +144,14 @@ it('triggers onChange when changed', () => {
   expect(mockEvent).not.toHaveBeenCalled();
   wrapper.find('input').simulate('change');
   expect(mockEvent).toHaveBeenCalled();
+});
+
+it('triggers onChange with a number value when prop type is number', () => {
+  const mockEvent = jest.fn();
+  const wrapper = mount(<TextField onChange={mockEvent} type="number" />);
+  expect(mockEvent).not.toHaveBeenCalled();
+  wrapper.find('input').simulate('change', { target: { value: 12 }});
+  expect(mockEvent).toHaveBeenCalledWith(12);
 });
 
 // Snapshot

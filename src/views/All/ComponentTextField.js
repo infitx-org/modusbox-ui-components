@@ -52,6 +52,13 @@ const TestTextField = () => (
       <TextFieldWithValidation />
       <TextField className="m5" type="text" placeholder="Default" />
       <TextField className="m5" type="password" placeholder="Password" />
+      <TextField
+        className="m5"
+        type="number"
+        placeholder="Number"
+        onChange={console.log}
+        value="10"
+      />
       <TextField className="m5" placeholder="Pending" pending />
       <TextField
         className="m5"
@@ -84,20 +91,7 @@ const TestTextField = () => (
         buttonText="Press Me"
         buttonKind="primary"
       />
-      <TextField
-        className="m5"
-        placeholder="Button"
-        onButtonClick={() => console.log('Clicked!')}
-        buttonText="Press Me"
-        buttonKind="secondary"
-      />
-      <TextField
-        className="m5"
-        placeholder="Button"
-        onButtonClick={() => console.log('Clicked!')}
-        buttonText="Press Me"
-        buttonKind="danger"
-      />
+
       <TextField
         className="m5"
         placeholder="Disabled"

@@ -47,3 +47,13 @@
 .input-textfield__icon {
   flex: 0 0 auto;
 }
+
+// Hide arrows for input type number
+.input-textfield__value[type='number']::-webkit-inner-spin-button,
+.input-textfield__value[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-textfield__value[type='number'] {
+  -moz-appearance: textfield;
+}
