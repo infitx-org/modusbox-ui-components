@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-
-import ModalPortal from './ModalPortal';
-import ModalBackground from './ModalBackground';
-
 import './Modal.scss';
+
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
+import ModalBackground from './ModalBackground';
+import ModalPortal from './ModalPortal';
 
 class ModalContainer extends PureComponent {
   render() {

@@ -1,8 +1,9 @@
 /* eslint no-console: "off" */
 
 import React from 'react';
-import Row from '../../components/Row';
+
 import FileUploader from '../../components/FileUploader';
+import Row from '../../components/Row';
 
 const TestFileUploader = () => (
   <div>

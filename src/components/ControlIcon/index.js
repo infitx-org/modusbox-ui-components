@@ -1,8 +1,10 @@
-import React from 'react';
+import './ControlIcon.scss';
+
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import * as utils from '../../utils/common';
 import { Icon, Tooltip } from '../index';
-import './ControlIcon.scss';
 
 const tooltipKind = kind => {
   if (kind === 'danger') {

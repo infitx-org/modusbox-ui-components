@@ -1,19 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import find from 'lodash/find';
-
-import * as utils from '../../utils/common';
-
-import Icon from '../Icon';
-import ScrollBox from '../ScrollBox';
-import Modal from '../Modal';
-import Spinner from '../Spinner';
-import logo from './PortXLogoSmall.png';
 import '../../icons/modusbox/cloud.svg';
 import '../../icons/modusbox/business-group.svg';
 import '../../icons/mule/user-small.svg';
-
 import './Navbar.scss';
+
+import find from 'lodash/find';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
+import * as utils from '../../utils/common';
+import Icon from '../Icon';
+import Modal from '../Modal';
+import ScrollBox from '../ScrollBox';
+import Spinner from '../Spinner';
+import logo from './PortXLogoSmall.png';
 
 export default class ModusBoxNav extends PureComponent {
   render() {

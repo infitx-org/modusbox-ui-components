@@ -1,21 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import './Select.scss';
+import '../../icons/mule/search-small.svg';
+
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 import orderBy from 'lodash/orderBy';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
-
+import { InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
 import Icon, { iconSizes } from '../Icon';
-import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../Common';
-
-import Options from './Options';
 import Indicator from './Indicator';
-
-import './Select.scss';
-
-import '../../icons/mule/search-small.svg';
+import Options from './Options';
 
 class Select extends PureComponent {
   static sortOptions(options = [], key, asc = true) {

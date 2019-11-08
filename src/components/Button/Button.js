@@ -1,11 +1,12 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import * as utils from '../../utils/common';
+import './Button.scss';
 
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
+import * as utils from '../../utils/common';
 import Icon, { iconSizes } from '../Icon';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
-import './Button.scss';
 
 class Button extends PureComponent {
   constructor(props) {

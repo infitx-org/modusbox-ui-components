@@ -1,12 +1,12 @@
+import './Tooltip.scss';
+
+import delay from 'lodash/delay';
+import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import delay from 'lodash/delay';
-import uuid from '../../utils/uuid';
 
 import * as utils from '../../utils/common';
-
-import './Tooltip.scss';
+import uuid from '../../utils/uuid';
 
 class TooltipViewer extends PureComponent {
   static getCoordinates(parentId, target, position) {

@@ -1,10 +1,11 @@
+import './assets/main.css';
+import './assets/views.css';
+import './assets/styles/vars/fonts.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Views from './views';
-import './assets/main.css';
-import './assets/views.css';
-import './assets/styles/vars/fonts.scss';
 
 const Root = () => (
   <div

@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 // Render into subtree is necessary for parent contexts to transfer over

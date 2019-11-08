@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import * as utils from '../../utils/common';
-
-import Tooltip from '../Tooltip';
-import ScrollBox from '../ScrollBox';
-
 import './Rows.scss';
+
+import React, { PureComponent } from 'react';
+
+import * as utils from '../../utils/common';
+import ScrollBox from '../ScrollBox';
+import Tooltip from '../Tooltip';
 
 class Rows extends PureComponent {
   constructor(props) {

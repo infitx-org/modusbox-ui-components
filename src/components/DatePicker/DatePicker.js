@@ -1,17 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import '../../icons/mule/calendar-small.svg';
+import './DatePicker.scss';
+
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import DayPicker, { DateUtils } from 'react-day-picker';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
-
+import { InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
 import Icon, { iconSizes } from '../Icon';
-import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../Common';
-
-import '../../icons/mule/calendar-small.svg';
-
-import './DatePicker.scss';
 
 function asDate(day) {
   if (day) {

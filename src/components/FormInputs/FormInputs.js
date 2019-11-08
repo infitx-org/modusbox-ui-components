@@ -1,8 +1,8 @@
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import Heading from '../Heading';
 
+import Heading from '../Heading';
 import FormInput from './FormInput';
 import Inline from './Inline';
 

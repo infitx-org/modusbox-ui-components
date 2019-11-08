@@ -1,10 +1,10 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
 import Button from '../components/Button';
-import Spinner from '../components/Spinner';
 import Icon from '../components/Icon';
+import Spinner from '../components/Spinner';
 
 // Shallow render, no sub-components ( still available children html)
 

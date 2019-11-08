@@ -1,17 +1,15 @@
-import React, { PureComponent } from 'react';
+import '../../icons/modusbox/toggle-invisible.svg';
+import '../../icons/modusbox/toggle-visible.svg';
+import './TextField.scss';
+
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
-
-import Icon, { iconSizes } from '../Icon';
+import { InnerButton, InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
 import ControlIcon from '../ControlIcon';
-import { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon } from '../Common';
-
-import '../../icons/modusbox/toggle-invisible.svg';
-import '../../icons/modusbox/toggle-visible.svg';
-
-import './TextField.scss';
+import Icon, { iconSizes } from '../Icon';
 
 class TextField extends PureComponent {
   constructor(props) {

@@ -1,6 +1,6 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
 import Checkbox from '../components/Checkbox';
 

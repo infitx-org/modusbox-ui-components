@@ -1,3 +1,3 @@
-import { Tab, Tabs, TabList, TabPanel, TabPanels } from './Tabs';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from './Tabs';
 
 export { Tab, Tabs, TabList, TabPanel, TabPanels };

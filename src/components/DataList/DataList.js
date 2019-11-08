@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
-import orderBy from 'lodash/orderBy';
+import './DataList.scss';
+
 import find from 'lodash/find';
 import get from 'lodash/get';
-import uuid from '../../utils/uuid';
+import isEqual from 'lodash/isEqual';
+import orderBy from 'lodash/orderBy';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
 import * as utils from '../../utils/common';
-
+import uuid from '../../utils/uuid';
 import Checkbox from '../Checkbox';
+import { ErrorMessage, NoData, Pending } from './Boxes';
 import Header from './Header';
-import Rows from './Rows';
 import Link from './Link';
-import { NoData, Pending, ErrorMessage } from './Boxes';
-
-import './DataList.scss';
+import Rows from './Rows';
 
 class DataList extends PureComponent {
   static getCheckedItems(list, checked) {

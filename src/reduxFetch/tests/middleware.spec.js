@@ -1,8 +1,9 @@
+import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
-import fetchMiddleware from '../middleware';
+
 import { buildFetchActions, fetch } from '../actions';
+import fetchMiddleware from '../middleware';
 
 const mockStore = configureStore([thunk, fetchMiddleware()]);
 

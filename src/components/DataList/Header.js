@@ -1,16 +1,15 @@
-import React, { PureComponent } from 'react';
-import find from 'lodash/find';
-import * as utils from '../../utils/common';
-
-import Checkbox from '../Checkbox';
-import Row from '../Row';
-import Icon from '../Icon';
-import ControlIcon from '../ControlIcon';
-import Tooltip from '../Tooltip';
-
 import '../../icons/modusbox/arrow.svg';
-
 import './Header.scss';
+
+import find from 'lodash/find';
+import React, { PureComponent } from 'react';
+
+import * as utils from '../../utils/common';
+import Checkbox from '../Checkbox';
+import ControlIcon from '../ControlIcon';
+import Icon from '../Icon';
+import Row from '../Row';
+import Tooltip from '../Tooltip';
 
 const Header = ({
   columns,

@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
-import Row from '../../components/Row';
 import DatePicker from '../../components/DatePicker';
+import Row from '../../components/Row';
 
 class DatePickerWithDelay extends React.Component {
   constructor() {

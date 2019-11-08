@@ -1,8 +1,9 @@
-import React from 'react';
+import '../../icons/modusbox/arrow.svg';
+
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Icon from '../Icon';
-import '../../icons/modusbox/arrow.svg';
 
 const indicatorSizes = {
   s: 8,

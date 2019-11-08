@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import './ModalTabsLayout.scss';
+
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../../utils/common';
 import ScrollBox from '../../ScrollBox';
-
-import './ModalTabsLayout.scss';
 
 class ModalTabsLayout extends PureComponent {
   constructor(props) {

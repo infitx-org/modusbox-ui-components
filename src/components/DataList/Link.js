@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from '../Icon';
 import './Link.scss';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import Icon from '../Icon';
 
 const Link = ({ value, children, onClick }) => {
   const content = value !== undefined ? value.toString() : children;

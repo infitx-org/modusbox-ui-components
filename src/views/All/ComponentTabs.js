@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../components/Tabs';
 
 const TestTabs = () => (
   <div>

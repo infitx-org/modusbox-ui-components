@@ -1,13 +1,14 @@
-import React, { PureComponent } from 'react';
-import vkbeautify from 'vkbeautify';
+import 'highlight.js/styles/googlecode.css';
+import './ContentReader.scss';
+
 import hljs from 'highlight.js/lib/highlight';
 import json from 'highlight.js/lib/languages/json';
 import shell from 'highlight.js/lib/languages/shell';
 import xml from 'highlight.js/lib/languages/xml';
-import 'highlight.js/styles/googlecode.css';
+import React, { PureComponent } from 'react';
+import vkbeautify from 'vkbeautify';
 
 import ScrollBox from '../ScrollBox';
-import './ContentReader.scss';
 
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('json', json);

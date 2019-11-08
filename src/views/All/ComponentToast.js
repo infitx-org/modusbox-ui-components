@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Button from '../../components/Button';
 import Row from '../../components/Row';
 import Toast from '../../components/Toast';
-import Button from '../../components/Button';
 
 function showErrorToast() {
   Toast.show({

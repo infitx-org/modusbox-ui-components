@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Notification from 'rc-notification';
-import PropTypes from 'prop-types';
-
-import Icon from '../Icon';
-import * as utils from '../../utils/common';
-
 import './Toast.scss';
+
+import PropTypes from 'prop-types';
+import Notification from 'rc-notification';
+import React, { Component } from 'react';
+
+import * as utils from '../../utils/common';
+import Icon from '../Icon';
 
 /* initialized Toast Lib */
 let notification;

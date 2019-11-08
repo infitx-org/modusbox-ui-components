@@ -1,6 +1,7 @@
 import React from 'react';
-import Spinner from '../../components/Spinner';
+
 import Row from '../../components/Row';
+import Spinner from '../../components/Spinner';
 
 const Svg = () => (
   <div>

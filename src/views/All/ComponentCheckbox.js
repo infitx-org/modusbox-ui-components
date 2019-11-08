@@ -1,6 +1,7 @@
 /* eslint no-alert: "off" */
 /* eslint no-console: "off" */
 import React from 'react';
+
 import Checkbox from '../../components/Checkbox';
 import Column from '../../components/Column';
 import Row from '../../components/Row';

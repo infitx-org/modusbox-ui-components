@@ -1,5 +1,5 @@
 import createValidation, { createValidator } from '../creators';
-import { getMessages, getIsValid, getFieldMessages, getFieldIsValid } from '../getters';
+import { getFieldIsValid, getFieldMessages, getIsValid, getMessages } from '../getters';
 import toValidationResult from '../runner';
 
 const oddMessage = 'is odd number';

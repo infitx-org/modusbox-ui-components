@@ -1,5 +1,8 @@
+import './FormInput.scss';
+
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+
 import * as utils from '../../utils/common';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
@@ -11,8 +14,6 @@ import Row from '../Row';
 import Select from '../Select';
 import TextField from '../TextField';
 import Tooltip from '../Tooltip';
-
-import './FormInput.scss';
 
 const Label = ({ size, label, required, complete }) => {
   if (!label) {

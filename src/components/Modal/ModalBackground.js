@@ -1,10 +1,9 @@
-import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
-
-import ControlIcon from '../ControlIcon';
 import Button from '../Button';
+import ControlIcon from '../ControlIcon';
 import ScrollBox from '../ScrollBox';
 
 const ModalContent = ({ tabbed, flex, children }) => {

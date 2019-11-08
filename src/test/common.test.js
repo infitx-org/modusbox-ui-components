@@ -1,10 +1,10 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
 import { Loader, Placeholder } from '../components/Common';
-import Spinner from '../components/Spinner';
 import { iconSizes } from '../components/Icon';
+import Spinner from '../components/Spinner';
 
 describe('The Loader', () => {
   it('renders the spinner', () => {

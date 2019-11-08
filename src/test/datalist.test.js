@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
 
 import DataList from '../components/DataList';
 
@@ -833,7 +833,7 @@ it('triggers the onCheck function with no items when clicking the header checkbo
   expect(mockEvent).toHaveBeenCalledWith([]);
 });
 
-/*it('renders the list correctly when multiple props are set', () => {
+/* it('renders the list correctly when multiple props are set', () => {
   const mockEvent = () => false;
   const checked = () => false;
   const wrapper = shallow(

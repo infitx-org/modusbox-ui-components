@@ -1,14 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader/root';
-import Menu, { MenuItem } from '../components/Menu';
-import ScrollBox from '../components/ScrollBox';
-import DataList from '../components/DataList';
-import Button from '../components/Button';
-import * as ComponentViews from './All';
-import WrappedNavbar from './All/ComponentNavbar';
 import '../assets/styles/index.scss';
 import './index.scss';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import { hot } from 'react-hot-loader/root';
+
+import Button from '../components/Button';
+import DataList from '../components/DataList';
+import Menu, { MenuItem } from '../components/Menu';
+import ScrollBox from '../components/ScrollBox';
+import * as ComponentViews from './All';
+import WrappedNavbar from './All/ComponentNavbar';
 
 const componentMappings = Object.keys(ComponentViews).map(view => ({
   name: view.substring(9), // 'Remove the prefix "component"
