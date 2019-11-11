@@ -1,10 +1,10 @@
 import {
   FETCH,
-  SET_FETCH_STATUS,
-  UNSET_FETCH_STATUS,
-  setFetchStatus,
-  unsetFetchStatus,
   fetch,
+  SET_FETCH_STATUS,
+  setFetchStatus,
+  UNSET_FETCH_STATUS,
+  unsetFetchStatus,
 } from '../actions';
 
 describe('Returns the correct action descriptions', () => {

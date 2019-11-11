@@ -1,12 +1,13 @@
 import 'whatwg-fetch';
-import { FETCH, setFetchStatus, unsetFetchStatus } from './actions';
+
 import uuid from '../utils/uuid';
+import { FETCH, setFetchStatus, unsetFetchStatus } from './actions';
 import {
-  buildServiceConfig,
-  buildEndpointConfig,
   buildConfig,
-  buildRequestUrl,
+  buildEndpointConfig,
   buildRequestConfig,
+  buildRequestUrl,
+  buildServiceConfig,
   getEndpointVariables,
 } from './funcs';
 

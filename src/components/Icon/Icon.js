@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import * as utils from '../../utils/common';
-
-import Tooltip from '../Tooltip';
-
 import './Icon.scss';
+
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
+import * as utils from '../../utils/common';
+import Tooltip from '../Tooltip';
 
 const iconSizes = {
   xs: 10,

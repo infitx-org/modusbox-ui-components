@@ -1,10 +1,10 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
+import Checkbox from '../../components/Checkbox';
 import Row from '../../components/Row';
 import TextField from '../../components/TextField';
-import Checkbox from '../../components/Checkbox';
-import { vd, createOptionalValidation, validate } from '../../reduxValidation';
+import { createOptionalValidation, validate, vd } from '../../reduxValidation';
 
 class TextFieldWithDelay extends React.Component {
   constructor() {

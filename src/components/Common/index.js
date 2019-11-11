@@ -1,5 +1,9 @@
-import React from 'react';
+import './Common.scss';
+import '../../icons/mule/check-small.svg';
+import '../../icons/mule/close-small.svg';
+
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import * as utils from '../../utils/common';
 import Button from '../Button';
@@ -7,11 +11,6 @@ import Icon, { iconSizes } from '../Icon';
 import Row from '../Row';
 import Spinner from '../Spinner';
 import Tooltip from '../Tooltip';
-
-import './Common.scss';
-
-import '../../icons/mule/check-small.svg';
-import '../../icons/mule/close-small.svg';
 
 const Loader = ({ size }) => (
   <div className="mb-input__inner-icon mb-loader">

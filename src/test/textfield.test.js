@@ -1,11 +1,11 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
-import TextField from '../components/TextField';
 import Button from '../components/Button';
+import { InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../components/Common';
 import Icon from '../components/Icon';
-import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
+import TextField from '../components/TextField';
 
 it('renders the textfield', () => {
   const wrapper = shallow(<TextField />);
@@ -150,7 +150,7 @@ it('triggers onChange with a number value when prop type is number', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(<TextField onChange={mockEvent} type="number" />);
   expect(mockEvent).not.toHaveBeenCalled();
-  wrapper.find('input').simulate('change', { target: { value: 12 }});
+  wrapper.find('input').simulate('change', { target: { value: 12 } });
   expect(mockEvent).toHaveBeenCalledWith(12);
 });
 

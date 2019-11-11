@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import './RadioGroup.scss';
+
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
-
-import './RadioGroup.scss';
 
 class RadioGroup extends PureComponent {
   constructor(props) {

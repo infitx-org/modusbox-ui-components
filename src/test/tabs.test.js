@@ -1,8 +1,8 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
-import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../components/Tabs';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../components/Tabs';
 
 const TabComponents = (
   <Tabs id="test-tabs" flex>

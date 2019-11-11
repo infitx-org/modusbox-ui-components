@@ -1,15 +1,15 @@
 /* eslint no-console: "off" */
-import React, { PureComponent } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import React, { PureComponent } from 'react';
 
-import Checkbox from '../../components/Checkbox';
-import TextField from '../../components/TextField';
-import DataList, { Link } from '../../components/DataList';
 import Button from '../../components/Button';
-import ScrollBox from '../../components/ScrollBox';
+import Checkbox from '../../components/Checkbox';
+import DataList, { Link } from '../../components/DataList';
 import Icon from '../../components/Icon';
 import Modal from '../../components/Modal';
-import { Tab, Tabs, TabList, TabPanel, TabPanels } from '../../components/Tabs';
+import ScrollBox from '../../components/ScrollBox';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../components/Tabs';
+import TextField from '../../components/TextField';
 
 const containerStyle = {
   padding: '5px',

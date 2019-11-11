@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Heading from '../../components/Heading';
+
 import FormInput, { FormInputs } from '../../components/FormInputs';
+import Heading from '../../components/Heading';
 /* eslint-disable */
 
 const model = {

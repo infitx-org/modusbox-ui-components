@@ -1,10 +1,10 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
-import Row from '../../components/Row';
+import Button from '../../components/Button';
 import Column from '../../components/Column';
 import Dropdown from '../../components/Dropdown';
-import Button from '../../components/Button';
+import Row from '../../components/Row';
 import Spinner from '../../components/Spinner';
 
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };

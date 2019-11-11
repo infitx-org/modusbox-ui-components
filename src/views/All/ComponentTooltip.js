@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
+import Column from '../../components/Column';
+import { ValidationWrapper } from '../../components/Common';
 import Icon from '../../components/Icon';
 import Row from '../../components/Row';
-import Column from '../../components/Column';
 import ScrollBox from '../../components/ScrollBox';
 import Tooltip from '../../components/Tooltip';
-import { ValidationWrapper } from '../../components/Common';
 
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };

@@ -1,5 +1,6 @@
-import React from 'react';
 import find from 'lodash/find';
+import React from 'react';
+
 import Navbar from '../../components/Navbar';
 
 /* eslint-disable */

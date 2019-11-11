@@ -1,11 +1,12 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+
+import { buildFetchActions } from '../actions';
 import fetchMiddleware from '../middleware';
 import api from '../reducers';
-import { buildFetchActions } from '../actions';
 import {
-  createPendingSelector,
   createPendingCollectionSelector,
+  createPendingSelector,
   getPendingByParameter,
 } from '../selectors';
 
@@ -58,8 +59,8 @@ describe('Sets the pending state correctly', () => {
     const createCollection = createCollectionSelector(store.getState());
     const readCollection = readCollectionSelector(store.getState());
 
-    expect(createCollection.length).toBe(0);
-    expect(readCollection.length).toBe(1);
+    expect(createCollection).toHaveLength(0);
+    expect(readCollection).toHaveLength(1);
   });
 
   it('Should retrieve the correct pending collection for the given action payload ', () => {

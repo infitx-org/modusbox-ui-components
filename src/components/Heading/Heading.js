@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-
 import './Heading.scss';
+
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 function headerTag(size) {
   if (size >= 1 && size <= 6) {

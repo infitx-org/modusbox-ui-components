@@ -1,11 +1,10 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
+import { InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../components/Common';
 import Select from '../components/Select';
 import Options from '../components/Select/Options';
-
-import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
 
 const options = new Array(100).fill().map((item, index) => ({
   label: `label-${index}`,

@@ -1,9 +1,9 @@
+import { buildFetchActions, fetch } from './actions';
 import fetchMiddleware from './middleware';
-import { fetch, buildFetchActions } from './actions';
 import reducers from './reducers';
 import {
-  createPendingSelector,
   createPendingCollectionSelector,
+  createPendingSelector,
   getPendingByParameter,
 } from './selectors';
 

@@ -1,13 +1,12 @@
-import React, { PureComponent } from 'react';
+import './Options.scss';
+
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
-
-import ScrollBox from '../ScrollBox';
 import Icon, { iconSizes } from '../Icon';
+import ScrollBox from '../ScrollBox';
 import Tooltip from '../Tooltip';
-
-import './Options.scss';
 
 class Options extends PureComponent {
   constructor(props) {

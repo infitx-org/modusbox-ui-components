@@ -1,8 +1,9 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+
+import { buildFetchActions, setFetchStatus, unsetFetchStatus } from '../actions';
 import fetchMiddleware from '../middleware';
 import api from '../reducers';
-import { buildFetchActions, setFetchStatus, unsetFetchStatus } from '../actions';
 
 const getStore = initialState => {
   const ReduxFetch = fetchMiddleware();
@@ -30,7 +31,7 @@ describe('Sets the pending state correctly', () => {
   it('Should create the pending request with the correct name', () => {
     const action = setFetchStatus('requestName', 'read', null, {}, '1');
     store.dispatch(action);
-    //console.log(store.getState())
+    // console.log(store.getState())
 
     const { pendingRequests } = store.getState().api;
     const [request] = Object.keys(pendingRequests);
@@ -54,7 +55,7 @@ describe('Sets the pending state correctly', () => {
 
     const requests = store.getState().api.pendingRequests.requestName.read;
 
-    expect(requests.length).toEqual(1);
+    expect(requests).toHaveLength(1);
     expect(requests[0].id).toEqual('1');
     expect(requests[0].payload.foo).toEqual('bar');
   });
@@ -67,7 +68,7 @@ describe('Sets the pending state correctly', () => {
     const requests = store.getState().api.pendingRequests.books.create;
     const [request] = requests;
 
-    expect(requests.length).toEqual(1);
+    expect(requests).toHaveLength(1);
     expect(request.id).not.toBeUndefined();
     expect(request.request.body).toEqual(JSON.stringify('test'));
   });
@@ -80,7 +81,7 @@ describe('Sets the pending state correctly', () => {
     const requests = store.getState().api.pendingRequests.books.update;
     const [request] = requests;
 
-    expect(requests.length).toEqual(1);
+    expect(requests).toHaveLength(1);
     expect(request.id).not.toBeUndefined();
     expect(request.payload.bookId).toEqual('23');
   });

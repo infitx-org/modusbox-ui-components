@@ -1,10 +1,10 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import React from 'react';
 
+import { InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../components/Common';
 import DatePicker from '../components/DatePicker';
 import Icon from '../components/Icon';
-import { Loader, Placeholder, ValidationWrapper, InvalidIcon } from '../components/Common';
 
 it('renders the datepicker', () => {
   const wrapper = mount(<DatePicker />);

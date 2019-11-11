@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import './Checkbox.scss';
+
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
-
-import './Checkbox.scss';
 
 class Checkbox extends PureComponent {
   constructor(props) {

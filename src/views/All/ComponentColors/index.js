@@ -1,9 +1,9 @@
+import './ColorBox.scss';
+
 import React from 'react';
 
-import Row from '../../../components/Row';
 import Column from '../../../components/Column';
-
-import './ColorBox.scss';
+import Row from '../../../components/Row';
 
 const colors = {
   main: [

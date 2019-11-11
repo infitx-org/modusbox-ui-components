@@ -1,9 +1,9 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
-import Row from '../../components/Row';
 import Column from '../../components/Column';
 import ControlIcon from '../../components/ControlIcon';
+import Row from '../../components/Row';
 
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const C = props => (

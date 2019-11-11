@@ -1,9 +1,9 @@
+import './Boxes.scss';
+
 import React from 'react';
 
 import Icon from '../Icon';
 import Spinner from '../Spinner';
-
-import './Boxes.scss';
 
 const Pending = () => (
   <div className="element-datalist__pending-box">

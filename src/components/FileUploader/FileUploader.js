@@ -1,16 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import '../../icons/mule/upload-small.svg';
+import '../../icons/mule/close-small.svg';
+import './FileUploader.scss';
+
 import isNil from 'lodash/isNil';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
-
-import { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon } from '../Common';
-
-import '../../icons/mule/upload-small.svg';
-import '../../icons/mule/close-small.svg';
-
-import './FileUploader.scss';
+import { InnerButton, InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
 
 class FileUploader extends PureComponent {
   constructor(props) {

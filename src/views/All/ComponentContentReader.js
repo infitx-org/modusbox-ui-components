@@ -1,5 +1,6 @@
 /* eslint no-console: "off" */
 import React from 'react';
+
 import ContentReader from '../../components/ContentReader';
 
 // eslint-disable-next-line max-len

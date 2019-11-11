@@ -1,9 +1,10 @@
 import React from 'react';
-import Modal, { ModalTabsLayout } from '../../components/Modal';
-import TextField from '../../components/TextField';
-import Select from '../../components/Select';
+
 import Button from '../../components/Button';
+import Modal, { ModalTabsLayout } from '../../components/Modal';
 import Row from '../../components/Row';
+import Select from '../../components/Select';
+import TextField from '../../components/TextField';
 
 class TestModal extends React.Component {
   constructor(props) {

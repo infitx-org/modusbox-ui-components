@@ -24,10 +24,8 @@ import './modusbox/saved.svg';
 import './modusbox/editing.svg';
 import './modusbox/magic-wand.svg';
 import './modusbox/settings.svg';
-
 // //////////////////////////////////////////
 // Mulesoft icons
-
 import './mule/access-manager-color.svg';
 import './mule/access-manager-greyscale.svg';
 import './mule/admin-color.svg';

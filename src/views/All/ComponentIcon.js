@@ -1,7 +1,8 @@
-import React from 'react';
-import Icon from '../../components/Icon';
-
 import '../../icons/index';
+
+import React from 'react';
+
+import Icon from '../../components/Icon';
 
 const modusboxIcons = [
   'circle',
