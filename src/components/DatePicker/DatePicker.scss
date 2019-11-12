@@ -8,7 +8,6 @@
   display: flex;
   position: relative;
   cursor: pointer;
-  height: 100%;
   transition: $input__main-transition;
 
   &.input-datepicker__mb-input--open {
