@@ -1,12 +1,12 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/transitions.scss';
 
-.element-datalist {
+.el-datalist {
   width: 100%;
   animation: fadeUp 0.3s ease-out 1 forwards;
 }
 
-.element-datalist--flexible {
+.el-datalist--flexible {
   display: flex;
   flex-direction: column;
   min-height: 0;

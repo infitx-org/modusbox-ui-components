@@ -23,7 +23,7 @@ const TabComponents = (
 
 it('renders the tabs', () => {
   const wrapper = mount(TabComponents);
-  expect(wrapper.find('.element-tabs')).toBeTruthy();
+  expect(wrapper.find('.el-tabs')).toBeTruthy();
 });
 
 it('renderd the prop id', () => {
@@ -33,7 +33,7 @@ it('renderd the prop id', () => {
 
 it('renderd the prop flex', () => {
   const wrapper = mount(TabComponents);
-  expect(wrapper.find('.element-tabs--flexible')).toBeTruthy();
+  expect(wrapper.find('.el-tabs--flexible')).toBeTruthy();
 });
 
 it('renders all the tab items', () => {

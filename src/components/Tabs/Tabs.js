@@ -22,10 +22,10 @@ class Tab extends PureComponent {
       return null;
     }
     const className = utils.composeClassNames([
-      'element-tabs__tab-item',
-      focused && 'element-tabs__tab-item--focused',
-      selected && 'element-tabs__tab-item--selected',
-      disabled && 'element-tabs__tab-item--disabled',
+      'el-tabs__tab-item',
+      focused && 'el-tabs__tab-item--focused',
+      selected && 'el-tabs__tab-item--selected',
+      disabled && 'el-tabs__tab-item--disabled',
       flex && 'fill-width',
     ]);
 
@@ -72,9 +72,9 @@ TabList.defaultProps = {
 const TabPanel = ({ children, flex }) => {
   let classes;
   if (flex) {
-    classes = 'element-tabs__tab__content element-tabs__tab__content--flexible';
+    classes = 'el-tabs__tab__content el-tabs__tab__content--flexible';
   } else {
-    classes = 'element-tabs__tab__content';
+    classes = 'el-tabs__tab__content';
   }
   return <div className={classes}>{children}</div>;
 };
@@ -256,8 +256,8 @@ class Tabs extends PureComponent {
 
     const tabsClassNames = utils.composeClassNames([
       'element',
-      'element-tabs',
-      shouldRenderAsFlex === true && 'element-tabs--flexible',
+      'el-tabs',
+      shouldRenderAsFlex === true && 'el-tabs--flexible',
     ]);
 
     return (
@@ -267,12 +267,12 @@ class Tabs extends PureComponent {
             this.input = input;
           }}
           type="button"
-          className="modus-element__holder"
+          className="modus-el__holder"
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           onKeyDown={this.testKey}
         />
-        <div className="element-tabs__tab-items" style={tabList.props.style}>
+        <div className="el-tabs__tab-items" style={tabList.props.style}>
           {tabs}
         </div>
         {panel}
@@ -291,7 +291,7 @@ Tabs.propTypes = {
 };
 
 Tabs.defaultProps = {
-  id: 'element-tabs',
+  id: 'el-tabs',
   selected: 0,
   onSelect: undefined,
   disabled: false,

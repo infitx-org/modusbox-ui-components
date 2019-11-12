@@ -43,9 +43,9 @@ class ModalTabsLayout extends PureComponent {
       style: { ...child.props.style, padding: '10px', flex: '2' },
     });
     return (
-      <div className="element-modal-tab-layout">
+      <div className="el-modal-tab-layout">
         <ModalTabs items={items} selected={selected} onSelect={this.onSelect} />
-        <div className="element-modal-tab-layout__content">
+        <div className="el-modal-tab-layout__content">
           <ScrollBox flex>{content}</ScrollBox>
         </div>
       </div>
@@ -66,12 +66,12 @@ ModalTabsLayout.defaultProps = {
 };
 
 const ModalTabs = ({ items, selected, onSelect }) => (
-  <div className="element-modal-tab-layout__items">
+  <div className="el-modal-tab-layout__items">
     {items.map((item, index) => {
       const itemClassName = utils.composeClassNames([
-        'element-modal-tab-layout__item',
-        index === selected && 'element-modal-tab-layout__item--selected',
-        item.disabled && 'element-modal-tab-layout__item--disabled',
+        'el-modal-tab-layout__item',
+        index === selected && 'el-modal-tab-layout__item--selected',
+        item.disabled && 'el-modal-tab-layout__item--disabled',
       ]);
       return (
         <div

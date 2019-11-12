@@ -6,14 +6,14 @@ import Spinner from '../components/Spinner';
 
 it('renders the spinner', () => {
   const wrapper = shallow(<Spinner />);
-  expect(wrapper.find('.element-spinner')).toBeTruthy();
+  expect(wrapper.find('.el-spinner')).toBeTruthy();
 });
 
 it('renders the spinner elements with correct size', () => {
   [1, 2, 3, 10, 20, 30, 100, 200, 300].forEach(size => {
     const wrapper = shallow(<Spinner size={size} />);
     const svg = wrapper.find('svg');
-    const style = wrapper.find('.element-spinner').prop('style');
+    const style = wrapper.find('.el-spinner').prop('style');
     expect(svg.prop('height')).toBe(`${size}px`);
     expect(svg.prop('width')).toBe(`${size}px`);
     expect(style).toHaveProperty('width', `${size}px`);

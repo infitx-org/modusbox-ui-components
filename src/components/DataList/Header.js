@@ -52,7 +52,7 @@ const Header = ({
   });
 
   return (
-    <div className="element-datalist__header">
+    <div className="el-datalist__header">
       <Row>{headerCells}</Row>
     </div>
   );
@@ -100,11 +100,11 @@ class HeaderCell extends PureComponent {
     } = this.props;
 
     const headerCellClassName = utils.composeClassNames([
-      'element-datalist__header-cell',
-      isCheckbox && 'element-datalist__header-cell--checkbox',
-      isSortable && 'element-datalist__header-cell--sortable',
-      isSorting && 'element-datalist__header-cell--sorting',
-      isFiltering && 'element-datalist__header-cell--filtering',
+      'el-datalist__header-cell',
+      isCheckbox && 'el-datalist__header-cell--checkbox',
+      isSortable && 'el-datalist__header-cell--sortable',
+      isSorting && 'el-datalist__header-cell--sorting',
+      isFiltering && 'el-datalist__header-cell--filtering',
       className,
     ]);
 
@@ -157,7 +157,7 @@ class HeaderCell extends PureComponent {
 }
 
 const HeaderLabel = ({ label }) => (
-  <div className="element-datalist__header-cell__label">
+  <div className="el-datalist__header-cell__label">
     <Tooltip style={{ flex: ' 1 0 0 ' }}>{label}</Tooltip>
   </div>
 );
@@ -165,7 +165,7 @@ const HeaderLabel = ({ label }) => (
 const HeaderFilter = ({ filter, onFilterClick, onFilterChange, onFilterBlur, assignRef }) => (
   <input
     type="text"
-    className="element-datalist__header-cell__filter"
+    className="el-datalist__header-cell__filter"
     value={filter.value || ''}
     onClick={onFilterClick}
     onChange={e => onFilterChange(e.target.value)}
@@ -176,8 +176,8 @@ const HeaderFilter = ({ filter, onFilterClick, onFilterChange, onFilterBlur, ass
 
 const FilterIcon = ({ isFiltering, onClick }) => {
   const searchIconClassName = utils.composeClassNames([
-    'element-datalist__header-cell__search-icon',
-    isFiltering && 'element-datalist__header-cell__search-icon--active',
+    'el-datalist__header-cell__search-icon',
+    isFiltering && 'el-datalist__header-cell__search-icon--active',
   ]);
 
   return (
@@ -199,8 +199,8 @@ const SortIcon = ({ isSorting, isSortingAsc }) => {
   }
 
   const iconClassName = utils.composeClassNames([
-    'element-datalist__header-cell__sort-icon',
-    isSortingAsc && 'element-datalist__header-cell__sort-icon--asc',
+    'el-datalist__header-cell__sort-icon',
+    isSortingAsc && 'el-datalist__header-cell__sort-icon--asc',
   ]);
 
   return <Icon className={iconClassName} name="arrow" size={10} />;

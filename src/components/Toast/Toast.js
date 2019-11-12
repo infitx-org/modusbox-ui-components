@@ -22,7 +22,7 @@ let toastCount = 0;
 const now = Date.now();
 function toastUID() {
   toastCount += 1;
-  return `element-toast_${now}_${toastCount}`;
+  return `el-toast_${now}_${toastCount}`;
 }
 function close(key) {
   notification.removeNotice(key);
@@ -76,11 +76,11 @@ export default class Toast extends Component {
     const { kind, className } = this.props;
     const isCustom = kind === 'custom';
     const componentClassName = utils.composeClassNames([
-      'element-toast',
-      `element-toast--${kind}`,
+      'el-toast',
+      `el-toast--${kind}`,
       className,
-      isCustom && 'element-toast-noPadding',
-      !isCustom && 'element-toast-padding',
+      isCustom && 'el-toast-noPadding',
+      !isCustom && 'el-toast-padding',
     ]);
     return componentClassName;
   }
@@ -93,19 +93,19 @@ export default class Toast extends Component {
     if (!isCustom) {
       const iconName = iconNameMaps[kind];
       icon = (
-        <div className="element-toast__icon">
+        <div className="el-toast__icon">
           <Icon name={iconName} size={16} />
         </div>
       );
     }
 
     const titleElement = (
-      <div className="element-toast__title">
+      <div className="el-toast__title">
         {icon} {title}
       </div>
     );
 
-    const childrenElement = <div className="element-toast__custom">{children}</div>;
+    const childrenElement = <div className="el-toast__custom">{children}</div>;
 
     return (
       <div className={className}>

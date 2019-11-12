@@ -14,9 +14,9 @@ class ModalPortal extends PureComponent {
     if (this.props.id) {
       this._div.id = this.props.id;
     }
-    this._div.className = 'element-modal__box';
+    this._div.className = 'el-modal__box';
     this._target = document.body.appendChild(this._div);
-    this._modalIndex = document.querySelectorAll('.element-modal__box').length;
+    this._modalIndex = document.querySelectorAll('.el-modal__box').length;
   }
   componentWillUnmount() {
     document.body.removeChild(this._target);

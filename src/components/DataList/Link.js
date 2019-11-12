@@ -8,11 +8,11 @@ import Icon from '../Icon';
 const Link = ({ value, children, onClick }) => {
   const content = value !== undefined ? value.toString() : children;
   return (
-    <div className="element-datalist__link" onClick={onClick} role="presentation">
-      <div className="element-datalist__link__container">
-        <span className="element-datalist__link__content">{content}</span>
+    <div className="el-datalist__link" onClick={onClick} role="presentation">
+      <div className="el-datalist__link__container">
+        <span className="el-datalist__link__content">{content}</span>
       </div>
-      <div className="element-datalist__link__icon">
+      <div className="el-datalist__link__icon">
         <Icon name="open" size={16} fill="#00A3E0" />
       </div>
     </div>

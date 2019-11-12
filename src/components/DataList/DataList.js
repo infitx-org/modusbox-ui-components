@@ -378,8 +378,8 @@ class DataList extends PureComponent {
     const { items, sortAsc, sortColumn, filters } = this.state;
     const className = utils.composeClassNames([
       'mb-element',
-      'element-datalist',
-      flex && 'element-datalist--flexible',
+      'el-datalist',
+      flex && 'el-datalist--flexible',
     ]);
 
     const checkableItems = items.filter(item => DataList.isCheckable(checkable, item));

@@ -1,7 +1,7 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/transitions.scss';
 
-.element-datalist__header-cell {
+.el-datalist__header-cell {
   flex: 1;
   display: flex;
   height: 40px;
@@ -17,45 +17,45 @@
   user-select: none;
 }
 
-.element-datalist__header-cell--checkbox {
+.el-datalist__header-cell--checkbox {
   flex: 0 0 40px;
 }
-.element-datalist__header-cell--sortable {
+.el-datalist__header-cell--sortable {
   cursor: pointer;
-  &:not(.element-datalist__header-cell--sorting):not(.element-datalist__header-cell--filtering):hover {
+  &:not(.el-datalist__header-cell--sorting):not(.el-datalist__header-cell--filtering):hover {
     border-bottom-color: #aaa;
   }
 }
-.element-datalist__header-cell--sorting {
+.el-datalist__header-cell--sorting {
   color: $color__blue-4;
   border-bottom-color: $color__blue-3;
 }
-.element-datalist__header-cell--filtering {
+.el-datalist__header-cell--filtering {
   border-bottom-color: #f63;
 }
 
-.element-datalist__header-cell__sort-icon {
+.el-datalist__header-cell__sort-icon {
   flex: 0 0 auto;
   transform: rotateZ(90deg) rotateY(0deg);
   fill: #999;
   transition: transform 0.2s ease-out;
   margin: 3px;
 }
-.element-datalist__header-cell__sort-icon--asc {
+.el-datalist__header-cell__sort-icon--asc {
   transform: rotateZ(90deg) rotateY(180deg);
 }
-.element-datalist__header-cell__search-icon {
+.el-datalist__header-cell__search-icon {
   margin-right: 4px;
   margin-left: 2px;
   transition: transform 0.2s ease-out;
 }
-.element-datalist__header-cell__search-icon--active {
+.el-datalist__header-cell__search-icon--active {
   margin-right: 6px;
   fill: #f63;
   transform: scale(1.1, 1.1);
 }
 
-.element-datalist__header-cell__filter {
+.el-datalist__header-cell__filter {
   flex: 1;
   border: none;
   outline: none;
@@ -63,7 +63,7 @@
   appearance: none;
   min-width: 0;
 }
-.element-datalist__header-cell__label {
+.el-datalist__header-cell__label {
   font-size: 13px;
   flex: 2 1 auto;
   overflow: hidden;

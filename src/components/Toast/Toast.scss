@@ -29,40 +29,40 @@
 }
 /* Local CSS for toast */
 
-.element-toast {
+.el-toast {
   border-radius: 3px;
   display: flex;
 }
-.element-toast-padding {
+.el-toast-padding {
   padding: 15px;
 }
-.element-toast-noPadding {
+.el-toast-noPadding {
   padding: 0px;
 }
-.element-toast--info {
+.el-toast--info {
   background: $color__blue-3;
   fill: $color__blue-3;
 }
-.element-toast--error {
+.el-toast--error {
   background: $color__main-danger;
   fill: $color__main-danger;
 }
-.element-toast--success {
+.el-toast--success {
   background: $color__main-success;
   fill: $color__main-success;
 }
-.element-toast__title {
+.el-toast__title {
   display: flex;
   font-size: 16px;
   color: #ffffff;
   line-height: 19px;
 }
-.element-toast__inner,
-.element-toast__custom {
+.el-toast__inner,
+.el-toast__custom {
   display: inline-block;
 }
 
-.element-toast__icon {
+.el-toast__icon {
   width: 20px;
   height: 20px;
   background: #fff;

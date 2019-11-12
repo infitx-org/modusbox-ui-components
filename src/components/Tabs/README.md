@@ -33,7 +33,7 @@ Renders the Tabs
 
 |   Name   |        Type        |                 Description                 | Optional | Values |     Default      |
 |----------|--------------------|---------------------------------------------|----------|--------|------------------|
-| id       | `string`           | defines the HTML id                         |          |        | `'element-tabs'` |
+| id       | `string`           | defines the HTML id                         |          |        | `'el-tabs'` |
 | selected | `number`, `string` | defines the selected tab                    |          |        | `0`              |
 | onSelect | `func`             | defines the selection callback function     |          |        | `undefined`      |
 | disabled | `bool`             | defines whether the the `Tab`s are disabled |          |        | `false`          |
