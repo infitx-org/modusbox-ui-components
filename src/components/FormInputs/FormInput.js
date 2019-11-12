@@ -10,7 +10,6 @@ import DatePicker from '../DatePicker';
 import FileUploader from '../FileUploader';
 import Icon from '../Icon';
 import RadioGroup from '../RadioGroup';
-import Row from '../Row';
 import Select from '../Select';
 import TextField from '../TextField';
 import Tooltip from '../Tooltip';
@@ -368,7 +367,6 @@ class FormInput extends PureComponent {
       disabled,
       locked,
       elementWidth,
-      rowWidth = '100%',
       placeholder = '',
       id,
       // select and radio parameters
@@ -477,13 +475,7 @@ class FormInput extends PureComponent {
         onChange: this.onTextFieldChange,
       });
     }
-    input = input.map(addKey);
-
-    return (
-      <Row align="left center" style={{ width: rowWidth }}>
-        {input}
-      </Row>
-    );
+    return input.map(addKey);
   }
 }
 
@@ -550,7 +542,6 @@ FormInput.propTypes = {
   className: PropTypes.string,
   style: PropTypes.shape(),
   elementWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  rowWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   locked: PropTypes.bool,
 };
@@ -589,7 +580,6 @@ FormInput.defaultProps = {
   className: undefined,
   style: undefined,
   elementWidth: undefined,
-  rowWidth: '100%',
 };
 export default FormInput;
 export { Label };

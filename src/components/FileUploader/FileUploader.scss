@@ -7,7 +7,6 @@
   display: flex;
   position: relative;
   cursor: pointer;
-  height: 100%;
   transition: $input__main-transition;
 
   &.input-fileuploader__mb-input--open {
