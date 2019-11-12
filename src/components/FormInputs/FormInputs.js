@@ -150,17 +150,10 @@ class FormInputs extends PureComponent {
   }
 
   render() {
-    const { inline = false, title, width, style = {} } = this.props;
-
-    const wrapperStyle = {
-      marginBottom: 20,
-      display: inline ? 'flex' : 'block',
-      width,
-      ...style,
-    };
+    const { title, style } = this.props;
 
     return (
-      <div style={wrapperStyle}>
+      <div style={style} className="forminputs__column">
         {title && <Heading size="4">{title}</Heading>}
         {this.getChildren()}
       </div>

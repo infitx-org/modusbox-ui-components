@@ -1,9 +1,19 @@
+.forminputs__column {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
 .forminput__inline-button {
   min-width: 80px;
   margin-left: 10px;
 }
 
-/* forminputs */
+.forminput__row {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 0px;
+}
 .forminput-input {
   margin-bottom: 4px;
   margin-left: 10px;

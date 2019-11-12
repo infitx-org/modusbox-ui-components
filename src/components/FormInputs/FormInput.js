@@ -475,7 +475,13 @@ class FormInput extends PureComponent {
         onChange: this.onTextFieldChange,
       });
     }
-    return input.map(addKey);
+    input = input.map(addKey);
+
+    return (
+      <div className="forminput__row">
+        {input}
+      </div>
+    );
   }
 }
 
