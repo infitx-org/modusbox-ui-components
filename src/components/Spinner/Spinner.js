@@ -34,15 +34,15 @@ class Spinner extends PureComponent {
     const pathStyle = { stroke: color };
 
     return (
-      <div className={`element-spinner ${center ? 'center' : ''}`} style={spinnerStyle}>
+      <div className={`el-spinner ${center ? 'center' : ''}`} style={spinnerStyle}>
         <svg
-          className="element-spinner__component"
+          className="el-spinner__component"
           width={width}
           height={height}
           viewBox={`0 0 ${realSize} ${realSize}`}
         >
           <path
-            className="element-spinner__svg-path"
+            className="el-spinner__svg-path"
             strokeWidth={strokeWidth}
             d={describeArc(position, position, radius, 90, 200)}
             style={pathStyle}

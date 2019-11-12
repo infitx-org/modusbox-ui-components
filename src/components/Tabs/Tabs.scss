@@ -1,22 +1,22 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-tabs {
+.el-tabs {
 }
-.element-tabs--flexible {
+.el-tabs--flexible {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   min-height: 0;
 }
 
-.element-tabs__tab-items {
+.el-tabs__tab-items {
   display: flex;
   flex-grow: 1;
   flex-direction: row;
   padding-bottom: 10px;
   flex: 0 0 auto;
 }
-.element-tabs__tab-item {
+.el-tabs__tab-item {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -36,34 +36,34 @@
     flex-grow: 1;
   }
 
-  &:hover:not(.element-tabs__tab-item--disabled):not(.element-tabs__tab-item--selected) {
+  &:hover:not(.el-tabs__tab-item--disabled):not(.el-tabs__tab-item--selected) {
     border-bottom-color: $color__gray-4;
     cursor: pointer;
   }
-  &.element-tabs__tab-item--selected {
+  &.el-tabs__tab-item--selected {
     border-bottom-color: $color__main-primary;
     color: $color__main-primary;
     cursor: pointer;
   }
-  &.element-tabs__tab-item--focused {
+  &.el-tabs__tab-item--focused {
     border-bottom-color: $color__main-primary--active;
     color: $color__main-primary--active;
   }
-  &.element-tabs__tab-item--disabled {
+  &.el-tabs__tab-item--disabled {
     color: $color__main-disabled;
     cursor: default;
   }
 }
 
-.element-tabs__tab__content {
-  &.element-tabs__tab__content--flexible {
+.el-tabs__tab__content {
+  &.el-tabs__tab__content--flexible {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     min-height: 0;
   }
 }
-.element-tabs__tab__panel {
+.el-tabs__tab__panel {
   display: flex;
   flex-grow: 1;
   flex-direction: column;

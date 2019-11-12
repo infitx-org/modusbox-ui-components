@@ -91,11 +91,11 @@
 }
 
 /* MODAL CSS MODIFIERS */
-.element-modal__body:not(.element-modal__body--tabbed) .forminput-input {
+.el-modal__body:not(.el-modal__body--tabbed) .forminput-input {
   margin-left: 0;
   width: auto;
   flex-grow: 1;
 }
-.element-modal__body.element-modal__body--tabbed .forminput-input {
+.el-modal__body.el-modal__body--tabbed .forminput-input {
   flex-grow: 0;
 }

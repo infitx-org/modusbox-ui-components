@@ -51,64 +51,64 @@ const testColumns2 = [
 it('renders the list', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__rows').exists()).toBe(true);
-  expect(wrapper.find('div.element-datalist__row')).toHaveLength(testList1.length);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist__rows').exists()).toBe(true);
+  expect(wrapper.find('div.el-datalist__row')).toHaveLength(testList1.length);
 });
 
 it('renders the header', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__header').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__header-cell')).toHaveLength(testColumns1.length);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist__header').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist__header-cell')).toHaveLength(testColumns1.length);
 });
 
 it('renders the pending spinner when prop isPending is set', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} isPending />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__rows').exists()).toBe(false);
-  expect(wrapper.find('.element-datalist__pending-box').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist__rows').exists()).toBe(false);
+  expect(wrapper.find('.el-datalist__pending-box').exists()).toBe(true);
 });
 
 it('renders the error message when prop hasError is set', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} hasError />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__rows').exists()).toBe(false);
-  expect(wrapper.find('.element-datalist__error-box').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist__rows').exists()).toBe(false);
+  expect(wrapper.find('.el-datalist__error-box').exists()).toBe(true);
 });
 
 it('renders the no-data message when the list is empty', () => {
   const wrapper = mount(<DataList list={[]} columns={testColumns1} />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist__rows').exists()).toBe(false);
-  expect(wrapper.find('.element-datalist__nodata-box').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist__rows').exists()).toBe(false);
+  expect(wrapper.find('.el-datalist__nodata-box').exists()).toBe(true);
 });
 
 it('renders as flex when specified', () => {
   const wrapper = mount(<DataList flex list={[]} columns={testColumns1} />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist--flexible').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist--flexible').exists()).toBe(true);
 });
 
 it('does not render as flex when specified', () => {
   const wrapper = mount(<DataList flex={false} list={[]} columns={testColumns1} />);
 
-  expect(wrapper.find('.element-datalist').exists()).toBe(true);
-  expect(wrapper.find('.element-datalist--flexible').exists()).toBe(false);
+  expect(wrapper.find('.el-datalist').exists()).toBe(true);
+  expect(wrapper.find('.el-datalist--flexible').exists()).toBe(false);
 });
 
 it('renders the correct transformed value described in the column configuration', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const cellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(1)
     .text();
   const columnContent = testColumns1[1].func(testList1[0].column2).toString();
@@ -122,9 +122,9 @@ it('renders the nested object property as described in the column configuration'
   const wrapper = mount(<DataList list={list} columns={columns} />);
 
   const cellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(0)
     .text();
 
@@ -136,11 +136,11 @@ it('renders the link correctly', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const link = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(0)
-    .find('.element-datalist__link');
+    .find('.el-datalist__link');
 
   expect(link.exists()).toBeTruthy();
 });
@@ -150,11 +150,11 @@ it('renders the selected prop when an a function is passed', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} selected={selectedFn} />);
 
   const hasSelectedClass = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .hasClass('element-datalist__row--selected');
+    .hasClass('el-datalist__row--selected');
 
-  const allSelectedRows = wrapper.find('div.element-datalist__row.element-datalist__row--selected');
+  const allSelectedRows = wrapper.find('div.el-datalist__row.el-datalist__row--selected');
 
   expect(hasSelectedClass).toBeTruthy();
   expect(allSelectedRows).toHaveLength(1);
@@ -164,34 +164,34 @@ it('renders the selected prop when an array is passed', () => {
   const selected = [testList1[0], testList1[1]];
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} selected={selected} />);
 
-  const row1 = wrapper.find('div.element-datalist__row').at(0);
+  const row1 = wrapper.find('div.el-datalist__row').at(0);
 
-  const row2 = wrapper.find('div.element-datalist__row').at(1);
+  const row2 = wrapper.find('div.el-datalist__row').at(1);
 
-  const row3 = wrapper.find('div.element-datalist__row').at(2);
+  const row3 = wrapper.find('div.el-datalist__row').at(2);
 
-  expect(row1.hasClass('element-datalist__row--selected')).toBe(true);
-  expect(row2.hasClass('element-datalist__row--selected')).toBe(true);
-  expect(row3.hasClass('element-datalist__row--selected')).toBe(false);
+  expect(row1.hasClass('el-datalist__row--selected')).toBe(true);
+  expect(row2.hasClass('el-datalist__row--selected')).toBe(true);
+  expect(row3.hasClass('el-datalist__row--selected')).toBe(false);
 });
 
 it('renders the selected prop when a single item is passed', () => {
   const selected = testList1[0];
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} selected={selected} />);
 
-  const row1 = wrapper.find('div.element-datalist__row').at(0);
+  const row1 = wrapper.find('div.el-datalist__row').at(0);
 
-  const row2 = wrapper.find('div.element-datalist__row').at(1);
+  const row2 = wrapper.find('div.el-datalist__row').at(1);
 
-  expect(row1.hasClass('element-datalist__row--selected')).toBe(true);
-  expect(row2.hasClass('element-datalist__row--selected')).toBe(false);
+  expect(row1.hasClass('el-datalist__row--selected')).toBe(true);
+  expect(row2.hasClass('el-datalist__row--selected')).toBe(false);
 });
 
 it('updates the cell content on list changing', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const oldCellValue = wrapper
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .text();
 
@@ -202,7 +202,7 @@ it('updates the cell content on list changing', () => {
   wrapper.setProps({ list: updatedList });
 
   const newCellValue = wrapper
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .text();
   expect(oldCellValue).not.toBe(newCellValue);
@@ -212,12 +212,12 @@ it('updates the cell content on list changing', () => {
 it('renders and sorts by the prop sortColumn', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} sortColumn="Column2" />);
 
-  const headerContent = wrapper.find('.element-datalist__header-cell--sorting').text();
+  const headerContent = wrapper.find('.el-datalist__header-cell--sorting').text();
 
   const cellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(1)
     .text();
 
@@ -235,9 +235,9 @@ it('renders and sorts desc by the prop sortAsc', () => {
   );
 
   const cellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(1)
     .text();
 
@@ -251,12 +251,12 @@ it('renders and sorts desc by the prop sortAsc', () => {
 it('automatically sorts on the first sortable column if not specified otherwise', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
 
-  const previousSortingCell = wrapper.find('.element-datalist__header-cell--sorting').text();
+  const previousSortingCell = wrapper.find('.el-datalist__header-cell--sorting').text();
 
   const cellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(0)
     .text();
 
@@ -279,34 +279,34 @@ it('cannot sort on a column when configured as non sortable', () => {
   ];
   const wrapper = mount(<DataList list={testList2} columns={columns} />);
 
-  const headerCell = wrapper.find('.element-datalist__header-cell').at(0);
+  const headerCell = wrapper.find('.el-datalist__header-cell').at(0);
 
-  expect(headerCell.hasClass('element-datalist__header-cell--sortable')).toBeFalsy();
+  expect(headerCell.hasClass('el-datalist__header-cell--sortable')).toBeFalsy();
 });
 
 it('sorts the list by the column of the clicked header cell', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
 
-  const prevSortingCell = wrapper.find('.element-datalist__header-cell--sorting').text();
+  const prevSortingCell = wrapper.find('.el-datalist__header-cell--sorting').text();
 
   const prevCellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(0)
     .text();
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .simulate('click');
 
-  const nextSortingCell = wrapper.find('.element-datalist__header-cell--sorting').text();
+  const nextSortingCell = wrapper.find('.el-datalist__header-cell--sorting').text();
 
   const nextCellContent = wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
-    .find('.element-datalist__item-cell')
+    .find('.el-datalist__item-cell')
     .at(0)
     .text();
 
@@ -325,9 +325,9 @@ it('cannot search on a column without label', () => {
   const wrapper = mount(<DataList list={testList2} columns={columns} />);
 
   const searchIcon = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
-    .find('.element-datalist__header-cell__search-icon');
+    .find('.el-datalist__header-cell__search-icon');
 
   expect(searchIcon.exists()).toBeFalsy();
 });
@@ -344,9 +344,9 @@ it('cannot search on a column when configued as non searchable', () => {
   const wrapper = mount(<DataList list={testList2} columns={columns} />);
 
   const searchIcon = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
-    .find('.element-datalist__header-cell__search-icon');
+    .find('.el-datalist__header-cell__search-icon');
 
   expect(searchIcon.exists()).toBeFalsy();
 });
@@ -355,16 +355,16 @@ it('finds the filter input when clicking on a filterable column', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
-    .find('.element-datalist__header-cell__search-icon')
+    .find('.el-datalist__header-cell__search-icon')
     .at(0)
     .find('[role="presentation"]')
     .at(0)
     .simulate('click');
 
-  const updatedHeaderCell = wrapper.find('.element-datalist__header-cell').at(0);
-  const hasFilterClass = updatedHeaderCell.hasClass('element-datalist__header-cell--filtering');
+  const updatedHeaderCell = wrapper.find('.el-datalist__header-cell').at(0);
+  const hasFilterClass = updatedHeaderCell.hasClass('el-datalist__header-cell--filtering');
 
   const textInput = updatedHeaderCell.find('input[type="text"]');
 
@@ -377,30 +377,30 @@ it('filters the list when setting a filter', () => {
 
   const filterValue = '1';
   const initialRowsCount = wrapper.find(
-    'div.element-datalist__row:not(.element-datalist__row--filtered)',
+    'div.el-datalist__row:not(.el-datalist__row--filtered)',
   ).length;
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
-    .find('.element-datalist__header-cell__search-icon')
+    .find('.el-datalist__header-cell__search-icon')
     .at(0)
     .find('[role="presentation"]')
     .at(0)
     .simulate('click');
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('input[type="text"]')
     .simulate('change', { target: { value: filterValue } });
 
   const updatedRows = wrapper.find(
-    'div.element-datalist__row:not(.element-datalist__row--filtered)',
+    'div.el-datalist__row:not(.el-datalist__row--filtered)',
   );
   const firstCellContent = updatedRows
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .text();
 
@@ -439,41 +439,41 @@ it('filters the list on muliple columns when multiple filters are set a filter',
   const wrapper = mount(<DataList list={list} columns={columns} />);
 
   const initialRowsCount = wrapper.find(
-    'div.element-datalist__row:not(.element-datalist__row--filtered)',
+    'div.el-datalist__row:not(.el-datalist__row--filtered)',
   ).length;
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
-    .find('.element-datalist__header-cell__search-icon')
+    .find('.el-datalist__header-cell__search-icon')
     .at(0)
     .find('[role="presentation"]')
     .at(0)
     .simulate('click');
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('input[type="text"]')
     .simulate('change', { target: { value: valueColumn1 } });
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(1)
-    .find('.element-datalist__header-cell__search-icon')
+    .find('.el-datalist__header-cell__search-icon')
     .at(0)
     .find('[role="presentation"]')
     .at(0)
     .simulate('click');
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(1)
     .find('input[type="text"]')
     .simulate('change', { target: { value: valueColumn2 } });
 
   const updatedRows = wrapper.find(
-    'div.element-datalist__row:not(.element-datalist__row--filtered)',
+    'div.el-datalist__row:not(.el-datalist__row--filtered)',
   );
 
   const updatedRowsCount = updatedRows.length;
@@ -487,13 +487,13 @@ it('renders the checkboxes when onCheck prop is passed', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} onCheck={mockEvent} />);
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
-  wrapper.find('.element-datalist__row').forEach(row => {
+  wrapper.find('.el-datalist__row').forEach(row => {
     const rowCheckbox = row
-      .find('div.element-datalist__item-cell')
+      .find('div.el-datalist__item-cell')
       .at(0)
       .find('Checkbox');
     expect(rowCheckbox.exists()).toBe(true);
@@ -510,13 +510,13 @@ it('renders the checkboxes checked when onCheck prop is passed', () => {
   );
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
-  wrapper.find('.element-datalist__row').forEach(row => {
+  wrapper.find('.el-datalist__row').forEach(row => {
     const rowCheckbox = row
-      .find('div.element-datalist__item-cell')
+      .find('div.el-datalist__item-cell')
       .at(0)
       .find('Checkbox');
     expect(rowCheckbox.prop('checked')).toBe(true);
@@ -533,28 +533,28 @@ it('renders the checkboxes checked when passing the checked prop as an array', (
   );
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox1 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox2 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(1)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox3 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(2)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
@@ -575,28 +575,28 @@ it('renders the checkboxes checked after a list change', () => {
   wrapper.setProps({ list: newList });
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox1 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox2 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(1)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox3 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(2)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
@@ -622,28 +622,28 @@ it('renders the checkboxes checked after columns change', () => {
   wrapper.setProps({ columns: newColumns });
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox1 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox2 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(1)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox3 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(2)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
@@ -667,28 +667,28 @@ it('disables the row checkbox bases on the function passed to the checkable prop
   );
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox1 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox2 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(1)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox3 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(2)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
@@ -712,28 +712,28 @@ it('disables the header checkbox when no items can be checked', () => {
   );
 
   const checkboxHeaderCell = wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox1 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox2 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(1)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
   const rowCheckbox3 = wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(2)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox');
 
@@ -749,7 +749,7 @@ it('triggers the onSelect even when clicking on a row', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} onSelect={mockEvent} />);
 
   wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
     .simulate('click');
 
@@ -770,7 +770,7 @@ it('triggers the onUnselect even when clicking on a selected row', () => {
   );
 
   wrapper
-    .find('div.element-datalist__row')
+    .find('div.el-datalist__row')
     .at(0)
     .simulate('click');
 
@@ -787,9 +787,9 @@ it('triggers the onCheck function when clicking a checkbox', () => {
   );
 
   wrapper
-    .find('.element-datalist__row')
+    .find('.el-datalist__row')
     .at(0)
-    .find('div.element-datalist__item-cell')
+    .find('div.el-datalist__item-cell')
     .at(0)
     .find('Checkbox')
     .find('label')
@@ -806,7 +806,7 @@ it('triggers the onCheck function with all items when clicking the header checkb
   );
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox')
     .find('label')
@@ -823,7 +823,7 @@ it('triggers the onCheck function with no items when clicking the header checkbo
   );
 
   wrapper
-    .find('.element-datalist__header-cell')
+    .find('.el-datalist__header-cell')
     .at(0)
     .find('Checkbox')
     .find('label')

@@ -2,18 +2,18 @@
 
 exports[`renders the checkbox correctly when multiple props are set 1`] = `
 <div
-  className="element element-tabs element-tabs--flexible"
+  className="element el-tabs el-tabs--flexible"
   id="test-tabs"
 >
   <input
-    className="modus-element__holder"
+    className="modus-el__holder"
     onBlur={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
     type="button"
   />
   <div
-    className="element-tabs__tab-items"
+    className="el-tabs__tab-items"
   >
     <Tab
       disabled={false}

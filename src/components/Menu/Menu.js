@@ -72,23 +72,23 @@ class MenuItem extends PureComponent {
     let backIcon = null;
     if (back) {
       backIcon = (
-        <Icon className="element-menu__item__back-icon" name="arrow" size={10} fill="#999" />
+        <Icon className="el-menu__item__back-icon" name="arrow" size={10} fill="#999" />
       );
     }
     let itemIcon = null;
     if (icon) {
       itemIcon = (
-        <div className="element-menu__item__item-icon">
+        <div className="el-menu__item__item-icon">
           <Icon name={icon} size={size} fill={fill} />
         </div>
       );
     }
     const classNames = utils.composeClassNames([
-      'element-menu__item',
-      active && 'element-menu__item--active',
-      disabled && 'element-menu__item--disabled',
-      back && 'element-menu__item--back',
-      icon && 'element-menu__item--with-icon',
+      'el-menu__item',
+      active && 'el-menu__item--active',
+      disabled && 'el-menu__item--disabled',
+      back && 'el-menu__item--back',
+      icon && 'el-menu__item--with-icon',
     ]);
 
     return (
@@ -146,12 +146,12 @@ const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) =
 
   let menuSectionLabel = null;
   if (label) {
-    menuSectionLabel = <div className="element-menu__section-label">{label}</div>;
+    menuSectionLabel = <div className="el-menu__section-label">{label}</div>;
   }
   return (
-    <div className="element-menu__section">
+    <div className="el-menu__section">
       {menuSectionLabel}
-      <div className="element-menu__section-items">{menuItems}</div>
+      <div className="el-menu__section-items">{menuItems}</div>
     </div>
   );
 };
@@ -168,7 +168,7 @@ const MENU_SECTION_TYPE = <MenuSection />.type;
 const isMenuSection = node => node.type === MENU_SECTION_TYPE;
 
 const MenuItemsGroup = ({ children }) => (
-  <div className="element-menu__section-items">{children}</div>
+  <div className="el-menu__section-items">{children}</div>
 );
 
 const wrapItemsInSections = items => {
@@ -262,7 +262,7 @@ class Menu extends PureComponent {
           .map(bindActiveProp(pathname)),
       );
     }
-    return <div className="mb-element element-menu">{menuComponents}</div>;
+    return <div className="mb-element el-menu">{menuComponents}</div>;
   }
 }
 

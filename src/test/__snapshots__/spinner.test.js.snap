@@ -2,7 +2,7 @@
 
 exports[`renders the button correctly when multiple props are set 1`] = `
 <div
-  className="element-spinner "
+  className="el-spinner "
   style={
     Object {
       "height": "30px",
@@ -11,13 +11,13 @@ exports[`renders the button correctly when multiple props are set 1`] = `
   }
 >
   <svg
-    className="element-spinner__component"
+    className="el-spinner__component"
     height="30px"
     viewBox="0 0 30 30"
     width="30px"
   >
     <path
-      className="element-spinner__svg-path"
+      className="el-spinner__svg-path"
       d="M 10.895758280091975 26.2763114494309 A 12 12 0 0 0 27 15"
       strokeWidth={3}
       style={

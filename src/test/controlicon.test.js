@@ -101,7 +101,7 @@ it('triggers the onClick prop', () => {
 
 it('renders the inner icon component', () => {
   const wrapper = mount(<ControlIcon icon="deploy" />);
-  expect(wrapper.find('.element-icon')).toHaveLength(1);
+  expect(wrapper.find('.el-icon')).toHaveLength(1);
 });
 
 // Snapshot testing

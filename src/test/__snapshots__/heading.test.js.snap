@@ -2,7 +2,7 @@
 
 exports[`renders correct sizes 1`] = `
 <h3
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -12,7 +12,7 @@ exports[`renders correct sizes 1`] = `
 
 exports[`renders correct sizes 2`] = `
 <h1
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -22,7 +22,7 @@ exports[`renders correct sizes 2`] = `
 
 exports[`renders correct sizes 3`] = `
 <h2
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -32,7 +32,7 @@ exports[`renders correct sizes 3`] = `
 
 exports[`renders correct sizes 4`] = `
 <h3
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -42,7 +42,7 @@ exports[`renders correct sizes 4`] = `
 
 exports[`renders correct sizes 5`] = `
 <h4
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -52,7 +52,7 @@ exports[`renders correct sizes 5`] = `
 
 exports[`renders correct sizes 6`] = `
 <h5
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -62,7 +62,7 @@ exports[`renders correct sizes 6`] = `
 
 exports[`renders correct sizes 7`] = `
 <h6
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -72,7 +72,7 @@ exports[`renders correct sizes 7`] = `
 
 exports[`renders correct sizes 8`] = `
 <h3
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -82,7 +82,7 @@ exports[`renders correct sizes 8`] = `
 
 exports[`renders correct sizes 9`] = `
 <h3
-  className="element"
+  className="el"
 >
   <span>
      Text 
@@ -92,7 +92,7 @@ exports[`renders correct sizes 9`] = `
 
 exports[`renders correct sizes 10`] = `
 <h3
-  className="element"
+  className="el"
 >
   <span>
      Text 

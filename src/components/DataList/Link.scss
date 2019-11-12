@@ -1,6 +1,6 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-datalist__link {
+.el-datalist__link {
   position: relative;
   display: flex;
   height: 20px;
@@ -8,28 +8,28 @@
   width: 100%;
   align-items: center;
 }
-.element-datalist__link__container {
+.el-datalist__link__container {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
   display: block;
 }
-.element-datalist__link__content {
+.el-datalist__link__content {
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;
   color: $color__blue-4;
   fill: $color__blue-4;
 }
-.element-datalist__link__icon {
+.el-datalist__link__icon {
   display: none;
   flex: 0 0 25px;
   padding-top: 2px;
   padding-left: 5px;
   animation: animateLinkFadeIn 0.2s ease-out 1 forwards;
 }
-.element-datalist__link:hover .element-datalist__link__icon {
+.el-datalist__link:hover .el-datalist__link__icon {
   display: block;
 }
 

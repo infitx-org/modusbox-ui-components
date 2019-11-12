@@ -25,7 +25,7 @@ exports[`renders the ContentReader correctly when multiple props are set 1`] = `
         trackStyle={Object {}}
       >
         <div
-          className="element element-scrollbox__wrapper"
+          className="element el-scrollbox__wrapper"
           style={Object {}}
         >
           <ResizeDetector
@@ -43,10 +43,10 @@ exports[`renders the ContentReader correctly when multiple props are set 1`] = `
             </ChildWrapper>
           </ResizeDetector>
           <div
-            className="element-scrollbox__content-box element-scrollbox__content-box--flexible"
+            className="el-scrollbox__content-box el-scrollbox__content-box--flexible"
           >
             <div
-              className="element-scrollbox__content element-scrollbox__content--flexible"
+              className="el-scrollbox__content el-scrollbox__content--flexible"
             >
               <ResizeDetector
                 handleHeight={true}

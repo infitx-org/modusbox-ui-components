@@ -129,9 +129,9 @@ class TooltipViewer extends PureComponent {
     super(props);
     this._viewer = document.createElement('div');
     this._viewer.className = utils.composeClassNames([
-      'element-tooltip__viewer',
-      this.props.custom !== true && 'element-tooltip__viewer--default',
-      this.props.custom !== true && `element-tooltip__viewer--${this.props.kind}`,
+      'el-tooltip__viewer',
+      this.props.custom !== true && 'el-tooltip__viewer--default',
+      this.props.custom !== true && `el-tooltip__viewer--${this.props.kind}`,
     ]);
     this._location = document.body.appendChild(this._viewer);
     this.state = {
@@ -152,8 +152,8 @@ class TooltipViewer extends PureComponent {
     this._location.style.maxWidth = `${maxWidth}px`;
 
     const viewerFadeInClassName = utils.composeClassNames([
-      'element-tooltip__viewer--fade-in',
-      `element-tooltip__viewer--fade-in-${direction}`,
+      'el-tooltip__viewer--fade-in',
+      `el-tooltip__viewer--fade-in-${direction}`,
     ]);
     this._viewer.className += ` ${viewerFadeInClassName}`;
     // eslint-disable-next-line
@@ -191,8 +191,8 @@ class TooltipViewer extends PureComponent {
     }
 
     const childClassName = utils.composeClassNames([
-      'element-tooltip__child',
-      custom && 'element-tooltip__child--custom',
+      'el-tooltip__child',
+      custom && 'el-tooltip__child--custom',
     ]);
     const rendering = [
       <div key="content" className={childClassName}>
@@ -206,13 +206,13 @@ class TooltipViewer extends PureComponent {
 
 const TooltipHandle = ({ custom, direction, kind }) => {
   const handleWrapperClassName = utils.composeClassNames([
-    'element-tooltip__handle-wrapper',
-    direction && `element-tooltip__handle-wrapper--${direction}`,
+    'el-tooltip__handle-wrapper',
+    direction && `el-tooltip__handle-wrapper--${direction}`,
   ]);
   const handleClassName = utils.composeClassNames([
-    'element-tooltip__handle',
-    `element-tooltip__handle--${kind}`,
-    !custom && 'element-tooltip__handle--default',
+    'el-tooltip__handle',
+    `el-tooltip__handle--${kind}`,
+    !custom && 'el-tooltip__handle--default',
   ]);
 
   return (
@@ -318,7 +318,7 @@ class Tooltip extends PureComponent {
       this.box.addEventListener('mouseenter', this.delayShowTooltip);
       this.box.addEventListener('mouseleave', this.delayHideTooltip);
     }
-    this.box.classList.remove('element-tooltip--inactive');
+    this.box.classList.remove('el-tooltip--inactive');
   }
   unmountTooltip() {
     clearTimeout(this.tooltipTimeout);
@@ -327,7 +327,7 @@ class Tooltip extends PureComponent {
       this.box.removeEventListener('mouseenter', this.delayShowTooltip);
       this.box.removeEventListener('mouseleave', this.delayHideTooltip);
     }
-    this.box.classList.add('element-tooltip--inactive');
+    this.box.classList.add('el-tooltip--inactive');
   }
   showTooltip() {
     if (!this._mounted) {
@@ -391,8 +391,8 @@ class Tooltip extends PureComponent {
   render() {
     const { className, style, children, content, label, position, kind, custom } = this.props;
     const tooltipClassName = utils.composeClassNames([
-      'element-tooltip',
-      custom && 'element-tooltip--custom',
+      'el-tooltip',
+      custom && 'el-tooltip--custom',
       className,
     ]);
 

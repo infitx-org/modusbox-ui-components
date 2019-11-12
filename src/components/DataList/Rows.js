@@ -29,7 +29,7 @@ class Rows extends PureComponent {
 
     return (
       <ScrollBox>
-        <div className="element-datalist__rows">{rows}</div>
+        <div className="el-datalist__rows">{rows}</div>
       </ScrollBox>
     );
   }
@@ -59,9 +59,9 @@ class RowItem extends PureComponent {
     const { item, columns, selected, visible } = this.props;
     const rowCells = columns.map(RowItem.getCells(item));
     const rowClassName = utils.composeClassNames([
-      'element-datalist__row',
-      selected && 'element-datalist__row--selected',
-      !visible && 'element-datalist__row--filtered',
+      'el-datalist__row',
+      selected && 'el-datalist__row--selected',
+      !visible && 'el-datalist__row--filtered',
     ]);
 
     return (
@@ -77,8 +77,8 @@ class ItemCell extends PureComponent {
     const { isCheckbox, checked, content, value, className } = this.props;
     const itemCellClassName = utils.composeClassNames([
       className,
-      'element-datalist__item-cell',
-      isCheckbox && 'element-datalist__item-cell--checkbox',
+      'el-datalist__item-cell',
+      isCheckbox && 'el-datalist__item-cell--checkbox',
     ]);
     let cell = null;
     if (isCheckbox && content) {

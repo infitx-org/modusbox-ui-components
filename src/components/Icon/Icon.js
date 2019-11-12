@@ -47,8 +47,8 @@ class Icon extends PureComponent {
       ...style,
     };
     const componentClassName = utils.composeClassNames([
-      'element-icon',
-      spin && 'element-icon--spin',
+      'el-icon',
+      spin && 'el-icon--spin',
       className,
     ]);
     const svg = (

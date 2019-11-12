@@ -97,18 +97,18 @@ it('renders multiple props', () => {
 
 it('renders the inner icon component', () => {
   const wrapper = mount(<Dropdown icon="deploy" />);
-  expect(wrapper.find('.element-icon')).toHaveLength(1);
+  expect(wrapper.find('.el-icon')).toHaveLength(1);
 });
 
 it('renders the inner spinner component', () => {
   const wrapper = mount(<Dropdown pending />);
-  expect(wrapper.find('.element-spinner')).toHaveLength(1);
+  expect(wrapper.find('.el-spinner')).toHaveLength(1);
 });
 
 it('renders the spinner component and overrides the icon prop', () => {
   const wrapper = mount(<Dropdown pending icon="deploy" />);
-  expect(wrapper.find('.element-icon')).toHaveLength(0);
-  expect(wrapper.find('.element-spinner')).toHaveLength(1);
+  expect(wrapper.find('.el-icon')).toHaveLength(0);
+  expect(wrapper.find('.el-spinner')).toHaveLength(1);
 });
 
 it('does not render the popup when not clicked', () => {

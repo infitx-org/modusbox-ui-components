@@ -11,8 +11,8 @@ const ModalContent = ({ tabbed, flex, children }) => {
     return children;
   }
   const contentClassName = utils.composeClassNames([
-    'element-modal__body__content',
-    flex && 'element-modal__body__content--flexible',
+    'el-modal__body__content',
+    flex && 'el-modal__body__content--flexible',
   ]);
   const wrappedContent = <div className={contentClassName}>{children}</div>;
   if (flex) {
@@ -22,10 +22,10 @@ const ModalContent = ({ tabbed, flex, children }) => {
 };
 
 const ModalHeader = ({ kind, title, allowClose, onClose, isCloseDisabled }) => (
-  <div className="element-modal__header">
-    <div className="element-modal__header-title">{title}</div>
+  <div className="el-modal__header">
+    <div className="el-modal__header-title">{title}</div>
     {allowClose && (
-      <div className="element-modal__header-close">
+      <div className="el-modal__header-close">
         <ControlIcon
           onClick={onClose}
           kind={kind !== 'primary' ? 'light' : 'default'}
@@ -62,9 +62,9 @@ const ModalFooter = ({
   onClose,
   isCloseDisabled,
 }) => (
-  <div className="element-modal__footer">
-    <div className="element-modal__footer-left" />
-    <div className="element-modal__footer-right">
+  <div className="el-modal__footer">
+    <div className="el-modal__footer-left" />
+    <div className="el-modal__footer-right">
       {allowCancel && (
         <Button
           onClick={onCancel}
@@ -92,7 +92,7 @@ const ModalFooter = ({
           onClick={onSubmit}
           label={submitLabel}
           kind={submitKind}
-          className={`element-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
+          className={`el-modal__submit ${isSubmitDisabled ? 'disabled' : ''}`}
         />
       )}
       {allowClose && (
@@ -102,7 +102,7 @@ const ModalFooter = ({
           onClick={onClose}
           label="Close"
           kind="secondary"
-          className={`element-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
+          className={`el-modal__close ${isCloseDisabled ? 'disabled' : ''}`}
         />
       )}
     </div>
@@ -191,18 +191,18 @@ export default class ModalBackground extends PureComponent {
     const isCloseDisabled = !isCloseEnabled || this.props.isSubmitPending;
 
     const bodyClassName = utils.composeClassNames([
-      'element-modal__body',
-      tabbed && 'element-modal__body--tabbed',
+      'el-modal__body',
+      tabbed && 'el-modal__body--tabbed',
     ]);
     return (
-      <div className="element element-modal">
+      <div className="element el-modal">
         <div
-          className="element-modal__overlay"
+          className="el-modal__overlay"
           style={customStyle}
           onClick={this.onClickOverlay}
           role="presentation"
         />
-        <div className={`element-modal__container ${kind}`} style={modalStyle}>
+        <div className={`el-modal__container ${kind}`} style={modalStyle}>
           <ModalHeader
             kind={kind}
             title={title}

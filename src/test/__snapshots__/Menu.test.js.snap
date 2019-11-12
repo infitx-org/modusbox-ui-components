@@ -7,13 +7,13 @@ exports[`renders the menu correctly when multiple props are set 1`] = `
   pathname="/foo"
 >
   <div
-    className="mb-element element-menu"
+    className="mb-element el-menu"
   >
     <MenuItemsGroup
       key="0"
     >
       <div
-        className="element-menu__section-items"
+        className="el-menu__section-items"
       >
         <MenuItem
           asRoot={false}
@@ -29,7 +29,7 @@ exports[`renders the menu correctly when multiple props are set 1`] = `
           size={10}
         >
           <div
-            className="element-menu__item"
+            className="el-menu__item"
             onClick={[Function]}
             role="presentation"
           >

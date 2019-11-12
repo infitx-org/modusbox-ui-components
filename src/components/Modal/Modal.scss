@@ -1,6 +1,6 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-modal {
+.el-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
 }
-.element-modal__overlay {
+.el-modal__overlay {
   opacity: 1;
   position: absolute;
   background-color: transparent;
@@ -20,7 +20,7 @@
   height: 100%;
   width: 100%;
 }
-.element-modal__container {
+.el-modal__container {
   position: absolute;
   opacity: 1;
   background: #fff;
@@ -36,27 +36,27 @@
   &.regular {
   }
   &.danger {
-    .element-modal__header {
+    .el-modal__header {
       background: $color__main-danger;
       color: $color__white;
     }
   }
 
   &.warning {
-    .element-modal__header {
+    .el-modal__header {
       background: $color__main-warning;
       color: $color__white;
     }
   }
 }
-.element-modal__close {
+.el-modal__close {
   margin-left: 10px;
 }
-.element-modal__submit {
+.el-modal__submit {
   margin-left: 10px;
 }
 
-.element-modal__header {
+.el-modal__header {
   width: 100%;
   border-bottom: 1px solid #ccc;
   display: flex;
@@ -68,15 +68,15 @@
   color: #666;
   border-bottom: 2px solid $color__alpha-2;
 
-  .element-modal__header-title {
+  .el-modal__header-title {
     margin-left: 20px;
     font-size: 24px;
   }
-  .element-modal__header-close {
+  .el-modal__header-close {
     margin-right: 18px;
   }
 }
-.element-modal__body {
+.el-modal__body {
   width: 100%;
   border-bottom: 1px solid #ccc;
   flex: 1;
@@ -84,20 +84,20 @@
   position: relative;
   display: flex;
 }
-.element-modal__body--tabbed {
+.el-modal__body--tabbed {
   overflow: hidden;
 }
 
-.element-modal__body__content {
+.el-modal__body__content {
   padding: 20px;
 }
-.element-modal__body__content--flexible {
+.el-modal__body__content--flexible {
   display: flex;
   flex-direction: column;
   flex: 2 1 auto;
   width: 100%;
 }
-.element-modal__footer {
+.el-modal__footer {
   width: 100%;
   background: #f8f8f8;
   display: flex;
@@ -105,9 +105,9 @@
   justify-content: space-between;
 }
 
-.element-modal__footer-left {
+.el-modal__footer-left {
 }
-.element-modal__footer-right {
+.el-modal__footer-right {
   padding: 10px;
   display: flex;
 }

@@ -1,10 +1,10 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-icon {
+.el-icon {
   display: flex;
   flex: 0 0 auto;
 }
-.element-icon--spin {
+.el-icon--spin {
   animation: spinIcon 1s linear infinite;
 }
 

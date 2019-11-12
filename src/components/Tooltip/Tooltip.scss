@@ -1,37 +1,37 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-tooltip {
+.el-tooltip {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 0 0 auto;
 }
-.element-tooltip--custom {
+.el-tooltip--custom {
   overflow: unset;
   text-overflow: unset;
   white-space: unset;
 }
-.element-tooltip--inactive {
+.el-tooltip--inactive {
   max-width: none;
   overflow: visible;
   text-overflow: unset;
   white-space: unset;
 }
-.element-tooltip__content {
+.el-tooltip__content {
 }
 
-.element-tooltip__child {
+.el-tooltip__child {
   position: relative;
 }
 
-.element-tooltip__child--custom {
+.el-tooltip__child--custom {
   overflow: visible;
   color: #333;
   display: table;
 }
 
-.element-tooltip__viewer {
+.el-tooltip__viewer {
   display: block;
   position: absolute;
   z-index: 1000000;
@@ -41,49 +41,49 @@
   display: table;
 }
 
-.element-tooltip__viewer--break {
+.el-tooltip__viewer--break {
 }
-.element-tooltip__viewer--default {
+.el-tooltip__viewer--default {
   padding: 7px;
   border-radius: 4px;
   font-size: 12px;
   line-height: 14px;
 }
-.element-tooltip__viewer--regular {
+.el-tooltip__viewer--regular {
   background: #000;
   color: #fff;
   fill: #fff;
 }
 
-.element-tooltip__viewer--error {
+.el-tooltip__viewer--error {
   color: #fff;
   fill: #fff;
   background: $color__main-danger;
 }
-.element-tooltip__viewer--info {
+.el-tooltip__viewer--info {
   color: #fff;
   fill: #fff;
   background: $color__main-primary;
 }
-.element-tooltip__viewer--warning {
+.el-tooltip__viewer--warning {
   color: #fff;
   fill: #fff;
   background: $color__main-warning;
 }
 
-.element-tooltip__viewer--fade-in-top {
+.el-tooltip__viewer--fade-in-top {
   animation-name: fade-in-top;
 }
-.element-tooltip__viewer--fade-in-left {
+.el-tooltip__viewer--fade-in-left {
   animation-name: fade-in-left;
 }
-.element-tooltip__viewer--fade-in-bottom {
+.el-tooltip__viewer--fade-in-bottom {
   animation-name: fade-in-bottom;
 }
-.element-tooltip__viewer--fade-in-right {
+.el-tooltip__viewer--fade-in-right {
   animation-name: fade-in-right;
 }
-.element-tooltip__viewer--fade-in {
+.el-tooltip__viewer--fade-in {
   opacity: 1;
   transform: translate(0px, 0px);
   animation-duration: 0.1s;
@@ -92,7 +92,7 @@
   animation-timing-function: ease-in-out;
 }
 
-.element-tooltip__handle {
+.el-tooltip__handle {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -103,7 +103,7 @@
   top: 2.1px;
   left: 2.1px;
 }
-.element-tooltip__handle-wrapper {
+.el-tooltip__handle-wrapper {
   position: absolute;
   width: 7.1px;
   height: 14.2px;
@@ -111,48 +111,48 @@
   line-height: 30px;
   background: none;
 }
-.element-tooltip__handle--default {
+.el-tooltip__handle--default {
   background: #000;
   color: #fff;
   fill: #fff;
   box-shadow: none;
   border: none;
 }
-.element-tooltip__handle--error {
+.el-tooltip__handle--error {
   background: $color__main-danger;
 }
-.element-tooltip__handle--info {
+.el-tooltip__handle--info {
   background: $color__main-primary;
 }
-.element-tooltip__handle--warning {
+.el-tooltip__handle--warning {
   background: $color__main-warning;
 }
-.element-tooltip__handle--neutral {
+.el-tooltip__handle--neutral {
   background: $color__white;
   box-shadow: 0px 0px 2px $color__alpha-2;
 }
-.element-tooltip__handle-wrapper--top {
+.el-tooltip__handle-wrapper--top {
   top: 100%;
   left: 50%;
   margin-top: -5px;
   margin-left: -5px;
   transform: rotateZ(270deg);
 }
-.element-tooltip__handle-wrapper--left {
+.el-tooltip__handle-wrapper--left {
   top: 50%;
   left: 100%;
   margin-top: -7px;
   margin-left: -1px;
   transform: rotateZ(180deg);
 }
-.element-tooltip__handle-wrapper--bottom {
+.el-tooltip__handle-wrapper--bottom {
   top: 0%;
   left: 50%;
   margin-top: -9px;
   margin-left: -5px;
   transform: rotateZ(90deg);
 }
-.element-tooltip__handle-wrapper--right {
+.el-tooltip__handle-wrapper--right {
   top: 50%;
   left: 0%;
   margin-top: -7px;

@@ -1,6 +1,6 @@
 @import '../../assets/styles/vars/colors.scss';
 
-.element-scrollbox__wrapper {
+.el-scrollbox__wrapper {
   position: relative;
   overflow-x: hidden;
   display: flex;
@@ -8,7 +8,7 @@
   flex-direction: row;
   max-height: 100%;
 }
-.element-scrollbox__content-box {
+.el-scrollbox__content-box {
   width: calc(100% + 20px);
   overflow-y: scroll;
   overflow-x: hidden;
@@ -17,16 +17,16 @@
   flex: 1 0 auto;
   flex-direction: column;
 }
-.element-scrollbox__content-box--flexible {
+.el-scrollbox__content-box--flexible {
   display: flex;
 }
-.element-scrollbox__content {
+.el-scrollbox__content {
   width: calc(100% + 20px);
   flex-direction: column;
   flex: 2 0 auto;
   flex-direction: column;
 }
-.element-scrollbox__content--flexible {
+.el-scrollbox__content--flexible {
   height: auto;
   display: flex;
 }
