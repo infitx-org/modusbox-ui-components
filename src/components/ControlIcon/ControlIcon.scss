@@ -15,14 +15,13 @@
       transform: scale3d(1.2, 1.2, 1);
     }
   }
+  &.control__icon--disabled {
+    fill: #ccc;
+  }
 }
 
 .control-icon__icon {
   z-index: 2;
-}
-.control__icon--disabled {
-  opacity: 0.7;
-  fill: #ccc;
 }
 .control__icon--button {
   flex: 0 0 auto;
