@@ -12,6 +12,7 @@ import ComponentFormInputs from './ComponentFormInputs';
 import ComponentHeading from './ComponentHeading';
 import ComponentIcon from './ComponentIcon';
 import ComponentMenu from './ComponentMenu';
+import ComponentMessageBox from './ComponentMessageBox';
 import ComponentModal from './ComponentModal';
 import ComponentRadio from './ComponentRadio';
 import ComponentRow from './ComponentRow';
@@ -34,6 +35,7 @@ export {
   ComponentFormInputs,
   ComponentHeading,
   ComponentMenu,
+  ComponentMessageBox,
   ComponentSelect,
   ComponentTextField,
   ComponentTabs,

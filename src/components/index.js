@@ -13,6 +13,7 @@ import FormInput, { FormInputs, FormInputsGroup, Inline } from './FormInputs';
 import Heading from './Heading';
 import Icon from './Icon';
 import Menu, { MenuItem, MenuSection } from './Menu';
+import MessageBox from './MessageBox';
 import Modal, { ModalTabsLayout } from './Modal';
 import Navbar from './Navbar';
 import RadioGroup from './RadioGroup';
@@ -45,9 +46,10 @@ export {
   Menu,
   MenuSection,
   MenuItem,
-  Navbar,
+  MessageBox,
   Modal,
   ModalTabsLayout,
+  Navbar,
   RadioGroup,
   Row,
   ScrollBox,

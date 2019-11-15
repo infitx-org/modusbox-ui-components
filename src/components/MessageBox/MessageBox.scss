@@ -1,0 +1,91 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/shadow.scss';
+
+.message-box {
+  display: flex;
+  width: 100%;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  overflow: hidden;
+  animation: fadeInOverlayMessage 0.2s ease-out 1 forwards;
+}
+
+.message-box--centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.message-box--default {
+  fill: #666;
+  color: #666;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.message-box--primary {
+  fill: $color__main-primary;
+  color: $color__main-primary;
+  background-color: $shadow-color--primary;
+}
+.message-box--secondary {
+  fill: $color__main-secondary;
+  color: $color__main-secondary;
+  background-color: $shadow-color--secondary;
+}
+.message-box--tertiary {
+  fill: $color__main-tertiary;
+  color: $color__main-tertiary;
+  background-color: $shadow-color--tertiary;
+}
+.message-box--success {
+  fill: $color__main-success;
+  color: $color__main-success;
+  background-color: $shadow-color--success;
+}
+.message-box--danger {
+  fill: $color__main-danger;
+  color: $color__main-danger;
+  background-color: $shadow-color--danger;
+}
+.message-box--warning {
+  fill: $color__main-warning;
+  color: $color__main-warning;
+  background-color: $shadow-color--warning;
+}
+.message-box--dark {
+  fill: #000;
+  color: #000;
+  background-color: $shadow-color--dark;
+}
+.message-box--light {
+  fill: $color__white;
+  color: $color__white;
+  background-color: shadow-color-0light;
+}
+
+.message-box__icon-box {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.message-box__icon {
+}
+.message-box__messages {
+  flex: 1 1 auto;
+}
+.message-box__messages--centered {
+  flex: 0 0 auto;
+}
+
+.message-box__message {
+}
+
+@keyframes fadeInOverlayMessage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
