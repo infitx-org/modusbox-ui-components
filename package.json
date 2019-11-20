@@ -1,7 +1,8 @@
 {
-  "name": "modusbox-ui-components",
-  "version": "1.16.21",
+  "name": "@modusbox/modusbox-ui-components",
+  "version": "1.16.22",
   "description": "ModusBox UI Components",
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "files": [
     "dist/index.js",
@@ -23,7 +24,6 @@
     "prepack": "yarn build",
     "printversion": "node -p \"require('./package.json').version\""
   },
-  "license": "UNLICENSED",
   "dependencies": {
     "copy-webpack-plugin": "^5.0.0",
     "eslint-config-prettier": "6.3.0",
