@@ -1,5 +1,6 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/shadow.scss';
+@import '../../assets/styles/vars/transitions.scss';
 
 .input-button__input {
   outline: none;
@@ -11,7 +12,7 @@
   white-space: nowrap;
   user-select: none;
   text-decoration: none;
-  transition: background 0.05s ease-out, margin 0.01s linear;
+  transition: $button__main-transition;
   font-style: normal;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -21,6 +22,9 @@
   fill: $color__white;
   stroke: $color__white;
   border-bottom-width: 2px;
+
+  box-shadow: $shadow-size--closed transparent;
+  
   &:not(.noFill) {
     border-bottom-color: rgba(0, 0, 0, 0.2);
   }

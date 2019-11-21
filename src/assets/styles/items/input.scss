@@ -17,8 +17,6 @@
   font-family: Fira Sans, sans-serif;
   letter-spacing: 0.02rem;
   border-radius: $border-radius;
-  box-shadow: $shadow-size--closed;
-  color: transparent;
 }
 .mb-input--open {
   box-shadow: $shadow-size;
@@ -51,6 +49,9 @@
 }
 
 /** COMPONENT SHADOW **/
+.mb-input__shadow {
+  color: transparent;
+}
 .mb-input--open {
   &.mb-input__shadow {
     color: $shadow-color--default;
