@@ -17,10 +17,13 @@
   font-family: Fira Sans, sans-serif;
   letter-spacing: 0.02rem;
   border-radius: $border-radius;
+  box-shadow: $shadow-size--closed;
+  color: transparent;
 }
 .mb-input--open {
-  padding: 0px $component-open-size;
   box-shadow: $shadow-size;
+  padding: 0px $component-open-size;
+  
 }
 .mb-input--disabled {
   opacity: $component-opacity--disabled;
@@ -48,17 +51,19 @@
 }
 
 /** COMPONENT SHADOW **/
-.mb-input__shadow {
-  color: $shadow-color--default;
-}
-.mb-input__shadow--pending {
-  color: $shadow-color--pending;
-}
-.mb-input__shadow--required {
-  color: $shadow-color--required;
-}
-.mb-input__shadow--invalid {
-  color: $shadow-color--invalid;
+.mb-input--open {
+  &.mb-input__shadow {
+    color: $shadow-color--default;
+  }
+  &.mb-input__shadow--pending {
+    color: $shadow-color--pending;
+  }
+  &.mb-input__shadow--required {
+    color: $shadow-color--required;
+  }
+  &.mb-input__shadow--invalid {
+    color: $shadow-color--invalid;
+  }
 }
 
 /** COMPONENT BACKGROUND **/

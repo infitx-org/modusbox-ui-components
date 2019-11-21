@@ -1,2 +1,4 @@
-$input__main-transition: background 0.2s ease-out, border 0.2s ease-out, margin 0.2s ease-out,
+$easing: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+$input__main-transition: box-shadow 0.5s $easing, color 0.2s $easing, background 0.2s ease-out, border 0.2s ease-out, margin 0.2s ease-out,
   padding 0.2s ease-out !default;

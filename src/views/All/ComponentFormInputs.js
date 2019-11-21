@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';
 import Heading from '../../components/Heading';
-/* eslint-disable */
+import {createValidation, vd, toValidationResult} from '../../reduxValidation';
+
+
 
 const model = {
   name: undefined,
@@ -12,7 +14,14 @@ const model = {
   age: 42,
 };
 
-const validation = undefined;
+const validation = {
+  name: createValidation([vd.isRequired, vd.maxLength(10) ]),
+  lastname: createValidation([vd.isRequired, vd.maxLength(10) ]),
+  description: createValidation([vd.isRequired, vd.maxLength(10) ]),
+  sex: createValidation([vd.isRequired ]),
+  age: createValidation([vd.isRequired, vd.isNum ]),
+};
+
 const ages = new Array(100).fill(0).map((_, index) => ({ label: index, value: index }));
 const sexes = [
   {
@@ -35,11 +44,9 @@ class Wrapped extends Component {
     this.onChange = this.onChange.bind(this);
     this.state = {
       model,
-      validation,
     };
   }
   onChange(change) {
-    console.log(change);
     this.setState({
       model: {
         ...this.state.model,
@@ -48,18 +55,19 @@ class Wrapped extends Component {
     });
   }
   render() {
+    const validationResult = toValidationResult(this.state.model, validation);
     return (
       <div>
         <Heading>Wrapped</Heading>
         <FormInputs
           onChange={this.onChange}
           data={this.state.model}
-          validation={this.state.validation}
+          validation={validationResult}
           title="Form inputs title"
         >
-          <FormInput type="text" label="name" name="name" required />
-          <FormInput type="text" label="lastname" name="lastname" required />
-          <FormInput type="area" label="description" name="description" required />
+          <FormInput type="text" label="name" name="name" />
+          <FormInput type="text" label="lastname" name="lastname" />
+          <FormInput type="area" label="description" name="description" />
           <FormInput type="select" label="age" name="age" options={ages} />
           <FormInput type="radio" label="sex" name="sex" options={sexes} />
         </FormInputs>
@@ -76,7 +84,6 @@ class Unwrapped extends Component {
     this.state = {
       size: 'l',
       model,
-      validation,
     };
   }
   onChange(field) {
@@ -95,6 +102,7 @@ class Unwrapped extends Component {
     });
   }
   render() {
+    const validationResult = toValidationResult(this.state.model, validation)
     return (
       <div>
         <Heading>Non Wrapped</Heading>
@@ -113,33 +121,37 @@ class Unwrapped extends Component {
           size={this.state.size}
           onChange={this.onChange('name')}
           value={this.state.model.name}
+          validation={validationResult.fields.name}
           type="text"
           label="name"
           name="name"
-          required
+         
         />
         <FormInput
           size={this.state.size}
           onChange={this.onChange('lastname')}
           value={this.state.model.lastname}
+          validation={validationResult.fields.lastname}
           type="text"
           label="lastname"
           name="lastname"
-          required
+         
         />
         <FormInput
           size={this.state.size}
           onChange={this.onChange('description')}
           value={this.state.model.description}
+          validation={validationResult.fields.description}
           type="area"
           label="description"
           name="description"
-          required
+         
         />
         <FormInput
           size={this.state.size}
           onChange={this.onChange('age')}
           value={this.state.model.age}
+          validation={validationResult.fields.age}
           type="select"
           label="age"
           name="age"
@@ -148,6 +160,7 @@ class Unwrapped extends Component {
         <FormInput
           onChange={this.onChange('sex')}
           value={this.state.model.sex}
+          validation={validationResult.fields.sex}
           type="radio"
           label="sex"
           name="sex"

@@ -1,6 +1,7 @@
 @import './colors.scss';
 
 $shadow-size: 0px 0px 0px 3px;
+$shadow-size--closed: 0px 0px 0px 0px;
 
 $shadow-color--default: lighten($color__blue-3, 30%) !default;
 $shadow-color--pending: lighten($color__blue-4, 30%) !default;
