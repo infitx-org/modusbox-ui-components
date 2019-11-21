@@ -22,6 +22,7 @@ import ScrollBox from './ScrollBox';
 import Select from './Select';
 import Spinner from './Spinner';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from './Tabs';
+import TextArea from './TextArea';
 import TextField from './TextField';
 import Toast from './Toast';
 import Tooltip from './Tooltip';
@@ -60,6 +61,7 @@ export {
   TabList,
   TabPanels,
   TabPanel,
+  TextArea,
   TextField,
   Toast,
   Tooltip,

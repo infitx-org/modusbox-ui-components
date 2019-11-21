@@ -21,18 +21,7 @@ const getMessages = message => {
 
 class MessageBox extends PureComponent {
   render() {
-
-    const {
-      kind,
-      style,
-      icon,
-      message,
-      center,
-      size,
-      fontSize,
-      className,
-      children,
-    } = this.props;
+    const { kind, style, icon, message, center, size, fontSize, className, children } = this.props;
 
     if (!message && !children) {
       return null;
@@ -49,7 +38,7 @@ class MessageBox extends PureComponent {
 
     const messagesClassName = composeClassNames([
       'message-box__messages',
-      center && 'message-box__messages--centered'
+      center && 'message-box__messages--centered',
     ]);
 
     let iconComponent = null;
@@ -69,7 +58,7 @@ class MessageBox extends PureComponent {
         </div>
       </div>
     );
-  };
+  }
 }
 
 MessageBox.propTypes = {
@@ -97,7 +86,7 @@ MessageBox.defaultProps = {
   fontSize: 13,
   label: undefined,
   icon: undefined,
-  // TODO: Add iconPosition: 'left', 
+  // TODO: Add iconPosition: 'left',
 };
 
 export default MessageBox;

@@ -1,29 +1,31 @@
 import '../assets/styles/index.scss';
 import './index.scss';
 
-import PropTypes from 'prop-types';
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 
-import Button from '../components/Button';
-import DataList from '../components/DataList';
 import Menu, { MenuItem } from '../components/Menu';
 import ScrollBox from '../components/ScrollBox';
 import * as ComponentViews from './All';
 import WrappedNavbar from './All/ComponentNavbar';
+import Header from './Header';
 
-const componentMappings = Object.keys(ComponentViews).map(view => ({
+const setNameFromView = view => ({
   name: view.substring(9), // 'Remove the prefix "component"
   view,
-}));
-const viewNames = componentMappings.map(c => c.name);
+});
+const getNameFromMapping = mapping => mapping.name;
 
-const MenuItems = componentMappings.map(({ name }) => (
+const toMenuItem = name => (
   <MenuItem key={name} path={`/${name}`} label={name}>
     {name}
   </MenuItem>
-));
+);
 
+const componentViews = Object.keys(ComponentViews);
+const componentMappings = componentViews.map(setNameFromView);
+const viewNames = componentMappings.map(getNameFromMapping);
+const MenuItems = viewNames.sort().map(toMenuItem);
 const Views = {};
 
 componentMappings.forEach(({ view, name }) => {
@@ -38,108 +40,6 @@ componentMappings.forEach(({ view, name }) => {
     );
   }
 });
-
-const columns = [
-  {
-    label: 'prop',
-    key: 'prop',
-  },
-  {
-    label: 'type',
-    key: 'type',
-  },
-  {
-    label: 'value',
-    key: 'value',
-  },
-];
-const Block = ({ title, children }) => (
-  <div className="header__block__container">
-    <div className="header__block__title">{title}</div>
-    <div className="header__block__props">{children}</div>
-  </div>
-);
-
-class Header extends React.Component {
-  static getValueType(propType, value) {
-    if (propType === PropTypes.string) {
-      return 'String';
-    } else if (propType === PropTypes.number) {
-      return 'Number';
-    } else if (propType === PropTypes.bool) {
-      return 'Boolean';
-    } else if (propType.name === PropTypes.oneOf().name) {
-      return 'One Ot types';
-    } else if (propType.name === PropTypes.shape().name) {
-      return 'Shape / Object';
-    }
-    return Object.prototype.toString
-      .call(value)
-      .split(' ')[1]
-      .slice(0, -1);
-  }
-  constructor(props) {
-    super(props);
-    this.getComponentProps = this.getComponentProps.bind(this);
-    this.state = {
-      open: false,
-    };
-  }
-  getComponentProps() {
-    const name = this.props.component;
-    let allExportedOnes = {};
-
-    try {
-      // eslint-disable-next-line
-      const LibComponents = require(`../components/${name}/index.js`);
-
-      if (LibComponents.default) {
-        allExportedOnes = [LibComponents.default];
-      } else {
-        allExportedOnes = Object.values(LibComponents);
-      }
-
-      return allExportedOnes.reduce((prev, component) => {
-        const props = Object.entries(component.defaultProps).map(([prop, value]) => {
-          return {
-            prop,
-            type: Header.getValueType(component.propTypes[prop], value),
-            value: JSON.stringify(value),
-          };
-        });
-        return [
-          ...prev,
-          <Block key={component.name} title={component.name}>
-            <DataList columns={columns} list={props} />
-          </Block>,
-        ];
-      }, []);
-    } catch (e) {
-      return null;
-    }
-  }
-  render() {
-    return (
-      <div id="view__header" className={this.state.open && 'view__header--open'}>
-        <div id="view__header__title-row">
-          <div id="view__header__title">{this.props.component}</div>
-          <Button
-            size="s"
-            label="show props"
-            onClick={() => this.setState({ open: !this.state.open })}
-          />
-        </div>
-        {this.state.open && (
-          <div id="view__header__props">
-            <ScrollBox>
-              <div>{this.getComponentProps()}</div>
-            </ScrollBox>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
 
 class Examples extends React.Component {
   constructor(props) {

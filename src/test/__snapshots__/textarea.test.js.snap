@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the textarea correctly when multiple props are set 1`] = `
+<ValidationWrapper
+  active={false}
+  messages={Array []}
+>
+  <div
+    className="input-textarea__component mb-input mb-input__borders mb-input__background mb-input__shadow mb-input--large mb-textarea--large"
+    onClick={[Function]}
+    role="presentation"
+    style={Object {}}
+  >
+    <div
+      className="mb-input__content input-textarea__content"
+    >
+      <div
+        className="input-textarea__placeholder"
+      />
+      <textarea
+        autoComplete="off"
+        autoFocus={false}
+        className="mb-input__input input-textarea__value"
+        disabled={false}
+        id="test-id"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPress={[Function]}
+        rows={10}
+        type="text"
+        value="test-value"
+      />
+    </div>
+  </div>
+</ValidationWrapper>
+`;

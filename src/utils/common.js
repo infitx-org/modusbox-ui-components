@@ -1,10 +1,15 @@
+const FOCUSABLE_ELEMENTS = [
+  'textarea:not([disabled])',
+  'input:not([disabled])',
+  'button:not([disabled]):not(.mb-input__inner-button)',
+];
+
 const focusNextFocusableElement = (currentElement, next = true) => {
   const { body, activeElement } = document;
   const forceFocusNextElement = activeElement === currentElement || activeElement === body;
 
   if (forceFocusNextElement) {
-    const selector = 'input:not([disabled]),button:not([disabled]):not(.mb-input__inner-button)';
-    const inputs = document.querySelectorAll(selector);
+    const inputs = document.querySelectorAll(FOCUSABLE_ELEMENTS.join(','));
     const inputList = Array.prototype.slice.call(inputs);
     const nextIndex = inputList.indexOf(currentElement) + (next ? 1 : -1);
     let nextInput = null;

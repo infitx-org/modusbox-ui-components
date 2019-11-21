@@ -51,25 +51,34 @@
 .forminput__label-box--small {
   height: 13px;
   label {
+    margin-left: 1px;
     font-size: 10px;
+  }
+  .forminput__label-icon {
+    margin-left: 1px;
   }
 }
 .forminput__label-box--medium {
   height: 16px;
   label {
-    font-size: 13px;
+    margin-left: 2px;
+    font-size: 12px;
+  }
+  .forminput__label-icon {
+    margin-left: 2px;
   }
 }
 .forminput__label-box--large {
   height: 19px;
   label {
-    font-size: 16px;
+    margin-left: 3px;
+    font-size: 14px;
+  }
+  .forminput__label-icon {
+    margin-left: 3px;
   }
 }
-.forminput__label-icon {
-  margin-left: 3px;
-  margin-right: 3px;
-}
+
 .forminput-timepicker,
 .forminput-input,
 .forminput-checkbox {

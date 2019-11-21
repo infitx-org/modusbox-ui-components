@@ -7,6 +7,7 @@ import Heading from '../../components/Heading';
 const model = {
   name: undefined,
   lastname: 'test-lastname',
+  description: 'The quick brown fox jumps over the lazy dog\n and find a friend for life',
   sex: 'unisex',
   age: 42,
 };
@@ -58,6 +59,7 @@ class Wrapped extends Component {
         >
           <FormInput type="text" label="name" name="name" required />
           <FormInput type="text" label="lastname" name="lastname" required />
+          <FormInput type="area" label="description" name="description" required />
           <FormInput type="select" label="age" name="age" options={ages} />
           <FormInput type="radio" label="sex" name="sex" options={sexes} />
         </FormInputs>
@@ -124,7 +126,15 @@ class Unwrapped extends Component {
           label="lastname"
           name="lastname"
           required
-          disabled
+        />
+        <FormInput
+          size={this.state.size}
+          onChange={this.onChange('description')}
+          value={this.state.model.description}
+          type="area"
+          label="description"
+          name="description"
+          required
         />
         <FormInput
           size={this.state.size}

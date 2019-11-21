@@ -20,6 +20,7 @@ import ComponentScrollBox from './ComponentScrollBox';
 import ComponentSelect from './ComponentSelect';
 import ComponentSpinner from './ComponentSpinner';
 import ComponentTabs from './ComponentTabs';
+import ComponentTextArea from './ComponentTextArea';
 import ComponentTextField from './ComponentTextField';
 import ComponentToast from './ComponentToast';
 import ComponentTooltip from './ComponentTooltip';
@@ -37,6 +38,7 @@ export {
   ComponentMenu,
   ComponentMessageBox,
   ComponentSelect,
+  ComponentTextArea,
   ComponentTextField,
   ComponentTabs,
   ComponentRadio,

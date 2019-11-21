@@ -71,9 +71,7 @@ class MenuItem extends PureComponent {
     }
     let backIcon = null;
     if (back) {
-      backIcon = (
-        <Icon className="el-menu__item__back-icon" name="arrow" size={10} fill="#999" />
-      );
+      backIcon = <Icon className="el-menu__item__back-icon" name="arrow" size={10} fill="#999" />;
     }
     let itemIcon = null;
     if (icon) {
@@ -167,9 +165,7 @@ const MENU_SECTION_TYPE = <MenuSection />.type;
 
 const isMenuSection = node => node.type === MENU_SECTION_TYPE;
 
-const MenuItemsGroup = ({ children }) => (
-  <div className="el-menu__section-items">{children}</div>
-);
+const MenuItemsGroup = ({ children }) => <div className="el-menu__section-items">{children}</div>;
 
 const wrapItemsInSections = items => {
   const groupedMenuItems = [];

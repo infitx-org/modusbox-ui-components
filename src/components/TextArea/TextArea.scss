@@ -1,0 +1,89 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/transitions.scss';
+
+.input-textarea {
+}
+.mb-textarea--small {
+  height: 60px;
+  padding-left: 10px;
+  padding-right: 6px;
+  font-size: 12px;
+  .input-textarea__placeholder {
+    height: 31px;
+  }
+  .input-textarea__value {
+    padding-top: 10px;
+  }
+}
+.mb-textarea--medium {
+  height: 80px;
+  padding-left: 13px;
+  padding-right: 8px;
+  font-size: 13px;
+  .input-textarea__placeholder {
+    height: 38px;
+  }
+  .input-textarea__value {
+    padding-top: 13px;
+  }
+}
+.mb-textarea--large {
+  height: 100px;
+  padding-left: 16px;
+  padding-right: 10px;
+  font-size: 14px;
+  .input-textarea__placeholder {
+    height: 45px;
+  }
+  .input-textarea__value {
+    padding-top: 16px;
+  }
+}
+
+.input-textarea__component {
+  display: flex;
+  position: relative;
+  cursor: text;
+  transition: $input__main-transition;
+
+  &.input-textarea__mb-input--open {
+  }
+
+  &.input-textarea__mb-input--disabled {
+  }
+}
+
+.input-textarea__placeholder {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 45px;
+}
+.input-textarea__content {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+
+.input-textarea__value {
+  flex: 2 1 auto;
+  vertical-align: middle;
+  position: relative;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0px;
+  padding-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  color: $color__dark-gray-3;
+  resize: none;
+}
+.input-textarea__icon {
+  flex: 0 0 auto;
+}

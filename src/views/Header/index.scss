@@ -1,0 +1,81 @@
+#playground__header {
+  background: #f4f4f4;
+  border-bottom: 2px solid #ccc;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+#playground__header__title-row {
+  display: flex;
+  padding: 10px;
+}
+#playground__header__title {
+  flex: 1 0 auto;
+  font-weight: bold;
+  font-size: 18px;
+  align-items: center;
+  display: flex;
+  margin-left: 20px;
+}
+#playground__header__props {
+  flex: 0 0 auto;
+  min-height: 0px;
+}
+.header__prop {
+  margin-right: 10px;
+}
+
+.header__block__container {
+  padding-top: 0px;
+  padding: 10px;
+}
+.header__block__title {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 5px;
+}
+.header__block__props {
+}
+
+.header__prop__container {
+  margin-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.proptype__prop__type {
+  font-family: monospace;
+}
+.proptype__prop__value {
+  font-family: monospace;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: bold;
+  background-color: #eee;
+}
+
+.proptype__prop__value--string {
+  color: #03c000;
+}
+.proptype__prop__value--number {
+  color: #333;
+}
+.proptype__prop__value--bool {
+  color: #39f;
+}
+.proptype__prop__value--oot {
+  color: #333;
+}
+.proptype__prop__value--object {
+  color: #f33;
+}
+.proptype__prop__value--func {
+  color: #0f9;
+}
+.proptype__prop__value--undefined {
+  color: #999;
+}

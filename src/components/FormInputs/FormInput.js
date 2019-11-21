@@ -11,6 +11,7 @@ import FileUploader from '../FileUploader';
 import Icon from '../Icon';
 import RadioGroup from '../RadioGroup';
 import Select from '../Select';
+import TextArea from '../TextArea';
 import TextField from '../TextField';
 import Tooltip from '../Tooltip';
 
@@ -153,6 +154,42 @@ const composePicker = props => [
     {props.children !== undefined && props.children}
     <InfoMessage message={props.inputMessage} />
   </div>,
+  <LockedIcon locked={props.isLocked} />,
+];
+
+const composeArea = props => [
+  <div className="forminput-input" style={props.wrapperStyle}>
+    <Label
+      size={props.size}
+      label={props.label}
+      required={props.isRequired}
+      complete={props.hasValue}
+    />
+    <TextArea
+      className={props.className}
+      size={props.size}
+      id={props.componentId}
+      autofocus={props.autofocus}
+      value={props.value}
+      onChange={props.onChange}
+      disabled={props.isDisabled}
+      required={props.isRequiredAndUnset}
+      pending={props.isPending}
+      invalid={props.isInvalid}
+      invalidMessages={props.validationMessages}
+      style={props.inputStyle}
+      placeholder={props.placeholder}
+    />
+    {props.children !== undefined && props.children}
+    <InfoMessage message={props.inputMessage} />
+  </div>,
+  <InlineButton
+    visible={props.hasInlineButton}
+    locked={props.isLocked}
+    disabled={props.isDisabled}
+    onClick={props.onInlineButtonClick}
+    label={props.inlineButtonLabel}
+  />,
   <LockedIcon locked={props.isLocked} />,
 ];
 
@@ -466,6 +503,13 @@ class FormInput extends PureComponent {
       input = composeDate({ ...cmnProps, ...btnProps, type, format, dateFormat });
     } else if (type === 'file') {
       input = composeFile({ ...cmnProps, parseFileAsText, parseFileAsBase64, fileType, fileName });
+    } else if (type === 'area') {
+      input = composeArea({
+        ...cmnProps,
+        ...btnProps,
+        autofocus,
+        onChange: this.onTextFieldChange,
+      });
     } else if (type === 'text' || type === 'number' || type === 'email' || type === 'password') {
       input = composeText({
         ...cmnProps,
@@ -477,11 +521,7 @@ class FormInput extends PureComponent {
     }
     input = input.map(addKey);
 
-    return (
-      <div className="forminput__row">
-        {input}
-      </div>
-    );
+    return <div className="forminput__row">{input}</div>;
   }
 }
 
@@ -491,6 +531,7 @@ FormInput.propTypes = {
     'select',
     'checkbox',
     'radio',
+    'area',
     'text',
     'number',
     'email',

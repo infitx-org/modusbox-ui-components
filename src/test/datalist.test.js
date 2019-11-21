@@ -376,9 +376,8 @@ it('filters the list when setting a filter', () => {
   const wrapper = mount(<DataList list={testList2} columns={testColumns2} />);
 
   const filterValue = '1';
-  const initialRowsCount = wrapper.find(
-    'div.el-datalist__row:not(.el-datalist__row--filtered)',
-  ).length;
+  const initialRowsCount = wrapper.find('div.el-datalist__row:not(.el-datalist__row--filtered)')
+    .length;
 
   wrapper
     .find('.el-datalist__header-cell')
@@ -395,9 +394,7 @@ it('filters the list when setting a filter', () => {
     .find('input[type="text"]')
     .simulate('change', { target: { value: filterValue } });
 
-  const updatedRows = wrapper.find(
-    'div.el-datalist__row:not(.el-datalist__row--filtered)',
-  );
+  const updatedRows = wrapper.find('div.el-datalist__row:not(.el-datalist__row--filtered)');
   const firstCellContent = updatedRows
     .at(0)
     .find('div.el-datalist__item-cell')
@@ -438,9 +435,8 @@ it('filters the list on muliple columns when multiple filters are set a filter',
 
   const wrapper = mount(<DataList list={list} columns={columns} />);
 
-  const initialRowsCount = wrapper.find(
-    'div.el-datalist__row:not(.el-datalist__row--filtered)',
-  ).length;
+  const initialRowsCount = wrapper.find('div.el-datalist__row:not(.el-datalist__row--filtered)')
+    .length;
 
   wrapper
     .find('.el-datalist__header-cell')
@@ -472,9 +468,7 @@ it('filters the list on muliple columns when multiple filters are set a filter',
     .find('input[type="text"]')
     .simulate('change', { target: { value: valueColumn2 } });
 
-  const updatedRows = wrapper.find(
-    'div.el-datalist__row:not(.el-datalist__row--filtered)',
-  );
+  const updatedRows = wrapper.find('div.el-datalist__row:not(.el-datalist__row--filtered)');
 
   const updatedRowsCount = updatedRows.length;
 
