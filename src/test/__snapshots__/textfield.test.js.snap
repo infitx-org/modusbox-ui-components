@@ -20,6 +20,7 @@ exports[`renders the textfield correctly when multiple props are set 1`] = `
         className="mb-input__input input-textfield__value"
         disabled={false}
         id="test-id"
+        key="input"
         onBlur={[Function]}
         onChange={[Function]}
         onClick={[Function]}

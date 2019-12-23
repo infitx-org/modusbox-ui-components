@@ -21,7 +21,6 @@
 .mb-input--open {
   box-shadow: $shadow-size;
   padding: 0px $component-open-size;
-  
 }
 .mb-input--disabled {
   opacity: $component-opacity--disabled;
@@ -129,7 +128,7 @@
   border: none;
   outline: none;
   padding: 0px;
-  padding-top: 5px;
+  padding-top: 0px;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: inherit;
@@ -162,15 +161,15 @@
   font-size: 14px;
 }
 .mb-input__placeholder--active-small {
-  top: 7px;
-  font-size: 9px;
+  top: 5px;
+  font-size: 7px;
 }
 .mb-input__placeholder--active-medium {
-  top: 9px;
-  font-size: 10px;
+  top: 6px;
+  font-size: 9px;
 }
 .mb-input__placeholder--active-large {
-  top: 11px;
+  top: 8px;
   font-size: 11px;
 }
 

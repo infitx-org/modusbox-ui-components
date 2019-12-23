@@ -1,28 +1,36 @@
 const FOCUSABLE_ELEMENTS = [
-  'textarea:not([disabled])',
-  'input:not([disabled])',
-  'button:not([disabled]):not(.mb-input__inner-button)',
+  '.mb-input__input:not([disabled])',
+  '.input-button__input:not([disabled]):not(.mb-input__inner-button)',
 ];
 
-const focusNextFocusableElement = (currentElement, next = true) => {
+const getNextFocusableElement = (currentElement, next = true) => {
   const { body, activeElement } = document;
-  const forceFocusNextElement = activeElement === currentElement || activeElement === body;
+  const forceFocusNextElement = currentElement || activeElement === body;
 
-  if (forceFocusNextElement) {
-    const inputs = document.querySelectorAll(FOCUSABLE_ELEMENTS.join(','));
-    const inputList = Array.prototype.slice.call(inputs);
-    const nextIndex = inputList.indexOf(currentElement) + (next ? 1 : -1);
-    let nextInput = null;
-    if (nextIndex < 0) {
-      nextInput = inputList[inputList.length + nextIndex];
-    } else if (nextIndex >= inputList.length) {
-      nextInput = inputList[nextIndex % inputList.length];
-    } else {
-      nextInput = inputList[nextIndex];
-    }
-    if (nextInput) {
-      nextInput.focus();
-    }
+  if (!forceFocusNextElement) {
+    return null;
+  }
+  const inputs = document.querySelectorAll(FOCUSABLE_ELEMENTS.join(','));
+  const inputList = Array.prototype.slice.call(inputs);
+  const nextIndex = inputList.indexOf(currentElement) + (next ? 1 : -1);
+  let nextInput = null;
+  if (nextIndex < 0) {
+    nextInput = inputList[inputList.length + nextIndex];
+  } else if (nextIndex >= inputList.length) {
+    nextInput = inputList[nextIndex % inputList.length];
+  } else {
+    nextInput = inputList[nextIndex];
+  }
+  if (nextInput) {
+    return nextInput;
+  }
+  return null;
+};
+
+const focusNextFocusableElement = (currentElement, next = true) => {
+  const nextInput = getNextFocusableElement(currentElement, next);
+  if (nextInput) {
+    nextInput.focus();
   }
 };
 
@@ -94,6 +102,7 @@ const getSpaceAvailability = (defaultHeight, handle, wrapper) => {
 };
 
 export {
+  getNextFocusableElement,
   focusNextFocusableElement,
   composeClassNames,
   getParentOverflow,

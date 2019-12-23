@@ -125,6 +125,22 @@ class TooltipViewer extends PureComponent {
     }
     return { ...finalCoordinates, maxWidth: finalMaxWidth };
   }
+  static setPosition(id, position, _portal, _viewer) {
+    const { top, left, direction, maxWidth } = TooltipViewer.getCoordinates(id, _portal, position);
+    /* eslint-disable no-param-reassign */
+
+    _portal.style.top = `${top}px`;
+    _portal.style.left = `${left}px`;
+    _portal.style.maxWidth = `${maxWidth}px`;
+
+    if (!_viewer.className.includes('el-tooltip__viewer--fade-in')) {
+      _viewer.className += ' el-tooltip__viewer--fade-in';
+    }
+    if (!_viewer.className.includes(`el-tooltip__viewer--fade-in-${direction}`)) {
+      _viewer.className += ` el-tooltip__viewer--fade-in-${direction}`;
+    }
+    return direction;
+  }
   constructor(props) {
     super(props);
     this._viewer = document.createElement('div');
@@ -140,28 +156,22 @@ class TooltipViewer extends PureComponent {
   }
   componentDidMount() {
     const { parentId, position } = this.props;
-    const { top, left, direction, maxWidth } = TooltipViewer.getCoordinates(
-      parentId,
-      this._location,
-      position,
-    );
-
-    // Apply final updates to the tooltip itself
-    this._location.style.top = `${top}px`;
-    this._location.style.left = `${left}px`;
-    this._location.style.maxWidth = `${maxWidth}px`;
-
-    const viewerFadeInClassName = utils.composeClassNames([
-      'el-tooltip__viewer--fade-in',
-      `el-tooltip__viewer--fade-in-${direction}`,
-    ]);
-    this._viewer.className += ` ${viewerFadeInClassName}`;
+    const direction = TooltipViewer.setPosition(parentId, position, this._location, this._viewer);
     // eslint-disable-next-line
     this.setState({ direction });
+  }
+  componentDidUpdate() {
+    const { parentId, position } = this.props;
+    const direction = TooltipViewer.setPosition(parentId, position, this._location, this._viewer);
+
+    if (direction !== this.state.direction) {
+      this.setState({ direction });
+    }
   }
   componentWillUnmount() {
     document.body.removeChild(this._location);
   }
+
   // This doesn't actually return anything to render
   render() {
     const { direction } = this.state;

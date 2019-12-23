@@ -214,6 +214,9 @@ const composeText = props => [
       pending={props.isPending}
       invalid={props.isInvalid}
       invalidMessages={props.validationMessages}
+      tokens={props.tokens}
+      cardSelectors={props.cardSelectors}
+      cardComponent={props.cardComponent}
       style={props.inputStyle}
       placeholder={props.placeholder}
     />
@@ -436,6 +439,7 @@ class FormInput extends PureComponent {
     const hasValue = value !== undefined && value !== null && value !== '';
     const hasValidationMessages =
       validation && validation.messages && validation.messages.length > 0;
+    const hasValidationTokens = validation && validation.tokens && validation.tokens.length > 0;
     const isFieldInvalid = validation && validation.isValid === false && hasValue;
     const hasValidationRequiredFlag = validation && validation.isRequired;
     const isRequired = required || hasValidationRequiredFlag;
@@ -443,6 +447,7 @@ class FormInput extends PureComponent {
     const isInvalid = shouldShowValidation && errorVisibility !== false;
     const isPending = pending;
     const validationMessages = hasValidationMessages ? validation.messages : [];
+    const validationTokens = hasValidationTokens ? validation.tokens : [];
     const messageVisibilities = Array.isArray(messageVisibility)
       ? messageVisibility
       : [messageVisibility];
@@ -514,6 +519,9 @@ class FormInput extends PureComponent {
       input = composeText({
         ...cmnProps,
         ...btnProps,
+        tokens: validationTokens,
+        cardSelectors: this.props.cardSelectors,
+        cardComponent: this.props.cardComponent,
         type,
         autofocus,
         onChange: this.onTextFieldChange,

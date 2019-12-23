@@ -154,8 +154,73 @@ it('triggers onChange with a number value when prop type is number', () => {
   expect(mockEvent).toHaveBeenCalledWith(12);
 });
 
-// Snapshot
+describe('tests the textfield cards', () => {
+  // vars: [],
+  // tokenDelimiters: undefined,
+  // cardComponent: undefined,
 
+  it('identifies the cardable cards of a given value automatically', () => {
+    const wrapper = mount(<TextField value="[test]value" tokenDelimiters="[]" />);
+    const tokens = wrapper.state('tokens');
+    const [token] = tokens;
+    expect(tokens).toHaveLength(1);
+    expect(token.isCardable).toBe(true);
+    expect(token.isPartiallyCardable).toBe(false);
+    expect(token.word).toBe('[test]');
+  });
+
+  it('identifies the partially cards of a given value automatically', () => {
+    const wrapper = mount(<TextField value="[partial[test]value" tokenDelimiters="[]" />);
+    const tokens = wrapper.state('tokens');
+    const [partial, token] = tokens;
+    expect(tokens).toHaveLength(2);
+    expect(partial.isCardable).toBe(false);
+    expect(partial.isPartiallyCardable).toBe(true);
+    expect(partial.word).toBe('[partial');
+    expect(token.isCardable).toBe(true);
+    expect(token.isPartiallyCardable).toBe(false);
+    expect(token.word).toBe('[test]');
+  });
+
+  it('identifies the escaped cards of a given value automatically', () => {
+    const wrapper = mount(<TextField value="\[test]value" tokenDelimiters="[]" />);
+    const tokens = wrapper.state('tokens');
+    expect(tokens).toHaveLength(0);
+  });
+
+  it('renders the ValueTokens components', () => {
+    const tokensResult = [
+      {
+        value: 'test',
+        available: true,
+        replaced: 'I was a value',
+      },
+      {
+        value: 'missing',
+        available: false,
+        replaced: '',
+      },
+    ];
+    const wrapper = mount(
+      <TextField value="[test][missing]foobar" tokenDelimiters="[]" tokens={tokensResult} />,
+    );
+    const ValueTokens = wrapper.find('ValueToken');
+    const Test = ValueTokens.at(0);
+    const Missing = ValueTokens.at(1);
+
+    expect(ValueTokens).toHaveLength(2);
+    expect(Test.prop('isCardable')).toBe(true);
+    expect(Test.prop('isInvalid')).toBe(false);
+    expect(Test.prop('isSelected')).toBe(false);
+    expect(Test.prop('word')).toBe('[test]');
+    expect(Missing.prop('isCardable')).toBe(true);
+    expect(Missing.prop('isInvalid')).toBe(true);
+    expect(Missing.prop('isSelected')).toBe(false);
+    expect(Missing.prop('word')).toBe('[missing]');
+  });
+});
+
+// Snapshot
 it('renders the textfield correctly when multiple props are set', () => {
   const wrapper = shallow(<TextField value="test-value" id="test-id" />);
   expect(shallowToJson(wrapper)).toMatchSnapshot();

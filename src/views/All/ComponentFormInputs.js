@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';
 import Heading from '../../components/Heading';
-import {createValidation, vd, toValidationResult} from '../../reduxValidation';
-
-
+import { createValidation, vd, toValidationResult } from '../../reduxValidation';
 
 const model = {
   name: undefined,
@@ -15,11 +13,11 @@ const model = {
 };
 
 const validation = {
-  name: createValidation([vd.isRequired, vd.maxLength(10) ]),
-  lastname: createValidation([vd.isRequired, vd.maxLength(10) ]),
-  description: createValidation([vd.isRequired, vd.maxLength(10) ]),
-  sex: createValidation([vd.isRequired ]),
-  age: createValidation([vd.isRequired, vd.isNum ]),
+  name: createValidation([vd.isRequired, vd.maxLength(10)]),
+  lastname: createValidation([vd.isRequired, vd.maxLength(10)]),
+  description: createValidation([vd.isRequired, vd.maxLength(10)]),
+  sex: createValidation([vd.isRequired]),
+  age: createValidation([vd.isRequired, vd.isNum]),
 };
 
 const ages = new Array(100).fill(0).map((_, index) => ({ label: index, value: index }));
@@ -58,6 +56,7 @@ class Wrapped extends Component {
     const validationResult = toValidationResult(this.state.model, validation);
     return (
       <div>
+        {JSON.stringify(validationResult)}
         <Heading>Wrapped</Heading>
         <FormInputs
           onChange={this.onChange}
@@ -102,7 +101,7 @@ class Unwrapped extends Component {
     });
   }
   render() {
-    const validationResult = toValidationResult(this.state.model, validation)
+    const validationResult = toValidationResult(this.state.model, validation);
     return (
       <div>
         <Heading>Non Wrapped</Heading>
@@ -125,7 +124,6 @@ class Unwrapped extends Component {
           type="text"
           label="name"
           name="name"
-         
         />
         <FormInput
           size={this.state.size}
@@ -135,7 +133,6 @@ class Unwrapped extends Component {
           type="text"
           label="lastname"
           name="lastname"
-         
         />
         <FormInput
           size={this.state.size}
@@ -145,7 +142,6 @@ class Unwrapped extends Component {
           type="area"
           label="description"
           name="description"
-         
         />
         <FormInput
           size={this.state.size}

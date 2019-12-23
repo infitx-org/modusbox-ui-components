@@ -22,61 +22,62 @@ describe('tests the validator creator', () => {
 describe('tests the validation creators', () => {
   it('should build the validation as array', () => {
     const validation = createValidation([testValidator]);
-    expect(validation).toBeInstanceOf(Array);
-    expect(validation).toHaveLength(1);
-    expect(validation[0].message).toBe(testValidator.message);
-    expect(validation[0].fn).toBe(testValidator.fn);
-    expect(validation[0].required).toBe(true);
+    const { validators, isRequired } = validation;
+    expect(isRequired).toBe(true);
+    expect(validators).toBeInstanceOf(Array);
+    expect(validators).toHaveLength(1);
+    expect(validators[0].message).toBe(testValidator.message);
+    expect(validators[0].fn).toBe(testValidator.fn);
   });
 
   it('should build the validation array items correctly', () => {
     const otherValidator = createValidator('other message', value => value > 0);
     const customValidator = createValidator('custom message', value => value < 0);
     const validation = createValidation([testValidator, otherValidator, customValidator]);
-    const [firstValidation, secondValidation, thirdValidation] = validation;
+    const { validators, isRequired } = validation;
+    const [firstValidator, secondValidator, thirdValidator] = validators;
 
-    expect(validation).toHaveLength(3);
+    expect(validators).toHaveLength(3);
+    expect(isRequired).toBe(true);
 
-    expect(firstValidation.fn).toBe(testValidator.fn);
-    expect(firstValidation.message).toBe(testValidator.message);
-    expect(firstValidation.required).toBe(true);
+    expect(firstValidator.fn).toBe(testValidator.fn);
+    expect(firstValidator.message).toBe(testValidator.message);
 
-    expect(secondValidation.fn).toBe(otherValidator.fn);
-    expect(secondValidation.message).toBe(otherValidator.message);
-    expect(secondValidation.required).toBe(true);
+    expect(secondValidator.fn).toBe(otherValidator.fn);
+    expect(secondValidator.message).toBe(otherValidator.message);
 
-    expect(thirdValidation.fn).toBe(customValidator.fn);
-    expect(thirdValidation.message).toBe(customValidator.message);
-    expect(thirdValidation.required).toBe(true);
+    expect(thirdValidator.fn).toBe(customValidator.fn);
+    expect(thirdValidator.message).toBe(customValidator.message);
   });
 
   it('should build the optional validation with non required validators', () => {
     const validation = createOptionalValidation([testValidator]);
-    expect(validation).toBeInstanceOf(Array);
-    expect(validation).toHaveLength(1);
-    expect(validation[0].message).toBe(testValidator.message);
-    expect(validation[0].fn).toBe(testValidator.fn);
-    expect(validation[0].required).toBe(false);
+    const { validators, isRequired } = validation;
+    const [firstValidator] = validators;
+    expect(isRequired).toBe(false);
+    expect(validators).toBeInstanceOf(Array);
+    expect(validators).toHaveLength(1);
+    expect(firstValidator.message).toBe(testValidator.message);
+    expect(firstValidator.fn).toBe(testValidator.fn);
   });
 
   it('should build the optional validation array items correctly', () => {
     const otherValidator = createValidator('other message', value => value > 0);
     const customValidator = createValidator('optional message', value => value < 0);
     const validation = createOptionalValidation([testValidator, otherValidator, customValidator]);
-    const [firstValidation, secondValidation, thirdValidation] = validation;
+    const { validators, isRequired } = validation;
+    const [firstValidator, secondValidator, thirdValidator] = validators;
 
-    expect(validation).toHaveLength(3);
+    expect(isRequired).toBe(false);
+    expect(validators).toHaveLength(3);
 
-    expect(firstValidation.fn).toBe(testValidator.fn);
-    expect(firstValidation.message).toBe(testValidator.message);
-    expect(firstValidation.required).toBe(false);
+    expect(firstValidator.fn).toBe(testValidator.fn);
+    expect(firstValidator.message).toBe(testValidator.message);
 
-    expect(secondValidation.fn).toBe(otherValidator.fn);
-    expect(secondValidation.message).toBe(otherValidator.message);
-    expect(secondValidation.required).toBe(false);
+    expect(secondValidator.fn).toBe(otherValidator.fn);
+    expect(secondValidator.message).toBe(otherValidator.message);
 
-    expect(thirdValidation.fn).toBe(customValidator.fn);
-    expect(thirdValidation.message).toBe(customValidator.message);
-    expect(thirdValidation.required).toBe(false);
+    expect(thirdValidator.fn).toBe(customValidator.fn);
+    expect(thirdValidator.message).toBe(customValidator.message);
   });
 });
