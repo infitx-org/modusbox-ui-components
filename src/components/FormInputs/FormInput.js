@@ -70,13 +70,15 @@ const LockedIcon = ({ locked }) => {
     return null;
   }
   return (
-    <Icon
-      name="lock-small"
-      size={20}
-      fill="#999"
-      style={{ marginLeft: '10px' }}
-      tooltip="this field is locked"
-    />
+    <div className="forminput__inline-icon">
+      <Icon
+        name="lock-small"
+        size={20}
+        fill="#999"
+        style={{ marginLeft: '10px' }}
+        tooltip="this field is locked"
+      />
+    </div>
   );
 };
 

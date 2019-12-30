@@ -11,6 +11,18 @@ const INLINE_TYPE = <Inline />.type;
 
 // wrapper for data, onChange, validation, options
 class FormInputs extends PureComponent {
+  static addOnChangeAfterPropsChanged(_onChange) {
+    return function addOnChangeToElement(element) {
+      if (element.type !== FORMINPUT_TYPE) {
+        return element;
+      }
+
+      const wrappedOnChange = (value) => _onChange(value, element);
+      const onChange = element.props.onChange || wrappedOnChange;
+      return React.cloneElement(element, { onChange });
+    }
+
+  }
   static addPropsToFormInputOrInline(
     data,
     options,
@@ -35,7 +47,7 @@ class FormInputs extends PureComponent {
 
       if (element.type === FORMINPUT_TYPE) {
         const { name } = element.props;
-
+        
         let componentValue = data[name];
         let componentOptions = options[name];
         let componentValidation = get(validation, `fields[${name}]`);
@@ -46,13 +58,10 @@ class FormInputs extends PureComponent {
           componentValidation = get(validation, `fields[${subgroup}].fields[${name}]`);
         }
 
-        const wrappedOnChange = value => _onChange(value, element);
-
         const matchedProps = {
           value: element.props.value || componentValue,
           options: element.props.options || componentOptions,
           validation: element.props.validation || componentValidation,
-          onChange: element.props.onChange || wrappedOnChange,
           subgroup: element.props.subgroup || subgroup,
         };
 
@@ -60,13 +69,14 @@ class FormInputs extends PureComponent {
         const hiddenByParent = FormInputs.getIncludesNested(subgroup, hiddenFields, name);
         const hidden = element.props.hidden || hiddenByParent;
         const locked = element.props.locked || lockedByParent;
-        const finalDisabled = disabled === true || element.props.disabled || locked;
+        const finalDisabled = disabled || element.props.disabled || locked;
 
         addProps = {
           rowWidth,
           elementWidth,
           ...element.props,
           ...matchedProps,
+          subgroup,
           disabled: finalDisabled,
           locked,
           hidden,
@@ -132,7 +142,7 @@ class FormInputs extends PureComponent {
       elementWidth = rowWidth - 10;
     }
 
-    return React.Children.map(
+    const childrenWithProps = React.Children.map(
       this.props.children,
       FormInputs.addPropsToFormInputOrInline(
         data,
@@ -146,6 +156,11 @@ class FormInputs extends PureComponent {
         rowWidth,
         elementWidth,
       ),
+    );
+
+    return React.Children.map(
+      childrenWithProps,
+      FormInputs.addOnChangeAfterPropsChanged(this.onChange)
     );
   }
 
