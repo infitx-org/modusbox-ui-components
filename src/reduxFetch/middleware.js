@@ -1,7 +1,12 @@
 import 'whatwg-fetch';
 
 import uuid from '../utils/uuid';
-import { FETCH, setFetchStatus, unsetFetchStatus } from './actions';
+import {
+  FETCH,
+  setFetchRequestFailed,
+  setFetchRequestSent,
+  setFetchRequestSucceeded,
+} from './actions';
 import {
   buildConfig,
   buildEndpointConfig,
@@ -11,8 +16,15 @@ import {
   getEndpointVariables,
 } from './funcs';
 
+const shouldOverrideStatus = (crud, status, overrideStatus) => {
+  if (!crud) {
+    return false;
+  }
+  return overrideStatus[crud].includes(status);
+};
+
 const parseResponse = async (response, parseAsJson, parseAsText) => {
-  const { status } = response;
+  const { status, ok } = response;
   const contentType = response.headers.get('content-type') || '';
   const isJson = contentType.includes('application/json');
   let data = response.body;
@@ -25,21 +37,24 @@ const parseResponse = async (response, parseAsJson, parseAsText) => {
     }
   }
 
-  return { data, status };
+  return { data, status, ok };
 };
 
-const buildFailedResponse = async (error, status, handleError, state) => ({
+const buildFailedResponse = async (error, status, headers, handleError, state) => ({
   data: handleError ? handleError(error, status, state) : error,
+  headers,
   status,
 });
 
-const buildSuccessResponse = async (data, status, handleData, state) => ({
+const buildSuccessResponse = async (data, status, headers, handleData, state) => ({
   data: handleData ? handleData(data, status, state) : data,
+  headers,
   status,
 });
 
 const buildErrorResponse = message => ({
   data: message,
+  headers: undefined,
   status: undefined,
 });
 
@@ -52,13 +67,12 @@ const fetchMiddleware = () => store => next => async action => {
     // just pass to next middleware if not a "FETCH" action
     return next(action);
   }
-  const { method, params, service } = config;
 
   // Get configs for both endpoint and service
+  const { method, params, service, name, crud } = config;
+  const vars = getEndpointVariables(config);
   const serviceConfig = buildServiceConfig(service, store.getState());
   const endpointConfig = buildEndpointConfig(config, store.getState());
-
-  // Merge configs
   const {
     url,
     headers,
@@ -68,6 +82,8 @@ const fetchMiddleware = () => store => next => async action => {
     parseAsJson,
     handleData,
     handleError,
+    saveData,
+    overrideStatus,
   } = buildConfig(endpointConfig, serviceConfig);
 
   let response;
@@ -75,23 +91,34 @@ const fetchMiddleware = () => store => next => async action => {
   const requestUrl = buildRequestUrl(url, params);
   const requestConfig = buildRequestConfig(method, body, headers, credentials);
 
-  const vars = getEndpointVariables(config);
-  store.dispatch(setFetchStatus(config.name, config.crud, vars, requestConfig, requestId));
-
   try {
+    store.dispatch(setFetchRequestSent(name, crud, vars, requestConfig, requestId, saveData));
     const fetchResponse = await window.fetch(requestUrl, requestConfig);
-    const { data, status } = await parseResponse(fetchResponse, parseAsJson, parseAsText);
+    const { data, status, ok } = await parseResponse(fetchResponse, parseAsJson, parseAsText);
 
-    if (fetchResponse.ok) {
-      response = await buildSuccessResponse(data, status, handleData, store.getState());
+    if (ok || shouldOverrideStatus(crud, status, overrideStatus)) {
+      response = await buildSuccessResponse(
+        data,
+        status,
+        fetchResponse.headers,
+        handleData,
+        store.getState(),
+      );
+      store.dispatch(setFetchRequestSucceeded(name, crud, requestId, response));
     } else {
-      response = await buildFailedResponse(data, status, handleError, store.getState());
+      response = await buildFailedResponse(
+        data,
+        status,
+        fetchResponse.headers,
+        handleError,
+        store.getState(),
+      );
+      store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
     }
   } catch (e) {
     response = buildErrorResponse(e.message);
+    store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
   }
-
-  store.dispatch(unsetFetchStatus(config.name, config.crud, requestConfig, requestId));
 
   return response;
 };

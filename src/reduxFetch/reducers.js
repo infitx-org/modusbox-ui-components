@@ -1,76 +1,105 @@
-import { SET_FETCH_STATUS, UNSET_FETCH_STATUS } from './actions';
+import {
+  SET_FETCH_REQUEST_FAILED,
+  SET_FETCH_REQUEST_SENT,
+  SET_FETCH_REQUEST_SUCCEEDED,
+} from './actions';
 
 const initialState = {
-  pendingRequests: {},
+  requests: {},
 };
 
-const buildPendingRequest = (id, payload, request) => ({
+const buildReq = (id, payload, request, saveData) => ({
   id,
   payload,
+  saveData,
   request,
+  pending: true,
 });
 
-const getPendingRequestByName = (pendingRequests, name) => {
-  if (pendingRequests[name]) {
-    return { ...pendingRequests[name] };
+const buildReqByName = (requests, name) => {
+  if (requests[name]) {
+    return { ...requests[name] };
   }
   return {};
 };
 
-const getPendingRequestCollectionByMethod = (collections, crud) => {
+const buildReqCollectionByCrud = (collections, crud) => {
   if (collections[crud]) {
     return [...collections[crud]];
   }
   return [];
 };
 
-const buildPendingRequestsPathByNameAndMethod = (pendingRequests, name, crud) => {
-  const pendingRequestByName = getPendingRequestByName(pendingRequests, name);
-  const pendingRequestsByNameAndMethod = getPendingRequestCollectionByMethod(
-    pendingRequestByName,
-    crud,
-  );
+const buildReqsPathByNameAndCrud = (requests, name, crud) => {
+  const reqByName = buildReqByName(requests, name);
+  const requestsByNameAndMethod = buildReqCollectionByCrud(reqByName, crud);
 
   return {
-    ...pendingRequests,
+    ...requests,
     [name]: {
-      ...pendingRequestByName,
-      [crud]: pendingRequestsByNameAndMethod,
+      ...reqByName,
+      [crud]: requestsByNameAndMethod,
     },
   };
 };
 
-const Api = (state = initialState, action) => {
-  const { type, payload, name, crud, request, id } = action;
-  const pendingRequests = buildPendingRequestsPathByNameAndMethod(
-    state.pendingRequests,
-    name,
-    crud,
-  );
+const getReqsPathByNameAndCrud = (requests, name, crud) =>
+  buildReqsPathByNameAndCrud(requests, name, crud)[name][crud];
+
+const getReqByIndex = (requests, name, crud, id) =>
+  getReqsPathByNameAndCrud(requests, name, crud)
+    .map(req => req.id)
+    .indexOf(id);
+
+const ApiReducer = (state = initialState, action) => {
+  const { type, payload, name, crud, request, id, saveData } = action;
+  const requests = buildReqsPathByNameAndCrud(state.requests, name, crud);
   switch (type) {
-    case SET_FETCH_STATUS: {
-      const pendingRequest = buildPendingRequest(id, payload, request);
-      pendingRequests[name][crud].push(pendingRequest);
+    case SET_FETCH_REQUEST_SENT: {
+      const req = buildReq(id, payload, request, saveData);
+      requests[name][crud].push(req);
       return {
         ...state,
-        pendingRequests,
+        requests,
       };
     }
-    case UNSET_FETCH_STATUS: {
-      const requestIndex = pendingRequests[name][crud].map(req => req.id).indexOf(id);
+    case SET_FETCH_REQUEST_SUCCEEDED: {
+      const requestIndex = getReqByIndex(requests, name, crud, id);
+      const req = requests[name][crud][requestIndex];
 
-      pendingRequests[name][crud].splice(requestIndex, 1);
-
-      if (pendingRequests[name][crud].length === 0) {
-        delete pendingRequests[name][crud];
-      }
-      if (Object.keys(pendingRequests[name]).length === 0) {
-        delete pendingRequests[name];
-      }
-
+      requests[name][crud] = [
+        ...requests[name][crud].slice(0, requestIndex),
+        {
+          ...requests[name][crud][requestIndex],
+          data: req.saveData ? payload.data : null,
+          status: payload.status,
+          pending: false,
+          failed: false,
+        },
+        ...requests[name][crud].slice(requestIndex + 1),
+      ];
       return {
         ...state,
-        pendingRequests,
+        requests,
+      };
+    }
+    case SET_FETCH_REQUEST_FAILED: {
+      const requestIndex = getReqByIndex(requests, name, crud, id);
+
+      requests[name][crud] = [
+        ...requests[name][crud].slice(0, requestIndex),
+        {
+          ...requests[name][crud][requestIndex],
+          error: payload.data,
+          status: payload.status,
+          pending: false,
+          failed: true,
+        },
+        ...requests[name][crud].slice(requestIndex + 1),
+      ];
+      return {
+        ...state,
+        requests,
       };
     }
     default: {
@@ -79,5 +108,5 @@ const Api = (state = initialState, action) => {
   }
 };
 
-export default Api;
+export default ApiReducer;
 export { initialState };

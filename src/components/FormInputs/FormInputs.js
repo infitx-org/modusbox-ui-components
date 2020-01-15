@@ -17,11 +17,10 @@ class FormInputs extends PureComponent {
         return element;
       }
 
-      const wrappedOnChange = (value) => _onChange(value, element);
+      const wrappedOnChange = value => _onChange(value, element);
       const onChange = element.props.onChange || wrappedOnChange;
       return React.cloneElement(element, { onChange });
-    }
-
+    };
   }
   static addPropsToFormInputOrInline(
     data,
@@ -47,7 +46,7 @@ class FormInputs extends PureComponent {
 
       if (element.type === FORMINPUT_TYPE) {
         const { name } = element.props;
-        
+
         let componentValue = data[name];
         let componentOptions = options[name];
         let componentValidation = get(validation, `fields[${name}]`);
@@ -160,7 +159,7 @@ class FormInputs extends PureComponent {
 
     return React.Children.map(
       childrenWithProps,
-      FormInputs.addOnChangeAfterPropsChanged(this.onChange)
+      FormInputs.addOnChangeAfterPropsChanged(this.onChange),
     );
   }
 

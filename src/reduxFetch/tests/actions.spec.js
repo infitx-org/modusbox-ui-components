@@ -1,10 +1,11 @@
 import {
   FETCH,
   fetch,
-  SET_FETCH_STATUS,
-  setFetchStatus,
-  UNSET_FETCH_STATUS,
-  unsetFetchStatus,
+  SET_FETCH_REQUEST_FAILED,
+  SET_FETCH_REQUEST_SENT,
+  SET_FETCH_REQUEST_SUCCEEDED,
+  setFetchRequestSent,
+  setFetchRequestSucceeded,
 } from '../actions';
 
 describe('Returns the correct action descriptions', () => {
@@ -12,12 +13,16 @@ describe('Returns the correct action descriptions', () => {
     expect(FETCH).toEqual('@@ReduxFetch / Fetch');
   });
 
-  it('Should match the "setFetchStatus" action type', () => {
-    expect(SET_FETCH_STATUS).toEqual('@@ReduxFetch / Set fetch action status');
+  it('Should match the "setFetchRequestSent" action type', () => {
+    expect(SET_FETCH_REQUEST_SENT).toEqual('@@ReduxFetch / Set fetch request sent');
   });
 
-  it('Should match the "unsetFetchStatus" action type', () => {
-    expect(UNSET_FETCH_STATUS).toEqual('@@ReduxFetch / Unset fetch action status');
+  it('Should match the "setFetchRequestSucceeded" action type', () => {
+    expect(SET_FETCH_REQUEST_SUCCEEDED).toEqual('@@ReduxFetch / Set fetch request succeeded');
+  });
+
+  it('Should match the "setFetchRequestFailed" action type', () => {
+    expect(SET_FETCH_REQUEST_FAILED).toEqual('@@ReduxFetch / Set fetch request failed');
   });
 });
 
@@ -28,10 +33,10 @@ describe('Builds the actions correctly', () => {
     expect(action.config).toEqual('test-config');
   });
 
-  it('Should build the correct "setFetchStatus" action', () => {
-    const action = setFetchStatus('name', 'get', null, { 'content-type': null }, '1');
+  it('Should build the correct "setFetchRequestSent" action', () => {
+    const action = setFetchRequestSent('name', 'get', null, { 'content-type': null }, '1');
 
-    expect(action.type).toEqual(SET_FETCH_STATUS);
+    expect(action.type).toEqual(SET_FETCH_REQUEST_SENT);
     expect(action.payload).toEqual(null);
     expect(action.request).toEqual({ 'content-type': null });
     expect(action.crud).toEqual('get');
@@ -39,10 +44,10 @@ describe('Builds the actions correctly', () => {
     expect(action.id).toEqual('1');
   });
 
-  it('Should build the correct "unsetFetchStatus" action', () => {
-    const action = unsetFetchStatus('name', 'get', '1');
+  it('Should build the correct "setFetchRequestSucceeded" action', () => {
+    const action = setFetchRequestSucceeded('name', 'get', '1');
 
-    expect(action.type).toEqual(UNSET_FETCH_STATUS);
+    expect(action.type).toEqual(SET_FETCH_REQUEST_SUCCEEDED);
     expect(action.crud).toEqual('get');
     expect(action.name).toEqual('name');
     expect(action.id).toEqual('1');

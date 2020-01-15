@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';
 import Heading from '../../components/Heading';
-import { createValidation, vd, toValidationResult } from '../../reduxValidation';
+import { createValidation, toValidationResult, vd } from '../../reduxValidation';
 
 const model = {
   name: undefined,

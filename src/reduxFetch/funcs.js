@@ -1,3 +1,5 @@
+import assignIn from 'lodash/assignIn';
+
 const firstNotUndefined = (...args) => {
   let current;
   let final;
@@ -47,10 +49,6 @@ const buildEndpointConfig = (config = {}, state) => {
     endpointUrl = config.url(config);
   }
 
-  if (typeof config.url === 'function') {
-    endpointUrl = config.url(config);
-  }
-
   if (typeof config.credentials === 'function') {
     // transform credentials dynamically
     endpointCredentials = config.credentials(state);
@@ -71,9 +69,18 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
     credentials: undefined,
     handleData: undefined,
     handleError: undefined,
-    sendAsJson: true,
+    sendAsJson: false,
+    sendAsFormData: false,
+    sendAsFormUrlEncoded: false,
     parseAsJson: true,
     parseAsText: true,
+    saveData: false,
+    overrideStatus: {
+      read: [],
+      create: [],
+      update: [],
+      delete: [],
+    },
   };
 
   // build the headers separately since they would
@@ -90,21 +97,32 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
     endpointConfig.credentials,
   );
 
+  const overrideStatus = assignIn(
+    {},
+    defaultConfig.overrideStatus,
+    serviceConfig.overrideStatus,
+    endpointConfig.overrideStatus,
+  );
+
   const config = {
     ...defaultConfig,
     ...serviceConfig,
     ...endpointConfig,
     headers,
     credentials,
+    overrideStatus,
   };
 
   config.url = `${serviceConfig.url}${endpointConfig.url}`;
 
   if (config.sendAsJson) {
     config.headers['content-type'] = 'application/json';
-  }
-
-  if (config.sendAsFormUrlEncoded) {
+  } else if (config.sendAsFormData) {
+    config.headers['content-type'] = 'multipart/form-data';
+    const formData = new FormData();
+    formData.append('file', config.body);
+    config.body = formData;
+  } else if (config.sendAsFormUrlEncoded) {
     config.headers['content-type'] = 'application/x-www-form-urlencoded';
     config.body = urlEncode(config.body);
   }
@@ -129,7 +147,7 @@ const buildRequestUrl = (url, queryParams = {}) => {
   return url;
 };
 
-const buildRequestConfig = (method, body = null, headers, credentials) => {
+const buildRequestConfig = (method = 'GET', body = null, headers, credentials) => {
   const requestConfig = {
     method,
     headers,
@@ -159,9 +177,12 @@ const knownRequestKeys = [
   'handleData',
   'handleError',
   'sendAsJson',
+  'sendAsFormData',
   'sendAsFormUrlEncoded',
   'parseAsJson',
   'parseAsText',
+  'saveData',
+  'overrideStatus',
 ];
 
 const getEndpointVariables = config => {

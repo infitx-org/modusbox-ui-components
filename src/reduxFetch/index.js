@@ -2,8 +2,13 @@ import { buildFetchActions, fetch } from './actions';
 import fetchMiddleware from './middleware';
 import reducers from './reducers';
 import {
-  createPendingCollectionSelector,
+  createApiSelector,
+  createCollectionSelector,
+  createDataSelector,
+  createErrorSelector,
   createPendingSelector,
+  getDataByParameter,
+  getErrorByParameter,
   getPendingByParameter,
 } from './selectors';
 
@@ -12,7 +17,12 @@ export {
   reducers,
   fetch,
   buildFetchActions,
+  createCollectionSelector,
+  createApiSelector,
   createPendingSelector,
-  createPendingCollectionSelector,
+  createErrorSelector,
+  createDataSelector,
+  getErrorByParameter,
+  getDataByParameter,
   getPendingByParameter,
 };

@@ -1,9 +1,11 @@
 const FETCH = '@@ReduxFetch / Fetch';
-const SET_FETCH_STATUS = '@@ReduxFetch / Set fetch action status';
-const UNSET_FETCH_STATUS = '@@ReduxFetch / Unset fetch action status';
+const SET_FETCH_REQUEST_SENT = '@@ReduxFetch / Set fetch request sent';
+const SET_FETCH_REQUEST_SUCCEEDED = '@@ReduxFetch / Set fetch request succeeded';
+const SET_FETCH_REQUEST_FAILED = '@@ReduxFetch / Set fetch request failed';
 
-const setFetchStatus = (name, crud, payload, request, id) => ({
-  type: SET_FETCH_STATUS,
+const setFetchRequestSent = (name, crud, payload, request, id, saveData = false) => ({
+  type: SET_FETCH_REQUEST_SENT,
+  saveData,
   payload,
   request,
   crud,
@@ -11,11 +13,20 @@ const setFetchStatus = (name, crud, payload, request, id) => ({
   id,
 });
 
-const unsetFetchStatus = (name, crud, id) => ({
-  type: UNSET_FETCH_STATUS,
+const setFetchRequestSucceeded = (name, crud, id, payload) => ({
+  type: SET_FETCH_REQUEST_SUCCEEDED,
   crud,
   name,
   id,
+  payload,
+});
+
+const setFetchRequestFailed = (name, crud, id, payload) => ({
+  type: SET_FETCH_REQUEST_FAILED,
+  crud,
+  name,
+  id,
+  payload,
 });
 
 const buildAction = config => ({
@@ -87,10 +98,12 @@ const buildFetchActions = resources => {
 
 export {
   FETCH,
-  SET_FETCH_STATUS,
-  UNSET_FETCH_STATUS,
-  setFetchStatus,
-  unsetFetchStatus,
+  SET_FETCH_REQUEST_SENT,
+  SET_FETCH_REQUEST_SUCCEEDED,
+  SET_FETCH_REQUEST_FAILED,
+  setFetchRequestSent,
+  setFetchRequestSucceeded,
+  setFetchRequestFailed,
   fetch,
   buildFetchActions,
 };

@@ -1,12 +1,12 @@
+import './index.scss';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import * as utils from '../../utils/common';
-import ScrollBox from '../../components/ScrollBox';
 import ControlIcon from '../../components/ControlIcon';
 import DataList from '../../components/DataList';
-
-import './index.scss';
+import ScrollBox from '../../components/ScrollBox';
+import * as utils from '../../utils/common';
 
 const PROPTYPES = {
   STRING: 'String',

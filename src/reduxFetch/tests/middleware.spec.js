@@ -1,11 +1,21 @@
 import fetchMock from 'fetch-mock';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import { buildFetchActions, fetch } from '../actions';
 import fetchMiddleware from '../middleware';
+import api from '../reducers';
+import { createApiSelector } from '../selectors';
 
 const mockStore = configureStore([thunk, fetchMiddleware()]);
+
+const getStore = initialState => {
+  const ReduxFetch = fetchMiddleware();
+  const middlewares = compose(applyMiddleware(thunk, ReduxFetch));
+  const reducer = combineReducers({ api });
+  return createStore(reducer, initialState, middlewares);
+};
 
 const defaultTestSvc = {
   getApplicationUrl: () => `/test-svc`,
@@ -201,14 +211,13 @@ describe('Builds the responses correctly', () => {
     const statusCodes = [200, 201, 204, 400, 401, 404, 500];
     const action = fetch({ url: '/test' });
 
-    for (let i = 0; i < statusCodes.length; i += 1) {
-      const statusCode = statusCodes[i];
+    statusCodes.forEach(async statusCode => {
       fetchMock.reset();
       fetchMock.get('*', { status: statusCode });
       // eslint-disable-next-line
       const response = await store.dispatch(action);
       expect(response.status).toBe(statusCode);
-    }
+    });
   });
 
   it('Should return the correct body', async () => {
@@ -217,6 +226,23 @@ describe('Builds the responses correctly', () => {
 
     const response = await store.dispatch(action);
     expect(response.data).toBe('test');
+  });
+
+  it('Should send the body as form data if set', async () => {
+    fetchMock.get('*', 200);
+    const action = fetch({
+      url: '/test',
+      sendAsFormData: true,
+      body: 'test'
+    });
+
+    await store.dispatch(action);
+
+    const [call] = fetchMock.calls();
+    const [, config] = call;
+    expect(config.headers['content-type']).toBe('multipart/form-data');
+    expect(config.body).toBeInstanceOf(FormData);
+    expect(config.body.get('file')).toBe('test');
   });
 
   it('Should send the body as url encoded if set', async () => {
@@ -231,8 +257,8 @@ describe('Builds the responses correctly', () => {
 
     const [call] = fetchMock.calls();
     const [, config] = call;
-    expect(config.body).toBe('test=key&value=x');
     expect(config.headers['content-type']).toBe('application/x-www-form-urlencoded');
+    expect(config.body).toBe('test=key&value=x');
   });
 
   it('Should parse the body as json by default', async () => {
@@ -276,6 +302,18 @@ describe('Builds the responses correctly', () => {
     const response = await store.dispatch(action);
     expect(response.data.value).toBe('MAGIC_NUMBER');
   });
+});
+
+describe('Should handle the response correctly', () => {
+  beforeEach(() => {
+    // reset the store
+    store = getStore(initialState);
+    // reset the fetch mock utility
+    fetchMock.reset();
+    // reset services and endpoints configurations to default
+    endpointsCfgs.testEndpoint = { ...defaultTestEndpoint };
+    endpointsCfgs.otherEndpoint = { ...defaultOtherEndpoint };
+  });
 
   it('Should handle the authentication with "handleError"', async () => {
     const handleErrorStatus = jest.fn();
@@ -306,6 +344,7 @@ describe('Builds the responses correctly', () => {
     });
 
     endpointsCfgs.testEndpoint.handleError = () => 'transformed';
+    endpointsCfgs.testEndpoint.saveData = true;
 
     const actions = buildFetchActions(endpointsCfgs);
     const action = actions.testEndpoint.read();
@@ -313,5 +352,34 @@ describe('Builds the responses correctly', () => {
 
     expect(response.status).toEqual(400);
     expect(response.data).toEqual('transformed');
+  });
+
+  it('Should handle the override status correctly', async () => {
+    const handleErrorStatus = jest.fn();
+    fetchMock.get('*', {
+      status: 404,
+      body: 'Accept the 404',
+      headers: { 'content-type': 'text/plain' },
+    });
+
+    endpointsCfgs.testEndpoint.overrideStatus = {
+      read: [404],
+    };
+    endpointsCfgs.testEndpoint.saveData = true;
+
+    const actions = buildFetchActions(endpointsCfgs);
+    const action = actions.testEndpoint.read();
+    const response = await store.dispatch(action);
+
+    expect(handleErrorStatus).not.toHaveBeenCalledWith(401);
+    expect(response.data).toBe('Accept the 404');
+    expect(response.status).toBe(404);
+
+    const getTestEndpointRead = createApiSelector('testEndpoint.read');
+    const testEndpointReadState = getTestEndpointRead(store.getState());
+
+    expect(testEndpointReadState.pending).toBe(false);
+    expect(testEndpointReadState.data).toBe('Accept the 404');
+    expect(testEndpointReadState.error).toBe(undefined);
   });
 });
