@@ -11,6 +11,7 @@ class ComplexDataList extends PureComponent {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.toggleColumn = this.toggleColumn.bind(this);
     this.increment = this.increment.bind(this);
     this.changeNoDataLabel = this.changeNoDataLabel.bind(this);
     this.changeErrorMessage = this.changeErrorMessage.bind(this);
@@ -21,6 +22,20 @@ class ComplexDataList extends PureComponent {
       pending: false,
       error: false,
       flex: false,
+      columns: {
+        col1: false,
+        col2: false,
+        col3: false,
+        col4: false,
+        linkColumn: false,
+        textColumn: false,
+        transformColumn: false,
+        spanColumn: false,
+        nestedColumn: false,
+        linkFuncColumn: false,
+        iconColumn: false,
+        componentColumn: false,
+      },
     };
   }
   increment() {
@@ -31,6 +46,14 @@ class ComplexDataList extends PureComponent {
   toggle(field, value) {
     this.setState({
       [field]: value,
+    });
+  }
+  toggleColumn(column) {
+    this.setState({
+      columns:{
+        ...this.state.columns,
+        [column]: !this.state.columns[column],
+      }
     });
   }
   changeNoDataLabel(value) {
@@ -45,7 +68,20 @@ class ComplexDataList extends PureComponent {
   }
   render() {
     const toggle = field => value => this.toggle(field, value);
+    const toggleColumn = column => () => this.toggleColumn(column);
+    const columns = Object.entries(this.state.columns).map(([key, value]) => ({
+      name: key,
+      label: key,
+      checked: value,
+    }));
 
+
+    const columnsToRender = getColumns({
+      valueModifier: this.state.counter,
+      ...this.state.columns
+    });
+
+    console.log(this.state.columns)
     return (
       <div style={containerStyle}>
         <div style={rowStyle}>
@@ -78,8 +114,15 @@ class ComplexDataList extends PureComponent {
             <Button size="s" label="increment" onClick={this.increment} />
           </div>
         </div>
+        <div style={rowStyle}>
+            {columns.map(col => (
+              <div className="m5">
+                <Checkbox checked={col.checked} onChange={toggleColumn(col.label)} label={col.label} />
+              </div>
+            ))}
+        </div>
         <List
-          counter={this.state.counter}
+          columns={columnsToRender}
           noDataLabel={this.state.noDataLabel}
           errorMsg={this.state.errorMsg}
           pending={this.state.pending}
@@ -91,8 +134,7 @@ class ComplexDataList extends PureComponent {
   }
 }
 
-const List = ({ counter, noDataLabel, errorMsg, pending, error, flex }) => {
-  const columns = getColumns(counter);
+const List = ({ columns, noDataLabel, errorMsg, pending, error, flex }) => {
   const datalist = (
     <DataList
       flex={flex}

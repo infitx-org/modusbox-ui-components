@@ -49,6 +49,20 @@ export const getColumns = ({
   iconColumn =false,
   componentColumn = false,
 } = {}) => {
+  console.log({
+    col1,
+    col2,
+    col3,
+    col4,
+    linkColumn,
+    textColumn,
+    transformColumn,
+    spanColumn,
+    nestedColumn,
+    linkFuncColumn,
+    iconColumn,
+    componentColumn,
+  })
   return [
     col1 && {
       label: 'Col 1',
