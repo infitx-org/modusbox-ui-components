@@ -9,6 +9,7 @@ class CheckableDataList extends React.Component {
     this.onCheck = this.onCheck.bind(this);
     this.onClear = this.onClear.bind(this);
     this.onAddNewItem = this.onAddNewItem.bind(this);
+    this.onRemoveItem = this.onRemoveItem.bind(this);
     this.state = {
       items: list,
       checked: [],
@@ -29,12 +30,18 @@ class CheckableDataList extends React.Component {
       items: [...this.state.items, buildRow()],
     });
   }
+  onRemoveItem() {
+    this.setState({
+      items: [...this.state.items.slice(1)],
+    });
+  }
   render() {
     return (
       <div style={containerStyle}>
         <div style={rowStyle}>
           <Button size="m" label="clear checked" onClick={this.onClear} />
-          <Button size="m" label="add new items" onClick={this.onAddNewItem} />
+          <Button size="m" label="Add a new item" onClick={this.onAddNewItem} />
+          <Button size="m" label="Remove an item" onClick={this.onRemoveItem} />
         </div>
         <DataList
           columns={getColumns({ valueModifier: 0 })}

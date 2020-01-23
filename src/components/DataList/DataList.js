@@ -76,14 +76,14 @@ class DataList extends PureComponent {
   static toItems(list, columns, selected, checked, checkable, prevItems, prevList = []) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
-    const reduceColumns = (row, _rowIndex, _listIndex) => (prev, column) => {
+    const reduceColumns = (row, _rowIndex, _position) => (prev, column) => {
       const { func, key, link, _index, _onChange } = column;
       const originalValue = get(row._source, key);
       let value = originalValue;
       let component = null;
 
       if (typeof func === 'function') {
-        value = func(value, row._source, _listIndex);
+        value = func(value, row._source, _position);
       }
       if (typeof link === 'function') {
         // eslint-disable-next-line
@@ -110,16 +110,16 @@ class DataList extends PureComponent {
       };
     };
 
-    const mapListRowToItem = (oldItems, oldList) => (item, _listIndex) => {
+    const mapListRowToItem = (oldItems, oldList) => (item, _position) => {
       let row;
-      if (isEqual(item, oldList[_listIndex])) {
+      if (isEqual(item, oldList[_position])) {
         // use last item if available so that the internal index does
         // not change, keeping eveything working faster
-        row = find(oldItems, { _position: _listIndex });
+        row = find(oldItems, { _position });
       } else {
         row = {
-          _position: _listIndex,
-          _index: get(oldItems, `[${_listIndex}]._index`) || uuid(),
+          _position,
+          _index: uuid(),
           _source: item,
           _visible: true,
         };
@@ -127,13 +127,13 @@ class DataList extends PureComponent {
 
       row._selected = selected
         ? selected.some(select => isEqual(select, item))
-        : get(oldItems, `[${_listIndex}]._selected`);
+        : get(oldItems, `[${_position}]._selected`);
 
       row._checked = checked
         ? checked.some(check => isEqual(check, item))
-        : get(oldItems, `[${_listIndex}]._checked`);
-      row.data = columns.reduce(reduceColumns(row, row._index, _listIndex), {});
+        : get(oldItems, `[${_position}]._checked`);
 
+      row.data = columns.reduce(reduceColumns(row, row._index, _position), {});
       return row;
     };
 

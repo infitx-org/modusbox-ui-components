@@ -32,7 +32,7 @@ class ModalDataList extends PureComponent {
     });
   }
   render() {
-    const  { visible, counter } = this.state;
+    const { visible, counter } = this.state;
     const columns = getColumns({
       valueModifier: counter,
       textColumn: true,

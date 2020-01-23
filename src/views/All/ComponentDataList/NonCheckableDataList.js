@@ -4,10 +4,7 @@ import DataList from '../../../components/DataList';
 
 const NonCheckableDataList = () => (
   <div style={containerStyle}>
-    <DataList
-      columns={getColumns()}
-      list={list}
-    />
+    <DataList columns={getColumns()} list={list} />
   </div>
 );
 

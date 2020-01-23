@@ -6,15 +6,16 @@ import ComplexDataList from './ComplexDataList';
 import NonCheckableDataList from './NonCheckableDataList';
 import CheckableDataList from './CheckableDataList';
 import ModalDataList from './ModalDataList';
+import TestDataList from './TestDataList';
 
-
-const TestDataList = () => (
-  <Tabs flex>
+const ExportableTestDataList = () => (
+  <Tabs flex  selected={4}>
     <TabList style={{ width: '500px' }}>
       <Tab>Complex multi props</Tab>
       <Tab>Modal</Tab>
       <Tab>Checkable</Tab>
       <Tab>Non Checkable</Tab>
+      <Tab>Test</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>
@@ -29,8 +30,11 @@ const TestDataList = () => (
       <TabPanel>
         <NonCheckableDataList />
       </TabPanel>
+      <TabPanel>
+        <TestDataList />
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
 
-export default TestDataList;
+export default ExportableTestDataList;

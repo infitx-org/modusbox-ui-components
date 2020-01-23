@@ -233,7 +233,7 @@ describe('Builds the responses correctly', () => {
     const action = fetch({
       url: '/test',
       sendAsFormData: true,
-      body: 'test'
+      body: 'test',
     });
 
     await store.dispatch(action);

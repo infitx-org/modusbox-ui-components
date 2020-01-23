@@ -50,10 +50,10 @@ class ComplexDataList extends PureComponent {
   }
   toggleColumn(column) {
     this.setState({
-      columns:{
+      columns: {
         ...this.state.columns,
         [column]: !this.state.columns[column],
-      }
+      },
     });
   }
   changeNoDataLabel(value) {
@@ -75,13 +75,12 @@ class ComplexDataList extends PureComponent {
       checked: value,
     }));
 
-
     const columnsToRender = getColumns({
       valueModifier: this.state.counter,
-      ...this.state.columns
+      ...this.state.columns,
     });
 
-    console.log(this.state.columns)
+    console.log(this.state.columns);
     return (
       <div style={containerStyle}>
         <div style={rowStyle}>
@@ -115,11 +114,15 @@ class ComplexDataList extends PureComponent {
           </div>
         </div>
         <div style={rowStyle}>
-            {columns.map(col => (
-              <div className="m5">
-                <Checkbox checked={col.checked} onChange={toggleColumn(col.label)} label={col.label} />
-              </div>
-            ))}
+          {columns.map(col => (
+            <div className="m5">
+              <Checkbox
+                checked={col.checked}
+                onChange={toggleColumn(col.label)}
+                label={col.label}
+              />
+            </div>
+          ))}
         </div>
         <List
           columns={columnsToRender}
@@ -144,9 +147,6 @@ const List = ({ columns, noDataLabel, errorMsg, pending, error, flex }) => {
       sortAsc={false}
       isPending={pending}
       hasError={error}
-      onSelect={console.log}
-      onUnselect={console.log}
-      onCheck={data => console.log(JSON.stringify(data))}
       checkable={item => item.a !== 0}
       selected={list[0]}
       noData={noDataLabel}

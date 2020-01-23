@@ -13,8 +13,8 @@ export const buildRow = () => {
   };
   idx += 5;
   return row;
-}
-export const list = new Array(20).fill(0).map(buildRow);
+};
+export const list = new Array(3).fill(0).map(buildRow);
 
 export const containerStyle = {
   padding: '5px',
@@ -46,7 +46,7 @@ export const getColumns = ({
   spanColumn = false,
   nestedColumn = false,
   linkFuncColumn = false,
-  iconColumn =false,
+  iconColumn = false,
   componentColumn = false,
 } = {}) => {
   console.log({
@@ -62,23 +62,23 @@ export const getColumns = ({
     linkFuncColumn,
     iconColumn,
     componentColumn,
-  })
+  });
   return [
     col1 && {
       label: 'Col 1',
-      key: 'col1'
+      key: 'col1',
     },
     col2 && {
       label: 'Col 2',
-      key: 'col2'
+      key: 'col2',
     },
     col3 && {
       label: 'Col 3',
-      key: 'col3'
+      key: 'col3',
     },
     col4 && {
       label: 'Col 4',
-      key: 'col4'
+      key: 'col4',
     },
     linkColumn && {
       label: 'Link',
@@ -130,4 +130,4 @@ export const getColumns = ({
       className: 'col-40px',
     },
   ].filter(item => item !== false && item !== undefined);
-}
+};
