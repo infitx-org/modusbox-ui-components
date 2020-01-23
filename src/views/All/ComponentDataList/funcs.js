@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { Link } from '../../../components/DataList';
 import Checkbox from '../../../components/Checkbox';
 import Icon from '../../../components/Icon';
-import { Link } from '../../../components/DataList';
 
 let idx = 0;
 export const buildRow = () => {
@@ -26,12 +27,17 @@ export const containerStyle = {
 
 export const rowStyle = {
   padding: '2px',
-  margin: '5px 0px',
-  display: 'flex',
+  display: 'inline-flex',
   flex: '0 0 auto',
   flexDirection: 'row',
+  flexWrap: 'wrap',
   alignItems: 'center',
-  background: '#F0F9F9',
+};
+
+export const settingsStyle = {
+  background: '#eee',
+  padding: 2,
+  border: '1px solid #ddd',
 };
 
 export const getColumns = ({
@@ -40,29 +46,15 @@ export const getColumns = ({
   col2 = true,
   col3 = true,
   col4 = true,
-  linkColumn = false,
-  textColumn = false,
-  transformColumn = false,
-  spanColumn = false,
-  nestedColumn = false,
-  linkFuncColumn = false,
-  iconColumn = false,
-  componentColumn = false,
+  link = false,
+  text = false,
+  transform = false,
+  span = false,
+  nested = false,
+  linkFunc = false,
+  icon = false,
+  component = false,
 } = {}) => {
-  console.log({
-    col1,
-    col2,
-    col3,
-    col4,
-    linkColumn,
-    textColumn,
-    transformColumn,
-    spanColumn,
-    nestedColumn,
-    linkFuncColumn,
-    iconColumn,
-    componentColumn,
-  });
   return [
     col1 && {
       label: 'Col 1',
@@ -80,49 +72,49 @@ export const getColumns = ({
       label: 'Col 4',
       key: 'col4',
     },
-    linkColumn && {
+    link && {
       label: 'Link',
       key: 'a',
       // eslint-disable-next-line
       func: x => <Link>{x}</Link>,
     },
-    textColumn && {
+    text && {
       label: 'Regular',
       key: 'col1',
       // eslint-disable-next-line
       func: x => <Link>{x}</Link>,
     },
-    transformColumn && {
+    transform && {
       label: 'Transform',
       key: 'col1',
       func: x => x * 2 * valueModifier,
       className: 'col-100px',
     },
-    spanColumn && {
+    span && {
       label: 'As a span',
       key: 'col1',
       func: x => <span>{x * Math.random()}</span>,
       className: 'col-100px',
     },
-    nestedColumn && {
+    nested && {
       label: 'Nested',
       key: 'c.test.value',
     },
-    linkFuncColumn && {
+    linkFunc && {
       label: 'As a Link',
       key: 'col1',
       func: x => new Array(15).fill(x).join(''),
       // eslint-disable-next-line
       link: console.log,
     },
-    iconColumn && {
+    icon && {
       sortable: false,
       label: '',
       key: 'col1',
       func: () => <Icon name="close-small" size={16} fill="#999" />,
       className: 'col-40px',
     },
-    componentColumn && {
+    component && {
       sortable: false,
       label: '',
       key: 'col1',

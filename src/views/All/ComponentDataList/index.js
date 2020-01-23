@@ -9,7 +9,7 @@ import ModalDataList from './ModalDataList';
 import TestDataList from './TestDataList';
 
 const ExportableTestDataList = () => (
-  <Tabs flex  selected={4}>
+  <Tabs flex>
     <TabList style={{ width: '500px' }}>
       <Tab>Complex multi props</Tab>
       <Tab>Modal</Tab>

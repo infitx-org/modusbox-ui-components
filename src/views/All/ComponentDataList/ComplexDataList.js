@@ -5,47 +5,52 @@ import ScrollBox from '../../../components/ScrollBox';
 import TextField from '../../../components/TextField';
 
 import React, { PureComponent } from 'react';
-import { list, containerStyle, rowStyle, getColumns } from './funcs';
+import { list, settingsStyle, containerStyle, rowStyle, getColumns } from './funcs';
 
 class ComplexDataList extends PureComponent {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.toggleColumn = this.toggleColumn.bind(this);
+    this.toggleModifier = this.toggleModifier.bind(this);
+    this.changeMessage = this.changeMessage.bind(this);
+    this.changeTransformer = this.changeTransformer.bind(this);
+
     this.increment = this.increment.bind(this);
-    this.changeNoDataLabel = this.changeNoDataLabel.bind(this);
-    this.changeErrorMessage = this.changeErrorMessage.bind(this);
     this.state = {
-      counter: 1,
-      noDataLabel: 'MyStupidList',
-      errorMsg: 'my default error message',
-      pending: false,
-      error: false,
-      flex: false,
+      transformers: {
+        counter: 1,
+        multiplier: 1,
+        randomizer: 1,
+      },
       columns: {
-        col1: false,
-        col2: false,
-        col3: false,
-        col4: false,
-        linkColumn: false,
-        textColumn: false,
-        transformColumn: false,
-        spanColumn: false,
-        nestedColumn: false,
-        linkFuncColumn: false,
-        iconColumn: false,
-        componentColumn: false,
+        col1: true,
+        col2: true,
+        col3: true,
+        col4: true,
+        link: false,
+        text: false,
+        transform: false,
+        span: false,
+        nested: false,
+        linkFunc: false,
+        icon: false,
+        component: false,
+      },
+      modifiers: {
+        isFlex: false,
+        inModal: false,
+        isPending: false,
+        hasError: false,
+      },
+      messages: {
+        empty: 'nothing to show!',
+        error: 'custom error msg',
       },
     };
   }
   increment() {
     this.setState({
       counter: this.state.counter + 1,
-    });
-  }
-  toggle(field, value) {
-    this.setState({
-      [field]: value,
     });
   }
   toggleColumn(column) {
@@ -56,107 +61,130 @@ class ComplexDataList extends PureComponent {
       },
     });
   }
-  changeNoDataLabel(value) {
+  toggleModifier(modifier) {
     this.setState({
-      noDataLabel: value,
+      modifiers: {
+        ...this.state.modifiers,
+        [modifier]: !this.state.modifiers[modifier],
+      },
     });
   }
-  changeErrorMessage(value) {
+  changeMessage(message, value) {
     this.setState({
-      errorMsg: value,
+      messages: {
+        ...this.state.messages,
+        [message]: value,
+      },
+    });
+  }
+  changeTransformer(transformer) {
+    let newValue;
+    if (transformer === 'counter') {
+      newValue = this.state.transformers.counter + 1;
+    } else if (transformer === 'multiplier') {
+      newValue = this.state.transformers.multiplier + 1;
+    } else if (transformer === 'randomizer') {
+      newValue = Math.floor(Math.random() * 10);
+    } else {
+      return;
+    }
+
+    this.setState({
+      transformers: {
+        ...this.state.transformers,
+        [transformer]: newValue,
+      },
     });
   }
   render() {
-    const toggle = field => value => this.toggle(field, value);
+    const { transformers, modifiers, messages, columns } = this.state;
     const toggleColumn = column => () => this.toggleColumn(column);
-    const columns = Object.entries(this.state.columns).map(([key, value]) => ({
-      name: key,
-      label: key,
-      checked: value,
-    }));
+    const toggleModifier = modifier => () => this.toggleModifier(modifier);
+    const changeMessage = message => value => this.changeMessage(message, value);
+    const changeTransformer = transformer => value => this.changeTransformer(transformer, value);
+
+    const getItems = (source, type) =>
+      Object.entries(source).map(([label, value]) => ({
+        type,
+        label,
+        value,
+      }));
+
+    const columnItems = getItems(columns, 'checkbox');
+    const modifierItems = getItems(modifiers, 'checkbox');
+    const messageItems = getItems(messages, 'textfield');
+    const transformerItems = getItems(transformers, 'button');
 
     const columnsToRender = getColumns({
       valueModifier: this.state.counter,
-      ...this.state.columns,
+      ...columns,
     });
 
-    console.log(this.state.columns);
+    const datalist = (
+      <DataList
+        columns={columnsToRender}
+        noDataLabel={messages.noDataLabel}
+        errorMsg={messages.errorMsg}
+        hasError={modifiers.hasError}
+        flex={modifiers.isFlex}
+        isPending={modifiers.isPending}
+        list={list}
+      />
+    );
+
     return (
       <div style={containerStyle}>
-        <div style={rowStyle}>
-          <div className="m5">
-            <TextField
-              size="s"
-              placeholder="no data"
-              value={this.state.noDataLabel}
-              onChange={this.changeNoDataLabel}
-            />
-          </div>
-          <div className="m5">
-            <TextField
-              size="s"
-              placeholder="error message"
-              value={this.state.errorMsg}
-              onChange={this.changeErrorMessage}
-            />
-          </div>
-          <div className="m5">
-            <Checkbox checked={this.state.pending} onChange={toggle('pending')} label="Pending" />
-          </div>
-          <div className="m5">
-            <Checkbox checked={this.state.error} onChange={toggle('error')} label="Error" />
-          </div>
-          <div className="m5">
-            <Checkbox checked={this.state.flex} onChange={toggle('flex')} label="Flex" />
-          </div>
-          <div className="m5">
-            <Button size="s" label="increment" onClick={this.increment} />
-          </div>
-        </div>
-        <div style={rowStyle}>
-          {columns.map(col => (
-            <div className="m5">
-              <Checkbox
-                checked={col.checked}
-                onChange={toggleColumn(col.label)}
-                label={col.label}
-              />
-            </div>
-          ))}
-        </div>
-        <List
-          columns={columnsToRender}
-          noDataLabel={this.state.noDataLabel}
-          errorMsg={this.state.errorMsg}
-          pending={this.state.pending}
-          error={this.state.error}
-          flex={this.state.flex}
-        />
+
+        <Settings title="Columns" items={columnItems} onChange={toggleColumn} />
+        <Settings title="Modifiers" items={modifierItems} onChange={toggleModifier} />
+        <Settings title="Messages" items={messageItems} onChange={changeMessage} />
+        <Settings title="Transformer" items={transformerItems} onChange={changeTransformer} />
+
+        {modifiers.isFlex ? datalist : <ScrollBox>{datalist}</ScrollBox>}
       </div>
     );
   }
 }
 
-const List = ({ columns, noDataLabel, errorMsg, pending, error, flex }) => {
-  const datalist = (
-    <DataList
-      flex={flex}
-      columns={columns}
-      list={list}
-      sortColumn="Double"
-      sortAsc={false}
-      isPending={pending}
-      hasError={error}
-      checkable={item => item.a !== 0}
-      selected={list[0]}
-      noData={noDataLabel}
-      errorMsg={errorMsg}
-    />
-  );
-  if (!flex) {
-    return <ScrollBox>{datalist}</ScrollBox>;
+const Settings = ({ title, items, onChange }) => (
+  <div style={settingsStyle}>
+    <div style={rowStyle}>
+      <div>
+        <b>{title}</b>
+      </div>
+      {items.map(item => (
+        <div className="m5" key={item.label}>
+          <Setting onChange={onChange} item={item} />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const Setting = ({ item, onChange }) => {
+  if (item.type === 'checkbox') {
+    return <Checkbox checked={item.value} onChange={onChange(item.label)} label={item.label} />;
+  } else if (item.type === 'textfield') {
+    return (
+      <TextField
+        size="s"
+        placeholder={item.label}
+        value={item.value}
+        onChange={onChange(item.label)}
+      />
+    );
+  } else if (item.type === 'button') {
+    return (
+      <Button
+        style={{ width: '100px' }}
+        size="s"
+        label={`${item.label}: ${item.value}`}
+        onClick={onChange(item.label)}
+      />
+    );
   }
-  return datalist;
+  return null;
 };
+
 
 export default ComplexDataList;
