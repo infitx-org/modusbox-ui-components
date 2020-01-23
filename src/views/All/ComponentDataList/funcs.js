@@ -20,7 +20,7 @@ export const list = new Array(3).fill(0).map(buildRow);
 export const containerStyle = {
   padding: '5px',
   display: 'flex',
-  flex: '2 1 auto',
+  flex: '2 0 auto',
   flexDirection: 'column',
   minHeight: '0',
 };

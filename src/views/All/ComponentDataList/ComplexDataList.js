@@ -5,22 +5,24 @@ import ScrollBox from '../../../components/ScrollBox';
 import TextField from '../../../components/TextField';
 
 import React, { PureComponent } from 'react';
-import { list, settingsStyle, containerStyle, rowStyle, getColumns } from './funcs';
+import { list, settingsStyle, containerStyle, rowStyle, getColumns, buildRow } from './funcs';
 
 class ComplexDataList extends PureComponent {
   constructor(props) {
     super(props);
+
     this.toggleColumn = this.toggleColumn.bind(this);
     this.toggleModifier = this.toggleModifier.bind(this);
     this.changeMessage = this.changeMessage.bind(this);
     this.changeTransformer = this.changeTransformer.bind(this);
-
-    this.increment = this.increment.bind(this);
+    this.updateItems = this.updateItems.bind(this);
     this.state = {
+      items: list,
       transformers: {
         counter: 1,
         multiplier: 1,
         randomizer: 1,
+        buildRow: undefined,
       },
       columns: {
         col1: true,
@@ -47,11 +49,6 @@ class ComplexDataList extends PureComponent {
         error: 'custom error msg',
       },
     };
-  }
-  increment() {
-    this.setState({
-      counter: this.state.counter + 1,
-    });
   }
   toggleColumn(column) {
     this.setState({
@@ -85,6 +82,10 @@ class ComplexDataList extends PureComponent {
       newValue = this.state.transformers.multiplier + 1;
     } else if (transformer === 'randomizer') {
       newValue = Math.floor(Math.random() * 10);
+    } else if (transformer === 'buildRow') {
+      this.setState({
+        items: [...this.state.items, buildRow()],
+      });
     } else {
       return;
     }
@@ -96,24 +97,46 @@ class ComplexDataList extends PureComponent {
       },
     });
   }
+  updateItems(updater) {
+    let newItems = [...this.state.items];
+    if (updater === 'Add Item') {
+      newItems.push(buildRow());
+    } else if (updater === 'Remove Item') {
+      newItems.splice(0, 1);
+    } else if (updater === 'Reset Items') {
+      newItems = list;
+    } else if (updater === 'Clear Items') {
+      newItems = [];
+    }
+    this.setState({ items: newItems });
+  }
+  increment() {
+    this.setState({
+      counter: this.state.counter + 1,
+    });
+  }
   render() {
-    const { transformers, modifiers, messages, columns } = this.state;
+    const { transformers, modifiers, messages, columns, items } = this.state;
     const toggleColumn = column => () => this.toggleColumn(column);
     const toggleModifier = modifier => () => this.toggleModifier(modifier);
     const changeMessage = message => value => this.changeMessage(message, value);
     const changeTransformer = transformer => value => this.changeTransformer(transformer, value);
+    const updateItems = updater => () => this.updateItems(updater);
 
-    const getItems = (source, type) =>
+    const mapItemsFromSource = (source, type) =>
       Object.entries(source).map(([label, value]) => ({
         type,
         label,
         value,
       }));
 
-    const columnItems = getItems(columns, 'checkbox');
-    const modifierItems = getItems(modifiers, 'checkbox');
-    const messageItems = getItems(messages, 'textfield');
-    const transformerItems = getItems(transformers, 'button');
+    const columnSettings = mapItemsFromSource(columns, 'checkbox');
+    const modifierSettings = mapItemsFromSource(modifiers, 'checkbox');
+    const messageSettings = mapItemsFromSource(messages, 'textfield');
+    const transformerSettings = mapItemsFromSource(transformers, 'button');
+    const dataUpdateSettings = ['Add Item', 'Remove Item', 'Clear Items', 'Reset Items'].map(
+      label => ({ label, type: 'button' }),
+    );
 
     const columnsToRender = getColumns({
       valueModifier: this.state.counter,
@@ -128,17 +151,17 @@ class ComplexDataList extends PureComponent {
         hasError={modifiers.hasError}
         flex={modifiers.isFlex}
         isPending={modifiers.isPending}
-        list={list}
+        list={items}
       />
     );
 
     return (
-      <div style={containerStyle}>
-
-        <Settings title="Columns" items={columnItems} onChange={toggleColumn} />
-        <Settings title="Modifiers" items={modifierItems} onChange={toggleModifier} />
-        <Settings title="Messages" items={messageItems} onChange={changeMessage} />
-        <Settings title="Transformer" items={transformerItems} onChange={changeTransformer} />
+      <div style={{ ...containerStyle, maxHeight: modifiers.isFlex ? '100%' : undefined }}>
+        <Settings title="Columns" items={columnSettings} onChange={toggleColumn} />
+        <Settings title="Modifiers" items={modifierSettings} onChange={toggleModifier} />
+        <Settings title="Messages" items={messageSettings} onChange={changeMessage} />
+        <Settings title="Transformer" items={transformerSettings} onChange={changeTransformer} />
+        <Settings title="Data update" items={dataUpdateSettings} onChange={updateItems} />
 
         {modifiers.isFlex ? datalist : <ScrollBox>{datalist}</ScrollBox>}
       </div>
@@ -178,13 +201,12 @@ const Setting = ({ item, onChange }) => {
       <Button
         style={{ width: '100px' }}
         size="s"
-        label={`${item.label}: ${item.value}`}
+        label={item.label}
         onClick={onChange(item.label)}
       />
     );
   }
   return null;
 };
-
 
 export default ComplexDataList;

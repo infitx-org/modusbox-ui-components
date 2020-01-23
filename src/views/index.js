@@ -30,7 +30,7 @@ const Views = {};
 
 componentMappings.forEach(({ view, name }) => {
   const CMP = ComponentViews[view];
-  if (name.includes('DataList') || name.includes('ContentReader')) {
+  if (name.includes('ContentReader')) {
     Views[name] = <CMP />;
   } else {
     Views[name] = (
