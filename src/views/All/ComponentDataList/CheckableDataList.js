@@ -37,7 +37,7 @@ class CheckableDataList extends React.Component {
           <Button size="m" label="add new items" onClick={this.onAddNewItem} />
         </div>
         <DataList
-          columns={getColumns(0)}
+          columns={getColumns({ valueModifier: 0 })}
           list={this.state.items}
           onCheck={this.onCheck}
           checked={this.state.checked}

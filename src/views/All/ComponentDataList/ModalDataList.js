@@ -32,13 +32,21 @@ class ModalDataList extends PureComponent {
     });
   }
   render() {
+    const  { visible, counter } = this.state;
+    const columns = getColumns({
+      valueModifier: counter,
+      textColumn: true,
+      transformColumn: true,
+      spanColumn: true,
+      nestedColumn: true,
+    });
     return (
       <div>
         <Button label="open" onClick={this.toggle} />
-        {this.state.visible && (
+        {visible && (
           <Modal allowClose onClose={this.toggle}>
             <Button label={this.state.rnd} onClick={this.rnd} />
-            <DataList columns={getColumns(this.state.counter)} list={list} sortColumn="Double" />
+            <DataList columns={columns} list={list} sortColumn="Double" />
           </Modal>
         )}
       </div>
