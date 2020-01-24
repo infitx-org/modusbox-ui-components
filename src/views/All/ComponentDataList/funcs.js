@@ -26,7 +26,7 @@ export const containerStyle = {
 };
 
 export const rowStyle = {
-  padding: '2px',
+  padding: '0px 5px',
   display: 'inline-flex',
   flex: '0 0 auto',
   flexDirection: 'row',
@@ -36,8 +36,9 @@ export const rowStyle = {
 
 export const settingsStyle = {
   background: '#eee',
-  padding: 2,
-  border: '1px solid #ddd',
+  padding: 0,
+  borderRadius: '10px',
+  marginBottom: 3
 };
 
 export const getColumns = ({

@@ -9,25 +9,40 @@ import Modal from '../../../components/Modal';
 import React, { PureComponent } from 'react';
 import { list, settingsStyle, containerStyle, rowStyle, getColumns, buildRow } from './funcs';
 
+const ACTIONS = {
+  ITEM_ADD: 'Add Item',
+  ITEM_REMOVE: 'Remove Item',
+  ITEMS_CLEAR: 'Clear Items',
+  ITEMS_RESET: 'Reset Items',
+  VAR_BUMP: 'Increase Counter',
+  VAR_RND: 'Randomize Counter',
+};
+
+
+
+
+
+
+
 class DataListWithSettings extends PureComponent {
   constructor(props) {
     super(props);
 
     this.onCheck = this.onCheck.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+
     this.toggleColumn = this.toggleColumn.bind(this);
     this.toggleModifier = this.toggleModifier.bind(this);
     this.changeMessage = this.changeMessage.bind(this);
-    this.changeTransformer = this.changeTransformer.bind(this);
     this.updateItems = this.updateItems.bind(this);
 
     this.state = {
       items: list,
       checked:[],
+      selected: undefined,
       transformers: {
         counter: 1,
-        multiplier: 1,
         randomizer: 1,
-        buildRow: undefined,
       },
       columns: {
         col1: true,
@@ -49,6 +64,7 @@ class DataListWithSettings extends PureComponent {
         isPending: false,
         hasError: false,
         canCheck: false,
+        canSelect: false,
       },
       messages: {
         empty: 'nothing to show!',
@@ -56,9 +72,14 @@ class DataListWithSettings extends PureComponent {
       },
     };
   }
-  onCheck(items) {
+  onCheck(checked) {
     this.setState({
-      checked: items,
+      checked,
+    });
+  }
+  onSelect(selected) {
+    this.setState({
+      selected,
     });
   }
   toggleColumn(column) {
@@ -85,41 +106,32 @@ class DataListWithSettings extends PureComponent {
       },
     });
   }
-  changeTransformer(transformer) {
-    let newValue;
-    if (transformer === 'counter') {
-      newValue = this.state.transformers.counter + 1;
-    } else if (transformer === 'multiplier') {
-      newValue = this.state.transformers.multiplier + 1;
-    } else if (transformer === 'randomizer') {
-      newValue = Math.floor(Math.random() * 10);
-    } else if (transformer === 'buildRow') {
-      this.setState({
-        items: [...this.state.items, buildRow()],
-      });
-    } else {
-      return;
-    }
-
-    this.setState({
-      transformers: {
-        ...this.state.transformers,
-        [transformer]: newValue,
-      },
-    });
-  }
-  updateItems(updater) {
+  updateItems(action) {
     let newItems = [...this.state.items];
-    if (updater === 'Add Item') {
-      newItems.push(buildRow());
-    } else if (updater === 'Remove Item') {
-      newItems.splice(0, 1);
-    } else if (updater === 'Reset Items') {
-      newItems = list;
-    } else if (updater === 'Clear Items') {
-      newItems = [];
+    let newTransformers = { ...this.state.transformers };
+    switch(action) {
+      case ACTIONS.ITEM_ADD:
+        newItems.push(buildRow());
+        break;
+      case ACTIONS.ITEM_REMOVE:
+        newItems.splice(0, 1);
+        break;
+      case ACTIONS.ITEMS_RESET:
+        newItems = list;
+        break;
+      case ACTIONS.ITEMS_CLEAR:
+        newItems = [];
+        break;
+      case ACTIONS.VAR_RND:
+        newTransformers.counter = Math.floor(Math.random() * 10);
+        break;
+      case ACTIONS.VAR_BUMP:
+        newTransformers.counter = newTransformers.counter + 1;
+        break;
+      default:
+        break;
     }
-    this.setState({ items: newItems });
+    this.setState({ items: newItems, transformers: newTransformers });
   }
   increment() {
     this.setState({
@@ -132,7 +144,6 @@ class DataListWithSettings extends PureComponent {
     const toggleColumn = column => () => this.toggleColumn(column);
     const toggleModifier = modifier => () => this.toggleModifier(modifier);
     const changeMessage = message => value => this.changeMessage(message, value);
-    const changeTransformer = transformer => value => this.changeTransformer(transformer, value);
     const updateItems = updater => () => this.updateItems(updater);
 
     const mapItemsFromSource = (source, type) =>
@@ -145,13 +156,10 @@ class DataListWithSettings extends PureComponent {
     const columnSettings = mapItemsFromSource(columns, 'checkbox');
     const modifierSettings = mapItemsFromSource(modifiers, 'checkbox');
     const messageSettings = mapItemsFromSource(messages, 'textfield');
-    const transformerSettings = mapItemsFromSource(transformers, 'button');
-    const dataUpdateSettings = ['Add Item', 'Remove Item', 'Clear Items', 'Reset Items'].map(
-      label => ({ label, type: 'button' }),
-    );
+    const dataUpdateSettings = Object.values(ACTIONS).map(label => ({ label, type: 'button' }));
 
     const columnsToRender = getColumns({
-      valueModifier: this.state.counter,
+      valueModifier: transformers.counter,
       ...columns,
     });
 
@@ -165,6 +173,8 @@ class DataListWithSettings extends PureComponent {
         isPending={modifiers.isPending}
         onCheck={modifiers.canCheck ? this.onCheck : undefined}
         checked={modifiers.canCheck ? this.state.checked : undefined}
+        onSelect={modifiers.canSelect ? this.onSelect : undefined}
+        selected={modifiers.canSelect ? this.state.selected : undefined}
         list={items}
       />
     );
@@ -179,7 +189,6 @@ class DataListWithSettings extends PureComponent {
         <Settings title="Columns" items={columnSettings} onChange={toggleColumn} />
         <Settings title="Modifiers" items={modifierSettings} onChange={toggleModifier} />
         <Settings title="Messages" items={messageSettings} onChange={changeMessage} />
-        <Settings title="Transformer" items={transformerSettings} onChange={changeTransformer} />
         <Settings title="Data update" items={dataUpdateSettings} onChange={updateItems} />
 
         {content}
