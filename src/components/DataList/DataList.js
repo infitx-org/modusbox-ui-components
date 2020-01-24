@@ -221,10 +221,7 @@ class DataList extends PureComponent {
     this.onItemClick = this.onItemClick.bind(this);
     this.onHeaderCheckboxChange = this.onHeaderCheckboxChange.bind(this);
     this.onChange = this.onChange.bind(this);
-
-    if (this.props.onCheck) {
-      this.onItemCheck = this.onItemCheck.bind(this);
-    }
+    this.onItemCheck = this.onItemCheck.bind(this);
 
     this._columns = DataList.convertColumns(
       this.props.columns,

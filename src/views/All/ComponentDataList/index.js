@@ -13,13 +13,16 @@ class DataListWithSettings extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.onCheck = this.onCheck.bind(this);
     this.toggleColumn = this.toggleColumn.bind(this);
     this.toggleModifier = this.toggleModifier.bind(this);
     this.changeMessage = this.changeMessage.bind(this);
     this.changeTransformer = this.changeTransformer.bind(this);
     this.updateItems = this.updateItems.bind(this);
+
     this.state = {
       items: list,
+      checked:[],
       transformers: {
         counter: 1,
         multiplier: 1,
@@ -45,12 +48,18 @@ class DataListWithSettings extends PureComponent {
         inModal: false,
         isPending: false,
         hasError: false,
+        canCheck: false,
       },
       messages: {
         empty: 'nothing to show!',
         error: 'custom error msg',
       },
     };
+  }
+  onCheck(items) {
+    this.setState({
+      checked: items,
+    });
   }
   toggleColumn(column) {
     this.setState({
@@ -119,6 +128,7 @@ class DataListWithSettings extends PureComponent {
   }
   render() {
     const { transformers, modifiers, messages, columns, items } = this.state;
+
     const toggleColumn = column => () => this.toggleColumn(column);
     const toggleModifier = modifier => () => this.toggleModifier(modifier);
     const changeMessage = message => value => this.changeMessage(message, value);
@@ -153,6 +163,8 @@ class DataListWithSettings extends PureComponent {
         hasError={modifiers.hasError}
         flex={modifiers.isFlex}
         isPending={modifiers.isPending}
+        onCheck={modifiers.canCheck ? this.onCheck : undefined}
+        checked={modifiers.canCheck ? this.state.checked : undefined}
         list={items}
       />
     );
