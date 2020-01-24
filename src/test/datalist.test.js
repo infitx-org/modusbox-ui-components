@@ -36,7 +36,7 @@ const buildRow = columns => () =>
     {},
   );
 
-const testList1 = new Array(100).fill(null).map(buildRow(testColumns1));
+const testList1 = new Array(10).fill(null).map(buildRow(testColumns1));
 
 const testList2 = [4, 5, 3, 1, 2].map(value => ({
   col: value,
@@ -188,25 +188,28 @@ it('renders the selected prop when a single item is passed', () => {
 });
 
 it('updates the cell content on list changing', () => {
-  const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
+  let wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const oldCellValue = wrapper
     .find('div.el-datalist__item-cell')
-    .at(0)
+    .at(3)
     .text();
 
   const updatedList = testList1.map(item => ({
     ...item,
-    column1: item.column1 * 2,
+    column4: '-'
   }));
   wrapper.setProps({ list: updatedList });
-
+  wrapper = wrapper.update();
+  
   const newCellValue = wrapper
     .find('div.el-datalist__item-cell')
-    .at(0)
+    .at(3)
     .text();
+
+
   expect(oldCellValue).not.toBe(newCellValue);
-  expect(newCellValue).not.toBe('4');
+  expect(newCellValue).toBe('-');
 });
 
 it('renders and sorts by the prop sortColumn', () => {
@@ -827,21 +830,22 @@ it('triggers the onCheck function with no items when clicking the header checkbo
   expect(mockEvent).toHaveBeenCalledWith([]);
 });
 
-/* it('renders the list correctly when multiple props are set', () => {
-  const mockEvent = () => false;
+it('triggers the onCheck function when onCheck is assigned as a prop change', () => {
+  const mockEvent = jest.fn();
   const checked = () => false;
-  const wrapper = shallow(
-    <DataList
-      list={testList1}
-      columns={testColumns1}
-      onCheck={mockEvent}
-      checked={checked}
-      sortColumn="Column2"
-      sortAsc={false}
-      selected={item => item.column1 === 1}
-      onUnselect={mockEvent}
-    />,
+  let wrapper = mount(
+    <DataList list={testList1} columns={testColumns1} onCheck={undefined} checked={checked} />,
   );
-  expect(shallowToJson(wrapper)).toMatchSnapshot();
+
+  wrapper.setProps({ onCheck: mockEvent });
+  wrapper = wrapper.update();
+  wrapper
+    .find('.el-datalist__header-cell')
+    .at(0)
+    .find('Checkbox')
+    .find('label')
+    .simulate('click')
+    .simulate('click');
+
+  expect(mockEvent).toHaveBeenCalledWith([]);
 });
-*/

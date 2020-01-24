@@ -262,15 +262,18 @@ class DataList extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     const { list, columns, selected, checked, checkable, onCheck } = this.props;
+    const didColumnsChange = prevProps.columns !== columns;
+    const didListChange = prevProps.list !== list;
+    const didOnCheckChange = onCheck !== prevProps.onCheck && !prevProps.onCheck;
 
-    if (prevProps.columns !== columns) {
+    if (didColumnsChange || didOnCheckChange) {
       this._columns = DataList.convertColumns(
         columns,
         this._columns,
         onCheck ? this.onItemCheck : undefined,
       );
     }
-    if (prevProps.list !== list || prevProps.columns !== columns) {
+    if (didColumnsChange || didListChange || didOnCheckChange) {
       const { sortAsc, sortColumn, items } = this.state;
       const checkedItems = DataList.getCheckedItems(list, checked);
       const selectedItems = DataList.getSelectedItems(list, selected);
@@ -291,10 +294,8 @@ class DataList extends PureComponent {
       this.setState({ items: sortedItems });
     }
   }
-  onSortClick(key) {
-    const sortAsc = this.state.sortColumn === key ? !this.state.sortAsc : true;
-    const sortColumn = key;
-
+  onSortClick(sortColumn) {
+    const sortAsc = this.state.sortColumn === sortColumn ? !this.state.sortAsc : true;
     const items = DataList.sortItems(this.state.items, sortAsc, sortColumn);
 
     this.setState({

@@ -13,6 +13,7 @@ const ACTIONS = {
   ITEM_REMOVE: 'Remove Item',
   ITEMS_CLEAR: 'Clear Items',
   ITEMS_RESET: 'Reset Items',
+  COLUMN_BUMP: 'Increase column value',
   VAR_BUMP: 'Increase Counter',
   VAR_RND: 'Randomize Counter',
 };
@@ -114,6 +115,9 @@ class DataListWithSettings extends PureComponent {
         break;
       case ACTIONS.ITEMS_CLEAR:
         newItems = [];
+        break;
+      case ACTIONS.COLUMN_BUMP:
+        newItems[0].col1 += 1;
         break;
       case ACTIONS.VAR_RND:
         newTransformers.counter = Math.floor(Math.random() * 10);
