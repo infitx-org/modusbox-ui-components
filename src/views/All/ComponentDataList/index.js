@@ -5,7 +5,6 @@ import ScrollBox from '../../../components/ScrollBox';
 import TextField from '../../../components/TextField';
 import Modal from '../../../components/Modal';
 
-
 import React, { PureComponent } from 'react';
 import { list, settingsStyle, containerStyle, rowStyle, getColumns, buildRow } from './funcs';
 
@@ -17,12 +16,6 @@ const ACTIONS = {
   VAR_BUMP: 'Increase Counter',
   VAR_RND: 'Randomize Counter',
 };
-
-
-
-
-
-
 
 class DataListWithSettings extends PureComponent {
   constructor(props) {
@@ -108,7 +101,7 @@ class DataListWithSettings extends PureComponent {
   }
   updateItems(action) {
     let newItems = [...this.state.items];
-    let newTransformers = { ...this.state.transformers };
+    const newTransformers = { ...this.state.transformers };
     switch(action) {
       case ACTIONS.ITEM_ADD:
         newItems.push(buildRow());
@@ -126,7 +119,7 @@ class DataListWithSettings extends PureComponent {
         newTransformers.counter = Math.floor(Math.random() * 10);
         break;
       case ACTIONS.VAR_BUMP:
-        newTransformers.counter = newTransformers.counter + 1;
+        newTransformers.counter += 1;
         break;
       default:
         break;
@@ -190,7 +183,6 @@ class DataListWithSettings extends PureComponent {
         <Settings title="Modifiers" items={modifierSettings} onChange={toggleModifier} />
         <Settings title="Messages" items={messageSettings} onChange={changeMessage} />
         <Settings title="Data update" items={dataUpdateSettings} onChange={updateItems} />
-
         {content}
       </div>
     );
@@ -227,7 +219,7 @@ const Setting = ({ item, onChange }) => {
   } else if (item.type === 'button') {
     return (
       <Button
-        style={{ width: '100px' }}
+        style={{ width: '120px' }}
         size="s"
         label={item.label}
         onClick={onChange(item.label)}
