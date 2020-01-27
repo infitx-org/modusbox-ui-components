@@ -76,14 +76,14 @@ class DataList extends PureComponent {
   static toItems(list, columns, selected, checked, checkable, prevItems, prevList = []) {
     // applies the column configuration to the list
     // so that child components will not need any transformation logic
-    const reduceColumns = (row, _rowIndex, _listIndex) => (prev, column) => {
+    const reduceColumns = (row, _rowIndex, _position) => (prev, column) => {
       const { func, key, link, _index, _onChange } = column;
       const originalValue = get(row._source, key);
       let value = originalValue;
       let component = null;
 
       if (typeof func === 'function') {
-        value = func(value, row._source, _listIndex);
+        value = func(value, row._source, _position);
       }
       if (typeof link === 'function') {
         // eslint-disable-next-line
@@ -110,16 +110,16 @@ class DataList extends PureComponent {
       };
     };
 
-    const mapListRowToItem = (oldItems, oldList) => (item, _listIndex) => {
+    const mapListRowToItem = (oldItems, oldList) => (item, _position) => {
       let row;
-      if (isEqual(item, oldList[_listIndex])) {
+      if (isEqual(item, oldList[_position])) {
         // use last item if available so that the internal index does
         // not change, keeping eveything working faster
-        row = find(oldItems, { _position: _listIndex });
+        row = find(oldItems, { _position });
       } else {
         row = {
-          _position: _listIndex,
-          _index: get(oldItems, `[${_listIndex}]._index`) || uuid(),
+          _position,
+          _index: uuid(),
           _source: item,
           _visible: true,
         };
@@ -127,13 +127,13 @@ class DataList extends PureComponent {
 
       row._selected = selected
         ? selected.some(select => isEqual(select, item))
-        : get(oldItems, `[${_listIndex}]._selected`);
+        : get(oldItems, `[${_position}]._selected`);
 
       row._checked = checked
         ? checked.some(check => isEqual(check, item))
-        : get(oldItems, `[${_listIndex}]._checked`);
-      row.data = columns.reduce(reduceColumns(row, row._index, _listIndex), {});
+        : get(oldItems, `[${_position}]._checked`);
 
+      row.data = columns.reduce(reduceColumns(row, row._index, _position), {});
       return row;
     };
 
@@ -221,10 +221,7 @@ class DataList extends PureComponent {
     this.onItemClick = this.onItemClick.bind(this);
     this.onHeaderCheckboxChange = this.onHeaderCheckboxChange.bind(this);
     this.onChange = this.onChange.bind(this);
-
-    if (this.props.onCheck) {
-      this.onItemCheck = this.onItemCheck.bind(this);
-    }
+    this.onItemCheck = this.onItemCheck.bind(this);
 
     this._columns = DataList.convertColumns(
       this.props.columns,
@@ -265,18 +262,21 @@ class DataList extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     const { list, columns, selected, checked, checkable, onCheck } = this.props;
+    const didColumnsChange = prevProps.columns !== columns;
+    const didListChange = prevProps.list !== list;
+    const didOnCheckChange = onCheck !== prevProps.onCheck && !prevProps.onCheck;
 
-    if (prevProps.columns !== columns) {
+    if (didColumnsChange || didOnCheckChange) {
       this._columns = DataList.convertColumns(
         columns,
         this._columns,
         onCheck ? this.onItemCheck : undefined,
       );
     }
-    if (prevProps.list !== list || prevProps.columns !== columns) {
+    if (didColumnsChange || didListChange || didOnCheckChange) {
       const { sortAsc, sortColumn, items } = this.state;
       const checkedItems = DataList.getCheckedItems(list, checked);
-      const selectedItems = DataList.getCheckedItems(list, selected);
+      const selectedItems = DataList.getSelectedItems(list, selected);
 
       const listItems = DataList.toItems(
         list,
@@ -294,10 +294,8 @@ class DataList extends PureComponent {
       this.setState({ items: sortedItems });
     }
   }
-  onSortClick(key) {
-    const sortAsc = this.state.sortColumn === key ? !this.state.sortAsc : true;
-    const sortColumn = key;
-
+  onSortClick(sortColumn) {
+    const sortAsc = this.state.sortColumn === sortColumn ? !this.state.sortAsc : true;
     const items = DataList.sortItems(this.state.items, sortAsc, sortColumn);
 
     this.setState({
