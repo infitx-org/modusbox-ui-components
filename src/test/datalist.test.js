@@ -197,16 +197,15 @@ it('updates the cell content on list changing', () => {
 
   const updatedList = testList1.map(item => ({
     ...item,
-    column4: '-'
+    column4: '-',
   }));
   wrapper.setProps({ list: updatedList });
   wrapper = wrapper.update();
-  
+
   const newCellValue = wrapper
     .find('div.el-datalist__item-cell')
     .at(3)
     .text();
-
 
   expect(oldCellValue).not.toBe(newCellValue);
   expect(newCellValue).toBe('-');

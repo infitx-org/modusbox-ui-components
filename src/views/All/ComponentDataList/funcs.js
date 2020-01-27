@@ -7,12 +7,11 @@ import Icon from '../../../components/Icon';
 let idx = 0;
 export const buildRow = () => {
   const row = {
-    col1: idx + 1,
-    col2: idx + 2,
-    col3: idx + 3,
-    col4: idx + 4,
+    col1: idx += 1,
+    col2: idx += 1,
+    col3: idx += 1,
+    col4: idx += 1,
   };
-  idx += 5;
   return row;
 };
 export const list = new Array(3).fill(0).map(buildRow);
@@ -38,7 +37,7 @@ export const settingsStyle = {
   background: '#eee',
   padding: 0,
   borderRadius: '10px',
-  marginBottom: 3
+  marginBottom: 3,
 };
 
 export const getColumns = ({
