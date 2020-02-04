@@ -84,12 +84,14 @@ const fetchMiddleware = () => store => next => async action => {
     handleError,
     saveData,
     overrideStatus,
-  } = buildConfig(endpointConfig, serviceConfig);
+  } = buildConfig(endpointConfig, serviceConfig, method);
 
   let response;
   const requestId = uuid();
   const requestUrl = buildRequestUrl(url, params);
   const requestConfig = buildRequestConfig(method, body, headers, credentials);
+
+  console.log(method, crud)
 
   try {
     store.dispatch(setFetchRequestSent(name, crud, vars, requestConfig, requestId, saveData));

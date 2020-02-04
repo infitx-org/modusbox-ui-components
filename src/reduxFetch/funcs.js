@@ -61,7 +61,7 @@ const buildEndpointConfig = (config = {}, state) => {
   };
 };
 
-const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
+const buildConfig = (endpointConfig = {}, serviceConfig = {}, method = 'GET') => {
   const defaultConfig = {
     url: undefined,
     headers: {},
@@ -115,16 +115,18 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}) => {
 
   config.url = `${serviceConfig.url}${endpointConfig.url}`;
 
-  if (config.sendAsJson) {
-    config.headers['content-type'] = 'application/json';
-  } else if (config.sendAsFormData) {
-    config.headers['content-type'] = 'multipart/form-data';
-    const formData = new FormData();
-    formData.append('file', config.body);
-    config.body = formData;
-  } else if (config.sendAsFormUrlEncoded) {
-    config.headers['content-type'] = 'application/x-www-form-urlencoded';
-    config.body = urlEncode(config.body);
+  if (method !== 'GET') {
+    if (config.sendAsJson) {
+      config.headers['content-type'] = 'application/json';
+    } else if (config.sendAsFormData) {
+      config.headers['content-type'] = 'multipart/form-data';
+      const formData = new FormData();
+      formData.append('file', config.body);
+      config.body = formData;
+    } else if (config.sendAsFormUrlEncoded) {
+      config.headers['content-type'] = 'application/x-www-form-urlencoded';
+      config.body = urlEncode(config.body);
+    }
   }
   return config;
 };
