@@ -229,8 +229,9 @@ describe('Builds the responses correctly', () => {
   });
 
   it('Should send the body as form data if set', async () => {
-    fetchMock.get('*', 200);
+    fetchMock.post('*', 200);
     const action = fetch({
+      method: 'POST',
       url: '/test',
       sendAsFormData: true,
       body: 'test',
@@ -246,8 +247,9 @@ describe('Builds the responses correctly', () => {
   });
 
   it('Should send the body as url encoded if set', async () => {
-    fetchMock.get('*', 200);
+    fetchMock.post('*', 200);
     const action = fetch({
+      method: 'POST',
       url: '/test',
       sendAsFormUrlEncoded: true,
       body: { test: 'key', value: 'x' },
