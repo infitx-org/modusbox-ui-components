@@ -91,8 +91,6 @@ const fetchMiddleware = () => store => next => async action => {
   const requestUrl = buildRequestUrl(url, params);
   const requestConfig = buildRequestConfig(method, body, headers, credentials);
 
-  console.log(method, crud)
-
   try {
     store.dispatch(setFetchRequestSent(name, crud, vars, requestConfig, requestId, saveData));
     const fetchResponse = await window.fetch(requestUrl, requestConfig);
