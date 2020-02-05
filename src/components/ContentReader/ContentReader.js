@@ -77,7 +77,7 @@ class ContentReader extends PureComponent {
               </div>
               <div
                 contentEditable
-                spellcheck="false"
+                spellCheck="false"
                 className="content-reader__content"
                 role="presentation"
                 onKeyDown={restrictKeysToSelectAndCopy}
