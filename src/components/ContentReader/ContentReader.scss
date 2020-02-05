@@ -64,17 +64,8 @@
   overflow-x: auto;
   min-height: min-content;
   display: flex;
+  outline: none;
   pre {
     min-height: min-content;
   }
-}
-
-.content-reader__row-number {
-  width: 40px;
-  height: 16px;
-  padding-right: 2px;
-}
-
-.content-reader__spacer {
-  height: 20px;
 }

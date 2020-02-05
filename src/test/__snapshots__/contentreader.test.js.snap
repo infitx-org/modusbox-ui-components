@@ -119,15 +119,15 @@ exports[`renders the ContentReader correctly when multiple props are set 1`] = `
                         8
                       </div>
                     </code>
-                    <Spacer>
-                      <div
-                        className="content-reader__spacer"
-                      />
-                    </Spacer>
                   </pre>
                 </div>
                 <div
                   className="content-reader__content"
+                  contentEditable={true}
+                  onKeyDown={[Function]}
+                  role="presentation"
+                  spellCheck="false"
+                  suppressContentEditableWarning={true}
                 >
                   <pre>
                     <code>
@@ -140,11 +140,6 @@ exports[`renders the ContentReader correctly when multiple props are set 1`] = `
                       Everything up-to-date
                       
                     </code>
-                    <Spacer>
-                      <div
-                        className="content-reader__spacer"
-                      />
-                    </Spacer>
                   </pre>
                 </div>
               </div>
