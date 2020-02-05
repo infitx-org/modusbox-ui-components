@@ -14,6 +14,15 @@ hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('shell', shell);
 
+function restrictKeysToSelectAndCopy (evt) {
+  const { ctrlKey, metaKey, keyCode } = evt;
+  const isCopyOrSelectKey = keyCode === 65 || keyCode === 67;
+  const isCopyOrSelectModifier = ctrlKey || metaKey;
+  if (!isCopyOrSelectKey || !isCopyOrSelectModifier) {
+    evt.preventDefault();
+  }
+}
+
 class ContentReader extends PureComponent {
   static parse(source = '') {
     let content = source;
@@ -33,8 +42,7 @@ class ContentReader extends PureComponent {
     if (!error) {
       const lines = content.split(/(?:\r\n|\r|\n)/);
       lineNumbers = lines.map((_, index) => (
-        /* eslint-disable-next-line react/no-array-index-key */
-        <div className="content-reader__lines__line-n" key={index}>
+        <div className="content-reader__lines__line-n" key={index.toString()}>
           {index + 1}
         </div>
       ));
@@ -54,7 +62,7 @@ class ContentReader extends PureComponent {
   render() {
     const { content, lineNumbers, error } = ContentReader.parse(this.props.data);
     if (error) {
-      return <div> Unable to read the data </div>;
+      return <div>Unable to read the data</div>;
     }
 
     return (
@@ -65,10 +73,14 @@ class ContentReader extends PureComponent {
               <div className="content-reader__lines">
                 <pre>
                   <code>{lineNumbers}</code>
-                  <Spacer />
                 </pre>
               </div>
-              <div className="content-reader__content">
+              <div
+                contentEditable
+                className="content-reader__content"
+                role="presentation"
+                onKeyDown={restrictKeysToSelectAndCopy}
+              >
                 <pre>
                   <code
                     ref={code => {
@@ -77,7 +89,6 @@ class ContentReader extends PureComponent {
                   >
                     {content}
                   </code>
-                  <Spacer />
                 </pre>
               </div>
             </div>
@@ -87,7 +98,5 @@ class ContentReader extends PureComponent {
     );
   }
 }
-
-const Spacer = () => <div className="content-reader__spacer" />;
 
 export default ContentReader;
