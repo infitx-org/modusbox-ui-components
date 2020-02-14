@@ -9,22 +9,23 @@
   pre {
     margin: 0;
     padding: 0;
+    word-wrap: normal;
   }
 
   code {
     font-family: monospace;
     color: #444;
-    font-size: 13px;
     line-height: 16px;
   }
+
   span {
     display: inline-block;
-    height: 16px;
   }
 
   .hljs {
-    padding: 2px;
+    padding: 0px;
     background: none;
+    overflow: visible;
   }
 }
 .content-reader__layout-v {
