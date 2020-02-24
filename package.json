@@ -1,6 +1,6 @@
 {
   "name": "@modusbox/modusbox-ui-components",
-  "version": "1.17.8",
+  "version": "1.17.9",
   "description": "ModusBox UI Components",
   "license": "Apache-2.0",
   "main": "dist/index.js",
