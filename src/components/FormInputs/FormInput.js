@@ -15,7 +15,88 @@ import TextArea from '../TextArea';
 import TextField from '../TextField';
 import Tooltip from '../Tooltip';
 
-const Label = ({ size, label, required, complete }) => {
+const FieldInfoOverlay = ({ assignRef, title, description }) => (
+  <div className="forminput__field-info" ref={assignRef}>
+    <div className="forminput__field-info__title">{title}</div>
+    <div className="forminput__field-info__content">
+      <p>
+        {description}
+      </p>
+    </div>
+  </div>
+);
+
+class FieldInfo extends PureComponent {
+  constructor() {
+    super();
+    this.onClick = this.onClick.bind(this);
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
+    this.closeIfClickingOutside = this.closeIfClickingOutside.bind(this);
+    this.state = {
+      open: false,
+    };
+  }
+  componentWillUnmount() {
+    this.close();
+  }
+  onClick() {
+    if (this.state.open) {
+      this.close();
+    } else {
+      this.open();
+    }
+  }
+  open() {
+    this.area = React.createRef();
+    this.setState({
+      open: true,
+    }, () => {
+      document.addEventListener('click', this.closeIfClickingOutside);
+    });
+  }
+  close() {
+    this.setState({
+      open: false,
+    }, () => {
+      this.area = null;
+      document.removeEventListener('click', this.closeIfClickingOutside);
+    });
+  }
+  closeIfClickingOutside(evt) {
+    if (!this.area.current) {
+      return;
+    }
+    if (!this.area.current.contains(evt.target)) {
+      this.close();
+    }
+  }
+  render() {
+    const { iconSize, title, description, url } = this.props;
+    let content = null;
+    if (this.state.open) {
+      content = <FieldInfoOverlay assignRef={this.area} title={title} description={description} url={url} />;
+    }
+    return (
+      <Tooltip
+        forceVisibility={this.state.open}
+        showOnHover={false}
+        content={content}
+        custom
+        position="right"
+      >
+        <Icon
+          name="forum-small"
+          onClick={this.onClick}
+          size={iconSize}
+          className="forminput__field-info__icon"
+        />
+      </Tooltip>
+    );
+  }
+}
+
+const Label = ({ size, label, required, complete, description, url }) => {
   if (!label) {
     return null;
   }
@@ -31,11 +112,12 @@ const Label = ({ size, label, required, complete }) => {
     m: 12,
     l: 14,
   };
+  const iconSize = iconSizes[size];
   return (
     <div className={className}>
       {required && (
         <Icon
-          size={iconSizes[size]}
+          size={iconSize}
           name="info-small"
           className="forminput__label-icon"
           fill={complete ? '#39f' : '#f93'}
@@ -43,6 +125,13 @@ const Label = ({ size, label, required, complete }) => {
         />
       )}
       <label>{label}</label>
+      <FieldInfo
+        iconSize={iconSize}
+        title={label}
+        description={description}
+        url={url}
+      />
+
     </div>
   );
 };
