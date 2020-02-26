@@ -22,6 +22,18 @@ const TooltipHandle = ({ custom, direction, kind }) => {
   );
 };
 
+const MultiLine = ({ string }) => {
+  return string
+    .map(line => <span>{line}</span>)
+    .reduce((lines, line, index, array) => {
+      const newLines = [...lines, line];
+      if (index < array.length - 1) {
+        newLines.push(<br />)
+      }
+      return newLines;
+    }, []);
+}
+
 export default class TooltipViewer extends PureComponent {
   static getCoordinatesByPosition (pos, parentRect, targetRect) {
     const leftCenteredByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
@@ -187,12 +199,7 @@ export default class TooltipViewer extends PureComponent {
     const { direction } = this.state;
     const { content, label, position, children, kind, custom } = this.props;
     let tooltipInnerComponent = null;
-    const addNewLine = (prev, current, index, array) => [
-      ...prev,
-      current,
-      index < array.length - 1 ? <br /> : null,
-    ];
-
+    
     if (content) {
       if (custom) {
         // We need to provide the content with the position it will be render
@@ -202,7 +209,7 @@ export default class TooltipViewer extends PureComponent {
       }
     } else if (label) {
       if (Array.isArray(label)) {
-        tooltipInnerComponent = label.map(single => <span>{single}</span>).reduce(addNewLine, []);
+        tooltipInnerComponent = <MultiLine string={label} />
       } else {
         tooltipInnerComponent = <span>{label}</span>;
       }
@@ -214,6 +221,7 @@ export default class TooltipViewer extends PureComponent {
       'el-tooltip__child',
       custom && 'el-tooltip__child--custom',
     ]);
+
     const rendering = [
       <div key="content" className={childClassName}>
         {tooltipInnerComponent}
