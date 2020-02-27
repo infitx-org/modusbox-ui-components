@@ -5,6 +5,7 @@ import React from 'react';
 
 import ControlIcon from '../../components/ControlIcon';
 import DataList from '../../components/DataList';
+import MessageBox from '../../components/MessageBox';
 import ScrollBox from '../../components/ScrollBox';
 import * as utils from '../../utils/common';
 
@@ -99,11 +100,12 @@ class Header extends React.Component {
       }
 
       return allExportedOnes.reduce((prev, component) => {
-        const props = Object.entries(component.defaultProps).map(([prop, value]) => {
+        const props = Object.entries(component.propTypes).map(([prop, value]) => {
+          const defaultValue = component.defaultProps[prop];
           return {
             prop,
             type: Header.getValueType(component.propTypes[prop], value),
-            value: JSON.stringify(value) || undefined,
+            value: JSON.stringify(defaultValue) || undefined,
           };
         });
         return [
@@ -114,7 +116,11 @@ class Header extends React.Component {
         ];
       }, []);
     } catch (e) {
-      return null;
+      return (
+        <div id="playground__header__error">
+          <MessageBox kind="danger">{e.toString()}</MessageBox>
+        </div>
+      );
     }
   }
   render() {

@@ -9,7 +9,6 @@ import Modal from '../../../components/Modal';
 import React, { PureComponent } from 'react';
 import { list, settingsStyle, containerStyle, rowStyle, getColumns, buildRow } from './funcs';
 
-
 const ACTIONS = {
   ITEM_ADD: 'Add Item',
   ITEM_REMOVE: 'Remove Item',
@@ -21,10 +20,13 @@ const ACTIONS = {
 };
 
 const stringifyFns = source => ({
-  ...Object.entries(source).reduce((prev, [key,value]) => ({
-    ...prev,
-    [key]: `${value}`
-  }), {})
+  ...Object.entries(source).reduce(
+    (prev, [key, value]) => ({
+      ...prev,
+      [key]: `${value}`,
+    }),
+    {},
+  ),
 });
 
 class DataListWithSettings extends PureComponent {

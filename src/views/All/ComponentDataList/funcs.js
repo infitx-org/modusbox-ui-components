@@ -7,10 +7,10 @@ import Icon from '../../../components/Icon';
 let idx = 0;
 export const buildRow = () => {
   const row = {
-    col1: idx += 1,
-    col2: idx += 1,
-    col3: idx += 1,
-    col4: idx += 1,
+    col1: (idx += 1),
+    col2: (idx += 1),
+    col3: (idx += 1),
+    col4: (idx += 1),
   };
   return row;
 };

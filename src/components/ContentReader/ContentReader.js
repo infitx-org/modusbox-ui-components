@@ -14,7 +14,7 @@ hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('shell', shell);
 
-function restrictKeysToSelectAndCopy (evt) {
+function restrictKeysToSelectAndCopy(evt) {
   const { ctrlKey, metaKey, keyCode } = evt;
   const isCopyOrSelectKey = keyCode === 65 || keyCode === 67;
   const isCopyOrSelectModifier = ctrlKey || metaKey;

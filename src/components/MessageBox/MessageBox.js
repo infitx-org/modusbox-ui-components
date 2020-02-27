@@ -75,6 +75,8 @@ MessageBox.propTypes = {
     'dark',
     'light',
   ]),
+  size: PropTypes.number,
+  fontSize: PropTypes.number,
   icon: PropTypes.string,
   // TODO: Add iconPosition: PropTypes.oneOf(['left', 'right']),
 };
@@ -84,7 +86,6 @@ MessageBox.defaultProps = {
   kind: 'default',
   size: 20,
   fontSize: 13,
-  label: undefined,
   icon: undefined,
   // TODO: Add iconPosition: 'left',
 };
