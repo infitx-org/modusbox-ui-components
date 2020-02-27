@@ -1,13 +1,13 @@
+import React, { PureComponent } from 'react';
+
 import Button from '../../../components/Button';
 import Checkbox from '../../../components/Checkbox';
 import ContentReader from '../../../components/ContentReader';
 import DataList from '../../../components/DataList';
+import Modal from '../../../components/Modal';
 import ScrollBox from '../../../components/ScrollBox';
 import TextField from '../../../components/TextField';
-import Modal from '../../../components/Modal';
-
-import React, { PureComponent } from 'react';
-import { list, settingsStyle, containerStyle, rowStyle, getColumns, buildRow } from './funcs';
+import { buildRow, containerStyle, getColumns, list, rowStyle, settingsStyle } from './funcs';
 
 const ACTIONS = {
   ITEM_ADD: 'Add Item',

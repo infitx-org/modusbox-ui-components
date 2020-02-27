@@ -20,7 +20,7 @@ class Tooltip extends PureComponent {
       const prect = parent.getBoundingClientRect();
       const visiblePixelX = Math.min(rect.right, prect.right) - Math.max(rect.left, prect.left);
       const visiblePixelY = Math.min(rect.bottom, prect.bottom) - Math.max(rect.top, prect.top);
-      
+
       const visiblePercentageX = (visiblePixelX / rect.width) * 100;
       const visiblePercentageY = (visiblePixelY / rect.height) * 100;
       return visiblePercentageX + tolerance > percentX && visiblePercentageY + tolerance > percentY;

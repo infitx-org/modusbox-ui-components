@@ -187,5 +187,4 @@ class Ticker extends Component {
   }
 }
 
-
 export default TestTooltip;

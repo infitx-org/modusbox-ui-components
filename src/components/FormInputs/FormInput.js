@@ -19,9 +19,7 @@ const FieldInfoOverlay = ({ assignRef, title, description }) => (
   <div className="forminput__field-info" ref={assignRef}>
     <div className="forminput__field-info__title">{title}</div>
     <div className="forminput__field-info__content">
-      <p>
-        {description}
-      </p>
+      <p>{description}</p>
     </div>
   </div>
 );
@@ -49,19 +47,25 @@ class FieldInfo extends PureComponent {
   }
   open() {
     this.area = React.createRef();
-    this.setState({
-      open: true,
-    }, () => {
-      document.addEventListener('click', this.closeIfClickingOutside);
-    });
+    this.setState(
+      {
+        open: true,
+      },
+      () => {
+        document.addEventListener('click', this.closeIfClickingOutside);
+      },
+    );
   }
   close() {
-    this.setState({
-      open: false,
-    }, () => {
-      this.area = null;
-      document.removeEventListener('click', this.closeIfClickingOutside);
-    });
+    this.setState(
+      {
+        open: false,
+      },
+      () => {
+        this.area = null;
+        document.removeEventListener('click', this.closeIfClickingOutside);
+      },
+    );
   }
   closeIfClickingOutside(evt) {
     if (!this.area.current) {
@@ -75,7 +79,9 @@ class FieldInfo extends PureComponent {
     const { iconSize, title, description, url } = this.props;
     let content = null;
     if (this.state.open) {
-      content = <FieldInfoOverlay assignRef={this.area} title={title} description={description} url={url} />;
+      content = (
+        <FieldInfoOverlay assignRef={this.area} title={title} description={description} url={url} />
+      );
     }
     return (
       <Tooltip
@@ -125,13 +131,7 @@ const Label = ({ size, label, required, complete, description, url }) => {
         />
       )}
       <label>{label}</label>
-      <FieldInfo
-        iconSize={iconSize}
-        title={label}
-        description={description}
-        url={url}
-      />
-
+      <FieldInfo iconSize={iconSize} title={label} description={description} url={url} />
     </div>
   );
 };

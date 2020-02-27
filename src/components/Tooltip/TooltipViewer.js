@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+
 import * as utils from '../../utils/common';
 
 /* eslint-disable no-param-reassign */
@@ -28,14 +29,14 @@ const MultiLine = ({ string }) => {
     .reduce((lines, line, index, array) => {
       const newLines = [...lines, line];
       if (index < array.length - 1) {
-        newLines.push(<br />)
+        newLines.push(<br />);
       }
       return newLines;
     }, []);
-}
+};
 
 export default class TooltipViewer extends PureComponent {
-  static getCoordinatesByPosition (pos, parentRect, targetRect) {
+  static getCoordinatesByPosition(pos, parentRect, targetRect) {
     const leftCenteredByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
     const topCenteredByX = parentRect.top + (parentRect.height - targetRect.height) / 2;
     const byPosition = {
@@ -62,10 +63,10 @@ export default class TooltipViewer extends PureComponent {
     };
     const byPositionGetter = byPosition[pos];
     return byPositionGetter();
-  };
+  }
 
-  static getMaxTargetWidth (rect, pos, _MINIMUM_MARGIN) {
-    const { innerWidth } = window; 
+  static getMaxTargetWidth(rect, pos, _MINIMUM_MARGIN) {
+    const { innerWidth } = window;
     const center = rect.left + rect.width / 2;
     const byLeft = 2 * center - 2 * _MINIMUM_MARGIN;
     const byRight = 2 * innerWidth - center * 2 - _MINIMUM_MARGIN;
@@ -78,22 +79,22 @@ export default class TooltipViewer extends PureComponent {
       bottom: min,
     };
     return byPosition[pos];
-  };
+  }
 
-  static getNextPosition (originalPosition = 'top', iteration) {
+  static getNextPosition(originalPosition = 'top', iteration) {
     // returns the next position based on a clockwise directiom
     const positions = ['top', 'right', 'bottom', 'left'];
     const positionIndex = positions.indexOf(originalPosition);
     const nextPositionIndex = (positionIndex + iteration) % positions.length;
     return positions[nextPositionIndex];
-  };
+  }
 
-  static testCoordinates (coordinates, rect) {
+  static testCoordinates(coordinates, rect) {
     if (!coordinates) {
       return 0;
     }
 
-    const { innerWidth, innerHeight} = window;
+    const { innerWidth, innerHeight } = window;
     const exceedings = {
       // test for every position if the tooltip size exceeds the limits
       top: ({ top }) => Math.abs(Math.min(0, top)),
@@ -109,7 +110,7 @@ export default class TooltipViewer extends PureComponent {
       exceedings.right(coordinates),
       exceedings.bottom(coordinates),
     ].reduce((prev, curr) => prev + curr);
-  };
+  }
 
   static getCoordinates(parentId, target, position) {
     const parent = document.getElementById(parentId);
@@ -125,12 +126,16 @@ export default class TooltipViewer extends PureComponent {
 
     while (iteration < 4) {
       const currentPosition = TooltipViewer.getNextPosition(position, iteration);
-      const maxWidth = TooltipViewer.getMaxTargetWidth(parentRect, currentPosition, _MINIMUM_MARGIN);
+      const maxWidth = TooltipViewer.getMaxTargetWidth(
+        parentRect,
+        currentPosition,
+        _MINIMUM_MARGIN,
+      );
       target.style.maxWidth = maxWidth;
-      
+
       const targetRect = target.getBoundingClientRect();
       coordinates = TooltipViewer.getCoordinatesByPosition(currentPosition, parentRect, targetRect);
-      
+
       const exceeds = TooltipViewer.testCoordinates(coordinates, targetRect);
       const isNotExceeding = previousExceeds > exceeds;
       const hasLowerHeight = previousExceeds === exceeds && targetRect.height < previousHeight;
@@ -199,7 +204,7 @@ export default class TooltipViewer extends PureComponent {
     const { direction } = this.state;
     const { content, label, position, children, kind, custom } = this.props;
     let tooltipInnerComponent = null;
-    
+
     if (content) {
       if (custom) {
         // We need to provide the content with the position it will be render
@@ -209,7 +214,7 @@ export default class TooltipViewer extends PureComponent {
       }
     } else if (label) {
       if (Array.isArray(label)) {
-        tooltipInnerComponent = <MultiLine string={label} />
+        tooltipInnerComponent = <MultiLine string={label} />;
       } else {
         tooltipInnerComponent = <span>{label}</span>;
       }

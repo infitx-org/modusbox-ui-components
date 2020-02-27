@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Link } from '../../../components/DataList';
 import Checkbox from '../../../components/Checkbox';
+import { Link } from '../../../components/DataList';
 import Icon from '../../../components/Icon';
 
 let idx = 0;
