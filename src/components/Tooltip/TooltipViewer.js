@@ -114,8 +114,10 @@ export default class TooltipViewer extends PureComponent {
 
   static getCoordinates(parentId, target, position) {
     const parent = document.getElementById(parentId);
+    const [firstChild] = document.getElementById(parentId).children;
+    const wrappedElement = firstChild || parent;
     const _MINIMUM_MARGIN = 10;
-    const parentRect = parent.getBoundingClientRect();
+    const parentRect = wrappedElement.getBoundingClientRect();
     const knowsPosition = position !== undefined;
     let iteration = 0;
     let coordinates;
@@ -153,6 +155,7 @@ export default class TooltipViewer extends PureComponent {
     }
     return { ...finalCoordinates, maxWidth: finalMaxWidth };
   }
+
   static setPosition(id, position, _portal, _viewer) {
     const { top, left, direction, maxWidth } = TooltipViewer.getCoordinates(id, _portal, position);
 
@@ -199,7 +202,6 @@ export default class TooltipViewer extends PureComponent {
     document.body.removeChild(this._location);
   }
 
-  // This doesn't actually return anything to render
   render() {
     const { direction } = this.state;
     const { content, label, position, children, kind, custom } = this.props;
@@ -233,6 +235,7 @@ export default class TooltipViewer extends PureComponent {
       </div>,
       <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle" />,
     ];
+
     return ReactDOM.createPortal(rendering, this._location);
   }
 }
