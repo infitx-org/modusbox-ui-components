@@ -108,7 +108,6 @@
   width: 7.1px;
   height: 14.2px;
   overflow: hidden;
-  line-height: 30px;
   background: none;
 }
 .el-tooltip__handle--default {
@@ -135,7 +134,7 @@
   top: 100%;
   left: 50%;
   margin-top: -5px;
-  margin-left: -5px;
+  margin-left: -4.5px;
   transform: rotateZ(270deg);
 }
 .el-tooltip__handle-wrapper--left {
@@ -149,7 +148,7 @@
   top: 0%;
   left: 50%;
   margin-top: -9px;
-  margin-left: -5px;
+  margin-left: -4.5px;
   transform: rotateZ(90deg);
 }
 .el-tooltip__handle-wrapper--right {
