@@ -11,10 +11,13 @@ import TooltipViewer from './TooltipViewer';
 /* eslint-disable no-mixed-operators */
 
 class Tooltip extends PureComponent {
+  static getInnerOverflow(element) {
+    return element.scrollWidth > element.offsetWidth || element.scrollHeight > element.offsetHeight;
+  }
   static visibleAfterScroll(element, parents) {
     const percentX = 100;
     const percentY = 100;
-    const tolerance = 0.01;
+    const tolerance = 0.05;
     const rect = element.getBoundingClientRect();
     return parents.every(parent => {
       const prect = parent.getBoundingClientRect();
@@ -86,15 +89,9 @@ class Tooltip extends PureComponent {
   }
   detectTooltipRequired() {
     const { content, label } = this.props;
-    const { scrollWidth, offsetWidth, scrollHeight, offsetHeight } = this.container;
-    const hasChildrenWidthOverflow = scrollWidth > offsetWidth;
-    const hasChildrenHeightOverflow = scrollHeight > offsetHeight;
-    const isLabelDefined = label !== undefined;
-    const isContentDefined = content !== undefined;
-    const shouldShowTooltip =
-      hasChildrenWidthOverflow || hasChildrenHeightOverflow || isLabelDefined || isContentDefined;
+    const hasOverflow = Tooltip.getInnerOverflow(this.container);
 
-    if (shouldShowTooltip) {
+    if (hasOverflow || label || content) {
       this.mountTooltip();
     } else {
       this.unmountTooltip();
@@ -117,16 +114,8 @@ class Tooltip extends PureComponent {
     this.container.classList.add('el-tooltip--inactive');
   }
   showTooltip() {
-    if (!this._mounted) {
-      // stop if not mounted
-      return;
-    }
-    if (!this._id) {
-      // stop if not existing
-      return;
-    }
-    if (!this.container) {
-      // stop if there is no box
+    if (!this._mounted || !this._id || !this.container) {
+      // stop if not mounted, not existing, no container available
       return;
     }
     if (this._isHoveringTooltip === false && this.props.forceVisibility !== true) {
