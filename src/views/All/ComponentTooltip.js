@@ -25,7 +25,7 @@ const TestTooltip = () => (
               <Column style={columnStyle}>
                 <div style={{ height: '50px' }} />
                 <Tooltip label="I am force here" forceVisibility position="left">
-                  <span>Forced Left</span>
+                  <span style={{ marginLeft: '50px' }}>Forced Left</span>
                 </Tooltip>
               </Column>
             </div>
@@ -35,7 +35,9 @@ const TestTooltip = () => (
     </Row>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip style={style}> Default usage - applying style(100px width) </Tooltip>
+        <Tooltip style={{ ...style, marginLeft: 50 }}>
+          Default usage - applying style(100px width)
+        </Tooltip>
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style} delay={2000}>

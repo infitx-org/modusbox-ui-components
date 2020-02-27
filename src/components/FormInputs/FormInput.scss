@@ -99,9 +99,10 @@
 
 .forminput__field-info__icon {
   fill: #999;
-  &:hover {
-    fill: #333;
-  }
+}
+.forminput__field-info__icon:hover,
+.forminput__field-info__icon--active {
+  fill: #333;
 }
 
 .forminput__field-info__title {

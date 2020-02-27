@@ -83,6 +83,11 @@ class FieldInfo extends PureComponent {
         <FieldInfoOverlay assignRef={this.area} title={title} description={description} url={url} />
       );
     }
+    const fieldInfoClassName = utils.composeClassNames([
+      'forminput__field-info__icon',
+      this.state.open && 'forminput__field-info__icon--active',
+    ]);
+
     return (
       <Tooltip
         forceVisibility={this.state.open}
@@ -95,7 +100,7 @@ class FieldInfo extends PureComponent {
           name="forum-small"
           onClick={this.onClick}
           size={iconSize}
-          className="forminput__field-info__icon"
+          className={fieldInfoClassName}
         />
       </Tooltip>
     );
