@@ -86,7 +86,7 @@ class Tooltip extends PureComponent {
   }
   detectTooltipRequired() {
     const { content, label } = this.props;
-    const { scrollWidth, offsetWidth, scrollHeight, offsetHeight } = this.box;
+    const { scrollWidth, offsetWidth, scrollHeight, offsetHeight } = this.container;
     const hasChildrenWidthOverflow = scrollWidth > offsetWidth;
     const hasChildrenHeightOverflow = scrollHeight > offsetHeight;
     const isLabelDefined = label !== undefined;
@@ -102,19 +102,19 @@ class Tooltip extends PureComponent {
   }
   mountTooltip() {
     if (this.props.showOnHover !== false) {
-      this.box.addEventListener('mouseenter', this.delayShowTooltip);
-      this.box.addEventListener('mouseleave', this.delayHideTooltip);
+      this.container.addEventListener('mouseenter', this.delayShowTooltip);
+      this.container.addEventListener('mouseleave', this.delayHideTooltip);
     }
-    this.box.classList.remove('el-tooltip--inactive');
+    this.container.classList.remove('el-tooltip--inactive');
   }
   unmountTooltip() {
     clearTimeout(this.tooltipTimeout);
     this.hideTooltip();
     if (this.props.showOnHover !== false) {
-      this.box.removeEventListener('mouseenter', this.delayShowTooltip);
-      this.box.removeEventListener('mouseleave', this.delayHideTooltip);
+      this.container.removeEventListener('mouseenter', this.delayShowTooltip);
+      this.container.removeEventListener('mouseleave', this.delayHideTooltip);
     }
-    this.box.classList.add('el-tooltip--inactive');
+    this.container.classList.add('el-tooltip--inactive');
   }
   showTooltip() {
     if (!this._mounted) {
@@ -125,7 +125,7 @@ class Tooltip extends PureComponent {
       // stop if not existing
       return;
     }
-    if (!this.box) {
+    if (!this.container) {
       // stop if there is no box
       return;
     }
@@ -135,13 +135,13 @@ class Tooltip extends PureComponent {
     }
     if (!this._scrollNodes.length) {
       // listen for scroll in containers
-      this._scrollNodes = utils.getScrollParents(this.box);
+      this._scrollNodes = utils.getScrollParents(this.container);
       this._scrollNodes.forEach(node => {
         node.addEventListener('scroll', this.hideTooltipBeforeScroll);
       });
     }
 
-    if (!Tooltip.visibleAfterScroll(this.box, this._scrollNodes)) {
+    if (!Tooltip.visibleAfterScroll(this.container, this._scrollNodes)) {
       return;
     }
     this.setState({ show: true });
@@ -183,31 +183,33 @@ class Tooltip extends PureComponent {
       className,
     ]);
 
+    let viewer = null;
+    if (this.state.show) {
+      viewer = (
+        <TooltipViewer
+          parentId={this._id}
+          content={content}
+          label={label}
+          position={position}
+          kind={kind}
+          custom={custom}
+        >
+          {children}
+        </TooltipViewer>
+      );
+    }
+
     return (
       <div
         className={tooltipClassName}
         style={style}
-        ref={box => {
-          this.box = box;
+        ref={container => {
+          this.container = container;
         }}
         id={this._id}
       >
         {children}
-        {this.state.show && (
-          <TooltipViewer
-            ref={viewer => {
-              this.viewer = viewer;
-            }}
-            parentId={this._id}
-            content={content}
-            label={label}
-            position={position}
-            kind={kind}
-            custom={custom}
-          >
-            {children}
-          </TooltipViewer>
-        )}
+        {viewer}
       </div>
     );
   }
