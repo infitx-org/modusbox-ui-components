@@ -71,6 +71,7 @@ class Wrapped extends Component {
           data={this.state.model}
           validation={validationResult}
           title="Form inputs title"
+          description={description}
         >
           <FormInput type="text" label="name" name="name" />
           <FormInput type="text" label="lastname" name="lastname" />

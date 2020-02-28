@@ -22,18 +22,19 @@ class FormInputs extends PureComponent {
       return React.cloneElement(element, { onChange });
     };
   }
-  static addPropsToFormInputOrInline(
+  static addPropsToFormInputOrInline({
     data,
     options,
     disabled,
     validation,
+    description,
     subgroup,
     disabledFields,
     hiddenFields,
     _onChange,
     rowWidth,
     elementWidth,
-  ) {
+  }) {
     return function addPropsToElement(element) {
       if (element === null) {
         return element;
@@ -50,11 +51,13 @@ class FormInputs extends PureComponent {
         let componentValue = data[name];
         let componentOptions = options[name];
         let componentValidation = get(validation, `fields[${name}]`);
+        let componentDescription = description[name];
 
         if (subgroup) {
           componentValue = get(data, `${subgroup}.${name}`);
           componentOptions = get(options, `${subgroup}.${name}`);
           componentValidation = get(validation, `fields[${subgroup}].fields[${name}]`);
+          componentDescription = get(description,`${subgroup}.${name}`);
         }
 
         const matchedProps = {
@@ -62,6 +65,7 @@ class FormInputs extends PureComponent {
           options: element.props.options || componentOptions,
           validation: element.props.validation || componentValidation,
           subgroup: element.props.subgroup || subgroup,
+          description: element.props.description || componentDescription,
         };
 
         const lockedByParent = FormInputs.getIncludesNested(subgroup, disabledFields, name);
@@ -117,44 +121,11 @@ class FormInputs extends PureComponent {
     });
   }
   getChildren() {
-    const {
-      data,
-      options,
-      disabled,
-      validation,
-      subgroup,
-      disabledFields,
-      hiddenFields,
-      width,
-      inline,
-    } = this.props;
-
-    let elementWidth = 400;
-    let rowWidth = '100%';
-
-    if (width === '100%') {
-      elementWidth = '100%';
-      rowWidth = '100%';
-    }
-    if (inline) {
-      rowWidth = (10 + 400) / this.props.children.length;
-      elementWidth = rowWidth - 10;
-    }
-
+    const elementWidth = this.props.width === '100%' ? '100%' : 400;
+    const rowWidth = '100%';
     const childrenWithProps = React.Children.map(
       this.props.children,
-      FormInputs.addPropsToFormInputOrInline(
-        data,
-        options,
-        disabled,
-        validation,
-        subgroup,
-        disabledFields,
-        hiddenFields,
-        this.onChange,
-        rowWidth,
-        elementWidth,
-      ),
+      FormInputs.addPropsToFormInputOrInline({ ...this.props, rowWidth, elementWidth })
     );
 
     return React.Children.map(
@@ -180,21 +151,25 @@ FormInputs.defaultProps = {
   onChange: undefined,
   options: {},
   validation: {},
+  description: {},
   disabledFields: [],
   hiddenFields: [],
   title: undefined,
   subgroup: undefined,
 };
 
+/* eslint-disable */
 FormInputs.propTypes = {
   data: PropTypes.shape(),
   onChange: PropTypes.func,
   validation: PropTypes.shape(),
   options: PropTypes.shape(),
+  description: PropTypes.shape(),
   disabledFields: PropTypes.arrayOf(PropTypes.string),
   hiddenFields: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   subgroup: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
+/* eslint-enable */
 
 export default FormInputs;
