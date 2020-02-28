@@ -116,7 +116,7 @@ const TestTooltip = () => (
               <Tooltip {...props}>{text}</Tooltip>
             </Column>
           </Row>
-        )
+        );
       });
     })}
 

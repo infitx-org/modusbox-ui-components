@@ -4,6 +4,14 @@ import FormInput, { FormInputs } from '../../components/FormInputs';
 import Heading from '../../components/Heading';
 import { createValidation, toValidationResult, vd } from '../../reduxValidation';
 
+const description = {
+  name: 'Describes the user name given at birth',
+  lastname: 'Describes the user lastname inherited by the parents',
+  description: 'Describes what is the main social role of the user',
+  sex: 'Describes wheter the user is male or female',
+  age: 'Describes how long the user has lived on this planet',
+};
+
 const model = {
   name: undefined,
   lastname: 'test-lastname',
@@ -123,6 +131,7 @@ class Unwrapped extends Component {
           validation={validationResult.fields.name}
           type="text"
           label="name"
+          description={description.name}
           name="name"
         />
         <FormInput
@@ -132,6 +141,7 @@ class Unwrapped extends Component {
           validation={validationResult.fields.lastname}
           type="text"
           label="lastname"
+          description={description.lastname}
           name="lastname"
         />
         <FormInput
@@ -141,6 +151,7 @@ class Unwrapped extends Component {
           validation={validationResult.fields.description}
           type="area"
           label="description"
+          description={description.description}
           name="description"
         />
         <FormInput
@@ -150,6 +161,7 @@ class Unwrapped extends Component {
           validation={validationResult.fields.age}
           type="select"
           label="age"
+          description={description.age}
           name="age"
           options={ages}
         />
@@ -159,6 +171,7 @@ class Unwrapped extends Component {
           validation={validationResult.fields.sex}
           type="radio"
           label="sex"
+          description={description.sex}
           name="sex"
           options={sexes}
         />
