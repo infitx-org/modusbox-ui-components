@@ -10,7 +10,7 @@ import Tooltip from '../../components/Tooltip';
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
-const longText = `Automatic positioning with ${Array(70)
+const longText = `${Array(70)
   .fill('super')
   .join(' ')} long content`;
 const testLabels = [`Hey you!`, `Hey what's up?`, `I don't know man!`];
@@ -35,7 +35,7 @@ const TestTooltip = () => (
     </Row>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip style={{ ...style, marginLeft: 50 }}>
+        <Tooltip style={{ ...style }}>
           Default usage - applying style(100px width)
         </Tooltip>
       </Column>
@@ -97,24 +97,24 @@ const TestTooltip = () => (
       </Column>
     </Row>
 
-    <Row>
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="top">
-          {longText}
-        </Tooltip>
-      </Column>
+    {[undefined, 'top', 'left', 'right', 'bottom'].map(position => {
+      return [undefined, 'start', 'center', 'end'].map(align => (
+        <Row key={`${position}-${align}`}>
+          <Column style={columnStyle} align="center space-between">
+            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+          </Column>
+          <Column style={columnStyle} align="center space-between">
+            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+          </Column>
+          <Column style={columnStyle} align="center space-between">
+            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+          </Column>
+          <Column style={columnStyle} align="center space-between">
+            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+          </Column>
+        </Row>
+    ))})}
 
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>{longText}</Tooltip>
-      </Column>
-
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>{longText}</Tooltip>
-      </Column>
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>{longText}</Tooltip>
-      </Column>
-    </Row>
     <Row>
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style}>

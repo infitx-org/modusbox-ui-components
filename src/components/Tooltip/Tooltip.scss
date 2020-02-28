@@ -130,33 +130,92 @@
   background: $color__white;
   box-shadow: 0px 0px 2px $color__alpha-2;
 }
-.el-tooltip__handle-wrapper--top {
+.el-tooltip__handle-wrapper--top-start {
+  top: 100%;
+  left: 14.5px;
+  margin-top: -5px;
+  margin-left: -4.5px;
+  transform: rotateZ(270deg);
+}
+.el-tooltip__handle-wrapper--top-center {
   top: 100%;
   left: 50%;
   margin-top: -5px;
   margin-left: -4.5px;
   transform: rotateZ(270deg);
 }
-.el-tooltip__handle-wrapper--left {
+.el-tooltip__handle-wrapper--top-end {
+  top: 100%;
+  right: 10px;
+  margin-top: -5px;
+  margin-left: -4.5px;
+  transform: rotateZ(270deg);
+}
+
+.el-tooltip__handle-wrapper--left-start {
+  top: 14.5px;
+  left: 100%;
+  margin-top: -7px;
+  margin-left: -1px;
+  transform: rotateZ(180deg);
+}
+.el-tooltip__handle-wrapper--left-center {
   top: 50%;
   left: 100%;
   margin-top: -7px;
   margin-left: -1px;
   transform: rotateZ(180deg);
 }
-.el-tooltip__handle-wrapper--bottom {
+.el-tooltip__handle-wrapper--left-end {
+  bottom: 9px;
+  left: 100%;
+  margin-top: -7px;
+  margin-left: -1px;
+  transform: rotateZ(180deg);
+}
+
+.el-tooltip__handle-wrapper--right-start {
+  top: 14.5px;
+  left: 0%;
+  margin-top: -7px;
+  margin-left: -6px;
+  transform: rotateZ(0deg);
+}
+
+.el-tooltip__handle-wrapper--right-center {
+  top: 50%;
+  left: 0%;
+  margin-top: -7px;
+  margin-left: -6px;
+  transform: rotateZ(0deg);
+}
+.el-tooltip__handle-wrapper--right-end {
+  bottom: 9px;
+  left: 0%;
+  margin-top: -7px;
+  margin-left: -6px;
+  transform: rotateZ(0deg);
+}
+.el-tooltip__handle-wrapper--bottom-start {
+  top: 0%;
+  left: 14.5px;
+  margin-top: -9px;
+  margin-left: -4.5px;
+  transform: rotateZ(90deg);
+}
+.el-tooltip__handle-wrapper--bottom-center {
   top: 0%;
   left: 50%;
   margin-top: -9px;
   margin-left: -4.5px;
   transform: rotateZ(90deg);
 }
-.el-tooltip__handle-wrapper--right {
-  top: 50%;
-  left: 0%;
-  margin-top: -7px;
-  margin-left: -6px;
-  transform: rotateZ(0deg);
+.el-tooltip__handle-wrapper--bottom-end {
+  top: 0%;
+  right: 10px;
+  margin-top: -9px;
+  margin-left: -4.5px;
+  transform: rotateZ(90deg);
 }
 
 @keyframes fade-in-top {

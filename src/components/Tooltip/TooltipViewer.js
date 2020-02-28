@@ -4,12 +4,17 @@ import ReactDOM from 'react-dom';
 import * as utils from '../../utils/common';
 
 /* eslint-disable no-param-reassign */
+/* eslint-disable no-nested-ternary */
 
-const TooltipHandle = ({ custom, direction, kind }) => {
+const POSITIONS = ['top', 'right', 'bottom', 'left'];
+const ALIGNMENTS = ['start', 'center', 'end'];
+
+const TooltipHandle = ({ custom, direction, alignment, kind }) => {
   const handleWrapperClassName = utils.composeClassNames([
     'el-tooltip__handle-wrapper',
-    direction && `el-tooltip__handle-wrapper--${direction}`,
+    direction && alignment && `el-tooltip__handle-wrapper--${direction}-${alignment}`,
   ]);
+  console.log(`el-tooltip__handle-wrapper--${direction}-${alignment}`)
   const handleClassName = utils.composeClassNames([
     'el-tooltip__handle',
     `el-tooltip__handle--${kind}`,
@@ -36,57 +41,96 @@ const MultiLine = ({ string }) => {
 };
 
 export default class TooltipViewer extends PureComponent {
-  static getCoordinatesByPosition(pos, parentRect, targetRect) {
-    const leftCenteredByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
-    const topCenteredByX = parentRect.top + (parentRect.height - targetRect.height) / 2;
+  static getCoordinatesByPosition(position, align, parentRect, targetRect) {
+    const leftCenterByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
+    const topCenterByX = parentRect.top + (parentRect.height - targetRect.height) / 2;
+    const leftAlignByY = parentRect.left - 10;
+    const rightAlignByY = parentRect.left + parentRect.width + 10 - targetRect.width;
+    const topAlignByX = parentRect.top - 10;
+    const bottomAlignByX = parentRect.top + parentRect.height - targetRect.height + 10;
+
+    const left = align === 'center' ? leftCenterByY : align === 'start' ? leftAlignByY : rightAlignByY;
+    const top = align === 'center' ? topCenterByX : align === 'start' ? topAlignByX : bottomAlignByX;
+    
+
     const byPosition = {
       top: () => ({
         top: parentRect.top - targetRect.height - 10,
-        left: leftCenteredByY,
+        left,
         direction: 'top',
       }),
       bottom: () => ({
         top: parentRect.top + parentRect.height + 10,
-        left: leftCenteredByY,
+        left,
         direction: 'bottom',
       }),
       left: () => ({
-        top: topCenteredByX,
+        top,
         left: parentRect.left - targetRect.width - 10,
         direction: 'left',
       }),
       right: () => ({
-        top: topCenteredByX,
+        top,
         left: parentRect.left + parentRect.width + 10,
         direction: 'right',
       }),
     };
-    const byPositionGetter = byPosition[pos];
-    return byPositionGetter();
+    const byPositionGetter = byPosition[position];
+    return byPositionGetter(align);
   }
 
-  static getMaxTargetWidth(rect, pos, _MINIMUM_MARGIN) {
-    const { innerWidth } = window;
-    const center = rect.left + rect.width / 2;
-    const byLeft = 2 * center - 2 * _MINIMUM_MARGIN;
-    const byRight = 2 * innerWidth - center * 2 - _MINIMUM_MARGIN;
-    const min = Math.min(byLeft, byRight);
+  static getMaxSizes(rect, pos, align, _MINIMUM_MARGIN) {
+    const { innerWidth, innerHeight } = window;
+    const centerX = rect.left + rect.width / 2;
+    const centerFromLeft = 2 * centerX - 2 * _MINIMUM_MARGIN;
+    const centerFromRight = 2 * innerWidth - centerX * 2 - _MINIMUM_MARGIN;
+
+    const centerY = rect.top + rect.height / 2;
+    const centerFromTop = 2 * centerY - 2 * _MINIMUM_MARGIN;
+    const centerFromBottom = 2 * innerHeight - centerY * 2 - _MINIMUM_MARGIN;
+    
+    const maxWidthLeft = rect.left - 2 * _MINIMUM_MARGIN;
+    const maxWidthStart = innerWidth - rect.left;
+    const maxWidthCenter = Math.min(centerFromLeft, centerFromRight);
+    const maxWidthEnd = rect.left + rect.width;
+    const maxWidthRight = innerWidth - rect.left - rect.width - 2 * _MINIMUM_MARGIN;
+
+    const maxHeightTop = rect.top - 2 * _MINIMUM_MARGIN;
+    const maxHeightStart = innerHeight - rect.top;
+    const maxHeightCenter = Math.min(centerFromTop, centerFromBottom);
+    const maxHeightEnd = innerHeight - (rect.top + rect.height);
+    const maxHeightBottom = innerHeight - (rect.top + rect.height) - 2 * _MINIMUM_MARGIN;
 
     const byPosition = {
-      top: min,
-      left: rect.left - 2 * _MINIMUM_MARGIN,
-      right: innerWidth - rect.left - rect.width - 2 * _MINIMUM_MARGIN,
-      bottom: min,
+      top: {
+        start: [maxWidthStart, maxHeightTop],
+        center: [maxWidthCenter, maxHeightTop],
+        end: [maxWidthEnd, maxHeightTop],
+      },
+      left: {
+        start: [maxWidthLeft, maxHeightStart],
+        center: [maxWidthLeft, maxHeightCenter],
+        end: [maxWidthLeft, maxHeightEnd],
+      },
+      right: {
+        start: [maxWidthRight, maxHeightStart],
+        center: [maxWidthRight, maxHeightCenter],
+        end: [maxWidthRight, maxHeightEnd],
+      },
+      bottom: {
+        start: [maxWidthStart, maxHeightBottom],
+        center: [maxWidthCenter, maxHeightBottom],
+        end: [maxWidthEnd, maxHeightBottom],
+      }
     };
-    return byPosition[pos];
+    return byPosition[pos][align];
   }
 
-  static getNextPosition(originalPosition = 'top', iteration) {
-    // returns the next position based on a clockwise directiom
-    const positions = ['top', 'right', 'bottom', 'left'];
-    const positionIndex = positions.indexOf(originalPosition);
-    const nextPositionIndex = (positionIndex + iteration) % positions.length;
-    return positions[nextPositionIndex];
+  static getNextPosition(item, items, iteration) {
+    // returns the next item based on a clockwise directiom
+    const itemIndex = items.indexOf(item);
+    const nextIndex = (itemIndex + iteration) % items.length;
+    return items[nextIndex];
   }
 
   static testCoordinates(coordinates, rect) {
@@ -112,56 +156,96 @@ export default class TooltipViewer extends PureComponent {
     ].reduce((prev, curr) => prev + curr);
   }
 
-  static getCoordinates(parentId, target, position) {
+  static getCoordinates(parentId, target, position, align) {
     const parent = document.getElementById(parentId);
     const [firstChild] = document.getElementById(parentId).children;
     const wrappedElement = firstChild || parent;
     const _MINIMUM_MARGIN = 10;
     const parentRect = wrappedElement.getBoundingClientRect();
     const knowsPosition = position !== undefined;
-    let iteration = 0;
+    const knowsAlign = align !== undefined;
+    let exceeds;
+    let positionIteration = 0;
+    let alignIteration = 0;
     let coordinates;
     let previousExceeds = Infinity;
     let previousHeight = Infinity;
     let finalCoordinates;
     let finalMaxWidth;
+    let finalMaxHeight;
+    let finalPosition;
+    let finalAlign;
 
-    while (iteration < 4) {
-      const currentPosition = TooltipViewer.getNextPosition(position, iteration);
-      const maxWidth = TooltipViewer.getMaxTargetWidth(
-        parentRect,
-        currentPosition,
-        _MINIMUM_MARGIN,
-      );
-      target.style.maxWidth = maxWidth;
+    while (positionIteration < 4) {
+      while (alignIteration < 3) {
+        const currentPosition = TooltipViewer.getNextPosition(
+          position || 'top',
+          POSITIONS,
+          positionIteration,
+        );
 
-      const targetRect = target.getBoundingClientRect();
-      coordinates = TooltipViewer.getCoordinatesByPosition(currentPosition, parentRect, targetRect);
+        const currentAlign = TooltipViewer.getNextPosition(
+          align || 'center',
+          ALIGNMENTS,
+          alignIteration,
+        );
 
-      const exceeds = TooltipViewer.testCoordinates(coordinates, targetRect);
-      const isNotExceeding = previousExceeds > exceeds;
-      const hasLowerHeight = previousExceeds === exceeds && targetRect.height < previousHeight;
+        const [maxWidth, maxHeight] = TooltipViewer.getMaxSizes(
+          parentRect,
+          currentPosition,
+          currentAlign,
+          _MINIMUM_MARGIN,
+        );
+        
+        target.style.maxWidth = maxWidth;
+        target.style.maxHeight = maxHeight;
 
-      if (isNotExceeding || hasLowerHeight) {
-        previousExceeds = exceeds;
-        previousHeight = targetRect.height;
-        finalCoordinates = coordinates;
-        finalMaxWidth = maxWidth;
+        const targetRect = target.getBoundingClientRect();
+        coordinates = TooltipViewer.getCoordinatesByPosition(
+          currentPosition,
+          currentAlign,
+          parentRect,
+          targetRect,
+        );
+        
+        exceeds = TooltipViewer.testCoordinates(coordinates, targetRect);
+        const isNotExceeding = previousExceeds > exceeds;
+        const hasLowerHeight = previousExceeds === exceeds && targetRect.height < previousHeight;
+        
+        if (isNotExceeding || hasLowerHeight) {
+          previousExceeds = exceeds;
+          previousHeight = targetRect.height;
+          finalCoordinates = coordinates;
+          finalMaxWidth = maxWidth;
+          finalPosition = currentPosition;
+          finalAlign = currentAlign;
+        }
+        if (knowsAlign && !exceeds) {
+          break;
+        }
+        alignIteration += 1;
       }
       if (knowsPosition && !exceeds) {
         break;
       }
-      iteration += 1;
+      positionIteration += 1;
     }
-    return { ...finalCoordinates, maxWidth: finalMaxWidth };
+    return {
+      ...finalCoordinates,
+      maxWidth: finalMaxWidth,
+      maxHeight: finalMaxHeight,
+      direction: finalPosition,
+      alignment: finalAlign,
+    };
   }
 
-  static setPosition(id, position, _portal, _viewer) {
-    const { top, left, direction, maxWidth } = TooltipViewer.getCoordinates(id, _portal, position);
+  static setPosition(id, position, align, _portal, _viewer) {
+    const { top, left, direction, alignment, maxWidth, maxHeight } = TooltipViewer.getCoordinates(id, _portal, position, align);
 
     _portal.style.top = `${top}px`;
     _portal.style.left = `${left}px`;
     _portal.style.maxWidth = `${maxWidth}px`;
+    _portal.style.maxHeight = `${maxHeight}px`;
 
     if (!_viewer.className.includes('el-tooltip__viewer--fade-in')) {
       _viewer.className += ' el-tooltip__viewer--fade-in';
@@ -169,7 +253,7 @@ export default class TooltipViewer extends PureComponent {
     if (!_viewer.className.includes(`el-tooltip__viewer--fade-in-${direction}`)) {
       _viewer.className += ` el-tooltip__viewer--fade-in-${direction}`;
     }
-    return direction;
+    return { direction, alignment };
   }
   constructor(props) {
     super(props);
@@ -182,20 +266,21 @@ export default class TooltipViewer extends PureComponent {
     this._location = document.body.appendChild(this._viewer);
     this.state = {
       direction: undefined,
+      alignment: undefined,
     };
   }
   componentDidMount() {
-    const { parentId, position } = this.props;
-    const direction = TooltipViewer.setPosition(parentId, position, this._location, this._viewer);
+    const { parentId, position, align } = this.props;
+    const { direction, alignment } = TooltipViewer.setPosition(parentId, position, align, this._location, this._viewer);
     // eslint-disable-next-line
-    this.setState({ direction });
+    this.setState({ direction, alignment });
   }
   componentDidUpdate() {
-    const { parentId, position } = this.props;
-    const direction = TooltipViewer.setPosition(parentId, position, this._location, this._viewer);
+    const { parentId, position, align } = this.props;
+    const { direction, alignment } = TooltipViewer.setPosition(parentId, position, align, this._location, this._viewer);
 
-    if (direction !== this.state.direction) {
-      this.setState({ direction });
+    if (direction !== this.state.direction || alignment !== this.state.alignment) {
+      this.setState({ direction, alignment });
     }
   }
   componentWillUnmount() {
@@ -203,7 +288,7 @@ export default class TooltipViewer extends PureComponent {
   }
 
   render() {
-    const { direction } = this.state;
+    const { direction, alignment } = this.state;
     const { content, label, position, children, kind, custom } = this.props;
     let tooltipInnerComponent = null;
 
@@ -233,7 +318,7 @@ export default class TooltipViewer extends PureComponent {
       <div key="content" className={childClassName}>
         {tooltipInnerComponent}
       </div>,
-      <TooltipHandle kind={kind} direction={direction} custom={custom} key="handle" />,
+      <TooltipHandle kind={kind} direction={direction} alignment={alignment} custom={custom} key="handle" />,
     ];
 
     return ReactDOM.createPortal(rendering, this._location);
