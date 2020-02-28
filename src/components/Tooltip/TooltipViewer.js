@@ -306,12 +306,7 @@ export default class TooltipViewer extends PureComponent {
     let tooltipInnerComponent = null;
 
     if (content) {
-      if (custom) {
-        // We need to provide the content with the position it will be render
-        tooltipInnerComponent = React.cloneElement(content, { ...content.props, position });
-      } else {
-        tooltipInnerComponent = content;
-      }
+      tooltipInnerComponent = React.cloneElement(content, { ...content.props, position });
     } else if (label) {
       if (Array.isArray(label)) {
         tooltipInnerComponent = <MultiLine string={label} />;
