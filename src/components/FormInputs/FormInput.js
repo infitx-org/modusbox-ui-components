@@ -3,182 +3,14 @@ import './FormInput.scss';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import * as utils from '../../utils/common';
-import Button from '../Button';
 import Checkbox from '../Checkbox';
 import DatePicker from '../DatePicker';
 import FileUploader from '../FileUploader';
-import Icon from '../Icon';
 import RadioGroup from '../RadioGroup';
 import Select from '../Select';
 import TextArea from '../TextArea';
 import TextField from '../TextField';
-import Tooltip from '../Tooltip';
-
-const FieldInfoOverlay = ({ assignRef, title, description }) => (
-  <div className="forminput__field-info" ref={assignRef}>
-    <div className="forminput__field-info__title">{title}</div>
-    <div className="forminput__field-info__content">
-      <p>{description}</p>
-    </div>
-  </div>
-);
-
-class FieldInfo extends PureComponent {
-  constructor() {
-    super();
-    this.onClick = this.onClick.bind(this);
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
-    this.closeIfClickingOutside = this.closeIfClickingOutside.bind(this);
-    this.state = {
-      open: false,
-    };
-  }
-  componentWillUnmount() {
-    this.close();
-  }
-  onClick() {
-    if (this.state.open) {
-      this.close();
-    } else {
-      this.open();
-    }
-  }
-  open() {
-    this.area = React.createRef();
-    this.setState(
-      {
-        open: true,
-      },
-      () => {
-        document.addEventListener('click', this.closeIfClickingOutside);
-      },
-    );
-  }
-  close() {
-    this.setState(
-      {
-        open: false,
-      },
-      () => {
-        this.area = null;
-        document.removeEventListener('click', this.closeIfClickingOutside);
-      },
-    );
-  }
-  closeIfClickingOutside(evt) {
-    if (!this.area.current) {
-      return;
-    }
-    if (!this.area.current.contains(evt.target)) {
-      this.close();
-    }
-  }
-  render() {
-    const { iconSize, title, description, url } = this.props;
-    let content = null;
-    if (this.state.open) {
-      content = (
-        <FieldInfoOverlay assignRef={this.area} title={title} description={description} url={url} />
-      );
-    }
-    const fieldInfoClassName = utils.composeClassNames([
-      'forminput__field-info__icon',
-      this.state.open && 'forminput__field-info__icon--active',
-    ]);
-
-    return (
-      <Tooltip
-        forceVisibility={this.state.open}
-        showOnHover={false}
-        content={content}
-        custom
-        position="right"
-      >
-        <Icon
-          name="forum-small"
-          onClick={this.onClick}
-          size={iconSize}
-          className={fieldInfoClassName}
-        />
-      </Tooltip>
-    );
-  }
-}
-
-const Label = ({ size, label, required, complete, description, url }) => {
-  if (!label) {
-    return null;
-  }
-
-  const className = utils.composeClassNames([
-    'forminput__label-box',
-    size === 's' && 'forminput__label-box--small',
-    size === 'm' && 'forminput__label-box--medium',
-    size === 'l' && 'forminput__label-box--large',
-  ]);
-  const iconSizes = {
-    s: 11,
-    m: 12,
-    l: 14,
-  };
-  const iconSize = iconSizes[size];
-  return (
-    <div className={className}>
-      {required && (
-        <Icon
-          size={iconSize}
-          name="info-small"
-          className="forminput__label-icon"
-          fill={complete ? '#39f' : '#f93'}
-          tooltip={complete ? '' : 'This is a required field'}
-        />
-      )}
-      <label>{label}</label>
-      <FieldInfo iconSize={iconSize} title={label} description={description} url={url} />
-    </div>
-  );
-};
-
-const InlineButton = ({ visible, isLocked, isDisabled, onClick, label }) => {
-  if (!visible || isLocked || isDisabled) {
-    return null;
-  }
-
-  return (
-    <Button
-      size="m"
-      noFill
-      kind="secondary"
-      className="forminput__inline-button"
-      onClick={onClick}
-      disabled={isDisabled}
-      label={label}
-    />
-  );
-};
-
-const LockedIcon = ({ locked }) => {
-  if (!locked) {
-    return null;
-  }
-  return (
-    <div className="forminput__inline-icon">
-      <Icon
-        name="lock-small"
-        size={20}
-        fill="#999"
-        style={{ marginLeft: '10px' }}
-        tooltip="this field is locked"
-      />
-    </div>
-  );
-};
-
-const InfoMessage = ({ message }) => (
-  <div className="forminput__input-message">{message && <Tooltip>{message}</Tooltip>}</div>
-);
+import { Label, InfoMessage, InlineButton, LockedIcon } from './components';
 
 const addKey = (element, index) => React.cloneElement(element, { key: index });
 
@@ -189,6 +21,8 @@ const composeSelect = props => [
       label={props.label}
       required={props.isRequired}
       complete={props.hasValue}
+      description={props.description}
+      url={props.url}
     />
     <Select
       size={props.size}
@@ -225,6 +59,8 @@ const composePicker = props => [
       label={props.label}
       required={props.isRequired}
       complete={props.hasValue}
+      description={props.description}
+      url={props.url}
     />
     <TextField
       type="text"
@@ -260,6 +96,8 @@ const composeArea = props => [
       label={props.label}
       required={props.isRequired}
       complete={props.hasValue}
+      description={props.description}
+      url={props.url}
     />
     <TextArea
       className={props.className}
@@ -296,6 +134,8 @@ const composeText = props => [
       label={props.label}
       required={props.isRequired}
       complete={props.hasValue}
+      description={props.description}
+      url={props.url}
     />
     <TextField
       type={props.type}
@@ -336,6 +176,8 @@ const composeDate = props => [
       label={props.label}
       required={props.isRequired}
       complete={props.hasValue}
+      description={props.description}
+      url={props.url}
     />
     <DatePicker
       size={props.size}
@@ -383,6 +225,8 @@ const composeFile = props => {
         label={props.label}
         required={props.isRequired}
         complete={props.hasValue}
+        description={props.description}
+        url={props.url}
       />
       <FileUploader
         size={props.size}
@@ -421,6 +265,8 @@ const composeRadio = props => [
       label={props.label}
       required={props.isRequired}
       complete={props.hasValue}
+      description={props.description}
+      url={props.url}
     />
     <RadioGroup
       id={props.componentId}
@@ -496,7 +342,8 @@ class FormInput extends PureComponent {
       size,
       name,
       label,
-      // optional parameters
+      description,
+      url,
       subgroup,
       hidden,
       autofocus,
@@ -505,20 +352,15 @@ class FormInput extends PureComponent {
       elementWidth,
       placeholder = '',
       id,
-      // select and radio parameters
       options,
-      // extra inline button
       onInlineButtonClick,
       inlineButtonLabel,
-      // Date Picker Props
       format,
       dateFormat,
-      // FileUploader Props
       parseFileAsText,
       parseFileAsBase64,
       fileType,
       fileName,
-      // has children to be shown below
       children,
     } = this.props;
 
@@ -560,6 +402,8 @@ class FormInput extends PureComponent {
       componentId: id || (subgroup ? `${subgroup}-${name}` : name),
       isDisabled: disabled === true || isPending === true,
       label,
+      description,
+      url,
       placeholder,
       className,
       size,
