@@ -8,6 +8,8 @@ import * as utils from '../../utils/common';
 
 const POSITIONS = ['top', 'right', 'bottom', 'left'];
 const ALIGNMENTS = ['start', 'center', 'end'];
+const MARGIN = 10;
+const TRANSLATION = 10;
 
 const TooltipHandle = ({ custom, direction, alignment, kind }) => {
   const handleWrapperClassName = utils.composeClassNames([
@@ -43,10 +45,10 @@ export default class TooltipViewer extends PureComponent {
   static getCoordinatesByPosition(position, align, parentRect, targetRect) {
     const leftCenterByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
     const topCenterByX = parentRect.top + (parentRect.height - targetRect.height) / 2;
-    const leftAlignByY = parentRect.left - 10;
-    const rightAlignByY = parentRect.left + parentRect.width + 10 - targetRect.width;
-    const topAlignByX = parentRect.top - 10;
-    const bottomAlignByX = parentRect.top + parentRect.height - targetRect.height + 10;
+    const leftAlignByY = parentRect.left - TRANSLATION;
+    const rightAlignByY = parentRect.left + parentRect.width + TRANSLATION - targetRect.width;
+    const topAlignByX = parentRect.top - TRANSLATION;
+    const bottomAlignByX = parentRect.top + parentRect.height - targetRect.height + TRANSLATION;
 
     const left =
       align === 'center' ? leftCenterByY : align === 'start' ? leftAlignByY : rightAlignByY;
@@ -57,49 +59,45 @@ export default class TooltipViewer extends PureComponent {
       top: () => ({
         top: parentRect.top - targetRect.height - 10,
         left,
-        direction: 'top',
       }),
       bottom: () => ({
         top: parentRect.top + parentRect.height + 10,
         left,
-        direction: 'bottom',
       }),
       left: () => ({
         top,
         left: parentRect.left - targetRect.width - 10,
-        direction: 'left',
       }),
       right: () => ({
         top,
         left: parentRect.left + parentRect.width + 10,
-        direction: 'right',
       }),
     };
     const byPositionGetter = byPosition[position];
     return byPositionGetter(align);
   }
 
-  static getMaxSizes(rect, pos, align, _MINIMUM_MARGIN) {
+  static getMaxSizes(rect, pos, align) {
     const { innerWidth, innerHeight } = window;
     const centerX = rect.left + rect.width / 2;
-    const centerFromLeft = 2 * centerX - 2 * _MINIMUM_MARGIN;
-    const centerFromRight = 2 * innerWidth - centerX * 2 - _MINIMUM_MARGIN;
+    const centerFromLeft = 2 * centerX - 2 * MARGIN;
+    const centerFromRight = 2 * innerWidth - centerX * 2 - MARGIN;
 
     const centerY = rect.top + rect.height / 2;
-    const centerFromTop = 2 * centerY - 2 * _MINIMUM_MARGIN;
-    const centerFromBottom = 2 * innerHeight - centerY * 2 - _MINIMUM_MARGIN;
+    const centerFromTop = 2 * centerY - 2 * MARGIN;
+    const centerFromBottom = 2 * innerHeight - centerY * 2 - MARGIN;
 
-    const maxWidthLeft = rect.left - 2 * _MINIMUM_MARGIN;
+    const maxWidthLeft = rect.left - 2 * MARGIN;
     const maxWidthStart = innerWidth - rect.left;
     const maxWidthCenter = Math.min(centerFromLeft, centerFromRight);
     const maxWidthEnd = rect.left + rect.width;
-    const maxWidthRight = innerWidth - rect.left - rect.width - 2 * _MINIMUM_MARGIN;
+    const maxWidthRight = innerWidth - rect.left - rect.width - 2 * MARGIN;
 
-    const maxHeightTop = rect.top - 2 * _MINIMUM_MARGIN;
+    const maxHeightTop = rect.top - 2 * MARGIN;
     const maxHeightStart = innerHeight - rect.top;
     const maxHeightCenter = Math.min(centerFromTop, centerFromBottom);
     const maxHeightEnd = innerHeight - (rect.top + rect.height);
-    const maxHeightBottom = innerHeight - (rect.top + rect.height) - 2 * _MINIMUM_MARGIN;
+    const maxHeightBottom = innerHeight - (rect.top + rect.height) - 2 * MARGIN;
 
     const byPosition = {
       top: {
@@ -160,7 +158,6 @@ export default class TooltipViewer extends PureComponent {
     const parent = document.getElementById(parentId);
     const [firstChild] = document.getElementById(parentId).children;
     const wrappedElement = firstChild || parent;
-    const _MINIMUM_MARGIN = 10;
     const parentRect = wrappedElement.getBoundingClientRect();
     const knowsPosition = position !== undefined;
     const knowsAlign = align !== undefined;
@@ -176,8 +173,8 @@ export default class TooltipViewer extends PureComponent {
     let finalPosition;
     let finalAlign;
 
-    while (positionIteration < 4) {
-      while (alignIteration < 3) {
+    while (positionIteration < POSITIONS.length) {
+      while (alignIteration < ALIGNMENTS.length) {
         const currentPosition = TooltipViewer.getNextPosition(
           position || 'top',
           POSITIONS,
@@ -194,7 +191,6 @@ export default class TooltipViewer extends PureComponent {
           parentRect,
           currentPosition,
           currentAlign,
-          _MINIMUM_MARGIN,
         );
 
         target.style.maxWidth = maxWidth;

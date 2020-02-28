@@ -35,7 +35,9 @@ const TestTooltip = () => (
     </Row>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip style={{ ...style }}>Default usage - applying style(100px width)</Tooltip>
+        <Tooltip align="start" label="I work on my own">
+          <span style={{ marginLeft: '50px' }}>Default usage - using the label prop</span>
+        </Tooltip>
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style} delay={2000}>
@@ -96,34 +98,26 @@ const TestTooltip = () => (
     </Row>
 
     {[undefined, 'top', 'left', 'right', 'bottom'].map(position => {
-      return [undefined, 'start', 'center', 'end'].map(align => (
-        <Row key={`${position}-${align}`}>
-          <Column style={columnStyle} align="center space-between">
-            <Tooltip
-              {...{ position, align }}
-              label={longText}
-            >{`[${position}]-[${align}]`}</Tooltip>
-          </Column>
-          <Column style={columnStyle} align="center space-between">
-            <Tooltip
-              {...{ position, align }}
-              label={longText}
-            >{`[${position}]-[${align}]`}</Tooltip>
-          </Column>
-          <Column style={columnStyle} align="center space-between">
-            <Tooltip
-              {...{ position, align }}
-              label={longText}
-            >{`[${position}]-[${align}]`}</Tooltip>
-          </Column>
-          <Column style={columnStyle} align="center space-between">
-            <Tooltip
-              {...{ position, align }}
-              label={longText}
-            >{`[${position}]-[${align}]`}</Tooltip>
-          </Column>
-        </Row>
-      ));
+      return [undefined, 'start', 'center', 'end'].map(align => {
+        const props = { position, align, label: longText };
+        const text = `[ ${`${position}`.toUpperCase()} ] [ ${`${align}`.toUpperCase()} ]`;
+        return (
+          <Row key={`${position}-${align}`}>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+          </Row>
+        )
+      });
     })}
 
     <Row>
@@ -140,26 +134,26 @@ const TestTooltip = () => (
 
     <Row style={rowStyle}>
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="right">
-          RIGHT POSITIONED
+        <Tooltip position="right" label="RIGHT">
+          RIGHT
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="left">
-          LEFT POSITIONED
+        <Tooltip position="left" label="LEFT">
+          LEFT
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="top">
-          TOP POSITIONED
+        <Tooltip position="top" label="TOP">
+          TOP
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="bottom">
-          BOTTOM POSITIONED
+        <Tooltip position="bottom" label="BOTTOM">
+          BOTTOM
         </Tooltip>
       </Column>
     </Row>
