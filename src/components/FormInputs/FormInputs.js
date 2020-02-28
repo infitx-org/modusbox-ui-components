@@ -28,6 +28,7 @@ class FormInputs extends PureComponent {
     disabled,
     validation,
     description,
+    url,
     subgroup,
     disabledFields,
     hiddenFields,
@@ -52,12 +53,14 @@ class FormInputs extends PureComponent {
         let componentOptions = options[name];
         let componentValidation = get(validation, `fields[${name}]`);
         let componentDescription = description[name];
+        let componentUrl = url[name];
 
         if (subgroup) {
           componentValue = get(data, `${subgroup}.${name}`);
           componentOptions = get(options, `${subgroup}.${name}`);
           componentValidation = get(validation, `fields[${subgroup}].fields[${name}]`);
-          componentDescription = get(description,`${subgroup}.${name}`);
+          componentDescription = get(description, `${subgroup}.${name}`);
+          componentUrl = get(url, `${subgroup}.${name}`);
         }
 
         const matchedProps = {
@@ -66,6 +69,7 @@ class FormInputs extends PureComponent {
           validation: element.props.validation || componentValidation,
           subgroup: element.props.subgroup || subgroup,
           description: element.props.description || componentDescription,
+          url: element.props.url || componentUrl,
         };
 
         const lockedByParent = FormInputs.getIncludesNested(subgroup, disabledFields, name);
@@ -125,7 +129,7 @@ class FormInputs extends PureComponent {
     const rowWidth = '100%';
     const childrenWithProps = React.Children.map(
       this.props.children,
-      FormInputs.addPropsToFormInputOrInline({ ...this.props, rowWidth, elementWidth })
+      FormInputs.addPropsToFormInputOrInline({ ...this.props, rowWidth, elementWidth }),
     );
 
     return React.Children.map(
@@ -152,6 +156,7 @@ FormInputs.defaultProps = {
   options: {},
   validation: {},
   description: {},
+  url: {},
   disabledFields: [],
   hiddenFields: [],
   title: undefined,
@@ -165,6 +170,7 @@ FormInputs.propTypes = {
   validation: PropTypes.shape(),
   options: PropTypes.shape(),
   description: PropTypes.shape(),
+  url: PropTypes.shape(),
   disabledFields: PropTypes.arrayOf(PropTypes.string),
   hiddenFields: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,

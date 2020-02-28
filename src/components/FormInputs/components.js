@@ -7,12 +7,27 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 
-export const FieldInfoOverlay = ({ assignRef, title, description }) => (
+export const FieldInfoOverlay = ({ assignRef, title, description, url, required }) => (
   <div className="forminput__field-info" ref={assignRef}>
-    <div className="forminput__field-info__title">{title}</div>
+    <div className="forminput__field-info__title-container">
+      <div className="forminput__field-info__title">{title}</div>
+      {required && (
+        <React.Fragment>
+          <div className="forminput__field-info__required-icon">
+            <Icon size={20} name="info-small" className="forminput__label-icon" fill="#333" />
+          </div>
+          <div className="forminput__field-info__required-label"> required </div>
+        </React.Fragment>
+      )}
+    </div>
     <div className="forminput__field-info__content">
       <p>{description}</p>
     </div>
+    {url && (
+      <div className="forminput__field-info__url">
+        <a href={url}>{url}</a>
+      </div>
+    )}
   </div>
 );
 
@@ -68,11 +83,17 @@ export class FieldInfo extends PureComponent {
     }
   }
   render() {
-    const { iconSize, title, description, url } = this.props;
+    const { iconSize, title, required, description, url } = this.props;
     let content = null;
     if (this.state.open) {
       content = (
-        <FieldInfoOverlay assignRef={this.area} title={title} description={description} url={url} />
+        <FieldInfoOverlay
+          assignRef={this.area}
+          title={title}
+          description={description}
+          url={url}
+          required={required}
+        />
       );
     }
     const fieldInfoClassName = utils.composeClassNames([
@@ -130,7 +151,13 @@ export const Label = ({ size, label, required, complete, description, url }) => 
       )}
       <label>{label}</label>
       {description && (
-        <FieldInfo iconSize={iconSize} title={label} description={description} url={url} />
+        <FieldInfo
+          iconSize={iconSize}
+          title={label}
+          description={description}
+          url={url}
+          required={required}
+        />
       )}
     </div>
   );

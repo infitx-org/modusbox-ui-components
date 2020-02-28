@@ -89,7 +89,6 @@
 }
 
 .forminput__field-info {
-  height: 200px;
   min-width: 140px;
   background: #f8f8f8;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
@@ -105,14 +104,48 @@
   fill: #333;
 }
 
-.forminput__field-info__title {
-  font-weight: bold;
-  font-size: 13px;
+.forminput__field-info__title-container {
   padding-bottom: 4px;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .forminput__field-info__required-label {
+    max-width: 0px;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    font-size: 13px;
+    display: flex;
+  }
+
+  &:hover {
+    .forminput__field-info__required-label {
+      max-width: 200px;
+      opacity: 1;
+      margin-left: 3px;
+    }
+  }
+}
+.forminput__field-info__title {
+  font-weight: bold;
+  font-size: 15px;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.forminput__field-info__required-icon {
+  flex: 0 0 auto;
+  flex-direction: row;
+  display: flex;
 }
 .forminput__field-info__content {
   color: #333;
+  font-size: 13px;
+  min-height: 100px;
+}
+.forminput__field-info__url {
+  color: #39f;
   font-size: 13px;
 }
 

@@ -12,6 +12,14 @@ const description = {
   age: 'Describes how long the user has lived on this planet',
 };
 
+const url = {
+  name: 'https://www.modusbox.com',
+  lastname: 'https://www.modusbox.com',
+  description: 'https://www.modusbox.com',
+  sex: 'https://www.modusbox.com',
+  age: 'https://www.modusbox.com',
+};
+
 const model = {
   name: undefined,
   lastname: 'test-lastname',
@@ -72,6 +80,7 @@ class Wrapped extends Component {
           validation={validationResult}
           title="Form inputs title"
           description={description}
+          url={url}
         >
           <FormInput type="text" label="name" name="name" />
           <FormInput type="text" label="lastname" name="lastname" />
@@ -133,6 +142,7 @@ class Unwrapped extends Component {
           type="text"
           label="name"
           description={description.name}
+          url={url.name}
           name="name"
         />
         <FormInput
@@ -143,6 +153,7 @@ class Unwrapped extends Component {
           type="text"
           label="lastname"
           description={description.lastname}
+          url={url.lastname}
           name="lastname"
         />
         <FormInput
@@ -153,6 +164,7 @@ class Unwrapped extends Component {
           type="area"
           label="description"
           description={description.description}
+          url={url.description}
           name="description"
         />
         <FormInput
@@ -163,6 +175,7 @@ class Unwrapped extends Component {
           type="select"
           label="age"
           description={description.age}
+          url={url.age}
           name="age"
           options={ages}
         />
@@ -173,6 +186,7 @@ class Unwrapped extends Component {
           type="radio"
           label="sex"
           description={description.sex}
+          url={url.sex}
           name="sex"
           options={sexes}
         />

@@ -12,7 +12,6 @@ import TextArea from '../TextArea';
 import TextField from '../TextField';
 import { Label, InfoMessage, InlineButton, LockedIcon } from './components';
 
-
 const addKey = (element, index) => React.cloneElement(element, { key: index });
 
 const composeSelect = props => [
