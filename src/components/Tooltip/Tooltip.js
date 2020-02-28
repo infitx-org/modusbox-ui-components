@@ -165,7 +165,17 @@ class Tooltip extends PureComponent {
   }
 
   render() {
-    const { className, style, children, content, label, position, align, kind, custom } = this.props;
+    const {
+      className,
+      style,
+      children,
+      content,
+      label,
+      position,
+      align,
+      kind,
+      custom,
+    } = this.props;
     const tooltipClassName = utils.composeClassNames([
       'el-tooltip',
       custom && 'el-tooltip--custom',

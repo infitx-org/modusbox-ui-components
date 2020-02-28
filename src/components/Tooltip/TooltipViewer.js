@@ -14,7 +14,6 @@ const TooltipHandle = ({ custom, direction, alignment, kind }) => {
     'el-tooltip__handle-wrapper',
     direction && alignment && `el-tooltip__handle-wrapper--${direction}-${alignment}`,
   ]);
-  console.log(`el-tooltip__handle-wrapper--${direction}-${alignment}`)
   const handleClassName = utils.composeClassNames([
     'el-tooltip__handle',
     `el-tooltip__handle--${kind}`,
@@ -49,9 +48,10 @@ export default class TooltipViewer extends PureComponent {
     const topAlignByX = parentRect.top - 10;
     const bottomAlignByX = parentRect.top + parentRect.height - targetRect.height + 10;
 
-    const left = align === 'center' ? leftCenterByY : align === 'start' ? leftAlignByY : rightAlignByY;
-    const top = align === 'center' ? topCenterByX : align === 'start' ? topAlignByX : bottomAlignByX;
-    
+    const left =
+      align === 'center' ? leftCenterByY : align === 'start' ? leftAlignByY : rightAlignByY;
+    const top =
+      align === 'center' ? topCenterByX : align === 'start' ? topAlignByX : bottomAlignByX;
 
     const byPosition = {
       top: () => ({
@@ -88,7 +88,7 @@ export default class TooltipViewer extends PureComponent {
     const centerY = rect.top + rect.height / 2;
     const centerFromTop = 2 * centerY - 2 * _MINIMUM_MARGIN;
     const centerFromBottom = 2 * innerHeight - centerY * 2 - _MINIMUM_MARGIN;
-    
+
     const maxWidthLeft = rect.left - 2 * _MINIMUM_MARGIN;
     const maxWidthStart = innerWidth - rect.left;
     const maxWidthCenter = Math.min(centerFromLeft, centerFromRight);
@@ -121,7 +121,7 @@ export default class TooltipViewer extends PureComponent {
         start: [maxWidthStart, maxHeightBottom],
         center: [maxWidthCenter, maxHeightBottom],
         end: [maxWidthEnd, maxHeightBottom],
-      }
+      },
     };
     return byPosition[pos][align];
   }
@@ -196,7 +196,7 @@ export default class TooltipViewer extends PureComponent {
           currentAlign,
           _MINIMUM_MARGIN,
         );
-        
+
         target.style.maxWidth = maxWidth;
         target.style.maxHeight = maxHeight;
 
@@ -207,11 +207,11 @@ export default class TooltipViewer extends PureComponent {
           parentRect,
           targetRect,
         );
-        
+
         exceeds = TooltipViewer.testCoordinates(coordinates, targetRect);
         const isNotExceeding = previousExceeds > exceeds;
         const hasLowerHeight = previousExceeds === exceeds && targetRect.height < previousHeight;
-        
+
         if (isNotExceeding || hasLowerHeight) {
           previousExceeds = exceeds;
           previousHeight = targetRect.height;
@@ -240,7 +240,12 @@ export default class TooltipViewer extends PureComponent {
   }
 
   static setPosition(id, position, align, _portal, _viewer) {
-    const { top, left, direction, alignment, maxWidth, maxHeight } = TooltipViewer.getCoordinates(id, _portal, position, align);
+    const { top, left, direction, alignment, maxWidth, maxHeight } = TooltipViewer.getCoordinates(
+      id,
+      _portal,
+      position,
+      align,
+    );
 
     _portal.style.top = `${top}px`;
     _portal.style.left = `${left}px`;
@@ -271,13 +276,25 @@ export default class TooltipViewer extends PureComponent {
   }
   componentDidMount() {
     const { parentId, position, align } = this.props;
-    const { direction, alignment } = TooltipViewer.setPosition(parentId, position, align, this._location, this._viewer);
+    const { direction, alignment } = TooltipViewer.setPosition(
+      parentId,
+      position,
+      align,
+      this._location,
+      this._viewer,
+    );
     // eslint-disable-next-line
     this.setState({ direction, alignment });
   }
   componentDidUpdate() {
     const { parentId, position, align } = this.props;
-    const { direction, alignment } = TooltipViewer.setPosition(parentId, position, align, this._location, this._viewer);
+    const { direction, alignment } = TooltipViewer.setPosition(
+      parentId,
+      position,
+      align,
+      this._location,
+      this._viewer,
+    );
 
     if (direction !== this.state.direction || alignment !== this.state.alignment) {
       this.setState({ direction, alignment });
@@ -318,7 +335,13 @@ export default class TooltipViewer extends PureComponent {
       <div key="content" className={childClassName}>
         {tooltipInnerComponent}
       </div>,
-      <TooltipHandle kind={kind} direction={direction} alignment={alignment} custom={custom} key="handle" />,
+      <TooltipHandle
+        kind={kind}
+        direction={direction}
+        alignment={alignment}
+        custom={custom}
+        key="handle"
+      />,
     ];
 
     return ReactDOM.createPortal(rendering, this._location);

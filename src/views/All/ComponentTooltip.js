@@ -35,9 +35,7 @@ const TestTooltip = () => (
     </Row>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip style={{ ...style }}>
-          Default usage - applying style(100px width)
-        </Tooltip>
+        <Tooltip style={{ ...style }}>Default usage - applying style(100px width)</Tooltip>
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style} delay={2000}>
@@ -101,19 +99,32 @@ const TestTooltip = () => (
       return [undefined, 'start', 'center', 'end'].map(align => (
         <Row key={`${position}-${align}`}>
           <Column style={columnStyle} align="center space-between">
-            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+            <Tooltip
+              {...{ position, align }}
+              label={longText}
+            >{`[${position}]-[${align}]`}</Tooltip>
           </Column>
           <Column style={columnStyle} align="center space-between">
-            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+            <Tooltip
+              {...{ position, align }}
+              label={longText}
+            >{`[${position}]-[${align}]`}</Tooltip>
           </Column>
           <Column style={columnStyle} align="center space-between">
-            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+            <Tooltip
+              {...{ position, align }}
+              label={longText}
+            >{`[${position}]-[${align}]`}</Tooltip>
           </Column>
           <Column style={columnStyle} align="center space-between">
-            <Tooltip {...{position, align}} label={longText}>{`[${position}]-[${align}]`}</Tooltip>
+            <Tooltip
+              {...{ position, align }}
+              label={longText}
+            >{`[${position}]-[${align}]`}</Tooltip>
           </Column>
         </Row>
-    ))})}
+      ));
+    })}
 
     <Row>
       <Column style={columnStyle} align="center space-between">
