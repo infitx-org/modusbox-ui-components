@@ -98,6 +98,7 @@
 
 .forminput__field-info__icon {
   fill: #999;
+  cursor: pointer;
 }
 .forminput__field-info__icon:hover,
 .forminput__field-info__icon--active {
@@ -110,6 +111,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  max-width: 300px;
+
   .forminput__field-info__required-label {
     max-width: 0px;
     overflow: hidden;
@@ -143,6 +146,7 @@
   color: #333;
   font-size: 13px;
   min-height: 100px;
+  padding-bottom: 4px;
 }
 .forminput__field-info__url {
   color: #39f;
