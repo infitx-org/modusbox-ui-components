@@ -94,7 +94,7 @@ export default class Toast extends Component {
       const iconName = iconNameMaps[kind];
       icon = (
         <div className="el-toast__icon">
-          <Icon name={iconName} size={16} />
+          <Icon name={iconName} size={20} />
         </div>
       );
     }

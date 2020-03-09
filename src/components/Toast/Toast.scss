@@ -41,15 +41,15 @@
 }
 .el-toast--info {
   background: $color__blue-3;
-  fill: $color__blue-3;
+  fill: #fff;
 }
 .el-toast--error {
   background: $color__main-danger;
-  fill: $color__main-danger;
+  fill: #fff;
 }
 .el-toast--success {
   background: $color__main-success;
-  fill: $color__main-success;
+  fill: #fff;
 }
 .el-toast__title {
   display: flex;
@@ -65,13 +65,10 @@
 .el-toast__icon {
   width: 20px;
   height: 20px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 2px;
   margin-right: 10px;
-  transform: scale(0.5, 0.5);
-  opacity: 0;
-  animation: toastIconFadeIn 0.2s ease-out 0.3s forwards;
+  transform: scale(0.8, 0.9);
+  opacity: 0.5;
+  animation: toastIconFadeIn 0.1s ease-out 0.3s forwards;
 }
 
 .rc-notification {

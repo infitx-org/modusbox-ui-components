@@ -10,7 +10,7 @@ import Tooltip from '../../components/Tooltip';
 const style = { width: '100px' };
 const rowStyle = { padding: '10px', border: '1px solid #ccc' };
 const columnStyle = { padding: '10px', border: '1px solid #ccc' };
-const longText = `Automatic positioning with ${Array(70)
+const longText = `${Array(70)
   .fill('super')
   .join(' ')} long content`;
 const testLabels = [`Hey you!`, `Hey what's up?`, `I don't know man!`];
@@ -25,7 +25,7 @@ const TestTooltip = () => (
               <Column style={columnStyle}>
                 <div style={{ height: '50px' }} />
                 <Tooltip label="I am force here" forceVisibility position="left">
-                  <span>Forced Left</span>
+                  <span style={{ marginLeft: '50px' }}>Forced Left</span>
                 </Tooltip>
               </Column>
             </div>
@@ -35,7 +35,9 @@ const TestTooltip = () => (
     </Row>
     <Row style={rowStyle} align="center space-between">
       <Column style={columnStyle}>
-        <Tooltip style={style}> Default usage - applying style(100px width) </Tooltip>
+        <Tooltip align="start" label="I work on my own">
+          <span style={{ marginLeft: '50px' }}>Default usage - using the label prop</span>
+        </Tooltip>
       </Column>
       <Column style={columnStyle}>
         <Tooltip style={style} delay={2000}>
@@ -95,24 +97,29 @@ const TestTooltip = () => (
       </Column>
     </Row>
 
-    <Row>
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style} position="top">
-          {longText}
-        </Tooltip>
-      </Column>
+    {[undefined, 'top', 'left', 'right', 'bottom'].map(position => {
+      return [undefined, 'start', 'center', 'end'].map(align => {
+        const props = { position, align, label: longText };
+        const text = `[ ${`${position}`.toUpperCase()} ] [ ${`${align}`.toUpperCase()} ]`;
+        return (
+          <Row key={`${position}-${align}`}>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+            <Column style={columnStyle} align="center space-between">
+              <Tooltip {...props}>{text}</Tooltip>
+            </Column>
+          </Row>
+        );
+      });
+    })}
 
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>{longText}</Tooltip>
-      </Column>
-
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>{longText}</Tooltip>
-      </Column>
-      <Column style={columnStyle} align="center space-between">
-        <Tooltip style={style}>{longText}</Tooltip>
-      </Column>
-    </Row>
     <Row>
       <Column style={columnStyle} align="center space-between">
         <Tooltip style={style}>
@@ -127,26 +134,26 @@ const TestTooltip = () => (
 
     <Row style={rowStyle}>
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="right">
-          RIGHT POSITIONED
+        <Tooltip position="right" label="RIGHT">
+          RIGHT
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="left">
-          LEFT POSITIONED
+        <Tooltip position="left" label="LEFT">
+          LEFT
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="top">
-          TOP POSITIONED
+        <Tooltip position="top" label="TOP">
+          TOP
         </Tooltip>
       </Column>
 
       <Column style={columnStyle} align="center">
-        <Tooltip style={style} position="bottom">
-          BOTTOM POSITIONED
+        <Tooltip position="bottom" label="BOTTOM">
+          BOTTOM
         </Tooltip>
       </Column>
     </Row>
@@ -186,4 +193,5 @@ class Ticker extends Component {
     );
   }
 }
+
 export default TestTooltip;
