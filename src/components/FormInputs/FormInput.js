@@ -10,7 +10,7 @@ import RadioGroup from '../RadioGroup';
 import Select from '../Select';
 import TextArea from '../TextArea';
 import TextField from '../TextField';
-import { Label, InfoMessage, InlineButton, LockedIcon } from './components';
+import { InfoMessage, InlineButton, Label, LockedIcon } from './components';
 
 const addKey = (element, index) => React.cloneElement(element, { key: index });
 
