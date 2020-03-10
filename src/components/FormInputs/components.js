@@ -1,4 +1,5 @@
 import './FormInput.scss';
+import '../../icons/mule/forum-small.svg';
 
 import React, { PureComponent } from 'react';
 
@@ -6,6 +7,7 @@ import * as utils from '../../utils/common';
 import Button from '../Button';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
+
 
 export const FieldInfoOverlay = ({ assignRef, title, description, url, required }) => (
   <div className="forminput__field-info" ref={assignRef}>

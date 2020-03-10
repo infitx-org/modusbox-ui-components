@@ -89,11 +89,13 @@
 }
 
 .forminput__field-info {
-  min-width: 140px;
+  min-width: 180px;
+  max-width: 300px;
   background: #f8f8f8;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  overflow: hidden;
   border-radius: 5px;
+  font-family: helvetica;
 }
 
 .forminput__field-info__icon {
@@ -107,11 +109,11 @@
 
 .forminput__field-info__title-container {
   padding-bottom: 4px;
-  border-bottom: 1px solid #ddd;
+  background: #eee;
   display: flex;
   flex-direction: row;
   align-items: center;
-  max-width: 300px;
+  padding: 10px 10px 10px 10px;
 
   .forminput__field-info__required-label {
     max-width: 0px;
@@ -146,11 +148,17 @@
   color: #333;
   font-size: 13px;
   min-height: 100px;
-  padding-bottom: 4px;
+  padding: 10px;
+
+  p {
+    margin: 0px;
+  }
 }
 .forminput__field-info__url {
   color: #39f;
   font-size: 13px;
+  text-decoration: underline;
+  padding: 10px;
 }
 
 .forminput-timepicker,
