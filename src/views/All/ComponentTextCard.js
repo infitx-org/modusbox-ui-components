@@ -2,6 +2,7 @@
 import React from 'react';
 
 import TextField from '../../components/TextField';
+import FormInput from '../../components/FormInputs/FormInput';
 import { createValidation, validate, vd } from '../../reduxValidation';
 
 const options = [
@@ -92,6 +93,18 @@ class TextFieldWithValidation extends React.Component {
       <div>
         {this.state.value}
         <br />
+
+        <FormInput        
+          className="m5"
+          type="text"
+          placeholder="Validation"
+          value={this.state.value}
+          onChange={this.onChange}
+          required
+          tokens={pathCardValidationResult.tokens}
+          cardComponent={getCardComponent('port')}
+          tokenDelimiters='[]'
+        />
 
         <TextField
           className="m5"
