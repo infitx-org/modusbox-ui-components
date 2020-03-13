@@ -151,7 +151,7 @@ const composeText = props => [
       invalid={props.isInvalid}
       invalidMessages={props.validationMessages}
       tokens={props.tokens}
-      cardSelectors={props.cardSelectors}
+      tokenDelimiters={props.tokenDelimiters}
       cardComponent={props.cardComponent}
       style={props.inputStyle}
       placeholder={props.placeholder}
@@ -460,7 +460,7 @@ class FormInput extends PureComponent {
         ...cmnProps,
         ...btnProps,
         tokens: validationTokens,
-        cardSelectors: this.props.cardSelectors,
+        tokenDelimiters: this.props.tokenDelimiters,
         cardComponent: this.props.cardComponent,
         type,
         autofocus,
