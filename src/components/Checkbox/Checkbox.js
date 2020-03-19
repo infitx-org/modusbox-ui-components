@@ -95,6 +95,7 @@ class Checkbox extends PureComponent {
           checked={checked && semi !== true}
           disabled={disabled}
         />
+        {/* eslint-disable-next-line */}
         <label htmlFor={id} className={labelClassName} onClick={this.onChange} role="button">
           {label}
         </label>
