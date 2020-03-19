@@ -2,8 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'colors.scss');
 
@@ -23,7 +23,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin('dist', {}),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new ExtractTextPlugin('[name].css', {
+    new MiniCssExtractPlugin('[name].css', {
       disable: false,
       allChunks: true,
     }),
@@ -52,7 +52,11 @@ module.exports = {
       },
       {
         test: /\.(css|scss)?$/,
-        loader: ExtractTextPlugin.extract('css-loader!sass-loader!postcss-loader'),
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        },
+        'css-loader','sass-loader','postcss-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/,
