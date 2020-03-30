@@ -13,7 +13,10 @@ const Wrapped = props => (
 const TestMessageBox = () => (
   <div style={{ padding: 10 }}>
     Simple
-    <Wrapped message="A Default MessageBox, when not wrapped in flexbox, will take 100% width" kind="default" />
+    <Wrapped
+      message="A Default MessageBox, when not wrapped in flexbox, will take 100% width"
+      kind="default"
+    />
     All kinds regular
     <Row wrap>
       <Wrapped message="Default" kind="default" />
@@ -77,7 +80,6 @@ const TestMessageBox = () => (
       <Wrapped message="Font and Icon Size 20" size={20} fontSize={20} icon="deploy-small" />
       <Wrapped message="Font and Icon Size 30" size={30} fontSize={30} icon="deploy-small" />
     </Row>
-
     Active Sizes
     <Row wrap>
       <Wrapped active message="Font Size 10" size={20} fontSize={10} icon="deploy-small" />
@@ -90,8 +92,6 @@ const TestMessageBox = () => (
       <Wrapped active message="Font and Icon Size 20" size={20} fontSize={20} icon="deploy-small" />
       <Wrapped active message="Font and Icon Size 30" size={30} fontSize={30} icon="deploy-small" />
     </Row>
-
-
     Wrapped into each other
     <Wrapped icon="deploy-small" size={50}>
       <Wrapped center message="Font Size 10" size={10} fontSize={10} icon="deploy-small" />

@@ -18,7 +18,6 @@ it('renders the messages', () => {
   expect(wrapper.find('.el-message-box__messages').text()).toBe('test message');
 });
 
-
 it('renders the active prop', () => {
   const wrapper = shallow(<MessageBox message="test message" icon="deploy-small" active />);
   expect(wrapper.find('div.el-message-box').hasClass('el-message-box--active')).toBe(true);
@@ -36,7 +35,7 @@ it('renders the icon', () => {
 });
 
 it('renders the icon with override fill prop', () => {
-  const wrapper = shallow(<MessageBox message="test message" icon="deploy" fill="#000"/>);
+  const wrapper = shallow(<MessageBox message="test message" icon="deploy" fill="#000" />);
   expect(wrapper.find(Icon).prop('fill')).toBe('#000');
 });
 
@@ -51,7 +50,9 @@ it('applies the prop className', () => {
 });
 
 it('renders the prop id', () => {
-  const wrapper = shallow(<MessageBox message="test message" icon="deploy" id="testMessageBoxId" />);
+  const wrapper = shallow(
+    <MessageBox message="test message" icon="deploy" id="testMessageBoxId" />,
+  );
   expect(wrapper.find('#testMessageBoxId')).toHaveLength(1);
   expect(wrapper.find('div.el-message-box').prop('id')).toBe('testMessageBoxId');
 });
@@ -78,6 +79,14 @@ it('renders the inner icon component', () => {
 
 // Snapshot testing
 it('renders the button correctly when multiple props are set', () => {
-  const wrapper = shallow(<MessageBox message="test message" icon="deploy-small" kind="secondary" disabled onClick={jest.fn} />);
+  const wrapper = shallow(
+    <MessageBox
+      message="test message"
+      icon="deploy-small"
+      kind="secondary"
+      disabled
+      onClick={jest.fn}
+    />,
+  );
   expect(shallowToJson(wrapper)).toMatchSnapshot();
 });

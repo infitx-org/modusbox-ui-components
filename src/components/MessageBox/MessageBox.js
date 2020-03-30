@@ -21,7 +21,20 @@ const getMessages = message => {
 
 class MessageBox extends PureComponent {
   render() {
-    const { id, kind, style, active, icon, fill, message, center, size, fontSize, className, children } = this.props;
+    const {
+      id,
+      kind,
+      style,
+      active,
+      icon,
+      fill,
+      message,
+      center,
+      size,
+      fontSize,
+      className,
+      children,
+    } = this.props;
 
     if (!message && !children) {
       return null;
@@ -72,9 +85,6 @@ class MessageBox extends PureComponent {
   }
 }
 
-
-
-
 MessageBox.propTypes = {
   className: PropTypes.string,
   style: PropTypes.shape(),
@@ -94,7 +104,7 @@ MessageBox.propTypes = {
   fill: PropTypes.string,
   icon: PropTypes.string,
   active: PropTypes.bool,
-  center:  PropTypes.bool,
+  center: PropTypes.bool,
   message: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
   // TODO: Add iconPosition: PropTypes.oneOf(['left', 'right']),
 };
