@@ -1,0 +1,98 @@
+@import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/shadow.scss';
+
+.el-pill {
+  border-radius: 20px;
+  border: 2px solid;
+  min-height: 24px;
+  padding: 3px 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: initial;
+}
+
+.el-pill--active {
+  background: #eee;
+  color: #999;
+}
+
+.el-pill--default {
+  fill: #666;
+  color: #666;
+  border-color: #666;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.el-pill--primary {
+  fill: $color__main-primary;
+  color: $color__main-primary;
+  border-color: $color__main-primary;
+  background-color: $shadow-color--primary-2;
+}
+.el-pill--secondary {
+  fill: $color__main-secondary;
+  color: $color__main-secondary;
+  border-color: $color__main-secondary;
+  background-color: $shadow-color--secondary-2;
+}
+.el-pill--tertiary {
+  fill: $color__main-tertiary;
+  color: $color__main-tertiary;
+  border-color: $color__main-tertiary;
+  background-color: $shadow-color--tertiary-2;
+}
+.el-pill--success {
+  fill: $color__main-success;
+  color: $color__main-success;
+  border-color: $color__main-success;
+  background-color: $shadow-color--success-2;
+}
+.el-pill--danger {
+  fill: $color__main-danger;
+  color: $color__main-danger;
+  border-color: $color__main-danger;
+  background-color: $shadow-color--danger-2;
+}
+.el-pill--warning {
+  fill: $color__main-warning;
+  color: $color__main-warning;
+  border-color: $color__main-warning;
+  background-color: $shadow-color--warning-2;
+}
+.el-pill--dark {
+  fill: #000;
+  color: #000;
+  border-color: #000;
+  background-color: $shadow-color--dark-2;
+}
+.el-pill--light {
+  fill: $color__white;
+  color: $color__white;
+  border-color: $color__white;
+  background-color: shadow-color-0light;
+}
+.el-pill--inactive {
+  border-color: transparent;
+}
+
+.el-pill--active {
+}
+
+.el-pill__icon-box {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 2px;
+}
+.el-pill__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0px 2px;
+  cursor: initial;
+}
+.el-pill__icon {
+}

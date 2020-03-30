@@ -128,7 +128,7 @@ MenuItem.propTypes = {
   partial: PropTypes.bool,
 };
 
-const MENU_ITEM_TYPE = <MenuItem />.type;
+const MENU_ITEM_TYPE = (<MenuItem />).type;
 
 const isMenuItem = node => node.type === MENU_ITEM_TYPE;
 
@@ -161,7 +161,7 @@ MenuSection.propTypes = {
   label: PropTypes.string,
 };
 
-const MENU_SECTION_TYPE = <MenuSection />.type;
+const MENU_SECTION_TYPE = (<MenuSection />).type;
 
 const isMenuSection = node => node.type === MENU_SECTION_TYPE;
 

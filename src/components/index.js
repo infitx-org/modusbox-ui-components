@@ -16,6 +16,7 @@ import Menu, { MenuItem, MenuSection } from './Menu';
 import MessageBox from './MessageBox';
 import Modal, { ModalTabsLayout } from './Modal';
 import Navbar from './Navbar';
+import Pill from './Pill';
 import RadioGroup from './RadioGroup';
 import Row from './Row';
 import ScrollBox from './ScrollBox';
@@ -51,6 +52,7 @@ export {
   Modal,
   ModalTabsLayout,
   Navbar,
+  Pill,
   RadioGroup,
   Row,
   ScrollBox,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import FormInput from './FormInput';
 
-const FORMINPUT_TYPE = <FormInput />.type;
+const FORMINPUT_TYPE = (<FormInput />).type;
 
 const Inline = props => {
   const rowWidth = (10 + 400) / props.children.length;
