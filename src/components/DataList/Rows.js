@@ -45,6 +45,7 @@ class RowItem extends PureComponent {
         value={item.data[column._index].value}
         isCheckbox={column._onChange !== undefined}
         checked={item._checked}
+        isCentered={column.centered}
       />
     );
   }
@@ -74,10 +75,11 @@ class RowItem extends PureComponent {
 
 class ItemCell extends PureComponent {
   render() {
-    const { isCheckbox, checked, content, value, className } = this.props;
+    const { isCheckbox, checked, isCentered, content, value, className } = this.props;
     const itemCellClassName = utils.composeClassNames([
       className,
       'el-datalist__item-cell',
+      isCentered && 'el-datalist__item-cell--centered',
       isCheckbox && 'el-datalist__item-cell--checkbox',
     ]);
     let cell = null;

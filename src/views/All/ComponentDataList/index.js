@@ -56,6 +56,7 @@ class DataListWithSettings extends PureComponent {
         col2: true,
         col3: true,
         col4: true,
+        centered: true,
         link: false,
         text: false,
         transform: false,

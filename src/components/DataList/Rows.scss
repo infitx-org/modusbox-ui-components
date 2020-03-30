@@ -40,6 +40,10 @@
   font-size: 13px;
 }
 
+.el-datalist__item-cell--centered {
+  justify-content: center;
+}
+
 .el-datalist__item-cell--checkbox {
   flex: 0 0 40px;
   justify-content: center;
