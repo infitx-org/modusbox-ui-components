@@ -95,7 +95,7 @@ MessageBox.propTypes = {
   icon: PropTypes.string,
   active: PropTypes.bool,
   center:  PropTypes.bool,
-  message: PropTypes.oneOf(PropTypes.arrayOf(PropTypes.string), PropTypes.string),
+  message: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
   // TODO: Add iconPosition: PropTypes.oneOf(['left', 'right']),
 };
 MessageBox.defaultProps = {
