@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the button correctly when multiple props are set 1`] = `
+<div
+  className="el-message-box el-message-box--secondary el-message-box--inactive"
+  style={
+    Object {
+      "borderWidth": "2px",
+      "padding": "10px",
+    }
+  }
+>
+  <div
+    className="el-message-box__icon-box"
+    style={
+      Object {
+        "marginRight": "10px",
+      }
+    }
+  >
+    <Icon
+      className="el-message-box__icon"
+      name="deploy-small"
+      size={20}
+      spin={false}
+    />
+  </div>
+  <div
+    className="el-message-box__messages"
+    style={
+      Object {
+        "fontSize": "13px",
+      }
+    }
+  >
+    <div
+      className="el-message-box__message"
+      key="0"
+    >
+      test message
+    </div>
+  </div>
+</div>
+`;
