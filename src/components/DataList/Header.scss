@@ -69,4 +69,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.el-datalist__header-cell__label--centered {
+  justify-content: center;
 }

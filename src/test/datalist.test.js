@@ -132,7 +132,25 @@ it('renders the nested object property as described in the column configuration'
   expect(cellContent).toBe(columnContent);
 });
 
-it('renders the link correctly', () => {
+it('renders the cells of the column as centered when specified', () => {
+  const wrapper = mount(<DataList list={testList1} columns={[{ key: 'column1', label: 'Centered', centered: true }]} />);
+
+  const headerCell = wrapper
+    .find('.el-datalist__header-cell')
+    .find('.el-datalist__header-cell__label')
+    .at(0);
+
+  const cell = wrapper
+    .find('div.el-datalist__row')
+    .at(0)
+    .find('.el-datalist__item-cell')
+    .at(0);
+
+  expect(headerCell.hasClass('el-datalist__header-cell__label--centered')).toBeTruthy();
+  expect(cell.hasClass('el-datalist__item-cell--centered')).toBeTruthy();
+});
+
+it('renders column as link when described in configuration', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
   const link = wrapper

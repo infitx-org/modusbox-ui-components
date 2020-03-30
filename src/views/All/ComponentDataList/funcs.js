@@ -11,6 +11,7 @@ export const buildRow = () => {
     col2: (idx += 1),
     col3: (idx += 1),
     col4: (idx += 1),
+    col5: { nested: { nested: (idx += 1) } },
   };
   return row;
 };
@@ -42,10 +43,11 @@ export const settingsStyle = {
 
 export const getColumns = ({
   valueModifier = 1,
-  col1 = true,
-  col2 = true,
-  col3 = true,
-  col4 = true,
+  col1 = false,
+  col2 = false,
+  col3 = false,
+  col4 = false,
+  centered = false,
   link = false,
   text = false,
   transform = false,
@@ -72,11 +74,17 @@ export const getColumns = ({
       label: 'Col 4',
       key: 'col4',
     },
+    centered && {
+      label: 'Centered Very MUUUUUUUUUCH',
+      key: '_',
+      func: () => 'centerd',
+      centered: true,
+    },
     link && {
       label: 'Link',
-      key: 'a',
+      key: 'col1',
       // eslint-disable-next-line
-      func: x => <Link>{x}</Link>,
+      func: value => <Link>{value}</Link>,
     },
     text && {
       label: 'Regular',
@@ -98,7 +106,7 @@ export const getColumns = ({
     },
     nested && {
       label: 'Nested',
-      key: 'c.test.value',
+      key: 'col5.nested.nested',
     },
     linkFunc && {
       label: 'As a Link',

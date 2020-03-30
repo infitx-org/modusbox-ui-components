@@ -32,6 +32,7 @@ const Header = ({
         className={column.className}
         key={column._index}
         label={column.label}
+        isCentered={column.centered}
         isCheckbox={column._onChange}
         isSearchable={column.searchable !== false}
         isSortable={column.sortable !== false && !column._onChange}
@@ -84,6 +85,7 @@ class HeaderCell extends PureComponent {
     const {
       className,
       label,
+      isCentered,
       isCheckbox,
       isSearchable,
       isSortable,
@@ -129,7 +131,9 @@ class HeaderCell extends PureComponent {
         );
       }
       if (label !== '' && !isFiltering) {
-        headerCellContent.push(<HeaderLabel key="header-label" label={label} />);
+        headerCellContent.push(
+          <HeaderLabel key="header-label" label={label} isCentered={isCentered} />,
+        );
       }
       if (label !== '' && isFiltering) {
         headerCellContent.push(
@@ -156,11 +160,17 @@ class HeaderCell extends PureComponent {
   }
 }
 
-const HeaderLabel = ({ label }) => (
-  <div className="el-datalist__header-cell__label">
-    <Tooltip style={{ flex: ' 1 0 0 ' }}>{label}</Tooltip>
-  </div>
-);
+const HeaderLabel = ({ label, isCentered }) => {
+  const labelClassName = utils.composeClassNames([
+    'el-datalist__header-cell__label',
+    isCentered && 'el-datalist__header-cell__label--centered',
+  ]);
+  return (
+    <div className={labelClassName}>
+      <Tooltip style={{ flex: '0 0 auto' }}>{label}</Tooltip>
+    </div>
+  );
+};
 
 const HeaderFilter = ({ filter, onFilterClick, onFilterChange, onFilterBlur, assignRef }) => (
   <input
