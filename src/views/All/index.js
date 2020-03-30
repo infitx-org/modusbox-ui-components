@@ -14,6 +14,7 @@ import ComponentIcon from './ComponentIcon';
 import ComponentMenu from './ComponentMenu';
 import ComponentMessageBox from './ComponentMessageBox';
 import ComponentModal from './ComponentModal';
+import ComponentPill from './ComponentPill';
 import ComponentRadio from './ComponentRadio';
 import ComponentRow from './ComponentRow';
 import ComponentScrollBox from './ComponentScrollBox';
@@ -43,6 +44,7 @@ export {
   ComponentTextCard,
   ComponentTextField,
   ComponentTabs,
+  ComponentPill,
   ComponentRadio,
   ComponentDataList,
   ComponentScrollBox,

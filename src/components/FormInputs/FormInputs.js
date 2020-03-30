@@ -6,8 +6,8 @@ import Heading from '../Heading';
 import FormInput from './FormInput';
 import Inline from './Inline';
 
-const FORMINPUT_TYPE = <FormInput />.type;
-const INLINE_TYPE = <Inline />.type;
+const FORMINPUT_TYPE = (<FormInput />).type;
+const INLINE_TYPE = (<Inline />).type;
 
 // wrapper for data, onChange, validation, options
 class FormInputs extends PureComponent {

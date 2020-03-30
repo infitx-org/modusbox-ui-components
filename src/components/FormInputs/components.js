@@ -8,7 +8,6 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 
-
 export const FieldInfoOverlay = ({ assignRef, title, description, url, required }) => (
   <div className="forminput__field-info" ref={assignRef}>
     <div className="forminput__field-info__title-container">

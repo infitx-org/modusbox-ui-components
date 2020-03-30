@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
-import TextField from '../../components/TextField';
 import FormInput from '../../components/FormInputs/FormInput';
+import TextField from '../../components/TextField';
 import { createValidation, validate, vd } from '../../reduxValidation';
 
 const options = [
@@ -94,7 +94,7 @@ class TextFieldWithValidation extends React.Component {
         {this.state.value}
         <br />
 
-        <FormInput        
+        <FormInput
           className="m5"
           type="text"
           placeholder="Validation"
@@ -103,7 +103,7 @@ class TextFieldWithValidation extends React.Component {
           required
           tokens={pathCardValidationResult.tokens}
           cardComponent={getCardComponent('port')}
-          tokenDelimiters='[]'
+          tokenDelimiters="[]"
         />
 
         <TextField
