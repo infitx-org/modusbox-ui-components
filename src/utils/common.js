@@ -1,6 +1,7 @@
 const FOCUSABLE_ELEMENTS = [
-  '.mb-input__input:not([disabled])',
-  '.input-button__input:not([disabled]):not(.mb-input__inner-button)',
+  'textarea:not([disabled])',
+  'input:not([disabled]):not(.input-textfield__value__token)',
+  'button:not([disabled]):not(.mb-input__inner-button)',
 ];
 
 const getNextFocusableElement = (currentElement, next = true) => {
