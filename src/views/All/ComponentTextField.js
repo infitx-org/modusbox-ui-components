@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Checkbox from '../../components/Checkbox';
+import Modal from '../../components/Modal';
 import Row from '../../components/Row';
 import TextField from '../../components/TextField';
 import { createOptionalValidation, validate, vd } from '../../reduxValidation';
@@ -45,11 +46,46 @@ class TextFieldWithValidation extends React.Component {
   }
 }
 
+class TextFieldWithFix extends React.Component {
+  constructor() {
+    super();
+    this.state = { modal: false };
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+    this.setState({ modal: true });
+  }
+  render() {
+    let modal = null;
+    if (this.state.modal) {
+      modal = <Modal title="Hello" />;
+    }
+    return (
+      <div>
+        {modal}
+        <TextField
+          className="m5"
+          type="text"
+          placeholder="Validation"
+          onClick={this.onClick}
+          invalid
+          invalidMessages={[
+            { message: 'This is a test', active: true },
+            { message: 'This is undefined', active: undefined },
+            { message: 'This is invalid', active: false },
+          ]}
+        />
+      </div>
+    );
+  }
+}
+
 const TestTextField = () => (
   <div>
     <div className="p10 b1-ccc w500">
       <TextFieldWithDelay />
       <TextFieldWithValidation />
+      <TextFieldWithFix />
       <TextField className="m5" type="text" placeholder="Default" />
       <TextField className="m5" type="password" placeholder="Password" />
       <TextField
