@@ -24,11 +24,10 @@ class FileUploader extends PureComponent {
     this.onChangeFile = this.onChangeFile.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
 
-    this.fileContent = this.props.file;
-
     this.state = {
       isOpen: false,
       fileName: this.props.fileName,
+      fileContent: this.props.file,
     };
   }
 
@@ -37,11 +36,11 @@ class FileUploader extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     const { file, disabled } = this.props;
-    if (file && file !== this.fileContent) {
-      this.fileContent = file;
+    if (file && file !== this.state.fileContent) {
+      this.setState({ fileContent: file });
     } else if (!file && file !== prevProps.file) {
-      this.fileContent = undefined;
       this.setState({
+        fileContent: undefined,
         fileName: undefined,
       });
     }
@@ -76,20 +75,20 @@ class FileUploader extends PureComponent {
     }
 
     const { parseFileAs } = this.props;
-    let fileContent = file;
+    let parseFile = file;
     if (parseFileAs === 'text') {
-      fileContent = await readAsText(file);
+      parseFile = await readAsText(file);
     }
     if (parseFileAs === 'base64') {
-      fileContent = await readAsBase64(file);
+      parseFile = await readAsBase64(file);
     }
-    this.fileContent = file;
     this.setState({
+      fileContent: file,
       fileName: file.name,
     });
 
     if (this.props.onChange) {
-      this.props.onChange(fileContent);
+      this.props.onChange(parseFile);
     }
   }
   onCloseFileUploader() {
@@ -180,7 +179,7 @@ class FileUploader extends PureComponent {
       disabled,
     } = this.props;
     const { isOpen, fileName } = this.state;
-    const hasFile = !isNil(this.fileContent) && fileName;
+    const hasFile = !isNil(this.state.fileContent) && fileName;
 
     const componentClassName = utils.composeClassNames([
       className,
