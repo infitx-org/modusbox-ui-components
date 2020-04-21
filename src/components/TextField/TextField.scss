@@ -40,6 +40,7 @@
   border: none;
   outline: none;
   padding: 0px;
+  transition: background 0.1s ease-out, color 0.1s ease-out;
 }
 .input-textfield__value__token--matching {
   color: $color__main-secondary;
@@ -50,7 +51,6 @@
     background: $color__main-secondary;
     color: #fff;
     border-radius: 3px;
-    transition: background 0.1s ease-out;
   }
 }
 .input-textfield__value__token--invalid {

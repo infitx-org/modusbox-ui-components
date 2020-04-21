@@ -14,10 +14,19 @@ import Tooltip from '../Tooltip';
 
 class Card extends PureComponent {
   render() {
-    const { active, parent, assignRef, children, Content, value, onChange } = this.props;
+    const { active, parent, assignRef, children, Content, value, onChange, onClick } = this.props;
+
     let content = null;
     if (Content) {
-      content = <Content onChange={onChange} value={value} assignRef={assignRef} parent={parent} />;
+      content = (
+        <Content
+          onChange={onChange}
+          value={value}
+          assignRef={assignRef}
+          parent={parent}
+          onClick={onClick}
+        />
+      );
     }
 
     return (
@@ -839,6 +848,7 @@ class TextField extends PureComponent {
           value={cardValue || ''}
           Content={cardComponent}
           onChange={this.onCardChange}
+          onClick={this.closeTextField}
         >
           {component}
         </Card>

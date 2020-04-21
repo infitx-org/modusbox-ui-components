@@ -65,6 +65,8 @@ const validate = (initialValue, validation) => {
       const missingVars = tokens.filter(v => !v.available);
 
       if (missingVars.length) {
+        const verb = missingVars.length === 1 ? 'was' : 'were';
+        const name = missingVars.length === 1 ? 'variable' : 'variables';
         return {
           isRequired,
           tokens,
@@ -72,7 +74,7 @@ const validate = (initialValue, validation) => {
           messages: [
             {
               active: true,
-              message: `${missingVars.map(v => v.value).join(', ')} were not found`,
+              message: `${name} ${missingVars.map(v => v.value).join(', ')} ${verb} not found`,
             },
           ],
         };
