@@ -45,6 +45,8 @@ function getCardComponent(type, onInnerClick) {
       const availableOptions = options.filter(option => option.type === type);
       const { value, onChange } = this.props;
 
+      console.log(this.props.cardable)
+
       return (
         <div
           ref={this.assignRef}

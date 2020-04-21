@@ -14,7 +14,17 @@ import Tooltip from '../Tooltip';
 
 class Card extends PureComponent {
   render() {
-    const { active, parent, assignRef, children, Content, value, onChange, onClick } = this.props;
+    const { 
+      active,
+      parent,
+      assignRef,
+      children,
+      Content,
+      value,
+      cardable,
+      onChange,
+      onClick,
+    } = this.props;
 
     let content = null;
     if (Content) {
@@ -25,6 +35,7 @@ class Card extends PureComponent {
           assignRef={assignRef}
           parent={parent}
           onClick={onClick}
+          cardable={cardable}
         />
       );
     }
@@ -641,6 +652,7 @@ class TextField extends PureComponent {
     const { isOpen, tokens, inputValue, isPasswordVisible, valueToken } = this.state;
 
     let cardValue;
+    let tokenIsCardable;
     const iconSize = iconSizes[size];
     const inputType = isPasswordVisible ? 'text' : type;
     const hasValue = TextField.getFullValue(tokens, inputValue) !== '';
@@ -759,6 +771,7 @@ class TextField extends PureComponent {
 
             if (isSelected) {
               cardValue = cleanWord;
+              tokenIsCardable = token.isCardable;
             }
             return (
               <ValueToken
@@ -846,6 +859,7 @@ class TextField extends PureComponent {
           parent={this.area}
           active={isCardVisible}
           value={cardValue || ''}
+          cardable={tokenIsCardable}
           Content={cardComponent}
           onChange={this.onCardChange}
           onClick={this.closeTextField}
