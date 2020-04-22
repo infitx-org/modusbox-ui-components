@@ -45,8 +45,6 @@ function getCardComponent(type, onInnerClick) {
       const availableOptions = options.filter(option => option.type === type);
       const { value, onChange } = this.props;
 
-      console.log(this.props.cardable)
-
       return (
         <div
           ref={this.assignRef}
@@ -85,9 +83,9 @@ class TextFieldWithValidation extends React.Component {
       value: undefined,
       isModalVisible: false,
     };
-    this.portValidators = createValidation([vd.isEmail, vd.maxLength(30)], portOptions, '[]');
-    this.pathValidators = createValidation([vd.isEmail, vd.maxLength(30)], pathOptions, '[]');
-    this.addressValidators = createValidation([vd.isEmail, vd.maxLength(30)], addressOptions, '[]');
+    this.portValidators = createValidation([vd.isEmail, vd.isNum, vd.maxLength(30)], portOptions, '[]');
+    this.pathValidators = createValidation([vd.isEmail, vd.isNum, vd.maxLength(30)], pathOptions, '[]');
+    this.addressValidators = createValidation([vd.isEmail, vd.isNum, vd.maxLength(30)], addressOptions, '[]');
     this.onChange = this.onChange.bind(this);
     this.onModalClick = this.onModalClick.bind(this);
   }
