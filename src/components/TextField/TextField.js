@@ -88,23 +88,23 @@ class ValueToken extends PureComponent {
 }
 
 class TextField extends PureComponent {
-  static setElementWidth(el) {
-    if (!el) {
+  static setElementWidth(element) {
+    if (!element) {
       return;
     }
-    const fontSize = window.getComputedStyle(el).getPropertyValue('font-size');
-    const fontWeight = window.getComputedStyle(el).getPropertyValue('font-weight');
+    const fontSize = window.getComputedStyle(element).getPropertyValue('font-size');
+    const fontWeight = window.getComputedStyle(element).getPropertyValue('font-weight');
     const tmp = document.createElement('div');
     tmp.style.fontSize = fontSize;
     tmp.style.fontWeight = fontWeight;
-    tmp.className = el.className;
-    tmp.innerHTML = el.value
+    tmp.className = element.className;
+    tmp.innerHTML = element.value
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
     document.body.appendChild(tmp);
     // eslint-disable-next-line
-    el.style.width = tmp.getBoundingClientRect().width + 3 + 'px';
+    element.style.width = tmp.getBoundingClientRect().width + 3 + 'px';
     document.body.removeChild(tmp);
   }
   static getRegex(delimiters) {
@@ -399,10 +399,18 @@ class TextField extends PureComponent {
     if (this.card) {
       return;
     }
-    if (this.props.onBlur) {
-      this.props.onBlur(e);
-    }
-    this.closeTextField();
+    // TODO: Find a better way to detect the next focused element
+    setTimeout(() => {
+      if (this.valueTokens.includes(document.activeElement)) {
+        return;
+      } else if (document.activeElement === this.input) {
+        return;
+      }
+      if (this.props.onBlur) {
+        this.props.onBlur(e);
+      }
+      this.closeTextField();
+    });
   }
   onFocus(e) {
     if (this.props.onFocus) {
@@ -802,7 +810,7 @@ class TextField extends PureComponent {
           name="toggle-visible"
           tooltip={tooltip}
           size={iconSize}
-          fill="#333"
+          fill="#226291"
         />
       );
     }
