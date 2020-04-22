@@ -268,6 +268,7 @@ class TextField extends PureComponent {
       const nextElement =
         this._nextCardToken !== undefined ? this.valueTokens[this._nextCardToken] : this.input;
       nextElement.focus();
+
       nextElement.setSelectionRange(this._nextPosition, this._nextPosition);
       this._nextCardToken = undefined;
       this._nextPosition = undefined;
@@ -561,7 +562,7 @@ class TextField extends PureComponent {
 
     let nextCardToken = this.state.valueToken;
     let nextPosition;
-    if (nextRightPosition !== undefined && tokens.length) {
+    if (nextRightPosition !== undefined) {
       ({ nextCardToken, nextPosition } = TextField.getNextPosition(
         tokens,
         inputValue,
