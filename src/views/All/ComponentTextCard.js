@@ -13,7 +13,7 @@ const options = [
   { type: 'port', label: 'HTTP', value: '80' },
   { type: 'port', label: 'HTTPS', value: '443' },
   { type: 'port', label: 'FTP', value: '21' },
-  { type: 'address', label: 'APPLE', value: 'apple.com' },
+  { type: 'address', label: 'APPLE', value: undefined },
   { type: 'address', label: 'GOOGLE', value: 'google.com' },
   { type: 'address', label: 'MICROSOFT', value: 'microsoft.com' },
 ];

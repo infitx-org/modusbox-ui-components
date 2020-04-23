@@ -61,6 +61,7 @@ class ValueToken extends PureComponent {
       isCardable,
       isSelected,
       isInvalid,
+      isMissing,
       onKeyDown,
       onChange,
       onClick,
@@ -76,6 +77,7 @@ class ValueToken extends PureComponent {
           isSelected && 'input-textfield__value__token--selected',
           isCardable && 'input-textfield__value__token--matching',
           isCardable && isInvalid && 'input-textfield__value__token--invalid',
+          isCardable && isMissing && 'input-textfield__value__token--missing',
         ])}
         ref={assignRef}
         onKeyDown={onKeyDown}
@@ -777,8 +779,17 @@ class TextField extends PureComponent {
             const isSelected = valueToken === index;
             const cleanWord = TextField.removeDelimiters(word, tokenDelimiters);
             const currentVar = this.props.tokens.find(v => v.value === cleanWord);
-            const isInvalid = currentVar ? !currentVar.available : true;
-            tooltip += currentVar && currentVar.available ? currentVar.replaced : word;
+
+            let isInvalid = true;
+            let isMissing = false;
+            if (currentVar) {
+              const { available, replaced } = currentVar;
+              isInvalid = !available || replaced === undefined;
+              isMissing = available && replaced === undefined;
+              tooltip += available ? replaced : word;
+            } else {
+              tooltip += word;
+            }
 
             if (isSelected) {
               cardValue = cleanWord;
@@ -795,6 +806,7 @@ class TextField extends PureComponent {
                 index={index}
                 isSelected={isSelected}
                 isInvalid={isInvalid}
+                isMissing={isMissing}
                 onFocus={this.onTokenFocus}
                 onKeyDown={this.onKeyDown}
                 onChange={e => this.onTokenChange(e, index)}
