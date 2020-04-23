@@ -8,9 +8,7 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     return { value, tokens: [] };
   }
 
-  console.log(availableVariables);
   const flattenVariables = availableVariables.reduce((types, type) => ([...types, ...type]), []);
-  console.log(flattenVariables);
   const [open, close] = selectors;
   const availableLabels = flattenVariables.map(option => option.label);
 
