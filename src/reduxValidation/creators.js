@@ -4,9 +4,9 @@ const createValidator = (message, fn) => ({
   fn,
 });
 
-const buildValidationCreator = isRequired => (validators, options, selectors) => ({
+const buildValidationCreator = isRequired => (validators, variables, selectors) => ({
   isRequired,
-  options,
+  variables,
   selectors,
   validators: validators.map(validator => {
     const { fn, message } = validator;

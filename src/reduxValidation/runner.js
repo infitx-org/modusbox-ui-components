@@ -3,13 +3,16 @@ const isUndefined = item => item === undefined;
 const isObject = item => typeof item === 'object';
 const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 
-function getValueAndMissingCards(value, availableOptions, selectors) {
+function getValueAndMissingCards(value, availableVariables, selectors) {
   if (!value) {
     return { value, tokens: [] };
   }
 
+  console.log(availableVariables);
+  const flattenVariables = availableVariables.reduce((types, type) => ([...types, ...type]), []);
+  console.log(flattenVariables);
   const [open, close] = selectors;
-  const availableLabels = availableOptions.map(option => option.label);
+  const availableLabels = flattenVariables.map(option => option.label);
 
   function defineToken(tokenValue) {
     const wrapped = tokenValue.startsWith(open) && tokenValue.endsWith(close);
@@ -27,7 +30,7 @@ function getValueAndMissingCards(value, availableOptions, selectors) {
     if (!token.wrapped) {
       return token.value;
     }
-    const mapping = availableOptions.find(option => option.label === token.value);
+    const mapping = flattenVariables.find(option => option.label === token.value);
     return mapping ? mapping.value : '';
   }
 
@@ -58,10 +61,10 @@ const validate = (initialValue, validation) => {
 
   if (!isUndefined(validation)) {
     let value = initialValue;
-    const { selectors, options, validators } = validation;
+    const { selectors, variables, validators } = validation;
 
     if (selectors) {
-      ({ tokens, value } = getValueAndMissingCards(initialValue, options, selectors));
+      ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
       const missingVars = tokens.filter(v => !v.available);
 
       if (missingVars.length) {
