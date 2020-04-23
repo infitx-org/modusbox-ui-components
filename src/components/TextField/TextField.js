@@ -269,7 +269,9 @@ class TextField extends PureComponent {
         this._nextCardToken !== undefined ? this.valueTokens[this._nextCardToken] : this.input;
       nextElement.focus();
 
-      nextElement.setSelectionRange(this._nextPosition, this._nextPosition);
+      if (this.props.type !== 'number') {
+        nextElement.setSelectionRange(this._nextPosition, this._nextPosition);
+      }
       this._nextCardToken = undefined;
       this._nextPosition = undefined;
     }
