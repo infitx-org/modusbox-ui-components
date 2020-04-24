@@ -396,25 +396,24 @@ class TextField extends PureComponent {
       });
     }
   }
-  onBlur(e) {
+  async onBlur(e) {
     if (this.state.valueToken !== undefined) {
       return;
     }
     if (this.card) {
       return;
     }
-    // TODO: Find a better way to detect the next focused element
-    setTimeout(() => {
-      if (this.valueTokens.includes(document.activeElement)) {
-        return;
-      } else if (document.activeElement === this.input) {
-        return;
-      }
-      if (this.props.onBlur) {
-        this.props.onBlur(e);
-      }
-      this.closeTextField();
-    });
+    if (this.valueTokens.includes(e.relatedTarget)) {
+      return; 
+    }
+    if (e.relatedTarget === this.input) {
+      return 
+    }
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
+    this.closeTextField();
+      
   }
   onFocus(e) {
     if (this.props.onFocus) {
