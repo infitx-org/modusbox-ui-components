@@ -10,7 +10,6 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
 
   const flattenVariables = availableVariables.reduce((types, type) => ([...types, ...type]), []);
   const [open, close] = selectors;
-  const availableLabels = flattenVariables.map(option => option.label);
 
   function defineToken(tokenValue) {
     const wrapped = tokenValue.startsWith(open) && tokenValue.endsWith(close);
@@ -39,15 +38,20 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     .filter(str => str !== '')
     .map(defineToken);
 
+
   return {
     value: tokens.map(replaceWithTokenValue).join(''),
     tokens: tokens
       .filter(token => token.wrapped)
-      .map(token => ({
-        value: token.value,
-        available: availableLabels.includes(token.value),
-        replaced: replaceWithTokenValue(token),
-      })),
+      .map(token => {
+        const referenceVariable = flattenVariables.find(v => v.label === token.value);
+        return {
+          value: token.value,
+          available: referenceVariable !== undefined,
+          undefined: referenceVariable ? referenceVariable.value === undefined : undefined,
+          replaced: replaceWithTokenValue(token),
+        }
+      }),
   };
 }
 
@@ -63,21 +67,36 @@ const validate = (initialValue, validation) => {
 
     if (selectors) {
       ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
+      
       const missingVars = tokens.filter(v => !v.available);
 
       if (missingVars.length) {
         const verb = missingVars.length === 1 ? 'was' : 'were';
         const name = missingVars.length === 1 ? 'variable' : 'variables';
+        messages.push({
+          active: true,
+          message: `${name} ${missingVars.map(v => v.value).join(', ')} ${verb} not found`,
+        })
+      }
+
+      const undefinedVars = tokens.filter(v => v.undefined === true);
+
+      if (undefinedVars.length) {
+        const verb = undefinedVars.length === 1 ? 'has' : 'have';
+        const name = undefinedVars.length === 1 ? 'variable' : 'variables';
+        
+        messages.push({
+          active: true,
+          message: `${name} ${undefinedVars.map(v => v.value).join(', ')} ${verb} no value`,
+        });
+      }
+
+      if (messages.length) {
         return {
           isRequired,
           tokens,
           isValid: false,
-          messages: [
-            {
-              active: true,
-              message: `${name} ${missingVars.map(v => v.value).join(', ')} ${verb} not found`,
-            },
-          ],
+          messages,
         };
       }
     }

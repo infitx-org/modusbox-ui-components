@@ -87,19 +87,19 @@ class TextFieldWithValidation extends React.Component {
       vd.isEmail,
       vd.isNum,
       vd.maxLength(30)
-    ], portOptions, '[]');
+    ], [portOptions], '[]');
 
     this.pathValidators = createValidation([
       vd.isEmail,
       vd.isNum,
       vd.maxLength(30)
-    ], pathOptions, '[]');
+    ], [pathOptions], '[]');
 
     this.addressValidators = createValidation([
       vd.isEmail,
       vd.isNum,
       vd.maxLength(30)
-    ], addressOptions, '[]');
+    ], [addressOptions], '[]');
 
     this.onChange = this.onChange.bind(this);
     this.onModalClick = this.onModalClick.bind(this);
