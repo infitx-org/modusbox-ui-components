@@ -14,10 +14,30 @@ import Tooltip from '../Tooltip';
 
 class Card extends PureComponent {
   render() {
-    const { active, parent, assignRef, children, Content, value, onChange } = this.props;
+    const { 
+      active,
+      parent,
+      assignRef,
+      children,
+      Content,
+      value,
+      cardable,
+      onChange,
+      onClick,
+    } = this.props;
+
     let content = null;
     if (Content) {
-      content = <Content onChange={onChange} value={value} assignRef={assignRef} parent={parent} />;
+      content = (
+        <Content
+          onChange={onChange}
+          value={value}
+          assignRef={assignRef}
+          parent={parent}
+          onClick={onClick}
+          cardable={cardable}
+        />
+      );
     }
 
     return (
@@ -68,23 +88,23 @@ class ValueToken extends PureComponent {
 }
 
 class TextField extends PureComponent {
-  static setElementWidth(el) {
-    if (!el) {
+  static setElementWidth(element) {
+    if (!element) {
       return;
     }
-    const fontSize = window.getComputedStyle(el).getPropertyValue('font-size');
-    const fontWeight = window.getComputedStyle(el).getPropertyValue('font-weight');
+    const fontSize = window.getComputedStyle(element).getPropertyValue('font-size');
+    const fontWeight = window.getComputedStyle(element).getPropertyValue('font-weight');
     const tmp = document.createElement('div');
     tmp.style.fontSize = fontSize;
     tmp.style.fontWeight = fontWeight;
-    tmp.className = el.className;
-    tmp.innerHTML = el.value
+    tmp.className = element.className;
+    tmp.innerHTML = element.value
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
     document.body.appendChild(tmp);
     // eslint-disable-next-line
-    el.style.width = tmp.getBoundingClientRect().width + 3 + 'px';
+    element.style.width = tmp.getBoundingClientRect().width + 3 + 'px';
     document.body.removeChild(tmp);
   }
   static getRegex(delimiters) {
@@ -248,7 +268,10 @@ class TextField extends PureComponent {
       const nextElement =
         this._nextCardToken !== undefined ? this.valueTokens[this._nextCardToken] : this.input;
       nextElement.focus();
-      nextElement.setSelectionRange(this._nextPosition, this._nextPosition);
+
+      if (this.props.type !== 'number') {
+        nextElement.setSelectionRange(this._nextPosition, this._nextPosition);
+      }
       this._nextCardToken = undefined;
       this._nextPosition = undefined;
     }
@@ -371,17 +394,24 @@ class TextField extends PureComponent {
       });
     }
   }
-  onBlur(e) {
+  async onBlur(e) {
     if (this.state.valueToken !== undefined) {
       return;
     }
     if (this.card) {
       return;
     }
+    if (this.valueTokens.includes(e.relatedTarget)) {
+      return; 
+    }
+    if (e.relatedTarget === this.input) {
+      return 
+    }
     if (this.props.onBlur) {
       this.props.onBlur(e);
     }
     this.closeTextField();
+      
   }
   onFocus(e) {
     if (this.props.onFocus) {
@@ -541,7 +571,7 @@ class TextField extends PureComponent {
 
     let nextCardToken = this.state.valueToken;
     let nextPosition;
-    if (nextRightPosition !== undefined && tokens.length) {
+    if (nextRightPosition !== undefined) {
       ({ nextCardToken, nextPosition } = TextField.getNextPosition(
         tokens,
         inputValue,
@@ -632,6 +662,7 @@ class TextField extends PureComponent {
     const { isOpen, tokens, inputValue, isPasswordVisible, valueToken } = this.state;
 
     let cardValue;
+    let tokenIsCardable;
     const iconSize = iconSizes[size];
     const inputType = isPasswordVisible ? 'text' : type;
     const hasValue = TextField.getFullValue(tokens, inputValue) !== '';
@@ -745,11 +776,19 @@ class TextField extends PureComponent {
             const isSelected = valueToken === index;
             const cleanWord = TextField.removeDelimiters(word, tokenDelimiters);
             const currentVar = this.props.tokens.find(v => v.value === cleanWord);
-            const isInvalid = currentVar ? !currentVar.available : true;
-            tooltip += currentVar && currentVar.available ? currentVar.replaced : word;
+
+            let isInvalid = true;
+            if (currentVar) {
+              const { available, replaced } = currentVar;
+              isInvalid = !available || replaced === undefined;
+              tooltip += available ? replaced : word;
+            } else {
+              tooltip += word;
+            }
 
             if (isSelected) {
               cardValue = cleanWord;
+              tokenIsCardable = token.isCardable;
             }
             return (
               <ValueToken
@@ -779,7 +818,7 @@ class TextField extends PureComponent {
           name="toggle-visible"
           tooltip={tooltip}
           size={iconSize}
-          fill="#333"
+          fill="#226291"
         />
       );
     }
@@ -837,8 +876,10 @@ class TextField extends PureComponent {
           parent={this.area}
           active={isCardVisible}
           value={cardValue || ''}
+          cardable={tokenIsCardable}
           Content={cardComponent}
           onChange={this.onCardChange}
+          onClick={this.closeTextField}
         >
           {component}
         </Card>

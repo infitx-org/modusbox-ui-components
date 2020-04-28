@@ -2,6 +2,7 @@
 import React from 'react';
 
 import FormInput from '../../components/FormInputs/FormInput';
+import Modal from '../../components/Modal';
 import TextField from '../../components/TextField';
 import { createValidation, validate, vd } from '../../reduxValidation';
 
@@ -12,7 +13,7 @@ const options = [
   { type: 'port', label: 'HTTP', value: '80' },
   { type: 'port', label: 'HTTPS', value: '443' },
   { type: 'port', label: 'FTP', value: '21' },
-  { type: 'address', label: 'APPLE', value: 'apple.com' },
+  { type: 'address', label: 'APPLE', value: undefined },
   { type: 'address', label: 'GOOGLE', value: 'google.com' },
   { type: 'address', label: 'MICROSOFT', value: 'microsoft.com' },
 ];
@@ -21,13 +22,18 @@ const portOptions = options.filter(option => option.type === 'port');
 const pathOptions = options.filter(option => option.type === 'path');
 const addressOptions = options.filter(option => option.type === 'address');
 
-function getCardComponent(type) {
+function getCardComponent(type, onInnerClick) {
   return class CardComponent extends React.Component {
     constructor(props) {
       super(props);
       this.assignRef = this.assignRef.bind(this);
+      this.onClick = this.onClick.bind(this);
     }
     componentDidMount() {}
+    onClick() {
+      onInnerClick();
+      this.props.onClick();
+    }
     assignRef(element) {
       if (element) {
         this.props.assignRef(element);
@@ -48,7 +54,7 @@ function getCardComponent(type) {
           }}
         >
           <div style={{ padding: '5px', borderBottom: '2px solid #eee' }}>
-            <TextField />
+            <TextField onClick={this.onClick} />
           </div>
           Current value: <span>{value}</span>
           {availableOptions.map(option => (
@@ -74,15 +80,35 @@ class TextFieldWithValidation extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: undefined, // '[HTTP]/[ONE]\\[\\[[TEST]metetete'
+      value: undefined,
+      isModalVisible: false,
     };
-    this.portValidators = createValidation([vd.isEmail, vd.maxLength(30)], portOptions, '[]');
-    this.pathValidators = createValidation([vd.isEmail, vd.maxLength(30)], pathOptions, '[]');
-    this.addressValidators = createValidation([vd.isEmail, vd.maxLength(30)], addressOptions, '[]');
+    this.portValidators = createValidation([
+      vd.isEmail,
+      vd.isNum,
+      vd.maxLength(30)
+    ], [portOptions], '[]');
+
+    this.pathValidators = createValidation([
+      vd.isEmail,
+      vd.isNum,
+      vd.maxLength(30)
+    ], [pathOptions], '[]');
+
+    this.addressValidators = createValidation([
+      vd.isEmail,
+      vd.isNum,
+      vd.maxLength(30)
+    ], [addressOptions], '[]');
+
     this.onChange = this.onChange.bind(this);
+    this.onModalClick = this.onModalClick.bind(this);
   }
   onChange(value) {
     this.setState({ value: value !== '' ? value : undefined });
+  }
+  onModalClick() {
+    this.setState({ isModalVisible: true });
   }
   render() {
     const portCardValidationResult = validate(this.state.value, this.portValidators);
@@ -91,9 +117,6 @@ class TextFieldWithValidation extends React.Component {
 
     return (
       <div>
-        {this.state.value}
-        <br />
-
         <FormInput
           className="m5"
           type="text"
@@ -102,7 +125,7 @@ class TextFieldWithValidation extends React.Component {
           onChange={this.onChange}
           required
           tokens={pathCardValidationResult.tokens}
-          cardComponent={getCardComponent('port')}
+          cardComponent={getCardComponent('port', this.onModalClick)}
           tokenDelimiters="[]"
         />
 
@@ -117,7 +140,7 @@ class TextFieldWithValidation extends React.Component {
           invalidMessages={portCardValidationResult.messages}
           tokens={portCardValidationResult.tokens}
           tokenDelimiters="[]"
-          cardComponent={getCardComponent('port')}
+          cardComponent={getCardComponent('port', this.onModalClick)}
         />
 
         <TextField
@@ -131,7 +154,7 @@ class TextFieldWithValidation extends React.Component {
           invalidMessages={pathCardValidationResult.messages}
           tokens={pathCardValidationResult.tokens}
           tokenDelimiters="[]"
-          cardComponent={getCardComponent('path')}
+          cardComponent={getCardComponent('path', this.onModalClick)}
         />
 
         <TextField
@@ -145,8 +168,9 @@ class TextFieldWithValidation extends React.Component {
           invalidMessages={addressCardValidationResult.messages}
           tokens={addressCardValidationResult.tokens}
           tokenDelimiters="[]"
-          cardComponent={getCardComponent('address')}
+          cardComponent={getCardComponent('address', this.onModalClick)}
         />
+        {this.state.isModalVisible && <Modal title="test" />}
       </div>
     );
   }

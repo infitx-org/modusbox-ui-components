@@ -3,13 +3,13 @@ const isUndefined = item => item === undefined;
 const isObject = item => typeof item === 'object';
 const isPrimitiveObject = item => isObject(item) && !Array.isArray(item);
 
-function getValueAndMissingCards(value, availableOptions, selectors) {
+function getValueAndMissingCards(value, availableVariables, selectors) {
   if (!value) {
     return { value, tokens: [] };
   }
 
+  const flattenVariables = availableVariables.reduce((types, type) => ([...types, ...type]), []);
   const [open, close] = selectors;
-  const availableLabels = availableOptions.map(option => option.label);
 
   function defineToken(tokenValue) {
     const wrapped = tokenValue.startsWith(open) && tokenValue.endsWith(close);
@@ -27,7 +27,7 @@ function getValueAndMissingCards(value, availableOptions, selectors) {
     if (!token.wrapped) {
       return token.value;
     }
-    const mapping = availableOptions.find(option => option.label === token.value);
+    const mapping = flattenVariables.find(option => option.label === token.value);
     return mapping ? mapping.value : '';
   }
 
@@ -38,15 +38,20 @@ function getValueAndMissingCards(value, availableOptions, selectors) {
     .filter(str => str !== '')
     .map(defineToken);
 
+
   return {
     value: tokens.map(replaceWithTokenValue).join(''),
     tokens: tokens
       .filter(token => token.wrapped)
-      .map(token => ({
-        value: token.value,
-        available: availableLabels.includes(token.value),
-        replaced: replaceWithTokenValue(token),
-      })),
+      .map(token => {
+        const referenceVariable = flattenVariables.find(v => v.label === token.value);
+        return {
+          value: token.value,
+          available: referenceVariable !== undefined,
+          undefined: referenceVariable ? referenceVariable.value === undefined : undefined,
+          replaced: replaceWithTokenValue(token),
+        }
+      }),
   };
 }
 
@@ -58,23 +63,40 @@ const validate = (initialValue, validation) => {
 
   if (!isUndefined(validation)) {
     let value = initialValue;
-    const { selectors, options, validators } = validation;
+    const { selectors, variables, validators } = validation;
 
     if (selectors) {
-      ({ tokens, value } = getValueAndMissingCards(initialValue, options, selectors));
+      ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
+      
       const missingVars = tokens.filter(v => !v.available);
 
       if (missingVars.length) {
+        const verb = missingVars.length === 1 ? 'was' : 'were';
+        const name = missingVars.length === 1 ? 'variable' : 'variables';
+        messages.push({
+          active: true,
+          message: `${name} ${missingVars.map(v => v.value).join(', ')} ${verb} not found`,
+        })
+      }
+
+      const undefinedVars = tokens.filter(v => v.undefined === true);
+
+      if (undefinedVars.length) {
+        const verb = undefinedVars.length === 1 ? 'has' : 'have';
+        const name = undefinedVars.length === 1 ? 'variable' : 'variables';
+        
+        messages.push({
+          active: true,
+          message: `${name} ${undefinedVars.map(v => v.value).join(', ')} ${verb} no value`,
+        });
+      }
+
+      if (messages.length) {
         return {
           isRequired,
           tokens,
           isValid: false,
-          messages: [
-            {
-              active: true,
-              message: `${missingVars.map(v => v.value).join(', ')} were not found`,
-            },
-          ],
+          messages,
         };
       }
     }
