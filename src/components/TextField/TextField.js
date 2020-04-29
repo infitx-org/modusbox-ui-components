@@ -405,13 +405,12 @@ class TextField extends PureComponent {
       return; 
     }
     if (e.relatedTarget === this.input) {
-      return 
+      return;
     }
     if (this.props.onBlur) {
       this.props.onBlur(e);
     }
     this.closeTextField();
-      
   }
   onFocus(e) {
     if (this.props.onFocus) {
@@ -427,7 +426,8 @@ class TextField extends PureComponent {
     }
     const isClickWithinTextFieldBox = this.area.contains(evt.target);
     const isClickWithinCardBox =
-      document.body.contains(this.card) && this.card.contains(evt.target);
+      document.body.contains(this.card) && this.card && this.card.contains(evt.target);
+
     if (!isClickWithinTextFieldBox && !isClickWithinCardBox) {
       this.closeTextField();
       this.input.blur();
