@@ -1,7 +1,8 @@
 // create an object with properties message and function to test against
-const createValidator = (message, fn) => ({
+const createValidator = (message, fn, appliesToTokens = false) => ({
   message,
   fn,
+  appliesToTokens,
 });
 
 const buildValidationCreator = isRequired => (validators, variables, selectors) => ({
@@ -9,10 +10,11 @@ const buildValidationCreator = isRequired => (validators, variables, selectors) 
   variables,
   selectors,
   validators: validators.map(validator => {
-    const { fn, message } = validator;
+    const { fn, message, appliesToTokens } = validator;
     return {
       message,
       fn,
+      appliesToTokens,
     };
   }),
 });
