@@ -27,6 +27,7 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     if (!token.wrapped) {
       return token.value;
     }
+
     const mapping = flattenVariables.find(option => option.label === token.value);
     return mapping ? mapping.value : '';
   }

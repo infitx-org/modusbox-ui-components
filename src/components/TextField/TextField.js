@@ -109,7 +109,12 @@ class TextField extends PureComponent {
   }
   static getRegex(delimiters) {
     const [open, close] = delimiters;
+
     return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]*)`);
+  }
+  static getIsWrappedBetweenDelimiters(value, delimiters) {
+    const [open, close] = delimiters;
+    return value.startsWith(open) && value.endsWith(close);
   }
   static getIsCardable(value, delimiters) {
     if (!delimiters) {
@@ -131,7 +136,7 @@ class TextField extends PureComponent {
     const [open, close] = delimiters;
 
     function defineToken(tokenValue, index, arr) {
-      const isCardable = tokenValue.startsWith(open) && tokenValue.endsWith(close);
+      const isCardable = TextField.getIsWrappedBetweenDelimiters(tokenValue, delimiters);
       if (index === arr.length - 1 && !isCardable) {
         return null;
       }
@@ -772,12 +777,16 @@ class TextField extends PureComponent {
       valueTokens = (
         <div className="input-textfield__value__tokens">
           {tokens.map((token, index) => {
-            const { word } = token;
+            const { word, isCardable } = token;
             const isSelected = valueToken === index;
             const cleanWord = TextField.removeDelimiters(word, tokenDelimiters);
-            const currentVar = this.props.tokens.find(v => v.value === cleanWord);
-
             let isInvalid = true;
+            let currentVar;
+
+            if (isCardable) {
+              currentVar = this.props.tokens.find(v => v.value === cleanWord);
+            }
+
             if (currentVar) {
               const { available, replaced } = currentVar;
               isInvalid = !available || replaced === undefined;
@@ -788,12 +797,13 @@ class TextField extends PureComponent {
 
             if (isSelected) {
               cardValue = cleanWord;
-              tokenIsCardable = token.isCardable;
+              tokenIsCardable = isCardable;
             }
+
             return (
               <ValueToken
                 word={token.word}
-                isCardable={token.isCardable}
+                isCardable={isCardable}
                 assignRef={card => {
                   this.valueTokens[index] = card;
                 }}
