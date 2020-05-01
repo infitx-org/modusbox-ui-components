@@ -23,12 +23,24 @@
   align-items: center;
 }
 
+
 .input-textfield__value__tokens {
   height: 100%;
   align-items: center;
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: flex-start;
+  overflow: hidden;
 }
+
+.mb-input--open .input-textfield__value__tokens {
+  //justify-content: flex-end;
+}
+
+
 .input-textfield__value__token {
+  flex: 0 0 auto;
   font-family: inherit;
   font-size: inherit;
   display: inline-flex;
@@ -70,7 +82,8 @@
 }
 
 .input-textfield__value {
-  flex: 2 1 auto;
+  min-width: 0;
+  flex: 0 0 auto;
   vertical-align: middle;
   position: relative;
   height: 100%;

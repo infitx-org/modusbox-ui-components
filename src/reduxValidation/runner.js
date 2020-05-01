@@ -66,7 +66,6 @@ const validate = (initialValue, validation) => {
     let value = initialValue;
     const { selectors, variables, validators } = validation;
 
-    const tokenValidators = validators.filter(validator => validator.appliesToTokens === true);
 
     if (selectors) {
       ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
@@ -93,6 +92,8 @@ const validate = (initialValue, validation) => {
           message: `${name} ${undefinedVars.map(v => v.value).join(', ')} ${verb} no value`,
         });
       }
+
+      const tokenValidators = validators.filter(validator => validator.appliesToTokens === true);
 
       if (tokenValidators.length) {
 
@@ -135,7 +136,7 @@ const validate = (initialValue, validation) => {
         }
         messages[index].active = !succeeded;
       }
-      if (tokens.filter(v => !v.available).length) {
+      if (tokens.filter(token => !token.available).length) {
         isValid = false;
       }
     });
