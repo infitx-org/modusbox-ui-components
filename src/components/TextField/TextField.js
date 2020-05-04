@@ -516,6 +516,7 @@ class TextField extends PureComponent {
   }
   leaveTextField(next) {
     const nextInput = utils.getNextFocusableElement(this.input, next);
+    console.log(this.input, next, nextInput)
     if (nextInput === this.input) {
       return;
     } else if (!this.card || !this.card.contains(nextInput)) {
@@ -864,7 +865,7 @@ class TextField extends PureComponent {
                 onFocus={this.onFocus}
                 value={inputValue}
                 disabled={disabled}
-                className="mb-input__input input-textfield__value input-textfield__value__token"
+                className="mb-input__input input-textfield__value"
               />
             </div>
             {innerButton}
