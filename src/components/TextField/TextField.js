@@ -789,9 +789,9 @@ class TextField extends PureComponent {
         }
 
         if (currentVar) {
-          const { available, replaced } = currentVar;
-          isInvalid = !available || replaced === undefined;
-          tooltip += available ? replaced : word;
+          const { available, isUndefined, replaced } = currentVar;
+          isInvalid = !available || isUndefined;
+          tooltip += `${replaced}`;
         } else {
           tooltip += word;
         }

@@ -29,13 +29,13 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     }
 
     const mapping = flattenVariables.find(option => option.label === token.value);
-    return mapping ? mapping.value : '';
+    return mapping && mapping.value;
   }
 
   const tokens = value
     .split(`\\${open}`)
     .join('%%%')
-    .split(new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{0, 1})`))
+    .split(new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{0,1})`))
     .filter(str => str !== '')
     .map(defineToken);
 
@@ -45,11 +45,11 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     tokens: tokens
       .filter(token => token.wrapped)
       .map(token => {
-        const referenceVariable = flattenVariables.find(v => v.label === token.value);
+        const referenceVariable = flattenVariables.find(variable => variable.label === token.value);
         return {
           value: token.value,
           available: referenceVariable !== undefined,
-          undefined: referenceVariable ? referenceVariable.value === undefined : undefined,
+          isUndefined: referenceVariable ? referenceVariable.value === undefined : undefined,
           replaced: replaceWithTokenValue(token),
         }
       }),
@@ -81,7 +81,7 @@ const validate = (initialValue, validation) => {
         })
       }
 
-      const undefinedVars = tokens.filter(v => v.undefined === true);
+      const undefinedVars = tokens.filter(v => v.isUndefined === true);
 
       if (undefinedVars.length) {
         const verb = undefinedVars.length === 1 ? 'has' : 'have';
