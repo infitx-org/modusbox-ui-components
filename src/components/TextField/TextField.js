@@ -110,7 +110,7 @@ class TextField extends PureComponent {
   static getRegex(delimiters) {
     const [open, close] = delimiters;
 
-    return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]*)`);
+    return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{0,1})`);
   }
   static getIsWrappedBetweenDelimiters(value, delimiters) {
     const [open, close] = delimiters;
