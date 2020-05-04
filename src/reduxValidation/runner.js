@@ -35,7 +35,7 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
   const tokens = value
     .split(`\\${open}`)
     .join('%%%')
-    .split(new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{1})`))
+    .split(new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]*)`))
     .filter(str => str !== '')
     .map(defineToken);
 
