@@ -27,14 +27,15 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     if (!token.wrapped) {
       return token.value;
     }
+
     const mapping = flattenVariables.find(option => option.label === token.value);
-    return mapping ? mapping.value : '';
+    return mapping && mapping.value;
   }
 
   const tokens = value
     .split(`\\${open}`)
     .join('%%%')
-    .split(new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]*)`))
+    .split(new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{0,1})`))
     .filter(str => str !== '')
     .map(defineToken);
 
@@ -44,11 +45,11 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     tokens: tokens
       .filter(token => token.wrapped)
       .map(token => {
-        const referenceVariable = flattenVariables.find(v => v.label === token.value);
+        const referenceVariable = flattenVariables.find(variable => variable.label === token.value);
         return {
           value: token.value,
           available: referenceVariable !== undefined,
-          undefined: referenceVariable ? referenceVariable.value === undefined : undefined,
+          isUndefined: referenceVariable ? referenceVariable.value === undefined : undefined,
           replaced: replaceWithTokenValue(token),
         }
       }),
@@ -65,6 +66,7 @@ const validate = (initialValue, validation) => {
     let value = initialValue;
     const { selectors, variables, validators } = validation;
 
+
     if (selectors) {
       ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
       
@@ -79,7 +81,7 @@ const validate = (initialValue, validation) => {
         })
       }
 
-      const undefinedVars = tokens.filter(v => v.undefined === true);
+      const undefinedVars = tokens.filter(v => v.isUndefined === true);
 
       if (undefinedVars.length) {
         const verb = undefinedVars.length === 1 ? 'has' : 'have';
@@ -88,6 +90,22 @@ const validate = (initialValue, validation) => {
         messages.push({
           active: true,
           message: `${name} ${undefinedVars.map(v => v.value).join(', ')} ${verb} no value`,
+        });
+      }
+
+      const tokenValidators = validators.filter(validator => validator.appliesToTokens === true);
+
+      if (tokenValidators.length) {
+
+        tokenValidators.forEach((validator) => {
+          const { fn } = validator;
+          const succeeded = fn(initialValue);
+          if (!succeeded) {
+            messages.push({
+              active: true,
+              message: validator.message,
+            })
+          }
         });
       }
 
@@ -118,7 +136,7 @@ const validate = (initialValue, validation) => {
         }
         messages[index].active = !succeeded;
       }
-      if (tokens.filter(v => !v.available).length) {
+      if (tokens.filter(token => !token.available).length) {
         isValid = false;
       }
     });

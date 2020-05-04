@@ -14,22 +14,26 @@ exports[`renders the textfield correctly when multiple props are set 1`] = `
     <div
       className="mb-input__content input-textfield__content"
     >
-      <input
-        autoComplete="off"
-        autoFocus={false}
-        className="mb-input__input input-textfield__value"
-        disabled={false}
-        id="test-id"
-        key="input"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="test-value"
-      />
+      <div
+        className="input-textfield__value__tokens"
+      >
+        <input
+          autoComplete="off"
+          autoFocus={false}
+          className="mb-input__input input-textfield__value"
+          disabled={false}
+          id="test-id"
+          key="input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          type="text"
+          value="test-value"
+        />
+      </div>
     </div>
   </div>
 </ValidationWrapper>

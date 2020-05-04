@@ -70,6 +70,7 @@ class ValueToken extends PureComponent {
 
     return (
       <input
+        type="text"
         onClick={onClick}
         className={utils.composeClassNames([
           'input-textfield__value__token',
@@ -109,7 +110,12 @@ class TextField extends PureComponent {
   }
   static getRegex(delimiters) {
     const [open, close] = delimiters;
-    return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]*)`);
+
+    return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{0,1})`);
+  }
+  static getIsWrappedBetweenDelimiters(value, delimiters) {
+    const [open, close] = delimiters;
+    return value.startsWith(open) && value.endsWith(close);
   }
   static getIsCardable(value, delimiters) {
     if (!delimiters) {
@@ -131,7 +137,7 @@ class TextField extends PureComponent {
     const [open, close] = delimiters;
 
     function defineToken(tokenValue, index, arr) {
-      const isCardable = tokenValue.startsWith(open) && tokenValue.endsWith(close);
+      const isCardable = TextField.getIsWrappedBetweenDelimiters(tokenValue, delimiters);
       if (index === arr.length - 1 && !isCardable) {
         return null;
       }
@@ -260,9 +266,11 @@ class TextField extends PureComponent {
   componentDidMount() {
     window.addEventListener('mouseup', this.onPageClick, false);
     this.valueTokens.forEach(TextField.setElementWidth);
+    TextField.setElementWidth(this.input);
   }
   componentDidUpdate(prevProps) {
     this.valueTokens.forEach(TextField.setElementWidth);
+    TextField.setElementWidth(this.input);
 
     if (this._nextPosition !== undefined) {
       const nextElement =
@@ -769,47 +777,49 @@ class TextField extends PureComponent {
 
     if (hasCardTokens) {
       let tooltip = '';
-      valueTokens = (
-        <div className="input-textfield__value__tokens">
-          {tokens.map((token, index) => {
-            const { word } = token;
-            const isSelected = valueToken === index;
-            const cleanWord = TextField.removeDelimiters(word, tokenDelimiters);
-            const currentVar = this.props.tokens.find(v => v.value === cleanWord);
+      valueTokens = tokens.map((token, index) => {
+        const { word, isCardable } = token;
+        const isSelected = valueToken === index;
+        const cleanWord = TextField.removeDelimiters(word, tokenDelimiters);
+        let isInvalid = true;
+        let currentVar;
 
-            let isInvalid = true;
-            if (currentVar) {
-              const { available, replaced } = currentVar;
-              isInvalid = !available || replaced === undefined;
-              tooltip += available ? replaced : word;
-            } else {
-              tooltip += word;
-            }
+        if (isCardable) {
+          currentVar = this.props.tokens.find(v => v.value === cleanWord);
+        }
 
-            if (isSelected) {
-              cardValue = cleanWord;
-              tokenIsCardable = token.isCardable;
-            }
-            return (
-              <ValueToken
-                word={token.word}
-                isCardable={token.isCardable}
-                assignRef={card => {
-                  this.valueTokens[index] = card;
-                }}
-                key={index.toString()}
-                index={index}
-                isSelected={isSelected}
-                isInvalid={isInvalid}
-                onFocus={this.onTokenFocus}
-                onKeyDown={this.onKeyDown}
-                onChange={e => this.onTokenChange(e, index)}
-                onClick={e => this.onTokenClick(e, index)}
-              />
-            );
-          })}
-        </div>
-      );
+        if (currentVar) {
+          const { available, isUndefined, replaced } = currentVar;
+          isInvalid = !!(!available || isUndefined);
+          tooltip += `${replaced}`;
+        } else {
+          tooltip += word;
+        }
+
+        if (isSelected) {
+          cardValue = cleanWord;
+          tokenIsCardable = isCardable;
+        }
+
+        return (
+          <ValueToken
+            word={token.word}
+            isCardable={isCardable}
+            assignRef={card => {
+              this.valueTokens[index] = card;
+            }}
+            key={index.toString()}
+            index={index}
+            isSelected={isSelected}
+            isInvalid={isInvalid}
+            onFocus={this.onTokenFocus}
+            onKeyDown={this.onKeyDown}
+            onChange={e => this.onTokenChange(e, index)}
+            onClick={e => this.onTokenClick(e, index)}
+          />
+        );
+      })
+
       tooltip += inputValue;
 
       cardEyeIcon = (
@@ -836,26 +846,28 @@ class TextField extends PureComponent {
         >
           <div className="mb-input__content input-textfield__content">
             {customPlaceholder}
-            {valueTokens}
-            <input
-              key="input"
-              id={id}
-              ref={input => {
-                this.input = input;
-              }}
-              autoFocus={autofocus === true}
-              autoComplete="off"
-              type={inputType}
-              onClick={this.onClick}
-              onChange={this.onChange}
-              onKeyDown={this.onKeyDown}
-              onKeyPress={this.onKeyPress}
-              onBlur={this.onBlur}
-              onFocus={this.onFocus}
-              value={inputValue}
-              disabled={disabled}
-              className="mb-input__input input-textfield__value"
-            />
+            <div className="input-textfield__value__tokens">
+              {valueTokens}
+              <input
+                key="input"
+                id={id}
+                ref={input => {
+                  this.input = input;
+                }}
+                autoFocus={autofocus === true}
+                autoComplete="off"
+                type={inputType}
+                onClick={this.onClick}
+                onChange={this.onChange}
+                onKeyDown={this.onKeyDown}
+                onKeyPress={this.onKeyPress}
+                onBlur={this.onBlur}
+                onFocus={this.onFocus}
+                value={inputValue}
+                disabled={disabled}
+                className="mb-input__input input-textfield__value"
+              />
+            </div>
             {innerButton}
             {loader}
             {cardEyeIcon}

@@ -155,9 +155,6 @@ it('triggers onChange with a number value when prop type is number', () => {
 });
 
 describe('tests the textfield cards', () => {
-  // vars: [],
-  // tokenDelimiters: undefined,
-  // cardComponent: undefined,
 
   it('identifies the cardable cards of a given value automatically', () => {
     const wrapper = mount(<TextField value="[test]value" tokenDelimiters="[]" />);
