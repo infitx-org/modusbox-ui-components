@@ -20,7 +20,7 @@ exports[`renders the textfield correctly when multiple props are set 1`] = `
         <input
           autoComplete="off"
           autoFocus={false}
-          className="mb-input__input input-textfield__value input-textfield__value__token"
+          className="mb-input__input input-textfield__value"
           disabled={false}
           id="test-id"
           key="input"
