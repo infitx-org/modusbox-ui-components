@@ -110,7 +110,7 @@ class TextField extends PureComponent {
   static getRegex(delimiters) {
     const [open, close] = delimiters;
 
-    return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]*)`);
+    return new RegExp(`(\\${open}[^\\${open}\\${close}]*[\\${close}]{1})`);
   }
   static getIsWrappedBetweenDelimiters(value, delimiters) {
     const [open, close] = delimiters;
@@ -681,6 +681,7 @@ class TextField extends PureComponent {
     const isInputCardable =
       valueToken === undefined && TextField.getIsCardable(inputValue, tokenDelimiters);
 
+    console.log({ isInputCardable, isOpen, valueToken, currentToken, inputValue });
     const isCardVisible =
       isOpen &&
       (isInputCardable ||
