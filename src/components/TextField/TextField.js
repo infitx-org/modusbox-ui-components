@@ -70,6 +70,7 @@ class ValueToken extends PureComponent {
 
     return (
       <input
+        type="text"
         onClick={onClick}
         className={utils.composeClassNames([
           'input-textfield__value__token',
