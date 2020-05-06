@@ -587,6 +587,11 @@ class TextField extends PureComponent {
       ));
     }
 
+    if (nextPosition !== undefined) {
+      this._nextCardToken = nextCardToken;
+      this._nextPosition = nextPosition;
+    }
+
     this.setState(
       {
         inputValue,
@@ -594,10 +599,6 @@ class TextField extends PureComponent {
         valueToken: tokens.length > nextCardToken ? nextCardToken : undefined,
       },
       () => {
-        if (nextPosition !== undefined) {
-          this._nextCardToken = nextCardToken;
-          this._nextPosition = nextPosition;
-        }
 
         if (this.props.onChange) {
           let onChangeValue = nextFullValue;
