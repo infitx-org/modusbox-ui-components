@@ -275,6 +275,7 @@ class TextField extends PureComponent {
     if (this._nextPosition !== undefined) {
       const nextElement =
         this._nextCardToken !== undefined ? this.valueTokens[this._nextCardToken] : this.input;
+
       nextElement.focus();
 
       if (this.props.type !== 'number') {
@@ -325,7 +326,7 @@ class TextField extends PureComponent {
     this.applyTokens(
       this.state.tokens,
       e.target.value,
-      e.target.value.length - e.target.selectionStart,
+      e.target.value.length - e.target.selectionStart || 0,
     );
   }
   onKeyPress(e) {
@@ -587,6 +588,11 @@ class TextField extends PureComponent {
       ));
     }
 
+    if (nextPosition !== undefined) {
+      this._nextCardToken = nextCardToken;
+      this._nextPosition = nextPosition;
+    }
+
     this.setState(
       {
         inputValue,
@@ -594,10 +600,6 @@ class TextField extends PureComponent {
         valueToken: tokens.length > nextCardToken ? nextCardToken : undefined,
       },
       () => {
-        if (nextPosition !== undefined) {
-          this._nextCardToken = nextCardToken;
-          this._nextPosition = nextPosition;
-        }
 
         if (this.props.onChange) {
           let onChangeValue = nextFullValue;

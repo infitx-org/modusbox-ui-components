@@ -142,15 +142,15 @@ it('triggers onChange when changed', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(<TextField onChange={mockEvent} />);
   expect(mockEvent).not.toHaveBeenCalled();
-  wrapper.find('input').simulate('change');
-  expect(mockEvent).toHaveBeenCalled();
+  wrapper.find('input').simulate('change', { target: {value : 'test'}});
+  expect(mockEvent).toHaveBeenCalledWith('test');
 });
 
 it('triggers onChange with a number value when prop type is number', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(<TextField onChange={mockEvent} type="number" />);
   expect(mockEvent).not.toHaveBeenCalled();
-  wrapper.find('input').simulate('change', { target: { value: 12 } });
+  wrapper.find('input').simulate('change', { target: { value: '12' } });
   expect(mockEvent).toHaveBeenCalledWith(12);
 });
 
