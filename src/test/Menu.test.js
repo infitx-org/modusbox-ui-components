@@ -36,6 +36,30 @@ it('renders the menu items if child route matches', () => {
   expect(wrapper.find('.el-menu__item')).toHaveLength(2);
 });
 
+it('renders the menu section with icons', () => {
+  const wrapper = mount(
+    <Menu path="/" pathname="/foo" onChange={onChangeMockEvent}>
+      <MenuSection label="Menu Section" icon="access-manager-color" size={14}>
+        <MenuItem path="/foo" label="foo" />
+        <MenuItem path="/bar" label="bar" />
+      </MenuSection>
+    </Menu>,
+  );
+  expect(wrapper.find('.el-menu__section-icon')).toHaveLength(1);
+});
+
+it('renders the menu items with icons', () => {
+  const wrapper = mount(
+    <Menu path="/" pathname="/foo" onChange={onChangeMockEvent}>
+      <MenuSection label="Menu Section" size={14}>
+        <MenuItem path="/foo" label="foo" icon="admin-color" fill="#A7A7A7" />
+        <MenuItem path="/bar" label="bar" icon="application-color" fill="#A7A7A7" />
+      </MenuSection>
+    </Menu>,
+  );
+  expect(wrapper.find('.el-menu__item__item-icon')).toHaveLength(2);
+});
+
 it('does not render the menu items if no route matches', () => {
   const wrapper = mount(
     <Menu path="/" pathname="/non-existing" onChange={onChangeMockEvent}>
