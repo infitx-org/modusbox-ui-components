@@ -2,12 +2,13 @@
 @import '../vars/border.scss';
 @import '../vars/background.scss';
 @import '../vars/general.scss';
+@import '../vars/fonts.scss';
 
 .el {
-  font-family: Fira Sans, sans-serif;
-  letter-spacing: 0.02rem;
+  font-family: $font__primary, $font__primary-fallback;
+  letter-spacing: $font__primary-spacing;
 }
-.modus-el__holder {
+.el__holder {
   position: absolute;
   width: 0px;
   height: 0px;

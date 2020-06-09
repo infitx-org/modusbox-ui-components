@@ -54,6 +54,8 @@
   cursor: pointer;
   color: $color__dark-gray-1;
   fill: $color__dark-gray-1;
+
+  transition: border 0.05s ease-out, background 0.05s ease-out, color 0.05s ease-out;
 }
 
 .input-select__options-item--small {
@@ -78,20 +80,23 @@
   flex-basis: 40px;
 }
 
-.input-select__options-item--selected {
-  background: $color__gray-2;
-  border-color: $color__dark-gray-2;
-  color: $color__dark-gray-2;
-}
 .input-select__options-item:hover,
 .input-select__options-item--highlighted {
-  background: $color__gray-1;
-  border-color: $color__main-primary;
-  color: $color__main-primary;
-  fill: $color__main-primary;
+  background: $color__main-tertiary--active;
+  border-color: $color__main-tertiary--active;
+  color: $color__dark-gray-3;
+  fill: $color__dark-gray-3;
+}
+.input-select__options-item--selected,
+.input-select__options-item--selected:hover {
+  background: $color__main-secondary--active;
+  border-color: $color__main-secondary--active;
+  color: #fff;
+  fill: #fff;
 }
 .input-select__options-item--disabled,
 .input-select__options-item--disabled:hover {
+  background: $color__white;
   color: $color__main-disabled;
   border-color: $color__main-disabled;
   cursor: auto;

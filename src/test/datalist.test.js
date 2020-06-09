@@ -133,7 +133,9 @@ it('renders the nested object property as described in the column configuration'
 });
 
 it('renders the cells of the column as centered when specified', () => {
-  const wrapper = mount(<DataList list={testList1} columns={[{ key: 'column1', label: 'Centered', centered: true }]} />);
+  const wrapper = mount(
+    <DataList list={testList1} columns={[{ key: 'column1', label: 'Centered', centered: true }]} />,
+  );
 
   const headerCell = wrapper
     .find('.el-datalist__header-cell')

@@ -1,5 +1,6 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/transitions.scss';
+@import '../../assets/styles/vars/fonts.scss';
 
 .input-datepicker {
 }
@@ -88,6 +89,8 @@
   position: relative !important;
   padding: 10px 0px 5px 0px;
   user-select: none;
+  font-family: $font__primary, $font__primary-fallback;
+  letter-spacing: $font__primary-spacing;
 }
 
 .DayPicker-Month {

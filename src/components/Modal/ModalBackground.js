@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
 import Button from '../Button';
-import ControlIcon from '../ControlIcon';
+import ControlIcon from '../ControlIcon/ControlIcon';
 import ScrollBox from '../ScrollBox';
 
 const ModalContent = ({ tabbed, flex, children }) => {
@@ -202,7 +201,7 @@ export default class ModalBackground extends PureComponent {
           onClick={this.onClickOverlay}
           role="presentation"
         />
-        <div className={`el-modal__container ${kind}`} style={modalStyle}>
+        <div className={`el el-modal__container ${kind}`} style={modalStyle}>
           <ModalHeader
             kind={kind}
             title={title}
@@ -242,57 +241,3 @@ export default class ModalBackground extends PureComponent {
     );
   }
 }
-
-ModalBackground.defaultProps = {
-  kind: 'primary',
-  isSubmitPending: false,
-  isCloseEnabled: true,
-  isSubmitEnabled: undefined,
-  isUndoEnabled: undefined,
-  allowClose: true,
-  allowSubmit: undefined,
-  allowUndo: undefined,
-  noFooter: false,
-  onClose: undefined,
-  onUndo: undefined,
-  onCancel: undefined,
-  onSubmit: undefined,
-  primaryAction: 'Submit',
-  flex: false,
-  tabbed: false,
-  maximise: false,
-  children: undefined,
-  width: '600',
-  modalIndex: 0,
-  title: '',
-  allowCancel: false,
-  isCancelEnabled: false,
-  submitButtonId: '',
-};
-
-ModalBackground.propTypes = {
-  kind: PropTypes.oneOf(['danger', 'warning', 'primary']),
-  isSubmitPending: PropTypes.bool,
-  isCloseEnabled: PropTypes.bool,
-  isSubmitEnabled: PropTypes.bool,
-  isUndoEnabled: PropTypes.bool,
-  allowClose: PropTypes.bool,
-  allowSubmit: PropTypes.bool,
-  allowUndo: PropTypes.bool,
-  noFooter: PropTypes.bool,
-  onClose: PropTypes.func,
-  onUndo: PropTypes.func,
-  onCancel: PropTypes.func,
-  onSubmit: PropTypes.func,
-  primaryAction: PropTypes.string,
-  flex: PropTypes.bool,
-  tabbed: PropTypes.bool,
-  maximise: PropTypes.bool,
-  children: PropTypes.node,
-  width: PropTypes.string,
-  modalIndex: PropTypes.number,
-  title: PropTypes.string,
-  allowCancel: PropTypes.bool,
-  isCancelEnabled: PropTypes.bool,
-  submitButtonId: PropTypes.string,
-};

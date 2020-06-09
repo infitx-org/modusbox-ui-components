@@ -8,7 +8,7 @@ import React, { PureComponent } from 'react';
 import * as utils from '../../utils/common';
 import keyCodes from '../../utils/keyCodes';
 import { InnerButton, InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
-import ControlIcon from '../ControlIcon';
+import ControlIcon from '../ControlIcon/ControlIcon';
 import Icon, { iconSizes } from '../Icon';
 import Tooltip from '../Tooltip';
 
@@ -61,6 +61,7 @@ class ValueToken extends PureComponent {
       isCardable,
       isSelected,
       isInvalid,
+      isMissing,
       onKeyDown,
       onChange,
       onClick,
@@ -77,6 +78,7 @@ class ValueToken extends PureComponent {
           isSelected && 'input-textfield__value__token--selected',
           isCardable && 'input-textfield__value__token--matching',
           isCardable && isInvalid && 'input-textfield__value__token--invalid',
+          isCardable && isMissing && 'input-textfield__value__token--missing',
         ])}
         ref={assignRef}
         onKeyDown={onKeyDown}

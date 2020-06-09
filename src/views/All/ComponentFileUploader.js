@@ -5,19 +5,18 @@ import React from 'react';
 import FileUploader from '../../components/FileUploader';
 import Row from '../../components/Row';
 
-
-class FileUploaderWithDelay extends React.Component { 
+class FileUploaderWithDelay extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state ={
-      file: undefined
+    this.state = {
+      file: undefined,
     };
 
-    setTimeout(() => this.setState({ file: 'test' }), 500)
+    setTimeout(() => this.setState({ file: 'test' }), 500);
   }
   render() {
-    return <FileUploader {...this.props} file={this.state.file} />
+    return <FileUploader {...this.props} file={this.state.file} />;
   }
 }
 const TestFileUploader = () => (

@@ -73,6 +73,13 @@
   }
 }
 
+.input-textfield__value__token--missing {
+  color: $color__main-warning;
+  &.input-textfield__value__token--selected {
+    background: $color__main-warning;
+    color: #fff;
+  }
+}
 .input-textfield__value__token--selected {
 }
 .input-textfield__value__token:active {

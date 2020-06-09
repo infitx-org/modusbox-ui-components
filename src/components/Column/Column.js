@@ -7,6 +7,7 @@ const mapFlexToProperty = property => {
     bottom: 'flex-end',
     left: 'flex-start',
     right: 'flex-end',
+    'space-between': 'space-between',
   };
   return property ? flexMappers[property] || property : undefined;
 };

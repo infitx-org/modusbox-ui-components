@@ -157,17 +157,21 @@ class DatePicker extends PureComponent {
     const { format } = this.props;
     // convert the value into the specified format if necessary
     let exportDay = selectedDay === null || selectedDay === undefined ? undefined : selectedDay;
+
     if (exportDay !== undefined && format) {
       const dayStamp = moment(exportDay)
         .startOf('day')
-        .format(format);
-      const milliseconds =
+        .format('x');
+
+      exportDay =
         parseInt(dayStamp, 10) + hour * 60 * 60 * 1000 + minute * 60 * 1000 + second * 1000;
 
-      // convert the string into integer when dealing with milliseconds
-      if (format) {
-        exportDay = moment(milliseconds).format(format);
+      if (format === 'x') {
         exportDay = parseInt(exportDay, 10);
+      } else if (format === 'X') {
+        exportDay = parseInt(exportDay / 1000, 10);
+      } else {
+        exportDay = moment(exportDay).format(format);
       }
     }
 

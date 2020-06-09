@@ -42,7 +42,7 @@ const MultiLine = ({ string }) => {
 };
 
 export default class TooltipViewer extends PureComponent {
-  static getCoordinatesByPosition(position, align, parentRect, targetRect) {
+  static getCoordinatesByPosition(position = 'top', align = 'center', parentRect, targetRect) {
     const leftCenterByY = parentRect.left + (parentRect.width - targetRect.width) / 2;
     const topCenterByX = parentRect.top + (parentRect.height - targetRect.height) / 2;
     const leftAlignByY = parentRect.left - TRANSLATION;
@@ -124,13 +124,6 @@ export default class TooltipViewer extends PureComponent {
     return byPosition[pos][align];
   }
 
-  static getNextPosition(item, items, iteration) {
-    // returns the next item based on a clockwise directiom
-    const itemIndex = items.indexOf(item);
-    const nextIndex = (itemIndex + iteration) % items.length;
-    return items[nextIndex];
-  }
-
   static testCoordinates(coordinates, rect) {
     if (!coordinates) {
       return 0;
@@ -154,38 +147,19 @@ export default class TooltipViewer extends PureComponent {
     ].reduce((prev, curr) => prev + curr);
   }
 
-  static getCoordinates(parentId, target, position, align) {
+  static getCoordinates(parentId, target, position = 'top', align = 'center') {
     const parent = document.getElementById(parentId);
     const [firstChild] = document.getElementById(parentId).children;
     const wrappedElement = firstChild || parent;
     const parentRect = wrappedElement.getBoundingClientRect();
-    const knowsPosition = position !== undefined;
-    const knowsAlign = align !== undefined;
-    let exceeds;
     let positionIteration = 0;
     let alignIteration = 0;
-    let coordinates;
-    let previousExceeds = Infinity;
-    let previousHeight = Infinity;
-    let finalCoordinates;
-    let finalMaxWidth;
-    let finalMaxHeight;
-    let finalPosition;
-    let finalAlign;
+    const finalPositions = [];
 
     while (positionIteration < POSITIONS.length) {
       while (alignIteration < ALIGNMENTS.length) {
-        const currentPosition = TooltipViewer.getNextPosition(
-          position || 'top',
-          POSITIONS,
-          positionIteration,
-        );
-
-        const currentAlign = TooltipViewer.getNextPosition(
-          align || 'center',
-          ALIGNMENTS,
-          alignIteration,
-        );
+        const currentPosition = POSITIONS[positionIteration];
+        const currentAlign = ALIGNMENTS[alignIteration];
 
         const [maxWidth, maxHeight] = TooltipViewer.getMaxSizes(
           parentRect,
@@ -193,54 +167,92 @@ export default class TooltipViewer extends PureComponent {
           currentAlign,
         );
 
-        target.style.maxWidth = maxWidth;
-        target.style.maxHeight = maxHeight;
+        target.style.maxWidth = `${maxWidth}px`;
+        target.style.maxHeight = `${maxHeight}px`;
 
         const targetRect = target.getBoundingClientRect();
-        coordinates = TooltipViewer.getCoordinatesByPosition(
+
+        const coordinates = TooltipViewer.getCoordinatesByPosition(
           currentPosition,
           currentAlign,
           parentRect,
           targetRect,
         );
 
-        exceeds = TooltipViewer.testCoordinates(coordinates, targetRect);
-        const isNotExceeding = previousExceeds > exceeds;
-        const hasLowerHeight = previousExceeds === exceeds && targetRect.height < previousHeight;
+        const exceeds = TooltipViewer.testCoordinates(coordinates, targetRect);
 
-        if (isNotExceeding || hasLowerHeight) {
-          previousExceeds = exceeds;
-          previousHeight = targetRect.height;
-          finalCoordinates = coordinates;
-          finalMaxWidth = maxWidth;
-          finalPosition = currentPosition;
-          finalAlign = currentAlign;
-        }
-        if (knowsAlign && !exceeds) {
-          break;
-        }
+        finalPositions.push({
+          position: currentPosition,
+          align: currentAlign,
+          aspectRatio: targetRect.width / targetRect.height,
+          top: coordinates.top,
+          left: coordinates.left,
+          exceeds,
+          maxWidth,
+          maxHeight,
+        });
+
         alignIteration += 1;
       }
-      if (knowsPosition && !exceeds) {
-        break;
-      }
+      alignIteration = 0;
       positionIteration += 1;
     }
-    return {
-      ...finalCoordinates,
-      maxWidth: finalMaxWidth,
-      maxHeight: finalMaxHeight,
-      direction: finalPosition,
-      alignment: finalAlign,
-    };
+
+    function sortByExceeds(a, b) {
+      if (a.exceeds > b.exceeds) {
+        return 1;
+      } else if (a.exceeds < b.exceeds) {
+        return -1;
+      }
+      return 0;
+    }
+
+    function removeExceeds(item) {
+      return item.exceeds === 0 /* && item.aspectRatio > 0.5 && item.aspectRatio < 10 */;
+    }
+
+    function withPositions(targetPosition, targetAlign) {
+      return function filter(item) {
+        if (targetPosition && targetAlign) {
+          return item.position === targetPosition && item.align === targetAlign;
+        } else if (targetPosition) {
+          return item.position === targetPosition;
+        }
+        return item.align === targetAlign;
+      };
+    }
+
+    finalPositions.sort(sortByExceeds);
+
+    const samePos = finalPositions.filter(withPositions(position));
+    const [samePosCenter] = samePos.filter(withPositions(null, 'center')).filter(removeExceeds);
+    const [bestSamePos] = samePos.sort(sortByExceeds);
+
+    const [samePosAndAlign] = finalPositions
+      .filter(withPositions(position, align))
+      .filter(removeExceeds);
+    const [bestCenterPos] = finalPositions
+      .filter(withPositions(null, 'center'))
+      .sort(sortByExceeds);
+
+    if (samePosAndAlign) {
+      return samePosAndAlign;
+    } else if (samePosCenter) {
+      return samePosCenter;
+    } else if (bestCenterPos) {
+      return bestCenterPos;
+    } else if (bestSamePos) {
+      return bestSamePos;
+    }
+    return finalPositions[0];
   }
 
-  static setPosition(id, position, align, _portal, _viewer) {
-    const { top, left, direction, alignment, maxWidth, maxHeight } = TooltipViewer.getCoordinates(
+  static setPosition(id, wantedPosition, wantedAlignment, _portal, _viewer) {
+    const { top, left, position, align, maxWidth, maxHeight } = TooltipViewer.getCoordinates(
       id,
       _portal,
-      position,
-      align,
+      wantedPosition,
+      wantedAlignment,
     );
 
     _portal.style.top = `${top}px`;
@@ -251,10 +263,10 @@ export default class TooltipViewer extends PureComponent {
     if (!_viewer.className.includes('el-tooltip__viewer--fade-in')) {
       _viewer.className += ' el-tooltip__viewer--fade-in';
     }
-    if (!_viewer.className.includes(`el-tooltip__viewer--fade-in-${direction}`)) {
-      _viewer.className += ` el-tooltip__viewer--fade-in-${direction}`;
+    if (!_viewer.className.includes(`el-tooltip__viewer--fade-in-${position}`)) {
+      _viewer.className += ` el-tooltip__viewer--fade-in-${position}`;
     }
-    return { direction, alignment };
+    return { direction: position, alignment: align };
   }
   constructor(props) {
     super(props);

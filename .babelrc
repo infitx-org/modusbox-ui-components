@@ -1,9 +1,10 @@
 {
-  "presets": ["env", "react"],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-    "transform-object-rest-spread",
-    "syntax-async-functions",
-    "transform-regenerator",
     "react-hot-loader/babel",
+    "babel-plugin-lodash",
+    "@babel/plugin-proposal-object-rest-spread",
+    "syntax-async-functions",
+    "@babel/plugin-transform-runtime"
   ]
 }

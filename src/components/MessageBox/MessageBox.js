@@ -43,6 +43,7 @@ class MessageBox extends PureComponent {
     const higherSize = Math.max.apply(Math, [icon ? size : 0, fontSize, 20]);
 
     const messageBoxClassName = composeClassNames([
+      'el',
       'el-message-box',
       `el-message-box--${kind}`,
       active ? `el-message-box--active` : `el-message-box--inactive`,

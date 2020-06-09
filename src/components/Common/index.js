@@ -107,9 +107,13 @@ InnerButton.defaultProps = {
   disabled: false,
 };
 
-const ActiveValidationIcon = () => <Icon name="close-small" size={12} />;
-const InactiveValidationIcon = () => <Icon name="check-small" size={14} />;
-const UndefinedValidationIcon = () => <div className="validation__undefined-icon" />;
+const ActiveValidationIcon = () => (
+  <Icon className="validation__message__icon--active" name="close-small" size={12} />
+);
+const InactiveValidationIcon = () => (
+  <Icon className="validation__message__icon--inactive" name="check-small" size={14} />
+);
+const UnsetValidationIcon = () => <div className="validation__message__icon--unset" />;
 
 const ValidationIcon = ({ active }) => {
   if (active === true) {
@@ -117,7 +121,7 @@ const ValidationIcon = ({ active }) => {
   } else if (active === false) {
     return <InactiveValidationIcon />;
   }
-  return <UndefinedValidationIcon />;
+  return <UnsetValidationIcon />;
 };
 
 const ValidationMessage = ({ message, active }) => (
@@ -125,10 +129,10 @@ const ValidationMessage = ({ message, active }) => (
     <li
       className={`validation__message ${active === false ? 'validation__message--inactive' : ''}`}
     >
-      <div className="validation__message-icon">
+      <div className="validation__message__icon-container">
         <ValidationIcon active={active} />
       </div>
-      <span className="validation__message-text">{message}</span>
+      <span className="validation__message__text">{message}</span>
     </li>
   </Row>
 );

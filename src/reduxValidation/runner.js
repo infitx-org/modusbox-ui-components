@@ -69,12 +69,12 @@ const validate = (initialValue, validation) => {
 
     if (selectors) {
       ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
-      
       const missingVars = tokens.filter(v => !v.available);
 
       if (missingVars.length) {
         const verb = missingVars.length === 1 ? 'was' : 'were';
         const name = missingVars.length === 1 ? 'variable' : 'variables';
+
         messages.push({
           active: true,
           message: `${name} ${missingVars.map(v => v.value).join(', ')} ${verb} not found`,
@@ -110,6 +110,7 @@ const validate = (initialValue, validation) => {
       }
 
       if (messages.length) {
+
         return {
           isRequired,
           tokens,

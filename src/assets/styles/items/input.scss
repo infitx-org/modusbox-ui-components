@@ -3,6 +3,7 @@
 @import '../vars/background.scss';
 @import '../vars/shadow.scss';
 @import '../vars/general.scss';
+@import '../vars/fonts.scss';
 
 .mb-input * {
   box-sizing: border-box;
@@ -14,8 +15,8 @@
 /** COMPONENT */
 
 .mb-input {
-  font-family: Fira Sans, sans-serif;
-  letter-spacing: 0.02rem;
+  font-family: $font__primary, $font__primary-fallback;
+  letter-spacing: $font__primary-spacing;
   border-radius: $border-radius;
 }
 .mb-input--open {
@@ -48,6 +49,7 @@
 }
 
 /** COMPONENT SHADOW **/
+
 .mb-input__shadow {
   color: transparent;
 }

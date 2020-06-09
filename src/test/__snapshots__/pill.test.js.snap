@@ -2,7 +2,7 @@
 
 exports[`renders the button correctly when multiple props are set 1`] = `
 <div
-  className="el-pill el-pill--secondary el-pill--inactive"
+  className="el el-pill el-pill--secondary el-pill--inactive"
 >
   <div
     className="el-pill__icon-box"

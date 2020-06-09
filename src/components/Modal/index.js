@@ -1,5 +1,5 @@
-import ModalContainer from './ModalContainer';
+import Modal from './Modal';
 import ModalTabsLayout from './ModalTabsLayout';
 
-export default ModalContainer;
+export default Modal;
 export { ModalTabsLayout };

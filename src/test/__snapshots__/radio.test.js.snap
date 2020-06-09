@@ -2,7 +2,7 @@
 
 exports[`renders the checkbox correctly when multiple props are set 1`] = `
 <div
-  className="input input-radio"
+  className="mb-input input-radio"
   id="test-radio"
 >
   <Radio

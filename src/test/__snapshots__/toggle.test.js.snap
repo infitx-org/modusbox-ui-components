@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the toggle correctly when multiple props are set 1`] = `
+<div
+  className="mb-input input-toggle"
+>
+  <input
+    checked={true}
+    className="input-toggle__input"
+    disabled={false}
+    id="test-id"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    type="checkbox"
+  />
+  <label
+    className="input-toggle__label--no-margin"
+    htmlFor="test-id"
+    onClick={[Function]}
+    role="button"
+  />
+</div>
+`;

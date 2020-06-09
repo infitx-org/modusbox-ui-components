@@ -6,7 +6,7 @@ exports[`renders the checkbox correctly when multiple props are set 1`] = `
   id="test-tabs"
 >
   <input
-    className="modus-el__holder"
+    className="el__holder"
     onBlur={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}

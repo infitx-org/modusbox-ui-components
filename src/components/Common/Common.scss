@@ -1,8 +1,9 @@
 @import '../../assets/styles/vars/colors.scss';
+@import '../../assets/styles/vars/fonts.scss';
 .validation__icon {
   fill: transparent;
 }
-.validation__icon--invalid {
+.validation__icon.validation__icon--invalid {
   height: auto;
   width: auto;
   fill: $color__main-danger;
@@ -11,7 +12,8 @@
 .validation__messages {
   list-style-type: none;
   margin: 0;
-  padding: 10px;
+  padding: 14px;
+  padding-right: 18px;
   background: $color__gray-1;
   box-shadow: 0px 1px 2px $color__alpha-2;
   border-radius: 3px;
@@ -19,37 +21,58 @@
   display: block;
 }
 .validation__message {
+  font-family: $font__primary, $font__primary-fallback;
+  letter-spacing: $font__primary-spacing;
   display: flex;
   align-items: center;
   font-size: 12px;
   color: $color__dark-gray-1;
-  fill: $color__main-danger;
-  stroke: $color__main-danger;
   min-width: 60px;
 }
 .validation__message--inactive {
   text-decoration: line-through;
-  color: $color__gray-5;
-  fill: $color__main-success;
   stroke: none;
+  color: $color__gray-5;
 }
-.validation__message-icon {
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 16px;
-}
-.validation__message-text {
-  margin-left: 3px;
+.validation__message__text {
   white-space: nowrap;
 }
 
-.validation__undefined-icon {
+.validation__message__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.validation__message__icon--active {
+  animation: fadeInValidationMessageIcon 0.2s ease-out;
+  fill: $color__main-danger;
+  stroke: $color__main-danger;
+}
+.validation__message__icon--inactive {
+  animation: fadeInValidationMessageIcon 0.2s ease-out;
+  fill: $color__main-success;
+}
+.validation__message__icon--unset {
+  animation: fadeInValidationMessageIcon 0.2s ease-out;
   height: 6px;
   width: 6px;
   margin: 3px;
   border-radius: 3px;
   display: flex;
-  background: #ccc;
+  background: #ddd;
+}
+
+@keyframes fadeInValidationMessageIcon {
+  0% {
+    transform: scale(0.5, 0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
 }

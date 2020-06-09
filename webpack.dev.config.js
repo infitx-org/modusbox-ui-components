@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    bundle: ['babel-polyfill', './src/Root'],
+    bundle: ['./src/Root'],
   },
   output: {
     filename: '[name].js',
@@ -21,7 +21,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['env'],
+              presets: ['@babel/preset-env'],
             },
           },
           {

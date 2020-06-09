@@ -22,7 +22,7 @@ class RadioGroup extends PureComponent {
   }
   componentDidUpdate(prevProps) {
     const { value } = this.props;
-    if (value !== prevProps.value || value !== this.state.value) {
+    if (value !== prevProps.value) {
       this.setState({ value });
     }
   }
@@ -89,7 +89,7 @@ class RadioGroup extends PureComponent {
     const { value, focused } = this.state;
     const { id, label, disabled, options } = this.props;
 
-    const classNames = utils.composeClassNames(['input', 'input-radio', disabled && 'disabled']);
+    const classNames = utils.composeClassNames(['mb-input', 'input-radio', disabled && 'disabled']);
     return (
       <div className={classNames} id={id}>
         {label && <span>{label}</span>}

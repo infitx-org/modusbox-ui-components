@@ -22,6 +22,7 @@ class Tab extends PureComponent {
       return null;
     }
     const className = utils.composeClassNames([
+      'el',
       'el-tabs__tab-item',
       focused && 'el-tabs__tab-item--focused',
       selected && 'el-tabs__tab-item--selected',
@@ -69,22 +70,29 @@ TabList.defaultProps = {
   children: undefined,
 };
 
-const TabPanel = ({ children, flex }) => {
-  let classes;
-  if (flex) {
-    classes = 'el-tabs__tab__content el-tabs__tab__content--flexible';
-  } else {
-    classes = 'el-tabs__tab__content';
-  }
-  return <div className={classes}>{children}</div>;
+const TabPanel = ({ children, flex, style, className }) => {
+  const classNames = utils.composeClassNames([
+    'el-tabs__tab__content',
+    flex && 'el-tabs__tab__content--flexible',
+    className,
+  ]);
+  return (
+    <div className={classNames} style={style}>
+      {children}
+    </div>
+  );
 };
 
 TabPanel.propTypes = {
+  style: PropTypes.shape(),
+  className: PropTypes.string,
   children: PropTypes.node,
   flex: PropTypes.bool,
 };
 
 TabPanel.defaultProps = {
+  style: undefined,
+  className: undefined,
   children: undefined,
   flex: false,
 };
@@ -267,7 +275,7 @@ class Tabs extends PureComponent {
             this.input = input;
           }}
           type="button"
-          className="modus-el__holder"
+          className="el__holder"
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           onKeyDown={this.testKey}
