@@ -173,7 +173,7 @@ MenuSection.defaultProps = {
   label: undefined,
   icon: undefined,
   fill: '#7C7C7C',
-  size: 13,
+  size: 14,
 };
 MenuSection.propTypes = {
   label: PropTypes.string,
