@@ -107,7 +107,7 @@ MenuItem.defaultProps = {
   back: false,
   icon: undefined,
   fill: undefined,
-  size: 10,
+  size: 13,
   asRoot: false,
   partial: false,
 };
@@ -132,7 +132,8 @@ const MENU_ITEM_TYPE = (<MenuItem />).type;
 
 const isMenuItem = node => node.type === MENU_ITEM_TYPE;
 
-const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) => {
+const MenuSection = ({ pathname, label, children, onClick, hidden, disabled,
+  icon, size, fill }) => {
   if (hidden) {
     return null;
   }
@@ -142,9 +143,23 @@ const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) =
     .map(bindActiveProp(pathname))
     .map(bindDisabledProp(disabled));
 
+  let itemIcon = null;
+  if (icon) {
+    itemIcon = (
+      <div className="el-menu__section-icon">
+        <Icon name={icon} size={size} fill={fill} />
+      </div>
+    );
+  }
+
   let menuSectionLabel = null;
   if (label) {
-    menuSectionLabel = <div className="el-menu__section-label">{label}</div>;
+    menuSectionLabel = (
+      <div className="el-menu__section-label">
+        {itemIcon}
+        {label}
+      </div>
+    );
   }
   return (
     <div className="el-menu__section">
@@ -156,9 +171,15 @@ const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) =
 
 MenuSection.defaultProps = {
   label: undefined,
+  icon: undefined,
+  fill: '#7C7C7C',
+  size: 13,
 };
 MenuSection.propTypes = {
   label: PropTypes.string,
+  icon: PropTypes.string,
+  fill: PropTypes.string,
+  size: PropTypes.number,
 };
 
 const MENU_SECTION_TYPE = (<MenuSection />).type;

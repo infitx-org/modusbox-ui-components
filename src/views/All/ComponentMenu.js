@@ -22,10 +22,11 @@ const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
         <MenuItem path="/partners/partner/identifiers" label="Identifiers" disabled={disabled} />
       </MenuSection>
 
-      <MenuSection label="Format Defaults">
-        <MenuItem path="/partners/partner/csv" label="CSV" />
-        <MenuItem path="/partners/partner/edifact" label="EDIFACT" />
-        <MenuItem path="/partners/partner/x12" label="X12" />
+      <MenuSection label="Format Defaults" icon="access-manager-color" size={14}>
+        <MenuItem path="/partners/partner/csv" label="CSV" icon="admin-color" fill="#A7A7A7" />
+        <MenuItem path="/partners/partner/edifact" label="EDIFACT" icon="application-color" fill="#A7A7A7" />
+        <MenuItem path="/partners/partner/x12" label="X12" icon="calendar-small" fill="#A7A7A7" back />
+        <MenuItem path="/partners/partner/apps" label="Partners and Applications and this is a very long text" icon="github" fill="#A7A7A7" />
       </MenuSection>
 
       <MenuSection label="Configuration">

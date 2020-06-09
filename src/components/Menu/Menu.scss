@@ -4,8 +4,13 @@
   overflow: hidden;
   background: #f2f1f1;
 }
-.el-menu__section {
+
+.el-menu__section {}
+
+.el-menu__section-icon {
+  padding-right: 10px;
 }
+
 .el-menu__section-label {
   text-align: center;
   width: 100%;
@@ -17,6 +22,11 @@
   background: $color__white;
   margin-top: 1px;
 }
+
+.el-menu__section-disabled {
+  opacity: 0.5;
+}
+
 .el-menu__section-items {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -30,13 +40,17 @@
   padding-left: 16px;
   height: 30px;
   cursor: pointer;
-  line-height: 30px;
+  line-height: 15px;
   border-left: 4px solid transparent;
   transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;
   font-size: 12px;
 
   &:hover:not(.el-menu__item--active) {
     color: $color__main-primary;
+
+    .el-icon {
+      fill: $color__main-primary !important;
+    }
   }
 }
 
@@ -45,20 +59,21 @@
   font-weight: bold;
   color: #333;
 }
+
 .el-menu__item--disabled {
   color: #999;
   fill: #ccc;
   border-color: transparent;
 }
+
 .el-menu__item--back {
   padding-left: 0px;
   height: 40px;
   background: $color__white;
   margin-top: 1px;
 }
-.el-menu__item--with-icon {
-  padding-left: 0px;
-}
+
+.el-menu__item--with-icon {}
 
 .el-menu__item__back-icon {
   transform: rotateZ(180deg);
@@ -72,4 +87,6 @@
   justify-content: center;
   width: 16px;
   height: 100%;
+  margin-right: 10px;
+  padding-bottom: 2px;
 }
