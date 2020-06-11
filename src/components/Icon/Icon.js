@@ -39,6 +39,7 @@ class Icon extends PureComponent {
       tooltipDelay,
       tooltipPosition,
     } = this.props;
+
     const svgStyle = {
       height: `${size}px`,
       width: `${size}px`,

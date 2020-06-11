@@ -142,7 +142,7 @@ it('triggers onChange when changed', () => {
   const mockEvent = jest.fn();
   const wrapper = mount(<TextField onChange={mockEvent} />);
   expect(mockEvent).not.toHaveBeenCalled();
-  wrapper.find('input').simulate('change', { target: {value : 'test'}});
+  wrapper.find('input').simulate('change', { target: { value: 'test' } });
   expect(mockEvent).toHaveBeenCalledWith('test');
 });
 
@@ -155,7 +155,6 @@ it('triggers onChange with a number value when prop type is number', () => {
 });
 
 describe('tests the textfield cards', () => {
-
   it('identifies the cardable cards of a given value automatically', () => {
     const wrapper = mount(<TextField value="[test]value" tokenDelimiters="[]" />);
     const tokens = wrapper.state('tokens');

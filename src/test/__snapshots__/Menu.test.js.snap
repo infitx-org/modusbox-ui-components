@@ -19,14 +19,16 @@ exports[`renders the menu correctly when multiple props are set 1`] = `
           asRoot={false}
           back={false}
           disabled={false}
+          fill="#A7A7A7"
           hidden={false}
           key=".0"
           label="nested"
+          namedIcon={false}
           onClick={[MockFunction]}
           partial={false}
           path="/foo/nested"
           pathname="/foo"
-          size={10}
+          size={14}
         >
           <div
             className="el-menu__item"

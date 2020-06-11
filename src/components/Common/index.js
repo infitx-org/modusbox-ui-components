@@ -189,4 +189,13 @@ const ValidationWrapper = ({ messages, active, children }) => (
   </Tooltip>
 );
 
-export { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon };
+const NamedIcon = ({ namedIconTitle }) => <div className="named__icon">{namedIconTitle[0]}</div>;
+
+NamedIcon.propTypes = {
+  namedIconTitle: PropTypes.string,
+};
+NamedIcon.defaultProps = {
+  namedIconTitle: undefined,
+};
+
+export { Loader, Placeholder, InnerButton, ValidationWrapper, InvalidIcon, NamedIcon };

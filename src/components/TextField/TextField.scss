@@ -23,7 +23,6 @@
   align-items: center;
 }
 
-
 .input-textfield__value__tokens {
   height: 100%;
   align-items: center;
@@ -37,7 +36,6 @@
 .mb-input--open .input-textfield__value__tokens {
   //justify-content: flex-end;
 }
-
 
 .input-textfield__value__token {
   flex: 0 0 auto;
@@ -103,7 +101,7 @@
   font-size: inherit;
   display: inline-flex;
   vertical-align: middle;
-  align-items: center;;
+  align-items: center;
   background: transparent;
   border: none;
   outline: none;

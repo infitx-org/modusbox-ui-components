@@ -8,7 +8,7 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     return { value, tokens: [] };
   }
 
-  const flattenVariables = availableVariables.reduce((types, type) => ([...types, ...type]), []);
+  const flattenVariables = availableVariables.reduce((types, type) => [...types, ...type], []);
   const [open, close] = selectors;
 
   function defineToken(tokenValue) {
@@ -39,7 +39,6 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
     .filter(str => str !== '')
     .map(defineToken);
 
-
   return {
     value: tokens.map(replaceWithTokenValue).join(''),
     tokens: tokens
@@ -51,7 +50,7 @@ function getValueAndMissingCards(value, availableVariables, selectors) {
           available: referenceVariable !== undefined,
           isUndefined: referenceVariable ? referenceVariable.value === undefined : undefined,
           replaced: replaceWithTokenValue(token),
-        }
+        };
       }),
   };
 }
@@ -66,7 +65,6 @@ const validate = (initialValue, validation) => {
     let value = initialValue;
     const { selectors, variables, validators } = validation;
 
-
     if (selectors) {
       ({ tokens, value } = getValueAndMissingCards(initialValue, variables, selectors));
       const missingVars = tokens.filter(v => !v.available);
@@ -78,7 +76,7 @@ const validate = (initialValue, validation) => {
         messages.push({
           active: true,
           message: `${name} ${missingVars.map(v => v.value).join(', ')} ${verb} not found`,
-        })
+        });
       }
 
       const undefinedVars = tokens.filter(v => v.isUndefined === true);
@@ -86,7 +84,7 @@ const validate = (initialValue, validation) => {
       if (undefinedVars.length) {
         const verb = undefinedVars.length === 1 ? 'has' : 'have';
         const name = undefinedVars.length === 1 ? 'variable' : 'variables';
-        
+
         messages.push({
           active: true,
           message: `${name} ${undefinedVars.map(v => v.value).join(', ')} ${verb} no value`,
@@ -96,21 +94,19 @@ const validate = (initialValue, validation) => {
       const tokenValidators = validators.filter(validator => validator.appliesToTokens === true);
 
       if (tokenValidators.length) {
-
-        tokenValidators.forEach((validator) => {
+        tokenValidators.forEach(validator => {
           const { fn } = validator;
           const succeeded = fn(initialValue);
           if (!succeeded) {
             messages.push({
               active: true,
               message: validator.message,
-            })
+            });
           }
         });
       }
 
       if (messages.length) {
-
         return {
           isRequired,
           tokens,

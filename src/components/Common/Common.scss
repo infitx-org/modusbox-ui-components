@@ -1,8 +1,10 @@
 @import '../../assets/styles/vars/colors.scss';
 @import '../../assets/styles/vars/fonts.scss';
+
 .validation__icon {
   fill: transparent;
 }
+
 .validation__icon.validation__icon--invalid {
   height: auto;
   width: auto;
@@ -20,6 +22,7 @@
   min-width: 60px;
   display: block;
 }
+
 .validation__message {
   font-family: $font__primary, $font__primary-fallback;
   letter-spacing: $font__primary-spacing;
@@ -29,11 +32,13 @@
   color: $color__dark-gray-1;
   min-width: 60px;
 }
+
 .validation__message--inactive {
   text-decoration: line-through;
   stroke: none;
   color: $color__gray-5;
 }
+
 .validation__message__text {
   white-space: nowrap;
 }
@@ -52,10 +57,12 @@
   fill: $color__main-danger;
   stroke: $color__main-danger;
 }
+
 .validation__message__icon--inactive {
   animation: fadeInValidationMessageIcon 0.2s ease-out;
   fill: $color__main-success;
 }
+
 .validation__message__icon--unset {
   animation: fadeInValidationMessageIcon 0.2s ease-out;
   height: 6px;
@@ -71,8 +78,27 @@
     transform: scale(0.5, 0.5);
     opacity: 0.5;
   }
+
   100% {
     transform: scale(1, 1);
     opacity: 1;
+  }
+}
+
+.named__icon {
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #022843;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
   }
 }

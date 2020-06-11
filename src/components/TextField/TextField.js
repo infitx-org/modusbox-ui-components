@@ -14,7 +14,7 @@ import Tooltip from '../Tooltip';
 
 class Card extends PureComponent {
   render() {
-    const { 
+    const {
       active,
       parent,
       assignRef,
@@ -413,7 +413,7 @@ class TextField extends PureComponent {
       return;
     }
     if (this.valueTokens.includes(e.relatedTarget)) {
-      return; 
+      return;
     }
     if (e.relatedTarget === this.input) {
       return;
@@ -602,7 +602,6 @@ class TextField extends PureComponent {
         valueToken: tokens.length > nextCardToken ? nextCardToken : undefined,
       },
       () => {
-
         if (this.props.onChange) {
           let onChangeValue = nextFullValue;
 
@@ -822,7 +821,7 @@ class TextField extends PureComponent {
             onClick={e => this.onTokenClick(e, index)}
           />
         );
-      })
+      });
 
       tooltip += inputValue;
 

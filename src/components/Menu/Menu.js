@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 
 import * as utils from '../../utils/common';
+import { NamedIcon } from '../Common';
 import Icon from '../Icon';
 
 const getPathMatches = (pathname, path, partial) => {
@@ -65,7 +66,7 @@ class MenuItem extends PureComponent {
     }
   }
   render() {
-    const { label, icon, fill, size, disabled, hidden, active, back } = this.props;
+    const { label, icon, fill, size, disabled, hidden, active, back, namedIcon } = this.props;
     if (hidden) {
       return null;
     }
@@ -74,10 +75,17 @@ class MenuItem extends PureComponent {
       backIcon = <Icon className="el-menu__item__back-icon" name="arrow" size={10} fill="#999" />;
     }
     let itemIcon = null;
+
     if (icon) {
       itemIcon = (
         <div className="el-menu__item__item-icon">
           <Icon name={icon} size={size} fill={fill} />
+        </div>
+      );
+    } else if (namedIcon) {
+      itemIcon = (
+        <div className="el-menu__item__item-named-icon">
+          <NamedIcon namedIconTitle={label} />
         </div>
       );
     }
@@ -106,8 +114,9 @@ MenuItem.defaultProps = {
   hidden: false,
   back: false,
   icon: undefined,
-  fill: undefined,
-  size: 10,
+  namedIcon: false,
+  fill: '#A7A7A7',
+  size: 14,
   asRoot: false,
   partial: false,
 };
@@ -118,6 +127,7 @@ MenuItem.propTypes = {
   hidden: PropTypes.bool,
   back: PropTypes.bool,
   icon: PropTypes.string,
+  namedIcon: PropTypes.bool,
   fill: PropTypes.string,
   size: PropTypes.number,
   // prop asRoot is not used directly by the MenuItem but it is used by the Menu component
@@ -132,7 +142,17 @@ const MENU_ITEM_TYPE = (<MenuItem />).type;
 
 const isMenuItem = node => node.type === MENU_ITEM_TYPE;
 
-const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) => {
+const MenuSection = ({
+  pathname,
+  label,
+  children,
+  onClick,
+  hidden,
+  disabled,
+  icon,
+  size,
+  fill,
+}) => {
   if (hidden) {
     return null;
   }
@@ -142,12 +162,32 @@ const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) =
     .map(bindActiveProp(pathname))
     .map(bindDisabledProp(disabled));
 
+  let itemIcon = null;
+  if (icon) {
+    itemIcon = (
+      <div className="el-menu__section-icon">
+        <Icon name={icon} size={size} fill={fill} />
+      </div>
+    );
+  }
+
   let menuSectionLabel = null;
   if (label) {
-    menuSectionLabel = <div className="el-menu__section-label">{label}</div>;
+    menuSectionLabel = (
+      <div className="el-menu__section-label">
+        {itemIcon}
+        {label}
+      </div>
+    );
   }
+
+  const classNames = utils.composeClassNames([
+    'el-menu__section',
+    disabled && 'el-menu__section--disabled',
+  ]);
+
   return (
-    <div className="el-menu__section">
+    <div className={classNames}>
       {menuSectionLabel}
       <div className="el-menu__section-items">{menuItems}</div>
     </div>
@@ -156,9 +196,17 @@ const MenuSection = ({ pathname, label, children, onClick, hidden, disabled }) =
 
 MenuSection.defaultProps = {
   label: undefined,
+  icon: undefined,
+  fill: '#7C7C7C',
+  disabled: false,
+  size: 14,
 };
 MenuSection.propTypes = {
   label: PropTypes.string,
+  icon: PropTypes.string,
+  fill: PropTypes.string,
+  size: PropTypes.number,
+  disabled: PropTypes.bool,
 };
 
 const MENU_SECTION_TYPE = (<MenuSection />).type;

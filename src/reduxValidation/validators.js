@@ -76,9 +76,10 @@ const vd = {
     return false;
   }),
   maxLength: length =>
-    createValidator(`Max length is ${length} character`, value =>
-      value ? value.length <= length : false,
-    true
+    createValidator(
+      `Max length is ${length} character`,
+      value => (value ? value.length <= length : false),
+      true,
     ),
   isLong: length =>
     createValidator(`Must be ${length} characters`, value => value && value.length === length),
