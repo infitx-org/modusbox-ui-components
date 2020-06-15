@@ -39,9 +39,9 @@
   align-items: center;
   width: 100%;
   padding-left: 16px;
-  height: 30px;
+  min-height: 30px;
   cursor: pointer;
-  line-height: 15px;
+  line-height: 19px;
   border-left: 4px solid transparent;
   transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;
   font-size: 12px;
