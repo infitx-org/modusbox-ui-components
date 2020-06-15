@@ -59,6 +59,10 @@
   background: #f2f1f1;
   font-weight: bold;
   color: #333;
+
+  .el-icon {
+    fill: $color__dark-blue-5 !important;
+  }
 }
 
 .el-menu__item--disabled {
