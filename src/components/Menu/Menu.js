@@ -79,7 +79,7 @@ class MenuItem extends PureComponent {
     if (icon) {
       itemIcon = (
         <div className="el-menu__item__item-icon">
-          <Icon name={icon} size={size} fill={fill} />
+          <Icon className="el-menu__item__icon" name={icon} size={size} fill={fill} />
         </div>
       );
     } else if (namedIcon) {
@@ -115,7 +115,7 @@ MenuItem.defaultProps = {
   back: false,
   icon: undefined,
   namedIcon: false,
-  fill: '#A7A7A7',
+  fill: undefined,
   size: 14,
   asRoot: false,
   partial: false,

@@ -39,9 +39,9 @@
   align-items: center;
   width: 100%;
   padding-left: 16px;
-  height: 30px;
+  min-height: 30px;
   cursor: pointer;
-  line-height: 15px;
+  line-height: 19px;
   border-left: 4px solid transparent;
   transition: border 0.2s linear, color 0.2s linear, fill 0.2s linear;
   font-size: 12px;
@@ -49,16 +49,25 @@
   &:hover:not(.el-menu__item--active) {
     color: $color__main-primary;
 
-    .el-icon {
-      fill: $color__main-primary !important;
+    .el-menu__item__icon {
+      fill: $color__main-primary;
     }
   }
+}
+
+.el-menu__item__icon {
+  transition: fill 0.2s linear;
+  fill: #a7a7a7;
 }
 
 .el-menu__item--active {
   background: #f2f1f1;
   font-weight: bold;
   color: #333;
+
+  .el-menu__item__icon {
+    fill: $color__dark-blue-5;
+  }
 }
 
 .el-menu__item--disabled {
