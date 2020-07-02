@@ -14,37 +14,42 @@ class ScrollBox extends PureComponent {
     this.updateScrollbar = this.updateScrollbar.bind(this);
     this.updateContentSize = this.updateContentSize.bind(this);
     this.onDrag = this.onDrag.bind(this);
+
+    this.wrapperRef = React.createRef(document.createElement('div'));
+    this.contentBoxRef = React.createRef(document.createElement('div'));
+    this.contentRef = React.createRef(document.createElement('div'));
+    this.scrollbarRef = React.createRef(document.createElement('div'));
   }
   componentDidMount() {
     this.updateContentSize();
     this.updateScrollbar();
-    this.contentBox.addEventListener('scroll', this.updateScrollbar);
+    this.contentBoxRef.current.addEventListener('scroll', this.updateScrollbar);
   }
   componentDidUpdate() {
     this.updateContentSize();
     this.updateScrollbar();
   }
   componentWillUnmount() {
-    this.contentBox.removeEventListener('scroll', this.updateScrollbar);
+    this.contentBoxRef.current.removeEventListener('scroll', this.updateScrollbar);
   }
   onDrag(ratio) {
-    const { height } = this.content.getBoundingClientRect();
-    const boxHeight = this.contentBox.getBoundingClientRect().height;
+    const { height } = this.contentRef.current.getBoundingClientRect();
+    const boxHeight = this.contentBoxRef.current.getBoundingClientRect().height;
 
     const scrollTop = ratio * (height - boxHeight);
-    this.contentBox.scrollTop = scrollTop;
+    this.contentBoxRef.current.scrollTop = scrollTop;
   }
   handleResize() {
     this.updateContentSize();
     this.updateScrollbar();
   }
   updateScrollbar() {
-    const { scrollTop } = this.contentBox;
-    const { height } = this.contentBox.getBoundingClientRect();
-    const contentHeight = this.content.childNodes[1].getBoundingClientRect().height;
+    const { scrollTop } = this.contentBoxRef.current;
+    const { height } = this.contentBoxRef.current.getBoundingClientRect();
+    const contentHeight = this.contentRef.current.childNodes[0].getBoundingClientRect().height;
     const offset = 0;
-    if (this.scrollbar) {
-      this.scrollbar.setPosition({
+    if (this.scrollbarRef.current) {
+      this.scrollbarRef.current.setPosition({
         scrollTop,
         offset,
         contentHeight,
@@ -53,19 +58,18 @@ class ScrollBox extends PureComponent {
     }
   }
   updateContentSize() {
-    const { width } = this.wrapper.getBoundingClientRect();
-    const computedStyle = window.getComputedStyle(this.wrapper, null);
+    const { width } = this.wrapperRef.current.getBoundingClientRect();
+    const computedStyle = window.getComputedStyle(this.wrapperRef.current, null);
     const paddingLeft = parseFloat(computedStyle.getPropertyValue('padding-left'));
     const paddingRight = parseFloat(computedStyle.getPropertyValue('padding-right'));
     const exactWidth = `${width - paddingLeft + paddingRight}px`;
 
-    this.content.style.minWidth = exactWidth;
-    this.content.style.maxWidth = exactWidth;
-    this.content.style.width = exactWidth;
+    this.contentRef.current.style.minWidth = exactWidth;
+    this.contentRef.current.style.maxWidth = exactWidth;
+    this.contentRef.current.style.width = exactWidth;
   }
   render() {
     const { showTrack, handleStyle, trackStyle, style, children, flex, className } = this.props;
-
     const wrapperClassName = utils.composeClassNames([
       'element',
       'el-scrollbox__wrapper',
@@ -81,41 +85,34 @@ class ScrollBox extends PureComponent {
     ]);
 
     return (
-      <div
-        ref={wrapper => {
-          this.wrapper = wrapper;
-        }}
-        className={wrapperClassName}
-        style={style}
+      <ReactResizeDetector
+        handleWidth
+        handleHeight
+        onResize={this.handleResize}
+        targetRef={this.wrapperRef}
       >
-        <ReactResizeDetector handleWidth handleHeight onResize={this.handleResize} />
-        <div
-          ref={contentBox => {
-            this.contentBox = contentBox;
-          }}
-          className={contentBoxClassName}
-        >
-          <div
-            ref={content => {
-              this.content = content;
-            }}
-            className={contentClassName}
-          >
-            <ReactResizeDetector handleHeight onResize={this.handleResize} />
-            {children}
+        <div ref={this.wrapperRef} className={wrapperClassName} style={style}>
+          <div ref={this.contentBoxRef} className={contentBoxClassName}>
+            <ReactResizeDetector
+              handleHeight
+              onResize={this.handleResize}
+              targetRef={this.contentRef}
+            >
+              <div ref={this.contentRef} className={contentClassName}>
+                {children}
+              </div>
+            </ReactResizeDetector>
           </div>
-        </div>
 
-        <ScrollBar
-          ref={scrollbar => {
-            this.scrollbar = scrollbar;
-          }}
-          trackStyle={trackStyle}
-          handleStyle={handleStyle}
-          showTrack={showTrack}
-          onDrag={this.onDrag}
-        />
-      </div>
+          <ScrollBar
+            ref={this.scrollbarRef}
+            trackStyle={trackStyle}
+            handleStyle={handleStyle}
+            showTrack={showTrack}
+            onDrag={this.onDrag}
+          />
+        </div>
+      </ReactResizeDetector>
     );
   }
 }
