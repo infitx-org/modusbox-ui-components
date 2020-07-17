@@ -15,25 +15,23 @@ class ModalPortal extends PureComponent {
       this._div.id = this.props.id;
     }
     this._div.className = 'el-modal__box';
-    this._target = document.body.appendChild(this._div);
     this._modalIndex = document.querySelectorAll('.el-modal__box').length;
   }
   componentDidMount() {
+    document.body.appendChild(this._div);
     if (!this._div.contains(document.activeElement)) {
       document.activeElement.blur();
     }
   }
   componentWillUnmount() {
-    document.body.removeChild(this._target);
+    document.body.removeChild(this._div);
   }
-
-  // This doesn't actually return anything to render
   render() {
     const childrenWithIndex = React.cloneElement(this.props.children, {
       modalIndex: this._modalIndex,
     });
 
-    return ReactDOM.createPortal(childrenWithIndex, this._target);
+    return ReactDOM.createPortal(childrenWithIndex, this._div);
   }
 }
 ModalPortal.defaultProps = {
