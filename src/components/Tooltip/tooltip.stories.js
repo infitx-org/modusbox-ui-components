@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import Column from '../Column';
+import Icon from '../Icon';
 import Row from '../Row';
 import ScrollBox from '../ScrollBox';
-import Icon from '../Icon';
 import Tooltip from './Tooltip';
 
 export default {

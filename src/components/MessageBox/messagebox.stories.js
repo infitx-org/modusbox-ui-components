@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Button from '../Button';
-import MessageBox from './MessageBox';
-import Row from '../Row';
 import Column from '../Column';
+import Row from '../Row';
+import MessageBox from './MessageBox';
 
 export default {
   title: 'MessageBox',

@@ -11,12 +11,13 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /(node_modules|bower_components|build)/,
         use: [
           {
             loader: 'babel-loader',

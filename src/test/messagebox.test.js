@@ -2,8 +2,8 @@ import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import React from 'react';
 
-import MessageBox from '../components/MessageBox';
 import Icon from '../components/Icon';
+import MessageBox from '../components/MessageBox';
 
 // Shallow render, no sub-components ( still available children html)
 it('renders the component', () => {

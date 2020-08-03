@@ -1,8 +1,8 @@
+import { createValidation, toValidationResult, vd } from 'javascript/validation';
 import React, { Component } from 'react';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';
 import Heading from '../../components/Heading';
-import { createValidation, toValidationResult, vd } from '../../reduxValidation';
 
 const description = {
   name: 'Describes the user name given at birth',

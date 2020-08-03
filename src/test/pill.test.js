@@ -2,8 +2,8 @@ import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import React from 'react';
 
-import Pill from '../components/Pill';
 import Icon from '../components/Icon';
+import Pill from '../components/Pill';
 import Tooltip from '../components/Tooltip';
 
 // Shallow render, no sub-components ( still available children html)

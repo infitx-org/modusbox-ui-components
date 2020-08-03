@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
+import { createOptionalValidation, createValidator, validate, vd } from 'javascript/validation';
 import React, { useState } from 'react';
 
 import DatePicker from './DatePicker';
-import { createOptionalValidation, createValidator, validate, vd } from '../../reduxValidation';
 
 export default {
   title: 'DatePicker',

@@ -1,7 +1,8 @@
 /* eslint no-console: "off" */
 import React, { useState } from 'react';
-import DataList from './DataList';
+
 import Icon from '../Icon';
+import DataList from './DataList';
 
 export default {
   title: 'DataList',

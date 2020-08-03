@@ -1,10 +1,10 @@
 /* eslint no-console: "off" */
+import { createValidation, validate, vd } from 'javascript/validation';
 import React from 'react';
 
 import FormInput from '../../components/FormInputs/FormInput';
 import Modal from '../../components/Modal';
 import TextField from '../../components/TextField';
-import { createValidation, validate, vd } from '../../reduxValidation';
 
 const options = [
   { type: 'path', label: 'ONE', value: 'the first path' },

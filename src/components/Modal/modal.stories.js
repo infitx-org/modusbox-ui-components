@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 
 import Button from '../Button';
-import Modal, { ModalTabsLayout } from './index';
 import Row from '../Row';
 import Select from '../Select';
 import TextField from '../TextField';
+import Modal, { ModalTabsLayout } from './index';
 
 export default {
   title: 'Modal',

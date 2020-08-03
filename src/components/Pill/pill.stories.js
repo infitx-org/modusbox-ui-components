@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Pill from './Pill';
 import Row from '../Row';
+import Pill from './Pill';
 
 export default {
   title: 'Pill',

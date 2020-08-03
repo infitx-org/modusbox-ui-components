@@ -1,7 +1,8 @@
 /* eslint no-console: "off" */
 import React from 'react';
-import Row from '../Row';
+
 import Column from '../Column';
+import Row from '../Row';
 import Dropdown from './Dropdown';
 
 export default {

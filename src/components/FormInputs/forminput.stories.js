@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
+import { createValidation, toValidationResult, vd } from 'javascript/validation';
 import React, { useState } from 'react';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';
-import { createValidation, toValidationResult, vd } from '../../reduxValidation';
 
 export default {
   title: 'FormInputs',

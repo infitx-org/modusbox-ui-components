@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
+import { createOptionalValidation, validate, vd } from 'javascript/validation';
 import React, { useState } from 'react';
 
 import Select from './Select';
-import { createOptionalValidation, validate, vd } from '../../reduxValidation';
 
 export default {
   title: 'Select',

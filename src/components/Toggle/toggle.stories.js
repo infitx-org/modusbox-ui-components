@@ -2,8 +2,9 @@
 /* eslint no-console: "off" */
 /* eslint no-console: "off" */
 import React from 'react';
-import Toggle from './Toggle';
+
 import Column from '../Column';
+import Toggle from './Toggle';
 
 export default {
   title: 'Toggle',

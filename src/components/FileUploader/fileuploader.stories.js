@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
+import { createOptionalValidation, validate, vd } from 'javascript/validation';
 import React, { useState } from 'react';
 
 import FileUploader from './FileUploader';
-import { createOptionalValidation, validate, vd } from '../../reduxValidation';
 
 export default {
   title: 'FileUploader',

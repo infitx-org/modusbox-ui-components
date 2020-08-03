@@ -1,9 +1,9 @@
 /* eslint no-console: "off" */
+import { createOptionalValidation, validate, vd } from 'javascript/validation';
 import React from 'react';
 
 import Row from '../../components/Row';
 import TextArea from '../../components/TextArea';
-import { createOptionalValidation, validate, vd } from '../../reduxValidation';
 
 class TextAreaWithDelay extends React.Component {
   constructor() {

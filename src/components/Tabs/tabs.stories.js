@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
 import React from 'react';
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from './Tabs';
 import Column from '../Column';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from './Tabs';
 
 export default {
   title: 'Tabs',

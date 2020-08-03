@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 
-import uuid from '../utils/uuid';
+import uuid from 'utils/uuid';
+
 import {
   FETCH,
   setFetchRequestFailed,
