@@ -12,7 +12,7 @@ module.exports = {
   entry: {
     components: './src/components/index.js',
     'redux-fetch': './src/redux/reduxFetch/index.js',
-    'validation': './src/javascript/validation/index.js',
+    validation: './src/javascript/validation/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -36,7 +36,7 @@ module.exports = {
     ]),
   ],
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [

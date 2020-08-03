@@ -12,7 +12,7 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [
