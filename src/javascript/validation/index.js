@@ -3,7 +3,7 @@ import { getFieldIsValid, getFieldMessages, getIsValid, getMessages } from './ge
 import toValidationResult, { validate } from './runner';
 import vd from './validators';
 
-export {
+export default {
   vd,
   createValidator,
   createValidation,

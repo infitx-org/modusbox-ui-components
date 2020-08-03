@@ -4,6 +4,21 @@ Reusable modules to build Modusbox User Interfaces.
 
 The library includes React components, Redux Middlewares, and commonly used JS utility modules.
 
+```
+├── components         - React components folder
+│   ├── index.css      - React components stylesheets
+│   └── index.js       - React components single export module
+├── redux              - Redux folder
+│   ├── index.js       - all Redux exports
+│   └── redux-fetch    - Redux / Redux-Fetch folder
+│       └── index.js   - Redux-Fetch single export module
+├── scss               - SCSS Styles 
+│   └── colors.scss    - color module
+└── utils              - Javascript utils folder
+    ├── index.js       - all Javascript exports
+    └── validation     - Javascript / Validation folder
+        └── index.js   - Validation single export module
+```
 
 ### Installing
 

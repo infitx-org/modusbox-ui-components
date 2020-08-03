@@ -5,11 +5,11 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "files": [
-    "dist/index.js",
-    "dist/index.css",
-    "dist/colors.scss",
-    "dist/redux-fetch.js",
-    "dist/validation.js"
+    "dist/components/index.js",
+    "dist/components/index.css",
+    "dist/scss/colors.scss",
+    "dist/redux/index.js",
+    "dist/javascript/index.js"
   ],
   "author": {
     "name": "Ivan Annovazzi",

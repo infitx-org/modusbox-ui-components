@@ -11,8 +11,12 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     components: './src/components/index.js',
-    'redux-fetch': './src/redux/reduxFetch/index.js',
-    validation: './src/javascript/validation/index.js',
+    // group every redux util into a single module
+    redux: './src/redux/index.js',
+    'redux/redux-fetch': './src/redux/reduxFetch/index.js',
+    // group every JS util into a single module
+    utils: './src/javascript/index.js',
+    'utils/validation': './src/javascript/validation/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
