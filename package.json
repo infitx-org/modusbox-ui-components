@@ -9,7 +9,9 @@
     "dist/components/index.css",
     "dist/scss/colors.scss",
     "dist/redux/index.js",
-    "dist/javascript/index.js"
+    "dist/redux/reduxFetch/index.js",
+    "dist/javascript/index.js",
+    "dist/javascript/validation/index.js"
   ],
   "author": {
     "name": "Ivan Annovazzi",

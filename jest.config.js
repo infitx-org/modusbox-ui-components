@@ -10,12 +10,12 @@ module.exports = {
     '^react-dom': '<rootDir>/node_modules/react-dom',
     '^react[/](.+)': '<rootDir>/node_modules/react/$1',
     '^react': '<rootDir>/node_modules/react',
-    '^views': '<rootDir>/src/views',
-    '^icons': '<rootDir>/src/icons',
-    '^components': '<rootDir>/src/components',
+    '^views': '<rootDir>/src/react/views',
+    '^icons': '<rootDir>/src/react/icons',
+    '^components': '<rootDir>/src/react/components',
     '^utils[/](.+)$': '<rootDir>/src/utils/$1',
     '^test[/](.+)': '<rootDir>/test/$1',
-    '^.+\\.(css|png|scss|svg)$': '<rootDir>/src/test/__mocks__/staticMocks.js'
+    '^.+\\.(css|png|scss|svg)$': '<rootDir>/src/react/test/__mocks__/staticMocks.js'
   },
   'moduleFileExtensions': [
     'js',
@@ -23,7 +23,7 @@ module.exports = {
     'jsx'
   ],
   'roots': [
-    'src/test',
+    'src/react/test',
     'src/redux/reduxFetch',
     'src/javascript/validation'
   ]

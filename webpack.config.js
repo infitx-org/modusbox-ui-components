@@ -10,7 +10,7 @@ const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'c
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    components: './src/components/index.js',
+    components: './src/react/components/index.js',
     // group every redux util into a single module
     redux: './src/redux/index.js',
     'redux/redux-fetch': './src/redux/reduxFetch/index.js',

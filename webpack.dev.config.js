@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    bundle: ['./src/Root'],
+    bundle: ['./src/react/Root'],
   },
   output: {
     filename: '[name].js',
