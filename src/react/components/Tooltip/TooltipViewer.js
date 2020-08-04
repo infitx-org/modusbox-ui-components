@@ -1,6 +1,6 @@
+import * as utils from 'common/generic';
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import * as utils from 'utils/common';
 
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-nested-ternary */

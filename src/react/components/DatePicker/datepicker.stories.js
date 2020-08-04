@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import { createOptionalValidation, createValidator, validate, vd } from 'javascript/validation';
+import { createOptionalValidation, createValidator, validate, vd } from 'utils/validation';
 import React, { useState } from 'react';
 
 import DatePicker from './DatePicker';

@@ -1,13 +1,13 @@
 import './DataList.scss';
 
+import * as utils from 'common/generic';
+import uuid from 'common/uuid';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
-import uuid from 'utils/uuid';
 
 import Checkbox from '../Checkbox';
 import { ErrorMessage, NoData, Pending } from './Boxes';

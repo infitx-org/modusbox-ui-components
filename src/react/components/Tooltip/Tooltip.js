@@ -1,10 +1,10 @@
 import './Tooltip.scss';
 
+import * as utils from 'common/generic';
+import uuid from 'common/uuid';
 import delay from 'lodash/delay';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
-import uuid from 'utils/uuid';
 
 import TooltipViewer from './TooltipViewer';
 

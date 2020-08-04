@@ -1,8 +1,8 @@
 import './index.scss';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as utils from 'utils/common';
 
 import ControlIcon from '../../components/ControlIcon';
 import DataList from '../../components/DataList';

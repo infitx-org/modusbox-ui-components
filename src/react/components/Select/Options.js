@@ -1,8 +1,8 @@
 import './Options.scss';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
 
 import Icon, { iconSizes } from '../Icon';
 import ScrollBox from '../ScrollBox';

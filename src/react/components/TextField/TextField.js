@@ -2,10 +2,10 @@ import '../../icons/modusbox/toggle-invisible.svg';
 import '../../icons/modusbox/toggle-visible.svg';
 import './TextField.scss';
 
+import * as utils from 'common/generic';
+import keyCodes from 'common/keyCodes';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
-import keyCodes from 'utils/keyCodes';
 
 import { InnerButton, InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
 import ControlIcon from '../ControlIcon/ControlIcon';

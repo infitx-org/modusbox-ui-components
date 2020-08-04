@@ -1,6 +1,6 @@
 /* eslint no-console: "off" */
-import { createOptionalValidation, validate, vd } from 'javascript/validation';
 import React from 'react';
+import { createOptionalValidation, validate, vd } from 'utils/validation';
 
 import Checkbox from '../../components/Checkbox';
 import Modal from '../../components/Modal';

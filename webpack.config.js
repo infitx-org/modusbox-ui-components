@@ -10,13 +10,14 @@ const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'c
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    components: './src/react/components/index.js',
+    'components': './src/react/components/index.js',
     // group every redux util into a single module
-    redux: './src/redux/index.js',
+    'redux': './src/redux/index.js',
     'redux/redux-fetch': './src/redux/reduxFetch/index.js',
     // group every JS util into a single module
-    utils: './src/javascript/index.js',
-    'utils/validation': './src/javascript/validation/index.js',
+    'utils': './src/utils/index.js',
+    'utils/validation': './src/utils/validation/index.js',
+    'utils/html': './src/utils/html/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -41,6 +42,7 @@ module.exports = {
   ],
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
     rules: [
@@ -55,6 +57,11 @@ module.exports = {
           },
           { loader: 'eslint-loader' },
         ],
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.(css|scss)?$/,

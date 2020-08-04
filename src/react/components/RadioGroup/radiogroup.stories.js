@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import { createOptionalValidation, validate, vd } from 'javascript/validation';
+import { createOptionalValidation, validate, vd } from 'utils/validation';
 import React, { useState } from 'react';
 
 import RadioGroup from './RadioGroup';

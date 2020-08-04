@@ -1,13 +1,13 @@
 import './Select.scss';
 import '../../icons/mule/search-small.svg';
 
+import * as utils from 'common/generic';
+import keyCodes from 'common/keyCodes';
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
-import keyCodes from 'utils/keyCodes';
 
 import { InvalidIcon, Loader, Placeholder, ValidationWrapper } from '../Common';
 import Icon, { iconSizes } from '../Icon';

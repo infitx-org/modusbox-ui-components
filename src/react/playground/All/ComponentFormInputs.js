@@ -1,5 +1,5 @@
-import { createValidation, toValidationResult, vd } from 'javascript/validation';
 import React, { Component } from 'react';
+import { createValidation, toValidationResult, vd } from 'utils/validation';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';
 import Heading from '../../components/Heading';

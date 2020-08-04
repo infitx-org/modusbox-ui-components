@@ -1,9 +1,9 @@
 import './Tabs.scss';
 
+import * as utils from 'common/generic';
+import keyCodes from 'common/keyCodes';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
-import keyCodes from 'utils/keyCodes';
 
 class Tab extends PureComponent {
   constructor(props) {

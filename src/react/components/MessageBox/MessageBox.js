@@ -1,8 +1,8 @@
 import './MessageBox.scss';
 
+import { composeClassNames } from 'common/generic';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { composeClassNames } from 'utils/common';
 
 import { Icon } from '../index';
 

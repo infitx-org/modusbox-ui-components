@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-import uuid from 'utils/uuid';
+import uuid from 'common/uuid';
 
 import {
   FETCH,

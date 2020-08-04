@@ -1,8 +1,8 @@
 import './Pill.scss';
 
+import { composeClassNames } from 'common/generic';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { composeClassNames } from 'utils/common';
 
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';

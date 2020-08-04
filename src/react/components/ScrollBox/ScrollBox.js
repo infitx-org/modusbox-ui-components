@@ -1,9 +1,9 @@
 import './ScrollBox.scss';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import ReactResizeDetector from 'react-resize-detector';
-import * as utils from 'utils/common';
 
 import ScrollBar from './ScrollBar';
 

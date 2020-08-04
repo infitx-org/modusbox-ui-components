@@ -1,9 +1,9 @@
 import './Menu.scss';
 import '../../icons/mule/back-small.svg';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
 
 import { NamedIcon } from '../Common';
 import Icon from '../Icon';

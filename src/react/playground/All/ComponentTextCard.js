@@ -1,6 +1,6 @@
 /* eslint no-console: "off" */
-import { createValidation, validate, vd } from 'javascript/validation';
 import React from 'react';
+import { createValidation, validate, vd } from 'utils/validation';
 
 import FormInput from '../../components/FormInputs/FormInput';
 import Modal from '../../components/Modal';

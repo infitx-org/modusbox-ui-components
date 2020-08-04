@@ -2,9 +2,9 @@ import './Common.scss';
 import '../../icons/mule/check-small.svg';
 import '../../icons/mule/close-small.svg';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as utils from 'utils/common';
 
 import Button from '../Button';
 import Icon, { iconSizes } from '../Icon';

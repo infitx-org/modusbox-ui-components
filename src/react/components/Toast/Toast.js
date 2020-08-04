@@ -1,9 +1,9 @@
 import './Toast.scss';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import Notification from 'rc-notification';
 import React, { Component } from 'react';
-import * as utils from 'utils/common';
 
 import Icon from '../Icon';
 

@@ -1,9 +1,9 @@
 import '../../icons/modusbox/arrow.svg';
 import './Header.scss';
 
+import * as utils from 'common/generic';
 import find from 'lodash/find';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
 
 import Checkbox from '../Checkbox';
 import ControlIcon from '../ControlIcon';

@@ -1,8 +1,8 @@
 import './ModalTabsLayout.scss';
 
+import * as utils from 'common/generic';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
 
 import ScrollBox from '../../ScrollBox';
 

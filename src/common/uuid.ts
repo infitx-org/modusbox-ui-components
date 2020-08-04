@@ -1,10 +1,9 @@
 /* eslint-disable no-bitwise, no-mixed-operators */
 
-const uuid = () => {
-  let _uuid = '';
-  let i;
-  let random;
-  for (i = 0; i < 32; i += 1) {
+const uuid = (): string => {
+  let _uuid: string = '';
+  let random: number;
+  for (let i = 0; i < 32; i += 1) {
     random = (Math.random() * 16) | 0;
 
     if (i === 8 || i === 12 || i === 16 || i === 20) {

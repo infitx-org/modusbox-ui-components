@@ -3,6 +3,20 @@ import { getFieldIsValid, getFieldMessages, getIsValid, getMessages } from './ge
 import toValidationResult, { validate } from './runner';
 import vd from './validators';
 
+const validation = {
+  vd,
+  createValidator,
+  createValidation,
+  createOptionalValidation,
+  toValidationResult,
+  validate,
+  getMessages,
+  getIsValid,
+  getFieldMessages,
+  getFieldIsValid,
+};
+
+export default validation;
 export {
   vd,
   createValidator,

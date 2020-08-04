@@ -1,5 +1,5 @@
+import * as utils from 'common/generic';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
 
 import Button from '../Button';
 import ControlIcon from '../ControlIcon/ControlIcon';

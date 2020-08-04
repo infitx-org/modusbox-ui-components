@@ -13,11 +13,12 @@ module.exports = {
     '^views': '<rootDir>/src/react/views',
     '^icons': '<rootDir>/src/react/icons',
     '^components': '<rootDir>/src/react/components',
-    '^utils[/](.+)$': '<rootDir>/src/utils/$1',
+    '^common[/](.+)': '<rootDir>/src/common/$1',
     '^test[/](.+)': '<rootDir>/test/$1',
     '^.+\\.(css|png|scss|svg)$': '<rootDir>/src/react/test/__mocks__/staticMocks.js'
   },
   'moduleFileExtensions': [
+    'ts',
     'js',
     'json',
     'jsx'
@@ -25,6 +26,6 @@ module.exports = {
   'roots': [
     'src/react/test',
     'src/redux/reduxFetch',
-    'src/javascript/validation'
+    'src/utils/validation'
   ]
 }

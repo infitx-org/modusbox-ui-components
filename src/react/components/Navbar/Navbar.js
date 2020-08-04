@@ -3,10 +3,10 @@ import '../../icons/modusbox/business-group.svg';
 import '../../icons/mule/user-small.svg';
 import './Navbar.scss';
 
+import * as utils from 'common/generic';
 import find from 'lodash/find';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import * as utils from 'utils/common';
 
 import Icon from '../Icon';
 import Modal from '../Modal';

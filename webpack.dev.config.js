@@ -13,6 +13,7 @@ module.exports = {
   plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
     rules: [
@@ -33,6 +34,11 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.(css|scss)?$/,

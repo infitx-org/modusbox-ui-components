@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import { createValidation, toValidationResult, vd } from 'javascript/validation';
+import { createValidation, toValidationResult, vd } from 'utils/validation';
 import React, { useState } from 'react';
 
 import FormInput, { FormInputs } from '../../components/FormInputs';

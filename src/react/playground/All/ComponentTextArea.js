@@ -1,6 +1,6 @@
 /* eslint no-console: "off" */
-import { createOptionalValidation, validate, vd } from 'javascript/validation';
 import React from 'react';
+import { createOptionalValidation, validate, vd } from 'utils/validation';
 
 import Row from '../../components/Row';
 import TextArea from '../../components/TextArea';
