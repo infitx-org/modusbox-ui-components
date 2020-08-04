@@ -1,15 +1,17 @@
 {
   "name": "@modusbox/modusbox-ui-components",
-  "version": "1.19.4",
+  "version": "1.20.0",
   "description": "ModusBox UI Components",
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "files": [
-    "dist/index.js",
-    "dist/index.css",
-    "dist/colors.scss",
-    "dist/redux-fetch.js",
-    "dist/redux-validation.js"
+    "dist/components/index.js",
+    "dist/components/index.css",
+    "dist/scss/colors.scss",
+    "dist/redux/index.js",
+    "dist/redux/reduxFetch/index.js",
+    "dist/javascript/index.js",
+    "dist/javascript/validation/index.js"
   ],
   "author": {
     "name": "Ivan Annovazzi",

@@ -4,19 +4,20 @@ const webpack = require('webpack');
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    bundle: ['./src/Root'],
+    bundle: ['./src/react/Root'],
   },
   output: {
     filename: '[name].js',
   },
   devtool: 'cheap-module-source-map',
   plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /(node_modules|bower_components|build)/,
         use: [
           {
             loader: 'babel-loader',

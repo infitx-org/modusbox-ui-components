@@ -21,6 +21,11 @@ module.exports = {
       return true;
     })
 
+    // resolve every directory under src directly
+    config.resolve = {
+      modules: [path.resolve(__dirname, '../', 'src'), 'node_modules']
+    };
+
     // Make whatever fine-grained changes you need
     config.module.rules.push({
       test: /\.scss$/,
@@ -46,16 +51,6 @@ module.exports = {
       loader: 'file-loader',
       include: path.resolve(__dirname, '../'),
     });
-
-    /*config.module.rules.push({
-      test: /\.md$/,
-      use: [
-        {
-          loader: 'markdown-loader',
-        }
-      ],
-      include: path.resolve(__dirname, '../'),
-    })*/
 
     // Return the altered config
     return config;

@@ -1,47 +1,95 @@
 ## Modusbox UI Components
 
-Reusable and configurable React UI components.
+Reusable modules to build Modusbox User Interfaces.
 
-#### Installing
+The library includes React components, Redux Middlewares, and commonly used JS utility modules.
 
-Make sure you have Docker installed, then run `make install`. If you make any
-changes to files outside `src`, such as `package.json`, you should run `make install` again. You can easily chain
-that with the command you want to run, for example `make install test`.
+```
+├── components         - React components folder
+│   ├── index.css      - React components stylesheets
+│   └── index.js       - React components single export module
+├── redux              - Redux folder
+│   ├── index.js       - all Redux exports
+│   └── redux-fetch    - Redux / Redux-Fetch folder
+│       └── index.js   - Redux-Fetch single export module
+├── scss               - SCSS Styles 
+│   └── colors.scss    - color module
+└── utils              - Javascript utils folder
+    ├── index.js       - all Javascript exports
+    └── validation     - Javascript / Validation folder
+        └── index.js   - Validation single export module
+```
 
-#### Running
+### Installing
+
+
+##### Makefile / Docker 
+
+Make sure you have _Docker_ installed, then run `make install`.
+
+If you make any changes to files outside `src`, such as `package.json`, you should run `make install` again.
+
+You can easily chain that with the command you want to run, for example `make install test`.
+
+
+##### Manual install
+
+  1. Make sure to have a compatible version of NodeJS.
+  2. Enter the project folder and run `yarn install`.
+
+
+### Running
+
+
+##### Running the dev playground
 
 Launch dev mode with `make start` and open [http://localhost:9090](http://localhost:9090). So long as you keep
 this process running, your files will be automatically linted (with automatic fixing) and you don't need to run a separate lint step.
 
-#### Adding and removing packages
+##### Running the Storybook playground
+
+Simply run `yarn storybook` to start the preconfigured Storybook playground.
+
+##### Adding and removing packages
 
 Run `make add package=name-of-package` or `make remove package=name-of-package`.
 This will automatically run `install`. To install for dev, change to
 `make add/remove package="--dev name-of-package"`.
 
-#### Incrementing the package version
+##### Incrementing the package version
 Run `make version increment=type-of-increment`, where `type-of-increment` is `major`, `minor`, or `patch` (defaults to `minor`).
 For example if the version is currently `1.1.0` and you run `make version` the new version will be `1.2.0`. If you run
 `make version increment=major` the new version will be `2.0.0`. You will then need to commit the updated package.json file. This
 should be the last step before you merge a pull request into the `master` branch.
 
-#### Building
+
+### Building
+
+Note: Several module will be produces by the build; they are grouped into folders so that they can be easily imported separately when consumed in a project.
 
 Building creates specific artifacts that the build process pulls out. To check that
 the build works, run `make build`. Build artifacts will be stored in the `dist/`.
 
-#### Linting
+### Testing / Linting
+
+**Note** Tests should be run each time some changes are committed to ensure everything works properly.
+
+##### Linting strategy
 
 Modern ESLint rules and AirBnb styleguide are applied to this code base. Linting runs
 automatically if you use `make start`, but if you need to run them manually,
 run `make lint`. Prettier is run as part of linting.
 
-### Testing
+##### Local testing for development
 
-To run the tests, run `make test` or, if you want to pass additional arguments, `make cmd="test"`
+In order to run the test locally, use `yarn jest`
+
+##### Containerized testing
+
+If you want to run the test inside docker, run `make test` or; if you want to pass additional arguments, `make cmd="test"`
 (everything in double quotes will be passed to yarn).
 
-#### Snapshot Testing
+##### Snapshot Testing
 
 Since most of these components are Pure, we'll be able to do a large amount of our testing via a technique in Jest, snapshot testing.
 Snapshot testing is related to doing pixel-by-pixel comparisons of rendered pages, but instead it compares markup.

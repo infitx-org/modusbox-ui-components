@@ -10,36 +10,42 @@ const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'c
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    index: './src/components/index.js',
-    'redux-fetch': './src/reduxFetch/index.js',
-    'redux-validation': './src/reduxValidation/index.js',
+    components: './src/react/components/index.js',
+    // group every redux util into a single module
+    redux: './src/redux/index.js',
+    'redux/redux-fetch': './src/redux/reduxFetch/index.js',
+    // group every JS util into a single module
+    utils: './src/javascript/index.js',
+    'utils/validation': './src/javascript/validation/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name]/index.js',
     libraryTarget: 'umd',
     library: 'modusbox-ui-components',
   },
   plugins: [
     new CleanWebpackPlugin('dist', {}),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new MiniCssExtractPlugin('[name].css', {
+    new MiniCssExtractPlugin({
+      filename: 'components/index.css',
       disable: false,
       allChunks: true,
     }),
     new CopyWebpackPlugin([
       {
         from: colorsSass,
-        to: path.resolve(__dirname, 'dist'),
+        to: path.resolve(__dirname, 'dist', 'scss'),
       },
     ]),
   ],
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /(node_modules|bower_components|build)/,
         use: [
           {
             loader: 'babel-loader',
