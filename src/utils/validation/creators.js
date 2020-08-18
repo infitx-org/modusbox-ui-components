@@ -9,14 +9,11 @@ const buildValidationCreator = isRequired => (validators, variables, selectors) 
   isRequired,
   variables,
   selectors,
-  validators: validators.map(validator => {
-    const { fn, message, appliesToTokens } = validator;
-    return {
-      message,
-      fn,
-      appliesToTokens,
-    };
-  }),
+  validators: validators.map(({ message, fn, appliesToTokens }) => ({
+    message,
+    fn,
+    appliesToTokens,
+  })),
 });
 
 // create functions that will test against all validators

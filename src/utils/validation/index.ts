@@ -3,7 +3,7 @@ import { getFieldIsValid, getFieldMessages, getIsValid, getMessages } from './ge
 import toValidationResult, { validate } from './runner';
 import vd from './validators';
 
-const validation = {
+export {
   vd,
   createValidator,
   createValidation,
@@ -16,8 +16,7 @@ const validation = {
   getFieldIsValid,
 };
 
-export default validation;
-export {
+export default {
   vd,
   createValidator,
   createValidation,

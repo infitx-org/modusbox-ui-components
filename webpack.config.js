@@ -10,14 +10,22 @@ const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'c
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    'components': './src/react/components/index.js',
+    // group every react util into a single module
+    'react/components': './src/react/components/index.js',
+    'react/hooks': './src/react/hooks/index.ts',
+    'react/hocs': './src/react/hocs/index.tsx',
     // group every redux util into a single module
-    'redux': './src/redux/index.js',
+    redux: './src/redux/index.js',
     'redux/redux-fetch': './src/redux/reduxFetch/index.js',
     // group every JS util into a single module
-    'utils': './src/utils/index.js',
-    'utils/validation': './src/utils/validation/index.js',
+    utils: './src/utils/index.ts',
+    'utils/async': './src/utils/async/index.ts',
+    'utils/file': './src/utils/file/index.ts',
+    'utils/localstorage': './src/utils/localstorage/index.ts',
     'utils/html': './src/utils/html/index.ts',
+    'utils/http': './src/utils/http/index.ts',
+    'utils/testers': './src/utils/testers/index.ts',
+    'utils/validation': './src/utils/validation/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -29,7 +37,7 @@ module.exports = {
     new CleanWebpackPlugin('dist', {}),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new MiniCssExtractPlugin({
-      filename: 'components/index.css',
+      filename: 'react/components/index.css',
       disable: false,
       allChunks: true,
     }),
@@ -59,9 +67,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
       },
       {
         test: /\.(css|scss)?$/,
