@@ -5,27 +5,30 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const colorsSass = path.resolve(__dirname, 'src', 'assets', 'styles', 'vars', 'colors.scss');
+const colorsSass = path.resolve(__dirname, 'src', 'react', 'assets', 'styles', 'vars', 'colors.scss');
 
 module.exports = {
   mode: process.env.NODE_ENV,
+  context: path.resolve(__dirname, 'src'),
   entry: {
     // group every react util into a single module
-    'react/components': './src/react/components/index.js',
-    'react/hooks': './src/react/hooks/index.ts',
-    'react/hocs': './src/react/hocs/index.tsx',
+    'react/components': 'react/components/index.js',
+    'react/hooks': 'react/hooks/index.ts',
+    'react/hocs': 'react/hocs/index.tsx',
+    
     // group every redux util into a single module
-    redux: './src/redux/index.js',
-    'redux/redux-fetch': './src/redux/reduxFetch/index.js',
+    redux: 'redux/index.js',
+    'redux/redux-fetch': 'redux/reduxFetch/index.js',
+    
     // group every JS util into a single module
-    utils: './src/utils/index.ts',
-    'utils/async': './src/utils/async/index.ts',
-    'utils/file': './src/utils/file/index.ts',
-    'utils/localstorage': './src/utils/localstorage/index.ts',
-    'utils/html': './src/utils/html/index.ts',
-    'utils/http': './src/utils/http/index.ts',
-    'utils/testers': './src/utils/testers/index.ts',
-    'utils/validation': './src/utils/validation/index.ts',
+    utils: 'utils/index.ts',
+    'utils/async': 'utils/async/index.ts',
+    'utils/file': 'utils/file/index.ts',
+    'utils/localstorage': 'utils/localstorage/index.ts',
+    'utils/html': 'utils/html/index.ts',
+    'utils/http': 'utils/http/index.ts',
+    'utils/testers': 'utils/testers/index.ts',
+    'utils/validation': 'utils/validation/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -63,12 +66,26 @@ module.exports = {
               presets: ['@babel/preset-env'],
             },
           },
-          { loader: 'eslint-loader' },
+          { 
+            loader: 'eslint-loader',
+            options: {
+              cache: true,
+            },
+          },
         ],
       },
       {
         test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
+        exclude: /node_modules/,
+        use: [{
+          loader: 'ts-loader',
+          options: {
+            compilerOptions: {
+              declarationDir: './dist',
+              outDir: './dist'
+            }
+          }
+        }]
       },
       {
         test: /\.(css|scss)?$/,
