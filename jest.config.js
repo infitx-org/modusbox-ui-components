@@ -24,8 +24,8 @@ module.exports = {
     'jsx'
   ],
   'roots': [
-    'src/react/test',
-    'src/redux/reduxFetch',
-    'src/utils/validation'
+    'src/react',
+    'src/redux',
+    'src/utils'
   ]
 }

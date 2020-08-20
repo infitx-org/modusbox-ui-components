@@ -38,5 +38,4 @@ export function useWidth(ref: MutableRefObject<HTMLDivElement> | null) {
   return width;
 }
 
-
-export default { useWindowSize, useWidth }
+export default { useWindowSize, useWidth };

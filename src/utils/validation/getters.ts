@@ -1,9 +1,6 @@
 // @ts-ignore
 import get from 'lodash/get';
-import {
-  ValidationMessage,
-  ValidationResults,
-} from './types';
+import { ValidationMessage, ValidationResults } from './types';
 
 const getMessages = (result: ValidationResults): ValidationMessage[] => result.messages;
 

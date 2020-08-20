@@ -17,10 +17,10 @@ const isNotNil = (value: AnyValue): boolean => value !== undefined && value !== 
 const isNotEmptyCollection = (collection: AnyValue[]): boolean => collection.length > 0;
 
 const getAnyIs = (value: AnyValue) => (...args: AnyValue[]): boolean =>
-  args.some((arg) => arg === value);
+  args.some(arg => arg === value);
 
 const getAllAre = (value: AnyValue) => (...args: AnyValue[]): boolean =>
-  args.every((arg) => arg === value);
+  args.every(arg => arg === value);
 
 const getAnyIsDefined = (...args: AnyValue[]): boolean => args.some(isDefined);
 

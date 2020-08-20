@@ -5,7 +5,15 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const colorsSass = path.resolve(__dirname, 'src', 'react', 'assets', 'styles', 'vars', 'colors.scss');
+const colorsSass = path.resolve(
+  __dirname,
+  'src',
+  'react',
+  'assets',
+  'styles',
+  'vars',
+  'colors.scss',
+);
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -15,11 +23,11 @@ module.exports = {
     'react/components': 'react/components/index.js',
     'react/hooks': 'react/hooks/index.ts',
     'react/hocs': 'react/hocs/index.tsx',
-    
+
     // group every redux util into a single module
     redux: 'redux/index.js',
     'redux/redux-fetch': 'redux/reduxFetch/index.js',
-    
+
     // group every JS util into a single module
     utils: 'utils/index.ts',
     'utils/async': 'utils/async/index.ts',
@@ -66,7 +74,7 @@ module.exports = {
               presets: ['@babel/preset-env'],
             },
           },
-          { 
+          {
             loader: 'eslint-loader',
             options: {
               cache: true,
@@ -77,15 +85,17 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'ts-loader',
-          options: {
-            compilerOptions: {
-              declarationDir: './dist',
-              outDir: './dist'
-            }
-          }
-        }]
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              compilerOptions: {
+                declarationDir: './dist',
+                outDir: './dist',
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(css|scss)?$/,

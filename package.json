@@ -24,7 +24,7 @@
     "storybook": "start-storybook",
     "storybook-build": "build-storybook -c .storybook -o .storybook-dist",
     "test": "jest",
-    "prettier": "prettier --write webpack*.js 'src/**/*.{js,scss}'",
+    "prettier": "prettier --write webpack*.js 'src/**/*.{js,jsx,ts,tsx,css,scss}'",
     "prepack": "yarn build",
     "printversion": "node -p \"require('./package.json').version\""
   },

@@ -11,8 +11,8 @@ const downloadFile = (content: string, filename: string) => {
 const readFileAsText = (file: File) => {
   const reader = new FileReader();
   return new Promise((resolve, reject) => {
-    reader.onload = (event) => resolve(event?.target?.result);
-    reader.onerror = (error) => reject(error);
+    reader.onload = event => resolve(event?.target?.result);
+    reader.onerror = error => reject(error);
     reader.readAsText(file);
   });
 };
@@ -51,4 +51,4 @@ const copyToClipboard = (content: string) => {
   document.body.removeChild(element);
 };
 
-export default { downloadFile, loadFile, copyToClipboard };
+export default { readFileAsText, downloadFile, loadFile, copyToClipboard };

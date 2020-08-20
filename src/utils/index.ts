@@ -16,12 +16,4 @@ export default {
   validation,
 };
 
-export {
-  async,
-  file,
-  localstorage,
-  html,
-  http,
-  testers,
-  validation,
-};
+export { async, file, localstorage, html, http, testers, validation };

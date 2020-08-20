@@ -1,7 +1,7 @@
 type AnyType = boolean | number | string | null | undefined;
 type JsonType = {
-  [key: string]: AnyType | JsonType
-}
+  [key: string]: AnyType | JsonType;
+};
 
 const setItem = (key: string, value: AnyType | JsonType) => {
   const stringified = JSON.stringify(value);
