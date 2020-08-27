@@ -26,7 +26,7 @@ const getAnyIsDefined = (...args: AnyValue[]): boolean => args.some(isDefined);
 
 const getAnyIsNotNil = (...args: AnyValue[]): boolean => args.some(isNotNil);
 
-export default {
+export {
   getAnyIs,
   getAllAre,
   getAnyIsDefined,

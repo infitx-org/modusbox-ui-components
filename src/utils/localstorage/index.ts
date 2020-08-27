@@ -27,4 +27,4 @@ const getItem = (key: string): AnyType | JsonType => {
 
 const removeItem = (key: string) => localStorage.removeItem(key);
 
-export default { setItem, getItem, removeItem };
+export { setItem, getItem, removeItem };

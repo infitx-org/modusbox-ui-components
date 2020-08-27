@@ -1,17 +1,17 @@
-export const is200 = (statusCode: number): boolean => statusCode === 200;
-export const is201 = (statusCode: number): boolean => statusCode === 201;
-export const is204 = (statusCode: number): boolean => statusCode === 204;
-export const is20x = (statusCode: number): boolean => statusCode >= 200 && statusCode <= 299;
-export const is400 = (statusCode: number): boolean => statusCode === 400;
-export const is401 = (statusCode: number): boolean => statusCode === 401;
-export const is403 = (statusCode: number): boolean => statusCode === 403;
-export const is404 = (statusCode: number): boolean => statusCode === 404;
-export const is422 = (statusCode: number): boolean => statusCode === 422;
-export const is40x = (statusCode: number): boolean => statusCode >= 400 && statusCode <= 499;
-export const is500 = (statusCode: number): boolean => statusCode === 500;
-export const is50x = (statusCode: number): boolean => statusCode >= 500 && statusCode <= 599;
+const is200 = (statusCode: number): boolean => statusCode === 200;
+const is201 = (statusCode: number): boolean => statusCode === 201;
+const is204 = (statusCode: number): boolean => statusCode === 204;
+const is20x = (statusCode: number): boolean => statusCode >= 200 && statusCode <= 299;
+const is400 = (statusCode: number): boolean => statusCode === 400;
+const is401 = (statusCode: number): boolean => statusCode === 401;
+const is403 = (statusCode: number): boolean => statusCode === 403;
+const is404 = (statusCode: number): boolean => statusCode === 404;
+const is422 = (statusCode: number): boolean => statusCode === 422;
+const is40x = (statusCode: number): boolean => statusCode >= 400 && statusCode <= 499;
+const is500 = (statusCode: number): boolean => statusCode === 500;
+const is50x = (statusCode: number): boolean => statusCode >= 500 && statusCode <= 599;
 
-export default {
+export {
   is200,
   is201,
   is204,
