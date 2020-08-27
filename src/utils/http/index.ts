@@ -11,7 +11,7 @@ export const is40x = (statusCode: number): boolean => statusCode >= 400 && statu
 export const is500 = (statusCode: number): boolean => statusCode === 500;
 export const is50x = (statusCode: number): boolean => statusCode >= 500 && statusCode <= 599;
 
-export default {
+export {
   is200,
   is201,
   is204,

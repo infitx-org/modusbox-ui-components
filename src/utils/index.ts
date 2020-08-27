@@ -1,19 +1,9 @@
-import async from './async';
-import file from './file';
-import localstorage from './localstorage';
-import html from './html';
-import http from './http';
-import testers from './testers';
-import validation from './validation';
-
-export default {
-  async,
-  file,
-  localstorage,
-  html,
-  http,
-  testers,
-  validation,
-};
+import * as async from './async';
+import * as file from './file';
+import * as localstorage from './localstorage';
+import * as html from './html';
+import * as http from './http';
+import * as testers from './testers';
+import * as validation from './validation';
 
 export { async, file, localstorage, html, http, testers, validation };

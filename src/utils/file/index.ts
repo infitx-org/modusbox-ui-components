@@ -51,4 +51,4 @@ const copyToClipboard = (content: string) => {
   document.body.removeChild(element);
 };
 
-export default { readFileAsText, downloadFile, loadFile, copyToClipboard };
+export { readFileAsText, downloadFile, loadFile, copyToClipboard };
