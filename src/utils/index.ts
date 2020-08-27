@@ -1,9 +1,7 @@
-import * as async from './async';
-import * as file from './file';
-import * as localstorage from './localstorage';
-import * as html from './html';
-import * as http from './http';
-import * as testers from './testers';
-import * as validation from './validation';
-
-export { async, file, localstorage, html, http, testers, validation };
+export * as async from './async';
+export * as file from './file';
+export * as localstorage from './localstorage';
+export * as html from './html';
+export * as http from './http';
+export * as testers from './testers';
+export * as validation from './validation';
