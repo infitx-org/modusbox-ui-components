@@ -1,4 +1,4 @@
-import http from './index';
+import * as http from './index';
 
 function testWrongCodes(tester, skipStatusCode) {
   const statusCodes = [100, 200, 300, 400, 500];
