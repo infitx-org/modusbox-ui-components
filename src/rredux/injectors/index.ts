@@ -54,3 +54,7 @@ function addSagaInjector(store: Store, runSaga, rootSaga) {
 }
 
 export { addSagaInjector, addReducerInjector };
+
+export type {
+  InjectableStore
+};
