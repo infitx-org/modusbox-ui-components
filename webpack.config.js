@@ -25,8 +25,9 @@ module.exports = {
     'react/hocs': 'react/hocs/index.tsx',
 
     // group every redux util into a single module
-    redux: 'redux/index.js',
-    'redux/redux-fetch': 'redux/reduxFetch/index.js',
+    redux: 'rredux/index.ts',
+    'redux/injectors': 'rredux/injectors/index.ts',
+    'redux/redux-fetch': 'rredux/reduxFetch/index.js',
 
     // group every JS util into a single module
     utils: 'utils/index.ts',
@@ -151,6 +152,13 @@ module.exports = {
       commonjs: 'react-dom',
       amd: 'react-dom',
       umd: 'react-dom',
+    },
+    redux: {
+      root: 'Redux',
+      commonjs2: 'redux',
+      commonjs: 'redux',
+      amd: 'redux',
+      umd: 'redux',
     },
   },
 };

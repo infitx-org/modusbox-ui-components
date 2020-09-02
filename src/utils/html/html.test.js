@@ -1,7 +1,6 @@
 import * as html from './index';
 
 describe('tests the HTML utility methods', () => {
-
   it('Should build the correct pair', () => {
     expect(html.composeOption('label', 'value')).toStrictEqual({ label: 'label', value: 'value' });
   });
