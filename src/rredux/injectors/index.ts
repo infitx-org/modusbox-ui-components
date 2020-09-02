@@ -38,7 +38,7 @@ function createSagaInjector(runSaga, rootSaga) {
     injectedSagas.set(key, task);
   };
 
-  // Inject the root saga as it is a staticlly loaded file
+  // Inject the root saga as it is a statically loaded file
   injectSaga('root', rootSaga);
 
   return injectSaga;

@@ -161,5 +161,12 @@ module.exports = {
       amd: 'redux',
       umd: 'redux',
     },
+    'react-redux': {
+      root: 'ReactRedux',
+      commonjs2: 'react-redux',
+      commonjs: 'react-redux',
+      amd: 'react-redux',
+      umd: 'react-redux',
+    },
   },
 };
