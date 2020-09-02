@@ -25,7 +25,7 @@ module.exports = {
   ],
   'roots': [
     'src/react',
-    'src/redux',
+    'src/rredux',
     'src/utils'
   ]
 }

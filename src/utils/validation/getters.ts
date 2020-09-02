@@ -1,4 +1,3 @@
-// @ts-ignore
 import get from 'lodash/get';
 import { ValidationMessage, ValidationResults } from './types';
 
