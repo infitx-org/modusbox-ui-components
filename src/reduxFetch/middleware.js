@@ -40,14 +40,14 @@ const parseResponse = async (response, parseAsJson, parseAsText) => {
   return { data, status, ok };
 };
 
-const buildFailedResponse = async (error, status, headers, handleError, state) => ({
-  data: handleError ? handleError(error, status, state) : error,
+const buildFailedResponse = async (error, status, headers, handleError, state, dispatch) => ({
+  data: handleError ? await handleError(error, status, state, dispatch) : error,
   headers,
   status,
 });
 
-const buildSuccessResponse = async (data, status, headers, handleData, state) => ({
-  data: handleData ? handleData(data, status, state) : data,
+const buildSuccessResponse = async (data, status, headers, handleData, state, dispatch) => ({
+  data: handleData ? handleData(data, status, state, dispatch) : data,
   headers,
   status,
 });
@@ -78,6 +78,7 @@ const fetchMiddleware = () => store => next => async action => {
     headers,
     body,
     credentials,
+    mode,
     parseAsText,
     parseAsJson,
     handleData,
@@ -89,7 +90,7 @@ const fetchMiddleware = () => store => next => async action => {
   let response;
   const requestId = uuid();
   const requestUrl = buildRequestUrl(url, params);
-  const requestConfig = buildRequestConfig(method, body, headers, credentials);
+  const requestConfig = buildRequestConfig(method, body, headers, credentials, mode);
 
   try {
     store.dispatch(setFetchRequestSent(name, crud, vars, requestConfig, requestId, saveData));
@@ -103,6 +104,7 @@ const fetchMiddleware = () => store => next => async action => {
         fetchResponse.headers,
         handleData,
         store.getState(),
+        store.dispatch,
       );
       store.dispatch(setFetchRequestSucceeded(name, crud, requestId, response));
     } else {
@@ -112,6 +114,7 @@ const fetchMiddleware = () => store => next => async action => {
         fetchResponse.headers,
         handleError,
         store.getState(),
+        store.dispatch,
       );
       store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
     }
