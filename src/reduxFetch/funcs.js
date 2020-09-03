@@ -67,6 +67,7 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}, method = 'GET') =>
     headers: {},
     body: undefined,
     credentials: undefined,
+    mode: undefined,
     handleData: undefined,
     handleError: undefined,
     sendAsJson: false,
@@ -97,6 +98,8 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}, method = 'GET') =>
     endpointConfig.credentials,
   );
 
+  const mode = firstNotUndefined(defaultConfig.mode, serviceConfig.mode, endpointConfig.mode);
+
   const overrideStatus = assignIn(
     {},
     defaultConfig.overrideStatus,
@@ -110,6 +113,7 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}, method = 'GET') =>
     ...endpointConfig,
     headers,
     credentials,
+    mode,
     overrideStatus,
   };
 
@@ -149,11 +153,18 @@ const buildRequestUrl = (url, queryParams = {}) => {
   return url;
 };
 
-const buildRequestConfig = (method = 'GET', body = null, headers, credentials) => {
+const buildRequestConfig = (
+  method = 'GET',
+  body = null,
+  headers,
+  credentials,
+  mode = undefined,
+) => {
   const requestConfig = {
     method,
     headers,
     credentials,
+    mode,
   };
 
   if (body !== null && headers['content-type'] === 'application/json') {
