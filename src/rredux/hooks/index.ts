@@ -3,17 +3,16 @@ import { Reducer } from 'redux';
 import { useStore } from 'react-redux';
 import { InjectableStore } from '../types';
 
+type Saga = () => Generator;
 
 // Installs the reducer on the parent app and makes sure it is used
-const useReducerLoader = (name: string, reducerFunction: Reducer, sagas: () => Generator) => {
+const useReducerLoader = (name: string, reducerFn: Reducer, saga: Saga) => {
   const store = useStore() as InjectableStore;
   const [isReducerLoaded, setReducerLoaded] = useState(false);
 
   useEffect(() => {
-    // we inject the reducer at runtime
-    store.injectReducer(name, reducerFunction);
-    // we inject the saga at runtime
-    store.injectSaga(name, sagas);
+    store.injectReducer(name, reducerFn);
+    store.injectSaga(name, saga);
   }, []);
 
   useEffect(() => {
