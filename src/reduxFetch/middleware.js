@@ -124,7 +124,7 @@ const fetchMiddleware = () => store => next => async function fetch (action) {
     store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
   }
 
-  if (retryOn401) {
+  if (response.status === 401 && retryOn401) {
     return fetch(action);
   }
 
