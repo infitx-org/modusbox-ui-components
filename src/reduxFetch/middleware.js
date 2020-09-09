@@ -58,7 +58,7 @@ const buildErrorResponse = message => ({
   status: undefined,
 });
 
-const fetchMiddleware = () => store => next => async action => {
+const fetchMiddleware = () => store => next => async function fetch (action) {
   // this is a custom middleware that allows to isolate
   // fetching logic and redux api state tracking
   const { type, config } = action;
@@ -85,6 +85,7 @@ const fetchMiddleware = () => store => next => async action => {
     handleError,
     saveData,
     overrideStatus,
+    retryOn401
   } = buildConfig(endpointConfig, serviceConfig, method);
 
   let response;
@@ -121,6 +122,10 @@ const fetchMiddleware = () => store => next => async action => {
   } catch (e) {
     response = buildErrorResponse(e.message);
     store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
+  }
+
+  if (retryOn401) {
+    return fetch(action);
   }
 
   return response;

@@ -82,6 +82,7 @@ const buildConfig = (endpointConfig = {}, serviceConfig = {}, method = 'GET') =>
       update: [],
       delete: [],
     },
+    retryOn401: false,
   };
 
   // build the headers separately since they would
