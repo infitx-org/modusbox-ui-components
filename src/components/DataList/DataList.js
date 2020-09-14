@@ -261,9 +261,10 @@ class DataList extends PureComponent {
     };
   }
   componentDidUpdate(prevProps) {
-    const { list, columns, selected, checked, checkable, onCheck } = this.props;
+    const { list, columns, selected, checked, checkable, onCheck, filters } = this.props;
     const didColumnsChange = prevProps.columns !== columns;
     const didListChange = prevProps.list !== list;
+    const didFiltersChange = prevProps.filters !== filters && !isEqual(filters, this.state.filters);
     const didOnCheckChange = onCheck !== prevProps.onCheck && !prevProps.onCheck;
 
     if (didColumnsChange || didOnCheckChange) {
@@ -273,7 +274,7 @@ class DataList extends PureComponent {
         onCheck ? this.onItemCheck : undefined,
       );
     }
-    if (didColumnsChange || didListChange || didOnCheckChange) {
+    if (didColumnsChange || didListChange || didOnCheckChange || didFiltersChange) {
       const { sortAsc, sortColumn, items } = this.state;
       const checkedItems = DataList.getCheckedItems(list, checked);
       const selectedItems = DataList.getSelectedItems(list, selected);
@@ -288,10 +289,14 @@ class DataList extends PureComponent {
         prevProps.list,
       );
 
-      const filteredItems = DataList.filterItems(listItems, this._columns, this.state.filters);
+      const filteredItems = DataList.filterItems(
+        listItems,
+        this._columns,
+        filters || this.state.filters,
+      );
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
-      this.setState({ items: sortedItems });
+      this.setState({ items: sortedItems, filters: filters || this.state.filters });
     }
   }
   onSortClick(sortColumn) {
@@ -308,10 +313,17 @@ class DataList extends PureComponent {
     const filters = DataList.getFilters(this.state.filters, _index, value);
     const items = DataList.filterItems(this.state.items, this._columns, filters);
 
-    this.setState({
-      items,
-      filters,
-    });
+    this.setState(
+      {
+        items,
+        filters,
+      },
+      () => {
+        if (this.props.onFilter) {
+          this.props.onFilter({ items, filters });
+        }
+      },
+    );
   }
   onFilterBlur(_index) {
     const filters = DataList.getFilters(this.state.filters, _index);
@@ -437,6 +449,7 @@ DataList.defaultProps = {
   onSelect: undefined,
   onUnselect: undefined,
   onCheck: undefined,
+  onFilter: undefined,
 };
 
 DataList.propTypes = {
@@ -469,6 +482,7 @@ DataList.propTypes = {
   onSelect: PropTypes.func,
   onUnselect: PropTypes.func,
   onCheck: PropTypes.func,
+  onFilter: PropTypes.func,
 };
 
 export default DataList;
