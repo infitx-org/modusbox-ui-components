@@ -1,34 +1,14 @@
 import { Store, Reducer, combineReducers } from 'redux';
-import { InjectableStore } from '../types';
+import { InjectableStore } from './types';
 
-function addReducerInjector(store: Store, reducer: Record<string, Reducer>): InjectableStore {
-  // Inject microfrontend reducers
-  // @ts-ignore
-  const asyncReducers = {};
-  return {
-    ...store,
-    asyncReducers,
-    // @ts-ignore
-    injectReducer: (key: string, asyncReducer: Reducer): void => {
-      Object.assign(asyncReducers, { [key]: asyncReducer });
-
-      store.replaceReducer(
-        combineReducers({
-          ...reducer,
-          ...asyncReducers,
-        }),
-      );
-    },
-  };
-}
+type Saga = () => Generator;
 
 // @ts-ignore
 function createSagaInjector(runSaga, rootSaga) {
   // Create a dictionary to keep track of injected sagas
   const injectedSagas = new Map();
   const isInjected = (key: string) => injectedSagas.has(key);
-  // @ts-ignore
-  const injectSaga = (key: string, saga: any) => {
+  const injectSaga = (key: string, saga: Saga) => {
     // We won't run saga if it is already injected
     if (isInjected(key)) return;
     // Sagas return task when they executed, which can be used
@@ -45,15 +25,42 @@ function createSagaInjector(runSaga, rootSaga) {
 }
 
 // @ts-ignore
-function addSagaInjector(store: Store, runSaga, rootSaga) {
+function addInjectors(
+  store: Store,
+  reducer: Record<string, Reducer>,
+  rootSaga: Saga,
+  // @ts-ignore
+  runSaga,
+): InjectableStore {
+  // Inject microfrontend reducers
+  // @ts-ignore
+  const asyncReducers = {};
   return {
     ...store,
+    asyncReducers,
     // @ts-ignore
-    injectSaga: createSagaInjector(runSaga, rootSaga),
+    injectReducerAndSaga: (asyncReducer: Reducer, asyncSaga): string => {
+      const path = Math.floor(Math.random() * 10000).toString();
+      const sagaInjector = createSagaInjector(runSaga, rootSaga);
+      Object.assign(asyncReducers, { [path]: asyncReducer });
+
+      store.replaceReducer(
+        combineReducers({
+          ...reducer,
+          ...asyncReducers,
+        }),
+      );
+
+      sagaInjector(path, asyncSaga);
+
+      return path;
+    },
   };
 }
 
-export { addSagaInjector, addReducerInjector };
+
+
+export { addInjectors };
 
 export type {
   InjectableStore

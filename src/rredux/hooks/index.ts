@@ -1,27 +1,35 @@
 import { useState, useEffect} from 'react';
 import { Reducer } from 'redux';
 import { useStore } from 'react-redux';
-import { InjectableStore } from '../types';
+import { InjectableStore } from '../injectors/types';
 
 type Saga = () => Generator;
 
 // Installs the reducer on the parent app and makes sure it is used
-const useReducerLoader = (name: string, reducerFn: Reducer, saga: Saga) => {
+const useReducerLoader = (reducerFn: Reducer, saga: Saga) => {
   const store = useStore() as InjectableStore;
-  const [isReducerLoaded, setReducerLoaded] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [clone, setClone] = useState(store);
 
   useEffect(() => {
-    store.injectReducer(name, reducerFn);
-    store.injectSaga(name, saga);
-  }, []);
-
-  useEffect(() => {
-    if (!isReducerLoaded && store.getState()[name] !== undefined) {
-      setReducerLoaded(true);
+    function injectAndGetStoreInstance() {
+      const assignedPath = store.injectReducerAndSaga(reducerFn, saga);
+      setClone(
+        Object.assign(Object.create(Object.getPrototypeOf(store)), store, {
+          getState: function getState() {
+            return store.getState()[assignedPath];
+          },
+        }),
+      );
+      setReady(true);
     }
+    injectAndGetStoreInstance();
   }, []);
-  return isReducerLoaded;
+
+  if (ready) {
+    return clone;
+  }
+  return false;
 };
 
-
-export { useReducerLoader }
+export { useReducerLoader };
