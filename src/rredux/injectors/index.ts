@@ -1,15 +1,12 @@
 import uuid from 'common/uuid';
 import { Store, Reducer, combineReducers } from 'redux';
-import { InjectableStore } from './types';
+import { InjectableStore, Saga, SagaRunner, SagaInjector } from './types';
 
-type Saga = () => Generator;
-
-// @ts-ignore
-function createSagaInjector(runSaga, rootSaga) {
+function createSagaInjector(runSaga: SagaRunner, rootSaga: Saga): SagaInjector {
   // Create a dictionary to keep track of injected sagas
   const injectedSagas = new Map();
   const isInjected = (key: string) => injectedSagas.has(key);
-  const injectSaga = (key: string, saga: Saga) => {
+  const injectSaga: SagaInjector = (key: string, saga: Saga) => {
     // We won't run saga if it is already injected
     if (isInjected(key)) return;
     // Sagas return task when they executed, which can be used
@@ -25,22 +22,19 @@ function createSagaInjector(runSaga, rootSaga) {
   return injectSaga;
 }
 
-// @ts-ignore
 function addInjectors(
   store: Store,
   reducer: Record<string, Reducer>,
   rootSaga: Saga,
-  // @ts-ignore
-  runSaga,
+  runSaga: SagaRunner,
 ): InjectableStore {
-  // Inject microfrontend reducers
-  // @ts-ignore
-  const asyncReducers = {};
+  // Inject microfrontend reducers and sagas
+  const asyncReducers: Record<string, Reducer> = {};
   return {
     ...store,
     asyncReducers,
-    // @ts-ignore
     injectReducerAndSaga: (asyncReducer: Reducer, asyncSaga): string => {
+      // let's generate a unique path to mount the child app reducers
       const path = uuid();
       const sagaInjector = createSagaInjector(runSaga, rootSaga);
       Object.assign(asyncReducers, { [path]: asyncReducer });
@@ -52,6 +46,7 @@ function addInjectors(
         }),
       );
 
+      // let's run the child app sagas by using the same unique path
       sagaInjector(path, asyncSaga);
 
       return path;
