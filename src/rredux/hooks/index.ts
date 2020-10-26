@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Reducer } from 'redux';
 import { useStore } from 'react-redux';
 import { InjectableStore } from '../injectors/types';

@@ -11,7 +11,7 @@ export interface ValidationField {
   fields?: ValidationFields[];
 }
 
-export type ValidationFields = Record<string, ValidationField>
+export type ValidationFields = Record<string, ValidationField>;
 
 export interface ValidationResults {
   isValid: boolean;
