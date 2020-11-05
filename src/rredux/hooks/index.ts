@@ -5,19 +5,19 @@ import { Saga } from '@redux-saga/types';
 import { InjectableStore } from '../injectors/types';
 
 // Installs the reducer on the parent app and makes sure it is used
-const useReducerLoader = (reducer: Reducer, saga: Saga) => {
+const useChildStore = (reducer: Reducer, saga: Saga) => {
   const store = useStore() as InjectableStore;
-  const [clone, setClone] = useState(null);
+  const [childStore, setChildStore] = useState(null);
 
   useEffect(() => {
     function injectAndGetStoreInstance() {
-      const assignedPath = store.inject({ reducer, saga });
-      setClone(assignedPath);
+      const childStore = store.inject({ reducer, saga });
+      setChildStore(childStore);
     }
     injectAndGetStoreInstance();
   }, []);
 
-  return clone;
+  return childStore;
 };
 
-export { useReducerLoader };
+export { useChildStore };
