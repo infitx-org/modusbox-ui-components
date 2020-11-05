@@ -1,15 +1,14 @@
 import { Reducer, Store } from 'redux';
+import { Saga, Task } from '@redux-saga/types';
 
-export type Saga = () => Generator;
-export type SagaRunner = (Saga: Saga) => number;
+export type SagaRunner = (Saga: Saga) => Task;
 export type SagaInjector = (key: string, saga: Saga) => void;
+export type ReducerMap = Record<string, Reducer>;
+export type ReducerInjector = (asyncReducer: Reducer) => string;
+export type InjectReducerAndSaga = ({ reducer, saga }: { reducer: Reducer; saga: Saga }) => Store;
 
-// We need to define the InjectReducerAndSaga type extending the store the way we want
-type InjectReducerAndSaga = (reducer: Reducer, saga: Saga) => string;
-
-interface StoreInjectors {
-  injectReducerAndSaga: InjectReducerAndSaga;
-  asyncReducers?: any;
+export interface StoreInjectors {
+  inject: InjectReducerAndSaga;
 }
 
 export type InjectableStore = Store & StoreInjectors;
