@@ -3,11 +3,11 @@ import { combineReducers, Reducer, Store, StoreCreator, AnyAction } from 'redux'
 import { Saga, Task } from '@redux-saga/types';
 import { SagaRunner, SagaInjector, ReducerMap, ReducerInjector, InjectableStore } from './types';
 
-function createSagaInjector(runSaga: SagaRunner): SagaInjector {
+function createSagaInjector(runSaga: SagaRunner, rootSaga: Saga): SagaInjector {
   // Create a dictionary to keep track of injected sagas
   const injectedSagas = new Map();
 
-  return function sagaInjector(key: string, saga: Saga) {
+  function sagaInjector(key: string, saga: Saga) {
     // We won't run saga if it is already injected
     // Sagas return task when they executed, which can be used to cancel them
     // Save the task if we want to cancel it in the future
@@ -17,6 +17,11 @@ function createSagaInjector(runSaga: SagaRunner): SagaInjector {
     const task = runSaga(saga);
     injectedSagas.set(key, task);
   };
+
+  // Inject the root saga as it a staticlly loaded file,
+  sagaInjector('root', rootSaga);
+
+  return sagaInjector;
 }
 
 function createReducerInjector(
@@ -58,9 +63,9 @@ function createInjectors(injectSaga: SagaInjector, injectReducer: ReducerInjecto
   };
 }
 
-function addInjectors(store: Store, reducers: ReducerMap, sagaRunner: SagaRunner): InjectableStore {
+function addInjectors(store: Store, reducers: ReducerMap, sagaRunner: SagaRunner, rootSaga: Saga): InjectableStore {
   // Create injectors
-  const sagaInjector = createSagaInjector(sagaRunner);
+  const sagaInjector = createSagaInjector(sagaRunner, rootSaga);
   const reducerInjector = createReducerInjector(store.replaceReducer, reducers);
 
   // Create inject function to expose on store object
@@ -82,14 +87,16 @@ function addInjectors(store: Store, reducers: ReducerMap, sagaRunner: SagaRunner
 function applyInjectors({
   staticReducers,
   sagaRunner,
+  rootSaga,
 }: {
   staticReducers: ReducerMap;
   sagaRunner: SagaRunner;
+  rootSaga: Saga,
 }) {
   return (createStore: StoreCreator) => {
     return function injectStoreCreator(reducerFn: Reducer, preloadedState: ReturnType<Reducer>) {
       const store = createStore(reducerFn, preloadedState);
-      return addInjectors(store, staticReducers, sagaRunner);
+      return addInjectors(store, staticReducers, sagaRunner, rootSaga);
     };
   };
 }
