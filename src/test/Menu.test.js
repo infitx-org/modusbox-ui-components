@@ -144,6 +144,22 @@ it('renders the menu items when partial match is allowed', () => {
   expect(activeMenuItem.text()).toBe('foo');
 });
 
+it('renders the menu items when router param is used', () => {
+  const wrapper = mount(
+    <Menu path="/" pathname="/users/:user-id/settings" onChange={onChangeMockEvent}>
+      <MenuItem path="/books" label="Books" />
+      <MenuItem path="/users/:user-id" label="User" asRoot>
+        <MenuItem path="/users/:user-id/account" label="account" />
+        <MenuItem path="/users/:user-id/settings" label="settings" />
+      </MenuItem>
+    </Menu>,
+  );
+  const menuItem = wrapper.find('.el-menu__item');
+  const activeMenuItem = wrapper.find('.el-menu__item--active');
+  expect(menuItem).toHaveLength(2);
+  expect(activeMenuItem.text()).toBe('settings');
+});
+
 it('renders the menu section if parent root matches', () => {
   const wrapper = mount(
     <Menu path="/" pathname="/" onChange={onChangeMockEvent}>
