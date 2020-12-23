@@ -7,6 +7,23 @@ import Checkbox from '../../components/Checkbox';
 import Button from '../../components/Button';
 import Menu, { MenuItem, MenuSection } from '../../components/Menu';
 
+const Menu0 = ({ pathname, onChange, disabled, hidden }) => (
+  <Menu path="/" pathname={pathname} onChange={onChange}>
+    <MenuItem path="/user/:user-id" to="/user/:user-id/overview" label="user" asRoot>
+      <MenuItem to="/" label="initial" back />
+      <MenuSection path="/user/:user-id" label="Books">
+        <MenuItem path="/user/:user-id/overview" label="User overview" />
+        <MenuItem path="/user/:user-id/settings" label="User settings" />
+      </MenuSection>
+    </MenuItem>
+    <MenuItem path="/books" label="books" asRoot>
+      <MenuSection label="Books">
+        <MenuItem path="/books/most-read" label="most read" />
+        <MenuItem path="/books/most-sold" label="most sold" />
+      </MenuSection>
+    </MenuItem>
+  </Menu>
+);
 const Menu1 = ({ pathname, onChange, disabled, hidden }) => (
   <Menu path="/" pathname={pathname} onChange={onChange}>
     <MenuItem path="/tracking" label="Tracking" hidden={hidden} />
@@ -159,6 +176,9 @@ class MenuTester extends PureComponent {
 const TestMenu = () => (
   <div>
     <div style={{ padding: '10px', border: '1px solid #ccc', display: 'flex' }}>
+      <MenuTester>
+        <Menu0 />
+      </MenuTester>
       <MenuTester>
         <Menu1 />
       </MenuTester>

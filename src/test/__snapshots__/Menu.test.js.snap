@@ -16,6 +16,7 @@ exports[`renders the menu correctly when multiple props are set 1`] = `
         className="el-menu__section-items"
       >
         <MenuItem
+          active={true}
           asRoot={false}
           back={false}
           disabled={false}
@@ -30,7 +31,7 @@ exports[`renders the menu correctly when multiple props are set 1`] = `
           size={14}
         >
           <div
-            className="el-menu__item"
+            className="el-menu__item el-menu__item--active"
             onClick={[Function]}
             role="presentation"
           >

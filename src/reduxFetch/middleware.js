@@ -58,77 +58,78 @@ const buildErrorResponse = message => ({
   status: undefined,
 });
 
-const fetchMiddleware = () => store => next => async function fetch (action) {
-  // this is a custom middleware that allows to isolate
-  // fetching logic and redux api state tracking
-  const { type, config } = action;
+const fetchMiddleware = () => store => next =>
+  async function fetch(action) {
+    // this is a custom middleware that allows to isolate
+    // fetching logic and redux api state tracking
+    const { type, config } = action;
 
-  if (type !== FETCH) {
-    // just pass to next middleware if not a "FETCH" action
-    return next(action);
-  }
+    if (type !== FETCH) {
+      // just pass to next middleware if not a "FETCH" action
+      return next(action);
+    }
 
-  // Get configs for both endpoint and service
-  const { method, params, service, name, crud } = config;
-  const vars = getEndpointVariables(config);
-  const serviceConfig = buildServiceConfig(service, store.getState());
-  const endpointConfig = buildEndpointConfig(config, store.getState());
-  const {
-    url,
-    headers,
-    body,
-    credentials,
-    mode,
-    parseAsText,
-    parseAsJson,
-    handleData,
-    handleError,
-    saveData,
-    overrideStatus,
-    retryOn401
-  } = buildConfig(endpointConfig, serviceConfig, method);
+    // Get configs for both endpoint and service
+    const { method, params, service, name, crud } = config;
+    const vars = getEndpointVariables(config);
+    const serviceConfig = buildServiceConfig(service, store.getState());
+    const endpointConfig = buildEndpointConfig(config, store.getState());
+    const {
+      url,
+      headers,
+      body,
+      credentials,
+      mode,
+      parseAsText,
+      parseAsJson,
+      handleData,
+      handleError,
+      saveData,
+      overrideStatus,
+      retryOn401,
+    } = buildConfig(endpointConfig, serviceConfig, method);
 
-  let response;
-  const requestId = uuid();
-  const requestUrl = buildRequestUrl(url, params);
-  const requestConfig = buildRequestConfig(method, body, headers, credentials, mode);
+    let response;
+    const requestId = uuid();
+    const requestUrl = buildRequestUrl(url, params);
+    const requestConfig = buildRequestConfig(method, body, headers, credentials, mode);
 
-  try {
-    store.dispatch(setFetchRequestSent(name, crud, vars, requestConfig, requestId, saveData));
-    const fetchResponse = await window.fetch(requestUrl, requestConfig);
-    const { data, status, ok } = await parseResponse(fetchResponse, parseAsJson, parseAsText);
+    try {
+      store.dispatch(setFetchRequestSent(name, crud, vars, requestConfig, requestId, saveData));
+      const fetchResponse = await window.fetch(requestUrl, requestConfig);
+      const { data, status, ok } = await parseResponse(fetchResponse, parseAsJson, parseAsText);
 
-    if (ok || shouldOverrideStatus(crud, status, overrideStatus)) {
-      response = await buildSuccessResponse(
-        data,
-        status,
-        fetchResponse.headers,
-        handleData,
-        store.getState(),
-        store.dispatch,
-      );
-      store.dispatch(setFetchRequestSucceeded(name, crud, requestId, response));
-    } else {
-      response = await buildFailedResponse(
-        data,
-        status,
-        fetchResponse.headers,
-        handleError,
-        store.getState(),
-        store.dispatch,
-      );
+      if (ok || shouldOverrideStatus(crud, status, overrideStatus)) {
+        response = await buildSuccessResponse(
+          data,
+          status,
+          fetchResponse.headers,
+          handleData,
+          store.getState(),
+          store.dispatch,
+        );
+        store.dispatch(setFetchRequestSucceeded(name, crud, requestId, response));
+      } else {
+        response = await buildFailedResponse(
+          data,
+          status,
+          fetchResponse.headers,
+          handleError,
+          store.getState(),
+          store.dispatch,
+        );
+        store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
+      }
+    } catch (e) {
+      response = buildErrorResponse(e.message);
       store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
     }
-  } catch (e) {
-    response = buildErrorResponse(e.message);
-    store.dispatch(setFetchRequestFailed(name, crud, requestId, response));
-  }
 
-  if (response.status === 401 && retryOn401) {
-    return fetch(action);
-  }
+    if (response.status === 401 && retryOn401) {
+      return fetch(action);
+    }
 
-  return response;
-};
+    return response;
+  };
 
 export default fetchMiddleware;

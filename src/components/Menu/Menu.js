@@ -9,15 +9,20 @@ import { NamedIcon } from '../Common';
 import Icon from '../Icon';
 
 const getPathMatches = (pathname, path, partial) => {
-  let pathMatches = false;
-  if (path) {
-    if (partial) {
-      pathMatches = pathname.startsWith(path);
-    } else {
-      pathMatches = path === pathname;
-    }
+  if (!path) {
+    return false;
   }
-  return pathMatches;
+  const isPartialMatch = partial && pathname.startsWith(path);
+  const isExactMatch = path === pathname;
+  const pathChunks = path.split('/');
+  const pathNameChunks = pathname.split('/');
+  const isWildMatch = pathNameChunks.every((chunk, index) => {
+    const pathChunk = pathChunks[index];
+    const isExact = pathChunk === chunk;
+    const isWild = pathChunk && pathChunk.startsWith(':');
+    return isExact || isWild;
+  });
+  return isPartialMatch || isExactMatch || isWildMatch;
 };
 
 const bindOnClickProp = onClick => element =>
