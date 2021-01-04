@@ -12,17 +12,27 @@ const getPathMatches = (pathname, path, partial) => {
   if (!path) {
     return false;
   }
-  const isPartialMatch = partial && pathname.startsWith(path);
-  const isExactMatch = path === pathname;
+  if (partial && pathname.startsWith(path)){
+    return true;
+  }
+  if (path === pathname) {
+    return true;
+  }
+
   const pathChunks = path.split('/');
   const pathNameChunks = pathname.split('/');
-  const isWildMatch = pathNameChunks.every((chunk, index) => {
+
+  if (pathChunks.length !== pathNameChunks.length) {
+    return false;
+  }
+
+  return pathNameChunks.every((chunk, index) => {
     const pathChunk = pathChunks[index];
     const isExact = pathChunk === chunk;
-    const isWild = pathChunk && pathChunk.startsWith(':');
+    const isWild = pathChunk !== undefined && pathChunk.startsWith(':');
     return isExact || isWild;
   });
-  return isPartialMatch || isExactMatch || isWildMatch;
+  
 };
 
 const bindOnClickProp = onClick => element =>
