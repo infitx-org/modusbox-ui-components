@@ -1,5 +1,9 @@
 const path = require('path');
 
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   stories: ['../src/**/*.stories.[tj]s','../src/**/*.stories.mdx'],
   addons: [
@@ -23,8 +27,18 @@ module.exports = {
 
     // resolve every directory under src directly
     config.resolve = {
-      modules: [path.resolve(__dirname, '../', 'src'), 'node_modules']
+      modules: [
+        path.resolve(__dirname, '..', 'src'),
+        'node_modules',
+      ],
+      extensions: ['.tsx', '.ts', '.js'],
     };
+
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      use: 'ts-loader',
+      exclude: /node_modules/,
+    });
 
     // Make whatever fine-grained changes you need
     config.module.rules.push({
