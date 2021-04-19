@@ -39,6 +39,7 @@ class RowItem extends PureComponent {
   static getCells(item) {
     return column => (
       <ItemCell
+        disableTooltip={column.disableTooltip}
         key={column._index}
         className={column.className}
         content={item.data[column._index].component}
@@ -75,7 +76,15 @@ class RowItem extends PureComponent {
 
 class ItemCell extends PureComponent {
   render() {
-    const { isCheckbox, checked, isCentered, content, value, className } = this.props;
+    const {
+      isCheckbox,
+      checked,
+      isCentered,
+      content,
+      value,
+      className,
+      disableTooltip,
+    } = this.props;
     const itemCellClassName = utils.composeClassNames([
       className,
       'el-datalist__item-cell',
@@ -87,8 +96,10 @@ class ItemCell extends PureComponent {
       cell = React.cloneElement(content, { ...content.props, checked });
     } else if (content) {
       cell = content;
-    } else {
+    } else if (!disableTooltip) {
       cell = <Tooltip>{value}</Tooltip>;
+    } else {
+      cell = value;
     }
     return <div className={itemCellClassName}>{cell}</div>;
   }

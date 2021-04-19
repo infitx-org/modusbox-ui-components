@@ -65,6 +65,7 @@ class DataListWithSettings extends PureComponent {
         linkFunc: false,
         icon: false,
         component: false,
+        disableTooltip: true,
       },
       modifiers: {
         isFlex: false,

@@ -456,6 +456,7 @@ DataList.propTypes = {
   flex: PropTypes.bool,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
+      disableTooltip: PropTypes.bool,
       label: PropTypes.string,
       key: PropTypes.string,
       func: PropTypes.func,

@@ -56,6 +56,7 @@ export const getColumns = ({
   linkFunc = false,
   icon = false,
   component = false,
+  disableTooltip,
 } = {}) => {
   return [
     col1 && {
@@ -129,5 +130,5 @@ export const getColumns = ({
       func: () => <Checkbox checked={valueModifier % 2 !== 0} />,
       className: 'col-40px',
     },
-  ].filter(item => item !== false && item !== undefined);
+  ].filter(item => item !== false && item !== undefined).map(col => ({...col, disableTooltip}));
 };
