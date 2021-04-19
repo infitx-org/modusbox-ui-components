@@ -48,6 +48,35 @@ const testColumns2 = [
   },
 ];
 
+it('renders the tooltips', () => {
+  const wrapper = mount(<DataList list={testList1} columns={testColumns2} />);
+
+  expect(
+    wrapper
+      .find('.el-datalist__rows')
+      .find('.el-tooltip')
+      .exists(),
+  ).toBe(true);
+  expect(wrapper.find('.el-datalist__rows').find('div.el-tooltip')).toHaveLength(testList1.length);
+});
+
+it('removes the tooltips', () => {
+  const wrapper = mount(
+    <DataList
+      list={testList1}
+      columns={[{ label: 'Column without tooltip', key: 'col', disableTooltip: true }]}
+    />,
+  );
+
+  expect(
+    wrapper
+      .find('.el-datalist__rows')
+      .find('.el-tooltip')
+      .exists(),
+  ).toBe(false);
+  expect(wrapper.find('.el-datalist__rows').find('div.el-tooltip')).toHaveLength(0);
+});
+
 it('renders the list', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns1} />);
 
