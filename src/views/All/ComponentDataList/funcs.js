@@ -15,7 +15,8 @@ export const buildRow = () => {
   };
   return row;
 };
-export const list = new Array(3).fill(0).map(buildRow);
+
+export const list = new Array(1200).fill(0).map(buildRow);
 
 export const containerStyle = {
   padding: '5px',

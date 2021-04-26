@@ -48,6 +48,49 @@ const testColumns2 = [
   },
 ];
 
+it('renders the paginator with pageSize', () => {
+  const wrapper = mount(<DataList list={testList1} columns={testColumns2} pageSize={2} />);
+
+  expect(wrapper.find('.el-paginator').exists()).toBe(true);
+});
+
+it('does not renders the paginator with pageSize less than 1', () => {
+  const wrapper = mount(<DataList list={testList1} columns={testColumns2} pageSize={0} />);
+
+  expect(wrapper.find('.el-paginator').exists()).toBe(false);
+});
+
+it('does not renders the paginator with pageSize equal than item size', () => {
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns2} pageSize={testList1.length} />,
+  );
+
+  expect(wrapper.find('.el-paginator').exists()).toBe(false);
+});
+
+it('does not renders the paginator with pageSize greatter than item size', () => {
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns2} pageSize={testList1.length + 100} />,
+  );
+
+  expect(wrapper.find('.el-paginator').exists()).toBe(false);
+});
+
+it('does not renders the paginator with pageSize larger than the amount of items', () => {
+  const wrapper = mount(<DataList list={testList1} columns={testColumns2} pageSize={1000} />);
+
+  expect(wrapper.find('.el-paginator').exists()).toBe(false);
+});
+
+it('renders paginator with the expected amount of pages', () => {
+  const wrapper = mount(
+    <DataList list={testList1} columns={testColumns2} pageSize={1} paginatorSize={3} />,
+  );
+
+  expect(wrapper.find('.el-paginator').exists()).toBe(true);
+  expect(wrapper.find('.el-paginator').find('div.el-paginator__page')).toHaveLength(3);
+});
+
 it('renders the tooltips', () => {
   const wrapper = mount(<DataList list={testList1} columns={testColumns2} />);
 
@@ -60,7 +103,7 @@ it('renders the tooltips', () => {
   expect(wrapper.find('.el-datalist__rows').find('div.el-tooltip')).toHaveLength(testList1.length);
 });
 
-it('removes the tooltips', () => {
+it('does not render the tooltips', () => {
   const wrapper = mount(
     <DataList
       list={testList1}

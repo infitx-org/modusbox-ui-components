@@ -13,6 +13,7 @@ import Checkbox from '../Checkbox';
 import { ErrorMessage, NoData, Pending } from './Boxes';
 import Header from './Header';
 import Link from './Link';
+import Paginator from './Paginator';
 import Rows from './Rows';
 
 class DataList extends PureComponent {
@@ -211,6 +212,14 @@ class DataList extends PureComponent {
     return filters;
   }
 
+  static getAmountOfPages(pageSize, items) {
+    return Math.ceil(items.length / pageSize);
+  }
+
+  static getVisibleItems(items) {
+    return items.filter(item => item._visible);
+  }
+
   constructor(props) {
     super(props);
 
@@ -222,6 +231,9 @@ class DataList extends PureComponent {
     this.onHeaderCheckboxChange = this.onHeaderCheckboxChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onItemCheck = this.onItemCheck.bind(this);
+    this.onPageClick = this.onPageClick.bind(this);
+
+    this._pageSize = props.pageSize;
 
     this._columns = DataList.convertColumns(
       this.props.columns,
@@ -258,6 +270,7 @@ class DataList extends PureComponent {
       sortAsc,
       sortColumn,
       filters: [],
+      selectedPage: 1,
     };
   }
   componentDidUpdate(prevProps) {
@@ -289,14 +302,20 @@ class DataList extends PureComponent {
         prevProps.list,
       );
 
-      const filteredItems = DataList.filterItems(
-        listItems,
-        this._columns,
-        filters || this.state.filters,
-      );
+      const currentFilters = filters || this.state.filters;
+      const filteredItems = DataList.filterItems(listItems, this._columns, currentFilters);
       const sortedItems = DataList.sortItems(filteredItems, sortAsc, sortColumn);
 
-      this.setState({ items: sortedItems, filters: filters || this.state.filters });
+      const pages = DataList.getAmountOfPages(
+        this._pageSize,
+        DataList.getVisibleItems(sortedItems),
+      );
+
+      this.setState({
+        items: sortedItems,
+        filters: currentFilters,
+        selectedPage: Math.min(this.state.selectedPage, pages)
+      });
     }
   }
   onSortClick(sortColumn) {
@@ -317,10 +336,14 @@ class DataList extends PureComponent {
       {
         items,
         filters,
+        selectedPage: 1,
       },
       () => {
         if (this.props.onFilter) {
-          this.props.onFilter({ items, filters });
+          this.props.onFilter({
+            items: DataList.getVisibleItems(items).map(i => i._source),
+            filters,
+          });
         }
       },
     );
@@ -383,9 +406,13 @@ class DataList extends PureComponent {
     this.props.onCheck(sourceCheckedItems);
   }
 
+  onPageClick(selectedPage) {
+    this.setState({ selectedPage });
+  }
+
   render() {
-    const { flex, isPending, noData, errorMsg, hasError, checkable } = this.props;
-    const { items, sortAsc, sortColumn, filters } = this.state;
+    const { flex, isPending, noData, errorMsg, hasError, checkable, paginatorSize } = this.props;
+    const { items, sortAsc, sortColumn, filters, selectedPage } = this.state;
     const className = utils.composeClassNames([
       'mb-element',
       'el-datalist',
@@ -404,6 +431,29 @@ class DataList extends PureComponent {
     } else if (items.length === 0 && filters.length === 0) {
       content = <NoData message={noData} />;
     } else {
+      let paginator = null;
+      let data = items;
+
+      if (this._pageSize > 0) {
+        data = DataList.getVisibleItems(data);
+        const pages = DataList.getAmountOfPages(this._pageSize, data);
+
+        if (pages > 1 && selectedPage >= 1 && selectedPage <= pages) {
+          const start = (selectedPage - 1) * this._pageSize;
+          data = data.slice(start, start + this._pageSize);
+
+          paginator = (
+            <Paginator
+              key="datalist-paginator"
+              count={paginatorSize}
+              pages={pages}
+              selectedPage={selectedPage}
+              onPageClick={this.onPageClick}
+            />
+          );
+        }
+      }
+
       content = [
         <Header
           key="datalist-header"
@@ -422,10 +472,11 @@ class DataList extends PureComponent {
         />,
         <Rows
           key="datalist-rows"
-          items={items}
+          items={data}
           columns={this._columns}
           onItemClick={this.onItemClick}
         />,
+        paginator,
       ];
     }
 
@@ -435,6 +486,8 @@ class DataList extends PureComponent {
 
 DataList.defaultProps = {
   flex: true,
+  pageSize: undefined,
+  paginatorSize: 7,
   columns: [],
   list: [],
   sortAsc: true,
@@ -454,6 +507,8 @@ DataList.defaultProps = {
 
 DataList.propTypes = {
   flex: PropTypes.bool,
+  pageSize: PropTypes.number,
+  paginatorSize: PropTypes.number,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       disableTooltip: PropTypes.bool,

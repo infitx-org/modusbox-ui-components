@@ -74,6 +74,7 @@ class DataListWithSettings extends PureComponent {
         hasError: false,
         canCheck: false,
         canSelect: false,
+        withPagination: true,
       },
       messages: {
         empty: 'nothing to show!',
@@ -83,6 +84,10 @@ class DataListWithSettings extends PureComponent {
         checked: false,
         columns: false,
         items: false,
+      },
+      pagination: {
+        pageSize: 10,
+        paginatorSize: 7,
       },
     };
   }
@@ -125,6 +130,14 @@ class DataListWithSettings extends PureComponent {
       messages: {
         ...this.state.messages,
         [message]: value,
+      },
+    });
+  }
+  changePagination(field, value) {
+    this.setState({
+      pagination: {
+        ...this.state.pagination,
+        [field]: value,
       },
     });
   }
@@ -173,11 +186,13 @@ class DataListWithSettings extends PureComponent {
       items,
       checked,
       selected,
+      pagination,
     } = this.state;
 
     const onToggleColumn = column => () => this.toggleColumn(column);
     const onToggleModifier = modifier => () => this.toggleModifier(modifier);
     const onChangeMessage = message => value => this.changeMessage(message, value);
+    const onChangePagination = field => value => this.changePagination(field, value);
     const onUpdateItems = updater => () => this.updateItems(updater);
     const onToggleViewer = viewer => () => this.toggleViewer(viewer);
 
@@ -191,6 +206,7 @@ class DataListWithSettings extends PureComponent {
     const columnSettings = mapItemsFromSource(columns, 'checkbox');
     const modifierSettings = mapItemsFromSource(modifiers, 'checkbox');
     const messageSettings = mapItemsFromSource(messages, 'textfield');
+    const paginationSettings = mapItemsFromSource(pagination, 'textfield');
     const viewerSettings = mapItemsFromSource(viewers, 'button');
     const dataUpdateSettings = Object.values(ACTIONS).map(label => ({ label, type: 'button' }));
 
@@ -201,6 +217,10 @@ class DataListWithSettings extends PureComponent {
 
     const datalist = (
       <DataList
+        pageSize={modifiers.withPagination ? parseInt(pagination.pageSize, 10) : undefined}
+        paginatorSize={
+          modifiers.withPagination ? parseInt(pagination.paginatorSize, 10) : undefined
+        }
         columns={columnsToRender}
         noData={messages.empty}
         errorMsg={messages.error}
@@ -229,6 +249,9 @@ class DataListWithSettings extends PureComponent {
         <Settings title="Columns" items={columnSettings} onChange={onToggleColumn} />
         <Settings title="Modifiers" items={modifierSettings} onChange={onToggleModifier} />
         <Settings title="Messages" items={messageSettings} onChange={onChangeMessage} />
+        {modifiers.withPagination && (
+          <Settings title="Pagination" items={paginationSettings} onChange={onChangePagination} />
+        )}
         <Settings title="Data update" items={dataUpdateSettings} onChange={onUpdateItems} />
         <Settings title="Data update" items={viewerSettings} onChange={onToggleViewer} />
         {content}
@@ -279,6 +302,7 @@ const Setting = ({ item, onChange }) => {
         size="s"
         placeholder={item.label}
         value={item.value}
+        type={item.type}
         onChange={onChange(item.label)}
       />
     );
