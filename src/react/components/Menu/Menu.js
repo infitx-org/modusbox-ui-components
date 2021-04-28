@@ -9,15 +9,30 @@ import { NamedIcon } from '../Common';
 import Icon from '../Icon';
 
 const getPathMatches = (pathname, path, partial) => {
-  let pathMatches = false;
-  if (path) {
-    if (partial) {
-      pathMatches = pathname.startsWith(path);
-    } else {
-      pathMatches = path === pathname;
-    }
+  if (!path) {
+    return false;
   }
-  return pathMatches;
+  if (partial && pathname.startsWith(path)){
+    return true;
+  }
+  if (path === pathname) {
+    return true;
+  }
+
+  const pathChunks = path.split('/');
+  const pathNameChunks = pathname.split('/');
+
+  if (pathChunks.length !== pathNameChunks.length) {
+    return false;
+  }
+
+  return pathNameChunks.every((chunk, index) => {
+    const pathChunk = pathChunks[index];
+    const isExact = pathChunk === chunk;
+    const isWild = pathChunk !== undefined && pathChunk.startsWith(':');
+    return isExact || isWild;
+  });
+  
 };
 
 const bindOnClickProp = onClick => element =>
