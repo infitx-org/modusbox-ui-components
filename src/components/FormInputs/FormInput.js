@@ -25,6 +25,7 @@ const composeSelect = props => [
       url={props.url}
     />
     <Select
+      renderOption={props.renderOption}
       size={props.size}
       className={props.className}
       id={props.componentId}
@@ -432,7 +433,8 @@ class FormInput extends PureComponent {
     let input = null;
 
     if (type === 'select') {
-      input = composeSelect({ ...cmnProps, ...btnProps, options });
+      const { renderOption } = this.props;
+      input = composeSelect({ ...cmnProps, ...btnProps, renderOption, options });
     } else if (type === 'checkbox') {
       input = composeCheckbox({ ...cmnProps });
     } else if (type === 'radio') {
@@ -539,6 +541,9 @@ FormInput.propTypes = {
   elementWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   locked: PropTypes.bool,
+
+  // custom for select
+  renderOption: PropTypes.func,
 };
 
 FormInput.defaultProps = {
@@ -575,6 +580,7 @@ FormInput.defaultProps = {
   className: undefined,
   style: undefined,
   elementWidth: undefined,
+  renderOption: undefined,
 };
 export default FormInput;
 export { Label };
