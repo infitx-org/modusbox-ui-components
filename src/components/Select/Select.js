@@ -299,6 +299,7 @@ class Select extends PureComponent {
       invalid,
       required,
       invalidMessages,
+      renderOption,
     } = this.props;
     const { isOpen, selectedLabel, selected, filter, highlightedOption } = this.state;
     const options = this.getOptions();
@@ -398,6 +399,7 @@ class Select extends PureComponent {
             }}
           >
             <Options
+              renderOption={renderOption}
               size={size}
               open={isOpen}
               ref={wrapper => {
@@ -424,6 +426,7 @@ Select.propTypes = {
   className: PropTypes.string,
   style: PropTypes.shape(),
   size: PropTypes.oneOf(['s', 'm', 'l']),
+  renderOption: PropTypes.func,
   onChange: PropTypes.func,
   onClear: PropTypes.func,
   onFocus: PropTypes.func,
@@ -455,6 +458,7 @@ Select.defaultProps = {
   className: undefined,
   style: {},
   size: 'l',
+  renderOption: undefined,
   selected: undefined,
   onChange: undefined,
   onClear: undefined,

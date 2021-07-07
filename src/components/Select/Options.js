@@ -20,7 +20,17 @@ class Options extends PureComponent {
     this.props.onSelect(item);
   }
   render() {
-    const { options, selected, highlighted, maxHeight, reverse, open, size, onClear } = this.props;
+    const {
+      options,
+      selected,
+      highlighted,
+      maxHeight,
+      reverse,
+      open,
+      size,
+      onClear,
+      renderOption,
+    } = this.props;
 
     if (!open) {
       return null;
@@ -46,20 +56,19 @@ class Options extends PureComponent {
     let optionItems = null;
     if (options.length > 0) {
       optionItems = options.map((item, index) => {
-        const isSelected = selected === item.value;
-        return (
-          <Option
-            size={size}
-            highlighted={item.value === highlighted}
-            label={item.label}
-            value={item.value}
-            icon={item.icon}
-            disabled={item.disabled === true}
-            key={index.toString()}
-            selected={isSelected}
-            onClick={() => this.onClickOption(item)}
-          />
-        );
+        const optConfig = {
+          highlighted: item.value === highlighted,
+          selected: selected === item.value,
+          size,
+          label: item.label,
+          value: item.value,
+          icon: item.icon,
+          disabled: item.disabled === true,
+          key: index.toString(),
+          onClick: () => this.onClickOption(item),
+        };
+
+        return renderOption ? renderOption(item, optConfig, index) : <Option {...optConfig} />;
       });
     } else {
       optionItems = (
@@ -114,6 +123,7 @@ Options.propTypes = {
   maxHeight: PropTypes.number,
   reverse: PropTypes.bool,
   open: PropTypes.bool,
+  renderOption: PropTypes.func,
 };
 
 Options.defaultProps = {
@@ -124,6 +134,7 @@ Options.defaultProps = {
   maxHeight: 0,
   reverse: false,
   open: false,
+  renderOption: undefined,
 };
 
 class Option extends PureComponent {
